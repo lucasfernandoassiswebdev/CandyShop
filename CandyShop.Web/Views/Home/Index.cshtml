@@ -1,4 +1,39 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+<style>
+    body {
+        background-color:rgb(100,117,126);
+    }
+    h1 {
+        font-weight:bold;
+        color:rgb(23,233,132);
+        margin-top:5%;
+        font-size:150px;
+    }
+    form {
+        margin-top:10%;
+        padding-top: 40px
+    }
+    button {
+        margin-bottom: 10px
+    }
+</style>
+<h1 class="center">Candy Shop</h1>
+<div class="container">
+    <form class="center white">
+        <div class="row" >
+            <div class="input-field col s6 push-l3">
+                <input placeholder="Digite aqui seu login(CPF)" id="cpf" name="CPF" type="text" class="validate">
+                <label for="cpf">Login</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6 push-l3">
+                <input placeholder="Digite a senha" id="senha" type="text" class="validate">
+                <label for="senha">Senha</label>
+            </div>
+        </div>
+        <button class="waves-effect waves-light btn" type="submit">Logar</button>
+    </form>
+</div>
