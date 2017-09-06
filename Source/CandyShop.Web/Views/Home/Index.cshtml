@@ -4,39 +4,59 @@
 
 <style>
     body {
-        background-color:rgb(100,117,126);
+        background-image: url("~/../../Imagens/fundo.jpg");
+        background-repeat: repeat-x;
     }
+
     h1 {
         font-weight:bold;
         color:rgb(23,233,132);
-        margin-top:5%;
-        font-size:150px;
+        font-size:100px;
     }
+
     form {
-        margin-top:2%;
-        padding-top: 40px
+        margin-top:10%;
+        padding-top: 40px;
+      
     }
+
     button {
-        margin-bottom: 10px
+        margin-bottom: 30px
+    }
+
+    .cinza {
+        background-color: rgb(100, 117, 125);
+        opacity: 0.9;
+    }
+
+    .input-field {
+        opacity: 1;
+    }
+
+    html {
+        color: white;
     }
 </style>
 
-<h1 class="center">Candy Shop</h1>
-<div class="container">
-    <form class="center white">
-        <div class="row" >
+<div class="row container">
+   <form class="center cinza col s10 push-l1">
+        <h1 class="center">Candy Shop</h1>
+        <div class="row">
             <div class="input-field col s6 push-l3">
-                <input placeholder="Digite aqui seu login(CPF)" id="cpf" name="CPF" type="text" class="validate">
+                <i class="material-icons prefix">account_circle</i>
+                <input placeholder="Digite aqui seu login(CPF)" id="cpf" name="CPF" type="text" class="validate white-text">
                 <label for="cpf">Login</label>
             </div>
         </div>
+
         <div class="row">
             <div class="input-field col s6 push-l3">
-                <input placeholder="Digite a senha" id="senha" type="text" class="validate">
+                <i class="material-icons prefix">vpn_key</i>
+                <input placeholder="Digite a senha" id="senha" type="text" class="validate white-text">
                 <label for="senha">Senha</label>
             </div>
         </div>
-        <button class="waves-effect waves-light btn" type="submit">Logar</button>
+        <button class="waves-effect waves-light btn" type="submit"><i class="material-icons left">send</i>Logar</button>
     </form>
 </div>
 

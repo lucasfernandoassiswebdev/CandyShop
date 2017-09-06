@@ -12,5 +12,7 @@ namespace CandyShop.Web.Controllers
         {
             return View();
         }
+
+
     }
 }
