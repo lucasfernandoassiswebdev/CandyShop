@@ -23,6 +23,10 @@ CREATE PROCEDURE [dbo].[GCS_InsProduto]
 	
 		INSERT INTO [dbo].[Produto] (NomeProduto,PrecoProduto,QtdeProduto)
 			VALUES (@NomeProduto,@PrecoProduto,@QtdeProduto)
+
+				IF @@ERROR <> 0
+					RETURN 1
+		RETURN 0
 	END
 GO
 
@@ -47,7 +51,10 @@ CREATE PROCEDURE [dbo].[GCS_DelProduto]
 
 	BEGIN
 	DELETE [dbo].[Produto]
-		WHERE IdProduto = @IdProduto		
+		WHERE IdProduto = @IdProduto
+		IF @@ERROR <> 0
+					RETURN 1
+		RETURN 0		
 	END
 GO
 
@@ -79,6 +86,10 @@ CREATE PROCEDURE [dbo].[GCS_UpdProduto]
 			PrecoProduto = @PrecoProduto,
 			QtdeProduto = @QtdeProduto
 		WHERE IdProduto = @IdProduto
+
+		IF @@ERROR <> 0
+					RETURN 1
+		RETURN 0
 	END
 GO
 		
@@ -103,7 +114,7 @@ CREATE PROCEDURE [dbo].[GCS_SelProduto]
 	*/
 
 	BEGIN
-		SELECT * FROM Produto 
+		SELECT * FROM Produto WITH(NOLOCK)
 			WHERE IdProduto = @IdProduto
 	END
 GO
