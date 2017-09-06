@@ -4,8 +4,8 @@
 
 <style>
     body {
-        background-image: url("~/../../Imagens/fundo.jpg");
-        background-repeat: repeat-x;
+        background-image: url("~/../../Imagens/fundo4.jpg");
+        background-repeat: repeat-y repeax-x;
     }
 
     h1 {
@@ -17,7 +17,8 @@
     form {
         margin-top:10%;
         padding-top: 40px;
-      
+        box-shadow: 0 0 6px #444;
+        border-radius: 2px;
     }
 
     button {
@@ -29,22 +30,26 @@
         opacity: 0.9;
     }
 
+    .white {
+        opacity: 1;
+    }
+
     .input-field {
         opacity: 1;
     }
 
     html {
-        color: white;
+        color: red;
     }
 </style>
 
 <div class="row container">
-   <form class="center cinza col s10 push-l1">
-        <h1 class="center">Candy Shop</h1>
-        <div class="row">
-            <div class="input-field col s6 push-l3">
+   <form class="center white col s10 push-l1">
+       <h1 class="center"><font color="browm">Candy</font> <font color="red">Shop</font></h1>
+        <div class="row center">
+            <div class="input-field col s6 push-l3 center">
                 <i class="material-icons prefix">account_circle</i>
-                <input placeholder="Digite aqui seu login(CPF)" id="cpf" name="CPF" type="text" class="validate white-text">
+                <input placeholder="Digite aqui seu login(CPF)" id="cpf" name="CPF" type="text" class="validate red-text">
                 <label for="cpf">Login</label>
             </div>
         </div>
@@ -52,7 +57,7 @@
         <div class="row">
             <div class="input-field col s6 push-l3">
                 <i class="material-icons prefix">vpn_key</i>
-                <input placeholder="Digite a senha" id="senha" type="text" class="validate white-text">
+                <input placeholder="Digite a senha" id="senha" type="text" class="validate red-text">
                 <label for="senha">Senha</label>
             </div>
         </div>
