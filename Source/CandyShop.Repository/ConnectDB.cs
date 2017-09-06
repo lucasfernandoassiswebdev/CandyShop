@@ -12,7 +12,7 @@ namespace CandyShop.Repository
             _connection = Connect();
         }
         // Pega a minha connection string do webConfig
-        private string _connectionString => ConfigurationManager.ConnectionStrings["DbContext"].ToString();
+        private string _connectionString => ConfigurationManager.ConnectionStrings["DbCandyShop"].ToString();
         private readonly SqlConnection _connection;
         private SqlCommand _command;
         /* Testa a conexão com o banco se ela estiver quebrada entao fecha e abre denovo e se a conexao
