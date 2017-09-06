@@ -46,6 +46,12 @@
         $('#cpf').on('keydown',function() {
             mcpf($('#cpf').val());
         });
+
+        $('#cpf').on('blur',function() {
+            if ($('#cpf').val().length > 14) {
+                $('#cpf').substr($('#cpf').length - 1, 1);
+            }
+        });
     });
 
     function mcpf(v){  
