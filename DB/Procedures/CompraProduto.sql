@@ -56,9 +56,9 @@ CREATE PROCEDURE [dbo].[GCS_UpdCompraProduto]
 
 	BEGIN
 		
-		UPDATE [dbo].[CompraProduto] SET				
-			IdProduto = @IdProduto,
-			QtdeProduto = @QtdeProduto
+		UPDATE [dbo].[CompraProduto] 
+			SET IdProduto = @IdProduto,
+				QtdeProduto = @QtdeProduto
  			
 			WHERE IdCompra = @IdCompra
 
