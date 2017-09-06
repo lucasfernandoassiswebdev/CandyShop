@@ -12,24 +12,12 @@
         max-width: 100%;
     }
 
-    html {
+    html, a {
        color: brown;
    }
 
-    a {
-        color: brown;
-        text-decoration: none;
-        display: inline;
-        padding-top: 40px;
-    }
-
     .brown-text {
        color: rgb(176,0,0);
-   }
-
-    .red {
-        /*padding-top: 3px;*/
-        /*margin-bottom: 10px;*/
    }
 
     i.small {
@@ -44,37 +32,56 @@
         margin-left: 15px;
         font-size: 16px;
     }
+
+    .gatilho {
+        display: inline;
+        margin-bottom: 50%;
+    }
 </style>
 
 <!--menu lateral-->
 <ul id="slide-out" class="side-nav">
-    <li><div class="user-view">
-        <div class="background">
-            <img src="../../Imagens/fundo4.jpg" style="opacity: 0.5">
-        </div>
-        <a href="#!user"><img class="circle" src="../../Imagens/user.png"></a>
-        <a href="#!name"><span class="brown-text name">Nome do usuario</span></a>
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="../../Imagens/fundo4.jpg" style="opacity: 0.5">
+            </div>
+            <a href="#!user"><img class="circle" src="../../Imagens/user.png"></a>
+            <a href="#!name"><span class="brown-text name">Nome do usuario</span></a>
             <a href="#!name"><span class="red-text name">Saldo R$0,00</span></a>
-    </div></li>
+        </div>
+    </li>
     <li><a href="#!"><i class="material-icons">attach_money</i>Pagamento</a></li>
     <li><a href="#!"><i class="material-icons">find_in_page</i>Historico</a></li>
     <li><a href="#!"><i class="material-icons">shopping_cart</i>Carrinho atual</a></li>
 </ul>
 
-<div class="red">
+<div class="brown">
+    
     <!--trigger do menu-->
-    <a href="#!" data-activates="slide-out" class="button-collapse"><i class="material-icons small">menu</i></a>
-    
-    <label for="busca" class="white-text">Filtre sua busca:</label>
-    <input id="busca" type="text" placeholder="Pesquisa" class="white black-text"/>
-    
-    <label for="filtro1" class="white-text">Filtro</label>
-    <select id="filtro1">
-        <option value="" disabled selected>Escolha uma opção</option>
-        <option>Chocolates</option>
-        <option>Salgados</option>
-        <option>Bebidas</option>
-    </select>
+    <form>
+        <div class="row">
+            <div class="col s1" style="margin-top: 20px;margin-right: -50px">
+                <a href="#!" data-activates="slide-out" class="button-collapse gatilho" style="margin-top: 20px"><i class="material-icons small">menu</i></a>
+            </div>
+
+            <div class="input-field col s3" style="margin-top: 20px">
+                <i class="material-icons prefix">search</i>
+                <input id="busca" type="text" placeholder="Pesquisa" class="white red-text" style="width: 100%"/>
+                <label for="busca" class="red-text">Filtre sua busca:</label>
+            </div>
+
+            <div class="input-field col s3" style="margin-left:30px">
+                <select>
+                    <option value="" disabled selected>Escolha uma opção</option>
+                    <option value="1">Chocolates</option>
+                    <option value="2">Itens Salgados</option>
+                    <option value="3">Bebidas</option>
+                </select>
+                <label class="red-text">Classificação</label>
+            </div>
+        </div>
+    </form>
 </div>
 
 <!--exemplo do grid de produtos-->
@@ -162,5 +169,6 @@
     $(document).ready(function(){
         $('.tooltipped').tooltip({ delay: 50 });
         $(".button-collapse").sideNav();
+        $('select').material_select();
     });
 </script>
