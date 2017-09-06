@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
 <style>
     body {
         background-color:rgb(100,117,126);
@@ -12,13 +13,14 @@
         font-size:150px;
     }
     form {
-        margin-top:10%;
+        margin-top:2%;
         padding-top: 40px
     }
     button {
         margin-bottom: 10px
     }
 </style>
+
 <h1 class="center">Candy Shop</h1>
 <div class="container">
     <form class="center white">
@@ -37,3 +39,20 @@
         <button class="waves-effect waves-light btn" type="submit">Logar</button>
     </form>
 </div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#cpf').on('keydown',function() {
+            mcpf($('#cpf').val());
+        });
+    });
+
+    function mcpf(v){  
+        v=v.replace(/\D/g,"")                   
+        v=v.replace(/(\d{3})(\d)/,"$1.$2")      
+        v=v.replace(/(\d{3})(\d)/,"$1.$2")      
+        v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+        $('#cpf').val(v);
+    }
+</script>
