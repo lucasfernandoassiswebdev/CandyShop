@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IPagamentoRepository.cs" />
-    <Compile Include="Interfaces\IProdutoRepository.cs" />
+    <Compile Include="IPagamentoRepository.cs" />
+    <Compile Include="IProdutoRepository.cs" />
+    <Compile Include="Pagamento\Dto\Pagamento.cs" />
     <Compile Include="Produto\Dto\ProdutoDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
