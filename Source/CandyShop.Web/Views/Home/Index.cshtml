@@ -2,46 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<style>
-    body {
-        background-image: url("~/../../Imagens/fundo4.jpg");
-        background-repeat: repeat-y repeax-x;
-    }
-
-    h1 {
-        font-weight:bold;
-        color:rgb(23,233,132);
-        font-size:100px;
-    }
-
-    form {
-        margin-top:10%;
-        padding-top: 40px;
-        box-shadow: 0 0 6px #444;
-        border-radius: 2px;
-    }
-
-    button {
-        margin-bottom: 30px
-    }
-
-    .cinza {
-        background-color: rgb(100, 117, 125);
-        opacity: 0.9;
-    }
-
-    .white {
-        opacity: 1;
-    }
-
-    .input-field {
-        opacity: 1;
-    }
-
-    html {
-        color: red;
-    }
-</style>
+<link href="~/Content/index.css" rel="stylesheet" />
 
 <div class="row container">
    <form class="center white col s10 push-l1">
@@ -57,11 +18,11 @@
         <div class="row">
             <div class="input-field col s6 push-l3">
                 <i class="material-icons prefix">vpn_key</i>
-                <input placeholder="Digite a senha" id="senha" type="text" class="validate red-text">
+                <input placeholder="Digite a senha" id="senha" type="password" class="validate red-text">
                 <label for="senha">Senha</label>
             </div>
         </div>
-        <button class="waves-effect waves-light btn" type="submit"><i class="material-icons left">send</i>Logar</button>
+        <button class="waves-effect waves-light btn" type=""><i class="material-icons left">send</i>@Html.ActionLink("Logar","Main")</button>
     </form>
 </div>
 
