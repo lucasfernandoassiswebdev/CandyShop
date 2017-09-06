@@ -7,6 +7,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Apresentacao", "0 - Apr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandyShop.Web", "CandyShop.Web\CandyShop.Web.csproj", "{A81C6F85-3CA8-4906-B33A-A569CE64A1DD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Web", "1 - Web", "{4FD86C96-0801-493C-A5D2-213097582D75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{62BFF5A1-68C2-4383-B7FC-CD85EF24C13C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - WebAPI", "3 - WebAPI", "{45283297-5A77-464E-BDAA-8A7E49F282F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Core", "4 - Core", "{6ABD1984-83D8-4E04-BE44-BDE8599B3334}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Repository", "5 - Repository", "{087CF8FC-B6B5-4C2E-9DE4-EDBB75D9E79D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandyShop.Repository", "CandyShop.Repository\CandyShop.Repository.csproj", "{DF6C6292-F54B-4576-AC09-7A0AAE811AC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandyShop.WebAPI", "CandyShop.WebAPI\CandyShop.WebAPI.csproj", "{ACC55EDA-7662-4E19-A3E1-A2151C34933D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +31,22 @@ Global
 		{A81C6F85-3CA8-4906-B33A-A569CE64A1DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A81C6F85-3CA8-4906-B33A-A569CE64A1DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A81C6F85-3CA8-4906-B33A-A569CE64A1DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF6C6292-F54B-4576-AC09-7A0AAE811AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF6C6292-F54B-4576-AC09-7A0AAE811AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF6C6292-F54B-4576-AC09-7A0AAE811AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF6C6292-F54B-4576-AC09-7A0AAE811AC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC55EDA-7662-4E19-A3E1-A2151C34933D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC55EDA-7662-4E19-A3E1-A2151C34933D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC55EDA-7662-4E19-A3E1-A2151C34933D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC55EDA-7662-4E19-A3E1-A2151C34933D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A81C6F85-3CA8-4906-B33A-A569CE64A1DD} = {80398E88-8308-4812-9D71-8E5D6B3B19D0}
+		{DF6C6292-F54B-4576-AC09-7A0AAE811AC7} = {087CF8FC-B6B5-4C2E-9DE4-EDBB75D9E79D}
+		{ACC55EDA-7662-4E19-A3E1-A2151C34933D} = {45283297-5A77-464E-BDAA-8A7E49F282F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46497A9A-2B6F-418A-9A7B-4CDF0B5CCD86}

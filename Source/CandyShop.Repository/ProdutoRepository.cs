@@ -1,6 +1,6 @@
 ﻿namespace CandyShop.Repository
 {
-    public class ProdutoRepository
+    public class ProdutoRepository : ConnectDB 
     {
         
     }
