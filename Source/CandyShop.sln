@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandyShop.Repository", "Can
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandyShop.WebAPI", "CandyShop.WebAPI\CandyShop.WebAPI.csproj", "{ACC55EDA-7662-4E19-A3E1-A2151C34933D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandyShop.Core", "CandyShop.Core\CandyShop.Core.csproj", "{2EC96A99-E2DB-443B-9BBC-5A7B950272CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{ACC55EDA-7662-4E19-A3E1-A2151C34933D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACC55EDA-7662-4E19-A3E1-A2151C34933D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACC55EDA-7662-4E19-A3E1-A2151C34933D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EC96A99-E2DB-443B-9BBC-5A7B950272CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC96A99-E2DB-443B-9BBC-5A7B950272CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC96A99-E2DB-443B-9BBC-5A7B950272CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC96A99-E2DB-443B-9BBC-5A7B950272CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +53,7 @@ Global
 		{A81C6F85-3CA8-4906-B33A-A569CE64A1DD} = {80398E88-8308-4812-9D71-8E5D6B3B19D0}
 		{DF6C6292-F54B-4576-AC09-7A0AAE811AC7} = {087CF8FC-B6B5-4C2E-9DE4-EDBB75D9E79D}
 		{ACC55EDA-7662-4E19-A3E1-A2151C34933D} = {45283297-5A77-464E-BDAA-8A7E49F282F1}
+		{2EC96A99-E2DB-443B-9BBC-5A7B950272CB} = {6ABD1984-83D8-4E04-BE44-BDE8599B3334}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46497A9A-2B6F-418A-9A7B-4CDF0B5CCD86}
