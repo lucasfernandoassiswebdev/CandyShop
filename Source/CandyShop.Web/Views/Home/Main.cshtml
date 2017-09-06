@@ -37,6 +37,14 @@
         display: inline;
         margin-bottom: 50%;
     }
+
+    h3 {
+        font-weight: bold;
+    }
+
+    .modal .modal-footer {
+        text-align: center;    
+    }
 </style>
 
 <!--menu lateral-->
@@ -56,6 +64,19 @@
     <li><a href="#!"><i class="material-icons">shopping_cart</i>Carrinho atual</a></li>
 </ul>
 
+<!--modal de confirmação-->
+<div id="modal1" class="modal">
+    <div class="modal-content center">
+        <h3>Quantidade</h3>
+        <form class="center">
+            <input type="text" id="quantidade"/>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="confirmacao" class="modal-action modal-close waves-effect waves-green btn-flat">Confirma</a>
+    </div>
+</div>
+
 <div class="brown">
     
     <!--trigger do menu-->
@@ -71,7 +92,7 @@
                 <label for="busca" class="red-text">Filtre sua busca:</label>
             </div>
 
-            <div class="input-field col s2" style="margin-left: 40px">
+            <div class="input-field col s3" style="margin-left: 40px; width:500px">
                 <select>
                     <option value="" disabled selected>Escolha uma opção</option>
                     <option value="Chocolates">Chocolates</option>
@@ -91,72 +112,7 @@
             <div class="card-image">
                 <img src="../../Imagens/moranguete.jpg">
                 <span class="card-title flow-text">Moranguete</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 0,80</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col s2 m2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/moranguete.jpg">
-                <span class="card-title flow-text">Moranguete</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 0,80</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col s2 m2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/moranguete.jpg">
-                <span class="card-title flow-text">Moranguete</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 0,80</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col s2 m2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/moranguete.jpg">
-                <span class="card-title flow-text">Moranguete</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 0,80</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col s2 m2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/moranguete.jpg">
-                <span class="card-title flow-text">Moranguete</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 0,80</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col s2 m2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/moranguete.jpg">
-                <span class="card-title flow-text">Moranguete</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
+                <a href="#modal1" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
             </div>
             <div class="card-content">
                 <p>R$ 0,80</p>
@@ -170,5 +126,26 @@
         $('.tooltipped').tooltip({ delay: 50 });
         $(".button-collapse").sideNav();
         $('select').material_select();
+        $('.caret').hide();
+        $('.modal').modal();
     });
+
+    $('#quantidade').on('keydown',function() {
+        mNumbers($('#quantidade').val());
+    });
+
+    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
+
+    $('#quantidade').on('blur',function() {
+        if (parseFloat($('#quantidade').val()) > 10 || $('#quantidade').val().match(verifyInt)) {
+            alert('Valor inválido!');
+            $('#confirmacao').removeClass('modal-close');
+        } else {
+            $('#confirmacao').addClass('modal-close');
+        }
+    });
+    function mNumbers(v) {
+        v = v.replace(/\D/g, "")
+        $('#quantidade').val(v);
+    }
 </script>
