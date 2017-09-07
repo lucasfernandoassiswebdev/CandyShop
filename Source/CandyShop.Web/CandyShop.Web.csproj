@@ -143,6 +143,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PagamentoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -170,6 +171,7 @@
     <Content Include="fonts\roboto\Roboto-Thin.woff" />
     <Content Include="fonts\roboto\Roboto-Thin.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Js\Ajax.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -195,6 +197,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\Home\Padrao.cshtml" />
+    <Content Include="Views\Pagamento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

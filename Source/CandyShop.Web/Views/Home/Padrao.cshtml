@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Padrao";
+}
+
+<script src="~/Js/Ajax.js?d=@DateTime.Now.Ticks" type="text/javascript"></script>
+<script>
+    AjaxJs.init({
+        main: '@Url.Action("Main", "Home")',
+        pagamento: '@Url.Action("Index", "Pagamento")'
+        });
+</script>
+
+<link href="~/Content/Main.css" rel="stylesheet" />
+
+<!--menu lateral-->
+<ul id="slide-out" class="side-nav">
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="../../Imagens/fundo4.jpg" style="opacity: 0.5">
+            </div>
+            <a href="#!user"><img class="circle" src="../../Imagens/user.png"></a>
+            <a href="#!name"><span class="brown-text name">Nome do usuario</span></a>
+            <a href="#!name"><span class="red-text name">Saldo R$0,00</span></a>
+        </div>
+    </li>
+    <li><a href="#!"><i class="material-icons">attach_money</i>Pagamento</a></li>
+    <li><a href="#!"><i class="material-icons">find_in_page</i>Historico</a></li>
+    <li><a href="#!"><i class="material-icons">shopping_cart</i>Carrinho atual</a></li>
+</ul>
+
+<!--modal de quantidade-->
+<div id="modal1" class="modal">
+    <div class="modal-content center">
+        <h3>Quantidade</h3>
+        <form class="center">
+            <input type="text" id="quantidade" class="center" autocomplete="off" />
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#modal2" id="confirmacao" class="modal-trigger modal-close waves-effect waves-green btn-flat">Confirma</a>
+    </div>
+</div>
+
+<!--modal de confirmação-->
+<div id="modal2" class="modal">
+    <div class="modal-content center">
+        <h3>Confirmar venda?</h3>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Confirmar</a>
+    </div>
+</div>
+
+<!--barra de navegação-->
+<ul id="dropdown1" class="dropdown-content">
+    <li><a href="#!">Carrinho atual</a></li>
+    <li><a href="#!" onclick="AjaxJs.pagamento()">Pagamento</a></li>
+    <li><a href="#!">Histórico</a></li>
+    <li class="divider"></li>
+    <li>>@Html.ActionLink("Sair", "Index")</li>
+</ul>
+
+<nav class="brown">
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo right"><i class="material-icons">store</i>Candy Shop</a>
+        <ul class="left hide-on-med-and-down">
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="DivGrid"><img src="https://media.tenor.com/images/d6cd5151c04765d1992edfde14483068/tenor.gif" style="width: 100px;height: 100px;margin: 0 auto;display: block;"></div>
+<div id="DivDados"></div>

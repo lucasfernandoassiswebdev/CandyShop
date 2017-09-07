@@ -9,6 +9,11 @@ namespace CandyShop.Web.Controllers
             return View();
         }
 
+        public ActionResult Padrao()
+        {
+            return View();
+        }
+
         public ActionResult Main()
         {
             return View();
