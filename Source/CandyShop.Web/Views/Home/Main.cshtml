@@ -2,50 +2,8 @@
 @{
     ViewBag.Title = "Main";
 }
-<style>
-    .card .card-image .card-title {
-        color: brown;
-        font-weight: bold;
-    }
-    
-    img {
-        max-width: 100%;
-    }
 
-    html, a {
-       color: brown;
-   }
-
-    .brown-text {
-       color: rgb(176,0,0);
-   }
-
-    i.small {
-       font-size: 2.4rem;
-   }
-
-    input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
-        width: 30%;
-    }
-
-    label {
-        margin-left: 15px;
-        font-size: 16px;
-    }
-
-    .gatilho {
-        display: inline;
-        margin-bottom: 50%;
-    }
-
-    h3 {
-        font-weight: bold;
-    }
-
-    .modal .modal-footer {
-        text-align: center;    
-    }
-</style>
+<link href="~/Content/Main.css" rel="stylesheet" />
 
 <!--menu lateral-->
 <ul id="slide-out" class="side-nav">
@@ -69,13 +27,23 @@
     <div class="modal-content center">
         <h3>Quantidade</h3>
         <form class="center">
-            <input type="text" id="quantidade" class="center"/>
+            <input type="text" id="quantidade" class="center" autocomplete="off"/>
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#!" id="confirmacao" class="modal-action modal-close waves-effect waves-green btn-flat">Confirma</a>
+        <a href="#modal2" id="confirmacao" class="modal-trigger modal-close waves-effect waves-green btn-flat">Confirma</a>
     </div>
 </div>
+
+<div id="modal2" class="modal">
+    <div class="modal-content center">
+        <h3>Confirmar venda?</h3>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Confirmar</a>
+    </div>
+</div>
+
 
 <div class="brown">
     
@@ -83,7 +51,7 @@
     <form>
         <div class="row">
             <div class="col s1" style="margin-top: 25px;margin-right: -50px">
-                <a href="#!" data-activates="slide-out" class="button-collapse gatilho" style="margin-top: 20px"><i class="material-icons small">menu</i></a>
+                <a href="#!" data-activates="slide-out" class="button-collapse" style="margin-top: 20px"><i class="material-icons small">menu</i></a>
             </div>
 
             <div class="input-field col s3" style="margin-top: 20px">
@@ -112,7 +80,7 @@
             <div class="card-image">
                 <img src="../../Imagens/moranguete.jpg">
                 <span class="card-title flow-text">Moranguete</span>
-                <a href="#modal1" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
+                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
             </div>
             <div class="card-content">
                 <p>R$ 0,80</p>
@@ -136,16 +104,33 @@
 
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
 
-    $('#quantidade').on('blur',function() {
-        if (parseFloat($('#quantidade').val()) > 10 || $('#quantidade').val().match(verifyInt)) {
-            alert('Valor inválido!');
-            $('#confirmacao').removeClass('modal-close');
+    $('#abreModal').on('click', function () {
+        mNumbers($('#quantidade').val(''));   
+    });
+
+    $('#quantidade').on('blur', function () {
+        mNumbers($('#quantidade').val());
+        if ($('#quantidade').val().match(verifyInt)) {
+           $('#confirmacao').removeClass('modal-close modal-trigger');
+        } else if ($('#quantidade').val() == 0) {
+            $('#confirmacao').removeClass('modal-close modal-trigger');
         } else {
-            $('#confirmacao').addClass('modal-close');
+            $('#confirmacao').addClass('modal-close modal-trigger');
         }
     });
+
+    $('#confirmacao').on('click', function () {
+        if ($('#quantidade').val().match(verifyInt)) {
+            $('#confirmacao').removeClass('modal-close modal-trigger');
+        } else if ($('#quantidade').val() == 0) {
+            $('#confirmacao').removeClass('modal-close modal-trigger');
+        } else {
+            $('#confirmacao').addClass('modal-close modal-trigger');
+        }
+    });
+
     function mNumbers(v) {
-        v = v.replace(/\D/g, "")
+        v = v.replace(/\D/g, "");
         $('#quantidade').val(v);
     }
 </script>
