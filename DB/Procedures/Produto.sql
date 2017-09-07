@@ -121,6 +121,31 @@ GO
 						
 
 
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_LisProduto]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_LisProduto]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produto.sql
+	Objetivo..........: Listar todos os produtos
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 07/07/2017
+	Ex................: EXEC [dbo].[GCS_LisProduto]
+
+	*/
+
+	BEGIN
+	
+		SELECT * FROM Produto WITH(NOLOCK)
+
+	END
+GO
+				
 
 
 				

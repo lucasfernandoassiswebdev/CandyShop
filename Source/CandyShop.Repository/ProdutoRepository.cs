@@ -1,18 +1,22 @@
 ﻿
 using CandyShop.Core.Services.Produto.Dto;
+using Concessionaria.Repositorio;
+using System;
+using System.Collections.Generic;
 
 namespace CandyShop.Repository
 
 
 {
-    public class ProdutoRepository : ConnectDB
+    public class ProdutoRepository : ConnectDB, IProdutoRepository
     {
         private enum Procedures
         {
             GCS_InsProduto,
             GCS_DelProduto,
             GCS_UpdProduto,
-            GCS_SelProduto
+            GCS_SelProduto,
+            GCS_LisProduto
         }
 
         public void InserirProduto(ProdutoDto produto)
@@ -25,7 +29,7 @@ namespace CandyShop.Repository
             ExecuteNonQuery();
         }
 
-        public void DeletaProduto(int idproduto)
+        public void DeletarProduto(int idproduto)
         {
             ExecuteProcedure(Procedures.GCS_DelProduto);
             AddParameter("@IdProduto", idproduto);
@@ -42,12 +46,37 @@ namespace CandyShop.Repository
             ExecuteNonQuery();
         }
 
-        public bool SelecionarProdutos(int idproduto)
+        public bool SelecionarProduto(int idproduto)
         {
             ExecuteProcedure(Procedures.GCS_SelProduto);
             AddParameter("@IdProduto", idproduto);
             using (var retornobd = ExecuteReader())
                 return retornobd.Read();
+        }
+
+        public IEnumerable<ProdutoDto> ListarProdutos()
+        {
+            ExecuteProcedure(Procedures.GCS_LisProduto);
+            var retorno = new List<ProdutoDto>();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    do
+                    {
+                        retorno.Add(new ProdutoDto()
+                        {
+                            IdProduto = reader.ReadAsInt("IdProduto"),
+                            NomeProduto = reader.ReadAsString("NomeProduto"),
+                            PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                            QtdeProduto = reader.ReadAsInt("QtdeProduto")
+                        });
+                    } while (reader.Read());
+
+            return retorno;
+        }
+
+        public ProdutoDto SelecionarDadosProduto(int idProduto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

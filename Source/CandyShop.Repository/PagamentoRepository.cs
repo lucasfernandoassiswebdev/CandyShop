@@ -1,9 +1,12 @@
-﻿using CandyShop.Core.Pagamento.Dto;
+﻿using CandyShop.Core;
+using CandyShop.Core.Pagamento.Dto;
+using CandyShop.Core.Usuario.Dto;
+using Concessionaria.Repositorio;
 using System.Collections;
 
 namespace CandyShop.Repository
 {
-    public class PagamentoRepository : ConnectDB
+    public class PagamentoRepository : ConnectDB, IPagamentoRepository
     {
         private enum Procedures
         {
@@ -11,8 +14,10 @@ namespace CandyShop.Repository
             GCS_UpdPagamento,
             GCS_DelPagamento,
             GCS_LisPagamento,
-            GCS_LisCpfPagamento
+            GCS_LisCpfPagamento,
+            GCS_SelPagamento
         }
+
         public void InserirPagamento(PagamentoDto pagamento)
         {
             ExecuteProcedure(Procedures.GCS_InsPagamento);
@@ -47,7 +52,7 @@ namespace CandyShop.Repository
             return ExecuteReader();
         }
 
-        public IEnumerable SelecionarPagamentosPorCpf(string cpf)
+        public IEnumerable ListarPagamentosPorCpf(string cpf)
         {
             ExecuteProcedure(Procedures.GCS_LisCpfPagamento);
             AddParameter("@Cpf", cpf);
@@ -55,5 +60,32 @@ namespace CandyShop.Repository
                 return retorno;
         }
 
+        public bool SelecionarPagamento(int idPagamento)
+        {
+            ExecuteProcedure(Procedures.GCS_SelPagamento);
+            AddParameter("@IdPagamento", idPagamento);
+            using (var retorno = ExecuteReader())
+                return retorno.Read();
+        }
+
+        public PagamentoDto SelecionarDadosPagamento(int idPagamento)
+        {
+            ExecuteProcedure(Procedures.GCS_SelPagamento);
+            AddParameter("@IdPagamento", idPagamento);
+            PagamentoDto retorno = new PagamentoDto();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    retorno = new PagamentoDto
+                    {
+                        DataPagamento = reader.ReadAsDateTime("DataPagamento"),
+                        IdPagamento = reader.ReadAsInt("IdPagamento"),
+                        ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
+                        Usuario = new UsuarioDto
+                        {
+                            Cpf = reader.ReadAsString("Cpf")
+                        }
+                    };
+            return retorno;
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace CandyShop.Repository
 {
-    public class UsuarioRepository : ConnectDB
+    public class UsuarioRepository : ConnectDB, IUsuarioRepository
     {
         private enum Procedures
         {
