@@ -13,7 +13,7 @@ namespace CandyShop.Repository
             GCS_LisPagamento,
             GCS_LisCpfPagamento
         }
-        public void Inserir(Pagamento pagamento)
+        public void Inserir(PagamentoDto pagamento)
         {
             ExecuteProcedure(Procedures.GCS_InsPagamento);
             AddParameter("IdPagamento", pagamento.IdPagamento);
@@ -24,7 +24,7 @@ namespace CandyShop.Repository
             ExecuteNonQuery();
         }
 
-        public void Editar(Pagamento pagamento)
+        public void Editar(PagamentoDto pagamento)
         {
             ExecuteProcedure(Procedures.GCS_UpdPagamento);
             AddParameter("IdPagamento", pagamento.IdPagamento);
@@ -34,10 +34,10 @@ namespace CandyShop.Repository
             ExecuteNonQuery();
         }
 
-        public void Excluir(int IdPagamento)
+        public void Excluir(int idPagamento)
         {
             ExecuteProcedure(Procedures.GCS_DelPagamento);
-            AddParameter("IdPagamento", IdPagamento);
+            AddParameter("IdPagamento", idPagamento);
             ExecuteNonQuery();
         }
 
@@ -47,7 +47,7 @@ namespace CandyShop.Repository
             return ExecuteReader();
         }
 
-        public IEnumerable SelecionarPagamento(string cpf)
+        public IEnumerable SelecionarPagamentosPorCpf(string cpf)
         {
             ExecuteProcedure(Procedures.GCS_LisCpfPagamento);
             AddParameter("Cpf", cpf);
