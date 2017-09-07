@@ -1,7 +1,6 @@
 ﻿
 using CandyShop.Core.Services.Produto.Dto;
 using Concessionaria.Repositorio;
-using System;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository
@@ -62,7 +61,7 @@ namespace CandyShop.Repository
                 if (reader.Read())
                     do
                     {
-                        retorno.Add(new ProdutoDto()
+                        retorno.Add(new ProdutoDto
                         {
                             IdProduto = reader.ReadAsInt("IdProduto"),
                             NomeProduto = reader.ReadAsString("NomeProduto"),
@@ -76,7 +75,20 @@ namespace CandyShop.Repository
 
         public ProdutoDto SelecionarDadosProduto(int idProduto)
         {
-            throw new NotImplementedException();
-        }
+            ExecuteProcedure(Procedures.GCS_SelProduto);
+            AddParameter("@IdProduto", idProduto);
+
+            var retorno = new ProdutoDto();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    retorno = new ProdutoDto
+                    {
+                        IdProduto = reader.ReadAsInt("IdProduto"),
+                        NomeProduto = reader.ReadAsString("NomeProduto"),
+                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                        QtdeProduto = reader.ReadAsInt("QtdeProduto")
+                    };
+            return retorno;
+        }   
     }
 }

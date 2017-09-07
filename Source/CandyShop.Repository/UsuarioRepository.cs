@@ -1,5 +1,7 @@
-﻿using CandyShop.Core.Usuario.Dto;
-using System.Collections;
+﻿using CandyShop.Core;
+using CandyShop.Core.Usuario.Dto;
+using Concessionaria.Repositorio;
+using System.Collections.Generic;
 
 namespace CandyShop.Repository
 {
@@ -25,7 +27,7 @@ namespace CandyShop.Repository
             ExecuteNonQuery();
         }
 
-        public void Editarusuario(UsuarioDto usuario)
+        public void EditarUsuario(UsuarioDto usuario)
         {
             ExecuteProcedure(Procedures.GCS_UpdUsuario);
             AddParameter("@Cpf", usuario.Cpf);
@@ -51,10 +53,41 @@ namespace CandyShop.Repository
                 return retorno.Read();
         }
 
-        public IEnumerable ListarUsuario()
+        public IEnumerable<UsuarioDto> ListarUsuario()
         {
             ExecuteProcedure(Procedures.GCS_LisUsuario);
-            return ExecuteReader();
+            var retorno = new List<UsuarioDto>();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    do
+                    {
+                        retorno.Add(new UsuarioDto()
+                        {
+                            Cpf = reader.ReadAsString("Cpf"),
+                            SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
+                            SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
+                            NomeUsuario = reader.ReadAsString("NomeUsuario")
+                        });
+                    } while (reader.Read());
+
+            return retorno;
+        }
+
+        public UsuarioDto SelecionarDadosUsuario(string cpf)
+        {
+            ExecuteProcedure(Procedures.GCS_SelUsuario);
+            AddParameter("@CpfUsuario", cpf);
+            var retorno = new UsuarioDto();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    retorno = new UsuarioDto
+                    {
+                        Cpf = reader.ReadAsString("Cpf"),
+                        SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
+                        SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
+                        NomeUsuario = reader.ReadAsString("NomeUsuario")
+                    };
+            return retorno;
         }
     }
 }

@@ -2,7 +2,7 @@
 using CandyShop.Core.Pagamento.Dto;
 using CandyShop.Core.Usuario.Dto;
 using Concessionaria.Repositorio;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace CandyShop.Repository
 {
@@ -46,18 +46,49 @@ namespace CandyShop.Repository
             ExecuteNonQuery();
         }
 
-        public IEnumerable ListarPagamentos()
+        public IEnumerable<PagamentoDto> ListarPagamentos()
         {
             ExecuteProcedure(Procedures.GCS_LisPagamento);
-            return ExecuteReader();
+            var retorno = new List<PagamentoDto>();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    do
+                    {
+                        retorno.Add( new PagamentoDto
+                        {
+                            DataPagamento = reader.ReadAsDateTime("DataPagamento"),
+                            IdPagamento = reader.ReadAsInt("IdPagamento"),
+                            ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
+                            Usuario = new UsuarioDto
+                            {
+                                Cpf = reader.ReadAsString("Cpf")
+                            }
+                        });
+                    } while (reader.Read());
+            return retorno;
         }
 
-        public IEnumerable ListarPagamentosPorCpf(string cpf)
+        public IEnumerable<PagamentoDto> ListarPagamentosPorCpf(string cpf)
         {
             ExecuteProcedure(Procedures.GCS_LisCpfPagamento);
             AddParameter("@Cpf", cpf);
-            using (var retorno = ExecuteReader())
-                return retorno;
+            var retorno = new List<PagamentoDto>();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    do
+                    {
+                        retorno.Add(new PagamentoDto
+                        {
+                            DataPagamento = reader.ReadAsDateTime("DataPagamento"),
+                            IdPagamento = reader.ReadAsInt("IdPagamento"),
+                            ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
+                            Usuario = new UsuarioDto
+                            {
+                                Cpf = reader.ReadAsString("Cpf")
+                            }
+                        });
+                    } while (reader.Read());
+            return retorno;
         }
 
         public bool SelecionarPagamento(int idPagamento)

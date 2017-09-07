@@ -2,7 +2,7 @@
 using CandyShop.Core.Compra.Dto;
 using CandyShop.Core.Usuario.Dto;
 using Concessionaria.Repositorio;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace CandyShop.Repository
 {
@@ -45,17 +45,49 @@ namespace CandyShop.Repository
             ExecuteNonQuery();
         }                       
 
-        public IEnumerable ListarCompra()
+        public IEnumerable<CompraDto> ListarCompra()
         {
             ExecuteProcedure(Procedures.GCS_LisCompra);
-            return ExecuteReader();
+            var retorno = new List<CompraDto>();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    do
+                    {
+                        retorno.Add( new CompraDto()
+                        {
+                            DataCompra = reader.ReadAsDateTime("DataCompra"),
+                            IdCompra = reader.ReadAsInt("IdCompra"),
+                            Usuario = new UsuarioDto()
+                            {
+                                Cpf = reader.ReadAsString("UsuarioCompra")
+                            }
+                        });
+                    } while (reader.Read());
+
+            return retorno;
         }
 
-        public IEnumerable ListarCompraPorCpf(string cpf)
+        public IEnumerable<CompraDto> ListarCompraPorCpf(string cpf)
         {
             ExecuteProcedure(Procedures.GCS_LisCpfCompra);
             AddParameter("@Cpf", cpf);
-            return ExecuteReader();
+            var retorno = new List<CompraDto>();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    do
+                    {
+                        retorno.Add(new CompraDto()
+                        {
+                            DataCompra = reader.ReadAsDateTime("DataCompra"),
+                            IdCompra = reader.ReadAsInt("IdCompra"),
+                            Usuario = new UsuarioDto()
+                            {
+                                Cpf = reader.ReadAsString("UsuarioCompra")
+                            }
+                        });
+                    } while (reader.Read());
+
+            return retorno;            
         }
 
         public bool SelecionarCompra(int idCompra)
