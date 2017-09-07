@@ -18,9 +18,9 @@ namespace CandyShop.Repository
         public void InserirProduto(ProdutoDto produto)
         {
             ExecuteProcedure(Procedures.GCS_InsProduto);
-            AddParameter("NomeProduto", produto.NomeProduto);
-            AddParameter("PrecoProduto", produto.PrecoProduto);
-            AddParameter("QtdeProduto", produto.QtdeProduto);
+            AddParameter("@NomeProduto", produto.NomeProduto);
+            AddParameter("@PrecoProduto", produto.PrecoProduto);
+            AddParameter("@QtdeProduto", produto.QtdeProduto);
 
             ExecuteNonQuery();
         }
@@ -28,24 +28,24 @@ namespace CandyShop.Repository
         public void DeletaProduto(int idproduto)
         {
             ExecuteProcedure(Procedures.GCS_DelProduto);
-            AddParameter("IdProduto", idproduto);
+            AddParameter("@IdProduto", idproduto);
             ExecuteNonQuery();
         }
 
         public void UpdateProduto(ProdutoDto produto)
         {
             ExecuteProcedure(Procedures.GCS_UpdProduto);
-            AddParameter("IdProduto", produto.IdProduto);
-            AddParameter("NomeProduto", produto.NomeProduto);
-            AddParameter("PrecoProduto", produto.PrecoProduto);
-            AddParameter("QtdeProduto", produto.QtdeProduto);
+            AddParameter("@IdProduto", produto.IdProduto);
+            AddParameter("@NomeProduto", produto.NomeProduto);
+            AddParameter("@PrecoProduto", produto.PrecoProduto);
+            AddParameter("@QtdeProduto", produto.QtdeProduto);
             ExecuteNonQuery();
         }
 
         public bool SelecionarProdutos(int idproduto)
         {
             ExecuteProcedure(Procedures.GCS_SelProduto);
-            AddParameter("IdProduto", idproduto);
+            AddParameter("@IdProduto", idproduto);
             using (var retornobd = ExecuteReader())
                 return retornobd.Read();
         }

@@ -13,31 +13,31 @@ namespace CandyShop.Repository
             GCS_LisPagamento,
             GCS_LisCpfPagamento
         }
-        public void Inserir(PagamentoDto pagamento)
+        public void InserirPagamento(PagamentoDto pagamento)
         {
             ExecuteProcedure(Procedures.GCS_InsPagamento);
-            AddParameter("IdPagamento", pagamento.IdPagamento);
-            AddParameter("UsuarioPagamento", pagamento.Usuario);
-            AddParameter("DataPagamento", pagamento.DataPagamento);
-            AddParameter("ValorPagamento", pagamento.ValorPagamento);
+            AddParameter("@IdPagamento", pagamento.IdPagamento);
+            AddParameter("@UsuarioPagamento", pagamento.Usuario.Cpf);
+            AddParameter("@DataPagamento", pagamento.DataPagamento);
+            AddParameter("@ValorPagamento", pagamento.ValorPagamento);
 
             ExecuteNonQuery();
         }
 
-        public void Editar(PagamentoDto pagamento)
+        public void EditarPagamento(PagamentoDto pagamento)
         {
             ExecuteProcedure(Procedures.GCS_UpdPagamento);
-            AddParameter("IdPagamento", pagamento.IdPagamento);
-            AddParameter("DataPagamento", pagamento.DataPagamento);
-            AddParameter("ValorPagamento", pagamento.ValorPagamento);
+            AddParameter("@IdPagamento", pagamento.IdPagamento);
+            AddParameter("@DataPagamento", pagamento.DataPagamento);
+            AddParameter("@ValorPagamento", pagamento.ValorPagamento);
 
             ExecuteNonQuery();
         }
 
-        public void Excluir(int idPagamento)
+        public void DeletarPagamento(int idPagamento)
         {
             ExecuteProcedure(Procedures.GCS_DelPagamento);
-            AddParameter("IdPagamento", idPagamento);
+            AddParameter("@IdPagamento", idPagamento);
             ExecuteNonQuery();
         }
 
@@ -50,7 +50,7 @@ namespace CandyShop.Repository
         public IEnumerable SelecionarPagamentosPorCpf(string cpf)
         {
             ExecuteProcedure(Procedures.GCS_LisCpfPagamento);
-            AddParameter("Cpf", cpf);
+            AddParameter("@Cpf", cpf);
             using (var retorno = ExecuteReader())
                 return retorno;
         }
