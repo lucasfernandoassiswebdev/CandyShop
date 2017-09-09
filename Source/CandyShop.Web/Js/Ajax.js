@@ -6,8 +6,7 @@
         main();
     };
 
-    function main() {
-        //busca o grid
+    function main() {        //carrega a pagina principal
         $.get(url.main).success(function(data) {
             $('#DivGrid').html(data).slideDown(function() { //desce  o divgrid
                 //if (mensagem)
@@ -18,31 +17,41 @@
         });
     };
 
+    function chamaPagina(endereco) {
+        $.get(endereco).success(function (data) {
+            $('#DivGrid').slideUp(function () {
+                $('#DivDados').hide().html(data).slideDown();
+            });
+        }).error(function (xhr) {
+            $('#DivGrid').errorMessage(xhr.responseText);
+            console.log('penis');
+        });
+    };
+
     var voltarInicio = function () {
         $.get(url.main).success(function () {
-            $("#divDados").slideUp(function () {
-                $("#divDados").empty(); //$(this).empty();                
-                $('#DivGrid').slideDown();
+            $("#DivDados").slideUp(function () {
+                $("#DivDados").empty(); //$(this).empty();                
+                main();
             }).error(function (xhr) {
-                $("#divGrid").errorMessage(xhr.responseText);
+                $("#DivGrid").errorMessage(xhr.responseText);
             });
         });
     };
 
-    var pagamento = function() {
-        $.get(url.pagamento).success(function(data) {
-            $('#DivGrid').slideUp(function() {
-                $('#DivDados').hide().html(data).slideDown();
-            });            
-        }).error(function(xhr) {
-            $('#DivGrid').errorMessage(xhr.responseText);
-        });
+    var pagamento = function () {
+        chamaPagina(url.pagamento);
+    };
+
+    var historicoCompra = function () {
+        chamaPagina(url.historicoCompra);
     };
 
     return {
         init: init,
         pagamento: pagamento,
-        voltaInicio: voltarInicio
+        voltarInicio: voltarInicio,
+        historicoCompra: historicoCompra
     };
 
 })();
