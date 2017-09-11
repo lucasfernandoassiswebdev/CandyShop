@@ -9,27 +9,14 @@
         main: '@Url.Action("Main", "Home")',
         pagamento: '@Url.Action("Index", "Pagamento")',
         historicoCompra: '@Url.Action("Historico", "Compra")'
-        });
+    });
+
+    $(document).ready(function() {
+        $('select').material_select();
+    });
 </script>
 
 <link href="~/Content/Main.css" rel="stylesheet" />
-
-<!--menu lateral-->
-<ul id="slide-out" class="side-nav">
-    <li>
-        <div class="user-view">
-            <div class="background">
-                <img src="../../Imagens/fundo4.jpg" style="opacity: 0.5">
-            </div>
-            <a href="#!user"><img class="circle" src="../../Imagens/user.png"></a>
-            <a href="#!name"><span class="brown-text name">Nome do usuario</span></a>
-            <a href="#!name"><span class="red-text name">Saldo R$0,00</span></a>
-        </div>
-    </li>
-    <li><a href="#!"><i class="material-icons">attach_money</i>Pagamento</a></li>
-    <li><a href="#!"><i class="material-icons">find_in_page</i>Historico</a></li>
-    <li><a href="#!"><i class="material-icons">shopping_cart</i>Carrinho atual</a></li>
-</ul>
 
 <!--modal de quantidade-->
 <div id="modal1" class="modal">
@@ -56,11 +43,10 @@
 
 <!--barra de navegação-->
 <ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!">Carrinho atual</a></li>
-    <li><a href="#!" onclick="AjaxJs.pagamento()">Pagamento</a></li>
-    <li><a href="#!" onclick="AjaxJs.historicoCompra()">Histórico</a></li>
+    <li><a href="#!" onclick="AjaxJs.pagamento()"><i class="material-icons">attach_money</i>Pagamento</a></li>
+    <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico</a></li>
     <li class="divider"></li>
-    <li>@Html.ActionLink("Sair", "Index")</li>
+    <li><a href="#!"><i class="material-icons">power_settings_new</i>Sair</a></li>
 </ul>
 
 <nav class="brown">
@@ -71,11 +57,35 @@
         <ul class="hide-on-med-and-down">
             <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
             <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
+            <li><a class="dropdown-button" href="#!"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
+            <li>
+                <div class="col s4 hide-on-med-and-down">
+                    <form>
+                        <div class="input-field">
+                            <input id="search" type="search" placeholder="pesquise por itens aqui" required>
+                            <label class="label-icon" for="search"><i class="material-icons">search</i>
+                            </label>
+                            <i class="material-icons closed ">close</i>
+                        </div>
+                    </form>
+                </div>
+            </li>
+            <li style="margin-left: 250px">
+                <select style="position: absolute;margin-top:30px">
+                    <option value="" disabled selected>Filtro</option>
+                    <option value="1">Chocolates</option>
+                    <option value="2">Amendoins</option>
+                    <option value="3">Salgadinhos</option>
+               </select>
+            </li>
         </ul>
         
         <ul class="side-nav" id="mobile-demo">
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
             <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
+            <li><a href="#!"><i class="material-icons">attach_money</i>Pagamento</a></li>
+            <li><a href="#!"><i class="material-icons">find_in_page</i>Historico</a></li>
+            <li class="divider"></li>
+            <li><a href="#!"><i class="material-icons">power_settings_new</i>Sair</a></li>
         </ul>
     </div>
 </nav>
