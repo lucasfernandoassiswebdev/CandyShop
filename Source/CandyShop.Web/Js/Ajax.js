@@ -20,18 +20,17 @@
     function chamaPagina(endereco) {
         $.get(endereco).success(function (data) {
             $('#DivGrid').slideUp(function () {
-                $('#DivDados').hide().html(data).slideDown();
+                $('#DivGrid').hide().html(data).slideDown();
             });
         }).error(function (xhr) {
-            $('#DivGrid').errorMessage(xhr.responseText);
-            console.log('penis');
+            $('#DivGrid').errorMessage(xhr.responseText);            
         });
     };
 
     var voltarInicio = function () {
         $.get(url.main).success(function () {
-            $("#DivDados").slideUp(function () {
-                $("#DivDados").empty(); //$(this).empty();                
+            $("#DivGrid").slideUp(function () {
+                $("#DivGrid").empty(); //$(this).empty();                
                 main();
             }).error(function (xhr) {
                 $("#DivGrid").errorMessage(xhr.responseText);
