@@ -15,7 +15,8 @@ img {
 .card .card-image .card-title {
 	color: black;
 	font-weight: bold;
-	font-size:30px;
+	top: 170px;
+	font-size:19px;
 }
 
 .nav-wrapper .input-field input[type=search] {
@@ -90,3 +91,6 @@ li img {
 	line-height: 2.5rem;
 }
 
+.card .card-content p {
+	padding-top: 25px;
+}
