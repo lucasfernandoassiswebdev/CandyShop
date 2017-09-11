@@ -91,14 +91,14 @@
         $('.modal').modal();
     });
 
-    $('#quantidade').on('keydown',function() {
-        mNumbers($('#quantidade').val());
+    $('#quantidade, #quantidadeEdit').on('keydown',function() {
+        mNumbers($(this).val());
     });
 
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
 
     $('#abreModal').on('click', function () {
-        mNumbers($('#quantidade').val(''));   
+        $('#quantidade').val('');   
     });
 
     $('#quantidade').on('blur', function () {
@@ -106,9 +106,20 @@
         if ($('#quantidade').val().match(verifyInt)) {
            $('#confirmacao').removeClass('modal-close modal-trigger');
         } else if ($('#quantidade').val() == 0) {
+            $('#quantidade').val('');   
             $('#confirmacao').removeClass('modal-close modal-trigger');
         } else {
             $('#confirmacao').addClass('modal-close modal-trigger');
+        }
+    });
+
+    $('#quantidadeEdit').on('blur', function () {
+        mNumbers($('#quantidadeEdit').val());
+        if ($('#quantidadeEdit').val().match(verifyInt) || $('#quantidadeEdit').val() == 0) {
+            $('#quantidadeEdit').val('');
+            $('#confirmaCompra').removeClass('modal-close');
+        } else {
+            $('#confirmaCompra').addClass('modal-close');
         }
     });
 
@@ -122,8 +133,11 @@
         }
     });
 
+    $('#limpar').on('click',function() {
+        $('.collection li').remove();
+    });
     function mNumbers(v) {
         v = v.replace(/\D/g, "");
-        $('#quantidade').val(v);
+        $('#quantidade, #quantidadeEdit').val(v);
     }
 </script>
