@@ -6,7 +6,8 @@ GO
 CREATE PROCEDURE [dbo].[GCS_InsUsuario]
 	@NomeUsuario varchar(50),
 	@SenhaUsuario varchar(12),
-	@SaldoUsuario decimal
+	@SaldoUsuario decimal,
+	@CpfUsuario varchar(14)
 	AS
 
 	/*
@@ -16,12 +17,16 @@ CREATE PROCEDURE [dbo].[GCS_InsUsuario]
 	Autor.............: SMN - João Guilherme
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[GCS_InsUsuario]
-
+	
+	Editado Por.......: SMN - Rafael Morais
+	Objetivo..........: Adicionar a o campo de cpf na proceure 
+	Data..............: 07/09/2017
+	
 	*/
 	
 	BEGIN
-		INSERT INTO [dbo].[Usuario](NomeUsuario,SenhaUsuario,SaldoUsuario)
-			VALUES (@NomeUsuario,@SenhaUsuario,@SaldoUsuario)		
+		INSERT INTO [dbo].[Usuario](Cpf,SenhaUsuario,SaldoUsuario)
+			VALUES (@CpfUsuario,@NomeUsuario,@SenhaUsuario,@SaldoUsuario)		
 			
 				IF @@ERROR <> 0
 					RETURN 1
@@ -120,5 +125,29 @@ CREATE PROCEDURE [dbo].[GCS_SelUsuario]
 	END
 GO
 				
-						
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_LisUsuario]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_LisUsuario]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Listar todos os usuario
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 07/07/2017
+	Ex................: EXEC [dbo].[GCS_LisUsuario]
+
+	*/
+
+	BEGIN
+	
+		SELECT * FROM [dbo].[Usuario]
+	END
+GO
+										
 				

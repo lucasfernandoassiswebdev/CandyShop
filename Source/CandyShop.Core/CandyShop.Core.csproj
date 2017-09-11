@@ -40,9 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IProdutoRepository.cs" />
+    <Compile Include="CompraProduto\Dto\CompraProdutoDto.cs" />
+    <Compile Include="Compra\Dto\CompraDto.cs" />
+    <Compile Include="-Interfaces\ICompraRepository.cs" />
+    <Compile Include="-Interfaces\IPagamentoRepository.cs" />
+    <Compile Include="-Interfaces\IProdutoRepository.cs" />
+    <Compile Include="-Interfaces\IUsuarioRepository.cs" />
+    <Compile Include="Pagamento\Dto\PagamentoDto.cs" />
     <Compile Include="Produto\Dto\ProdutoDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Usuario\Dto\UsuarioDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

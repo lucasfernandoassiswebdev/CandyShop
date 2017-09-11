@@ -41,9 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompraRepository.cs" />
     <Compile Include="ConnectDB.cs" />
+    <Compile Include="PagamentoRepository.cs" />
     <Compile Include="ProdutoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="SQLExtension.cs" />
+>>>>>>> 2b6b228d6f8378e333bdc3c476680bbc8c45131b
     <Compile Include="UsuarioRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CandyShop.Core.Compra.Dto.CompraDto>
+@{ Layout = null; }
+
+<table class="table">
+    <tr>
+        <th>
+            Compra:
+        </th>
+        <th>
+            Data da Compra:
+        </th>
+        <th></th>
+    </tr>
+
+    @for(var i =0; i<7; i++)
+    {
+        <tr>
+            <td>
+                Teste
+            </td>
+            <td>
+                testando
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Detailhes", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Deletar", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<a href="#!" onclick="AjaxJs.voltarInicio()">Voltar</a>

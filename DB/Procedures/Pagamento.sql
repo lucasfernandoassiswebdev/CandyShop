@@ -112,7 +112,7 @@ CREATE PROCEDURE [dbo].[GCS_LisCpfPagamento]
 	Arquivo Fonte.....: Pagamento.sql
 	Objetivo..........: Listar os pagamentos de um usuario
 	Autor.............: SMN - Rafael Morais
- 	Data..............: 01/01/2017
+ 	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[GCS_LisCpfPagamento]
 
 	*/
@@ -123,8 +123,7 @@ CREATE PROCEDURE [dbo].[GCS_LisCpfPagamento]
 			WHERE Cpf = @Cpf
 
 	END
-GO
-				
+GO			
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_DelPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[GCS_DelPagamento]
@@ -147,11 +146,37 @@ CREATE PROCEDURE [dbo].[GCS_DelPagamento]
 
 	BEGIN
 	
-		DELETE Pagamento 
+		DELETE [dbo].[Pagamento] 
 			WHERE IdPagamento = @IdPagamento
 
 	END
 GO
-				
-				
-				
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_SelPagamento]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_SelPagamento]
+	@IdPagamento int
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Pagamento.sql
+	Objetivo..........: Selecionar um pagamento
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 07/07/2017
+	Ex................: EXEC [dbo].[GCS_SelPagamento]
+
+	*/
+
+	BEGIN
+	
+		SELECT * FROM [dbo].[Pagamento]	WITH(NOLOCK)
+			WHERE IdPagamento = @IdPagamento
+
+	END
+GO
+													

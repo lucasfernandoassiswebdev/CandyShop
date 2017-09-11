@@ -87,10 +87,39 @@ CREATE PROCEDURE [dbo].[GCS_LisCompra]
 
 	BEGIN
 	
-		SELECT * FROM compras WITH(NOLOCK)
+		SELECT * FROM [dbo].[Compra] WITH(NOLOCK)
 
 	END
 GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisCpfCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_LisCpfCompra]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_LisCpfCompra]
+	@Cpf varchar(14)
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Compra.sql
+	Objetivo..........: Listar as compras feitas por um usuario
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 07/07/2017
+	Ex................: EXEC [dbo].[GCS_LisCpfCompra]
+
+	*/
+
+	BEGIN
+	
+		SELECT * FROM [dbo].[Compra] WITH(NOLOCK)	
+			WHERE UsuarioCompra = @cpf
+
+	END
+GO
+				
 
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_DelCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
@@ -114,10 +143,37 @@ CREATE PROCEDURE [dbo].[GCS_DelCompra]
 
 	BEGIN
 	
-		DELETE FROM  Compra WHERE
+		DELETE FROM [dbo].[Compra] WHERE
 			IdCompra = @IdCompra
 	END
 GO
 
 
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_SelCompra]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_SelCompra]
+	@IdCompra int
+	
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Compra.sql
+	Objetivo..........: Selecionar uma compra
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 07/07/2017
+	Ex................: EXEC [dbo].[GCS_SelCompra]
+
+	*/
+
+	BEGIN
+	
+		SELECT * FROM [dbo].[Compra] WITH(NOLOCK)
+			WHERE IdCompra = @IdCompra
+
+	END
+GO
+				
 																			
