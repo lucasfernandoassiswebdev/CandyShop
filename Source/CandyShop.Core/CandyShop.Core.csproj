@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infra\Notification.cs" />
+    <Compile Include="Services\-Interfaces\INotification.cs" />
     <Compile Include="Services\CompraProduto\Dto\CompraProdutoDto.cs" />
     <Compile Include="Services\Compra\Dto\CompraDto.cs" />
     <Compile Include="Services\-Interfaces\ICompraRepository.cs" />
