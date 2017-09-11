@@ -54,7 +54,7 @@ select {
 
 .select-wrapper input.select-dropdown {
 	height: 2rem;
-	margin: 13px 33px 19px 10px
+	margin: 16px 33px 0px 10px
 }
 
 input[type="text"], .modal-close, h3 {
@@ -86,10 +86,7 @@ li img {
 	margin-top: 10px;
 }
 
-li span {
-	margin-top: 500px;
-}
-
 .collection .collection-item {
 	line-height: 2.5rem;
 }
+
