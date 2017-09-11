@@ -47,11 +47,13 @@
     <Compile Include="Services\-Interfaces\ICompraRepository.cs" />
     <Compile Include="Services\-Interfaces\IPagamentoRepository.cs" />
     <Compile Include="Services\-Interfaces\IProdutoRepository.cs" />
-    <Compile Include="Services\-Interfaces\IUsuarioRepository.cs" />
+    <Compile Include="Services\Usuario\IUsuarioRepository.cs" />
     <Compile Include="Services\Pagamento\Dto\PagamentoDto.cs" />
     <Compile Include="Services\Produto\Dto\ProdutoDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Usuario\Dto\UsuarioDto.cs" />
+    <Compile Include="Services\Usuario\IUsuarioService.cs" />
+    <Compile Include="Services\Usuario\UsuarioService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
