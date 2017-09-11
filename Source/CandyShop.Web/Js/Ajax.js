@@ -1,4 +1,4 @@
-﻿var AjaxJs = (function() {
+﻿var AjaxJs = (function($) {
     var url = {};   //objeto que recebe o nome e endereço da pagina
 
     // Lista de objetos que guarda o nome e o endereco da pagina, sã carregados na pagina padrao
@@ -9,22 +9,22 @@
 
     //carrega a pagina de inicio
     function main() {
-        $.get(url.main).success(function(data) {                //pega a view main e a carrega no div
+        $.get(url.main).done(function(data) {                //pega a view main e a carrega no div
             $("#DivGrid").slideUp(function() {
-                $('#DivGrid').hide().html(data).slideDown();    //desce  o divgrid                                                                                
-            }).error(function(xhr) {                            //xhr é o código do erro, que é retornado caso o get não tenha sucesso
-                $("#DivGrid").errorMessage(xhr.responseText);
+                $('#DivGrid').hide().html(data).slideDown(); //desce  o divgrid                                                                                
             });
+        }).fail(function(xhr) {                            //xhr é o código do erro, que é retornado caso o get não tenha sucesso
+            $("#DivGrid").errorMessage(xhr.responseText);
         });
     }
 
     //Função genérica para carregar o div, de acordo com o endereço passado
     function chamaPagina(endereco) {    
-        $.get(endereco).success(function (data) {               //data é o conteudo da view
+        $.get(endereco).done(function (data) {               //data é o conteudo da view
             $('#DivGrid').slideUp(function () {                 //a div é recolhida
                 $('#DivGrid').hide().html(data).slideDown();    //escondida, carregada e demonstrada novamente
             });
-        }).error(function (xhr) {
+        }).fail(function (xhr) {
             $('#DivGrid').errorMessage(xhr.responseText);            
         });
     };
@@ -54,4 +54,4 @@
         historicoCompra: historicoCompra
     };
 
-})();           //O método ajaxJS é auto executado quando é iniciado o sistema.
+})(jQuery);           //O método ajaxJS é auto executado quando é iniciado o sistema.
