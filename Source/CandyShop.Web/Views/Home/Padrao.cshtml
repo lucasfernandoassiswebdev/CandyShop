@@ -5,13 +5,13 @@
 
 <script src="~/Js/Ajax.js?d=@DateTime.Now.Ticks" type="text/javascript"></script>
 <script>
-    AjaxJs.init({
-        main: '@Url.Action("Main", "Home")',
-        pagamento: '@Url.Action("Index", "Pagamento")',
-        historicoCompra: '@Url.Action("Historico", "Compra")'
-    });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
+        AjaxJs.init({
+            main: '@Url.Action("Main", "Home")',
+            pagamento: '@Url.Action("Index", "Pagamento")',
+            historicoCompra: '@Url.Action("Historico", "Compra")'
+        });
         $('select').material_select();
     });
 </script>
