@@ -44,9 +44,9 @@
     <Compile Include="Services\-Interfaces\INotification.cs" />
     <Compile Include="Services\CompraProduto\Dto\CompraProdutoDto.cs" />
     <Compile Include="Services\Compra\Dto\CompraDto.cs" />
-    <Compile Include="Services\-Interfaces\ICompraRepository.cs" />
-    <Compile Include="Services\-Interfaces\IPagamentoRepository.cs" />
-    <Compile Include="Services\-Interfaces\IProdutoRepository.cs" />
+    <Compile Include="Services\Compra\ICompraRepository.cs" />
+    <Compile Include="Services\Pagamento\IPagamentoRepository.cs" />
+    <Compile Include="Services\Produto\IProdutoRepository.cs" />
     <Compile Include="Services\Usuario\IUsuarioRepository.cs" />
     <Compile Include="Services\Pagamento\Dto\PagamentoDto.cs" />
     <Compile Include="Services\Produto\Dto\ProdutoDto.cs" />
