@@ -22,12 +22,31 @@ namespace CandyShop.WebAPI.Controllers
             _usuarioService = usuarioService;
         }
 
-        public IHttpActionResult PostInserirUsuario(UsuarioDto usuario)
+        public IHttpActionResult InserirUsuario(UsuarioDto usuario)
         {
             _usuarioService.InserirUsuario(usuario);
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
             return Ok();
         }
+
+        public IHttpActionResult ListarUsuario(string cpf)
+        {
+            _usuarioRepository.ListarUsuario();
+            return Ok();
+        }
+
+        public IHttpActionResult EditaUsuario(UsuarioDto usuario)
+        {
+            _usuarioRepository.EditarUsuario(usuario);
+            return Ok();
+        }
+
+        public IHttpActionResult DeletaUsuario(string cpf)
+        {
+            _usuarioRepository.DeletarUsuario(cpf);
+            return Ok();
+        }
+
     }
 }
