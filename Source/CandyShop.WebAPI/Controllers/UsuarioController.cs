@@ -1,17 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using CandyShop.Core;
+using CandyShop.Core.Infra;
+using CandyShop.Core.Services.Usuario;
+using CandyShop.Core.Usuario.Dto;
+using System.Net;
+using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : ApiController
     {
-        // GET: Usuario
-        public ActionResult Index()
+        private readonly Notification _notification;
+        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUsuarioService _usuarioService;
+
+
+        public UsuarioController(Notification notification, IUsuarioRepository usuarioRepository,
+            IUsuarioService usuarioService)
         {
-            return View();
+            _notification = notification;
+            _usuarioRepository = usuarioRepository;
+            _usuarioService = usuarioService;
+        }
+
+        public IHttpActionResult PostInserirUsuario(UsuarioDto usuario)
+        {
+            _usuarioService.InserirUsuario(usuario);
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
+            return Ok();
         }
     }
 }
