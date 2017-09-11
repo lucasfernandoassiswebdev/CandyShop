@@ -27,7 +27,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#modal2" id="confirmacao" class="modal-trigger modal-close waves-effect waves-green btn-flat">Confirma</a>
+        <a href="#modal2" id="confirmacao" class="modal-trigger modal-close waves-effect waves-green btn-flat brown-text">Confirma</a>
     </div>
 </div>
 
@@ -38,6 +38,23 @@
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Confirmar</a>
+    </div>
+</div>
+
+<!--modal de compra-->
+<div id="modal3" class="modal">
+    <div class="modal-content center">
+        <h3>Carrinho</h3>
+        <div class="collection">
+            <a href="#!" class="collection-item">Alvin</a>
+            <a href="#!" class="collection-item">Alvin</a>
+            <a href="#!" class="collection-item">Alvin</a>
+            <a href="#!" class="collection-item">Alvin</a>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="Index.cshtml" class="right modal-action modal-close waves-effect waves-green btn-flat">Confirmar venda</a>
+        <a href="#!" class=" right modal-action waves-effect waves-green btn-flat brown-text">Limpar</a>
     </div>
 </div>
 
@@ -57,7 +74,7 @@
         <ul class="hide-on-med-and-down">
             <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
             <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
-            <li><a class="dropdown-button" href="#!"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
+            <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
             <li>
                 <div class="col s4 hide-on-med-and-down">
                     <form>
@@ -72,7 +89,7 @@
             </li>
             <li style="margin-left: 250px">
                 <select style="position: absolute;margin-top:30px">
-                    <option value="" disabled selected>Filtro</option>
+                    <option value="" disabled selected class="white-text">Filtro</option>
                     <option value="1">Chocolates</option>
                     <option value="2">Amendoins</option>
                     <option value="3">Salgadinhos</option>

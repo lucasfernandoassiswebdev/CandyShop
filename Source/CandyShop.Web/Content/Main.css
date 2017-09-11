@@ -57,3 +57,22 @@ select {
 	margin: 13px 33px 19px 10px
 }
 
+input[type="text"], .modal-close, h3 {
+	color: brown;
+}
+
+.caret {
+	display: inline !important;
+	color: white !important;
+}
+
+select {
+	color: white !important;
+}
+
+.select-dropdown {
+	color: white !important;
+}
+h3 {
+	color: brown;
+}
