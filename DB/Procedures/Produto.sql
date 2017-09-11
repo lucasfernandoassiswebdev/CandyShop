@@ -114,7 +114,7 @@ CREATE PROCEDURE [dbo].[GCS_SelProduto]
 	*/
 
 	BEGIN
-		SELECT * FROM Produto WITH(NOLOCK)
+		SELECT * FROM [dbo].[Produto] WITH(NOLOCK)
 			WHERE IdProduto = @IdProduto
 	END
 GO
