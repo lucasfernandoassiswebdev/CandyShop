@@ -82,60 +82,89 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col s12 m4 l2">
+        <div class="card">
+            <div class="card-image">
+                <img src="../../Imagens/passatempo.png">
+                <span class="card-title flow-text">Passa-Tempo</span>
+                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+                <p>R$ 2,50</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('.tooltipped').tooltip({ delay: 50 });
         $(".button-collapse").sideNav();
         $('select').material_select();
         $('.caret').hide();
         $('.modal').modal();
+
+        var qtde = $('.card-title').length;
+        for (var i = 0; i < qtde; i++) {
+            var botao = $('.btn-floating:eq(' + i + ')').css('top');
+            var pixels = botao.replace('px', '');
+            $('.card-title:eq(' + i + ')').css('top', parseFloat(pixels) + 20).css('margin-bottom','20px');
+        }
     });
 
-    $('#quantidade, #quantidadeEdit').on('keydown',function() {
-        mNumbers($(this).val());
-    });
+    $('#quantidade, #quantidadeEdit').on('keydown',
+        function() {
+            mNumbers($(this).val());
+        });
 
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
 
-    $('#abreModal').on('click', function () {
-        $('#quantidade').val('');   
-    });
+    $('#abreModal').on('click',
+        function() {
+            $('#quantidade').val('');
+        });
 
-    $('#quantidade').on('blur', function () {
-        mNumbers($('#quantidade').val());
-        if ($('#quantidade').val().match(verifyInt)) {
-           $('#confirmacao').removeClass('modal-close modal-trigger');
-        } else if ($('#quantidade').val() == 0) {
-            $('#quantidade').val('');   
-            $('#confirmacao').removeClass('modal-close modal-trigger');
-        } else {
-            $('#confirmacao').addClass('modal-close modal-trigger');
-        }
-    });
+    $('#quantidade').on('blur',
+        function() {
+            mNumbers($('#quantidade').val());
+            if ($('#quantidade').val().match(verifyInt)) {
+                $('#confirmacao').removeClass('modal-close modal-trigger');
+            } else if ($('#quantidade').val() == 0) {
+                $('#quantidade').val('');
+                $('#confirmacao').removeClass('modal-close modal-trigger');
+            } else {
+                $('#confirmacao').addClass('modal-close modal-trigger');
+            }
+        });
 
-    $('#quantidadeEdit').on('blur', function () {
-        mNumbers($('#quantidadeEdit').val());
-        if ($('#quantidadeEdit').val().match(verifyInt) || $('#quantidadeEdit').val() == 0) {
-            $('#quantidadeEdit').val('');
-            $('#confirmaCompra').removeClass('modal-close');
-        } else {
-            $('#confirmaCompra').addClass('modal-close');
-        }
-    });
+    $('#quantidadeEdit').on('blur',
+        function() {
+            mNumbers($('#quantidadeEdit').val());
+            if ($('#quantidadeEdit').val().match(verifyInt) || $('#quantidadeEdit').val() == 0) {
+                $('#quantidadeEdit').val('');
+                $('#confirmaCompra').removeClass('modal-close');
+            } else {
+                $('#confirmaCompra').addClass('modal-close');
+            }
+        });
 
-    $('#confirmacao').on('click', function () {
-        if ($('#quantidade').val().match(verifyInt)) {
-            $('#confirmacao').removeClass('modal-close modal-trigger');
-        } else if ($('#quantidade').val() == 0) {
-            $('#confirmacao').removeClass('modal-close modal-trigger');
-        } else {
-            $('#confirmacao').addClass('modal-close modal-trigger');
-        }
-    });
+    $('#confirmacao').on('click',
+        function() {
+            if ($('#quantidade').val().match(verifyInt)) {
+                $('#confirmacao').removeClass('modal-close modal-trigger');
+            } else if ($('#quantidade').val() == 0) {
+                $('#confirmacao').removeClass('modal-close modal-trigger');
+            } else {
+                $('#confirmacao').addClass('modal-close modal-trigger');
+            }
+        });
 
-    $('#limpar').on('click',function() {
-        $('.collection li').remove();
-    });
+    $('#limpar').on('click',
+        function() {
+            $('.collection li').remove();
+        });
+
     function mNumbers(v) {
         v = v.replace(/\D/g, "");
         $('#quantidade, #quantidadeEdit').val(v);
