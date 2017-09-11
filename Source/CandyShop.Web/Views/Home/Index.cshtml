@@ -7,14 +7,14 @@
 <div class="row">
    <form class="center white batata container">
        <h1 class="center"><font color="browm">Candy</font> <font color="red">Shop</font></h1>
-        <div class="row center">
+       <div class="row center batatao">
             <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
                 <input id="cpf" name="CPF" type="text" class="validate red-text">
                 <label for="cpf">Login</label>
             </div>
         </div>
-        <div class="row">
+        <div class="row batatao">
             <div class="input-field col s12">
                 <i class="material-icons prefix">vpn_key</i>
                 <input id="senha" type="password" class="validate red-text">
@@ -32,9 +32,10 @@
             mcpf($('#cpf').val());
         });
 
-        $('#cpf').on('blur',function() {
+        $('#cpf').on('blur', function () {
             if ($('#cpf').val().length > 14) {
-                $('#cpf').substr($('#cpf').length - 1, 1);
+                $('#cpf').val($('#cpf').val().substr(0, 13));
+                $('#cpf').keydown();
             }
         });
 

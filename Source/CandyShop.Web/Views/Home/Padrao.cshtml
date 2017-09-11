@@ -13,6 +13,28 @@
         });
         $('select').material_select();
     });
+
+
+    /*.append($('<li>', { html: [$('<img>', { src: '../../Imagens/moranguete.jpg', alt: '', class: 'circle' })], class: 'collection-item avatar' }));*/
+    $('#adicionaCarrinho').click(function () {
+
+        $("div[class='collection']").append($('<li>', {
+            html: [$('<span>', { html: 'Moranguete', class: 'title' }),
+                $('<p>', { html: 'Quantidade: 5' }),
+                   $('<a>',{})
+            ], class: 'collection-item avatar'
+        }))
+        $("div[class='collection']").append(
+            '<li class="collection-item avatar> ' +
+            '<span class="title">Moranguete </span>' +
+            '<p>' +
+            'Quantidade: 5' +
+            '</p>' +
+            '<a href="#modal4" class="modal-trigger secondary-content"><i class="material-icons">mode_edit</i></a>' +
+            '</li>');
+
+        $("div[class='collection'] span").last().prepend($('<img>', { src: '../../Imagens/moranguete.jpg', class: 'collection-item avatar circle' }));
+        });
 </script>
 
 <link href="~/Content/Main.css" rel="stylesheet" />
@@ -36,7 +58,7 @@
         <h3>Adicionar ao carrinho?</h3>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Confirmar</a>
+        <a href="#!" id="adicionaCarrinho" class="modal-action modal-close waves-effect waves-green btn-flat">Confirmar</a>
     </div>
 </div>
 
@@ -50,33 +72,6 @@
                 <span class="title">Moranguete</span>
                 <p>
                     Quantidade: 5
-                </p>
-                <a href="#modal4" class="modal-trigger secondary-content"><i class="material-icons">mode_edit</i></a>
-            </li>
-
-            <li class="collection-item avatar">
-                <img src="../../Imagens/amendoim.jpg" alt="" class="circle">
-                <span class="title">Amendoin</span>
-                <p>
-                    Quantidade: 2
-                </p>
-                <a href="#modal4" class="modal-trigger secondary-content"><i class="material-icons">mode_edit</i></a>
-            </li>
-
-            <li class="collection-item avatar">
-                <img src="../../Imagens/chocolate2.jpg" alt="" class="circle">
-                <span class="title">Chocolate</span>
-                <p>
-                    Quantidade: 3
-                </p>
-                <a href="#modal4" class="modal-trigger secondary-content"><i class="material-icons">mode_edit</i></a>
-            </li>
-
-            <li class="collection-item avatar">
-                <img src="../../Imagens/chocolate1.jpg" alt="" class="circle">
-                <span class="title">Chocolate 2</span>
-                <p>
-                    Quantidade: 1
                 </p>
                 <a href="#modal4" class="modal-trigger secondary-content"><i class="material-icons">mode_edit</i></a>
             </li>
@@ -151,3 +146,4 @@
 </nav>
 
 <div id="DivGrid"><img src="https://media.tenor.com/images/d6cd5151c04765d1992edfde14483068/tenor.gif" style="width: 100px;height: 100px;margin: 0 auto;display: block;"></div>
+
