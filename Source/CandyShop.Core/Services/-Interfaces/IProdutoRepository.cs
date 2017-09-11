@@ -9,6 +9,5 @@ public interface IProdutoRepository
     bool SelecionarProduto(int idProduto);
     IEnumerable<ProdutoDto> ListarProdutos();
     ProdutoDto SelecionarDadosProduto(int idProduto);
-
 }
 

@@ -12,6 +12,5 @@ namespace CandyShop.Core
         IEnumerable<PagamentoDto> ListarPagamentosPorCpf(string cpf);
         bool SelecionarPagamento(int idPagamento);
         PagamentoDto SelecionarDadosPagamento(int idPagamento);
-
     }
 }

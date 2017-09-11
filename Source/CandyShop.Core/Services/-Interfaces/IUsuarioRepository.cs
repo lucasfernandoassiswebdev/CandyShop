@@ -11,6 +11,5 @@ namespace CandyShop.Core
         bool SelecionarUsuario(string cpf);
         IEnumerable<UsuarioDto> ListarUsuario();
         UsuarioDto SelecionarDadosUsuario(string cpf);
-
     }
 }
