@@ -76,3 +76,20 @@ select {
 h3 {
 	color: brown;
 }
+
+.material-icons {
+	font-size: 40px;
+	line-height: 1.5;
+}
+
+li img {
+	margin-top: 10px;
+}
+
+li span {
+	margin-top: 500px;
+}
+
+.collection .collection-item {
+	line-height: 2.5rem;
+}
