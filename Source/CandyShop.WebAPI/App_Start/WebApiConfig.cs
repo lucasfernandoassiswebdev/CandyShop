@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using SimpleInjector.Integration.WebApi;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI
@@ -19,6 +17,9 @@ namespace CandyShop.WebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //Configurando a injeção de dependencia
+            config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(SimpleInjectorContainer.Build());
         }
     }
 }

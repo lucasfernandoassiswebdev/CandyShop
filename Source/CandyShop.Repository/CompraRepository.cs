@@ -1,5 +1,6 @@
 ﻿using CandyShop.Core;
 using CandyShop.Core.Compra.Dto;
+using CandyShop.Core.CompraProduto.Dto;
 using CandyShop.Core.Usuario.Dto;
 using Concessionaria.Repositorio;
 using System.Collections.Generic;
@@ -16,9 +17,10 @@ namespace CandyShop.Repository
             GCS_DelCompra,
             GCS_LisCpfCompra,
             GCS_SelCompra,
-
-
+            GCS_InsCompraProduto,
+            CCS_InsItens
         }
+
         public void InserirCompra(CompraDto compra)
         {
             ExecuteProcedure(Procedures.GCS_InsCompra);
@@ -26,6 +28,17 @@ namespace CandyShop.Repository
             AddParameter("@DataCompra", compra.DataCompra);
 
             ExecuteNonQuery();
+                        
+        }
+
+        public void InserirItens(CompraProdutoDto item)
+        {
+            ExecuteProcedure(Procedures.GCS_InsCompraProduto);
+            AddParameter("@IdProduto", item.Produto.IdProduto);
+            AddParameter("@QtdeProduto", item.QtdeCompra);
+            AddParameter("@IdCompra", item.IdCompra);
+            ExecuteNonQuery();
+            
         }
 
         public void EditarCompra(CompraDto compra)

@@ -155,6 +155,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VendaProdutoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,6 +175,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\VendaProduto\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CandyShop.Core\CandyShop.Core.csproj">
@@ -200,7 +202,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>22575</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3000/</IISUrl>
+          <IISUrl>http://localhost:4000/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

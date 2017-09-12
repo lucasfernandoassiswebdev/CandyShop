@@ -136,6 +136,9 @@ CREATE PROCEDURE [dbo].[GCS_LisProduto]
  	Data..............: 07/07/2017
 	Ex................: EXEC [dbo].[GCS_LisProduto]
 
+	Editado Por.......: SMN - João Guilherme
+	Objetivo..........: Alterando o select 
+	Data..............: 12/09/2017
 	*/
 
 	BEGIN
