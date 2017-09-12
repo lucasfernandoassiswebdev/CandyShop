@@ -53,6 +53,10 @@
     var listaProduto = function() {
         chamaPagina(url.listaProduto);
     }
+
+    var mostraSaldo = function() {
+        chamaPagina(url.mostraSaldo);
+    }
     //retorna links para acessar as paginas.
     return {
         init: init,
@@ -60,7 +64,8 @@
         voltarInicio: voltarInicio,
         historicoCompra: historicoCompra,
         listaUsuario: listaUsuario,
-        listaProduto: listaProduto
-    };
+        listaProduto: listaProduto,
+        mostraSaldo:  mostraSaldo
+};
 
 })(jQuery);           //O método ajaxJS é auto executado quando é iniciado o sistema.

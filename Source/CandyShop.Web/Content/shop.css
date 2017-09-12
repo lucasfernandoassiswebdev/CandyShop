@@ -1,0 +1,12 @@
+﻿@media only screen and (max-width : 992px) {
+	h1 {
+		font-size: 25px !important;
+		margin: 80% auto !important;
+	}
+}
+
+h1 {
+	font-size: 60px;
+	margin: 28% auto;
+	font-weight: bold !important;
+}

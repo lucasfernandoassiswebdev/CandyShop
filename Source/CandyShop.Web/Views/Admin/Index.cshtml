@@ -9,7 +9,8 @@
         AjaxJs.init({
             main: '@Url.Action("Index", "Usuario")',
             listaProduto: '@Url.Action("Index", "Produto")',
-            listaUsuario: '@Url.Action("Index", "Usuario")'
+            listaUsuario: '@Url.Action("Index", "Usuario")',
+            mostraSaldo: '@Url.Action("Index", "Shop")'
         });
     })
 </script>
@@ -53,7 +54,7 @@
             </div>
         </li>
     </ul>
-    <li><a class="dropdown-button white-text" href="#!"><i class="material-icons left white-text">attach_money</i>Crédito atual da loja</a></li>
+    <li><a class="dropdown-button white-text" href="#!" onclick="AjaxJs.mostraSaldo()"><i class="material-icons left white-text">attach_money</i>Crédito atual da loja</a></li>
     <li>
         <div class="divider"></div>
     </li>
