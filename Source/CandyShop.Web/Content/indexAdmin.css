@@ -15,3 +15,11 @@ header, main, footer {
 #DivGrid {
 	margin-left: 450px;
 }
+
+.side-nav li > a {
+	padding: 0 19px;
+}
+
+.side-nav .collapsible-body li a, .side-nav.fixed .collapsible-body li a {
+	padding: 0 26.5px 0 58px;
+}
