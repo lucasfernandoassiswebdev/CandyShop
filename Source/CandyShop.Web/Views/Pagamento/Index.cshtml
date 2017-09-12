@@ -10,12 +10,11 @@
 
 <h2 align="center"><font color="red">Pagamentos</font></h2>
 
-
-<div class="row" id="filtro" >
+<div class="row black-text" id="filtro">
     <div id="icone"><i class="small material-icons">date_range</i></div>
-    <div id="dropdown" class="input-field">        
-        <select id="FiltroMes" >
-            <option value="" selected disabled>Escolha um mês para filtrar</option>
+    <div id="dropdown" class="input-field black-text">        
+        <select id="FiltroMes">
+            <option class="opts black-text" value="" selected disabled>Escolha um mês</option>
             <option value="1">Janeiro</option>
             <option value="2">Fevereiro</option>
             <option value="3">Março</option>
@@ -95,3 +94,9 @@
 </style>
 
 <div align="center"><a href="#!" onclick="AjaxJs.voltarInicio()">Voltar</a></div>
+
+<script>
+    $(document).ready(function() {
+        $(".penis").last().removeClass('select-dropdown');
+    });
+</script>
