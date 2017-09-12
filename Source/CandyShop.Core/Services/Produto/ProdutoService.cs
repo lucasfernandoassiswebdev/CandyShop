@@ -8,7 +8,6 @@ namespace CandyShop.Core.Services.Produto
         private readonly IProdutoRepository _produtoRepository;
         private readonly INotification _notification;
 
-
         public ProdutoService(INotification notification, IProdutoRepository produtoRepository)
         {
             _notification = notification;

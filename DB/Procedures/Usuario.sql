@@ -25,7 +25,7 @@ CREATE PROCEDURE [dbo].[GCS_InsUsuario]
 	*/
 	
 	BEGIN
-		INSERT INTO [dbo].[Usuario](Cpf,SenhaUsuario,SaldoUsuario)
+		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario)
 			VALUES (@CpfUsuario,@NomeUsuario,@SenhaUsuario,@SaldoUsuario)		
 			
 				IF @@ERROR <> 0
@@ -129,7 +129,7 @@ GO
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[GCS_LisUsuario]
 GO
-
+	
 CREATE PROCEDURE [dbo].[GCS_LisUsuario]
 
 	AS
@@ -142,11 +142,18 @@ CREATE PROCEDURE [dbo].[GCS_LisUsuario]
  	Data..............: 07/07/2017
 	Ex................: EXEC [dbo].[GCS_LisUsuario]
 
+	Editado Por.......: SMN - João Guilherme
+	Objetivo..........: Alterando o select 
+	Data..............: 12/09/2017
 	*/
 
 	BEGIN
 	
-		SELECT * FROM [dbo].[Usuario]
+		SELECT Cpf,
+				SenhaUsuario,
+				SaldoUsuario,
+				NomeUsuario
+				 FROM [dbo].[Usuario]
 	END
 GO
 										

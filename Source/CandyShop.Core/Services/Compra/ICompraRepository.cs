@@ -1,4 +1,5 @@
 ﻿using CandyShop.Core.Compra.Dto;
+using CandyShop.Core.CompraProduto.Dto;
 using System.Collections.Generic;
 
 namespace CandyShop.Core
@@ -12,5 +13,6 @@ namespace CandyShop.Core
         IEnumerable<CompraDto> ListarCompraPorCpf(string cpf);
         bool SelecionarCompra(int idCompra);
         CompraDto SelecionarDadosCompra(int idCompra);
+        void InserirItens(CompraProdutoDto compraProduto);
     }
 }
