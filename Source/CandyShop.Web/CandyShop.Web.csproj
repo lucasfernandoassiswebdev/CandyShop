@@ -144,9 +144,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagamentoController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -154,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\index.css" />
+    <Content Include="Content\indexAdmin.css" />
     <Content Include="Content\Main.css" />
     <Content Include="Content\materialize.min.css" />
     <Content Include="favicon.ico" />
@@ -179,6 +183,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Js\Ajax.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Js\scriptsAdmin.js" />
     <Content Include="Js\scriptsIndex.js" />
     <Content Include="Js\scriptsMain.js" />
     <Content Include="Js\scriptsPadrao.js" />
@@ -216,6 +221,9 @@
     <Content Include="Views\Compra\Historico.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Produto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

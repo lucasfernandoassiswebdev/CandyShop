@@ -1,7 +1,12 @@
 ﻿@media screen and (min-width: 1000px) {
 	.pesquisaMobile {
 		display: none;
-		opacity: 0;
+	}
+}
+
+@media screen and (max-width: 1214px) {
+	.select-wrapper {
+		display: none;
 	}
 }
 

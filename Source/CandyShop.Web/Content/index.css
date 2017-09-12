@@ -1,6 +1,21 @@
-﻿body {
-	background-image: url("~/../../Imagens/fundo4.jpg");
-	background-repeat: repeat-x repeat y;
+﻿@media screen and (max-width: 600px) {
+	.batata {
+		width: 80% !important;
+		height: 80%;
+		top: -4.4%;
+		padding-top: 13%;
+		left: 10% !important;
+	}
+	.row .col.s12 {
+		width: 136%;
+		left: -23%;
+	}
+}
+
+body {
+	background-image: url("../../Imagens/fundo4.jpg");
+	background-repeat: repeat;
+	overflow: hidden;
 }
 
 h1 {
@@ -37,7 +52,6 @@ html {
 .batata {
 	position: absolute;
 	left: 25%;
-	margin-left: 0%;
 	width: 50%;
 }
 
