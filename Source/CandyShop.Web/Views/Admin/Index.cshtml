@@ -1,28 +1,32 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
+
 <script type="text/javascript" src="../../Js/scriptsAdmin.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="../../Js/Ajax.js?d=@DateTime.Now.Ticks"></script>
 <script>
     $(document).ready(function () {
-        $('.collapsible').collapsible();
         AjaxJs.init({
             main: '@Url.Action("Index", "Usuario")',
             listaProduto: '@Url.Action("Index", "Produto")',
-            listaUsuario: '@Url.Action("Index", "Usuario")'
+            listaUsuario: '@Url.Action("Index", "Usuario")',
+            mostraSaldo: '@Url.Action("Index", "Shop")'
         });
     })
-
-
 </script>
+
 <link rel="stylesheet" type="text/css" href="../../Content/indexAdmin.css">
 
-<ul id="slide-out" class="side-nav fixed show-on-large">
-    <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_box</i>Administrador</a></li>
-    <li><div class="divider"></div></li>
+<ul id="slide-out" class="side-nav fixed brown">
+    <h3><font color="white">Candy</font><font color="red"> Shop</font></h3>
+    <li class="divider"></li>
+    <li><a class="dropdown-button white-text" href="#!"><i class="material-icons left white-text">account_box</i>Administrador</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
     <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
         <li>
-            <div class="collapsible-header brown-text">
+            <div class="collapsible-header white-text">
                 <i class="material-icons left">face</i>Usuários
             </div>
             <div class="collapsible-body">
@@ -38,21 +42,23 @@
 
     <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
         <li>
-            <div class="collapsible-header brown-text">
+            <div class="collapsible-header white-text">
                 <i class="material-icons left">shopping_cart</i>Produtos
             </div>
             <div class="collapsible-body">
                 <ul class="brown-text">
-                    <li><a class="dropdown-button" href="#!" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Lista produtos</a></li>
+                    <li><a href="#!" class="dropdown-button" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Lista produtos</a></li>
                     <li><a href="#!"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
                     <li><a href="#!"><i class="material-icons">add_shopping_cart</i>Inserir produtos</a></li>
                 </ul>
             </div>
         </li>
     </ul>
-    <li><a class="dropdown-button" href="#!"><i class="material-icons left">attach_money</i>Crédito atual da loja</a></li>
-    <li><div class="divider"></div></li>
-    <li><a class="dropdown-button" href="#!"><i class="material-icons left">explore</i>Voltar ao início</a></li>
+    <li><a class="dropdown-button white-text" href="#!" onclick="AjaxJs.mostraSaldo()"><i class="material-icons left white-text">attach_money</i>Crédito atual da loja</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="dropdown-button white-text" href="#!"><i class="material-icons left white-text">home</i>Voltar ao início</a></li>
 </ul>
-
+<a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse brown-text"><i class="material-icons">menu</i></a>
 <div id="DivGrid"></div>

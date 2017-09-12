@@ -54,9 +54,14 @@
         chamaPagina(url.listaProduto);
     }
 
-    var detalhePagamento = function () {
+
+    var detalhePagamento = function() {
         chamaPagina(url.detalhePagamento);
-    }
+    };
+    var mostraSaldo = function() {
+        chamaPagina(url.mostraSaldo);
+
+    };
     //retorna links para acessar as paginas.
     return {
         init: init,
@@ -65,7 +70,8 @@
         historicoCompra: historicoCompra,
         listaUsuario: listaUsuario,
         listaProduto: listaProduto,
+        mostraSaldo:  mostraSaldo,
         detalhePagamento: detalhePagamento
-    };
+    };       
 
 })(jQuery);           //O método ajaxJS é auto executado quando é iniciado o sistema.
