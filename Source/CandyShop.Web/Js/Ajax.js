@@ -44,8 +44,6 @@
         chamaPagina(url.historicoCompra);
     };
 
-
-
     //retorna links para acessar as paginas.
     return {
         init: init,
