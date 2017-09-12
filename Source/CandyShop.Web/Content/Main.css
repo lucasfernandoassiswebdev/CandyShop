@@ -1,4 +1,11 @@
-﻿.brown-text {
+﻿@media screen and (min-width: 1000px) {
+	.pesquisaMobile {
+		display: none;
+		opacity: 0;
+	}
+}
+
+.brown-text {
 	color: rgb(176,0,0);
 }
 
@@ -109,5 +116,18 @@ li img {
 }
 
 .pesquisaMobile {
-	
+	height: 3.5rem;
+	margin: 0 0 0 0;
+}
+
+input[id="search"] {
+	border-bottom: none !important;
+}
+
+.input-field input[type=search] {
+	height: 100%;
+}
+
+.row {
+	margin-top: 20px;
 }

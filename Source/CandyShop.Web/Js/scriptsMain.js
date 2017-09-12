@@ -13,6 +13,15 @@
     }
 });
 
+$(window).resize(function() {
+    var qtde = $('.card-title').length;
+    for (var i = 0; i < qtde; i++) {
+        var botao = $('.btn-floating:eq(' + i + ')').css('top');
+        var pixels = botao.replace('px', '');
+        $('.card-title:eq(' + i + ')').css('top', parseFloat(pixels) + 20).css('margin-bottom', '20px');
+    }
+});
+
 $('#quantidade, #quantidadeEdit').on('keydown',
     function () {
         mNumbers($(this).val());
