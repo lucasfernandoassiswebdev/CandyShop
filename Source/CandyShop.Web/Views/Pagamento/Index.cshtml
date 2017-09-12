@@ -5,16 +5,25 @@
 <script>
     $(document).ready(function () {
         $('select').material_select();
+        $(".penis").last().removeClass('select-dropdown');
     });
 </script>
 
+
+
+<div></div>
+
+
+
+
+
 <h2 align="center"><font color="red">Pagamentos</font></h2>
 
-<div class="row black-text" id="filtro">
+<div  id="filtro">
     <div id="icone"><i class="small material-icons">date_range</i></div>
-    <div id="dropdown" class="input-field black-text">        
+    <div id="dropdown" class="input-field">        
         <select id="FiltroMes">
-            <option class="opts black-text" value="" selected disabled>Escolha um mês</option>
+            <option class="black-text" value="" selected disabled>Escolha um mês para filtrar</option>
             <option value="1">Janeiro</option>
             <option value="2">Fevereiro</option>
             <option value="3">Março</option>
@@ -27,8 +36,7 @@
             <option value="10">Outubro</option>
             <option value="11">Novembro</option>
             <option value="12">Dezembro</option>            
-        </select> 
-        <label>Filtrar Mês</label>              
+        </select>         
     </div>
 </div>
 
@@ -67,8 +75,13 @@
 
 <style>
     #tabela {
-        width: auto;
-        font-size: small;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    #filtro {
+        text-align: center;          
     }
 
     #icone {
@@ -79,24 +92,10 @@
     #dropdown {
         position: static;
         display: inline-block;       
-        font-size: small;                
-        text-align:right;        
+        font-size: small;
+        width: 200pt;                        
     }
 
-    #filtro {
-        text-align: center;          
-    }          
-    
-    .input-field {
-        font-size: 10pt;
-
-    }
 </style>
 
 <div align="center"><a href="#!" onclick="AjaxJs.voltarInicio()">Voltar</a></div>
-
-<script>
-    $(document).ready(function() {
-        $(".penis").last().removeClass('select-dropdown');
-    });
-</script>
