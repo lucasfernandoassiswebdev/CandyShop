@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<CandyShop.Core.Compra.Dto.CompraDto>
 @{ Layout = null; }
 
-<div id ="tabela">
+<h4 align="center"><font color="brown">Histórico </font><font color="red">de Compras</font></h4>
+<br/>
+<div id ="tabela">    
     <table class="bordered">
-        <tr>
+        <tr >
             <th>
                 Compra:
-            </th>
+            </th >
             <th>
                 Data da Compra:
             </th>
@@ -14,7 +16,7 @@
 
         @for (var i = 0; i < 7; i++)
         {
-            <tr>
+            <tr class="center">
                 <td>
                     Teste
                 </td>
@@ -22,20 +24,32 @@
                     testando
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Detalhes", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Deletar", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Editar", "Edit", new {/* id=item.PrimaryKey */}) |
+                    @Html.ActionLink("Detalhes", "Details", new {/* id=item.PrimaryKey */}) |
+                    @Html.ActionLink("Deletar", "Delete", new {/* id=item.PrimaryKey */})
                 </td>
             </tr>
         }
 
     </table>
 </div>
-<a href="#!" onclick="AjaxJs.voltarInicio()">Voltar</a>
+<br/>
+<div align="center">
+    <a class="waves-effect waves-light btn" onclick="AjaxJs.voltarInicio()"><i class="material-icons left">arrow_back</i>Voltar</a>
+</div>
+
 <style>
     #tabela {
         width: 100%;
         max-width: 800px;
         margin: 0 auto;
+        text-align: center        
     }
+     #tabela td {
+         text-align: center;
+     }
+
+     .center {
+         text-align: center;
+     }
 </style>
