@@ -10,7 +10,6 @@
 
 <h2 align="center"><font color="red">Pagamentos</font></h2>
 
-
 <div class="row black-text" id="filtro">
     <div id="icone"><i class="small material-icons">date_range</i></div>
     <div id="dropdown" class="input-field black-text">        
@@ -27,9 +26,9 @@
             <option value="9">Setembro</option>
             <option value="10">Outubro</option>
             <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-        </select>
-        <label>Filtrar</label>
+            <option value="12">Dezembro</option>            
+        </select> 
+        <label>Filtrar Mês</label>              
     </div>
 </div>
 
@@ -73,27 +72,25 @@
     }
 
     #icone {
-        float: left;
-        position: relative;
+        display: inline-block;
         color: brown;
     }
 
     #dropdown {
-        float: left;
-        position: relative;
+        position: static;
+        display: inline-block;       
         font-size: small;                
-        text-align:right;
-        
+        text-align:right;        
     }
 
     #filtro {
-        margin-left: auto;                
-    }
-
-    .opts{
-        color: red;
-    }
+        text-align: center;          
+    }          
     
+    .input-field {
+        font-size: 10pt;
+
+    }
 </style>
 
 <div align="center"><a href="#!" onclick="AjaxJs.voltarInicio()">Voltar</a></div>
