@@ -15,7 +15,7 @@
     <div id="icone"><i class="small material-icons">date_range</i></div>
     <div id="dropdown" class="input-field">        
         <select id="FiltroMes">
-            <option value="" disabled selected>Escolha um mês</option>
+            <option class="opts" value="" selected disabled>Escolha um mês</option>
             <option value="1">Janeiro</option>
             <option value="2">Fevereiro</option>
             <option value="3">Março</option>
@@ -75,23 +75,25 @@
     #icone {
         float: left;
         position: relative;
+        color: brown;
     }
 
     #dropdown {
         float: left;
         position: relative;
-        font-size: small;
+        font-size: small;                
+        text-align:right;
         
     }
 
     #filtro {
-        margin-left: 10%;
-        color: brown;
+        margin-left: auto;                
     }
-    option {
-        font-size: small;
-        color: brown;
+
+    .opts{
+        color: red;
     }
+    
 </style>
 
 <div align="center"><a href="#!" onclick="AjaxJs.voltarInicio()">Voltar</a></div>
