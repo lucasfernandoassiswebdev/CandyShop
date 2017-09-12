@@ -100,7 +100,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelPro
 GO
 
 CREATE PROCEDURE [dbo].[GCS_SelProduto]
-	@IdProduto int
+	@NomeProduto VARCHAR(50)
 	AS
 
 	/*
@@ -114,12 +114,11 @@ CREATE PROCEDURE [dbo].[GCS_SelProduto]
 	*/
 
 	BEGIN
-		SELECT * FROM [dbo].[Produto] WITH(NOLOCK)
-			WHERE IdProduto = @IdProduto
+		SELECT TOP 1 1
+		 FROM [dbo].[Produto] WITH(NOLOCK)
+			WHERE NomeProduto = @NomeProduto
 	END
 GO
-						
-
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[GCS_LisProduto]
@@ -141,7 +140,11 @@ CREATE PROCEDURE [dbo].[GCS_LisProduto]
 
 	BEGIN
 	
-		SELECT * FROM Produto WITH(NOLOCK)
+		SELECT IdProduto,
+				NomeProduto,
+				PrecoProduto,
+				QtdeProduto
+			 FROM Produto WITH(NOLOCK)
 
 	END
 GO

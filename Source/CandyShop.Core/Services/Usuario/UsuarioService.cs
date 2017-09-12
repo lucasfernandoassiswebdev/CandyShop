@@ -10,7 +10,7 @@ namespace CandyShop.Core.Services.Usuario
 
 
         public UsuarioService(INotification notification, IUsuarioRepository usuarioRepository)
-        {
+        {   
             _notification = notification;
             _usuarioRepository = usuarioRepository;
         }
