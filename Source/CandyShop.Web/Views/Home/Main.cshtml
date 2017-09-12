@@ -1,172 +1,24 @@
 ﻿@{ Layout = null; }
 
+<script type="text/javascript" src="../../Js/scriptsMain.js"></script>
+<script type="text/javascript" src="../../Js/scriptsPadrao.js"></script>
 
 <!--exemplo do grid de produtos-->
+<!--6 produtos por linha!!!!-->
+<!--depois disso deverá ser criada uma nova-->
 <div class="row">
     <div class="col s12 m4 l2">
         <div class="card">
             <div class="card-image">
                 <img src="../../Imagens/moranguete.jpg">
                 <span class="card-title flow-text">Moranguete</span>
-                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
+                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50"  data-tooltip="Nome do produto R$ 0,80" data-Preco="0.8" data-Nome="Moranguete" data-Imagem="moranguete.jpg"><i class="material-icons">add</i></a>
             </div>
             <div class="card-content">
                 <p>R$ 0,80</p>
             </div>
         </div>
     </div>
-
-    <div class="col s12 m4 l2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/amendoim.jpg">
-                <span class="card-title flow-text">Amendoim</span>
-                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 1,00</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col s12 m4 l2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/paçoca.jpg">
-                <span class="card-title flow-text">Paçoca</span>
-                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 0,25</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col s12 m4 l2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/chocolate1.jpg">
-                <span class="card-title flow-text">Chocolate Hershey's</span>
-                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 3,50</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col s12 m4 l2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/chocolate2.jpg">
-                <span class="card-title flow-text">Chocolate Moça</span>
-                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 2,00</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col s12 m4 l2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/chocolate3.jpg">
-                <span class="card-title flow-text">Chocolate Garoto</span>
-                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 1,80</p>
-            </div>
-        </div>
-    </div>
 </div>
 
-<div class="row">
-    <div class="col s12 m4 l2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/passatempo.png">
-                <span class="card-title flow-text">Passa-Tempo</span>
-                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 2,50</p>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script>
-    $(document).ready(function() {
-        $('.tooltipped').tooltip({ delay: 50 });
-        $(".button-collapse").sideNav();
-        $('select').material_select();
-        $('.caret').hide();
-        $('.modal').modal();
-
-        var qtde = $('.card-title').length;
-        for (var i = 0; i < qtde; i++) {
-            var botao = $('.btn-floating:eq(' + i + ')').css('top');
-            var pixels = botao.replace('px', '');
-            $('.card-title:eq(' + i + ')').css('top', parseFloat(pixels) + 20).css('margin-bottom','20px');
-        }
-    });
-
-    $('#quantidade, #quantidadeEdit').on('keydown',
-        function() {
-            mNumbers($(this).val());
-        });
-
-    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
-
-    $('#abreModal').on('click',
-        function() {
-            $('#quantidade').val('');
-        });
-
-    $('#quantidade').on('blur',
-        function() {
-            mNumbers($('#quantidade').val());
-            if ($('#quantidade').val().match(verifyInt)) {
-                $('#confirmacao').removeClass('modal-close modal-trigger');
-            } else if ($('#quantidade').val() == 0) {
-                $('#quantidade').val('');
-                $('#confirmacao').removeClass('modal-close modal-trigger');
-            } else {
-                $('#confirmacao').addClass('modal-close modal-trigger');
-            }
-        });
-
-    $('#quantidadeEdit').on('blur',
-        function() {
-            mNumbers($('#quantidadeEdit').val());
-            if ($('#quantidadeEdit').val().match(verifyInt) || $('#quantidadeEdit').val() == 0) {
-                $('#quantidadeEdit').val('');
-                $('#confirmaCompra').removeClass('modal-close');
-            } else {
-                $('#confirmaCompra').addClass('modal-close');
-            }
-        });
-
-    $('#confirmacao').on('click',
-        function() {
-            if ($('#quantidade').val().match(verifyInt)) {
-                $('#confirmacao').removeClass('modal-close modal-trigger');
-            } else if ($('#quantidade').val() == 0) {
-                $('#confirmacao').removeClass('modal-close modal-trigger');
-            } else {
-                $('#confirmacao').addClass('modal-close modal-trigger');
-            }
-        });
-
-    $('#limpar').on('click',
-        function() {
-            $('.collection li').remove();
-        });
-
-    function mNumbers(v) {
-        v = v.replace(/\D/g, "");
-        $('#quantidade, #quantidadeEdit').val(v);
-    }
-</script>

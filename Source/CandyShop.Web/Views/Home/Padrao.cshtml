@@ -4,41 +4,18 @@
 }
 
 <script src="~/Js/Ajax.js?d=@DateTime.Now.Ticks" type="text/javascript"></script>
+<script type="text/javascript" src="../../Js/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
+
+<link href="~/Content/Main.css" rel="stylesheet" />
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         AjaxJs.init({
             main: '@Url.Action("Main", "Home")',
             pagamento: '@Url.Action("Index", "Pagamento")',
             historicoCompra: '@Url.Action("Historico", "Compra")'
         });
-        $('select').material_select();
     });
-
-
-    /*.append($('<li>', { html: [$('<img>', { src: '../../Imagens/moranguete.jpg', alt: '', class: 'circle' })], class: 'collection-item avatar' }));*/
-    $('#adicionaCarrinho').click(function () {
-
-        $("div[class='collection']").append($('<li>', {
-            html: [$('<span>', { html: 'Moranguete', class: 'title' }),
-                $('<p>', { html: 'Quantidade: 5' }),
-                   $('<a>',{})
-            ], class: 'collection-item avatar'
-        }))
-        $("div[class='collection']").append(
-            '<li class="collection-item avatar> ' +
-            '<span class="title">Moranguete </span>' +
-            '<p>' +
-            'Quantidade: 5' +
-            '</p>' +
-            '<a href="#modal4" class="modal-trigger secondary-content"><i class="material-icons">mode_edit</i></a>' +
-            '</li>');
-
-        $("div[class='collection'] span").last().prepend($('<img>', { src: '../../Imagens/moranguete.jpg', class: 'collection-item avatar circle' }));
-        });
 </script>
-
-<link href="~/Content/Main.css" rel="stylesheet" />
-
 <!--modal de quantidade-->
 <div id="modal1" class="modal">
     <div class="modal-content center">
@@ -67,18 +44,11 @@
     <div class="modal-content center">
         <h3>Carrinho</h3>
         <div class="collection">
-            <li class="collection-item avatar">
-                <img src="../../Imagens/moranguete.jpg" alt="" class="circle">
-                <span class="title">Moranguete</span>
-                <p>
-                    Quantidade: 5
-                </p>
-                <a href="#modal4" class="modal-trigger secondary-content"><i class="material-icons">mode_edit</i></a>
-            </li>
+            
         </div>
     </div>
     <div class="modal-footer">
-        <a href="Index" class="right modal-action modal-close waves-effect waves-green btn-flat">Confirmar compra</a>
+        <a href="Home/Index" class="right modal-action modal-close waves-effect waves-green btn-flat">Confirmar compra</a>
         <a href="#!" id="limpar" class="right modal-action waves-effect waves-green btn-flat brown-text">Limpar</a>
     </div>
 </div>
@@ -137,8 +107,8 @@
         
         <ul class="side-nav" id="mobile-demo">
             <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
-            <li><a href="#!"><i class="material-icons">attach_money</i>Pagamento</a></li>
-            <li><a href="#!"><i class="material-icons">find_in_page</i>Historico</a></li>
+            <li><a href="#!" onclick="AjaxJs.pagamento()"><i class="material-icons">attach_money</i>Pagamento</a></li>
+            <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
             <li class="divider"></li>
             <li><a href="#!"><i class="material-icons">power_settings_new</i>Sair</a></li>
         </ul>
