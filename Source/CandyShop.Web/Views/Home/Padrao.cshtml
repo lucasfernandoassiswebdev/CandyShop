@@ -74,7 +74,7 @@
     <li><a href="#!"><i class="material-icons">power_settings_new</i>Sair</a></li>
 </ul>
 
-<nav class="brown">
+<nav class="brown nav-extended">
     <div class="nav-wrapper">
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <a href="#!" class="brand-logo right" onclick="AjaxJs.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
@@ -101,17 +101,27 @@
                     <option value="1">Chocolates</option>
                     <option value="2">Amendoins</option>
                     <option value="3">Salgadinhos</option>
-               </select>
+                </select>
             </li>
         </ul>
         
         <ul class="side-nav" id="mobile-demo">
             <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
+            <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
             <li><a href="#!" onclick="AjaxJs.pagamento()"><i class="material-icons">attach_money</i>Pagamento</a></li>
             <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
             <li class="divider"></li>
             <li><a href="#!"><i class="material-icons">power_settings_new</i>Sair</a></li>
         </ul>
+    </div>
+    <div class="nav-content yellow">
+        <form class="pesquisaMobile">
+            <div class="input-field">
+                <input id="search" type="search" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+            </div>
+        </form>
     </div>
 </nav>
 

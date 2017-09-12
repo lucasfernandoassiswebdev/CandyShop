@@ -7,9 +7,11 @@
 }
 
 img {
-	max-height:180px;
-	opacity:1;
-	margin-bottom:20px;
+	max-height: 180px;
+	margin-bottom: 20px;
+	width: auto !important;
+	height: 100% !important;
+	margin: 0 auto;
 }
 
 img:hover {
@@ -60,7 +62,7 @@ select {
 
 .select-wrapper input.select-dropdown {
 	height: 2rem;
-	margin: 16px 33px 0px 10px
+	margin: 16px 33px 0 10px
 }
 
 input[type="text"], .modal-close, h3 {
@@ -97,11 +99,15 @@ li img {
 }
 
 .btn-floating.halfway-fab {
-	bottom: 0px;
+	bottom: 0;
 }
 
 .card .card-content {
 	margin-top: 40px;
 	margin-left: 20%;
 	font-weight: bold;
+}
+
+.pesquisaMobile {
+	
 }
