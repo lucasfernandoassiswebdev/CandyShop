@@ -11,8 +11,8 @@ $(document).ready(function () {
         quantidade = $('#quantidade').val();
     });
 
-    $('#adicionaCarrinho').click(function () {
-        $("div[class='collection']").append($('<li>',
+    $('#adicionaCarrinho').off('click').on('click',function () {
+        $("div[class='collection']").append($("<li>",
         {
             html: [
                 $('<img>', { src: imagem, class: 'circle' }),
@@ -28,6 +28,6 @@ $(document).ready(function () {
                 })
             ],
             class: 'collection-item avatar'
-            }));
+        }));
     });
 });

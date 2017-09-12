@@ -16,14 +16,16 @@
 $('#quantidade, #quantidadeEdit').on('keydown',
     function () {
         mNumbers($(this).val());
-    });
+    }
+);
 
-var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
+var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
 
 $('#abreModal').on('click',
     function () {
         $('#quantidade').val('');
-    });
+    }
+);
 
 $('#quantidade').on('blur',
     function () {
@@ -36,7 +38,8 @@ $('#quantidade').on('blur',
         } else {
             $('#confirmacao').addClass('modal-close modal-trigger');
         }
-    });
+    }
+);
 
 $('#quantidadeEdit').on('blur',
     function () {
@@ -47,7 +50,8 @@ $('#quantidadeEdit').on('blur',
         } else {
             $('#confirmaCompra').addClass('modal-close');
         }
-    });
+    }
+);
 
 $('#confirmacao').on('click',
     function () {
@@ -58,12 +62,14 @@ $('#confirmacao').on('click',
         } else {
             $('#confirmacao').addClass('modal-close modal-trigger');
         }
-    });
+    }
+);
 
 $('#limpar').on('click',
     function () {
         $('.collection li').remove();
-    });
+    }
+);
 
 function mNumbers(v) {
     v = v.replace(/\D/g, "");
