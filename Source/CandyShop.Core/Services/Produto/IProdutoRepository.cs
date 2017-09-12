@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 public interface IProdutoRepository
 {
-    void InserirProduto(ProdutoDto produto);
+    void InserirProduto(ProdutoDto NomeProduto);
     void DeletarProduto(int idProduto);
     void UpdateProduto(ProdutoDto produto);
-    bool SelecionarProduto(int idProduto);
+    bool SelecionarProduto(string NomeProduto);
     IEnumerable<ProdutoDto> ListarProdutos();
     ProdutoDto SelecionarDadosProduto(int idProduto);
 }

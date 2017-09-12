@@ -1,5 +1,6 @@
 ﻿using CandyShop.Core;
 using CandyShop.Core.Infra;
+using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository;
 using SimpleInjector;
@@ -15,6 +16,7 @@ namespace CandyShop.WebAPI
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
             container.Register<IUsuarioRepository, UsuarioRepository>();
             container.Register<IUsuarioService, UsuarioService>();
+            container.Register<IProdutoService, ProdutoService>();
             container.Register<IPagamentoRepository, PagamentoRepository>();
             container.Register<IProdutoRepository, ProdutoRepository>();
             container.Register<ICompraRepository, CompraRepository>();

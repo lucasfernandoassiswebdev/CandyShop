@@ -1,5 +1,5 @@
 
-﻿using CandyShop.Core;
+using CandyShop.Core;
 using CandyShop.Core.Usuario.Dto;
 using Concessionaria.Repositorio;
 using System.Collections.Generic;
@@ -73,7 +73,6 @@ namespace CandyShop.Repository
                             NomeUsuario = reader.ReadAsString("NomeUsuario")
                         });
                     } while (reader.Read());
-
             return retorno;
         }
 
