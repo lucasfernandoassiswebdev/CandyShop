@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript" src="../../Js/scriptsAdmin.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax.js?d=@DateTime.Now.Ticks"></script>
+<script>
+    $(document).ready(function() {
+        AjaxJs.init({
+            main: '@Url.Action("Index", "Usuario")',
+            listaProduto: '@Url.Action("Index", "Produto")',
+            listaUsuario: '@Url.Action("Index", "Usuario")'
+        });
+    })
+
+
+</script>
+<link rel="stylesheet" type="text/css" href="../../Content/indexAdmin.css">
+
+<ul id="slide-out" class="side-nav fixed">
+    <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_box</i>Administrador</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="dropdown-button" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">face</i>Usuarios</a></li>
+    <li><a class="dropdown-button" href="#!" onclick="AjaxJs.listaProduto()"><i class="material-icons left">assignment</i>Produtos</a></li>
+    <li><a class="dropdown-button" href="#!"><i class="material-icons left">attach_money</i>Crédito atual da loja</a></li>
+</ul>
+
+<div id="DivGrid"></div>

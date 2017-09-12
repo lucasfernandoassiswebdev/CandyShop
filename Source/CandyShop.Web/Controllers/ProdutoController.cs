@@ -2,9 +2,9 @@
 
 namespace CandyShop.Web.Controllers
 {
-    public class AdminController : Controller
+    public class ProdutoController : Controller
     {
-        // GET: Admin
+        // GET: Produto
         public ActionResult Index()
         {
             return View();

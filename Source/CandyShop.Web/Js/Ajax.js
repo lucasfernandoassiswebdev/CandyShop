@@ -7,6 +7,7 @@
         main();
     };
 
+
     //carrega a pagina de inicio
     function main() {
         $.get(url.main).done(function(data) {                //pega a view main e a carrega no div
@@ -44,12 +45,22 @@
         chamaPagina(url.historicoCompra);
     };
 
+
+    var listaUsuario = function() {
+        chamaPagina(url.listaUsuario);
+    }
+
+    var listaProduto = function() {
+        chamaPagina(url.listaProduto);
+    }
     //retorna links para acessar as paginas.
     return {
         init: init,
         pagamento: pagamento,
         voltarInicio: voltarInicio,
-        historicoCompra: historicoCompra
+        historicoCompra: historicoCompra,
+        listaUsuario: listaUsuario,
+        listaProduto: listaProduto
     };
 
 })(jQuery);           //O método ajaxJS é auto executado quando é iniciado o sistema.
