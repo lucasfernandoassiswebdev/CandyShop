@@ -36,3 +36,19 @@ h3 {
 .side-nav li > a:hover {
 	background-color: rgba(0,0,0,0.05)
 }
+
+.modal .modal-footer {
+	text-align: center;
+}
+
+.modal {
+	overflow-x: hidden;
+}
+
+#nomeUsuario {
+	text-align: center;
+}
+
+.btn:hover {
+	color: white !important;
+}
