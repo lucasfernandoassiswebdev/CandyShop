@@ -12,12 +12,26 @@
             listaUsuario: '@Url.Action("Index", "Usuario")',
             mostraSaldo: '@Url.Action("Index", "Shop")',
             cadastroUsuario: '@Url.Action("Cadastrar","Usuario")',
-            cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")'
+            cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")',
+            detalheProduto: '@Url.Action("DetalheProduto", "Produto")'
         });
     })
 </script>
 
 <link rel="stylesheet" type="text/css" href="../../Content/indexAdmin.css">
+
+<!--modal de pesquisa de usuários-->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h3 class="center">Nome do usuário:</h3>
+        <form>
+            <input type="text" id="nomeUsuario" autocomplete="off"/>
+        </form>
+    </div>
+    <div class="modal-footer center">
+        <a href="#!" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
+    </div>
+</div>
 
 <ul id="slide-out" class="side-nav fixed brown" style="margin-right: -10%">
     <h3><font color="white">Candy</font><font color="red"> Shop</font></h3>
@@ -33,10 +47,10 @@
             </div>
             <div class="collapsible-body">
                 <ul class="brown-text">
-                    <li><a class="dropdown-button" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">list</i>Lista usuários</a></li>
-                    <li><a href="#!"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
-                    <li><a href="#!"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
-                    <li><a href="#!" onclick="AjaxJs.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
+                    <li><a class="closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">list</i>Lista usuários</a></li>
+                    <li><a class="closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
+                    <li><a class="modal-trigger" href="#modal1"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
+                    <li><a class="closeMenu" href="#!" onclick="AjaxJs.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
                 </ul>
             </div>
         </li>
@@ -49,9 +63,9 @@
             </div>
             <div class="collapsible-body">
                 <ul class="brown-text">
-                    <li><a href="#!" class="dropdown-button" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Lista produtos</a></li>
-                    <li><a href="#!"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
-                    <li><a href="#!" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produtos</a></li>
+                    <li><a href="#!" class="closeMenu" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Lista produtos</a></li>
+                    <li><a href="#!" class="closeMenu"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
+                    <li><a href="#!" class="closeMenu" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produtos</a></li>
                 </ul>
             </div>
         </li>

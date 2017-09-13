@@ -6,9 +6,9 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             $('#imagem').attr('src', e.target.result);
-        }
+        };
 
         reader.readAsDataURL(input.files[0]);
     }
@@ -31,7 +31,7 @@ $(document).ready(function () {
     $('#Nome').on('keydown', function () {
         var qtde = $('#Nome').val().length;
 
-        if (qtde > 50 || qtde == 0) {
+        if (qtde > 50 || qtde === 0) {
             $('.waves ').attr('disabled',true);
         } else {
             $('.waves').removeAttr('disabled');

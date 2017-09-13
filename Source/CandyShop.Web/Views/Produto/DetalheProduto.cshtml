@@ -1,0 +1,56 @@
+﻿@model CandyShop.Core.Services.Produto.Dto.ProdutoDto
+
+@{
+    Layout = null;
+}
+
+<div class="corpo">    
+    <h4><font color="brown">Detalhes</font><font color="red"> do Produto :</font></h4>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProduto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProduto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeProduto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeProduto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecoProduto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecoProduto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QtdeProduto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QtdeProduto)
+        </dd>
+
+    </dl>
+
+    <a class="waves-effect waves-light btn" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
+</div>
+
+
+<style>
+    .corpo {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
