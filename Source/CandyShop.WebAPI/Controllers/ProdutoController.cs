@@ -1,6 +1,7 @@
 ﻿using CandyShop.Core.Services._Interfaces;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Produto.Dto;
+using System.Net;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
@@ -20,9 +21,30 @@ namespace CandyShop.WebAPI.Controllers
             _produtoService = produtoService;
         }
 
-        IHttpActionResult PostProduto(ProdutoDto produto)
+       public IHttpActionResult PostProduto(ProdutoDto produto)
         {
-            
+            _produtoService.InserirProduto(produto);
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
+            return Ok();
+        }
+
+       public IHttpActionResult GetListaProduto(ProdutoDto produto)
+        {
+            _produtoRepository.ListarProdutos();
+            return Ok();
+        }
+
+        public IHttpActionResult PutEditaProduto(ProdutoDto produto)
+        {
+            _produtoRepository.UpdateProduto(produto);
+            return Ok();
+        }
+
+        public IHttpActionResult DeleteProduto(int idproduto)
+        {
+            _produtoRepository.DeletarProduto(idproduto);
+            return Ok();
         }
     }
 }

@@ -4,6 +4,7 @@
 }
 
 <link rel="stylesheet" href="../../Content/formCadastroUsuario.css" />
+<script type="text/javascript" src="../../Js/Usuario/scriptsCadastroUsuario.js"></script>
 
 <div class="container">
     <div class="row">
@@ -11,21 +12,21 @@
             <div class="row">
                 <div class="center">
                     <h1 class="center">Cadastrar <font color="brown">usuário</font></h1>
-                    <img class="center" src="../../Imagens/user.png" />
+                    <img id="imagem" class="center" src="../../Imagens/user.png" />
                 </div>
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>File</span>
-                        <input type="file">
+                        <input id="fotoUsuario" type="file" accept="image/x-png,image/gif,image/jpeg">
                     </div>
                     <div class="file-path-wrapper">
-                        <input placeholder="foto do usuário" class="file-path validate" type="text">
+                        <input  placeholder="foto do usuário" class="file-path validate">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="Nome" name="Nome" type="text" class="validate" required="">
+                    <input id="Nome" name="Nome" type="text" class="validate" required data-length="50" autocomplete="off">
                     <label for="Nome">Nome do usuário:</label>
                 </div>
                 <div class="input-field col s6">
@@ -34,7 +35,7 @@
                 </div>
             </div>
             <div class="row center">
-                <a class="btn waves waves-effect waves-light">Enviar</a>
+                <a class="btn waves waves-effect waves-light" disabled>Enviar</a>
             </div>
         </form>
     </div>

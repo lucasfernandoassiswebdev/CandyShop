@@ -48,7 +48,7 @@ namespace CandyShop.Repository
         public bool SelecionarProduto(string nomeproduto)
         {
             ExecuteProcedure(Procedures.GCS_SelProduto);
-            AddParameter("@IdProduto", nomeproduto);
+            AddParameter("@NomeProduto", nomeproduto);
             using (var retornobd = ExecuteReader())
                 return retornobd.Read();
         }

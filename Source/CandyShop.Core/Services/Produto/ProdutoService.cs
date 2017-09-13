@@ -16,7 +16,7 @@ namespace CandyShop.Core.Services.Produto
 
         public void InserirProduto(ProdutoDto produto)
         {
-            if (_produtoRepository.SelecionarProduto(produto.NomeProduto))
+            if (_produtoRepository.SelecionarProduto(produto.NomeProduto.Trim()))
             {
                 _notification.Add("Produto ja existe !!!");
                 return;
