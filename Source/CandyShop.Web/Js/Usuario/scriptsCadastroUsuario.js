@@ -1,4 +1,20 @@
-﻿$(document).ready(function () {
+﻿$('#fotoUsuario').change(function () {
+    readURL(this);
+});
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imagem').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(document).ready(function () {
     $('input').characterCounter();
 
     $('#cpf').on('keydown', function () {
@@ -40,3 +56,4 @@ function mcpf(v) {
     v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     $('#cpf').val(v);
 }
+
