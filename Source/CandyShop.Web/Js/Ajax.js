@@ -62,6 +62,10 @@
         chamaPagina(url.mostraSaldo);
 
     };
+
+    var cadastroUsuario = function() {
+        chamaPagina(url.cadastroUsuario);
+    }
     //retorna links para acessar as paginas.
     return {
         init: init,
@@ -71,7 +75,8 @@
         listaUsuario: listaUsuario,
         listaProduto: listaProduto,
         mostraSaldo:  mostraSaldo,
-        detalhePagamento: detalhePagamento
+        detalhePagamento: detalhePagamento,
+        cadastroUsuario: cadastroUsuario
     };       
 
 })(jQuery);           //O método ajaxJS é auto executado quando é iniciado o sistema.

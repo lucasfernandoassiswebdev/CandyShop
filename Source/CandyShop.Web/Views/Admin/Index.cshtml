@@ -10,7 +10,8 @@
             main: '@Url.Action("Index", "Usuario")',
             listaProduto: '@Url.Action("Index", "Produto")',
             listaUsuario: '@Url.Action("Index", "Usuario")',
-            mostraSaldo: '@Url.Action("Index", "Shop")'
+            mostraSaldo: '@Url.Action("Index", "Shop")',
+            cadastroUsuario: '@Url.Action("Cadastrar","Usuario")'
         });
     })
 </script>
@@ -32,9 +33,9 @@
             <div class="collapsible-body">
                 <ul class="brown-text">
                     <li><a class="dropdown-button" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">list</i>Lista usuários</a></li>
-                    <li><a><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
-                    <li><a><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
-                    <li><a><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
+                    <li><a href="#!"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
+                    <li><a href="#!"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
+                    <li><a href="#!" onclick="AjaxJs.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
                 </ul>
             </div>
         </li>

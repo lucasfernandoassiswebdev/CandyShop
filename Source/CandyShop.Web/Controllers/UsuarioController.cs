@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
@@ -10,6 +6,11 @@ namespace CandyShop.Web.Controllers
     {
         // GET: Usuario
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Cadastrar()
         {
             return View();
         }

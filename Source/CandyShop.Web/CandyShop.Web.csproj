@@ -157,6 +157,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\formCadastroUsuario.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\indexAdmin.css" />
     <Content Include="Content\Main.css" />
@@ -228,6 +229,7 @@
     <Content Include="Views\Produto\Index.cshtml" />
     <Content Include="Views\Pagamento\Detalhes.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Usuario\Cadastrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
