@@ -14,5 +14,7 @@ namespace CandyShop.Core
         bool SelecionarCompra(int idCompra);
         CompraDto SelecionarDadosCompra(int idCompra);
         void InserirItens(CompraProdutoDto compraProduto);
+        void EditaItens(CompraProdutoDto compraProduto);
+        void DeletaItens(int idcompra, int idproduto);
     }
 }

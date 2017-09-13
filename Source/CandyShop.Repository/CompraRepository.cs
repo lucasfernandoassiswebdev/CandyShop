@@ -18,7 +18,8 @@ namespace CandyShop.Repository
             GCS_LisCpfCompra,
             GCS_SelCompra,
             GCS_InsCompraProduto,
-            CCS_InsItens
+            GCS_UpdCompraProduto,
+            GCS_DelCompraProduto
         }
 
         public void InserirCompra(CompraDto compra)
@@ -28,17 +29,17 @@ namespace CandyShop.Repository
             AddParameter("@DataCompra", compra.DataCompra);
 
             ExecuteNonQuery();
-                        
+
         }
 
         public void InserirItens(CompraProdutoDto item)
         {
             ExecuteProcedure(Procedures.GCS_InsCompraProduto);
-            AddParameter("@IdProduto", item.Produto.IdProduto);
+            AddParameter("@IdProduto", item.IdProduto);
             AddParameter("@QtdeProduto", item.QtdeCompra);
             AddParameter("@IdCompra", item.IdCompra);
             ExecuteNonQuery();
-            
+
         }
 
         public void EditarCompra(CompraDto compra)
@@ -56,7 +57,7 @@ namespace CandyShop.Repository
             ExecuteProcedure(Procedures.GCS_DelCompra);
             AddParameter("@IdCompra", idCompra);
             ExecuteNonQuery();
-        }                       
+        }
 
         public IEnumerable<CompraDto> ListarCompra()
         {
@@ -66,7 +67,7 @@ namespace CandyShop.Repository
                 if (reader.Read())
                     do
                     {
-                        retorno.Add( new CompraDto()
+                        retorno.Add(new CompraDto()
                         {
                             DataCompra = reader.ReadAsDateTime("DataCompra"),
                             IdCompra = reader.ReadAsInt("IdCompra"),
@@ -100,7 +101,7 @@ namespace CandyShop.Repository
                         });
                     } while (reader.Read());
 
-            return retorno;            
+            return retorno;
         }
 
         public bool SelecionarCompra(int idCompra)
@@ -130,6 +131,23 @@ namespace CandyShop.Repository
                     };
             }
             return retorno;
+        }
+
+        public void EditaItens(CompraProdutoDto compraProduto)
+        {
+            ExecuteProcedure(Procedures.GCS_UpdCompraProduto);
+            AddParameter("@IdCompra", compraProduto.IdCompra);
+            AddParameter("@IdProduto", compraProduto.IdProduto);
+            AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
+            ExecuteNonQuery();
+        }
+
+        public void DeletaItens(int idcompra, int idproduto)
+        {
+            ExecuteProcedure(Procedures.GCS_DelCompraProduto);
+            AddParameter("@IdCompra", idcompra);
+            AddParameter("@IdProduto",idproduto);
+            ExecuteNonQuery();
         }
     }
 }
