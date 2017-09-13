@@ -27,14 +27,15 @@
         }).fail(function(xhr) {
             $('#DivGrid').errorMessage(xhr.responseText);
         });
-    };
+    }
 
     var concluirCadastroProduto = function() {
-        $.post(url.concluirCadastroProduto, {
-            NomeProduto: $('#NomeProduto').val(),
-            PrecoProduto: $('#PrecoProduto').val(),
-            QtdeProduto: $('#QtdeProduto').val()
-        }).done(function() { //passar o parametro data aqui quando for definida a mensagem
+        $.post(url.concluirCadastroProduto,
+            {
+                NomeProduto: $('#NomeProduto').val(),
+                PrecoProduto: $('#PrecoProduto').val(),
+                QtdeProduto: $('#QtdeProduto').val()
+            }).done(function() { //passar o parametro data aqui quando for definida a mensagem
             $('#DivGrid').slideUp(function() {
                 $(this).empty();
                 chamaPagina(url.cadastrarProduto);
@@ -42,7 +43,7 @@
         }).fail(function(xhr) {
             console.log(xhr.responseText);
         });
-    }
+    };
 
     //Variavel que retorna para o inicio
     var voltarInicio = function() {
@@ -68,13 +69,12 @@
     var mostraSaldo = function() {
         chamaPagina(url.mostraSaldo);
     };
-
     var cadastroUsuario = function() {
         chamaPagina(url.cadastroUsuario);
-    }
+    };
     var cadastrarProduto = function() {
         chamaPagina(url.cadastrarProduto);
-    }
+    };
 
     //retorna links para acessar as paginas.
     return {
