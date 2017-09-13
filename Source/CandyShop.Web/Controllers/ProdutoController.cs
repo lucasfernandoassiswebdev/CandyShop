@@ -22,7 +22,28 @@ namespace CandyShop.Web.Controllers
             return Content("Produto inserido com sucesso!");
         }
 
-        public ActionResult DetalheProduto(int idProduto)
+        public ActionResult DetalheProduto(/*int idProduto*/)
+        {
+            return View();
+        }
+
+        public ActionResult EditarProduto(/*int idProduto*/)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditarProduto(ProdutoDto produto)
+        {
+            return Content("Produto editado com sucesso!");
+        }
+
+        public ActionResult ExcluirProduto(/*int idProduto*/)
+        {
+            return View();
+        }
+
+        public ActionResult ExcluirProdutoConfirmado(int idProduto)
         {
             return View();
         }
