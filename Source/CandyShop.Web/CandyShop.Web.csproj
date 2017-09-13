@@ -149,6 +149,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagamentoController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,10 +157,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\formCadastroUsuario.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\indexAdmin.css" />
     <Content Include="Content\Main.css" />
     <Content Include="Content\materialize.min.css" />
+    <Content Include="Content\shop.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -184,6 +187,7 @@
     <Content Include="Js\Ajax.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Js\scriptsAdmin.js" />
+    <Content Include="Js\Usuario\scriptsCadastroUsuario.js" />
     <Content Include="Js\scriptsIndex.js" />
     <Content Include="Js\scriptsMain.js" />
     <Content Include="Js\scriptsPadrao.js" />
@@ -224,6 +228,10 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Produto\Index.cshtml" />
+    <Content Include="Views\Pagamento\Detalhes.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Usuario\Cadastrar.cshtml" />
+    <Content Include="Views\Produto\CadastrarProduto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,56 @@
+﻿@model CandyShop.Core.Services.Produto.Dto.ProdutoDto
+
+@{
+    Layout = null;
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+
+<div class="container">
+    <div class="row" style="margin-left: -20%">
+        <form class="col s12">
+            <div class="row">
+                <div class="center">
+                    <h1 class="center">Cadastrar <font color="brown">Produto</font></h1>
+                    <img class="center responsive-img" src="../../Imagens/bala.jpg" />
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input placeholder="foto do produto" class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s9">
+                    <input id="NomeProduto" name="Nome" type="text" class="validate" required="">
+                    <label for="NomeProduto">Nome do produto:</label>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="PrecoProduto" name="PrecoProduto" type="text" class="validate" required="">
+                    <label for="PrecoProduto">Preço do produto:</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="QtdeProduto" name="QtdeProduto" type="text" class="validate" required="">
+                    <label for="QtdeProduto">Quantidade disponível:</label>
+                </div>                
+            </div>
+            <div align="center">
+                <a class="waves-effect waves-light btn-large"><i class="material-icons left">add</i>Cadastrar</a>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<div>    
+</div>
+
