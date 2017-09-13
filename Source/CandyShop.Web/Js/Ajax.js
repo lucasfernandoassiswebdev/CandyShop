@@ -75,6 +75,9 @@
     var cadastrarProduto = function() {
         chamaPagina(url.cadastrarProduto);
     };
+    var detalheProduto = function() {
+        chamaPagina(url.detalheProduto);
+    };
 
     //retorna links para acessar as paginas.
     return {
@@ -92,6 +95,7 @@
         cadastroUsuario: cadastroUsuario,
         mostraSaldo: mostraSaldo,
         cadastrarProduto: cadastrarProduto,
-        concluirCadastroProduto: concluirCadastroProduto
+        concluirCadastroProduto: concluirCadastroProduto,
+        detalheProduto: detalheProduto
     };
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.

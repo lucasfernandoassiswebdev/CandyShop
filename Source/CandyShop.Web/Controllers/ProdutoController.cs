@@ -21,5 +21,10 @@ namespace CandyShop.Web.Controllers
         {
             return Content("Produto inserido com sucesso!");
         }
+
+        public ActionResult DetalheProduto(int idProduto)
+        {
+            return View();
+        }
     }
 }
