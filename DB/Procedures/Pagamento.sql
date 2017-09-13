@@ -54,12 +54,18 @@ CREATE PROCEDURE [dbo].[GCS_LisPagamento]
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[GCS_LisPagamento]
 
+	Editado Por.......: SMN - João Guilherme
+	Objetivo..........: Alterando o select 
+	Data..............: 13/09/2017
 	*/
 
 	BEGIN
 	
-		SELECT * FROM [dbo].[Pagamento] WITH(NOLOCK)
-
+		SELECT IdPagamento,
+				Cpf,
+				DataPagamento,
+				ValorPagamento
+				FROM [dbo].[Pagamento] WITH(NOLOCK)
 	END
 GO
 
