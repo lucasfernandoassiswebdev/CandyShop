@@ -89,7 +89,6 @@
         //admin
         listaUsuario: listaUsuario,
         listaProduto: listaProduto,
-        detalhePagamento: detalhePagamento,
         cadastroUsuario: cadastroUsuario,
         mostraSaldo: mostraSaldo,
         cadastrarProduto: cadastrarProduto,
