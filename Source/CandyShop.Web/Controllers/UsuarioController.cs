@@ -14,5 +14,10 @@ namespace CandyShop.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Editar()
+        {
+            return View();
+        }
     }
 }

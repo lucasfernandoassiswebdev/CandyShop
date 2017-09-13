@@ -233,6 +233,7 @@
     <Content Include="Views\Usuario\Cadastrar.cshtml" />
     <Content Include="Views\Produto\CadastrarProduto.cshtml" />
     <Content Include="Views\Produto\DetalheProduto.cshtml" />
+    <Content Include="Views\Usuario\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
