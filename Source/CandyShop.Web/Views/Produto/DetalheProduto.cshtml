@@ -4,45 +4,47 @@
     Layout = null;
 }
 
-<div class="corpo">    
+<div class="corpo left">    
     <h4><font color="brown">Detalhes</font><font color="red"> do Produto :</font></h4>
     <hr/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IdProduto)
-        </dt>
+    <form class="col s12" style="margin-left: -10%">
+        <dl class="dl-horizontal">
+            <dt>
+                @*@Html.DisplayNameFor(model => model.IdProduto)*@ID
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdProduto)
-        </dd>
+            <dd>
+                @*@Html.DisplayFor(model => model.IdProduto)*@
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NomeProduto)
-        </dt>
+            <dt>
+                @*@Html.DisplayNameFor(model => model.NomeProduto)*@Nome:
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NomeProduto)
-        </dd>
+            <dd>
+                @*@Html.DisplayFor(model => model.NomeProduto)*@
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PrecoProduto)
-        </dt>
+            <dt>
+                @*@Html.DisplayNameFor(model => model.PrecoProduto)*@Preco:
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PrecoProduto)
-        </dd>
+            <dd>
+                @*@Html.DisplayFor(model => model.PrecoProduto)*@
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.QtdeProduto)
-        </dt>
+            <dt>
+                @*@Html.DisplayNameFor(model => model.QtdeProduto)*@Qtde:
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.QtdeProduto)
-        </dd>
+            <dd>
+                @*@Html.DisplayFor(model => model.QtdeProduto)*@
+            </dd>
 
-    </dl>
+        </dl>
 
-    <a class="waves-effect waves-light btn" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
+        <a class="waves-effect waves-light btn" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
+    </form>
 </div>
 
 
@@ -51,6 +53,6 @@
         width: 100%;
         max-width: 400px;
         margin: 0 auto;
-        text-align: center;
+        text-align: left;
     }
 </style>

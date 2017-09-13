@@ -14,7 +14,7 @@
                 $('#DivGrid').hide().html(data).slideDown(); //desce  o divgrid                                                                                
             });
         }).fail(function(xhr) { //xhr é o código do erro, que é retornado caso o get não tenha sucesso
-            $("#DivGrid").errorMessage(xhr.responseText);
+            console.log(xhr.responseText);
         });
     }
 
@@ -25,7 +25,7 @@
                 $('#DivGrid').hide().html(data).slideDown(); //escondida, carregada e demonstrada novamente
             });
         }).fail(function(xhr) {
-            $('#DivGrid').errorMessage(xhr.responseText);
+            console.log(xhr.responseText);
         });
     }
 
@@ -78,7 +78,12 @@
     var detalheProduto = function() {
         chamaPagina(url.detalheProduto);
     };
-
+    var editarProduto = function() {
+        chamaPagina(url.editarProduto);
+    }
+    var excluirProduto = function() {
+        chamaPagina(url.excluirProduto);
+    }
     //retorna links para acessar as paginas.
     return {
         //para admin  e usuario
@@ -91,11 +96,14 @@
 
         //admin
         listaUsuario: listaUsuario,
-        listaProduto: listaProduto,
         cadastroUsuario: cadastroUsuario,
         mostraSaldo: mostraSaldo,
+
         cadastrarProduto: cadastrarProduto,
+        listaProduto: listaProduto,
         concluirCadastroProduto: concluirCadastroProduto,
-        detalheProduto: detalheProduto
-    };
+        detalheProduto: detalheProduto,
+        editarProduto: editarProduto,
+        excluirProduto: excluirProduto
+};
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.

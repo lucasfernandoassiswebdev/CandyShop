@@ -31,8 +31,7 @@ namespace CandyShop.WebAPI.Controllers
 
        public IHttpActionResult GetListaProduto(ProdutoDto produto)
         {
-            _produtoRepository.ListarProdutos();
-            return Ok();
+            return Ok(_produtoRepository.ListarProdutos());
         }
 
         public IHttpActionResult PutEditaProduto(ProdutoDto produto)
