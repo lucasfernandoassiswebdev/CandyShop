@@ -4,6 +4,7 @@
 }
 
 <link rel="stylesheet" href="../../Content/formCadastroUsuario.css" />
+<script type="text/javascript" src="../../Js/Usuario/scriptsCadastroUsuario.js"></script>
 
 <div class="container">
     <div class="row">
@@ -25,7 +26,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="Nome" name="Nome" type="text" class="validate" required="">
+                    <input id="Nome" name="Nome" type="text" class="validate" required data-length="50" autocomplete="off">
                     <label for="Nome">Nome do usuário:</label>
                 </div>
                 <div class="input-field col s6">
@@ -34,7 +35,7 @@
                 </div>
             </div>
             <div class="row center">
-                <a class="btn waves waves-effect waves-light">Enviar</a>
+                <a class="btn waves waves-effect waves-light" disabled>Enviar</a>
             </div>
         </form>
     </div>
