@@ -7,7 +7,6 @@
         main();
     };
 
-
     //carrega a pagina de inicio
     function main() {
         $.get(url.main).done(function(data) {                //pega a view main e a carrega no div
@@ -34,34 +33,29 @@
     var voltarInicio = function () {
         main();
     };
-
     //var que chama a view pagamento
     var pagamento = function () {
         chamaPagina(url.pagamento);
     };
-
     //var que chama a view historico de compra
     var historicoCompra = function () {
         chamaPagina(url.historicoCompra);
     };
-
-
     var listaUsuario = function() {
         chamaPagina(url.listaUsuario);
     }
-
     var listaProduto = function() {
         chamaPagina(url.listaProduto);
     }
-
-
     var detalhePagamento = function() {
         chamaPagina(url.detalhePagamento);
     };
     var mostraSaldo = function() {
         chamaPagina(url.mostraSaldo);
-
     };
+    var cadastrarProduto = function() {
+        chamaPagina(url.cadastrarProduto);
+    }
     //retorna links para acessar as paginas.
     return {
         init: init,
@@ -70,8 +64,9 @@
         historicoCompra: historicoCompra,
         listaUsuario: listaUsuario,
         listaProduto: listaProduto,
-        mostraSaldo:  mostraSaldo,
-        detalhePagamento: detalhePagamento
-    };       
+        mostraSaldo: mostraSaldo,
+        detalhePagamento: detalhePagamento,
+        cadastrarProduto: cadastrarProduto
+};       
 
 })(jQuery);           //O método ajaxJS é auto executado quando é iniciado o sistema.
