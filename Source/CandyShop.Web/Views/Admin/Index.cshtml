@@ -12,6 +12,7 @@
             listaUsuario: '@Url.Action("Index", "Usuario")',
             mostraSaldo: '@Url.Action("Index", "Shop")',
             cadastroUsuario: '@Url.Action("Cadastrar","Usuario")'
+            cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")'
         });
     })
 </script>
@@ -50,7 +51,7 @@
                 <ul class="brown-text">
                     <li><a href="#!" class="dropdown-button" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Lista produtos</a></li>
                     <li><a href="#!"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
-                    <li><a href="#!"><i class="material-icons">add_shopping_cart</i>Inserir produtos</a></li>
+                    <li><a href="#!" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produtos</a></li>
                 </ul>
             </div>
         </li>
