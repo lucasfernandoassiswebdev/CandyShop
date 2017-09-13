@@ -45,7 +45,7 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult ExcluirProdutoConfirmado(int idProduto)
         {
-            return View();
+            return Content("Produto excluído com sucesso!");
         }
     }
 }
