@@ -6,7 +6,8 @@ GO
 CREATE PROCEDURE [dbo].[GCS_InsProduto]
 	@NomeProduto varchar(40),
 	@PrecoProduto decimal,
-	@QtdeProduto int
+	@QtdeProduto int,
+	@Ativo varchar(1)
 	AS
 
 	/*
@@ -21,8 +22,8 @@ CREATE PROCEDURE [dbo].[GCS_InsProduto]
 
 	BEGIN
 	
-		INSERT INTO [dbo].[Produto] (NomeProduto,PrecoProduto,QtdeProduto)
-			VALUES (@NomeProduto,@PrecoProduto,@QtdeProduto)
+		INSERT INTO [dbo].[Produto] (NomeProduto,PrecoProduto,QtdeProduto,Ativo)
+			VALUES (@NomeProduto,@PrecoProduto,@QtdeProduto,@Ativo)
 
 				IF @@ERROR <> 0
 					RETURN 1
