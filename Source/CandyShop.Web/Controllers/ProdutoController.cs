@@ -1,14 +1,24 @@
-﻿using CandyShop.Core.Services.Produto.Dto;
+﻿using CandyShop.Application;
+using CandyShop.Application.ViewModels;
+using System.Net;
 using System.Web.Mvc;
+
 
 namespace CandyShop.Web.Controllers
 {
     public class ProdutoController : Controller
     {
+        private readonly ProdutoApplication _appProduto = new ProdutoApplication();
+
         // GET: Produto
         public ActionResult Index()
         {
-            return View();
+            var response = _appProduto.ListarProdutos();
+            if (response.Status != HttpStatusCode.OK)
+            {                
+                return Content("Erro " + response.ContentAsString);
+            }
+            return View(response.Content);
         }
 
         public ActionResult CadastrarProduto()
@@ -17,7 +27,7 @@ namespace CandyShop.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult CadastrarProduto(ProdutoDto produto)
+        public ActionResult CadastrarProduto(Produto produto)
         {
             return Content("Produto inserido com sucesso!");
         }
@@ -33,7 +43,7 @@ namespace CandyShop.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditarProduto(ProdutoDto produto)
+        public ActionResult EditarProduto(Produto produto)
         {
             return Content("Produto editado com sucesso!");
         }

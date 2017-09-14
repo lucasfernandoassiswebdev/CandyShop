@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CandyShop.Core.Services.Produto.Dto.ProdutoDto>
+﻿@model IEnumerable<CandyShop.Application.ViewModels.Produto>
 
 @{
     Layout = null;
@@ -19,17 +19,17 @@
                 <th></th>
             </tr>
 
-            @for (var i = 0; i < 5; i++)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>
-                         Chocolate
+                         @Html.DisplayFor(modelItem => item.NomeProduto)
                     </td>
                     <td>
-                         R$ 2,00
+                         @Html.DisplayFor(modelItem => item.PrecoProduto)
                     </td>
                     <td>
-                         7
+                         @Html.DisplayFor(modelItem => item.QtdeProduto)
                     </td>
                     <td>
                         <a class="btn-floating btn-sm waves-effect waves-light blue darken-1" onclick="AjaxJs.detalheProduto();"><i class="material-icons">info_outline</i></a>
