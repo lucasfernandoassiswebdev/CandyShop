@@ -1,6 +1,7 @@
 ﻿using CandyShop.Core;
 using CandyShop.Core.Compra.Dto;
 using System.Web.Http;
+using CandyShop.Core.Services.CompraProduto;
 
 namespace CandyShop.WebAPI.Controllers
 {

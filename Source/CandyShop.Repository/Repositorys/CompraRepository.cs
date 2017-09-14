@@ -4,6 +4,7 @@ using CandyShop.Core.CompraProduto.Dto;
 using CandyShop.Core.Usuario.Dto;
 using Concessionaria.Repositorio;
 using System.Collections.Generic;
+using CandyShop.Core.Services.CompraProduto;
 
 namespace CandyShop.Repository
 {

@@ -2,7 +2,7 @@
 using CandyShop.Core.CompraProduto.Dto;
 using System.Collections.Generic;
 
-namespace CandyShop.Core
+namespace CandyShop.Core.Services.CompraProduto
 {
     public interface ICompraRepository
     {

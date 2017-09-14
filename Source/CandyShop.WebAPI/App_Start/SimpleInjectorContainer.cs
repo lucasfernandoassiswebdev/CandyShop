@@ -5,6 +5,7 @@ using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository;
+using CandyShop.Repository.Repositorys;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 
@@ -23,7 +24,7 @@ namespace CandyShop.WebAPI
             container.Register<IPagamentoRepository, PagamentoRepository>();
             container.Register<IProdutoRepository, ProdutoRepository>();
             container.Register<ICompraRepository, CompraRepository>();
-            container.Register<ICompraProdutoRepository, ICompraProdutoRepository>();
+            container.Register<ICompraProdutoRepository, CompraProdutoRepository>();
 
             container.Verify();
             return container;

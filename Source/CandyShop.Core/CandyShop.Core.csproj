@@ -43,6 +43,7 @@
     <Compile Include="Infra\Notification.cs" />
     <Compile Include="Services\-Interfaces\INotification.cs" />
     <Compile Include="Services\CompraProduto\Dto\CompraProdutoDto.cs" />
+    <Compile Include="Services\CompraProduto\ICompraProdutoRepository.cs" />
     <Compile Include="Services\Compra\Dto\CompraDto.cs" />
     <Compile Include="Services\Compra\ICompraRepository.cs" />
     <Compile Include="Services\Pagamento\IPagamentoRepository.cs" />
