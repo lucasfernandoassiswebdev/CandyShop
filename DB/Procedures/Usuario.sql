@@ -156,5 +156,35 @@ CREATE PROCEDURE [dbo].[GCS_LisUsuario]
 				 FROM [dbo].[Usuario]
 	END
 GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelUsuarioSaldo]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_SelUsuarioSaldo]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_SelUsuarioSaldo]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Selecionar usuarios com saldo negativo
+	Autor.............: SMN - João Guilherme
+ 	Data..............: 14/09/2017
+	Ex................: EXEC [dbo].[GCS_SelUsuarioSaldo]
+
+	*/
+
+	BEGIN
+		SELECT Cpf,
+				NomeUsuario,
+				SaldoUsuario	
+				FROM [dbo].[Usuario]
+		WHERE SaldoUsuario < 0
+		
+	END
+GO
+				
 										
 				
