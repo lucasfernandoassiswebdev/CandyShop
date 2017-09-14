@@ -49,28 +49,30 @@
     var voltarInicio = function() {
         main();
     };
-    //var que chama a view pagamento
-    var pagamento = function() {
-        chamaPagina(url.pagamento);
-    };
-    //var que chama a view historico de compra
+    
+    //gerenciamento da lojinha
     var historicoCompra = function() {
         chamaPagina(url.historicoCompra);
+    };
+    var mostraSaldo = function () {
+        chamaPagina(url.mostraSaldo);
+    };
+    //usuarios
+    var cadastroUsuario = function () {
+        chamaPagina(url.cadastroUsuario);
     };
     var listaUsuario = function() {
         chamaPagina(url.listaUsuario);
     };
-    var listaProduto = function() {
-        chamaPagina(url.listaProduto);
-    };
-    var detalhePagamento = function() {
+    var detalhePagamento = function () {
         chamaPagina(url.detalhePagamento);
     };
-    var mostraSaldo = function() {
-        chamaPagina(url.mostraSaldo);
+    var pagamento = function () {
+        chamaPagina(url.pagamento);
     };
-    var cadastroUsuario = function() {
-        chamaPagina(url.cadastroUsuario);
+    //produtos
+    var listaProduto = function() {
+        chamaPagina(url.listaProduto);
     };
     var cadastrarProduto = function() {
         chamaPagina(url.cadastrarProduto);
@@ -84,6 +86,7 @@
         //para admin  e usuario
         init: init,
         voltarInicio: voltarInicio,
+
         //usuario
         pagamento: pagamento,
         detalhePagamento: detalhePagamento,
@@ -91,11 +94,11 @@
 
         //admin
         listaUsuario: listaUsuario,
-        listaProduto: listaProduto,
         cadastroUsuario: cadastroUsuario,
-        mostraSaldo: mostraSaldo,
+        listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,
         concluirCadastroProduto: concluirCadastroProduto,
-        detalheProduto: detalheProduto
+        detalheProduto: detalheProduto,
+        mostraSaldo: mostraSaldo
     };
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.
