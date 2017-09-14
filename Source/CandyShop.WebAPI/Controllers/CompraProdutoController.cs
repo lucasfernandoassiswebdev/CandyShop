@@ -1,9 +1,11 @@
-﻿using CandyShop.Core.Services.CompraProduto;
+﻿using System.Web.Http;
+using CandyShop.Core.Services.CompraProduto;
 using System.Web.Mvc;
+using CandyShop.Core.CompraProduto.Dto;
 
 namespace CandyShop.WebAPI.Controllers
 {
-    public class CompraProdutoController : Controller
+    public class CompraProdutoController : ApiController
     {
         private readonly ICompraProdutoRepository _compraProdutoRepository;
 
@@ -12,10 +14,19 @@ namespace CandyShop.WebAPI.Controllers
             _compraProdutoRepository = compraProdutoRepository;
         }
 
-        // GET: CompraProduto
-        public ActionResult Index()
+        public IHttpActionResult PostCompraProduto(CompraProdutoDto compraProduto)
         {
-            return View();
+            _compraProdutoRepository.InserirCompraProduto(compraProduto);
+            return Ok();
         }
-    }
+
+        public IHttpActionResult GetListaCompraProduto()
+        {
+            return Ok(_compraProdutoRepository.ListarCompraProduto());
+        }
+
+        public IHttpActionResult GetListaCompraProdutoPorIdCompra(int idCompra)
+        {
+            return Ok();
+        }
 }

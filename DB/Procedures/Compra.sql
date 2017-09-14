@@ -7,7 +7,7 @@ GO
 
 CREATE PROCEDURE [dbo].[GCS_InsCompra]
 	@UsuarioCompra VARCHAR(14),
-	@DataCompra Datetime
+	@DataCompra DATE
 
 	AS
 
