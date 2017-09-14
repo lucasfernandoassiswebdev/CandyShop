@@ -50,9 +50,9 @@
     <Compile Include="Response.cs" />
     <Compile Include="ViewModels\Compra.cs" />
     <Compile Include="ViewModels\CompraProduto.cs" />
-    <Compile Include="ViewModels\PagamentoDto.cs" />
-    <Compile Include="ViewModels\ProdutoDto.cs" />
-    <Compile Include="ViewModels\UsuarioDto.cs" />
+    <Compile Include="ViewModels\Pagamento.cs" />
+    <Compile Include="ViewModels\Produto.cs" />
+    <Compile Include="ViewModels\Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

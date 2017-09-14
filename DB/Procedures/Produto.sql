@@ -16,7 +16,7 @@ CREATE PROCEDURE [dbo].[GCS_InsProduto]
 	Objetivo..........: Inserir Produtos
 	Autor.............: SMN - João Guilherme
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_InsProduto]
+	Ex................: EXEC [dbo].[GCS_InsProduto] 'tortuguita', 1.00, 0, '1', 'chocolates'
 
 	*/
 
@@ -140,7 +140,7 @@ CREATE PROCEDURE [dbo].[GCS_LisProduto]
 	Autor.............: SMN - Rafael Morais
  	Data..............: 07/07/2017
 	Ex................: EXEC [dbo].[GCS_LisProduto]
-
+						select * from Produto
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select 
 	Data..............: 12/09/2017
