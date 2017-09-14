@@ -31,7 +31,6 @@ CREATE PROCEDURE [dbo].[GCS_InsCompra]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_UpdCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[GCS_UpdCompra]
 GO

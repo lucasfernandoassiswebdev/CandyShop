@@ -8,5 +8,6 @@ namespace CandyShop.Core.Services.CompraProduto
         void InserirCompraProduto(CompraProdutoDto compra);
         void EditarCompraProduto(CompraProdutoDto compra);
         IEnumerable<CompraProdutoDto> ListarCompraProduto();
+        CompraProdutoDto ListarCompraProdutoIdVenda(int idVenda);
     }
 }

@@ -8,7 +8,8 @@ namespace CandyShop.Repository.Repositorys
     {
         private enum Procedures
         {
-            GCS_LisCompraNomeUsuario,
+            GCS_LisCompraProduto,
+            GCS_LisCompraProdutoIdVenda,
             GCS_InsCompraProduto,
             GCS_UpdCompraProduto
         }
@@ -35,7 +36,7 @@ namespace CandyShop.Repository.Repositorys
 
         public IEnumerable<CompraProdutoDto> ListarCompraProduto()
         {
-            ExecuteProcedure(Procedures.GCS_LisCompraNomeUsuario);
+            ExecuteProcedure(Procedures.GCS_LisCompraProduto);
             var retorno = new List<CompraProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -46,6 +47,21 @@ namespace CandyShop.Repository.Repositorys
                         QtdeCompra = reader.ReadAsInt("QtdeProduto")
                     });
             return retorno;
+        }
+
+        public CompraProdutoDto ListarCompraProdutoIdVenda(int idVenda)
+        {
+            ExecuteProcedure(Procedures.GCS_LisCompraProdutoIdVenda);
+           
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    return new CompraProdutoDto()
+                    {
+                        IdCompra = reader.ReadAsInt("IdCompra"),
+                        IdProduto = reader.ReadAsInt("IdProduto"),
+                        QtdeCompra = reader.ReadAsInt("QtdeProduto")
+                    };
+            return null;
         }
     }
 }

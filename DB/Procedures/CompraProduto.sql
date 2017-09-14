@@ -32,7 +32,6 @@ CREATE PROCEDURE [dbo].[GCS_InsCompraProduto]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_UpdCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[GCS_UpdCompraProduto]
 GO
@@ -102,6 +101,35 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisCom
 GO
 
 CREATE PROCEDURE [dbo].[GCS_LisCompraProduto]
+	
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Lista.sql
+	Objetivo..........: Listar produtos de uma compra específica
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 01/01/2017
+	Ex................: EXEC [dbo].[GCS_LisCompraProduto]
+
+	Editado Por.......: SMN - João Guilherme
+	Objetivo..........: Alterando o select 
+	Data..............: 12/09/2017
+	*/
+
+	BEGIN
+		SELECT	IdCompra,
+				IdProduto,
+				QtdeProduto
+		 FROM CompraProduto WITH(NOLOCK)
+	END
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisCompraProdutoIdVenda]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].GCS_LisCompraProdutoIdVenda
+GO
+
+CREATE PROCEDURE [dbo].GCS_LisCompraProdutoIdVenda
 	@IdCompra int
 
 	AS
@@ -124,9 +152,8 @@ CREATE PROCEDURE [dbo].[GCS_LisCompraProduto]
 				IdProduto,
 				QtdeProduto
 		 FROM CompraProduto WITH(NOLOCK)
-			WHERE IdCompra = @Idcompra		
+		 WHERE IdCompra = @Idcompra		
 
 	END
 GO
-
 					

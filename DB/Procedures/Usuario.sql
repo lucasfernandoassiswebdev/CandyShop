@@ -186,5 +186,3 @@ CREATE PROCEDURE [dbo].[GCS_SelUsuarioSaldo]
 	END
 GO
 				
-										
-				
