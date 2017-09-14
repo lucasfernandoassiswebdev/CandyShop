@@ -3,7 +3,6 @@ using CandyShop.Core.Compra.Dto;
 using CandyShop.Core.CompraProduto.Dto;
 using CandyShop.Core.Usuario.Dto;
 using Concessionaria.Repositorio;
-using System;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository
@@ -20,7 +19,8 @@ namespace CandyShop.Repository
             GCS_SelCompra,
             GCS_InsCompraProduto,
             GCS_UpdCompraProduto,
-            GCS_DelCompraProduto
+            GCS_DelCompraProduto,
+            GCS_LisCompraNomeUsuario
         }
 
         public void InserirCompra(CompraDto compra)
@@ -152,7 +152,22 @@ namespace CandyShop.Repository
 
         public IEnumerable<CompraDto> ListarCompraPorNome(string nome)
         {
-            throw new NotImplementedException();
+            ExecuteProcedure(Procedures.GCS_LisCompraNomeUsuario);
+            AddParameter("@Nome", nome);
+            var retorno = new List<CompraDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new CompraDto()
+                    {
+                        IdCompra = reader.ReadAsInt("IdCompra"),
+                        DataCompra = reader.ReadAsDateTime("DataCompra"),
+                        Usuario = new UsuarioDto()
+                        {
+                            NomeUsuario = reader.ReadAsString("nomeUsuario"),
+                            Cpf = reader.ReadAsString("UsuarioCompra")
+                        }
+                    });
+            return retorno;
         }
     }
 }
