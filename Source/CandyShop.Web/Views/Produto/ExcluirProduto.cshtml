@@ -1,0 +1,59 @@
+﻿@model CandyShop.Core.Services.Produto.Dto.ProdutoDto
+
+@{
+    Layout = null;
+}
+
+<form class="col s12" style="margin-left: -10%">
+    <h4 class="center">Excluir <font color="brown">Produto</font></h4>
+    <p>Tem certeza que deseja excluir este produto?</p>
+    <div class="left">
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @*@Html.DisplayNameFor(model => model.IdProduto)*@ID:
+            </dt>
+
+            <dd>
+                @*@Html.DisplayFor(model => model.IdProduto)*@1
+            </dd>
+
+            <dt>
+                @*@Html.DisplayNameFor(model => model.NomeProduto)*@Nome do Produto:
+            </dt>
+
+            <dd>
+                @*@Html.DisplayFor(model => model.NomeProduto)*@Chocolate
+            </dd>
+
+            <dt>
+                @*@Html.DisplayNameFor(model => model.PrecoProduto)*@Preco do Produto:
+            </dt>
+
+            <dd>
+                @*@Html.DisplayFor(model => model.PrecoProduto)*@R$ 2,00
+            </dd>
+
+            <dt>
+                @*@Html.DisplayNameFor(model => model.QtdeProduto)*@Quantidade em estoque:
+            </dt>
+
+            <dd>
+                @*@Html.DisplayFor(model => model.QtdeProduto)*@0
+            </dd>
+
+        </dl>
+
+        <div class="row" , align="center">
+            <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
+            <a class="waves-effect waves-light btn-large"><i class="material-icons left">delete</i>Excluir</a>
+        </div>
+    </div>
+</form>
+<style>
+    dl {
+        color: black;
+    }
+</style>
+

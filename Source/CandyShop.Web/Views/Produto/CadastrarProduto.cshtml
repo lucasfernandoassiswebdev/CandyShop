@@ -7,6 +7,11 @@
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
 
+<style>
+    input {
+        text-align: center
+    }    
+</style>
 
 <div class="container">
     <div class="row" style="margin-left: -20%">
@@ -27,30 +32,29 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s9">
+                <div class="input-field col s12">
                     <input id="NomeProduto" name="Nome" type="text" class="validate" required="">
-                    <label for="NomeProduto">Nome do produto:</label>
+                    <label for="NomeProduto">Nome:</label>
                 </div>
                 
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     <input id="PrecoProduto" name="PrecoProduto" type="text" class="validate" required="">
-                    <label for="PrecoProduto">Preço do produto:</label>
+                    <label for="PrecoProduto">Valor:</label>
                 </div>
                 <div class="input-field col s6">
                     <input id="QtdeProduto" name="QtdeProduto" type="text" class="validate" required="">
                     <label for="QtdeProduto">Quantidade disponível:</label>
                 </div>                
             </div>
-            <div align="center">
-                <a class="waves-effect waves-light btn-large"><i class="material-icons left">add</i>Cadastrar</a>
+            <div class="row", align="center">
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>                
+                <a class="waves-effect waves-light btn-large"><i class="material-icons left">add_circle</i>Cadastrar</a>
             </div>
             
         </form>
     </div>
 </div>
 
-<div>    
-</div>
 

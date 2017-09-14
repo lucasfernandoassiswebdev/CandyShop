@@ -30,12 +30,11 @@
     }
 
     var concluirCadastroProduto = function() {
-        $.post(url.concluirCadastroProduto,
-            {
-                NomeProduto: $('#NomeProduto').val(),
-                PrecoProduto: $('#PrecoProduto').val(),
-                QtdeProduto: $('#QtdeProduto').val()
-            }).done(function() { //passar o parametro data aqui quando for definida a mensagem
+        $.post(url.concluirCadastroProduto, {
+            NomeProduto: $('#NomeProduto').val(),
+            PrecoProduto: $('#PrecoProduto').val(),
+            QtdeProduto: $('#QtdeProduto').val()
+        }).done(function() { //passar o parametro data aqui quando for definida a mensagem
             $('#DivGrid').slideUp(function() {
                 $(this).empty();
                 chamaPagina(url.cadastrarProduto);
@@ -49,28 +48,32 @@
     var voltarInicio = function() {
         main();
     };
-    //var que chama a view pagamento
-    var pagamento = function() {
-        chamaPagina(url.pagamento);
-    };
-    //var que chama a view historico de compra
+
+    //gerenciamento da lojinha
     var historicoCompra = function() {
         chamaPagina(url.historicoCompra);
-    };
-    var listaUsuario = function() {
-        chamaPagina(url.listaUsuario);
-    };
-    var listaProduto = function() {
-        chamaPagina(url.listaProduto);
-    };
-    var detalhePagamento = function() {
-        chamaPagina(url.detalhePagamento);
     };
     var mostraSaldo = function() {
         chamaPagina(url.mostraSaldo);
     };
+
+    //usuarios
     var cadastroUsuario = function() {
         chamaPagina(url.cadastroUsuario);
+    };
+    var listaUsuario = function() {
+        chamaPagina(url.listaUsuario);
+    };
+    var detalhePagamento = function() {
+        chamaPagina(url.detalhePagamento);
+    };
+    var pagamento = function() {
+        chamaPagina(url.pagamento);
+    };
+
+    //produtos
+    var listaProduto = function() {
+        chamaPagina(url.listaProduto);
     };
     var cadastrarProduto = function() {
         chamaPagina(url.cadastrarProduto);
@@ -80,15 +83,19 @@
     };
     var editarProduto = function() {
         chamaPagina(url.editarProduto);
-    }
+    };
     var excluirProduto = function() {
         chamaPagina(url.excluirProduto);
-    }
+    };
+
     //retorna links para acessar as paginas.
     return {
         //para admin  e usuario
         init: init,
         voltarInicio: voltarInicio,
+
+        //gerenciamento da lojinha
+        mostraSaldo: mostraSaldo,
         //usuario
         pagamento: pagamento,
         detalhePagamento: detalhePagamento,
@@ -97,13 +104,13 @@
         //admin
         listaUsuario: listaUsuario,
         cadastroUsuario: cadastroUsuario,
-        mostraSaldo: mostraSaldo,
 
-        cadastrarProduto: cadastrarProduto,
+        //produtos
         listaProduto: listaProduto,
+        cadastrarProduto: cadastrarProduto,
         concluirCadastroProduto: concluirCadastroProduto,
         detalheProduto: detalheProduto,
         editarProduto: editarProduto,
         excluirProduto: excluirProduto
-};
+    };
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.
