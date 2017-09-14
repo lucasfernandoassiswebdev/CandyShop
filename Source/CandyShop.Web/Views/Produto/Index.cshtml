@@ -32,13 +32,13 @@
                         @*@Html.DisplayFor(modelItem => item.QtdeProduto)*@ 7
                     </td>
                     <td>
-                        <a class="btn-floating btn-sm waves-effect waves-light blue darken-1"><i class="material-icons">info_outline</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light blue darken-1" onclick="AjaxJs.detalheProduto();"><i class="material-icons">info_outline</i></a>
                     </td>
                     <td>
-                        <a class="btn-floating btn-sm waves-effect waves-light orange"><i class="material-icons">edit</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto();"><i class="material-icons">edit</i></a>
                     </td>
                     <td>
-                        <a class="btn-floating btn-sm waves-effect waves-light red lighten-2"><i class="material-icons">delete</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJs.excluirProduto();"><i class="material-icons">delete</i></a>
                     </td>
 
                 </tr>

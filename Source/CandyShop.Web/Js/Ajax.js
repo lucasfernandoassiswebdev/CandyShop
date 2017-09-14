@@ -14,7 +14,7 @@
                 $('#DivGrid').hide().html(data).slideDown(); //desce  o divgrid                                                                                
             });
         }).fail(function(xhr) { //xhr é o código do erro, que é retornado caso o get não tenha sucesso
-            $("#DivGrid").errorMessage(xhr.responseText);
+            console.log(xhr.responseText);
         });
     }
 
@@ -25,17 +25,16 @@
                 $('#DivGrid').hide().html(data).slideDown(); //escondida, carregada e demonstrada novamente
             });
         }).fail(function(xhr) {
-            $('#DivGrid').errorMessage(xhr.responseText);
+            console.log(xhr.responseText);
         });
     }
 
     var concluirCadastroProduto = function() {
-        $.post(url.concluirCadastroProduto,
-            {
-                NomeProduto: $('#NomeProduto').val(),
-                PrecoProduto: $('#PrecoProduto').val(),
-                QtdeProduto: $('#QtdeProduto').val()
-            }).done(function() { //passar o parametro data aqui quando for definida a mensagem
+        $.post(url.concluirCadastroProduto, {
+            NomeProduto: $('#NomeProduto').val(),
+            PrecoProduto: $('#PrecoProduto').val(),
+            QtdeProduto: $('#QtdeProduto').val()
+        }).done(function() { //passar o parametro data aqui quando for definida a mensagem
             $('#DivGrid').slideUp(function() {
                 $(this).empty();
                 chamaPagina(url.cadastrarProduto);
@@ -49,27 +48,29 @@
     var voltarInicio = function() {
         main();
     };
-    
+
     //gerenciamento da lojinha
     var historicoCompra = function() {
         chamaPagina(url.historicoCompra);
     };
-    var mostraSaldo = function () {
+    var mostraSaldo = function() {
         chamaPagina(url.mostraSaldo);
     };
+
     //usuarios
-    var cadastroUsuario = function () {
+    var cadastroUsuario = function() {
         chamaPagina(url.cadastroUsuario);
     };
     var listaUsuario = function() {
         chamaPagina(url.listaUsuario);
     };
-    var detalhePagamento = function () {
+    var detalhePagamento = function() {
         chamaPagina(url.detalhePagamento);
     };
-    var pagamento = function () {
+    var pagamento = function() {
         chamaPagina(url.pagamento);
     };
+
     //produtos
     var listaProduto = function() {
         chamaPagina(url.listaProduto);
@@ -80,6 +81,12 @@
     var detalheProduto = function() {
         chamaPagina(url.detalheProduto);
     };
+    var editarProduto = function() {
+        chamaPagina(url.editarProduto);
+    };
+    var excluirProduto = function() {
+        chamaPagina(url.excluirProduto);
+    };
 
     //retorna links para acessar as paginas.
     return {
@@ -87,6 +94,8 @@
         init: init,
         voltarInicio: voltarInicio,
 
+        //gerenciamento da lojinha
+        mostraSaldo: mostraSaldo,
         //usuario
         pagamento: pagamento,
         detalhePagamento: detalhePagamento,
@@ -95,10 +104,13 @@
         //admin
         listaUsuario: listaUsuario,
         cadastroUsuario: cadastroUsuario,
+
+        //produtos
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,
         concluirCadastroProduto: concluirCadastroProduto,
         detalheProduto: detalheProduto,
-        mostraSaldo: mostraSaldo
+        editarProduto: editarProduto,
+        excluirProduto: excluirProduto
     };
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.

@@ -8,12 +8,15 @@
     $(document).ready(function () {
         AjaxJs.init({
             main: '@Url.Action("Index", "Usuario")',
-            listaProduto: '@Url.Action("Index", "Produto")',
             listaUsuario: '@Url.Action("Index", "Usuario")',
             mostraSaldo: '@Url.Action("Index", "Shop")',
             cadastroUsuario: '@Url.Action("Cadastrar","Usuario")',
+
+            listaProduto: '@Url.Action("Index", "Produto")',
             cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")',
-            detalheProduto: '@Url.Action("DetalheProduto", "Produto")'
+            detalheProduto: '@Url.Action("DetalheProduto", "Produto")',
+            editarProduto: '@Url.Action("EditarProduto", "Produto")',
+            excluirProduto: '@Url.Action("ExcluirProduto", "Produto")'
         });
     })
 </script>

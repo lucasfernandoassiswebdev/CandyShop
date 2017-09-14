@@ -1,5 +1,6 @@
 ﻿using CandyShop.Core;
 using CandyShop.Core.Compra.Dto;
+using CandyShop.Core.CompraProduto.Dto;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
@@ -22,5 +23,24 @@ namespace CandyShop.WebAPI.Controllers
             }
             return Ok();
         }
+
+        public IHttpActionResult GetListaVenda(int idcompra, int qtdecompra)
+        {
+            _compraRepository.ListarCompra();
+            return Ok();
+        }
+
+        public IHttpActionResult PutEditaVenda(CompraProdutoDto compraproduto)
+        {
+            _compraRepository.EditaItens(compraproduto);
+            return Ok();
+        }
+
+        public IHttpActionResult DeleteItens(int idcompra, int idproduto)
+        {
+            _compraRepository.DeletaItens(idcompra,idproduto);
+            return Ok();
+        }
+
     }
 }

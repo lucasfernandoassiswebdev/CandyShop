@@ -4,6 +4,7 @@
     Layout = null;
 }
 
+
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
 
@@ -13,8 +14,7 @@
         <form class="col s12">
             <div class="row">
                 <div class="center">
-                    <h1 class="center">Cadastrar <font color="brown">Produto</font></h1>
-                    <img class="center responsive-img" src="../../Imagens/bala.jpg" />
+                    <h1 class="center">Editar <font color="brown">Produto</font></h1>
                 </div>
                 <div class="file-field input-field">
                     <div class="btn">
@@ -31,7 +31,7 @@
                     <input id="NomeProduto" name="Nome" type="text" class="validate" required="">
                     <label for="NomeProduto">Nome do produto:</label>
                 </div>
-                
+
             </div>
             <div class="row">
                 <div class="input-field col s6">
@@ -41,15 +41,12 @@
                 <div class="input-field col s6">
                     <input id="QtdeProduto" name="QtdeProduto" type="text" class="validate" required="">
                     <label for="QtdeProduto">Quantidade disponível:</label>
-                </div>                
+                </div>
             </div>
-            <div class="row", align="center">
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>                
-                <a class="waves-effect waves-light btn-large"><i class="material-icons left">add</i>Cadastrar</a>
+            <div class="row" , align="center">
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large"><i class="material-icons left">edit</i>Cadastrar</a>
             </div>
-            
         </form>
     </div>
 </div>
-
-
