@@ -14,7 +14,6 @@ namespace CandyShop.WebAPI.Controllers
                 Ativo = true,
                 DataNascimento = DateTime.Now
             });
-            //return Content(HttpStatusCode.OK, DateTime.Now.ToString());
         }
     }
 }
