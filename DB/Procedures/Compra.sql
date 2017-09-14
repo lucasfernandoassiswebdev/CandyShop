@@ -7,7 +7,7 @@ GO
 
 CREATE PROCEDURE [dbo].[GCS_InsCompra]
 	@UsuarioCompra VARCHAR(14),
-	@DataCompra DATE
+	@DataCompra Datetime
 
 	AS
 
@@ -179,7 +179,7 @@ CREATE PROCEDURE [dbo].[GCS_SelCompra]
 	*/
 
 	BEGIN
-		SELECT	* 
+		SELECT TOP 1 1 
 		 FROM [dbo].[Compra] WITH(NOLOCK)
 		 WHERE IdCompra = @IdCompra
 	END
@@ -215,6 +215,11 @@ CREATE PROCEDURE [dbo].[GCS_LisCompraNomeUsuario]
 	END
 GO
 
+select * from Compra
+select * from CompraProduto
 
+select cp.IdProduto, p.NomeProduto, p.PrecoProduto, c.IdCompra, cp.QtdeProduto from Produto p
+inner join CompraProduto cp on cp.IdProduto = p.IdProduto
+inner join Compra c on c.IdCompra = cp.IdCompra 
 								
 																			

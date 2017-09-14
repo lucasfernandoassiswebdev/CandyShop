@@ -1,6 +1,7 @@
 ﻿using CandyShop.Core;
 using CandyShop.Core.Infra;
 using CandyShop.Core.Services._Interfaces;
+using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository;
@@ -22,7 +23,8 @@ namespace CandyShop.WebAPI
             container.Register<IPagamentoRepository, PagamentoRepository>();
             container.Register<IProdutoRepository, ProdutoRepository>();
             container.Register<ICompraRepository, CompraRepository>();
-           
+            container.Register<ICompraProdutoRepository, ICompraProdutoRepository>();
+
             container.Verify();
             return container;
         }

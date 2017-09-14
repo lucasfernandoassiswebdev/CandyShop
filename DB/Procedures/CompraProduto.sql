@@ -1,4 +1,4 @@
--USE CandyShop
+USE CandyShop
 
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_InsCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
@@ -120,11 +120,13 @@ CREATE PROCEDURE [dbo].[GCS_LisCompraProduto]
 	*/
 
 	BEGIN
-		SELECT IdCompra,
+		SELECT	IdCompra,
+				IdProduto,
 				QtdeProduto
 		 FROM CompraProduto WITH(NOLOCK)
 			WHERE IdCompra = @Idcompra		
 
 	END
 GO
-								
+
+						
