@@ -19,9 +19,15 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-        //public IHttpActionResult PutCompra()
-        //{
-            
-        //}
+        public IHttpActionResult GetCompra()
+        {
+            return Ok(_compraRepository.ListarCompra());
+        }
+
+        public IHttpActionResult PutCompra(CompraDto compra)
+        {
+            _compraRepository.EditarCompra(compra);
+            return Ok();
+        }
     }
 }

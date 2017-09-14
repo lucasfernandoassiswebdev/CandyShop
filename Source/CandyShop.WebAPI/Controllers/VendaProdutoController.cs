@@ -26,8 +26,7 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult GetListaVenda(int idcompra, int qtdecompra)
         {
-            _compraRepository.ListarCompra();
-            return Ok();
+            return Ok(_compraRepository.ListarCompra());
         }
 
         public IHttpActionResult PutEditaVenda(CompraProdutoDto compraproduto)
