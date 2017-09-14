@@ -15,7 +15,13 @@ namespace CandyShop.Repository
             GCS_DelProduto,
             GCS_UpdProduto,
             GCS_SelProduto,
-            GCS_LisProduto
+            GCS_LisProduto,
+            GCS_LisProdutoInativo,
+            GCS_LisProdutoValorCres,
+            GCS_LisProdutoValorDesc,
+            GCS_LisProdutoAbaixoValor,
+            GCS_LisProdutoAcimaValor,
+            GCS_LisProdutoCategoria
         }
 
         public void InserirProduto(ProdutoDto produto)
@@ -24,10 +30,12 @@ namespace CandyShop.Repository
             AddParameter("@NomeProduto", produto.NomeProduto);
             AddParameter("@PrecoProduto", produto.PrecoProduto);
             AddParameter("@QtdeProduto", produto.QtdeProduto);
-
+            AddParameter("@Ativo", produto.Ativo);
+            AddParameter("@Categoria", produto.Categoria);
             ExecuteNonQuery();
         }
 
+        //não será mais usado temporariamente
         public void DeletarProduto(int idproduto)
         {
             ExecuteProcedure(Procedures.GCS_DelProduto);
@@ -42,6 +50,8 @@ namespace CandyShop.Repository
             AddParameter("@NomeProduto", produto.NomeProduto);
             AddParameter("@PrecoProduto", produto.PrecoProduto);
             AddParameter("@QtdeProduto", produto.QtdeProduto);
+            AddParameter("@Ativo", produto.Ativo);
+            AddParameter("@Categoria", produto.Categoria);
             ExecuteNonQuery();
         }
 
@@ -58,18 +68,16 @@ namespace CandyShop.Repository
             ExecuteProcedure(Procedures.GCS_LisProduto);
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
-                if (reader.Read())
-                    do
+                while (reader.Read())
+                    retorno.Add(new ProdutoDto
                     {
-                        retorno.Add(new ProdutoDto
-                        {
-                            IdProduto = reader.ReadAsInt("IdProduto"),
-                            NomeProduto = reader.ReadAsString("NomeProduto"),
-                            PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
-                            QtdeProduto = reader.ReadAsInt("QtdeProduto")
-                        });
-                    } while (reader.Read());
-
+                        IdProduto = reader.ReadAsInt("IdProduto"),
+                        NomeProduto = reader.ReadAsString("NomeProduto"),
+                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Categoria = reader.ReadAsString("Categoria")
+                    });
             return retorno;
         }
 
@@ -86,9 +94,119 @@ namespace CandyShop.Repository
                         IdProduto = reader.ReadAsInt("IdProduto"),
                         NomeProduto = reader.ReadAsString("NomeProduto"),
                         PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
-                        QtdeProduto = reader.ReadAsInt("QtdeProduto")
+                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Categoria = reader.ReadAsString("Categoria")
                     };
             return retorno;
-        }   
+        }
+
+        public IEnumerable<ProdutoDto> ListarProdutosInativos()
+        {
+            ExecuteProcedure(Procedures.GCS_LisProdutoInativo);
+            var retorno = new List<ProdutoDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new ProdutoDto
+                    {
+                        IdProduto = reader.ReadAsInt("IdProduto"),
+                        NomeProduto = reader.ReadAsString("NomeProduto"),
+                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Categoria = reader.ReadAsString("Categoria")
+                    });
+            return retorno;
+        }
+
+        public IEnumerable<ProdutoDto> ListarProdutosValorCrescente()
+        {
+            ExecuteProcedure(Procedures.GCS_LisProdutoValorCres);
+            var retorno = new List<ProdutoDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new ProdutoDto
+                    {
+                        IdProduto = reader.ReadAsInt("IdProduto"),
+                        NomeProduto = reader.ReadAsString("NomeProduto"),
+                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Categoria = reader.ReadAsString("Categoria")
+                    });
+            return retorno;
+        }
+
+        public IEnumerable<ProdutoDto> ListarProdutosValorDecrescente()
+        {
+            ExecuteProcedure(Procedures.GCS_LisProdutoValorDesc);
+            var retorno = new List<ProdutoDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new ProdutoDto
+                    {
+                        IdProduto = reader.ReadAsInt("IdProduto"),
+                        NomeProduto = reader.ReadAsString("NomeProduto"),
+                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Categoria = reader.ReadAsString("Categoria")
+                    });
+            return retorno;
+        }
+
+        public IEnumerable<ProdutoDto> ListarProdutosAbaixoValor()
+        {
+            ExecuteProcedure(Procedures.GCS_LisProdutoAbaixoValor);
+            var retorno = new List<ProdutoDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new ProdutoDto
+                    {
+                        IdProduto = reader.ReadAsInt("IdProduto"),
+                        NomeProduto = reader.ReadAsString("NomeProduto"),
+                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Categoria = reader.ReadAsString("Categoria")
+                    });
+            return retorno;
+        }
+
+        public IEnumerable<ProdutoDto> ListarProdutosAcimaValor()
+        {
+            ExecuteProcedure(Procedures.GCS_LisProdutoAcimaValor);
+            var retorno = new List<ProdutoDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new ProdutoDto
+                    {
+                        IdProduto = reader.ReadAsInt("IdProduto"),
+                        NomeProduto = reader.ReadAsString("NomeProduto"),
+                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Categoria = reader.ReadAsString("Categoria")
+                    });
+            return retorno;
+        }
+
+        public IEnumerable<ProdutoDto> ListarProdutosPorCategoria()
+        {
+            ExecuteProcedure(Procedures.GCS_LisProdutoCategoria);
+            var retorno = new List<ProdutoDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new ProdutoDto
+                    {
+                        IdProduto = reader.ReadAsInt("IdProduto"),
+                        NomeProduto = reader.ReadAsString("NomeProduto"),
+                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Categoria = reader.ReadAsString("Categoria")
+                    });
+            return retorno;
+        }
     }
 }

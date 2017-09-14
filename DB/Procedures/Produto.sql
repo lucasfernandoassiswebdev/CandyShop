@@ -1,4 +1,3 @@
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_InsProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[GCS_InsProduto]
 GO
@@ -7,7 +6,8 @@ CREATE PROCEDURE [dbo].[GCS_InsProduto]
 	@NomeProduto varchar(40),
 	@PrecoProduto decimal,
 	@QtdeProduto int,
-	@Ativo varchar(1)
+	@Ativo varchar(1),
+	@Categoria varchar(50)
 	AS
 
 	/*
@@ -22,8 +22,8 @@ CREATE PROCEDURE [dbo].[GCS_InsProduto]
 
 	BEGIN
 	
-		INSERT INTO [dbo].[Produto] (NomeProduto,PrecoProduto,QtdeProduto,Ativo)
-			VALUES (@NomeProduto,@PrecoProduto,@QtdeProduto,@Ativo)
+		INSERT INTO [dbo].[Produto] (NomeProduto,PrecoProduto,QtdeProduto,Ativo,Categoria)
+			VALUES (@NomeProduto,@PrecoProduto,@QtdeProduto,@Ativo,@Categoria)
 
 				IF @@ERROR <> 0
 					RETURN 1
@@ -68,7 +68,9 @@ CREATE PROCEDURE [dbo].[GCS_UpdProduto]
 	@IdProduto int,
 	@NomeProduto varchar(40),
 	@PrecoProduto decimal,
-	@QtdeProduto int
+	@QtdeProduto int,
+	@Ativo varchar(1),
+	@Categoria varchar(50)
 	AS
 
 	/*
@@ -85,7 +87,9 @@ CREATE PROCEDURE [dbo].[GCS_UpdProduto]
 		UPDATE [dbo].[Produto]
 		SET	NomeProduto = @NomeProduto,
 			PrecoProduto = @PrecoProduto,
-			QtdeProduto = @QtdeProduto
+			QtdeProduto = @QtdeProduto,
+			Ativo = @Ativo,
+			Categoria = @Categoria
 		WHERE IdProduto = @IdProduto
 
 		IF @@ERROR <> 0
@@ -117,7 +121,7 @@ CREATE PROCEDURE [dbo].[GCS_SelProduto]
 	BEGIN
 		SELECT TOP 1 1
 		 FROM [dbo].[Produto] WITH(NOLOCK)
-			WHERE NomeProduto = @NomeProduto
+			WHERE NomeProduto like '%' + @NomeProduto + '%'
 	END
 GO
 
@@ -148,12 +152,175 @@ CREATE PROCEDURE [dbo].[GCS_LisProduto]
 				NomeProduto,
 				PrecoProduto,
 				QtdeProduto,
-				Ativo
+				Ativo,
+				Categoria
 			 FROM Produto WITH(NOLOCK)
-			 WHERE Ativo = 'S'
-
 	END
 GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoInativo]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_LisProdutoInativo]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_LisProdutoInativo]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produto.sql
+	Objetivo..........: Listar todos os produtos que estão inativos
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 14/09/2017
+	Ex................: EXEC [dbo].[GCS_LisProduto]
+
+	*/
+
+	BEGIN
+		SELECT IdProduto,
+				NomeProduto,
+				PrecoProduto,
+				QtdeProduto,
+				Ativo,
+				Categoria
+			 FROM Produto WITH(NOLOCK)
+			 WHERE Ativo = 'N'
+	END
+GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoValorCres]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].GCS_LisProdutoValorCres
+GO
+
+CREATE PROCEDURE [dbo].GCS_LisProdutoValorCres
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produto.sql
+	Objetivo..........: Listar os produtos pela ordem de preço crescente	
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 14/09/2017
+	Ex................: EXEC [dbo].[GCS_LisProdutoValor]
+
+	*/
+
+	BEGIN
+		SELECT * 
+			FROM Produto
+			ORDER BY PrecoProduto
+	END
+GO
+				
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoValorDesc]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_LisProdutoValorDesc]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_LisProdutoValorDesc]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produto.sql
+	Objetivo..........: Listar os produtos em ordem decrescente de valor
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 14/09/2017
+	Ex................: EXEC [dbo].[GCS_LisProdutoValorDesc]
+
+	*/
+
+	BEGIN
+	SELECT * 
+		FROM Produto
+		ORDER BY PrecoProduto desc
+END
+GO
+				
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoAbaixoValor]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_LisProdutoAbaixoValor]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_LisProdutoAbaixoValor]
+	@Valor decimal(18,2)
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produt.sql
+	Objetivo..........: Listar os produtos abaixo do valor que será passado âtravés de um parâmetro
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 14/09/2017
+	Ex................: EXEC [dbo].[GCS_LisProdutoAbaixoValor]
+
+	*/
+
+	BEGIN
+	SELECT * 
+		FROM Produto
+		WHERE PrecoProduto <= @Valor	
+	END
+GO
+				
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoAcimaValor]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_LisProdutoAcimaValor]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_LisProdutoAcimaValor]
+	@valor decimal(18,2)
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produto.sql
+	Objetivo..........: Listar os produtos que estão acima de um certo valor
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 14/09/2017
+	Ex................: EXEC [dbo].[GCS_LisProdutoAcimaValor]
+
+	*/
+
+	BEGIN
+	SELECT * 
+		FROM Produto
+		WHERE PrecoProduto >= @valor
+	END
+GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoCategoria]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_LisProdutoCategoria]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_LisProdutoCategoria]
+	@Categoria varchar(50)
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produto.sql
+	Objetivo..........: Listar os produtos de acordo com a sua categoria
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 14/09/2017
+	Ex................: EXEC [dbo].[GCS_LisProdutoCategoria]
+
+	*/
+
+	BEGIN
+		SELECT * 
+			FROM Produto
+			WHERE Categoria like '%' + @Categoria + '@%'
+	END
+GO
+				
+
+
+				
+
 				
 
 

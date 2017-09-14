@@ -5,7 +5,7 @@ use CandyShop
 CREATE TABLE Produto (
 	IdProduto int constraint PK_Produto primary key identity (1,1),
 	NomeProduto varchar(40),
-	PrecoProduto decimal,
+	PrecoProduto decimal(18,2),
 	QtdeProduto int,
 	Ativo varchar(1)
 )
