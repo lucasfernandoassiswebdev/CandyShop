@@ -7,7 +7,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Cpf)
+            CPF
         </th>
         <th>
             Nome
@@ -18,27 +18,29 @@
         <th></th>
     </tr>
 
-    @*@foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cpf)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeUsuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SenhaUsuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SaldoUsuario)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-        }*@
+    @for (var i = 0; i < 5; i++)
+    {
+        <tr>
+            <td>
+                111.111.111-11
+            </td>
+            <td>
+                Nome do usuário
+            </td>
+            <td>
+                R$ 0, 00
+            </td>
+            <td>
+                <a class="btn-floating btn-sm waves-effect waves-light blue darken-1" onclick="AjaxJs.detalheProduto();"><i class="material-icons">info_outline</i></a>
+            </td>
+            <td>
+                <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto();"><i class="material-icons">edit</i></a>
+            </td>
+            <td>
+                <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJs.excluirProduto();"><i class="material-icons">remove_shopping_cart</i></a>
+            </td>
+        </tr>
+    }
 
 </table>
 
