@@ -9,5 +9,11 @@ public interface IProdutoRepository
     bool SelecionarProduto(string NomeProduto);
     IEnumerable<ProdutoDto> ListarProdutos();
     ProdutoDto SelecionarDadosProduto(int idProduto);
+    IEnumerable<ProdutoDto> ListarProdutosInativos();
+    IEnumerable<ProdutoDto> ListarProdutosValorCrescente();
+    IEnumerable<ProdutoDto> ListarProdutosValorDecrescente();
+    IEnumerable<ProdutoDto> ListarProdutosAbaixoValor();
+    IEnumerable<ProdutoDto> ListarProdutosAcimaValor();
+    IEnumerable<ProdutoDto> ListarProdutosPorCategoria();
 }
 

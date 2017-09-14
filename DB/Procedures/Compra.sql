@@ -90,12 +90,12 @@ CREATE PROCEDURE [dbo].[GCS_LisCompra]
 	*/
 
 	BEGIN
-	
-		SELECT IdCompra,
-				UsuarioCompra,
-				DataCompra
-		 FROM [dbo].[Compra] WITH(NOLOCK)
-
+		SELECT	c.IdCompra,
+				c.UsuarioCompra as 'nomeUsuario',
+				u.NomeUsuario,
+				c.DataCompra 
+		 FROM [dbo].[Compra] c WITH(NOLOCK)
+		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
 	END
 GO
 
@@ -106,7 +106,7 @@ GO
 
 CREATE PROCEDURE [dbo].[GCS_LisCpfCompra]
 	@Cpf varchar(14)
-
+	
 	AS
 
 	/*
@@ -121,18 +121,21 @@ CREATE PROCEDURE [dbo].[GCS_LisCpfCompra]
 
 	BEGIN
 	
-		SELECT * FROM [dbo].[Compra] WITH(NOLOCK)	
-			WHERE UsuarioCompra = @cpf
-
+		SELECT	c.IdCompra,
+				c.UsuarioCompra as 'nomeUsuario',
+				u.NomeUsuario,
+				c.DataCompra 
+		 FROM [dbo].[Compra] c WITH(NOLOCK)
+		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
+		 WHERE c.UsuarioCompra = @Cpf
 	END
 GO
-				
-
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_DelCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[GCS_DelCompra]
 GO
 
+--temporariamente inutilizada
 CREATE PROCEDURE [dbo].[GCS_DelCompra]
 	@IdCompra INT
 
@@ -176,11 +179,46 @@ CREATE PROCEDURE [dbo].[GCS_SelCompra]
 	*/
 
 	BEGIN
-	
-		SELECT * FROM [dbo].[Compra] WITH(NOLOCK)
-			WHERE IdCompra = @IdCompra
-
+		SELECT	c.IdCompra,
+				c.UsuarioCompra as 'nomeUsuario',
+				u.NomeUsuario,
+				c.DataCompra 
+		 FROM [dbo].[Compra] c WITH(NOLOCK)
+		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
+		 WHERE c.IdCompra = @IdCompra
 	END
 GO
-				
+		
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisCompraNomeUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_LisCompraNomeUsuario]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_LisCompraNomeUsuario]
+	@Nome varchar(50)
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Compra.sql
+	Objetivo..........: Encontrar as compras que um usuário fez pelo seu nome
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 14/09/2017
+	Ex................: EXEC [dbo].[GCS_LisCompraNomeUsuario]
+
+	*/
+
+	BEGIN
+		SELECT	c.IdCompra,
+				c.UsuarioCompra as 'nomeUsuario',
+				u.NomeUsuario,
+				c.DataCompra 
+		 FROM [dbo].[Compra] c WITH(NOLOCK)
+		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
+		 WHERE u.NomeUsuario = '%' + @Nome + '%' 
+	END
+GO
+
+
+								
 																			
