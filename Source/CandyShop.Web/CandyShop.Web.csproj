@@ -246,6 +246,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CandyShop.Application\CandyShop.Application.csproj">
+      <Project>{9EF1F8E1-53BC-4EBC-84C1-21618D6A6FC3}</Project>
+      <Name>CandyShop.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CandyShop.Core\CandyShop.Core.csproj">
       <Project>{2ec96a99-e2db-443b-9bbc-5a7b950272cb}</Project>
       <Name>CandyShop.Core</Name>
