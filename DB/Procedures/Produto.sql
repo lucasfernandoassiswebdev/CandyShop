@@ -146,8 +146,10 @@ CREATE PROCEDURE [dbo].[GCS_LisProduto]
 		SELECT IdProduto,
 				NomeProduto,
 				PrecoProduto,
-				QtdeProduto
+				QtdeProduto,
+				Ativo
 			 FROM Produto WITH(NOLOCK)
+			 WHERE Ativo = 'S'
 
 	END
 GO

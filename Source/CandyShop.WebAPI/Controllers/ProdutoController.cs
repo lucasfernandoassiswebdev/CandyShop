@@ -13,8 +13,7 @@ namespace CandyShop.WebAPI.Controllers
         private readonly IProdutoService _produtoService;
 
 
-        public ProdutoController(INotification notification, IProdutoRepository produtoRepository,
-            IProdutoService produtoService)
+        public ProdutoController(INotification notification, IProdutoRepository produtoRepository, IProdutoService produtoService)
         {
             _notification = notification;
             _produtoRepository = produtoRepository;

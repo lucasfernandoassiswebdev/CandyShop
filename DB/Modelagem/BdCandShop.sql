@@ -6,7 +6,8 @@ CREATE TABLE Produto (
 	IdProduto int constraint PK_Produto primary key identity (1,1),
 	NomeProduto varchar(40),
 	PrecoProduto decimal,
-	QtdeProduto int
+	QtdeProduto int,
+	Ativo varchar(1)
 )
 
 CREATE TABLE Usuario (
