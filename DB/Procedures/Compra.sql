@@ -179,13 +179,9 @@ CREATE PROCEDURE [dbo].[GCS_SelCompra]
 	*/
 
 	BEGIN
-		SELECT	c.IdCompra,
-				c.UsuarioCompra as 'nomeUsuario',
-				u.NomeUsuario,
-				c.DataCompra 
-		 FROM [dbo].[Compra] c WITH(NOLOCK)
-		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
-		 WHERE c.IdCompra = @IdCompra
+		SELECT	* 
+		 FROM [dbo].[Compra] WITH(NOLOCK)
+		 WHERE IdCompra = @IdCompra
 	END
 GO
 		

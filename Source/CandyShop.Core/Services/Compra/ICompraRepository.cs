@@ -11,7 +11,7 @@ namespace CandyShop.Core
         void DeletarCompra(int idCompra);
         IEnumerable<CompraDto> ListarCompra();
         IEnumerable<CompraDto> ListarCompraPorCpf(string cpf);
-        bool SelecionarCompra(int idCompra);
+        int SelecionarCompra(int idCompra);
         CompraDto SelecionarDadosCompra(int idCompra);
         void InserirItens(CompraProdutoDto compraProduto);
         void EditaItens(CompraProdutoDto compraProduto);

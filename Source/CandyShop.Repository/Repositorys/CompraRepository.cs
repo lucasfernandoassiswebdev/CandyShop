@@ -103,12 +103,13 @@ namespace CandyShop.Repository
             return retorno;
         }
 
-        public bool SelecionarCompra(int idCompra)
+        public int SelecionarCompra(int idCompra)
         {
             ExecuteProcedure(Procedures.GCS_SelCompra);
-            AddParameter("@IdCompra", idCompra);
-            using (var retorno = ExecuteReader())
-                return retorno.Read();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    return 1;
+            return 0;
         }
 
         public CompraDto SelecionarDadosCompra(int idCompra)
