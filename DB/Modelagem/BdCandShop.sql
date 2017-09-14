@@ -7,7 +7,8 @@ CREATE TABLE Produto (
 	NomeProduto varchar(40),
 	PrecoProduto decimal(18,2),
 	QtdeProduto int,
-	Ativo varchar(1)
+	Ativo varchar(1),
+	Categoria varchar(50)
 )
 
 CREATE TABLE Usuario (
@@ -35,4 +36,3 @@ CREATE TABLE CompraProduto(
 	IdCompra int constraint FK_IdCompraProduto2 foreign key references Compra (IdCompra),
 	QtdeProduto int, 
 )
---drop table Pagamento
