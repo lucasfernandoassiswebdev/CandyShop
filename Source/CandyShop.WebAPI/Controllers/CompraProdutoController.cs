@@ -1,7 +1,6 @@
-﻿using System.Web.Http;
+﻿using CandyShop.Core.CompraProduto.Dto;
 using CandyShop.Core.Services.CompraProduto;
-using System.Web.Mvc;
-using CandyShop.Core.CompraProduto.Dto;
+using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
 {
@@ -29,4 +28,5 @@ namespace CandyShop.WebAPI.Controllers
         {
             return Ok();
         }
+    }
 }
