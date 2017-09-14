@@ -30,7 +30,6 @@ namespace CandyShop.Repository
             AddParameter("@DataCompra", compra.DataCompra);
 
             ExecuteNonQuery();
-
         }
 
         public void InserirItens(CompraProdutoDto item)
