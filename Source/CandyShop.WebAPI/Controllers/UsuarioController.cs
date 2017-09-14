@@ -30,10 +30,9 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-        public IHttpActionResult GetListarUsuario(string cpf)
+        public IHttpActionResult GetListarUsuario()
         {
-            _usuarioRepository.ListarUsuario();
-            return Ok();
+            return Ok(_usuarioRepository.ListarUsuario());
         }
 
         public IHttpActionResult PutEditaUsuario(UsuarioDto usuario)
