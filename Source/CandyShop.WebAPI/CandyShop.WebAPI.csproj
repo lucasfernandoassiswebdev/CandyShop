@@ -125,6 +125,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\SimpleInjectorContainer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\PagamentoController.cs" />
     <Compile Include="Controllers\PingController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
@@ -147,6 +148,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Compra\" />
+    <Folder Include="Views\Pagamento\" />
+    <Folder Include="Views\VendaProduto\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CandyShop.Core\CandyShop.Core.csproj">
