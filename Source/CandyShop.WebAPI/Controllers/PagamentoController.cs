@@ -28,8 +28,7 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult GetPagamento(PagamentoDto pagamento )
         {
-            _pagamentoRepository.ListarPagamentos();
-            return Ok();
+            return Ok(_pagamentoRepository.ListarPagamentos());
         }
 
         public IHttpActionResult DeletePagamento(int idpagamento)

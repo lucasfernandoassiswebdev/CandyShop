@@ -83,11 +83,18 @@ CREATE PROCEDURE [dbo].[GCS_LisCompra]
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[GCS_LisCompra]
 
+	Editado Por.......: SMN - João Guilherme
+	Objetivo..........: Alterando o select 
+	Data..............: 14/09/2017
+
 	*/
 
 	BEGIN
 	
-		SELECT * FROM [dbo].[Compra] WITH(NOLOCK)
+		SELECT IdCompra,
+				UsuarioCompra,
+				DataCompra
+		 FROM [dbo].[Compra] WITH(NOLOCK)
 
 	END
 GO
