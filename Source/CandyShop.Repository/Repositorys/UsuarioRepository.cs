@@ -1,7 +1,6 @@
 
 using CandyShop.Core;
 using CandyShop.Core.Usuario.Dto;
-using Concessionaria.Repositorio;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository
