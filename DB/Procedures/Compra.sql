@@ -91,8 +91,8 @@ CREATE PROCEDURE [dbo].[GCS_LisCompra]
 
 	BEGIN
 		SELECT	c.IdCompra,
-				c.UsuarioCompra as 'nomeUsuario',
-				u.NomeUsuario,
+				c.UsuarioCompra ,
+				u.NomeUsuario as 'nomeUsuario',
 				c.DataCompra 
 		 FROM [dbo].[Compra] c WITH(NOLOCK)
 		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra

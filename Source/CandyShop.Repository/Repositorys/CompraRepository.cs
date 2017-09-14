@@ -3,6 +3,7 @@ using CandyShop.Core.Compra.Dto;
 using CandyShop.Core.CompraProduto.Dto;
 using CandyShop.Core.Usuario.Dto;
 using Concessionaria.Repositorio;
+using System;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository
@@ -64,20 +65,18 @@ namespace CandyShop.Repository
             ExecuteProcedure(Procedures.GCS_LisCompra);
             var retorno = new List<CompraDto>();
             using (var reader = ExecuteReader())
-                if (reader.Read())
-                    do
+                while (reader.Read())
+                    retorno.Add(new CompraDto()
                     {
-                        retorno.Add(new CompraDto()
-                        {
-                            DataCompra = reader.ReadAsDateTime("DataCompra"),
-                            IdCompra = reader.ReadAsInt("IdCompra"),
-                            Usuario = new UsuarioDto()
-                            {
-                                Cpf = reader.ReadAsString("UsuarioCompra")
-                            }
-                        });
-                    } while (reader.Read());
 
+                        IdCompra = reader.ReadAsInt("IdCompra"),
+                        DataCompra = reader.ReadAsDateTime("DataCompra"),
+                        Usuario = new UsuarioDto()
+                        {
+                            NomeUsuario = reader.ReadAsString("nomeUsuario"),
+                            Cpf = reader.ReadAsString("UsuarioCompra")
+                        }
+                    });
             return retorno;
         }
 
@@ -146,8 +145,13 @@ namespace CandyShop.Repository
         {
             ExecuteProcedure(Procedures.GCS_DelCompraProduto);
             AddParameter("@IdCompra", idcompra);
-            AddParameter("@IdProduto",idproduto);
+            AddParameter("@IdProduto", idproduto);
             ExecuteNonQuery();
+        }
+
+        public IEnumerable<CompraDto> ListarCompraPorNome(string nome)
+        {
+            throw new NotImplementedException();
         }
     }
 }

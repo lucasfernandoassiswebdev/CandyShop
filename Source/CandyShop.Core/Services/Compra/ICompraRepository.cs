@@ -16,5 +16,6 @@ namespace CandyShop.Core
         void InserirItens(CompraProdutoDto compraProduto);
         void EditaItens(CompraProdutoDto compraProduto);
         void DeletaItens(int idcompra, int idproduto);
+        IEnumerable<CompraDto> ListarCompraPorNome(string nome);
     }
 }
