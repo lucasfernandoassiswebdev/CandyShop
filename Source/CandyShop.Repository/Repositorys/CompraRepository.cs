@@ -1,9 +1,8 @@
-﻿using CandyShop.Core;
-using CandyShop.Core.Compra.Dto;
+﻿using CandyShop.Core.Compra.Dto;
 using CandyShop.Core.CompraProduto.Dto;
+using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Usuario.Dto;
 using System.Collections.Generic;
-using CandyShop.Core.Services.CompraProduto;
 
 namespace CandyShop.Repository
 {
@@ -35,7 +34,7 @@ namespace CandyShop.Repository
         public void InserirItens(CompraProdutoDto item)
         {
             ExecuteProcedure(Procedures.GCS_InsCompraProduto);
-            AddParameter("@IdProduto", item.IdProduto);
+            AddParameter("@IdProduto", item.Produto.IdProduto);
             AddParameter("@QtdeProduto", item.QtdeCompra);
             AddParameter("@IdCompra", item.IdCompra);
             ExecuteNonQuery();
@@ -136,7 +135,7 @@ namespace CandyShop.Repository
         {
             ExecuteProcedure(Procedures.GCS_UpdCompraProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
-            AddParameter("@IdProduto", compraProduto.IdProduto);
+            AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
             ExecuteNonQuery();
         }

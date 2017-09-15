@@ -119,9 +119,11 @@ CREATE PROCEDURE [dbo].[GCS_LisCompraProduto]
 
 	BEGIN
 		SELECT	cp.IdCompra,
-				cp.IdProduto,
+				cp.QtdeProduto,
+				p.IdProduto,
 				p.NomeProduto,
-				cp.QtdeProduto
+				p.PrecoProduto,
+				p.Ativo
 		 FROM CompraProduto cp WITH(NOLOCK)
 		 INNER JOIN Produto p on p.IdProduto = cp.IdProduto
 	END
@@ -151,12 +153,14 @@ CREATE PROCEDURE [dbo].GCS_LisCompraProdutoIdVenda
 
 	BEGIN
 		SELECT	cp.IdCompra,
-		cp.IdProduto,
-		p.NomeProduto,
-		cp.QtdeProduto
-	FROM CompraProduto cp WITH(NOLOCK)
-	INNER JOIN Produto p on p.IdProduto = cp.IdProduto
-
+				cp.QtdeProduto,
+				p.IdProduto,
+				p.NomeProduto,
+				p.PrecoProduto,
+				p.Ativo
+		 FROM CompraProduto cp WITH(NOLOCK)
+		 INNER JOIN Produto p on p.IdProduto = cp.IdProduto
+		 WHERE cp.IdCompra = @IdCompra
 	END
 GO
 

@@ -18,7 +18,7 @@ namespace CandyShop.Repository.Repositorys
         public void EditarCompraProduto(CompraProdutoDto compraProduto)
         {
             ExecuteProcedure(Procedures.GCS_UpdCompraProduto);
-            AddParameter("@IdProduto", compraProduto.IdProduto);
+            AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
 
@@ -28,7 +28,7 @@ namespace CandyShop.Repository.Repositorys
         public void InserirCompraProduto(CompraProdutoDto compraProduto)
         {
             ExecuteProcedure(Procedures.GCS_InsCompraProduto);
-            AddParameter("@IdProduto", compraProduto.IdProduto);
+            AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
 
@@ -44,11 +44,13 @@ namespace CandyShop.Repository.Repositorys
                     retorno.Add(new CompraProdutoDto()
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
-                        IdProduto = reader.ReadAsInt("IdProduto"),
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),
                         Produto = new ProdutoDto()
                         {
-                            NomeProduto = reader.ReadAsString("NomeProduto")
+                            IdProduto =  reader.ReadAsInt("IdProduto"),
+                            NomeProduto = reader.ReadAsString("NomeProduto"),
+                            PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                            Ativo = reader.ReadAsString("Ativo")
                         }
                     });
             return retorno;
@@ -64,11 +66,13 @@ namespace CandyShop.Repository.Repositorys
                     retorno.Add( new CompraProdutoDto()
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
-                        IdProduto = reader.ReadAsInt("IdProduto"),
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),
                         Produto = new ProdutoDto()
                         {
-                            NomeProduto = reader.ReadAsString("NomeProduto")
+                            IdProduto = reader.ReadAsInt("IdProduto"),
+                            NomeProduto = reader.ReadAsString("NomeProduto"),
+                            PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                            Ativo = reader.ReadAsString("Ativo")
                         }
                     });
             return retorno;
