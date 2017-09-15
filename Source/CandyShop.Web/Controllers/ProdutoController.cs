@@ -29,12 +29,8 @@ namespace CandyShop.Web.Controllers
         [HttpPost]
         public ActionResult CadastrarProduto(Produto produto)
         {
-            var response = _appProduto.InserirProduto(produto);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                return Content("Erro " + response.StatusCode);
-            }            
-            return Content("Produto inserido com sucesso!");
+            var response = _appProduto.InserirProduto(produto);                       
+            return Content(response.ContentAsString);
         }
 
         public ActionResult DetalheProduto(/*int idProduto*/)
