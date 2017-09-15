@@ -72,7 +72,9 @@
         NomeUsuario: $('#Nome').val()
     };
 
-   
+    var concluirCadastroUsuario = function() {
+        concluirCadastro(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
+    };   
 
     //produtos
     var listaProduto = function () {
@@ -80,30 +82,18 @@
     };
     var cadastrarProduto = function () {
         chamaPagina(url.cadastrarProduto);
+    };    
+     
+    var produto = {
+        NomeProduto: $('#NomeProduto').val(),
+        PrecoProduto: $('#PrecoProduto').val(),
+        QtdeProduto: $('#QtdeProduto').val(),
+        Categoria: $('#Categoria').val()
     };
 
-    //var produto = {
-    //    NomeProduto: $('#NomeProduto').val(),
-    //    PrecoProduto: $('#PrecoProduto').val(),
-    //    QtdeProduto: $('#QtdeProduto').val(),
-    //    Categoria: $('#Categoria').val()
-    //};
-
-     var concluirCadastroProduto = function () {
-        $.post(url.concluirCadastroProduto, {
-            NomeProduto: $('#NomeProduto').val(),
-            PrecoProduto: $('#PrecoProduto').val(),
-            QtdeProduto: $('#QtdeProduto').val(),
-            Categoria: $('#Categoria').val()
-        }).done(function () { //passar o parametro data aqui quando for definida a mensagem
-            chamaPagina(url.cadastrarProduto);
-        }).fail(function (xhr) {
-            console.log(xhr.responseText);
-        });
+    var concluirCadastroProduto = function() {
+        concluirCadastro(url.concluirCadastroProduto, produto, url.cadastrarProduto);
     };
-    //var concluirCadastroProduto = function() {
-    //    concluirCadastro(url.concluirCadastroProduto, produto, url.CadastrarProduto);
-    //};
 
     var detalheProduto = function () {
         chamaPagina(url.detalheProduto);
@@ -128,7 +118,7 @@
         pagamento: pagamento,
         detalhePagamento: detalhePagamento,
         historicoCompra: historicoCompra,
-        //concluirCadastroUsuario: concluirCadastroUsuario,
+        concluirCadastroUsuario: concluirCadastroUsuario,
         listaUsuario: listaUsuario,
         cadastroUsuario: cadastroUsuario,
 

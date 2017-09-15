@@ -1,4 +1,5 @@
 ﻿using CandyShop.Application.Interfaces;
+using CandyShop.Application.ViewModels;
 using System.Net;
 using System.Web.Mvc;
 
@@ -26,6 +27,13 @@ namespace CandyShop.Web.Controllers
         public ActionResult Cadastrar()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Cadastrar(Usuario usuario)
+        {
+            var response = _appUsuario.InserirUsuario(usuario);
+            return Content(response.ContentAsString);
         }
 
         public ActionResult Editar()
