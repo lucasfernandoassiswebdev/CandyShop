@@ -156,4 +156,3 @@ CREATE PROCEDURE [dbo].GCS_LisCompraProdutoIdVenda
 
 	END
 GO
-					
