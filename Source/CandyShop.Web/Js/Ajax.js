@@ -48,6 +48,7 @@
     var historicoCompra = function () {
         chamaPagina(url.historicoCompra);
     };
+
     var mostraSaldo = function () {
         chamaPagina(url.mostraSaldo);
     };
@@ -71,9 +72,7 @@
         NomeUsuario: $('#Nome').val()
     };
 
-    var concluirCadastroUsuario = function() {
-        concluirCadastro(url.concluirCadastroUsuario, usuario, url.CadastrarUsuario);
-    };
+   
 
     //produtos
     var listaProduto = function () {
@@ -83,16 +82,28 @@
         chamaPagina(url.cadastrarProduto);
     };
 
-    var produto = {
-        NomeProduto: $('#NomeProduto').val(),
-        PrecoProduto: $('#PrecoProduto').val(),
-        QtdeProduto: $('#QtdeProduto').val(),
-        Categoria: $('#Categoria').val()
-    };
+    //var produto = {
+    //    NomeProduto: $('#NomeProduto').val(),
+    //    PrecoProduto: $('#PrecoProduto').val(),
+    //    QtdeProduto: $('#QtdeProduto').val(),
+    //    Categoria: $('#Categoria').val()
+    //};
 
-    var concluirCadastroProduto = function() {
-        concluirCadastro(url.concluirCadastroProduto, produto, url.CadastrarProduto);
+     var concluirCadastroProduto = function () {
+        $.post(url.concluirCadastroProduto, {
+            NomeProduto: $('#NomeProduto').val(),
+            PrecoProduto: $('#PrecoProduto').val(),
+            QtdeProduto: $('#QtdeProduto').val(),
+            Categoria: $('#Categoria').val()
+        }).done(function () { //passar o parametro data aqui quando for definida a mensagem
+            chamaPagina(url.cadastrarProduto);
+        }).fail(function (xhr) {
+            console.log(xhr.responseText);
+        });
     };
+    //var concluirCadastroProduto = function() {
+    //    concluirCadastro(url.concluirCadastroProduto, produto, url.CadastrarProduto);
+    //};
 
     var detalheProduto = function () {
         chamaPagina(url.detalheProduto);
@@ -117,7 +128,7 @@
         pagamento: pagamento,
         detalhePagamento: detalhePagamento,
         historicoCompra: historicoCompra,
-        concluirCadastroUsuario: concluirCadastroUsuario,
+        //concluirCadastroUsuario: concluirCadastroUsuario,
         listaUsuario: listaUsuario,
         cadastroUsuario: cadastroUsuario,
 
