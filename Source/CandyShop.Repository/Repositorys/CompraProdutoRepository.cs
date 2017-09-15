@@ -1,5 +1,6 @@
 ﻿using CandyShop.Core.CompraProduto.Dto;
 using CandyShop.Core.Services.CompraProduto;
+using CandyShop.Core.Services.Produto.Dto;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository.Repositorys
@@ -17,7 +18,7 @@ namespace CandyShop.Repository.Repositorys
         public void EditarCompraProduto(CompraProdutoDto compraProduto)
         {
             ExecuteProcedure(Procedures.GCS_UpdCompraProduto);
-            AddParameter("@IdProduto", compraProduto.IdProduto);
+            AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
 
@@ -27,7 +28,7 @@ namespace CandyShop.Repository.Repositorys
         public void InserirCompraProduto(CompraProdutoDto compraProduto)
         {
             ExecuteProcedure(Procedures.GCS_InsCompraProduto);
-            AddParameter("@IdProduto", compraProduto.IdProduto);
+            AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
 
@@ -43,25 +44,38 @@ namespace CandyShop.Repository.Repositorys
                     retorno.Add(new CompraProdutoDto()
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
-                        IdProduto = reader.ReadAsInt("IdProduto"),
-                        QtdeCompra = reader.ReadAsInt("QtdeProduto")
+                        QtdeCompra = reader.ReadAsInt("QtdeProduto"),
+                        Produto = new ProdutoDto()
+                        {
+                            IdProduto =  reader.ReadAsInt("IdProduto"),
+                            NomeProduto = reader.ReadAsString("NomeProduto"),
+                            PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                            Ativo = reader.ReadAsString("Ativo")
+                        }
                     });
             return retorno;
         }
 
-        public CompraProdutoDto ListarCompraProdutoIdVenda(int idVenda)
+        public IEnumerable<CompraProdutoDto> ListarCompraProdutoIdVenda(int idVenda)
         {
             ExecuteProcedure(Procedures.GCS_LisCompraProdutoIdVenda);
-           
+            AddParameter("@IdCompra",idVenda);
+            var retorno = new List<CompraProdutoDto>();
             using (var reader = ExecuteReader())
-                if (reader.Read())
-                    return new CompraProdutoDto()
+                while (reader.Read())
+                    retorno.Add( new CompraProdutoDto()
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
-                        IdProduto = reader.ReadAsInt("IdProduto"),
-                        QtdeCompra = reader.ReadAsInt("QtdeProduto")
-                    };
-            return null;
+                        QtdeCompra = reader.ReadAsInt("QtdeProduto"),
+                        Produto = new ProdutoDto()
+                        {
+                            IdProduto = reader.ReadAsInt("IdProduto"),
+                            NomeProduto = reader.ReadAsString("NomeProduto"),
+                            PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                            Ativo = reader.ReadAsString("Ativo")
+                        }
+                    });
+            return retorno;
         }
     }
 }

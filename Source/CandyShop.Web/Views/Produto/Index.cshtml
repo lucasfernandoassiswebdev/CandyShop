@@ -16,7 +16,7 @@
                 <th>
                     Qtde em estoque
                 </th>
-                <th></th>
+                <th>Categoria</th>
             </tr>
 
             @foreach (var item in Model)
@@ -29,7 +29,10 @@
                          @Html.DisplayFor(modelItem => item.PrecoProduto)
                     </td>
                     <td>
-                         @Html.DisplayFor(modelItem => item.QtdeProduto)
+                        @Html.DisplayFor(modelItem => item.QtdeProduto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Categoria)
                     </td>
                     <td>
                         <a class="btn-floating btn-sm waves-effect waves-light blue darken-1" onclick="AjaxJs.detalheProduto();"><i class="material-icons">info_outline</i></a>

@@ -5,9 +5,9 @@ namespace CandyShop.Core.Services.CompraProduto
 {
     public interface ICompraProdutoRepository
     {
-        void InserirCompraProduto(CompraProdutoDto compra);
-        void EditarCompraProduto(CompraProdutoDto compra);
+        void InserirCompraProduto(CompraProdutoDto compraProduto);
+        void EditarCompraProduto(CompraProdutoDto compraProduto);
         IEnumerable<CompraProdutoDto> ListarCompraProduto();
-        CompraProdutoDto ListarCompraProdutoIdVenda(int idVenda);
+        IEnumerable<CompraProdutoDto> ListarCompraProdutoIdVenda(int idVenda);
     }
 }

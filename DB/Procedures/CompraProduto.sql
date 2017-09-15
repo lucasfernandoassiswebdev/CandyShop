@@ -1,6 +1,5 @@
 USE CandyShop
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_InsCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[GCS_InsCompraProduto]
 GO
@@ -118,10 +117,14 @@ CREATE PROCEDURE [dbo].[GCS_LisCompraProduto]
 	*/
 
 	BEGIN
-		SELECT	IdCompra,
-				IdProduto,
-				QtdeProduto
-		 FROM CompraProduto WITH(NOLOCK)
+		SELECT	cp.IdCompra,
+				cp.QtdeProduto,
+				p.IdProduto,
+				p.NomeProduto,
+				p.PrecoProduto,
+				p.Ativo
+		 FROM CompraProduto cp WITH(NOLOCK)
+		 INNER JOIN Produto p on p.IdProduto = cp.IdProduto
 	END
 GO
 
@@ -148,12 +151,15 @@ CREATE PROCEDURE [dbo].GCS_LisCompraProdutoIdVenda
 	*/
 
 	BEGIN
-		SELECT	IdCompra,
-				IdProduto,
-				QtdeProduto
-		 FROM CompraProduto WITH(NOLOCK)
-		 WHERE IdCompra = @Idcompra		
-
+		SELECT	cp.IdCompra,
+				cp.QtdeProduto,
+				p.IdProduto,
+				p.NomeProduto,
+				p.PrecoProduto,
+				p.Ativo
+		 FROM CompraProduto cp WITH(NOLOCK)
+		 INNER JOIN Produto p on p.IdProduto = cp.IdProduto
+		 WHERE cp.IdCompra = @IdCompra
 	END
 GO
-					
+
