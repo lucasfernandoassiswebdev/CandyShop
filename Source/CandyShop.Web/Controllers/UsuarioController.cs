@@ -1,4 +1,4 @@
-﻿using CandyShop.Application;
+﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using System.Net;
 using System.Web.Mvc;
