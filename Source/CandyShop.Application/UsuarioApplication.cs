@@ -10,7 +10,7 @@ namespace CandyShop.Application
 {
     public class UsuarioApplication : IUsuarioApplication
     {
-        private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/Usuario";
+        private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/usuario";
 
         public Response<string> InserirUsuario(Usuario usuario)
         {

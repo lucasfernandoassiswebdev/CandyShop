@@ -49,9 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IProdutoApplication.cs" />
+    <Compile Include="Interfaces\IUsuarioApplication.cs" />
     <Compile Include="ProdutoApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
+    <Compile Include="UsuarioApplication.cs" />
     <Compile Include="ViewModels\Compra.cs" />
     <Compile Include="ViewModels\CompraProduto.cs" />
     <Compile Include="ViewModels\Pagamento.cs" />
