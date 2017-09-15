@@ -1,18 +1,17 @@
 ﻿using CandyShop.Application.Interfaces;
 using System.Net;
 using System.Web.Mvc;
-using CandyShop.Application;
 
 namespace CandyShop.Web.Controllers
 {
     public class UsuarioController : Controller
     {
-        private readonly UsuarioApplication _appUsuario = new UsuarioApplication();
+        private readonly IUsuarioApplication _appUsuario;
 
-        //public UsuarioController(IUsuarioApplication usuario)
-        //{
-        //    _appUsuario = usuario;
-        //}
+        public UsuarioController(IUsuarioApplication usuario)
+        {
+            _appUsuario = usuario;
+        }
 
         public ActionResult Index()
         {
