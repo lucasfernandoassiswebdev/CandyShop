@@ -8,10 +8,11 @@
     $(document).ready(function () {
         AjaxJs.init({
             main: '@Url.Action("Index", "Usuario")',
+            //usuários
             listaUsuario: '@Url.Action("Index", "Usuario")',
             mostraSaldo: '@Url.Action("Index", "Shop")',
             cadastroUsuario: '@Url.Action("Cadastrar","Usuario")',
-
+            //produtos
             listaProduto: '@Url.Action("Index", "Produto")',
             cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")',
             concluirCadastroProduto: '@Url.Action("CadastrarProduto", "Produto")',
@@ -26,16 +27,15 @@
 
 <style>
     #DivGrid {
-        
     }
-    </style>
+</style>
 
 <!--modal de pesquisa de usuários-->
 <div id="modal1" class="modal">
     <div class="modal-content">
         <h3 class="center">Nome do usuário:</h3>
         <form>
-            <input type="text" id="nomeUsuario" autocomplete="off"/>
+            <input type="text" id="nomeUsuario" autocomplete="off" />
         </form>
     </div>
     <div class="modal-footer center">
@@ -50,7 +50,7 @@
     <li>
         <div class="divider"></div>
     </li>
-    <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+    <ul class="collapsible" data-collapsible="accordion">
         <li>
             <div class="collapsible-header white-text">
                 <i class="material-icons left">face</i>Usuários
@@ -64,9 +64,7 @@
                 </ul>
             </div>
         </li>
-    </ul>
-
-    <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+    
         <li>
             <div class="collapsible-header white-text">
                 <i class="material-icons left">shopping_cart</i>Produtos
