@@ -1,4 +1,4 @@
-﻿using CandyShop.Application;
+﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using System.Net;
 using System.Web.Mvc;
@@ -8,7 +8,12 @@ namespace CandyShop.Web.Controllers
 {
     public class ProdutoController : Controller
     {
-        private readonly ProdutoApplication _appProduto = new ProdutoApplication();
+        private readonly IProdutoApplication _appProduto;
+
+        public ProdutoController(IProdutoApplication produto)
+        {
+            _appProduto = produto;
+        }
 
         // GET: Produto
         public ActionResult Index()

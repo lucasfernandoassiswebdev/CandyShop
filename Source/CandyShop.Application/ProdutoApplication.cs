@@ -1,7 +1,8 @@
-using CandyShop.Application.Interfaces;
+﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 
@@ -26,10 +27,9 @@ namespace CandyShop.Application
             {
                 var response = client.PostAsync(_enderecoApi, produto, new JsonMediaTypeFormatter()).Result;
                 if (response.StatusCode != HttpStatusCode.OK)
-                {
                     return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
-                }
-                return new Response<string>("Inserção feita com sucesso!", response.StatusCode);
+                
+                return new Response<string>("Produto cadastrado com sucesso!", response.StatusCode);
             }
         }
     }
