@@ -33,7 +33,9 @@ namespace CandyShop.Web.Controllers
         public ActionResult Cadastrar(Usuario usuario)
         {
             var response = _appUsuario.InserirUsuario(usuario);
-            return Content(response.Content);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Deu ruim!");
+            return Content("Deu bom!!");
         }
 
         public ActionResult Editar()

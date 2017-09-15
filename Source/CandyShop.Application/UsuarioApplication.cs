@@ -19,8 +19,8 @@ namespace CandyShop.Application
                 var response = client.PostAsync(_enderecoApi, usuario, new JsonMediaTypeFormatter()).Result;
                 if (response.StatusCode != HttpStatusCode.OK)
                     return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
-                
-                return new Response<string>("Usuário cadastrado com sucesso!", response.StatusCode);
+
+                return new Response<string>(response.StatusCode);
             }
         }
 
