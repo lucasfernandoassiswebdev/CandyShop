@@ -13,16 +13,14 @@ namespace CandyShop.WebAPI.Controllers
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
 
-
-        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository,
-            IUsuarioService usuarioService)
+        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService)
         {
             _notification = notification;
             _usuarioRepository = usuarioRepository;
             _usuarioService = usuarioService;
         }
 
-        public IHttpActionResult PostUsuario(UsuarioDto usuario)
+        public IHttpActionResult Post(UsuarioDto usuario)
         {
             _usuarioService.InserirUsuario(usuario);
             if (_notification.HasNotification())
@@ -30,18 +28,23 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-        public IHttpActionResult GetListarUsuario()
+        public IHttpActionResult Get()
         {
             return Ok(_usuarioRepository.ListarUsuario());
         }
 
-        public IHttpActionResult PutEditaUsuario(UsuarioDto usuario)
+        //public IHttpActionResult Get()
+        //{
+        //    return Ok(_usuarioRepository.ListarUsuarioDivida());
+        //}
+
+        public IHttpActionResult Put(UsuarioDto usuario)
         {
             _usuarioRepository.EditarUsuario(usuario);
             return Ok();
         }
 
-        public IHttpActionResult DeleteUsuario(string cpf)
+        public IHttpActionResult Delete(string cpf)
         {
             _usuarioRepository.DeletarUsuario(cpf);
             return Ok();
