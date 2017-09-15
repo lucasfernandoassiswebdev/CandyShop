@@ -49,19 +49,20 @@ namespace CandyShop.Repository.Repositorys
             return retorno;
         }
 
-        public CompraProdutoDto ListarCompraProdutoIdVenda(int idVenda)
+        public IEnumerable<CompraProdutoDto> ListarCompraProdutoIdVenda(int idVenda)
         {
             ExecuteProcedure(Procedures.GCS_LisCompraProdutoIdVenda);
-           
+            AddParameter("@IdCompra",idVenda);
+            var retorno = new List<CompraProdutoDto>();
             using (var reader = ExecuteReader())
-                if (reader.Read())
-                    return new CompraProdutoDto()
+                while (reader.Read())
+                    retorno.Add( new CompraProdutoDto()
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         IdProduto = reader.ReadAsInt("IdProduto"),
                         QtdeCompra = reader.ReadAsInt("QtdeProduto")
-                    };
-            return null;
+                    });
+            return retorno;
         }
     }
 }
