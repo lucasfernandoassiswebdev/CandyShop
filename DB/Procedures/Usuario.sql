@@ -148,7 +148,6 @@ CREATE PROCEDURE [dbo].[GCS_LisUsuario]
 	*/
 
 	BEGIN
-	
 		SELECT Cpf,
 				SenhaUsuario,
 				SaldoUsuario,
