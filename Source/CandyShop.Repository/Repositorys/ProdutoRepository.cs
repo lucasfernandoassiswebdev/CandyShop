@@ -9,7 +9,7 @@ namespace CandyShop.Repository
     public class ProdutoRepository : ConnectDB, IProdutoRepository
     {
         private enum Procedures
-        {
+        { 
             GCS_InsProduto,
             GCS_DelProduto,
             GCS_UpdProduto,
