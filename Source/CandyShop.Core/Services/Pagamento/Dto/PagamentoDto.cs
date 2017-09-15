@@ -1,5 +1,5 @@
-﻿using System;
-using CandyShop.Core.Usuario.Dto;
+﻿using CandyShop.Core.Usuario.Dto;
+using System;
 
 namespace CandyShop.Core.Pagamento.Dto
 {
@@ -9,6 +9,6 @@ namespace CandyShop.Core.Pagamento.Dto
         public UsuarioDto Usuario { get; set; }
         public DateTime DataPagamento { get; set; }
         public decimal ValorPagamento { get; set; }
-
+        public string NomeUsuario { get; set; }
     }
 }

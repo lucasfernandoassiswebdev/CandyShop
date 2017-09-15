@@ -55,17 +55,20 @@ CREATE PROCEDURE [dbo].[GCS_LisPagamento]
 	Ex................: EXEC [dbo].[GCS_LisPagamento]
 
 	Editado Por.......: SMN - João Guilherme
-	Objetivo..........: Alterando o select 
+	Objetivo..........: Alterando o select  e inserindo Inner JOin
 	Data..............: 13/09/2017
 	*/
 
 	BEGIN
 	
-		SELECT IdPagamento,
-				Cpf,
-				DataPagamento,
-				ValorPagamento
-				FROM [dbo].[Pagamento] WITH(NOLOCK)
+		SELECT p.IdPagamento,
+				p.Cpf,
+				u.NomeUsuario,
+				p.DataPagamento,
+				p.ValorPagamento
+			FROM [dbo].[Pagamento] p WITH(NOLOCK)
+				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
+					ON p.Cpf = u.Cpf
 	END
 GO
 

@@ -20,11 +20,9 @@ namespace CandyShop.Repository
         public void InserirPagamento(PagamentoDto pagamento)
         {
             ExecuteProcedure(Procedures.GCS_InsPagamento);
-            AddParameter("@IdPagamento", pagamento.IdPagamento);
-            AddParameter("@UsuarioPagamento", pagamento.Usuario.Cpf);
+            AddParameter("@Cpf", pagamento.Usuario.Cpf);
             AddParameter("@DataPagamento", pagamento.DataPagamento);
             AddParameter("@ValorPagamento", pagamento.ValorPagamento);
-
             ExecuteNonQuery();
         }
 
@@ -58,7 +56,7 @@ namespace CandyShop.Repository
                             DataPagamento = reader.ReadAsDateTime("DataPagamento"),
                             IdPagamento = reader.ReadAsInt("IdPagamento"),
                             ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
-                            Usuario = new UsuarioDto
+                            Usuario = new UsuarioDto()
                             {
                                 Cpf = reader.ReadAsString("Cpf")
                             }
@@ -81,6 +79,7 @@ namespace CandyShop.Repository
                             DataPagamento = reader.ReadAsDateTime("DataPagamento"),
                             IdPagamento = reader.ReadAsInt("IdPagamento"),
                             ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
+                            NomeUsuario = reader.ReadAsString("NomeUsuario"),
                             Usuario = new UsuarioDto
                             {
                                 Cpf = reader.ReadAsString("Cpf")

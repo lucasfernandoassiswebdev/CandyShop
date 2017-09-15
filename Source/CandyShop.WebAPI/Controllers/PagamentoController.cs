@@ -14,24 +14,24 @@ namespace CandyShop.WebAPI.Controllers
            _pagamentoRepository = pagamentoRepository;
         }
 
-        public IHttpActionResult PostPagamento(PagamentoDto pagamento)
+        public IHttpActionResult Post(PagamentoDto pagamento)
         {
             _pagamentoRepository.InserirPagamento(pagamento);
             return Ok();
         }
 
-        public IHttpActionResult PutPagamento(PagamentoDto pagamento)
+        public IHttpActionResult Put(PagamentoDto pagamento)
         {
             _pagamentoRepository.EditarPagamento(pagamento);
             return Ok();
         }
 
-        public IHttpActionResult GetPagamento(PagamentoDto pagamento )
+        public IHttpActionResult Get(PagamentoDto pagamento )
         {
             return Ok(_pagamentoRepository.ListarPagamentos());
         }
 
-        public IHttpActionResult DeletePagamento(int idpagamento)
+        public IHttpActionResult Delete(int idpagamento)
         {
             _pagamentoRepository.DeletarPagamento(idpagamento);
             return Ok();
