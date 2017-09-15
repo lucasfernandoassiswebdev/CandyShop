@@ -33,7 +33,7 @@ namespace CandyShop.Web.Controllers
         public ActionResult Cadastrar(Usuario usuario)
         {
             var response = _appUsuario.InserirUsuario(usuario);
-            return Content(response.ContentAsString);
+            return Content(response.Content);
         }
 
         public ActionResult Editar()

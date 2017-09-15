@@ -65,14 +65,13 @@
     };
     var pagamento = function () {
         chamaPagina(url.pagamento);
-    };
+    };    
 
-    var usuario = {
-        Cpf: $('#cpf').val(),
-        NomeUsuario: $('#Nome').val()
-    };
-
-    var concluirCadastroUsuario = function() {
+    var concluirCadastroUsuario = function () {
+        var usuario = {
+            Cpf: $('#cpf').val(),
+            NomeUsuario: $('#Nome').val()
+        };
         concluirCadastro(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };   
 
@@ -84,14 +83,15 @@
         chamaPagina(url.cadastrarProduto);
     };    
      
-    var produto = {
-        NomeProduto: $('#NomeProduto').val(),
-        PrecoProduto: $('#PrecoProduto').val(),
-        QtdeProduto: $('#QtdeProduto').val(),
-        Categoria: $('#Categoria').val()
-    };
+    
 
-    var concluirCadastroProduto = function() {
+    var concluirCadastroProduto = function () {
+        var produto = {
+            NomeProduto: $('#NomeProduto').val(),
+            PrecoProduto: $('#PrecoProduto').val(),
+            QtdeProduto: $('#QtdeProduto').val(),
+            Categoria: $('#Categoria').val()
+        };
         concluirCadastro(url.concluirCadastroProduto, produto, url.cadastrarProduto);
     };
 

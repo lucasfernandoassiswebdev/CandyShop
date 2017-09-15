@@ -9,7 +9,12 @@ namespace CandyShop.Application
         {
             Json = json;
             Status = statusCode;
-        }        
+        }
+
+        public Response(HttpStatusCode statusCode)
+        {
+            Status = statusCode;
+        }
 
         private string Json { get; }
         public HttpStatusCode Status { get; }

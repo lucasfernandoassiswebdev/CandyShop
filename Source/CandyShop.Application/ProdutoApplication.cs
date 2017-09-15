@@ -29,7 +29,7 @@ namespace CandyShop.Application
                 if (response.StatusCode != HttpStatusCode.OK)
                     return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
                 
-                return new Response<string>("Produto cadastrado com sucesso!", response.StatusCode);
+                return new Response<string>(response.StatusCode);
             }
         }
     }

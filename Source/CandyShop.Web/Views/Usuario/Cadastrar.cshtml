@@ -1,4 +1,4 @@
-﻿    
+﻿@model  CandyShop.Application.ViewModels.Usuario 
 @{
     Layout = null;
 }
@@ -37,7 +37,7 @@
                 </div>
                 <div class="row center">
                     <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a> 
-                    <a class="waves-effect waves-light btn-large"><i class="material-icons left">add_circle</i>Cadastrar</a>
+                    <a class="waves-effect waves-light btn-large" onclick="AjaxJs.concluirCadastroUsuario()"><i class="material-icons left">add_circle</i>Cadastrar</a>
                 </div>
             </div>
         </form>
