@@ -1,5 +1,6 @@
 ﻿using CandyShop.Core.CompraProduto.Dto;
 using CandyShop.Core.Services.CompraProduto;
+using CandyShop.Core.Services.Produto.Dto;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository.Repositorys
@@ -44,7 +45,11 @@ namespace CandyShop.Repository.Repositorys
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         IdProduto = reader.ReadAsInt("IdProduto"),
-                        QtdeCompra = reader.ReadAsInt("QtdeProduto")
+                        QtdeCompra = reader.ReadAsInt("QtdeProduto"),
+                        Produto = new ProdutoDto()
+                        {
+                            NomeProduto = reader.ReadAsString("NomeProduto")
+                        }
                     });
             return retorno;
         }
@@ -60,7 +65,11 @@ namespace CandyShop.Repository.Repositorys
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         IdProduto = reader.ReadAsInt("IdProduto"),
-                        QtdeCompra = reader.ReadAsInt("QtdeProduto")
+                        QtdeCompra = reader.ReadAsInt("QtdeProduto"),
+                        Produto = new ProdutoDto()
+                        {
+                            NomeProduto = reader.ReadAsString("NomeProduto")
+                        }
                     });
             return retorno;
         }
