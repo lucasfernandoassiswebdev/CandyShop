@@ -6,7 +6,7 @@ CREATE PROCEDURE [dbo].[GCS_InsProduto]
 	@NomeProduto varchar(40),
 	@PrecoProduto decimal,
 	@QtdeProduto int,
-	@Ativo varchar(1),
+	@Ativo varchar(1) = 'A',
 	@Categoria varchar(50)
 	AS
 
