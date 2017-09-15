@@ -9,7 +9,7 @@ CREATE PROCEDURE [dbo].[GCS_InsProduto]
 	@Ativo varchar(1) = 'A',
 	@Categoria varchar(50)
 	AS
-
+			
 	/*
 	Documentação
 	Arquivo Fonte.....: Produto.sql

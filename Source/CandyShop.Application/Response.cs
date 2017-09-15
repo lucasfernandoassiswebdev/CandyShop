@@ -17,4 +17,5 @@ namespace CandyShop.Application
         public T Content => JsonConvert.DeserializeObject<T>(Json);
         public string ContentAsString => JsonConvert.DeserializeObject<string>(Json);
     }
+
 }

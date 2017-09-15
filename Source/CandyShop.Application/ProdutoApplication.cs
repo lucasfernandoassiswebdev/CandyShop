@@ -1,7 +1,11 @@
-﻿using CandyShop.Application.ViewModels;
+﻿using System;
+using CandyShop.Application.ViewModels;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 
 namespace CandyShop.Application
 {
@@ -15,6 +19,15 @@ namespace CandyShop.Application
             {
                 var response = client.GetAsync(_enderecoApi).Result;
                 return new Response<IEnumerable<Produto>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        public HttpResponseMessage InserirProduto(Produto produto)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.PostAsync(_enderecoApi, produto, new JsonMediaTypeFormatter()).Result;
+                return response;
             }
         }
     }

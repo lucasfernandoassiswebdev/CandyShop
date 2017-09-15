@@ -27,22 +27,7 @@
         }).fail(function(xhr) {
             console.log(xhr.responseText);
         });
-    }
-
-    var concluirCadastroProduto = function() {
-        $.post(url.concluirCadastroProduto, {
-            NomeProduto: $('#NomeProduto').val(),
-            PrecoProduto: $('#PrecoProduto').val(),
-            QtdeProduto: $('#QtdeProduto').val()
-        }).done(function() { //passar o parametro data aqui quando for definida a mensagem
-            $('#DivGrid').slideUp(function() {
-                $(this).empty();
-                chamaPagina(url.cadastrarProduto);
-            });
-        }).fail(function(xhr) {
-            console.log(xhr.responseText);
-        });
-    };
+    }    
 
     //Variavel que retorna para o inicio
     var voltarInicio = function() {
@@ -78,6 +63,20 @@
     var cadastrarProduto = function() {
         chamaPagina(url.cadastrarProduto);
     };
+
+    var concluirCadastroProduto = function () {
+        $.post(url.concluirCadastroProduto, {
+            NomeProduto: $('#NomeProduto').val(),
+            PrecoProduto: $('#PrecoProduto').val(),
+            QtdeProduto: $('#QtdeProduto').val(),
+            Categoria: $('#Categoria').val()
+        }).done(function () { //passar o parametro data aqui quando for definida a mensagem
+            chamaPagina(url.cadastrarProduto);
+        }).fail(function (xhr) {
+            console.log(xhr.responseText);
+        });
+    };
+
     var detalheProduto = function() {
         chamaPagina(url.detalheProduto);
     };
