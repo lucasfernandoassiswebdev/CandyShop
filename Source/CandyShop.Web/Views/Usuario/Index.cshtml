@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CandyShop.Core.Usuario.Dto.UsuarioDto>
+﻿@model IEnumerable<CandyShop.Application.ViewModels.Usuario>
 
 @{
     Layout = null;
@@ -18,17 +18,17 @@
         <th></th>
     </tr>
 
-    @for (var i = 0; i < 5; i++)
+    @foreach (var usuario in Model)
     {
         <tr>
             <td>
-                111.111.111-11
+                @Html.DisplayFor(modelItem => usuario.Cpf)
             </td>
             <td>
-                Nome do usuário
+                @Html.DisplayFor(modelItem => usuario.NomeUsuario)
             </td>
             <td>
-                R$ 0, 00
+                R$ @Html.DisplayFor(modelItem => usuario.SaldoUsuario)
             </td>
             <td>
                 <a class="btn-floating btn-sm waves-effect waves-light blue darken-1" onclick="AjaxJs.detalheProduto();"><i class="material-icons">info_outline</i></a>

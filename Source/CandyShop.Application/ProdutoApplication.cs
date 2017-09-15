@@ -1,6 +1,5 @@
-﻿using System;
+﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
@@ -9,7 +8,7 @@ using System.Net.Http.Formatting;
 
 namespace CandyShop.Application
 {
-    public class ProdutoApplication
+    public class ProdutoApplication : IProdutoApplication
     {
         private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/produto";
 
@@ -22,12 +21,15 @@ namespace CandyShop.Application
             }
         }
 
-        public HttpResponseMessage InserirProduto(Produto produto)
+        public Response<string> InserirProduto(Produto produto)
         {
             using (var client = new HttpClient())
             {
                 var response = client.PostAsync(_enderecoApi, produto, new JsonMediaTypeFormatter()).Result;
-                return response;
+                if (response.StatusCode != HttpStatusCode.OK)
+                    return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                
+                return new Response<string>("Produto cadastrado com sucesso!", response.StatusCode);
             }
         }
     }

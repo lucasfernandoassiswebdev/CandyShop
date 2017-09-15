@@ -9,11 +9,11 @@ namespace CandyShop.Application
         {
             Json = json;
             Status = statusCode;
-        }
+        }        
 
         private string Json { get; }
-
         public HttpStatusCode Status { get; }
+
         public T Content => JsonConvert.DeserializeObject<T>(Json);
         public string ContentAsString => JsonConvert.DeserializeObject<string>(Json);
     }

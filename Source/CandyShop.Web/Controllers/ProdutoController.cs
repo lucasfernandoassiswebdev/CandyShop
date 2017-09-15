@@ -10,14 +10,20 @@ namespace CandyShop.Web.Controllers
     {
         private readonly ProdutoApplication _appProduto = new ProdutoApplication();
 
+        //public ProdutoController(IProdutoApplication produto)
+        //{
+        //    _appProduto = produto;
+        //}
+
         // GET: Produto
         public ActionResult Index()
         {
             var response = _appProduto.ListarProdutos();
             if (response.Status != HttpStatusCode.OK)
-            {                
+            {
                 return Content("Erro " + response.ContentAsString);
             }
+            
             return View(response.Content);
         }
 
@@ -29,12 +35,8 @@ namespace CandyShop.Web.Controllers
         [HttpPost]
         public ActionResult CadastrarProduto(Produto produto)
         {
-            var response = _appProduto.InserirProduto(produto);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                return Content("Erro " + response.StatusCode);
-            }            
-            return Content("Produto inserido com sucesso!");
+            var response = _appProduto.InserirProduto(produto);                       
+            return Content(response.ContentAsString);
         }
 
         public ActionResult DetalheProduto(/*int idProduto*/)
