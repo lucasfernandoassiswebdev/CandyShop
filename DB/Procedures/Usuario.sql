@@ -5,9 +5,9 @@ GO
 
 CREATE PROCEDURE [dbo].[GCS_InsUsuario]
 	@NomeUsuario varchar(50),
-	@SenhaUsuario varchar(12),
-	@SaldoUsuario decimal,
-	@CpfUsuario varchar(14)
+	@SenhaUsuario varchar(12) = 'password',
+	@SaldoUsuario decimal = 0,
+	@CpfUsuario varchar(14) 
 	AS
 
 	/*
