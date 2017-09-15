@@ -9,12 +9,7 @@ namespace CandyShop.Web.Controllers
     public class ProdutoController : Controller
     {
         private readonly ProdutoApplication _appProduto = new ProdutoApplication();
-
-        //public ProdutoController(IProdutoApplication produto)
-        //{
-        //    _appProduto = produto;
-        //}
-
+       
         // GET: Produto
         public ActionResult Index()
         {
