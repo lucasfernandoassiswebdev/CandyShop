@@ -1,15 +1,13 @@
-﻿using System;
+﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 
 namespace CandyShop.Application
 {
-    public class ProdutoApplication
+    public class ProdutoApplication : IProdutoApplication
     {
         private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/produto";
 
