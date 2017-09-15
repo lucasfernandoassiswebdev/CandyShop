@@ -33,10 +33,10 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_usuarioRepository.ListarUsuario());
         }
 
-        //public IHttpActionResult Get()
-        //{
-        //    return Ok(_usuarioRepository.ListarUsuarioDivida());
-        //}
+        public IHttpActionResult GetUsuariosDivida()
+        {
+            return Ok(_usuarioRepository.ListarUsuarioDivida());
+        }
 
         public IHttpActionResult Put(UsuarioDto usuario)
         {

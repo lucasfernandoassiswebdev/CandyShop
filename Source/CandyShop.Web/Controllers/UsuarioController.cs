@@ -24,6 +24,16 @@ namespace CandyShop.Web.Controllers
             return View(response.Content);
         }
 
+        public ActionResult ListarUsuariosEmDivida()
+        {
+            var response = _appUsuario.ListarUsuariosEmDivida();
+            if (response.Status != HttpStatusCode.OK)
+            {
+                return Content("Erro " + response.ContentAsString);
+            }
+            return View(response.Content);
+        }
+
         public ActionResult Cadastrar()
         {
             return View();

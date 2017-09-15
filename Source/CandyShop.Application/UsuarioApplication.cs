@@ -32,5 +32,14 @@ namespace CandyShop.Application
                 return new Response<IEnumerable<Usuario>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
+
+        public Response<IEnumerable<Usuario>> ListarUsuariosEmDivida()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync(_enderecoApi).Result;
+                return new Response<IEnumerable<Usuario>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
     }
 }
