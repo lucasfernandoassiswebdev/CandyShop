@@ -10,6 +10,7 @@ namespace CandyShop.Core
         void DeletarUsuario(string cpf);
         bool SelecionarUsuario(string cpf);
         IEnumerable<UsuarioDto> ListarUsuario();
+        IEnumerable<UsuarioDto> ListarUsuarioDivida();
         UsuarioDto SelecionarDadosUsuario(string cpf);
     }
 }
