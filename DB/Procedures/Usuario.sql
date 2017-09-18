@@ -8,8 +8,9 @@ GO
 CREATE PROCEDURE [dbo].[GCS_InsUsuario]
 	@NomeUsuario varchar(50),
 	@SenhaUsuario varchar(12) = 'password',
-	@SaldoUsuario decimal = 0,
-	@CpfUsuario varchar(14) 
+	@SaldoUsuario decimal(18,2) = 0,
+	@CpfUsuario varchar(14),
+	@Ativo varchar(1) = 'A'
 	AS
 
 	/*
@@ -34,8 +35,8 @@ CREATE PROCEDURE [dbo].[GCS_InsUsuario]
 	*/
 	
 	BEGIN
-		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario)
-			VALUES (@CpfUsuario,@NomeUsuario,@SenhaUsuario,@SaldoUsuario)		
+		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario,Ativo)
+			VALUES (@CpfUsuario,@NomeUsuario,@SenhaUsuario,@SaldoUsuario,@Ativo)		
 			
 				IF @@ERROR <> 0
 					RETURN 1
@@ -44,11 +45,11 @@ CREATE PROCEDURE [dbo].[GCS_InsUsuario]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_DelUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_DelUsuario]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_DesUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_DesUsuario]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_DelUsuario]
+CREATE PROCEDURE [dbo].[GCS_DesUsuario]
 	@Cpf varchar(14)
 	AS
 
@@ -63,7 +64,8 @@ CREATE PROCEDURE [dbo].[GCS_DelUsuario]
 	*/
 
 	BEGIN
-		DELETE [dbo].[Usuario] 
+		UPDATE [dbo].[Usuario] 
+			SET Ativo = 'N'
 			WHERE Cpf = @Cpf
 			IF @@ERROR <> 0
 				RETURN 1
@@ -81,7 +83,8 @@ CREATE PROCEDURE [dbo].[GCS_UpdUsuario]
 	@Cpf varchar(14),
 	@NomeUsuario varchar(50),
 	@SenhaUsuario varchar(12),
-	@SaldoUsuario decimal
+	@SaldoUsuario decimal,
+	@Ativo varchar(1)
 	AS
 
 	/*
@@ -99,7 +102,8 @@ CREATE PROCEDURE [dbo].[GCS_UpdUsuario]
 		UPDATE [dbo].[Usuario]
 			SET NomeUsuario = @NomeUsuario,
 				SenhaUsuario = @SenhaUsuario,
-				SaldoUsuario = @SaldoUsuario
+				SaldoUsuario = @SaldoUsuario,
+				Ativo = @Ativo
 				WHERE Cpf = @Cpf
 
 				IF @@ERROR <> 0 
@@ -157,43 +161,14 @@ CREATE PROCEDURE [dbo].[GCS_LisUsuario]
 	*/
 
 	BEGIN
-		SELECT Cpf,
+		SELECT	Cpf,
 				SenhaUsuario,
 				SaldoUsuario,
-				NomeUsuario
+				NomeUsuario,
+				Ativo
 				 FROM [dbo].[Usuario]
 	END
 GO
-
-
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelUsuarioSaldo]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_SelUsuarioSaldo]
-GO
-
-CREATE PROCEDURE [dbo].[GCS_SelUsuarioSaldo]
-
-	AS
-
-	/*
-	Documentação
-	Arquivo Fonte.....: Usuario.sql
-	Objetivo..........: Selecionar usuarios com saldo negativo
-	Autor.............: SMN - João Guilherme
- 	Data..............: 14/09/2017
-	Ex................: EXEC [dbo].[GCS_SelUsuarioSaldo]
-
-	*/
-
-	BEGIN
-		SELECT Cpf,
-				NomeUsuario,
-				SaldoUsuario	
-				FROM [dbo].[Usuario]
-		WHERE SaldoUsuario < 0
-		
-	END
-GO
-		
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelUsuariosDivida]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[GCS_SelUsuariosDivida]
@@ -217,7 +192,8 @@ CREATE PROCEDURE [dbo].[GCS_SelUsuariosDivida]
 		SELECT  Cpf,
 				SenhaUsuario,
 				SaldoUsuario,
-				NomeUsuario
+				NomeUsuario,
+				Ativo
 			FROM [dbo].[Usuario]
 			WHERE SaldoUsuario < 0
 	END
