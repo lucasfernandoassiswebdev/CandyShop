@@ -9,17 +9,17 @@ namespace CandyShop.Repository
     {
         private enum Procedures
         {
-            GCS_InsPagamento,
-            GCS_UpdPagamento,
-            GCS_DelPagamento,
-            GCS_LisPagamento,
-            GCS_LisCpfPagamento,
-            GCS_SelPagamento
+            CSSP_InsPagamento,
+            CSSP_UpdPagamento,
+            CSSP_DelPagamento,
+            CSSP_LisPagamento,
+            CSSP_LisCpfPagamento,
+            CSSP_SelPagamento
         }
 
         public void InserirPagamento(PagamentoDto pagamento)
         {
-            ExecuteProcedure(Procedures.GCS_InsPagamento);
+            ExecuteProcedure(Procedures.CSSP_InsPagamento);
             AddParameter("@Cpf", pagamento.Usuario.Cpf);
             AddParameter("@DataPagamento", pagamento.DataPagamento);
             AddParameter("@ValorPagamento", pagamento.ValorPagamento);
@@ -28,7 +28,7 @@ namespace CandyShop.Repository
 
         public void EditarPagamento(PagamentoDto pagamento)
         {
-            ExecuteProcedure(Procedures.GCS_UpdPagamento);
+            ExecuteProcedure(Procedures.CSSP_UpdPagamento);
             AddParameter("@IdPagamento", pagamento.IdPagamento);
             AddParameter("@DataPagamento", pagamento.DataPagamento);
             AddParameter("@ValorPagamento", pagamento.ValorPagamento);
@@ -38,14 +38,14 @@ namespace CandyShop.Repository
 
         public void DeletarPagamento(int idPagamento)
         {
-            ExecuteProcedure(Procedures.GCS_DelPagamento);
+            ExecuteProcedure(Procedures.CSSP_DelPagamento);
             AddParameter("@IdPagamento", idPagamento);
             ExecuteNonQuery();
         }
 
         public IEnumerable<PagamentoDto> ListarPagamentos()
         {
-            ExecuteProcedure(Procedures.GCS_LisPagamento);
+            ExecuteProcedure(Procedures.CSSP_LisPagamento);
             var retorno = new List<PagamentoDto>();
             using (var reader = ExecuteReader())
                 if (reader.Read())
@@ -67,7 +67,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<PagamentoDto> ListarPagamentosPorCpf(string cpf)
         {
-            ExecuteProcedure(Procedures.GCS_LisCpfPagamento);
+            ExecuteProcedure(Procedures.CSSP_LisCpfPagamento);
             AddParameter("@Cpf", cpf);
             var retorno = new List<PagamentoDto>();
             using (var reader = ExecuteReader())
@@ -91,7 +91,7 @@ namespace CandyShop.Repository
 
         public bool SelecionarPagamento(int idPagamento)
         {
-            ExecuteProcedure(Procedures.GCS_SelPagamento);
+            ExecuteProcedure(Procedures.CSSP_SelPagamento);
             AddParameter("@IdPagamento", idPagamento);
             using (var retorno = ExecuteReader())
                 return retorno.Read();
@@ -99,7 +99,7 @@ namespace CandyShop.Repository
 
         public PagamentoDto SelecionarDadosPagamento(int idPagamento)
         {
-            ExecuteProcedure(Procedures.GCS_SelPagamento);
+            ExecuteProcedure(Procedures.CSSP_SelPagamento);
             AddParameter("@IdPagamento", idPagamento);
             PagamentoDto retorno = new PagamentoDto();
             using (var reader = ExecuteReader())

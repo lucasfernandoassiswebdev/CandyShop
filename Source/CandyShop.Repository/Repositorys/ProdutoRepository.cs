@@ -9,23 +9,23 @@ namespace CandyShop.Repository
     public class ProdutoRepository : ConnectDB, IProdutoRepository
     {
         private enum Procedures
-        { 
-            GCS_InsProduto,
-            GCS_DelProduto,
-            GCS_UpdProduto,
-            GCS_SelProduto,
-            GCS_LisProduto,
-            GCS_LisProdutoInativo,
-            GCS_LisProdutoValorCres,
-            GCS_LisProdutoValorDesc,
-            GCS_LisProdutoAbaixoValor,
-            GCS_LisProdutoAcimaValor,
-            GCS_LisProdutoCategoria
+        {
+            CSSP_InsProduto,
+            CSSP_DesProduto,
+            CSSP_UpdProduto,
+            CSSP_SelProduto,
+            CSSP_LisProduto,
+            CSSP_LisProdutoInativo,
+            CSSP_LisProdutoValorCres,
+            CSSP_LisProdutoValorDesc,
+            CSSP_LisProdutoAbaixoValor,
+            CSSP_LisProdutoAcimaValor,
+            CSSP_LisProdutoCategoria
         }
 
         public void InserirProduto(ProdutoDto produto)
         {
-            ExecuteProcedure(Procedures.GCS_InsProduto);
+            ExecuteProcedure(Procedures.CSSP_InsProduto);
             AddParameter("@NomeProduto", produto.NomeProduto);
             AddParameter("@PrecoProduto", produto.PrecoProduto);
             AddParameter("@QtdeProduto", produto.QtdeProduto);
@@ -35,16 +35,16 @@ namespace CandyShop.Repository
         }
 
         //não será mais usado temporariamente
-        public void DeletarProduto(int idproduto)
+        public void DesativarPooduto(int idproduto)
         {
-            ExecuteProcedure(Procedures.GCS_DelProduto);
+            ExecuteProcedure(Procedures.CSSP_DesProduto);
             AddParameter("@IdProduto", idproduto);
             ExecuteNonQuery();
         }
 
         public void UpdateProduto(ProdutoDto produto)
         {
-            ExecuteProcedure(Procedures.GCS_UpdProduto);
+            ExecuteProcedure(Procedures.CSSP_UpdProduto);
             AddParameter("@IdProduto", produto.IdProduto);
             AddParameter("@NomeProduto", produto.NomeProduto);
             AddParameter("@PrecoProduto", produto.PrecoProduto);
@@ -56,7 +56,7 @@ namespace CandyShop.Repository
 
         public bool SelecionarProduto(string nomeproduto)
         {
-            ExecuteProcedure(Procedures.GCS_SelProduto);
+            ExecuteProcedure(Procedures.CSSP_SelProduto);
             AddParameter("@NomeProduto", nomeproduto);
             using (var retornobd = ExecuteReader())
                 return retornobd.Read();
@@ -64,7 +64,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<ProdutoDto> ListarProdutos()
         {
-            ExecuteProcedure(Procedures.GCS_LisProduto);
+            ExecuteProcedure(Procedures.CSSP_LisProduto);
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -82,7 +82,7 @@ namespace CandyShop.Repository
 
         public ProdutoDto SelecionarDadosProduto(int idProduto)
         {
-            ExecuteProcedure(Procedures.GCS_SelProduto);
+            ExecuteProcedure(Procedures.CSSP_SelProduto);
             AddParameter("@IdProduto", idProduto);
 
             var retorno = new ProdutoDto();
@@ -102,7 +102,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<ProdutoDto> ListarProdutosInativos()
         {
-            ExecuteProcedure(Procedures.GCS_LisProdutoInativo);
+            ExecuteProcedure(Procedures.CSSP_LisProdutoInativo);
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -120,7 +120,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<ProdutoDto> ListarProdutosValorCrescente()
         {
-            ExecuteProcedure(Procedures.GCS_LisProdutoValorCres);
+            ExecuteProcedure(Procedures.CSSP_LisProdutoValorCres);
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -138,7 +138,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<ProdutoDto> ListarProdutosValorDecrescente()
         {
-            ExecuteProcedure(Procedures.GCS_LisProdutoValorDesc);
+            ExecuteProcedure(Procedures.CSSP_LisProdutoValorDesc);
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -156,7 +156,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<ProdutoDto> ListarProdutosAbaixoValor()
         {
-            ExecuteProcedure(Procedures.GCS_LisProdutoAbaixoValor);
+            ExecuteProcedure(Procedures.CSSP_LisProdutoAbaixoValor);
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -174,7 +174,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<ProdutoDto> ListarProdutosAcimaValor()
         {
-            ExecuteProcedure(Procedures.GCS_LisProdutoAcimaValor);
+            ExecuteProcedure(Procedures.CSSP_LisProdutoAcimaValor);
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -192,7 +192,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<ProdutoDto> ListarProdutosPorCategoria()
         {
-            ExecuteProcedure(Procedures.GCS_LisProdutoCategoria);
+            ExecuteProcedure(Procedures.CSSP_LisProdutoCategoria);
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -206,6 +206,11 @@ namespace CandyShop.Repository
                         Categoria = reader.ReadAsString("Categoria")
                     });
             return retorno;
+        }
+
+        public void DesativarProduto(int idProduto)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

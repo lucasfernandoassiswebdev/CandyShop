@@ -1,8 +1,8 @@
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_InsProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_InsProduto]
+	DROP PROCEDURE [dbo].[CSSP_InsProduto]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_InsProduto]
+CREATE PROCEDURE [dbo].[CSSP_InsProduto]
 	@NomeProduto varchar(40),
 	@PrecoProduto decimal,
 	@QtdeProduto int,
@@ -16,7 +16,7 @@ CREATE PROCEDURE [dbo].[GCS_InsProduto]
 	Objetivo..........: Inserir Produtos
 	Autor.............: SMN - João Guilherme
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_InsProduto] 'tortuguita', 1.00, 0, '1', 'chocolates'
+	Ex................: EXEC [dbo].[CSSP_InsProduto] 'tortuguita', 1.00, 0, '1', 'chocolates'
 
 	*/
 
@@ -32,11 +32,11 @@ CREATE PROCEDURE [dbo].[GCS_InsProduto]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_DelProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_DelProduto]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DelProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_DelProduto]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_DelProduto]
+CREATE PROCEDURE [dbo].[CSSP_DesProduto]
 	@IdProduto int
 	AS
 
@@ -46,12 +46,13 @@ CREATE PROCEDURE [dbo].[GCS_DelProduto]
 	Objetivo..........: Deletar Produtos 
 	Autor.............: SMN - João Guilherme
  	Data..............: 01/01/2017
-	Ex................: EXEC [dbo].[GKSSP_DelProduto]
+	Ex................: EXEC [dbo].[CSSP_DelProduto]
 
 	*/
 
 	BEGIN
-	DELETE [dbo].[Produto]
+	UPDATE [dbo].[Produto]
+		SET Ativo = 'N'
 		WHERE IdProduto = @IdProduto
 		IF @@ERROR <> 0
 					RETURN 1
@@ -60,11 +61,11 @@ CREATE PROCEDURE [dbo].[GCS_DelProduto]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_UpdProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_UpdProduto]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_UpdProduto]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_UpdProduto]
+CREATE PROCEDURE [dbo].[CSSP_UpdProduto]
 	@IdProduto int,
 	@NomeProduto varchar(40),
 	@PrecoProduto decimal,
@@ -79,7 +80,7 @@ CREATE PROCEDURE [dbo].[GCS_UpdProduto]
 	Objetivo..........: Editar Poodutos
 	Autor.............: SMN - João Guilherme
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_UpdProduto]
+	Ex................: EXEC [dbo].[CSSP_UpdProduto]
 
 	*/
 
@@ -100,11 +101,11 @@ GO
 		
 		
 		
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_SelProduto]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelProduto]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_SelProduto]
+CREATE PROCEDURE [dbo].[CSSP_SelProduto]
 	@NomeProduto VARCHAR(50)
 	AS
 
@@ -114,7 +115,7 @@ CREATE PROCEDURE [dbo].[GCS_SelProduto]
 	Objetivo..........: Selecionar Produtos
 	Autor.............: SMN - João Guilherme
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_SelProduto]
+	Ex................: EXEC [dbo].[CSSP_SelProduto]
 
 	*/
 
@@ -125,11 +126,11 @@ CREATE PROCEDURE [dbo].[GCS_SelProduto]
 	END
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_LisProduto]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisProduto]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_LisProduto]
+CREATE PROCEDURE [dbo].[CSSP_LisProduto]
 
 	AS
 
@@ -139,7 +140,7 @@ CREATE PROCEDURE [dbo].[GCS_LisProduto]
 	Objetivo..........: Listar todos os produtos
 	Autor.............: SMN - Rafael Morais
  	Data..............: 07/07/2017
-	Ex................: EXEC [dbo].[GCS_LisProduto]
+	Ex................: EXEC [dbo].[CSSP_LisProduto]
 						select * from Produto
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select 
@@ -158,11 +159,11 @@ CREATE PROCEDURE [dbo].[GCS_LisProduto]
 	END
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoInativo]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_LisProdutoInativo]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdutoInativo]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisProdutoInativo]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_LisProdutoInativo]
+CREATE PROCEDURE [dbo].[CSSP_LisProdutoInativo]
 
 	AS
 
@@ -172,7 +173,7 @@ CREATE PROCEDURE [dbo].[GCS_LisProdutoInativo]
 	Objetivo..........: Listar todos os produtos que estão inativos
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 14/09/2017
-	Ex................: EXEC [dbo].[GCS_LisProduto]
+	Ex................: EXEC [dbo].[CSSP_LisProduto]
 
 	*/
 
@@ -189,11 +190,11 @@ CREATE PROCEDURE [dbo].[GCS_LisProdutoInativo]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoValorCres]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].GCS_LisProdutoValorCres
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdutoValorCres]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].CSSP_LisProdutoValorCres
 GO
 
-CREATE PROCEDURE [dbo].GCS_LisProdutoValorCres
+CREATE PROCEDURE [dbo].CSSP_LisProdutoValorCres
 
 	AS
 
@@ -203,7 +204,7 @@ CREATE PROCEDURE [dbo].GCS_LisProdutoValorCres
 	Objetivo..........: Listar os produtos pela ordem de preço crescente	
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 14/09/2017
-	Ex................: EXEC [dbo].[GCS_LisProdutoValor]
+	Ex................: EXEC [dbo].[CSSP_LisProdutoValor]
 
 	*/
 
@@ -215,11 +216,11 @@ CREATE PROCEDURE [dbo].GCS_LisProdutoValorCres
 GO
 				
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoValorDesc]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_LisProdutoValorDesc]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdutoValorDesc]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisProdutoValorDesc]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_LisProdutoValorDesc]
+CREATE PROCEDURE [dbo].[CSSP_LisProdutoValorDesc]
 
 	AS
 
@@ -229,7 +230,7 @@ CREATE PROCEDURE [dbo].[GCS_LisProdutoValorDesc]
 	Objetivo..........: Listar os produtos em ordem decrescente de valor
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 14/09/2017
-	Ex................: EXEC [dbo].[GCS_LisProdutoValorDesc]
+	Ex................: EXEC [dbo].[CSSP_LisProdutoValorDesc]
 
 	*/
 
@@ -241,11 +242,11 @@ END
 GO
 				
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoAbaixoValor]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_LisProdutoAbaixoValor]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdutoAbaixoValor]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisProdutoAbaixoValor]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_LisProdutoAbaixoValor]
+CREATE PROCEDURE [dbo].[CSSP_LisProdutoAbaixoValor]
 	@Valor decimal(18,2)
 	AS
 
@@ -255,7 +256,7 @@ CREATE PROCEDURE [dbo].[GCS_LisProdutoAbaixoValor]
 	Objetivo..........: Listar os produtos abaixo do valor que será passado âtravés de um parâmetro
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 14/09/2017
-	Ex................: EXEC [dbo].[GCS_LisProdutoAbaixoValor]
+	Ex................: EXEC [dbo].[CSSP_LisProdutoAbaixoValor]
 
 	*/
 
@@ -266,11 +267,11 @@ CREATE PROCEDURE [dbo].[GCS_LisProdutoAbaixoValor]
 	END
 GO
 				
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoAcimaValor]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_LisProdutoAcimaValor]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdutoAcimaValor]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisProdutoAcimaValor]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_LisProdutoAcimaValor]
+CREATE PROCEDURE [dbo].[CSSP_LisProdutoAcimaValor]
 	@valor decimal(18,2)
 	AS
 
@@ -280,7 +281,7 @@ CREATE PROCEDURE [dbo].[GCS_LisProdutoAcimaValor]
 	Objetivo..........: Listar os produtos que estão acima de um certo valor
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 14/09/2017
-	Ex................: EXEC [dbo].[GCS_LisProdutoAcimaValor]
+	Ex................: EXEC [dbo].[CSSP_LisProdutoAcimaValor]
 
 	*/
 
@@ -292,11 +293,11 @@ CREATE PROCEDURE [dbo].[GCS_LisProdutoAcimaValor]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisProdutoCategoria]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_LisProdutoCategoria]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdutoCategoria]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisProdutoCategoria]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_LisProdutoCategoria]
+CREATE PROCEDURE [dbo].[CSSP_LisProdutoCategoria]
 	@Categoria varchar(50)
 	AS
 
@@ -306,7 +307,7 @@ CREATE PROCEDURE [dbo].[GCS_LisProdutoCategoria]
 	Objetivo..........: Listar os produtos de acordo com a sua categoria
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 14/09/2017
-	Ex................: EXEC [dbo].[GCS_LisProdutoCategoria]
+	Ex................: EXEC [dbo].[CSSP_LisProdutoCategoria]
 
 	*/
 
@@ -316,6 +317,10 @@ CREATE PROCEDURE [dbo].[GCS_LisProdutoCategoria]
 			WHERE Categoria like '%' + @Categoria + '@%'
 	END
 GO
+
+
+
+				
 				
 
 

@@ -10,17 +10,17 @@ namespace CandyShop.Repository
     {
         private enum Procedures
         {
-            GCS_InsUsuario,
-            GCS_DesUsuario,
-            GCS_UpdUsuario,
-            GCS_SelUsuario,
-            GCS_LisUsuario,
-            GCS_SelUsuariosDivida
+            CSSP_InsUsuario,
+            CSSP_UpdUsuario,
+            CSSP_SelUsuario,
+            CSSP_LisUsuario,
+            CSSP_SelUsuariosDivida,
+            CSSP_DesUsuario
         }
 
         public void InserirUsuario(UsuarioDto usuario)
         {
-            ExecuteProcedure(Procedures.GCS_InsUsuario);
+            ExecuteProcedure(Procedures.CSSP_InsUsuario);
             AddParameter("@NomeUsuario", usuario.NomeUsuario);
             AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
             AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
@@ -32,7 +32,7 @@ namespace CandyShop.Repository
 
         public void EditarUsuario(UsuarioDto usuario)
         {
-            ExecuteProcedure(Procedures.GCS_UpdUsuario);
+            ExecuteProcedure(Procedures.CSSP_UpdUsuario);
             AddParameter("@Cpf", usuario.Cpf);
             AddParameter("@NomeUsuario", usuario.NomeUsuario);
             AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
@@ -42,9 +42,9 @@ namespace CandyShop.Repository
             ExecuteNonQuery();
         }
 
-        public void DeletarUsuario(string cpf)
+        public void DesativarUsuario(string cpf)
         {
-            ExecuteProcedure(Procedures.GCS_DesUsuario);
+            ExecuteProcedure(Procedures.CSSP_DesUsuario);
             AddParameter("@Cpf", cpf);
          
             ExecuteNonQuery();
@@ -52,7 +52,7 @@ namespace CandyShop.Repository
 
         public bool SelecionarUsuario(string cpf)
         {
-            ExecuteProcedure(Procedures.GCS_SelUsuario);
+            ExecuteProcedure(Procedures.CSSP_SelUsuario);
             AddParameter("@Cpf", cpf);
             using (var retorno = ExecuteReader())
                 return retorno.Read();
@@ -60,7 +60,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<UsuarioDto> ListarUsuario()
         {
-            ExecuteProcedure(Procedures.GCS_LisUsuario);
+            ExecuteProcedure(Procedures.CSSP_LisUsuario);
             var retorno = new List<UsuarioDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -77,7 +77,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<UsuarioDto> ListarUsuarioDivida()
         {
-            ExecuteProcedure(Procedures.GCS_SelUsuariosDivida);
+            ExecuteProcedure(Procedures.CSSP_SelUsuariosDivida);
             var retorno = new List<UsuarioDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -94,7 +94,7 @@ namespace CandyShop.Repository
 
         public UsuarioDto SelecionarDadosUsuario(string cpf)
         {
-            ExecuteProcedure(Procedures.GCS_SelUsuario);
+            ExecuteProcedure(Procedures.CSSP_SelUsuario);
             AddParameter("@CpfUsuario", cpf);
             var retorno = new UsuarioDto();
             using (var reader = ExecuteReader())

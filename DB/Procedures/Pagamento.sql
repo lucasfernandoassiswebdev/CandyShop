@@ -1,9 +1,9 @@
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_InsPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_InsPagamento]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_InsPagamento]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_InsPagamento]	
+CREATE PROCEDURE [dbo].[CSSP_InsPagamento]	
 	@Cpf varchar(14),
 	@DataPagamento datetime,
 	@ValorPagamento decimal
@@ -16,7 +16,7 @@ CREATE PROCEDURE [dbo].[GCS_InsPagamento]
 	Objetivo..........: Inserir um pagamento
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/0/2017
-	Ex................: EXEC [dbo].[GCS_InsPagamento]
+	Ex................: EXEC [dbo].[CSSP_InsPagamento]
 
 	*/
 
@@ -38,11 +38,11 @@ GO
 
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_LisPagamento]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisPagamento]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_LisPagamento]
+CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
 
 	AS
 
@@ -52,7 +52,7 @@ CREATE PROCEDURE [dbo].[GCS_LisPagamento]
 	Objetivo..........: Listar todos os pagamentos feitos por todos usuarios
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_LisPagamento]
+	Ex................: EXEC [dbo].[CSSP_LisPagamento]
 
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select  e inserindo Inner JOin
@@ -73,11 +73,11 @@ CREATE PROCEDURE [dbo].[GCS_LisPagamento]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_UpdPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_UpdPagamento]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_UpdPagamento]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_UpdPagamento]
+CREATE PROCEDURE [dbo].[CSSP_UpdPagamento]
 	@IdPagamento int,	
 	@DataPagamento datetime,
 	@ValorPagamento decimal
@@ -90,7 +90,7 @@ CREATE PROCEDURE [dbo].[GCS_UpdPagamento]
 	Objetivo..........: Editar um pagamento
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_UpdPagamento]
+	Ex................: EXEC [dbo].[CSSP_UpdPagamento]
 
 	*/
 
@@ -108,11 +108,11 @@ CREATE PROCEDURE [dbo].[GCS_UpdPagamento]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisCpfPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_LisCpfPagamento]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCpfPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisCpfPagamento]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_LisCpfPagamento]
+CREATE PROCEDURE [dbo].[CSSP_LisCpfPagamento]
 	@Cpf VARCHAR(14)
 	AS
 
@@ -122,7 +122,7 @@ CREATE PROCEDURE [dbo].[GCS_LisCpfPagamento]
 	Objetivo..........: Listar os pagamentos de um usuario
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_LisCpfPagamento]
+	Ex................: EXEC [dbo].[CSSP_LisCpfPagamento]
 
 	*/
 
@@ -134,11 +134,11 @@ CREATE PROCEDURE [dbo].[GCS_LisCpfPagamento]
 	END
 GO			
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_DelPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_DelPagamento]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DelPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_DelPagamento]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_DelPagamento]
+CREATE PROCEDURE [dbo].[CSSP_DelPagamento]
 	@IdPagamento int
 
 	AS
@@ -149,7 +149,7 @@ CREATE PROCEDURE [dbo].[GCS_DelPagamento]
 	Objetivo..........: Deletar um pagamento
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_DelPagamento]
+	Ex................: EXEC [dbo].[CSSP_DelPagamento]
 
 	*/
 
@@ -162,11 +162,11 @@ CREATE PROCEDURE [dbo].[GCS_DelPagamento]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_SelPagamento]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelPagamento]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_SelPagamento]
+CREATE PROCEDURE [dbo].[CSSP_SelPagamento]
 	@IdPagamento int
 
 	AS
@@ -177,7 +177,7 @@ CREATE PROCEDURE [dbo].[GCS_SelPagamento]
 	Objetivo..........: Selecionar um pagamento
 	Autor.............: SMN - Rafael Morais
  	Data..............: 07/07/2017
-	Ex................: EXEC [dbo].[GCS_SelPagamento]
+	Ex................: EXEC [dbo].[CSSP_SelPagamento]
 
 	*/
 
