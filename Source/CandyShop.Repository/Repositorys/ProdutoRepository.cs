@@ -29,7 +29,7 @@ namespace CandyShop.Repository
             AddParameter("@NomeProduto", produto.NomeProduto);
             AddParameter("@PrecoProduto", produto.PrecoProduto);
             AddParameter("@QtdeProduto", produto.QtdeProduto);
-            AddParameter("@Ativo", produto.Ativo);
+            AddParameter("@Ativo", "A");
             AddParameter("@Categoria", produto.Categoria);
             ExecuteNonQuery();
         }

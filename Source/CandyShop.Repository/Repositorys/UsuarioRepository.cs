@@ -8,8 +8,6 @@ namespace CandyShop.Repository
 
     public class UsuarioRepository : ConnectDB, IUsuarioRepository
     {
-
-
         private enum Procedures
         {
             GCS_InsUsuario,
