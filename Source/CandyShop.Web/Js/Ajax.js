@@ -100,9 +100,11 @@
     };
     var concluirEdicaoUsuario = function () {
         var usuario = {
-            Cpf: $('#cpf').val(),
+            Cpf: $('#Cpf').val(),
             NomeUsuario: $('#Nome').val(),
-            SaldoUsuario: $('#Nome').val()
+            SaldoUsuario: $('#SaldoUsuario').val(),
+            SenhaUsuario: $('#Password').val(),
+            Ativo: $('#Status').val()
         };
 
         concluirCadastro(url.concluirEdicaoUsuario, usuario, url.listaUsuario);

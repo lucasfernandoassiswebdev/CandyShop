@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -21,7 +22,7 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.ListarProdutos();
             if (response.Status != HttpStatusCode.OK)
             {
-                return Content("Erro " + response.ContentAsString);
+                return Content("Erro " + response.ContentAsString.First());
             }
             
             return View(response.Content);
@@ -37,7 +38,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.InserirProduto(produto);
             if (response.Status != HttpStatusCode.OK) 
-               return Content(response.ContentAsString.ToString());
+               return Content(response.ContentAsString.First());
             return Content("Produto cadastrado com sucesso!!");
         }
 
@@ -45,7 +46,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString);
+                return Content("Erro" + response.ContentAsString.First());
             return View(response.Content);
         }
 
@@ -53,7 +54,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString);
+                return Content("Erro" + response.ContentAsString.First());
             return View(response.Content);
         }
 
@@ -62,7 +63,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.EditarProduto(produto);
             if (response.Status != HttpStatusCode.OK)
-                return Content(response.ContentAsString.ToString());
+                return Content(response.ContentAsString.First());
             return Content("Produto editado com sucesso!");
         }
 

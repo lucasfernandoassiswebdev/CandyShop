@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -19,7 +20,7 @@ namespace CandyShop.Web.Controllers
             var response = _appUsuario.ListarUsuarios();
             if (response.Status != HttpStatusCode.OK)
             {
-                return Content("Erro " + response.ContentAsString);
+                return Content("Erro " + response.ContentAsString.First());
             }
             return View(response.Content);
         }
@@ -29,7 +30,7 @@ namespace CandyShop.Web.Controllers
             var response = _appUsuario.ListarUsuariosEmDivida();
             if (response.Status != HttpStatusCode.OK)
             {
-                return Content("Erro " + response.ContentAsString);
+                return Content("Erro " + response.ContentAsString.First());
             }
             return View(response.Content);
         }
@@ -53,7 +54,7 @@ namespace CandyShop.Web.Controllers
             var usuario = _appUsuario.SelecionarUsuario(cpf);
 
             if (usuario.Status != HttpStatusCode.OK)
-                return Content("Erro " + usuario.ContentAsString);
+                return Content("Erro " + usuario.ContentAsString.First());
             
             return View(usuario.Content);
         }
@@ -63,13 +64,12 @@ namespace CandyShop.Web.Controllers
             var usuario = _appUsuario.SelecionarUsuario(cpf);
 
             if (usuario.Status != HttpStatusCode.OK)
-                return Content("Erro " + usuario.ContentAsString);
+                return Content("Erro " + usuario.ContentAsString.First());
 
             return View(usuario.Content);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost]        
         public ActionResult Editar(Usuario usuario)
         {
             //if (ModelState.IsValid)
@@ -77,12 +77,10 @@ namespace CandyShop.Web.Controllers
             //_appUsuario.EditarUsuario(usuario);
 
             //}
-            var response = _appUsuario.InserirUsuario(usuario);
+            var response = _appUsuario.EditarUsuario(usuario);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Deu ruim!");
-            return Content("Deu bom!!");
-
-
+                return Content("Erro " + response.ContentAsString.First());
+            return Content("Edição concluída com sucesso!!");
             //return RedirectToAction("Index");
         }
     }

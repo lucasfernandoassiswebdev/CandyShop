@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" href="../../Content/formCadastroUsuario.css" />
 
-<script type="text/javascript" src="../../Js/Usuario/scriptsCadastroUsuario.js"></script>
+<script type="text/javascript" src="../../Js/scriptsCadastroUsuario.js"></script>
 
 <div class="container">
     <div class="row">
@@ -28,17 +28,28 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="Cpf" name="cpf" type="text" class="validate" value="@Model.Cpf" required data-length="50" autocomplete="off">
-                    
+                    <input id="Cpf" name="cpf" type="text" class="validate" value="@Model.Cpf" required data-length="50" autocomplete="off" disabled="disabled">
+                    <label class="active">CPF:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     <input id="Nome" name="Nome" type="text" class="validate" value="@Model.NomeUsuario"/>
+                    <label class="active">Nome:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="saldo" name="SaldoUsuario" type="text" class="validate" value="@Model.SaldoUsuario" required="">
-                    
+                    <input id="SaldoUsuario" name="SaldoUsuario" type="text" class="validate" value="@Model.SaldoUsuario" required="">
+                    <label class="active">Saldo:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Password" name="Password" type="text" class="validate" value="@Model.SenhaUsuario" disabled="disabled"/>
+                    <label class="active">Password:</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="Status" name="Status" type="text" class="validate" value="@Model.Ativo" required="" disabled="disabled">
+                    <label class="active">Status:</label>
                 </div>
             </div>
             <div class="row center">
