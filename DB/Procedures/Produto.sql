@@ -1,3 +1,6 @@
+USE CandyShop
+GO
+
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_InsProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_InsProduto]
 GO
@@ -32,8 +35,8 @@ CREATE PROCEDURE [dbo].[CSSP_InsProduto]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DelProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[CSSP_DelProduto]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DesProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_DesProduto]
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_DesProduto]
@@ -188,7 +191,6 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoInativo]
 			 WHERE Ativo = 'N'
 	END
 GO
-
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdutoValorCres]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].CSSP_LisProdutoValorCres

@@ -114,7 +114,7 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelUsuario]
 GO
 
@@ -139,7 +139,7 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuario]
 GO
 				
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisUsuario]
 GO
 	
@@ -170,7 +170,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 	END
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelUsuariosDivida]') AND objectproperty(id, N'IsPROCEDURE')=1)
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUsuariosDivida]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 GO
 
