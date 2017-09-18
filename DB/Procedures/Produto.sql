@@ -135,9 +135,8 @@ GO
 
 CREATE PROCEDURE [dbo].[CSSP_LisProduto]
 
-	AS
-
-	/*
+	AS	
+	/* 
 	Documentação
 	Arquivo Fonte.....: Produto.sql
 	Objetivo..........: Listar todos os produtos
