@@ -115,7 +115,7 @@
     };
 
     var detalheProduto = function (id) {
-        var produto = { Id: id };
+        var produto = { IdProduto: id };
         chamaPaginaComIdentificador(url.detalheProduto, produto);
     };
     var editarProduto = function (id) {
