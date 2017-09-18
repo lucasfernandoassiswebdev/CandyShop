@@ -76,11 +76,12 @@
     var pagamento = function () {
         chamaPagina(url.pagamento);
     };
-    var editarUsuario = function () {
-        chamaPagina(url.editarProduto);
+    var editarUsuario = function (cpf) {
+        var usuario = { Cpf: cpf };
+        chamaPaginaComIdentificador(url.editarUsuario, usuario);
     };
     var excluirUsuario = function () {
-        chamaPagina(url.excluirProduto);
+        chamaPagina(url.excluirUsuario);
     };
     var detalheUsuario = function (cpf) {
         var usuario = {
@@ -93,7 +94,17 @@
             Cpf: $('#cpf').val(),
             NomeUsuario: $('#Nome').val()
         };
+
         concluirCadastro(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
+    };
+    var concluirEdicaoUsuario = function () {
+        var usuario = {
+            Cpf: $('#cpf').val(),
+            NomeUsuario: $('#Nome').val(),
+            SaldoUsuario: $('#Nome').val()
+        };
+
+        concluirCadastro(url.concluirEdicaoUsuario, usuario, url.editarUsuario);
     };
 
     //produtos
@@ -143,6 +154,7 @@
         concluirCadastroUsuario: concluirCadastroUsuario,
         listaUsuario: listaUsuario,
         cadastroUsuario: cadastroUsuario,
+        concluirEdicaoUsuario: concluirEdicaoUsuario,
         editarUsuario: editarUsuario,
         detalheUsuario: detalheUsuario,
         excluirUsuario: excluirUsuario,

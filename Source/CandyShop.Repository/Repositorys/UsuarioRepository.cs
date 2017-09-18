@@ -2,6 +2,7 @@
 using CandyShop.Core;
 using CandyShop.Core.Usuario.Dto;
 using System.Collections.Generic;
+using CandyShop.Core.Services.Usuario;
 
 namespace CandyShop.Repository
 {

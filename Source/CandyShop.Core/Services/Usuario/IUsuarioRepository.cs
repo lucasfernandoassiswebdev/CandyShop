@@ -1,7 +1,7 @@
 ﻿using CandyShop.Core.Usuario.Dto;
 using System.Collections.Generic;
 
-namespace CandyShop.Core
+namespace CandyShop.Core.Services.Usuario
 {
     public interface IUsuarioRepository
     {

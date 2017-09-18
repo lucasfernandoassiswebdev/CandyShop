@@ -89,12 +89,12 @@ CREATE PROCEDURE [dbo].[CSSP_UpdProduto]
 
 	BEGIN
 		UPDATE [dbo].[Produto]
-		SET	NomeProduto = @NomeProduto,
-			PrecoProduto = @PrecoProduto,
-			QtdeProduto = @QtdeProduto,
-			Ativo = @Ativo,
-			Categoria = @Categoria
-		WHERE IdProduto = @IdProduto
+			SET	NomeProduto = @NomeProduto,
+				PrecoProduto = @PrecoProduto,
+				QtdeProduto = @QtdeProduto,
+				Ativo = @Ativo,
+				Categoria = @Categoria
+			WHERE IdProduto = @IdProduto
 
 		IF @@ERROR <> 0
 					RETURN 1
@@ -152,7 +152,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProduto]
 
 	BEGIN
 	
-		SELECT IdProduto,
+		SELECT	IdProduto,
 				NomeProduto,
 				PrecoProduto,
 				QtdeProduto,
@@ -181,7 +181,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoInativo]
 	*/
 
 	BEGIN
-		SELECT IdProduto,
+		SELECT	IdProduto,
 				NomeProduto,
 				PrecoProduto,
 				QtdeProduto,

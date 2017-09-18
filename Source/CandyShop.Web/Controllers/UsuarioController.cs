@@ -58,9 +58,32 @@ namespace CandyShop.Web.Controllers
             return View(usuario.Content);
         }
 
-        public ActionResult Editar()
+        public ActionResult Editar(string cpf)
         {
-            return View();
+            var usuario = _appUsuario.SelecionarUsuario(cpf);
+
+            if (usuario.Status != HttpStatusCode.OK)
+                return Content("Erro " + usuario.ContentAsString);
+
+            return View(usuario.Content);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editar(Usuario usuario)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //_appUsuario.EditarUsuario(usuario);
+
+            //}
+            var response = _appUsuario.InserirUsuario(usuario);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Deu ruim!");
+            return Content("Deu bom!!");
+
+
+            //return RedirectToAction("Index");
         }
     }
 }
