@@ -22,7 +22,7 @@
     function chamaPagina(endereco) {
         $.get(endereco).done(function (data) { //data é o conteudo da view
             $('#DivGrid').slideUp(function () { //a div é recolhida
-                $('#DivGrid').hide().html(data).slideDown(); //escondida, carregada e demonstrada novamente
+                $('#DivGrid').hide().html(data).slideDown(); //escondida, carregada e demonstrada novamente                
             });
         }).fail(function (xhr) {
             console.log(xhr.responseText);
@@ -41,8 +41,9 @@
 
     function concluirCadastro(endereco, objeto, tela) {
         $.post(endereco, objeto)
-            .done(function () { //passar o parametro data aqui quando for definida a mensagem
+            .done(function (message) { //passar o parametro data aqui quando for definida a mensagem
                 chamaPagina(tela);
+                Materialize.toast(message, 5000);
             })
             .fail(function (xhr) {
                 console.log(xhr.responseText);
@@ -104,7 +105,7 @@
             SaldoUsuario: $('#Nome').val()
         };
 
-        concluirCadastro(url.concluirEdicaoUsuario, usuario, url.editarUsuario);
+        concluirCadastro(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };
 
     //produtos
@@ -132,6 +133,17 @@
     var editarProduto = function (id) {
         var produto = { IdProduto: id };
         chamaPaginaComIdentificador(url.editarProduto, produto);
+    };
+    var concluirEdicaoProduto = function() {
+        var produto = {
+            IdProduto: $('#IdProduto').val(),
+            NomeProduto: $('#NomeProduto').val(),
+            PrecoProduto: $('#PrecoProduto').val(),
+            QtdeProduto: $('#QtdeProduto').val(),
+            Categoria: $('#Categoria').val(),
+            Ativo: $('#Status').val()
+        };
+        concluirCadastro(url.concluirEdicaoProduto, produto, url.listaProduto);
     };
     var excluirProduto = function (id) {
         var produto = { IdProduto: id };
@@ -164,6 +176,7 @@
         concluirCadastroProduto: concluirCadastroProduto,
         detalheProduto: detalheProduto,
         editarProduto: editarProduto,
+        concluirEdicaoProduto: concluirEdicaoProduto,
         excluirProduto: excluirProduto
     };
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.

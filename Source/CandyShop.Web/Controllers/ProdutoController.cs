@@ -60,7 +60,6 @@ namespace CandyShop.Web.Controllers
         [HttpPost]
         public ActionResult EditarProduto(Produto produto)
         {
-
             var response = _appProduto.EditarProduto(produto);
             if (response.Status != HttpStatusCode.OK)
                 return Content(response.ContentAsString.ToString());

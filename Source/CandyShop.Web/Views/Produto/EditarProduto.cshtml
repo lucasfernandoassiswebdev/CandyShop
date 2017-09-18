@@ -20,32 +20,46 @@
                     <div class="btn">
                         <span>File</span>
                         <input type="file">
-                    </div>
+                    </div>                    
                     <div class="file-path-wrapper">
                         <input placeholder="foto do produto" class="file-path validate" type="text">
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="input-field col s9">
-                    <input id="NomeProduto" name="Nome" type="text" class="validate" required="">
-                    <label for="NomeProduto">Nome do produto:</label>
+            <div class="row">                
+                <div class="input-field col s6">
+                    <input placeholder="Placeholder" id="NomeProduto" name="Nome" type="text" class="validate" required="" value="@Model.NomeProduto">
+                    <label class="active">Nome:</label>
                 </div>
-
+                
+                <div class="input-field col s6">
+                    <input placeholder="Placeholder" id="IdProduto" name="IdProduto" type="text" class="validate" required="" value="@Model.IdProduto" disabled="disabled">
+                    <label class="active">ID do Produto:</label>
+                </div>                
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="PrecoProduto" name="PrecoProduto" type="text" class="validate" required="">
-                    <label for="PrecoProduto">Preço do produto:</label>
+                    <input id="PrecoProduto" type="text" class="validate" value="@Model.PrecoProduto">
+                    <label class="active" for="PrecoProduto">Preco do Produto:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="QtdeProduto" name="QtdeProduto" type="text" class="validate" required="">
-                    <label for="QtdeProduto">Quantidade disponível:</label>
+                    <input id="QtdeProduto" name="QtdeProduto" type="text" class="validate" required="" value="@Model.QtdeProduto">
+                    <label class="active">Quantidade em estoque:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Categoria" name="Categoria" type="text" class="validate" required="" value="@Model.Categoria">
+                    <label class="active">Categoria:</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="Status" name="Status" type="text" class="validate" required="" value="@Model.Ativo">
+                    <label class="active">Status:</label>
                 </div>
             </div>
             <div class="row" , align="center">
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large"><i class="material-icons left">edit</i>Cadastrar</a>
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.concluirEdicaoProduto()"><i class="material-icons left">edit</i>Editar</a>
             </div>
         </form>
     </div>
