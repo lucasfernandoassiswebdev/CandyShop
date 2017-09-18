@@ -81,9 +81,7 @@
     };
     var cadastrarProduto = function () {
         chamaPagina(url.cadastrarProduto);
-    };    
-     
-    
+    };             
 
     var concluirCadastroProduto = function () {
         var produto = {
@@ -98,7 +96,7 @@
     var detalheProduto = function () {
         chamaPagina(url.detalheProduto);
     };
-    var editarProduto = function () {
+    var editarProduto = function (id) {
         chamaPagina(url.editarProduto);
     };
     var excluirProduto = function () {

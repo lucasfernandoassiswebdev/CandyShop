@@ -32,5 +32,17 @@ namespace CandyShop.Application
                 return new Response<string>(response.StatusCode);
             }
         }
+
+        public Response<string> EditarProduto(Produto produto)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.PutAsync(_enderecoApi, produto, new JsonMediaTypeFormatter()).Result;
+                if(response.StatusCode != HttpStatusCode.OK)
+                    return  new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+
+                return new Response<string>(response.StatusCode);
+            }
+        }
     }
 }
