@@ -37,8 +37,8 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.InserirProduto(produto);
             if (response.Status != HttpStatusCode.OK) 
-               return Content("Deu ruim!");
-            return Content("Deu bom!!");
+               return Content(response.ContentAsString.ToString());
+            return Content("Produto cadastrado com sucesso!!");
         }
 
         public ActionResult DetalheProduto(/*int idProduto*/)
