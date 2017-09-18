@@ -20,7 +20,8 @@ namespace CandyShop.Repository
             CSSP_LisProdutoValorDesc,
             CSSP_LisProdutoAbaixoValor,
             CSSP_LisProdutoAcimaValor,
-            CSSP_LisProdutoCategoria
+            CSSP_LisProdutoCategoria,
+            CSSP_SelDadosProduto
         }
 
         public void InserirProduto(ProdutoDto produto)
@@ -82,7 +83,7 @@ namespace CandyShop.Repository
 
         public ProdutoDto SelecionarDadosProduto(int idProduto)
         {
-            ExecuteProcedure(Procedures.CSSP_SelProduto);
+            ExecuteProcedure(Procedures.CSSP_SelDadosProduto);
             AddParameter("@IdProduto", idProduto);
 
             var retorno = new ProdutoDto();
