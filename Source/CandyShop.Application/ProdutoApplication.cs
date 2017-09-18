@@ -33,6 +33,15 @@ namespace CandyShop.Application
             }
         }
 
+        public Response<Produto> DetalharProduto(int idProduto)
+        {
+            using (var cliente = new HttpClient())
+            {
+                var response = cliente.GetAsync($"{_enderecoApi}/{idProduto}").Result;
+                return  new Response<Produto>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
         public Response<string> EditarProduto(Produto produto)
         {
             using (var client = new HttpClient())

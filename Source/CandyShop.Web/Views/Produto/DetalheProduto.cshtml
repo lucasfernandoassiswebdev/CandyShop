@@ -19,37 +19,53 @@
     <form class="col s12" style="margin-left: -10%">
         <dl class="dl-horizontal">
             <dt>
-                @*@Html.DisplayNameFor(model => model.IdProduto)*@ID
+                ID:
             </dt>
 
             <dd>
-                @*@Html.DisplayFor(model => model.IdProduto)*@
+                @Html.DisplayFor(model => model.IdProduto)
             </dd>
 
             <dt>
-                @*@Html.DisplayNameFor(model => model.NomeProduto)*@Nome:
+                Nome:
             </dt>
 
             <dd>
-                @*@Html.DisplayFor(model => model.NomeProduto)*@
+                @Html.DisplayFor(model => model.NomeProduto)
             </dd>
 
             <dt>
-                @*@Html.DisplayNameFor(model => model.PrecoProduto)*@Preco:
+                Preco:
             </dt>
 
             <dd>
-                @*@Html.DisplayFor(model => model.PrecoProduto)*@
+                @Html.DisplayFor(model => model.PrecoProduto)
+            </dd>
+            
+
+            <dt>
+                Categoria: 
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Categoria)
             </dd>
 
             <dt>
-                @*@Html.DisplayNameFor(model => model.QtdeProduto)*@Qtde:
+                Qtde:
             </dt>
 
             <dd>
-                @*@Html.DisplayFor(model => model.QtdeProduto)*@
+                @Html.DisplayFor(model => model.QtdeProduto)
             </dd>
+            
+            <dt>
+                Status do Produto:
+            </dt>
 
+            <dd>
+                @Html.DisplayFor(model => model.Ativo)
+            </dd>
         </dl>
 
         <a class="waves-effect waves-light btn" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>

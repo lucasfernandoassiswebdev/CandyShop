@@ -23,5 +23,6 @@ namespace CandyShop.Core.Services.Produto
             }
             _produtoRepository.InserirProduto(produto);
         }
+
     }
 }

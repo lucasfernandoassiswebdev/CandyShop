@@ -20,7 +20,7 @@ namespace CandyShop.WebAPI.Controllers
             _produtoService = produtoService;
         }
 
-       public IHttpActionResult Post(ProdutoDto produto)
+        public IHttpActionResult Post(ProdutoDto produto)
         {
             _produtoService.InserirProduto(produto);
             if (_notification.HasNotification())
@@ -28,10 +28,15 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-       public IHttpActionResult Get(ProdutoDto produto)
+        public IHttpActionResult Get()
         {
             return Ok(_produtoRepository.ListarProdutos());
         }
+
+        public IHttpActionResult GetId(int idProduto)
+        {            
+            return Ok(_produtoRepository.SelecionarDadosProduto(idProduto));
+        }       
 
         public IHttpActionResult Put(ProdutoDto produto)
         {
@@ -41,7 +46,7 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Delete(int idproduto)
         {
-            _produtoRepository.DeletarProduto(idproduto);
+            //_produtoRepository.DeletarProduto(idproduto);
             return Ok();
         }
     }

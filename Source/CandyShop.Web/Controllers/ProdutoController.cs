@@ -41,12 +41,15 @@ namespace CandyShop.Web.Controllers
             return Content("Produto cadastrado com sucesso!!");
         }
 
-        public ActionResult DetalheProduto(/*int idProduto*/)
+        public ActionResult DetalheProduto(int idProduto)
         {
-            return View();
+            var response = _appProduto.DetalharProduto(idProduto);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro" + response.ContentAsString);
+            return View(response.Content);
         }
 
-        public ActionResult EditarProduto(/*int idProduto*/)
+        public ActionResult EditarProduto(int idProduto)
         {
             return View();
         }

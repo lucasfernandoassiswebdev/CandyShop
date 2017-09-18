@@ -5,5 +5,6 @@ namespace CandyShop.Core.Services.Produto
     public interface IProdutoService
     {
         void InserirProduto(ProdutoDto produto);
+        
     }
 }

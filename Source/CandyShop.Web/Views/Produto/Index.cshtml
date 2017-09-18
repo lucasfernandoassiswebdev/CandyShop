@@ -3,13 +3,6 @@
 @{
     Layout = null;
 }
-
-<style>
-    tr {
-        color: black;
-    }
-</style>
-
 <div>
     <form class="col s12" style="margin-left: -10%">
         <table class="table highlight">
@@ -42,13 +35,13 @@
                         @Html.DisplayFor(modelItem => item.Categoria)
                     </td>
                     <td>
-                        <a class="btn-floating btn-sm waves-effect waves-light blue darken-1" onclick="AjaxJs.detalheProduto();"><i class="material-icons">info_outline</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light blue darken-1" onclick="AjaxJs.detalheProduto(@item.IdProduto);"><i class="material-icons">info_outline</i></a>
                     </td>
                     <td>
-                        <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto();"><i class="material-icons">edit</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto(@item.IdProduto);"><i class="material-icons">edit</i></a>
                     </td>
                     <td>
-                        <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJs.excluirProduto();"><i class="material-icons">remove_shopping_cart</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJs.excluirProduto(@item.IdProduto);"><i class="material-icons">remove_shopping_cart</i></a>
                     </td>
                 </tr>
             }
@@ -56,3 +49,8 @@
     </form>
 </div>
 
+<style>
+    tr {
+        color: black;
+    }
+</style>
