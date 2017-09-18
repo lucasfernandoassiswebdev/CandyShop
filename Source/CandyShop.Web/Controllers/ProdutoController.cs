@@ -16,7 +16,6 @@ namespace CandyShop.Web.Controllers
             _appProduto = produto;
         }
         
-        // GET: Produto
         public ActionResult Index()
         {
             var response = _appProduto.ListarProdutos();

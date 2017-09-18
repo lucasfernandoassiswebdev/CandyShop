@@ -1,13 +1,9 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Padrao";
 }
 
 <script src="~/Js/Ajax.js?d=@DateTime.Now.Ticks" type="text/javascript"></script>
 <script type="text/javascript" src="../../Js/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
-
-<link href="~/Content/Main.css" rel="stylesheet" />
-
 <script>
     $(document).ready(function() {
         AjaxJs.init({
@@ -18,6 +14,9 @@
         });
     });
 </script>
+
+<link href="~/Content/Main.css" rel="stylesheet" />
+
 <!--modal de quantidade-->
 <div id="modal1" class="modal">
     <div class="modal-content center">

@@ -26,11 +26,6 @@
 
 <link rel="stylesheet" type="text/css" href="../../Content/indexAdmin.css">
 
-<style>
-    #DivGrid {
-    }
-</style>
-
 <!--modal de pesquisa de usuários-->
 <div id="modal1" class="modal">
     <div class="modal-content">
@@ -42,7 +37,20 @@
     <div class="modal-footer center">
         <a href="#!" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
     </div>
-</div>'
+</div>
+
+<!--modal de pesquisa de produtos-->
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <h3 class="center">Nome do produto:</h3>
+        <form>
+            <input type="text" id="nomeProduto" autocomplete="off" />
+        </form>
+    </div>
+    <div class="modal-footer center">
+        <a href="#!" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
+    </div>
+</div>
 
 <ul id="slide-out" class="side-nav fixed brown">
     <h3><font color="white">Candy</font><font color="red"> Shop</font></h3>
@@ -60,7 +68,7 @@
                 <ul class="brown-text">
                     <li><a class=" closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
                     <li><a class="closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
-                    <li><a class="modal-trigger" href="#modal1"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
+                    <li><a class="close-menu modal-trigger" href="#modal1"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
                     <li><a class="closeMenu" href="#!" onclick="AjaxJs.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
                 </ul>
             </div>
@@ -73,7 +81,7 @@
             <div class="collapsible-body">
                 <ul class="brown-text">
                     <li><a href="#!" class="closeMenu" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
-                    <li><a href="#!" class="closeMenu"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
+                    <li><a href="#modal2" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
                     <li><a href="#!" class="closeMenu" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
                 </ul>
             </div>
