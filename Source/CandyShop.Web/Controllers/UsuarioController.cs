@@ -52,10 +52,10 @@ namespace CandyShop.Web.Controllers
         {
             var usuario = _appUsuario.SelecionarUsuario(cpf);
 
-            if (usuario == null)
-                return HttpNotFound();
-
-            return View(usuario);
+            if (usuario.Status != HttpStatusCode.OK)
+                return Content("Erro " + usuario.ContentAsString);
+            
+            return View(usuario.Content);
         }
 
         public ActionResult Editar()

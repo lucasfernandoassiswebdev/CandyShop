@@ -15,16 +15,19 @@ namespace CandyShop.Repository
             CSSP_SelUsuario,
             CSSP_LisUsuario,
             CSSP_SelUsuariosDivida,
-            CSSP_DesUsuario
+            CSSP_DesUsuario,
+            CSSP_LisUsuarioIgual
         }
 
         public void InserirUsuario(UsuarioDto usuario)
         {
+            var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+
             ExecuteProcedure(Procedures.CSSP_InsUsuario);
             AddParameter("@NomeUsuario", usuario.NomeUsuario);
             AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
             AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
-            AddParameter("@CpfUsuario", usuario.Cpf);
+            AddParameter("@CpfUsuario", cpf);
             AddParameter("@Ativo",usuario.Ativo);
 
             ExecuteNonQuery();
@@ -50,12 +53,21 @@ namespace CandyShop.Repository
             ExecuteNonQuery();
         }
 
-        public bool SelecionarUsuario(string cpf)
+        public UsuarioDto SelecionarUsuario(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_SelUsuario);
             AddParameter("@Cpf", cpf);
-            using (var retorno = ExecuteReader())
-                return retorno.Read();
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    return new UsuarioDto()
+                    {
+                        Cpf = reader.ReadAsString("Cpf"),
+                        SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
+                        SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
+                        NomeUsuario = reader.ReadAsString("NomeUsuario"),
+                        Ativo = reader.ReadAsString("Ativo")
+                    };
+            return null;
         }
 
         public IEnumerable<UsuarioDto> ListarUsuario()
@@ -108,6 +120,16 @@ namespace CandyShop.Repository
                         Ativo = reader.ReadAsString("Ativo")
                     };
             return retorno;
+        }
+
+        public int VericaUsuarioIgual(string cpf)
+        {
+            ExecuteProcedure(Procedures.CSSP_LisUsuarioIgual);
+            AddParameter("@cpf", cpf);
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    return 1;
+            return 0;
         }
     }
 }

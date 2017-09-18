@@ -46,7 +46,7 @@ namespace CandyShop.Application
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync(_enderecoApi).Result;
+                var response = client.GetAsync($"{_enderecoApi}/Detalhes/{cpf}").Result;
                 return new Response<Usuario>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }

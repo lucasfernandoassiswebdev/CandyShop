@@ -23,8 +23,10 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult Post(UsuarioDto usuario)
         {
             _usuarioService.InserirUsuario(usuario);
+
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
+
             return Ok();
         }
 
@@ -49,6 +51,12 @@ namespace CandyShop.WebAPI.Controllers
         {
             _usuarioRepository.DesativarUsuario(cpf);
             return Ok();
+        }
+
+        [HttpGet, Route("api/Usuario/Detalhes/{cpf}")]
+        public IHttpActionResult GetWithCpf(string cpf)
+        {
+            return Ok(_usuarioRepository.SelecionarUsuario(cpf));
         }
 
     }
