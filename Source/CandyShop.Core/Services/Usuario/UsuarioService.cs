@@ -25,5 +25,16 @@ namespace CandyShop.Core.Services.Usuario
 
             _usuarioRepository.InserirUsuario(usuario);
         }
+
+        public void EditarUsuario(UsuarioDto usuario)
+        {
+            if (_usuarioRepository.VericaUsuarioIgual(usuario.Cpf) == 1)
+            {
+                _notification.Add("Usuario ja cadastrado!!!");
+                return;
+            }
+
+            _usuarioRepository.EditarUsuario(usuario);
+        }
     }
 }

@@ -53,7 +53,7 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpGet, Route("api/Usuario/Detalhes/{cpf}")]
+        [HttpGet, Route("api/Usuario/{cpf}/Detalhes")]
         public IHttpActionResult GetWithCpf(string cpf)
         {
             return Ok(_usuarioRepository.SelecionarUsuario(cpf));

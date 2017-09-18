@@ -89,12 +89,12 @@ CREATE PROCEDURE [dbo].[CSSP_UpdProduto]
 
 	BEGIN
 		UPDATE [dbo].[Produto]
-		SET	NomeProduto = @NomeProduto,
-			PrecoProduto = @PrecoProduto,
-			QtdeProduto = @QtdeProduto,
-			Ativo = @Ativo,
-			Categoria = @Categoria
-		WHERE IdProduto = @IdProduto
+			SET	NomeProduto = @NomeProduto,
+				PrecoProduto = @PrecoProduto,
+				QtdeProduto = @QtdeProduto,
+				Ativo = @Ativo,
+				Categoria = @Categoria
+			WHERE IdProduto = @IdProduto
 
 		IF @@ERROR <> 0
 					RETURN 1
@@ -124,8 +124,8 @@ CREATE PROCEDURE [dbo].[CSSP_SelProduto]
 
 	BEGIN
 		SELECT TOP 1 1
-		 FROM [dbo].[Produto] WITH(NOLOCK)
-			WHERE NomeProduto like '%' + @NomeProduto + '%'
+			FROM [dbo].[Produto] WITH(NOLOCK)
+			WHERE NomeProduto = @NomeProduto
 	END
 GO
 
@@ -152,7 +152,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProduto]
 
 	BEGIN
 	
-		SELECT IdProduto,
+		SELECT	IdProduto,
 				NomeProduto,
 				PrecoProduto,
 				QtdeProduto,
@@ -181,7 +181,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoInativo]
 	*/
 
 	BEGIN
-		SELECT IdProduto,
+		SELECT	IdProduto,
 				NomeProduto,
 				PrecoProduto,
 				QtdeProduto,
@@ -320,6 +320,33 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoCategoria]
 	END
 GO
 
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdPorNome]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisProdPorNome]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_LisProdPorNome]
+	@NomeProduto varchar (40)
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produto.sql
+	Objetivo..........: Realmente eu nao sei
+	Autor.............: SMN - João Guilherme
+ 	Data..............: 18/09/2017
+	Ex................: EXEC [dbo].[CSSP_LisProdPorNome]
+
+	*/
+
+	BEGIN
+	
+		SELECT * 
+			FROM [dbo].[Produto] WITH(NOLOCK)
+			WHERE NomeProduto LIKE '%' + @NomeProduto + '%'
+	END
+GO
+				
 
 
 				

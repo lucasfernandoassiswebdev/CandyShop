@@ -10,17 +10,23 @@ namespace CandyShop.Application
 {
     public class UsuarioApplication : IUsuarioApplication
     {
-        private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/usuario";
+        private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/Usuario";
 
         public Response<string> InserirUsuario(Usuario usuario)
         {
             using (var client = new HttpClient())
             {
                 var response = client.PostAsync(_enderecoApi, usuario, new JsonMediaTypeFormatter()).Result;
-                if (response.StatusCode != HttpStatusCode.OK)
-                    return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return response.StatusCode != HttpStatusCode.OK ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) : new Response<string>(response.StatusCode);
+            }
+        }
 
-                return new Response<string>(response.StatusCode);
+        public Response<string> EditarUsuario(Usuario usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.PutAsync(_enderecoApi, usuario, new JsonMediaTypeFormatter()).Result;
+                return response.StatusCode != HttpStatusCode.OK ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) : new Response<string>(response.StatusCode);
             }
         }
 
@@ -46,7 +52,7 @@ namespace CandyShop.Application
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync($"{_enderecoApi}/Detalhes/{cpf}").Result;
+                var response = client.GetAsync($"{_enderecoApi}/{cpf}/Detalhes").Result;
                 return new Response<Usuario>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }

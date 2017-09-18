@@ -13,7 +13,7 @@
         <form class="col s12" style="margin-left: -10%">
             <div class="row">
                 <div class="center">
-                    <h1 class="center">Cadastrar <font color="brown">usuário</font></h1>
+                    <h1 class="center">Editar <font color="brown">usuário</font></h1>
                     <img id="imagem" class="center" src="../../Imagens/user.png" />
                 </div>
                 <div class="file-field input-field">
@@ -27,17 +27,22 @@
                 </div>
             </div>
             <div class="row">
+                <div class="input-field col s12">
+                    <input id="Cpf" name="cpf" type="text" class="validate" value="@Model.Cpf" required data-length="50" autocomplete="off">
+                    
+                </div>
+            </div>
+            <div class="row">
                 <div class="input-field col s6">
-                    <input id="Nome" name="Nome" type="text" class="validate" required data-length="50" autocomplete="off">
-                    <label for="Nome">Nome do usuário:</label>
+                    <input id="Nome" name="Nome" type="text" class="validate" value="@Model.NomeUsuario"/>
                 </div>
                 <div class="input-field col s6">
-                    <input id="cpf" name="CPF" type="text" class="validate" required="">
-                    <label for="cpf">CPF do usuário:</label>
+                    <input id="saldo" name="SaldoUsuario" type="text" class="validate" value="@Model.SaldoUsuario" required="">
+                    
                 </div>
             </div>
             <div class="row center">
-                <a class="btn waves waves-effect waves-light" disabled>Enviar</a>
+                <a class="btn waves waves-effect waves-light" onclick="AjaxJs.concluirEdicaoUsuario()">Enviar</a>
             </div>
         </form>
     </div>
