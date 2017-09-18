@@ -8,5 +8,6 @@ namespace CandyShop.Application.Interfaces
         Response<IEnumerable<Usuario>> ListarUsuarios();
         Response<IEnumerable<Usuario>> ListarUsuariosEmDivida();
         Response<string> InserirUsuario(Usuario usuario);
+        Response<Usuario> SelecionarUsuario(string cpf);
     }
 }

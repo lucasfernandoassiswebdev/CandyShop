@@ -29,6 +29,16 @@
         });
     }
 
+    function chamaPaginaComIdentificador(endereco,identificador) {
+        $.get(endereco,identificador).done(function (data) { //data é o conteudo da view
+            $('#DivGrid').slideUp(function () { //a div é recolhida
+                $('#DivGrid').hide().html(data).slideDown(); //escondida, carregada e demonstrada novamente
+            });
+        }).fail(function (xhr) {
+            console.log(xhr.responseText);
+        });
+    }
+
     function concluirCadastro(endereco, objeto, tela) {
         $.post(endereco, objeto)
             .done(function () { //passar o parametro data aqui quando for definida a mensagem
@@ -65,8 +75,19 @@
     };
     var pagamento = function () {
         chamaPagina(url.pagamento);
-    };    
-
+    };  
+    var editarUsuario = function () {
+        chamaPagina(url.editarProduto);
+    };
+    var excluirUsuario = function () {
+        chamaPagina(url.excluirProduto);
+    };
+    var detalheUsuario = function (cpf) {
+        var usuario = {
+            Cpf: cpf
+        };
+        chamaPaginaComIdentificador(url.detalheUsuario,usuario);
+    };
     var concluirCadastroUsuario = function () {
         var usuario = {
             Cpf: $('#cpf').val(),
@@ -83,8 +104,6 @@
         chamaPagina(url.cadastrarProduto);
     };    
      
-    
-
     var concluirCadastroProduto = function () {
         var produto = {
             NomeProduto: $('#NomeProduto').val(),
@@ -121,7 +140,9 @@
         concluirCadastroUsuario: concluirCadastroUsuario,
         listaUsuario: listaUsuario,
         cadastroUsuario: cadastroUsuario,
-
+        editarUsuario: editarUsuario,
+        detalheUsuario: detalheUsuario,
+        excluirUsuario: excluirUsuario,
         //produtos
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,
@@ -132,23 +153,3 @@
     };
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.
 
-//var concluirCadastroUsuario = function () {
-//    $.post(url.concluirCadastroUsuario, usuario)
-//        .done(function () { //passar o parametro data aqui quando for definida a mensagem
-//            chamaPagina(url.cadastrarProduto);
-//        })
-//        .fail(function (xhr) {
-//            console.log(xhr.responseText);
-//        });
-//};
-
-
-//var concluirCadastroProduto = function () {
-//    $.post(url.concluirCadastroProduto, {
-
-//    }).done(function () { //passar o parametro data aqui quando for definida a mensagem
-//        chamaPagina(url.cadastrarProduto);
-//    }).fail(function (xhr) {
-//        console.log(xhr.responseText);
-//    });
-//};

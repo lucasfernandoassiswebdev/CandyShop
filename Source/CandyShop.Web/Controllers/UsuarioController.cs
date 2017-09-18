@@ -48,6 +48,16 @@ namespace CandyShop.Web.Controllers
             return Content("Deu bom!!");
         }
 
+        public ActionResult Detalhes(string cpf)
+        {
+            var usuario = _appUsuario.SelecionarUsuario(cpf);
+
+            if (usuario == null)
+                return HttpNotFound();
+
+            return View(usuario);
+        }
+
         public ActionResult Editar()
         {
             return View();

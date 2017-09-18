@@ -258,6 +258,7 @@
     <Content Include="Views\Produto\EditarProduto.cshtml" />
     <Content Include="Views\Produto\ExcluirProduto.cshtml" />
     <Content Include="Views\Usuario\ListarUsuariosEmDivida.cshtml" />
+    <Content Include="Views\Usuario\Detalhes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

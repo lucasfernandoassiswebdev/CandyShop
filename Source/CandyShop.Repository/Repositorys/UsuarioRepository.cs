@@ -11,7 +11,7 @@ namespace CandyShop.Repository
         private enum Procedures
         {
             GCS_InsUsuario,
-            GCS_DelUsuario,
+            GCS_DesUsuario,
             GCS_UpdUsuario,
             GCS_SelUsuario,
             GCS_LisUsuario,
@@ -25,6 +25,7 @@ namespace CandyShop.Repository
             AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
             AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
             AddParameter("@CpfUsuario", usuario.Cpf);
+            AddParameter("@Ativo",usuario.Ativo);
 
             ExecuteNonQuery();
         }
@@ -36,14 +37,16 @@ namespace CandyShop.Repository
             AddParameter("@NomeUsuario", usuario.NomeUsuario);
             AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
             AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
+            AddParameter("@Ativo", usuario.Ativo);
 
             ExecuteNonQuery();
         }
 
         public void DeletarUsuario(string cpf)
         {
-            ExecuteProcedure(Procedures.GCS_DelUsuario);
+            ExecuteProcedure(Procedures.GCS_DesUsuario);
             AddParameter("@Cpf", cpf);
+         
             ExecuteNonQuery();
         }
 
@@ -66,7 +69,8 @@ namespace CandyShop.Repository
                         Cpf = reader.ReadAsString("Cpf"),
                         SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
                         SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
-                        NomeUsuario = reader.ReadAsString("NomeUsuario")
+                        NomeUsuario = reader.ReadAsString("NomeUsuario"),
+                        Ativo = reader.ReadAsString("Ativo")
                     });
             return retorno;
         }
@@ -82,7 +86,8 @@ namespace CandyShop.Repository
                         Cpf = reader.ReadAsString("Cpf"),
                         SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
                         SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
-                        NomeUsuario = reader.ReadAsString("NomeUsuario")
+                        NomeUsuario = reader.ReadAsString("NomeUsuario"),
+                        Ativo = reader.ReadAsString("Ativo")
                     });
             return retorno;
         }
@@ -99,7 +104,8 @@ namespace CandyShop.Repository
                         Cpf = reader.ReadAsString("Cpf"),
                         SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
                         SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
-                        NomeUsuario = reader.ReadAsString("NomeUsuario")
+                        NomeUsuario = reader.ReadAsString("NomeUsuario"),
+                        Ativo = reader.ReadAsString("Ativo")
                     };
             return retorno;
         }

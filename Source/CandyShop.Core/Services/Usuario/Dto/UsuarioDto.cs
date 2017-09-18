@@ -6,5 +6,6 @@
         public string NomeUsuario { get; set; }
         public string SenhaUsuario { get; set; }
         public decimal SaldoUsuario { get; set; }
+        public string Ativo { get; set; }
     }
 }
