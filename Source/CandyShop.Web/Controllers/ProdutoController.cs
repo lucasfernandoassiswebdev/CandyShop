@@ -51,12 +51,19 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult EditarProduto(int idProduto)
         {
-            return View();
+            var response = _appProduto.DetalharProduto(idProduto);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro" + response.ContentAsString);
+            return View(response.Content);
         }
 
         [HttpPost]
         public ActionResult EditarProduto(Produto produto)
         {
+
+            var response = _appProduto.EditarProduto(produto);
+            if (response.Status != HttpStatusCode.OK)
+                return Content(response.ContentAsString.ToString());
             return Content("Produto editado com sucesso!");
         }
 

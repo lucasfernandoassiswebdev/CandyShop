@@ -119,11 +119,11 @@
         chamaPaginaComIdentificador(url.detalheProduto, produto);
     };
     var editarProduto = function (id) {
-        var produto = { Id: id };
+        var produto = { IdProduto: id };
         chamaPaginaComIdentificador(url.editarProduto, produto);
     };
     var excluirProduto = function (id) {
-        var produto = { Id: id };
+        var produto = { IdProduto: id };
         chamaPaginaComIdentificador(url.excluirProduto, produto);
     };
 
