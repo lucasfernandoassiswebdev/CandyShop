@@ -45,7 +45,7 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_DesUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DesUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_DesUsuario]
 GO
 
@@ -74,8 +74,7 @@ CREATE PROCEDURE [dbo].[CSSP_DesUsuario]
 	END
 GO
 		
-		
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_UpdUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_UpdUsuario]
 GO
 
@@ -166,7 +165,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 				SaldoUsuario,
 				NomeUsuario,
 				Ativo
-				 FROM [dbo].[Usuario]
+				FROM [dbo].[Usuario]
 	END
 GO
 
@@ -197,7 +196,36 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 			FROM [dbo].[Usuario]
 			WHERE SaldoUsuario < 0
 	END
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_CSSP_LisUsuarioIgual]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_CSSP_LisUsuarioIgual]
 GO
 
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuarioIgual]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
+GO
 
+CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
+	@cpf varchar(14)
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Verificar se já existe um usuário com este mesmo CPF
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 18/09/2017
+	Ex................: EXEC [dbo].[GCS_CSSP_LisUsuarioIgual]
+
+	*/
+
+	BEGIN
+		SELECT TOP 1 1
+			FROM Usuario
+			WHERE CPF = @cpf
+	END
+GO
+				
 								
+

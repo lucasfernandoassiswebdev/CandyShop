@@ -12,7 +12,7 @@ CREATE TABLE Produto (
 )
 
 CREATE TABLE Usuario (
-	Cpf varchar(14) constraint PK_Cpf primary key,
+	Cpf varchar(11) constraint PK_Cpf primary key,
 	NomeUsuario varchar(50),
 	SenhaUsuario varchar(12),
 	SaldoUsuario decimal,
