@@ -9,15 +9,15 @@ namespace CandyShop.Repository.Repositorys
     {
         private enum Procedures
         {
-            GCS_LisCompraProduto,
-            GCS_LisCompraProdutoIdVenda,
-            GCS_InsCompraProduto,
-            GCS_UpdCompraProduto
+            CSSP_LisCompraProduto,
+            CSSP_LisCompraProdutoIdVenda,
+            CSSP_InsCompraProduto,
+            CSSP_UpdCompraProduto
         }
 
         public void EditarCompraProduto(CompraProdutoDto compraProduto)
         {
-            ExecuteProcedure(Procedures.GCS_UpdCompraProduto);
+            ExecuteProcedure(Procedures.CSSP_UpdCompraProduto);
             AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
@@ -27,7 +27,7 @@ namespace CandyShop.Repository.Repositorys
 
         public void InserirCompraProduto(CompraProdutoDto compraProduto)
         {
-            ExecuteProcedure(Procedures.GCS_InsCompraProduto);
+            ExecuteProcedure(Procedures.CSSP_InsCompraProduto);
             AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
@@ -37,7 +37,7 @@ namespace CandyShop.Repository.Repositorys
 
         public IEnumerable<CompraProdutoDto> ListarCompraProduto()
         {
-            ExecuteProcedure(Procedures.GCS_LisCompraProduto);
+            ExecuteProcedure(Procedures.CSSP_LisCompraProduto);
             var retorno = new List<CompraProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -58,7 +58,7 @@ namespace CandyShop.Repository.Repositorys
 
         public IEnumerable<CompraProdutoDto> ListarCompraProdutoIdVenda(int idVenda)
         {
-            ExecuteProcedure(Procedures.GCS_LisCompraProdutoIdVenda);
+            ExecuteProcedure(Procedures.CSSP_LisCompraProdutoIdVenda);
             AddParameter("@IdCompra",idVenda);
             var retorno = new List<CompraProdutoDto>();
             using (var reader = ExecuteReader())

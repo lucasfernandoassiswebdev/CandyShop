@@ -10,21 +10,21 @@ namespace CandyShop.Repository
     {
         private enum Procedures
         {
-            GCS_InsCompra,
-            GCS_UpdCompra,
-            GCS_LisCompra,
-            GCS_DelCompra,
-            GCS_LisCpfCompra,
-            GCS_SelCompra,
-            GCS_InsCompraProduto,
-            GCS_UpdCompraProduto,
-            GCS_DelCompraProduto,
-            GCS_LisCompraNomeUsuario
+            CSSP_InsCompra,
+            CSSP_UpdCompra,
+            CSSP_LisCompra,
+            CSSP_DelCompra,
+            CSSP_LisCpfCompra,
+            CSSP_SelCompra,
+            CSSP_InsCompraProduto,
+            CSSP_UpdCompraProduto,
+            CSSP_DelCompraProduto,
+            CSSP_LisCompraNomeUsuario
         }
 
         public void InserirCompra(CompraDto compra)
         {
-            ExecuteProcedure(Procedures.GCS_InsCompra);
+            ExecuteProcedure(Procedures.CSSP_InsCompra);
             AddParameter("@UsuarioCompra", compra.Usuario.Cpf);
             AddParameter("@DataCompra", compra.DataCompra);
 
@@ -33,7 +33,7 @@ namespace CandyShop.Repository
 
         public void InserirItens(CompraProdutoDto item)
         {
-            ExecuteProcedure(Procedures.GCS_InsCompraProduto);
+            ExecuteProcedure(Procedures.CSSP_InsCompraProduto);
             AddParameter("@IdProduto", item.Produto.IdProduto);
             AddParameter("@QtdeProduto", item.QtdeCompra);
             AddParameter("@IdCompra", item.IdCompra);
@@ -43,7 +43,7 @@ namespace CandyShop.Repository
 
         public void EditarCompra(CompraDto compra)
         {
-            ExecuteProcedure(Procedures.GCS_UpdCompra);
+            ExecuteProcedure(Procedures.CSSP_UpdCompra);
             AddParameter("@UsuarioCompra", compra.Usuario.Cpf);
             AddParameter("@IdCompra", compra.IdCompra);
             AddParameter("@DataCompra", compra.DataCompra);
@@ -53,14 +53,14 @@ namespace CandyShop.Repository
 
         public void DeletarCompra(int idCompra)
         {
-            ExecuteProcedure(Procedures.GCS_DelCompra);
+            ExecuteProcedure(Procedures.CSSP_DelCompra);
             AddParameter("@IdCompra", idCompra);
             ExecuteNonQuery();
         }
 
         public IEnumerable<CompraDto> ListarCompra()
         {
-            ExecuteProcedure(Procedures.GCS_LisCompra);
+            ExecuteProcedure(Procedures.CSSP_LisCompra);
             var retorno = new List<CompraDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -80,7 +80,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<CompraDto> ListarCompraPorCpf(string cpf)
         {
-            ExecuteProcedure(Procedures.GCS_LisCpfCompra);
+            ExecuteProcedure(Procedures.CSSP_LisCpfCompra);
             AddParameter("@Cpf", cpf);
             var retorno = new List<CompraDto>();
             using (var reader = ExecuteReader())
@@ -103,7 +103,7 @@ namespace CandyShop.Repository
 
         public int SelecionarCompra(int idCompra)
         {
-            ExecuteProcedure(Procedures.GCS_SelCompra);
+            ExecuteProcedure(Procedures.CSSP_SelCompra);
             using (var reader = ExecuteReader())
                 if (reader.Read())
                     return 1;
@@ -112,7 +112,7 @@ namespace CandyShop.Repository
 
         public CompraDto SelecionarDadosCompra(int idCompra)
         {
-            ExecuteProcedure(Procedures.GCS_SelCompra);
+            ExecuteProcedure(Procedures.CSSP_SelCompra);
             AddParameter("@IdCompra", idCompra);
             CompraDto retorno = new CompraDto();
             using (var reader = ExecuteReader())
@@ -133,7 +133,7 @@ namespace CandyShop.Repository
 
         public void EditaItens(CompraProdutoDto compraProduto)
         {
-            ExecuteProcedure(Procedures.GCS_UpdCompraProduto);
+            ExecuteProcedure(Procedures.CSSP_UpdCompraProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
             AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
@@ -142,7 +142,7 @@ namespace CandyShop.Repository
 
         public void DeletaItens(int idcompra, int idproduto)
         {
-            ExecuteProcedure(Procedures.GCS_DelCompraProduto);
+            ExecuteProcedure(Procedures.CSSP_DelCompraProduto);
             AddParameter("@IdCompra", idcompra);
             AddParameter("@IdProduto", idproduto);
             ExecuteNonQuery();
@@ -150,7 +150,7 @@ namespace CandyShop.Repository
 
         public IEnumerable<CompraDto> ListarCompraPorNome(string nome)
         {
-            ExecuteProcedure(Procedures.GCS_LisCompraNomeUsuario);
+            ExecuteProcedure(Procedures.CSSP_LisCompraNomeUsuario);
             AddParameter("@Nome", nome);
             var retorno = new List<CompraDto>();
             using (var reader = ExecuteReader())

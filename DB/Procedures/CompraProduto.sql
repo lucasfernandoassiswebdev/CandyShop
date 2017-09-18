@@ -1,10 +1,10 @@
 USE CandyShop
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_InsCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_InsCompraProduto]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_InsCompraProduto]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_InsCompraProduto]
+CREATE PROCEDURE [dbo].[CSSP_InsCompraProduto]
 	@IdProduto int,
 	@IdCompra int,
 	@QtdeProduto int
@@ -17,7 +17,7 @@ CREATE PROCEDURE [dbo].[GCS_InsCompraProduto]
 	Objetivo..........: Inserir um produto e a quantidade dele numa venda.
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_InsCompraProduto]
+	Ex................: EXEC [dbo].[CSSP_InsCompraProduto]
 
 	*/
 
@@ -31,11 +31,11 @@ CREATE PROCEDURE [dbo].[GCS_InsCompraProduto]
 	END
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_UpdCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_UpdCompraProduto]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_UpdCompraProduto]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_UpdCompraProduto]
+CREATE PROCEDURE [dbo].[CSSP_UpdCompraProduto]
 	@IdCompra int,
 	@IdProduto int, 
 	@QtdeProduto int
@@ -48,7 +48,7 @@ CREATE PROCEDURE [dbo].[GCS_UpdCompraProduto]
 	Objetivo..........: Objetivo
 	Autor.............: SMN - Rafael Morais
  	Data..............: 01/01/2017
-	Ex................: EXEC [dbo].[GCS_UpdCompraProduto]
+	Ex................: EXEC [dbo].[CSSP_UpdCompraProduto]
 
 	*/
 
@@ -68,11 +68,11 @@ CREATE PROCEDURE [dbo].[GCS_UpdCompraProduto]
 GO
 
 --temporariamente inutilizada
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_DelCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_DelCompraProduto]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DelCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_DelCompraProduto]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_DelCompraProduto]
+CREATE PROCEDURE [dbo].[CSSP_DelCompraProduto]
 	@IdCompra int,
 	@IdProduto int
 
@@ -84,7 +84,7 @@ CREATE PROCEDURE [dbo].[GCS_DelCompraProduto]
 	Objetivo..........: Excluir um item da compra
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_DelCompraProduto]
+	Ex................: EXEC [dbo].[CSSP_DelCompraProduto]
 
 	*/
 
@@ -95,11 +95,11 @@ CREATE PROCEDURE [dbo].[GCS_DelCompraProduto]
 GO
 								
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_LisCompraProduto]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCompraProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisCompraProduto]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_LisCompraProduto]
+CREATE PROCEDURE [dbo].[CSSP_LisCompraProduto]
 	
 	AS
 
@@ -109,7 +109,7 @@ CREATE PROCEDURE [dbo].[GCS_LisCompraProduto]
 	Objetivo..........: Listar produtos de uma compra específica
 	Autor.............: SMN - Rafael Morais
  	Data..............: 01/01/2017
-	Ex................: EXEC [dbo].[GCS_LisCompraProduto]
+	Ex................: EXEC [dbo].[CSSP_LisCompraProduto]
 
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select 
@@ -128,11 +128,11 @@ CREATE PROCEDURE [dbo].[GCS_LisCompraProduto]
 	END
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisCompraProdutoIdVenda]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].GCS_LisCompraProdutoIdVenda
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCompraProdutoIdVenda]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].CSSP_LisCompraProdutoIdVenda
 GO
 
-CREATE PROCEDURE [dbo].GCS_LisCompraProdutoIdVenda
+CREATE PROCEDURE [dbo].CSSP_LisCompraProdutoIdVenda
 	@IdCompra int
 
 	AS
@@ -143,7 +143,7 @@ CREATE PROCEDURE [dbo].GCS_LisCompraProdutoIdVenda
 	Objetivo..........: Listar produtos de uma compra específica
 	Autor.............: SMN - Rafael Morais
  	Data..............: 01/01/2017
-	Ex................: EXEC [dbo].[GCS_LisCompraProduto]
+	Ex................: EXEC [dbo].[CSSP_LisCompraProduto]
 
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select 

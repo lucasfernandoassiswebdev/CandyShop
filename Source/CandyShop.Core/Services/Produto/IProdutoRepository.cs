@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public interface IProdutoRepository
 {
     void InserirProduto(ProdutoDto NomeProduto);
-    void DeletarProduto(int idProduto);
+    void DesativarProduto(int idProduto);
     void UpdateProduto(ProdutoDto produto);
     bool SelecionarProduto(string NomeProduto);
     IEnumerable<ProdutoDto> ListarProdutos();

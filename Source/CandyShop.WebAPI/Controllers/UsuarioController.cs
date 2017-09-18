@@ -33,7 +33,7 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_usuarioRepository.ListarUsuario());
         }
 
-        [HttpGet, Route("api/Usuario/UsuariosDivida")]
+        [HttpGet, Route("api/Usuario/UsuariosDivida")] // Colocar quando controller tiver mais de um metodos GET
         public IHttpActionResult GetUsuariosDivida()
         {
             return Ok(_usuarioRepository.ListarUsuarioDivida());
@@ -47,7 +47,7 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Delete(string cpf)
         {
-            _usuarioRepository.DeletarUsuario(cpf);
+            _usuarioRepository.DesativarUsuario(cpf);
             return Ok();
         }
 

@@ -1,11 +1,11 @@
 USE CandyShop
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_InsUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_InsUsuario]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_InsUsuario]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_InsUsuario]
+CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	@NomeUsuario varchar(50),
 	@SenhaUsuario varchar(12) = 'password',
 	@SaldoUsuario decimal(18,2) = 0,
@@ -22,7 +22,7 @@ CREATE PROCEDURE [dbo].[GCS_InsUsuario]
 	Ex................: 
 	
 	BEGIN TRANSACTION
-	EXEC [dbo].[GCS_InsUsuario]
+	EXEC [dbo].[CSSP_InsUsuario]
 		@NomeUsuario = 'Cu',
 		@SaldoUsuario = 10,
 		@CpfUsuario = '123.123.123-12'
@@ -46,10 +46,10 @@ GO
 
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_DesUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_DesUsuario]
+	DROP PROCEDURE [dbo].[CSSP_DesUsuario]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_DesUsuario]
+CREATE PROCEDURE [dbo].[CSSP_DesUsuario]
 	@Cpf varchar(14)
 	AS
 
@@ -59,7 +59,7 @@ CREATE PROCEDURE [dbo].[GCS_DesUsuario]
 	Objetivo..........: Deletar cadatro de usuario
 	Autor.............: SMN - João Guilherme
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_DelUsuario]
+	Ex................: EXEC [dbo].[CSSP_DelUsuario]
 
 	*/
 
@@ -76,10 +76,10 @@ GO
 		
 		
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_UpdUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_UpdUsuario]
+	DROP PROCEDURE [dbo].[CSSP_UpdUsuario]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_UpdUsuario]
+CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 	@Cpf varchar(14),
 	@NomeUsuario varchar(50),
 	@SenhaUsuario varchar(12),
@@ -93,7 +93,7 @@ CREATE PROCEDURE [dbo].[GCS_UpdUsuario]
 	Objetivo..........: Editar informaçoes do usuario
 	Autor.............: SMN - João Guilherme
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_UpdUsuario]
+	Ex................: EXEC [dbo].[CSSP_UpdUsuario]
 
 	*/
 
@@ -115,10 +115,10 @@ GO
 
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_SelUsuario]
+	DROP PROCEDURE [dbo].[CSSP_SelUsuario]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_SelUsuario]
+CREATE PROCEDURE [dbo].[CSSP_SelUsuario]
 	@Cpf varchar(14)
 	AS
 
@@ -128,7 +128,7 @@ CREATE PROCEDURE [dbo].[GCS_SelUsuario]
 	Objetivo..........: Selecionar Usuarios
 	Autor.............: SMN - João Guilherme
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_SelUsuario]
+	Ex................: EXEC [dbo].[CSSP_SelUsuario]
 
 	*/
 
@@ -140,10 +140,10 @@ GO
 				
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_LisUsuario]
+	DROP PROCEDURE [dbo].[CSSP_LisUsuario]
 GO
 	
-CREATE PROCEDURE [dbo].[GCS_LisUsuario]
+CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 
 	AS
 
@@ -153,7 +153,7 @@ CREATE PROCEDURE [dbo].[GCS_LisUsuario]
 	Objetivo..........: Listar todos os usuario
 	Autor.............: SMN - Rafael Morais
  	Data..............: 07/07/2017
-	Ex................: EXEC [dbo].[GCS_LisUsuario]
+	Ex................: EXEC [dbo].[CSSP_LisUsuario]
 
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select 
@@ -171,10 +171,10 @@ CREATE PROCEDURE [dbo].[GCS_LisUsuario]
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelUsuariosDivida]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_SelUsuariosDivida]
+	DROP PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_SelUsuariosDivida]
+CREATE PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 
 	AS
 
@@ -184,7 +184,7 @@ CREATE PROCEDURE [dbo].[GCS_SelUsuariosDivida]
 	Objetivo..........: Selecionar usuarios com saldo negativo
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 05/09/2017
-	Ex................: EXEC [dbo].[GCS_SelUsuariosDivida]
+	Ex................: EXEC [dbo].[CSSP_SelUsuariosDivida]
 
 	*/
 
@@ -198,4 +198,6 @@ CREATE PROCEDURE [dbo].[GCS_SelUsuariosDivida]
 			WHERE SaldoUsuario < 0
 	END
 GO
+
+
 								
