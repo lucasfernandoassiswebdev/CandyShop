@@ -8,6 +8,5 @@ namespace CandyShop.Application.ViewModels
         public Usuario Usuario { get; set; }
         public DateTime DataPagamento { get; set; }
         public decimal ValorPagamento { get; set; }
-
     }
 }
