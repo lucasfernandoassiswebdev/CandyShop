@@ -10,7 +10,7 @@ namespace CandyShop.Application
 {
     public class UsuarioApplication : IUsuarioApplication
     {
-        private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/usuario";
+        private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/Usuario";
 
         public Response<string> InserirUsuario(Usuario usuario)
         {
@@ -25,7 +25,7 @@ namespace CandyShop.Application
         {
             using (var client = new HttpClient())
             {
-                var response = client.PostAsync(_enderecoApi, usuario, new JsonMediaTypeFormatter()).Result;
+                var response = client.PutAsync(_enderecoApi, usuario, new JsonMediaTypeFormatter()).Result;
                 return response.StatusCode != HttpStatusCode.OK ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) : new Response<string>(response.StatusCode);
             }
         }
