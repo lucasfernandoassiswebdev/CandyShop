@@ -1,3 +1,5 @@
+USE CandyShop
+GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_InsUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[GCS_InsUsuario]
@@ -16,8 +18,15 @@ CREATE PROCEDURE [dbo].[GCS_InsUsuario]
 	Objetivo..........: Inserir Usuarios 
 	Autor.............: SMN - João Guilherme
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[GCS_InsUsuario]
+	Ex................: 
 	
+	BEGIN TRANSACTION
+	EXEC [dbo].[GCS_InsUsuario]
+		@NomeUsuario = 'Cu',
+		@SaldoUsuario = 10,
+		@CpfUsuario = '123.123.123-12'
+	ROLLBACK TRANSACTION
+
 	Editado Por.......: SMN - Rafael Morais
 	Objetivo..........: Adicionar a o campo de cpf na proceure 
 	Data..............: 07/09/2017

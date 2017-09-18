@@ -22,8 +22,8 @@ namespace CandyShop.Repository
         {
             ExecuteProcedure(Procedures.GCS_InsUsuario);
             AddParameter("@NomeUsuario", usuario.NomeUsuario);
-            AddParameter("@SenhaUsuario", "123");
-            AddParameter("@SaldoUsuario", 0);
+            AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
+            AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
             AddParameter("@CpfUsuario", usuario.Cpf);
 
             ExecuteNonQuery();

@@ -10,7 +10,8 @@ namespace CandyShop.WebAPI
         {
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
-          
+            config.Routes.MapHttpRoute("DefaultApiWithAction", "api/{controller}/{action}");
+
             config.Formatters.Clear();
             config.Formatters.Add(new JsonMediaTypeFormatter());
 
