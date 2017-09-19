@@ -1,6 +1,7 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Core.Services.Usuario.Dto;
+using System;
 using System.Net;
 using System.Web.Http;
 
@@ -12,7 +13,8 @@ namespace CandyShop.WebAPI.Controllers
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService)
+        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository,
+            IUsuarioService usuarioService)
         {
             _notification = notification;
             _usuarioRepository = usuarioRepository;
@@ -21,12 +23,16 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Post(UsuarioDto usuario)
         {
-            _usuarioService.InserirUsuario(usuario);
-
-            if (_notification.HasNotification())
-                return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
-
-            return Ok();
+            try
+            {
+                if (_notification.HasNotification())
+                    _usuarioRepository.InserirUsuario(usuario);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         public IHttpActionResult Get()
@@ -42,13 +48,19 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Put(UsuarioDto usuario)
         {
-            _usuarioService.EditarUsuario(usuario);
 
-            if (_notification.HasNotification())
-                return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
-
-            return Ok();
+            try
+            {
+                if (_notification.HasNotification())
+                    _usuarioRepository.EditarUsuario(usuario);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, _notification.HasNotification());
+            }
         }
+
 
         public IHttpActionResult Delete(string cpf)
         {

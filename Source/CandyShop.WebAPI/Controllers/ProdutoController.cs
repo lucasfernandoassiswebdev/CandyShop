@@ -1,6 +1,7 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Produto.Dto;
+using System;
 using System.Net;
 using System.Web.Http;
 
@@ -22,10 +23,16 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Post(ProdutoDto produto)
         {
-            _produtoService.InserirProduto(produto);
-            if (_notification.HasNotification())
-                return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
-            return Ok();
+            try
+            {
+                if (_notification.HasNotification())
+                    _produtoRepository.InserirProduto(produto);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable,_notification.GetNotification());
+            }
         }
 
         public IHttpActionResult Get()
@@ -34,11 +41,11 @@ namespace CandyShop.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route ("api/produto/selecionar/{idProduto}")]
+        [Route("api/produto/selecionar/{idProduto}")]
         public IHttpActionResult GetId(int idProduto)
-        {            
+        {
             return Ok(_produtoRepository.SelecionarDadosProduto(idProduto));
-        }       
+        }
 
         public IHttpActionResult Put(ProdutoDto produto)
         {

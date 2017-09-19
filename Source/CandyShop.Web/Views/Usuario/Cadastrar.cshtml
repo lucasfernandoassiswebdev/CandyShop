@@ -4,20 +4,24 @@
     Layout = null;
 }
 
-<link rel="stylesheet" href="../../Content/formCadastroUsuario.css" />
+<link rel="stylesheet" type="text/css" href="../../Content/formCadastroUsuario.css" />
 <script type="text/javascript" src="../../Js/scriptsCadastroUsuario.js"></script>
 
 <div class="container">
     <div class="row">
-        <form class="col s12" style="margin-left: -10%">
+        <form class="col s12">
             <div class="row">
                 <div class="center">
-                    <h1 class="center">Cadastrar <font color="brown">usuário</font></h1>
-                    <img id="imagem" class="center" src="../../Imagens/user.png" />
+                    <h1 class="center">Cadastrar usuário</h1>
+                    <img id="imagem" class="center" src="../../Imagens/user.png" alt="imagem não disponível :("/>
                 </div>
                 <div class="file-field input-field">
-                    <div class="btn">
-                        <span>File</span>
+                    <div class="btn-floating center" style="margin-left: 48%;">
+                        <span class="center">
+                            <a>
+                                <i class="material-icons">add</i>
+                            </a>
+                        </span>
                         <input id="fotoUsuario" type="file" accept="image/x-png,image/gif,image/jpeg">
                     </div>
                     <div class="file-path-wrapper">

@@ -9,3 +9,7 @@ img {
 .container {
 	width: 85%;
 }
+
+input {
+	text-align: center;
+}
