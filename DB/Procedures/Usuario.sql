@@ -196,7 +196,7 @@ GO
 
 CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 	@nome varchar(50),
-	@cpf varchar(14)
+	@cpf varchar(11)
 	AS
 
 	/*
