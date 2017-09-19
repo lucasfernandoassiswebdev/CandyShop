@@ -1,5 +1,6 @@
 ﻿html {
-	color: red;
+	color: #CD2626;
+	font-family: Arial;
 }
 
 header, main, footer , #DivGrid{
@@ -55,4 +56,12 @@ h3 {
 
 th {
 	color: brown;
+}
+
+.vinho {
+	background-color: #CD2626;
+}
+
+input {
+	color: black;
 }
