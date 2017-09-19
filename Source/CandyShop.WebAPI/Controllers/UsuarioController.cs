@@ -47,6 +47,12 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_usuarioRepository.ListarUsuarioDivida());
         }
 
+        [HttpGet, Route("api/Usuario/inativos")] // Colocar quando controller tiver mais de um metodos GET
+        public IHttpActionResult GetUsuariosInativos()
+        {
+            return Ok(_usuarioRepository.ListarUsuarioInativo());
+        }
+
         public IHttpActionResult Put(UsuarioDto usuario)
         {
 

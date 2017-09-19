@@ -11,6 +11,7 @@ namespace CandyShop.Core.Services.Usuario
         int VericaUsuarioIgual(UsuarioDto usuario);
         UsuarioDto SelecionarUsuario(string cpf);
         IEnumerable<UsuarioDto> ListarUsuario();
+        IEnumerable<UsuarioDto> ListarUsuarioInativo();
         IEnumerable<UsuarioDto> ListarUsuarioDivida();
         UsuarioDto SelecionarDadosUsuario(string cpf);
     }

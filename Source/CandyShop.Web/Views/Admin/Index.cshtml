@@ -18,6 +18,7 @@
             editarUsuario: '@Url.Action("Editar","Usuario")',
             desativarUsuario: '@Url.Action("Desativar", "Usuario")',
             desativarUsuarioConfirmado: '@Url.Action("DesativarUsuario", "Usuario")',
+            listarUsuarioInativo: '@Url.Action("ListarInativos", "Usuario")',
             //produtos
             listaProduto: '@Url.Action("Index", "Produto")',
             cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")',
@@ -81,6 +82,8 @@
                         <li><a class="closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
                         <li><a class="close-menu modal-trigger" href="#modal1"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJs.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
+
                     </ul>
                 </div>
             </li>
@@ -94,7 +97,7 @@
                         <li><a href="#!" class="closeMenu" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
                         <li><a href="#modal2" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarInativos()"><i class="material-icons">list</i>Listar Inativos</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
                     </ul>
                 </div>
             </li>

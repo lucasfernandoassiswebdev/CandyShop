@@ -35,6 +35,16 @@ namespace CandyShop.Web.Controllers
             return View(response.Content);
         }
 
+        public ActionResult ListarInativos()
+        {
+            var response = _appUsuario.ListarInativos();
+            if (response.Status != HttpStatusCode.OK)
+            {
+                return Content("Erro " + response.ContentAsString.First());
+            }
+            return View(response.Content);
+        }
+
         public ActionResult Cadastrar()
         {
             return View();

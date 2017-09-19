@@ -114,6 +114,9 @@
         var usuario = { Cpf: cpf };
         concluirAcao(url.desativarUsuarioConfirmado, usuario, url.listaUsuario);
     };
+    var listarUsuarioInativo = function() {
+        chamaPagina(url.listarUsuarioInativo);
+    };
 
     //produtos
     var listaProduto = function () {
@@ -184,6 +187,7 @@
         detalheUsuario: detalheUsuario,
         desativarUsuario: desativarUsuario,
         desativarUsuarioConfirmado: desativarUsuarioConfirmado,
+        listarUsuarioInativo: listarUsuarioInativo,
         //produtos
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,

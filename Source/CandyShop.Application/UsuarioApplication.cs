@@ -48,6 +48,15 @@ namespace CandyShop.Application
             }
         }
 
+        public Response<IEnumerable<Usuario>> ListarInativos()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/inativos").Result;
+                return new Response<IEnumerable<Usuario>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
         public Response<Usuario> SelecionarUsuario(string cpf)
         {
             using (var client = new HttpClient())

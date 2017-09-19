@@ -58,7 +58,7 @@ CREATE PROCEDURE [dbo].[CSSP_DesUsuario]
 
 	BEGIN
 		UPDATE [dbo].[Usuario] 
-			SET Ativo = 'N'
+			SET Ativo = 'I'
 			WHERE Cpf = @Cpf
 			IF @@ERROR <> 0
 				RETURN 1
@@ -159,15 +159,16 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 				NomeUsuario,
 				Ativo
 				FROM [dbo].[Usuario]
+				WHERE Ativo = 'A'
 	END
 GO
 
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_ListarUsuariosInativos]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_ListarUsuariosInativos]
+	DROP PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_ListarUsuariosInativos]
+CREATE PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 
 	AS
 
