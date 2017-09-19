@@ -35,6 +35,10 @@ header, main, footer, #DivGrid {
 	.gridCelular {
 		display: block !important;
 	}
+
+	.recuaTabela {
+		margin-left: 0 !important;
+	}
 }
 
 .gridCelular {
@@ -57,7 +61,11 @@ header, main, footer, #DivGrid {
 	background-color: white;
 }
 
-h3 {
+.recuaTabela {
+	margin-left: -10%;
+}
+
+h4 {
 	margin-left: 8.5%;
 	font-weight: bold;
 }
