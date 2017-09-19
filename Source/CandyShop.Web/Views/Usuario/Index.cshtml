@@ -41,6 +41,29 @@
             </td>
         </tr>
     }
-
 </table>
 
+<div class="gridCelular">
+    <ul class="collapsible" data-collapsible="accordion">
+    @foreach (var usuario in Model)
+    {
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">filter_drama</i>@usuario.NomeUsuario
+            </div>
+            <div class="collapsible-body">
+                <span>CPF : @usuario.Cpf</span>
+            </div>
+            <div class="collapsible-body">
+                <span>Saldo : @usuario.SaldoUsuario</span>
+            </div>
+        </li>
+    }
+    </ul>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.collapsible').collapsible();
+    });
+</script>

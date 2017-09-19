@@ -23,6 +23,22 @@ header, main, footer, #DivGrid {
 	.row .col.s6 {
 		width: 100%;
 	}
+
+	.alinhamento {
+		margin-left: 42% !important;
+	}
+
+	.bordered {
+		display: none;
+	}
+
+	.gridCelular {
+		display: block !important;
+	}
+}
+
+.gridCelular {
+	display: none;
 }
 
 .side-nav .divider {
