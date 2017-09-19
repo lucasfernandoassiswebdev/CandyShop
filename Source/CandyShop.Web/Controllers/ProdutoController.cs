@@ -67,14 +67,21 @@ namespace CandyShop.Web.Controllers
             return Content("Produto editado com sucesso!");
         }
 
-        public ActionResult ExcluirProduto(/*int idProduto*/)
+        public ActionResult DesativarProduto(int idProduto)
         {
-            return View();
+            var response = _appProduto.DetalharProduto(idProduto);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro" + response.ContentAsString.First());
+            return View(response.Content);
         }
 
-        public ActionResult ExcluirProdutoConfirmado(int idProduto)
+        [HttpPost]
+        public ActionResult DesativarProdutoConfirmado(int idProduto)
         {
-            return Content("Produto excluído com sucesso!");
+            var response = _appProduto.DesativarProduto(idProduto);
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro: {response.Status}");
+            return Content("Produto desativado com sucesso!");
         }
     }
 }

@@ -53,5 +53,16 @@ namespace CandyShop.Application
                 return new Response<string>(response.StatusCode);
             }
         }
+
+        public Response<string> DesativarProduto(int idProduto)
+        {
+            using (var cliente = new HttpClient())
+            {
+                var response = cliente.DeleteAsync($"{_enderecoApi}/desativar/{idProduto}").Result;
+                if (response.StatusCode != HttpStatusCode.OK)
+                    return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<string>(response.StatusCode);                
+            }
+        }
     }
 }

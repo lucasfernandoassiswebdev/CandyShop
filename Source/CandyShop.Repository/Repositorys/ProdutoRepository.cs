@@ -37,10 +37,10 @@ namespace CandyShop.Repository.Repositorys
         }
 
         //não será mais usado temporariamente
-        public void DesativarPooduto(int idproduto)
+        public void DesativarProduto(int idProduto)
         {
             ExecuteProcedure(Procedures.CSSP_DesProduto);
-            AddParameter("@IdProduto", idproduto);
+            AddParameter("@IdProduto", idProduto);
             ExecuteNonQuery();
         }
 
@@ -209,10 +209,6 @@ namespace CandyShop.Repository.Repositorys
                     });
             return retorno;
         }
-
-        public void DesativarProduto(int idProduto)
-        {
-            throw new System.NotImplementedException();
-        }
+      
     }
 }
