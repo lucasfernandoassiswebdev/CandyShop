@@ -3,13 +3,25 @@
 	font-family: Arial;
 }
 
-header, main, footer , #DivGrid{
+header, main, footer, #DivGrid {
 	padding-left: 278px;
 }
 
 @media only screen and (max-width : 992px) {
 	header, main, footer, #DivGrid {
-		padding-left: 40px;
+		padding-left: 0;
+	}
+
+	.container {
+		width: 60% !important;
+	}
+
+	.waves-effect {
+		margin-bottom: 10px;
+	}
+
+	.row .col.s6 {
+		width: 100%;
 	}
 }
 
