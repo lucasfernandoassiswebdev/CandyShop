@@ -35,6 +35,17 @@
 
 <link rel="stylesheet" type="text/css" href="../../Content/indexAdmin.css">
 
+<style>
+    .side-nav li > a  {
+        color: #ff8a80;
+    }
+
+    
+    .branco {
+        color: white !important;
+    }
+
+</style>
 <!--modal de pesquisa de usuários-->
 <div id="modal1" class="modal">
     <div class="modal-content">
@@ -61,12 +72,13 @@
     </div>
 </div>
 
-<ul id="slide-out" class="side-nav fixed vinho">
-    <li>
-        <h4 class="center"><font color="white" style="font-weight: bold">CANDY SHOP</font></h4>
+<ul id="slide-out" class="side-nav fixed brown darken-3">
+    <li class="white-text">
+        @*<img src="~/Imagens/logo.png" style="max-width: 100%; margin-top: 10%;margin-left:5%"/>*@
+        <h4>Candy <font style="color:red">Shop</font></h4>
     </li>
     <li class="divider"></li>
-    <li><a class="dropdown-button white-text" href="#!"><i class="material-icons left white-text">account_box</i>ADMINISTRADOR</a></li>
+    <li><a class="dropdown-button white-text" href="#!"><i class="material-icons left white-text branco">account_box</i>ADMINISTRADOR</a></li>
     <li>
         <div class="divider"></div>
     </li>
@@ -77,7 +89,7 @@
                     <i class="material-icons left">face</i>USUÁRIOS
                 </div>
                 <div class="collapsible-body">
-                    <ul class="brown-text">
+                    <ul>
                         <li><a class=" closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
                         <li><a class="close-menu modal-trigger" href="#modal1"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>

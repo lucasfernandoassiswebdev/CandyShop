@@ -8,6 +8,14 @@ header, main, footer, #DivGrid {
 	padding-right: 70px;
 }
 
+.btn-large {
+	background-color: #CD2626;
+}
+
+.btn-floating {
+	background-color: #cd2626;
+}
+
 @media only screen and (max-width : 992px) {
 	header, main, footer, #DivGrid {
 		padding-left: 0;

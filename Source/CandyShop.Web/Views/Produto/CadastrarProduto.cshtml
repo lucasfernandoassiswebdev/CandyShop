@@ -4,11 +4,7 @@
     Layout = null;
 }
 
-<style>
-    input {
-        text-align: center
-    }    
-</style>
+<link rel="stylesheet" type="text/css" href="../../Content/formCadastroUsuario.css" />
 
 <div class="container">
     <div class="row" style="margin-left: -20%">
@@ -37,7 +33,7 @@
                     <input id="NomeProduto" name="Nome" type="text" class="validate" required="">
                     <label for="NomeProduto">Nome:</label>
                 </div>
-                
+
             </div>
             <div class="row">
                 <div class="input-field col s6">
@@ -47,23 +43,36 @@
                 <div class="input-field col s6">
                     <input id="QtdeProduto" name="QtdeProduto" type="text" class="validate" required="">
                     <label for="QtdeProduto">Quantidade disponível:</label>
-                </div>                
+                </div>
             </div>
             <div class="row">
-                <div class="input-field col s6">
-                    <input id="Categoria" name="Categoria" type="text" class="validate" required="">
-                    <label for="Categoria">Categoria:</label>
+                <div class="input-field col s12">
+                    <select>
+                        <option value="" disabled selected>Escolha uma opção:</option>
+                        <option value="Doces">Doces</option>
+                        <option value="Chocolates">Chocolates</option>
+                        <option value="Paçocas">Paçocas</option>
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Salgadinhos">Salgadinhos</option>
+                        <option value="Amendoins">Amendoins</option>
+                    </select>
+                    <label>Categoria</label>
                 </div>
             </div>
 
-            
-            <div class="row", align="center">
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>                
+            <div class="row" , align="center">
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJs.concluirCadastroProduto()"><i class="material-icons left">add_circle</i>Cadastrar</a>
             </div>
-            
+
         </form>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+</script>
 
 

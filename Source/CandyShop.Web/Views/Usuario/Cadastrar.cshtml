@@ -1,4 +1,4 @@
-﻿@model  CandyShop.Application.ViewModels.Usuario 
+﻿@model  CandyShop.Application.ViewModels.Usuario
 
 @{
     Layout = null;
@@ -13,21 +13,11 @@
             <div class="row">
                 <div class="center">
                     <h1 class="center">Cadastrar usuário</h1>
-                    <img id="imagem" class="center" src="../../Imagens/user.png" alt="imagem não disponível :("/>
-                </div>
-                <div class="file-field input-field">
-                    <div class="btn-floating center alinhamento">
-                        <span class="center">
-                            <a>
-                                <i class="material-icons">add</i>
-                            </a>
-                        </span>
-                        <input id="fotoUsuario" type="file" accept="image/x-png,image/gif,image/jpeg">
-                    </div>
-                    <div class="file-path-wrapper" style="display: none">
-                        <div class="file-path-wrapper">
-                            <input placeholder="foto do usuário" class="file-path validate">
-                        </div>
+                    <div>
+                        <label for="fotoUsuario">
+                            <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/user.png" alt="imagem não disponível :(" />
+                        </label>
+                        <input id="fotoUsuario" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
                     </div>
                 </div>
                 <div class="row">
@@ -41,10 +31,12 @@
                     </div>
                 </div>
                 <div class="row center">
-                    <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a> 
-                    <a class="waves-effect waves-light btn-large" onclick="AjaxJs.concluirCadastroUsuario()"><i class="material-icons left">add_circle</i>Cadastrar</a>
+                    <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
+                    <a class="waves-effect waves-light btn-large botaoCadastro" disabled onclick="AjaxJs.concluirCadastroUsuario()"><i class="material-icons left">add_circle</i>Cadastrar</a>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+
