@@ -1,5 +1,4 @@
-﻿using CandyShop.Core;
-using CandyShop.Core.Services._Interfaces;
+﻿using CandyShop.Core.Services._Interfaces;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Core.Usuario.Dto;
 using System.Net;
@@ -43,7 +42,11 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Put(UsuarioDto usuario)
         {
-            _usuarioRepository.EditarUsuario(usuario);
+            _usuarioService.EditarUsuario(usuario);
+
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
+
             return Ok();
         }
 

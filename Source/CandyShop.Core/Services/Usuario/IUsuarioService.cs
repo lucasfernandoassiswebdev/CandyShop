@@ -1,4 +1,4 @@
-﻿using CandyShop.Core.Usuario.Dto;
+﻿using CandyShop.Core.Services.Usuario.Dto;
 
 namespace CandyShop.Core.Services.Usuario
 {

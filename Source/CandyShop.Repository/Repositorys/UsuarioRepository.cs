@@ -1,10 +1,8 @@
-
-using CandyShop.Core;
-using CandyShop.Core.Usuario.Dto;
-using System.Collections.Generic;
 using CandyShop.Core.Services.Usuario;
+using CandyShop.Core.Services.Usuario.Dto;
+using System.Collections.Generic;
 
-namespace CandyShop.Repository
+namespace CandyShop.Repository.Repositorys
 {
 
     public class UsuarioRepository : ConnectDB, IUsuarioRepository
@@ -123,10 +121,11 @@ namespace CandyShop.Repository
             return retorno;
         }
 
-        public int VericaUsuarioIgual(string cpf)
+        public int VericaUsuarioIgual(UsuarioDto usuario)
         {
             ExecuteProcedure(Procedures.CSSP_LisUsuarioIgual);
-            AddParameter("@cpf", cpf);
+            AddParameter("@cpf", usuario.Cpf);
+            AddParameter("@nome", usuario.NomeUsuario);
             using (var reader = ExecuteReader())
                 if (reader.Read())
                     return 1;

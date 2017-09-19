@@ -1,5 +1,5 @@
 ﻿using CandyShop.Core.Services._Interfaces;
-using CandyShop.Core.Usuario.Dto;
+using CandyShop.Core.Services.Usuario.Dto;
 
 namespace CandyShop.Core.Services.Usuario
 {
@@ -17,7 +17,7 @@ namespace CandyShop.Core.Services.Usuario
 
         public void InserirUsuario(UsuarioDto usuario)
         {
-            if (_usuarioRepository.VericaUsuarioIgual(usuario.Cpf) == 1)
+            if (_usuarioRepository.VericaUsuarioIgual(usuario) == 1)
             {
                 _notification.Add("Usuario ja cadastrado!!!");
                 return;
@@ -28,10 +28,10 @@ namespace CandyShop.Core.Services.Usuario
 
         public void EditarUsuario(UsuarioDto usuario)
         {
-            if (_usuarioRepository.VericaUsuarioIgual(usuario.Cpf) == 1)
+            if (_usuarioRepository.VericaUsuarioIgual(usuario) == 1)
             {
                 _notification.Add("Usuario ja cadastrado!!!");
-                return;
+                return; 
             }
 
             _usuarioRepository.EditarUsuario(usuario);

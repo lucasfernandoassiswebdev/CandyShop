@@ -1,4 +1,4 @@
-﻿namespace CandyShop.Core.Usuario.Dto
+﻿namespace CandyShop.Core.Services.Usuario.Dto
 {
     public class UsuarioDto
     {

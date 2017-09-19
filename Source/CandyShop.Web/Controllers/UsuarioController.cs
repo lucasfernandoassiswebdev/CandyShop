@@ -72,16 +72,19 @@ namespace CandyShop.Web.Controllers
         [HttpPost]        
         public ActionResult Editar(Usuario usuario)
         {
-            //if (ModelState.IsValid)
-            //{
-            //_appUsuario.EditarUsuario(usuario);
+            if (ModelState.IsValid)
+            {
+                var response = _appUsuario.EditarUsuario(usuario);
 
-            //}
-            var response = _appUsuario.EditarUsuario(usuario);
-            if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
-            return Content("Edição concluída com sucesso!!");
-            //return RedirectToAction("Index");
+                if (response.Status != HttpStatusCode.OK)
+                    return Content("Erro " + response.ContentAsString.First());
+
+                return Content("Edição concluída com sucesso!!");
+
+            }
+
+            ModelState.AddModelError("USUARIO","Formulário inválido");
+            return View("Editar");
         }
     }
 }
