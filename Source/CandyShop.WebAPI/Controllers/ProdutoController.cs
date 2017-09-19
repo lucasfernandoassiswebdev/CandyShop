@@ -41,6 +41,12 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_produtoRepository.ListarProdutos());
         }
 
+        [Route("api/produto/inativos")]
+        public IHttpActionResult GetInativos()
+        {
+            return Ok(_produtoRepository.ListarProdutosInativos());
+        }
+
         [HttpGet]
         [Route("api/produto/selecionar/{idProduto}")]
         public IHttpActionResult GetId(int idProduto)

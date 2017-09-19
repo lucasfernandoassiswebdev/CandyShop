@@ -153,7 +153,9 @@
         var produto = { IdProduto: id };
         concluirCadastro(url.desativarProdutoConfirmado, produto, url.listaProduto);
     }
-
+    var listarInativos = function() {
+        chamaPagina(url.listarInativos);
+    };
 
 
     //retorna links para acessar as paginas.
@@ -184,6 +186,7 @@
         editarProduto: editarProduto,
         concluirEdicaoProduto: concluirEdicaoProduto,
         desativarProduto: desativarProduto,
-        desativarProdutoConfirmado: desativarProdutoConfirmado
-    };
+        desativarProdutoConfirmado: desativarProdutoConfirmado,
+        listarInativos: listarInativos
+};
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.

@@ -10,5 +10,6 @@ namespace CandyShop.Application.Interfaces
         Response<Produto> DetalharProduto(int idProduto);
         Response<string> EditarProduto(Produto produto);
         Response<string> DesativarProduto(int idProduto);
+        Response<IEnumerable<Produto>> ListarInativos();
     }
 }
