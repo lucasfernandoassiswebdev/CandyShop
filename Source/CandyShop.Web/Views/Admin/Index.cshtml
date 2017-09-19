@@ -23,7 +23,8 @@
             detalheProduto: '@Url.Action("DetalheProduto", "Produto")',
             editarProduto: '@Url.Action("EditarProduto", "Produto")',
             concluirEdicaoProduto: '@Url.Action("EditarProduto", "Produto")',
-            excluirProduto: '@Url.Action("ExcluirProduto", "Produto")'
+            desativarProduto: '@Url.Action("DesativarProduto", "Produto")',
+            desativarProdutoConfirmado: '@Url.Action("DesativarProdutoConfirmado", "Produto")'
         });
     })
 </script>
@@ -57,41 +58,45 @@
 </div>
 
 <ul id="slide-out" class="side-nav fixed vinho">
-    <h4 class="center"><font color="white" style="font-weight: bold">CANDY SHOP</font></h4>
+    <li>
+        <h4 class="center"><font color="white" style="font-weight: bold">CANDY SHOP</font></h4>
+    </li>
     <li class="divider"></li>
     <li><a class="dropdown-button white-text" href="#!"><i class="material-icons left white-text">account_box</i>ADMINISTRADOR</a></li>
     <li>
         <div class="divider"></div>
     </li>
-    <ul class="collapsible" data-collapsible="accordion">
-        <li>
-            <div class="collapsible-header white-text">
-                <i class="material-icons left">face</i>USUÁRIOS
-            </div>
-            <div class="collapsible-body">
-                <ul class="brown-text">
-                    <li><a class=" closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
-                    <li><a class="closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
-                    <li><a class="close-menu modal-trigger" href="#modal1"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
-                    <li><a class="closeMenu" href="#!" onclick="AjaxJs.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
-                </ul>
-            </div>
-        </li>
-    
-        <li>
-            <div class="collapsible-header white-text">
-                <i class="material-icons left">shopping_cart</i>PRODUTOS
-            </div>
-            <div class="collapsible-body">
-                <ul class="brown-text">
-                    <li><a href="#!" class="closeMenu" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
-                    <li><a href="#modal2" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
-                    <li><a href="#!" class="closeMenu" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
-                </ul>
-            </div>
-        </li>
-    </ul>
-    <li><a class="dropdown-button white-text" href="#!" onclick="AjaxJs.mostraSaldo()"><i class="material-icons left white-text">attach_money</i>CRÉDITO ATUAL DA LOJA</a></li>
+    <li>
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header white-text">
+                    <i class="material-icons left">face</i>USUÁRIOS
+                </div>
+                <div class="collapsible-body">
+                    <ul class="brown-text">
+                        <li><a class=" closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
+                        <li><a class="closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
+                        <li><a class="close-menu modal-trigger" href="#modal1"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
+                        <li><a class="closeMenu" href="#!" onclick="AjaxJs.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li>
+                <div class="collapsible-header white-text">
+                    <i class="material-icons left">shopping_cart</i>PRODUTOS
+                </div>
+                <div class="collapsible-body">
+                    <ul class="brown-text">
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
+                        <li><a href="#modal2" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+    <li><a class="dropdown-button white-text" href="#!" onclick="AjaxJs.mostraSaldo()"><i class="material-icons left white-text">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
     <li>
         <div class="divider"></div>
     </li>
@@ -99,5 +104,7 @@
 </ul>
 
 <a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse brown-text"><i class="material-icons">menu</i></a>
-<div id="DivGrid"><img src="https://media.tenor.com/images/d6cd5151c04765d1992edfde14483068/tenor.gif" style="width: 100px;height: 100px;margin: 0 auto;display: block;">
+
+<div id="DivGrid">
+    <img src="https://media.tenor.com/images/d6cd5151c04765d1992edfde14483068/tenor.gif" style="width: 100px;height: 100px;margin: 0 auto;display: block;" alt="carregando...">
 </div>

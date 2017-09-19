@@ -11,5 +11,9 @@ img {
 }
 
 input {
-	text-align: center !important;
+	text-align: center;
+}
+
+.alinhamento {
+	margin-left: 48%;
 }

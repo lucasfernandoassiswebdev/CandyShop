@@ -53,9 +53,11 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
+        
+        [Route("api/produto/desativar/{idProduto}")]
         public IHttpActionResult Delete(int idproduto)
         {
-            //_produtoRepository.DeletarProduto(idproduto);
+            _produtoRepository.DesativarProduto(idproduto);
             return Ok();
         }
     }

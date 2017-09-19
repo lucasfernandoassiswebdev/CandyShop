@@ -9,18 +9,22 @@
 
 <div class="container">
     <div class="row">
-        <form class="col s12" style="margin-left: -10%">
+        <form class="col s12">
             <div class="row">
                 <div class="center">
                     <h1 class="center">Cadastrar usuário</h1>
-                    <img id="imagem" class="center" src="../../Imagens/user.png" />
+                    <img id="imagem" class="center" src="../../Imagens/user.png" alt="imagem não disponível :("/>
                 </div>
                 <div class="file-field input-field">
-                    <div class="btn">
-                        <span>File</span>
+                    <div class="btn-floating center alinhamento">
+                        <span class="center">
+                            <a>
+                                <i class="material-icons">add</i>
+                            </a>
+                        </span>
                         <input id="fotoUsuario" type="file" accept="image/x-png,image/gif,image/jpeg">
                     </div>
-                    <div class="file-path-wrapper">
+                    <div class="file-path-wrapper" style="display: none">
                         <div class="file-path-wrapper">
                             <input placeholder="foto do usuário" class="file-path validate">
                         </div>
