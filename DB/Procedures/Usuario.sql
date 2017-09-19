@@ -195,6 +195,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUs
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
+	@nome varchar(50),
 	@cpf varchar(14)
 	AS
 
@@ -211,9 +212,9 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 	BEGIN
 		SELECT TOP 1 1
 			FROM Usuario
-			WHERE CPF = @cpf
+			WHERE Cpf = @cpf AND NomeUsuario = @nome
 	END
 GO
-				
+
 								
 
