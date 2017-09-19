@@ -256,7 +256,7 @@
     <Content Include="Views\Produto\DetalheProduto.cshtml" />
     <Content Include="Views\Usuario\Editar.cshtml" />
     <Content Include="Views\Produto\EditarProduto.cshtml" />
-    <Content Include="Views\Produto\ExcluirProduto.cshtml" />
+    <Content Include="Views\Produto\DesativarProduto.cshtml" />
     <Content Include="Views\Usuario\ListarUsuariosEmDivida.cshtml" />
     <Content Include="Views\Usuario\Detalhes.cshtml" />
   </ItemGroup>

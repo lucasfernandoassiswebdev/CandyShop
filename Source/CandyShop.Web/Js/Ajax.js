@@ -117,7 +117,6 @@
     var cadastrarProduto = function () {
         chamaPagina(url.cadastrarProduto);
     };
-
     var concluirCadastroProduto = function () {
         var produto = {
             NomeProduto: $('#NomeProduto').val(),
@@ -127,7 +126,6 @@
         };
         concluirCadastro(url.concluirCadastroProduto, produto, url.cadastrarProduto);
     };
-
     var detalheProduto = function (id) {
         var produto = { IdProduto: id };
         chamaPaginaComIdentificador(url.detalheProduto, produto);
@@ -147,10 +145,16 @@
         };
         concluirCadastro(url.concluirEdicaoProduto, produto, url.listaProduto);
     };
-    var excluirProduto = function (id) {
+    var desativarProduto = function (id) {
         var produto = { IdProduto: id };
-        chamaPaginaComIdentificador(url.excluirProduto, produto);
+        chamaPaginaComIdentificador(url.desativarProduto, produto);
     };
+    var desativarProdutoConfirmado = function(id) {
+        var produto = { IdProduto: id };
+        concluirCadastro(url.desativarProdutoConfirmado, produto, url.listaProduto);
+    }
+
+
 
     //retorna links para acessar as paginas.
     return {
@@ -179,6 +183,7 @@
         detalheProduto: detalheProduto,
         editarProduto: editarProduto,
         concluirEdicaoProduto: concluirEdicaoProduto,
-        excluirProduto: excluirProduto
+        desativarProduto: desativarProduto,
+        desativarProdutoConfirmado: desativarProdutoConfirmado
     };
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.
