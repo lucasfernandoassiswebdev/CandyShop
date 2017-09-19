@@ -4,64 +4,87 @@
     Layout = null;
 }
 
-<form class="col s12" style="margin-left: -10%">
-    <h4 class="center">Excluir <font color="brown">Produto</font></h4>
-    <p>Tem certeza que deseja desativar este produto?</p>
-    <div class="left">
-
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                ID:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.IdProduto)
-            </dd>
-
-            <dt>
-                Nome do Produto:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.NomeProduto)
-            </dd>
-
-            <dt>
-                Preco do Produto:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PrecoProduto)
-            </dd>
-
-            <dt>
-                Quantidade em estoque:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.QtdeProduto)
-            </dd>
-            
-            <dt>
-                Categoria:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Categoria)
-            </dd>
-
-        </dl>
-
-        <div class="row" , align="center">
-            <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
-            <a class="waves-effect waves-light btn-large" onclick="AjaxJs.desativarProdutoConfirmado(@Model.IdProduto)"><i class="material-icons left">delete</i>Excluir</a>
-        </div>
-    </div>
-</form>
 <style>
+    .corpo, hr {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    .corpo {
+        margin-left: -14%;
+    }
+
+    dd {
+        margin-left: 54%;
+        margin-top: -7%;
+        color: red;
+    }
+
     dl {
         color: black;
     }
+
+    .batata {
+        margin-left: -37%;
+    }
 </style>
+<div class="corpo left">
+    <div class="col s12">
+        <h4 class="center batata">Excluir <font color="brown">Produto</font></h4>
+        <p>Tem certeza que deseja desativar este produto?</p>
+        <div class="left">
+
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    ID:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IdProduto)
+                </dd>
+
+                <dt>
+                    Nome do Produto:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NomeProduto)
+                </dd>
+
+                <dt>
+                    Preco do Produto:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PrecoProduto)
+                </dd>
+
+                <dt>
+                    Quantidade em estoque:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.QtdeProduto)
+                </dd>
+
+                <dt>
+                    Categoria:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Categoria)
+                </dd>
+
+            </dl>
+
+            <div class="row" , align="center">
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.desativarProdutoConfirmado(@Model.IdProduto)"><i class="material-icons left">delete</i>Excluir</a>
+            </div>
+        </div>
+    </div>
+</div>
 
