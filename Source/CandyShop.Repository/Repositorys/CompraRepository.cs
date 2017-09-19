@@ -85,19 +85,16 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@Cpf", cpf);
             var retorno = new List<CompraDto>();
             using (var reader = ExecuteReader())
-                if (reader.Read())
-                    do
+                while (reader.Read())
+                    retorno.Add(new CompraDto()
                     {
-                        retorno.Add(new CompraDto()
+                        DataCompra = reader.ReadAsDateTime("DataCompra"),
+                        IdCompra = reader.ReadAsInt("IdCompra"),
+                        Usuario = new UsuarioDto()
                         {
-                            DataCompra = reader.ReadAsDateTime("DataCompra"),
-                            IdCompra = reader.ReadAsInt("IdCompra"),
-                            Usuario = new UsuarioDto()
-                            {
-                                Cpf = reader.ReadAsString("UsuarioCompra")
-                            }
-                        });
-                    } while (reader.Read());
+                            Cpf = reader.ReadAsString("UsuarioCompra")
+                        }
+                    });
 
             return retorno;
         }
@@ -117,7 +114,6 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@IdCompra", idCompra);
             CompraDto retorno = new CompraDto();
             using (var reader = ExecuteReader())
-            {
                 if (reader.Read())
                     retorno = new CompraDto
                     {
@@ -128,7 +124,7 @@ namespace CandyShop.Repository.Repositorys
                             Cpf = reader.ReadAsString("UsuarioCompra")
                         }
                     };
-            }
+
             return retorno;
         }
 
@@ -166,6 +162,7 @@ namespace CandyShop.Repository.Repositorys
                             Cpf = reader.ReadAsString("UsuarioCompra")
                         }
                     });
+
             return retorno;
         }
     }

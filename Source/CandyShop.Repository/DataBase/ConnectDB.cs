@@ -1,11 +1,10 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace CandyShop.Repository.Database
 {
-    public class ConnectDB  : IDisposable
+    public class ConnectDB // : IDisposable
     {
         //Cria o construtor pra que toda vez que o _connection for intanciado abrir a conexão com o banco 
         public ConnectDB()
@@ -56,10 +55,10 @@ namespace CandyShop.Repository.Database
             return _command.ExecuteReader();
         }
 
-        public void Dispose()
-        {
-            if (_connection.State == System.Data.ConnectionState.Open)
-                _connection.Close();
-        }
+        //public void Dispose()
+        //{
+        //    if (_connection.State == ConnectionState.Open)
+        //        _connection.Close();
+        //}
     }
 }
