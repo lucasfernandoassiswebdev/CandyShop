@@ -62,7 +62,7 @@ namespace CandyShop.WebAPI.Controllers
             }
         }
 
-
+        [Route("api/usuario/desativar/{cpf}")]
         public IHttpActionResult Delete(string cpf)
         {
             _usuarioRepository.DesativarUsuario(cpf);

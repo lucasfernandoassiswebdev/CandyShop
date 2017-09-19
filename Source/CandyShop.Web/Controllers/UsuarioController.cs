@@ -86,5 +86,22 @@ namespace CandyShop.Web.Controllers
             ModelState.AddModelError("USUARIO","Formulário inválido");
             return View("Editar");
         }
+
+        public ActionResult Desativar(string cpf)
+        {
+            var usuario = _appUsuario.SelecionarUsuario(cpf);
+            if (usuario.Status != HttpStatusCode.OK)
+                return Content("Erro " + usuario.ContentAsString.First());
+            return View(usuario.Content);
+        }
+
+        [HttpPost]
+        public ActionResult DesativarUsuario(string cpf)
+        {
+            var response = _appUsuario.DesativarUsuario(cpf);
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro {response.Status}");
+            return Content("Usuario desativado com sucesso!");
+        }
     }
 }

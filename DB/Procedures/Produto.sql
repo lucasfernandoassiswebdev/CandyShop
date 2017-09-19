@@ -130,11 +130,11 @@ CREATE PROCEDURE [dbo].[CSSP_SelProduto]
 GO
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelDadosProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_SelDadosProduto]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelDadosProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelDadosProduto]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_SelDadosProduto]
+CREATE PROCEDURE [dbo].[CSSP_SelDadosProduto]
 	@IdProduto int
 	AS
 
@@ -192,6 +192,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProduto]
 				Ativo,
 				Categoria
 			 FROM Produto WITH(NOLOCK)
+			 WHERE Ativo = 'A'
 	END
 GO
 

@@ -39,7 +39,7 @@
         });
     }
 
-    function concluirCadastro(endereco, objeto, tela) {
+    function concluirAcao(endereco, objeto, tela) {
         $.post(endereco, objeto)
             .done(function (message) { //passar o parametro data aqui quando for definida a mensagem
                 chamaPagina(tela);
@@ -80,10 +80,7 @@
     var editarUsuario = function (cpf) {
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.editarUsuario, usuario);
-    };
-    var excluirUsuario = function () {
-        chamaPagina(url.excluirUsuario);
-    };
+    };    
     var detalheUsuario = function (cpf) {
         var usuario = {
             Cpf: cpf
@@ -96,7 +93,7 @@
             NomeUsuario: $('#Nome').val()
         };
 
-        concluirCadastro(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
+        concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
     var concluirEdicaoUsuario = function () {
         var usuario = {
@@ -107,7 +104,15 @@
             Ativo: $('#Status').val()
         };
 
-        concluirCadastro(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
+        concluirAcao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
+    };
+    var desativarUsuario = function (cpf) {
+        var usuario = { Cpf: cpf };
+        chamaPaginaComIdentificador(url.desativarUsuario, usuario);
+    };
+    var desativarUsuarioConfirmado = function(cpf) {
+        var usuario = { Cpf: cpf };
+        concluirAcao(url.desativarUsuarioConfirmado, usuario, url.listaUsuario);
     };
 
     //produtos
@@ -124,7 +129,7 @@
             QtdeProduto: $('#QtdeProduto').val(),
             Categoria: $('#Categoria').val()
         };
-        concluirCadastro(url.concluirCadastroProduto, produto, url.cadastrarProduto);
+        concluirAcao(url.concluirCadastroProduto, produto, url.cadastrarProduto);
     };
     var detalheProduto = function (id) {
         var produto = { IdProduto: id };
@@ -143,7 +148,7 @@
             Categoria: $('#Categoria').val(),
             Ativo: $('#Status').val()
         };
-        concluirCadastro(url.concluirEdicaoProduto, produto, url.listaProduto);
+        concluirAcao(url.concluirEdicaoProduto, produto, url.listaProduto);
     };
     var desativarProduto = function (id) {
         var produto = { IdProduto: id };
@@ -151,7 +156,7 @@
     };
     var desativarProdutoConfirmado = function(id) {
         var produto = { IdProduto: id };
-        concluirCadastro(url.desativarProdutoConfirmado, produto, url.listaProduto);
+        concluirAcao(url.desativarProdutoConfirmado, produto, url.listaProduto);
     }
     var listarInativos = function() {
         chamaPagina(url.listarInativos);
@@ -177,7 +182,8 @@
         concluirEdicaoUsuario: concluirEdicaoUsuario,
         editarUsuario: editarUsuario,
         detalheUsuario: detalheUsuario,
-        excluirUsuario: excluirUsuario,
+        desativarUsuario: desativarUsuario,
+        desativarUsuarioConfirmado: desativarUsuarioConfirmado,
         //produtos
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,

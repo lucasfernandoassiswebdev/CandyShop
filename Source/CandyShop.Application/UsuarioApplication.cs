@@ -56,5 +56,16 @@ namespace CandyShop.Application
                 return new Response<Usuario>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
+
+        public Response<string> DesativarUsuario(string cpf)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.DeleteAsync($"{_enderecoApi}/desativar/{cpf}").Result;
+                if (response.StatusCode != HttpStatusCode.OK)
+                    return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<string>(response.StatusCode);
+            }
+        }
     }
 }

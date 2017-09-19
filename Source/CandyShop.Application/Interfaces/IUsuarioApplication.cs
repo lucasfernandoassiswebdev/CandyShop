@@ -10,5 +10,6 @@ namespace CandyShop.Application.Interfaces
         Response<string> InserirUsuario(Usuario usuario);
         Response<string> EditarUsuario(Usuario usuario);
         Response<Usuario> SelecionarUsuario(string cpf);
+        Response<string> DesativarUsuario(string cpf);
     }
 }
