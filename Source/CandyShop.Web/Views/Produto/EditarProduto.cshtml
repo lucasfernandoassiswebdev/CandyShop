@@ -4,11 +4,6 @@
     Layout = null;
 }
 
-
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
-
-
 <div class="container">
     <div class="row" style="margin-left: -20%">
         <form class="col s12">
@@ -49,12 +44,24 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="Categoria" name="Categoria" type="text" class="validate" required="" value="@Model.Categoria">
-                    <label class="active">Categoria:</label>
+                    <select>
+                        <option value="" disabled >Escolha uma opção</option>
+                        <option value="Doces" selected>Doces</option>
+                        <option value="Balas">Balas</option>
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Amendoins">Amendoins</option>
+                        <option value="Chocolates">Chocolates</option>
+                        <option value="Salgadinhos">Salgadinhos</option>
+                    </select>
+                    <label>Categoria do produto</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="Status" name="Status" type="text" class="validate" required="" value="@Model.Ativo">
-                    <label class="active">Status:</label>
+                    <select>
+                        <option value="" disabled>Escolha uma opção</option>
+                        <option value="A" selected>Ativo</option>
+                        <option value="I">Inativo</option>
+                    </select>
+                    <label>Status do produto</label>
                 </div>
             </div>
             <div class="row" , align="center">
@@ -64,3 +71,9 @@
         </form>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+</script>

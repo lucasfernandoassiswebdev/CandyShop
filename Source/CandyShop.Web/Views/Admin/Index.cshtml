@@ -37,15 +37,17 @@
 <link rel="stylesheet" type="text/css" href="../../Content/indexAdmin.css">
 
 <style>
-    .side-nav li > a  {
-        color: #ff8a80;
-    }
-
-    
     .branco {
         color: white !important;
     }
 
+    .side-nav li > a {
+        color: black;
+    }
+
+    .side-nav li>a>i, .side-nav li>a>[class^="mdi-"], .side-nav li>a li>a>[class*="mdi-"], .side-nav li>a>i.material-icons {
+        color: black;
+    }
 </style>
 <!--modal de pesquisa de usuários-->
 <div id="modal1" class="modal">
@@ -91,13 +93,12 @@
                 </div>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a class=" closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
+                        <li><a class="closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
                         <li><a class="close-menu modal-trigger" href="#modal1"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJs.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
-
-                    </ul>
+                        <li><a class="closeMenu" href="#!" onclick="AjaxJs.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
+              </ul>
                 </div>
             </li>
 

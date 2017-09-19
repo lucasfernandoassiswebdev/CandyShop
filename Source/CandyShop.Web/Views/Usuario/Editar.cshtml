@@ -13,17 +13,10 @@
         <form class="col s12">
             <div class="row">
                 <div class="center">
-                    <h1 class="center">Editar <font color="brown">usuário</font></h1>
-                    <img id="imagem" class="center" src="../../Imagens/user.png" />
-                </div>
-                <div class="file-field input-field">
-                    <div class="btn">
-                        <span>File</span>
-                        <input id="fotoUsuario" type="file" accept="image/x-png,image/gif,image/jpeg">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input placeholder="foto do usuário" class="file-path validate">
-                    </div>
+                    <label for="fotoUsuario">
+                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/user.png" alt="imagem não disponível :(" />
+                    </label>
+                    <input id="fotoUsuario" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
                 </div>
             </div>
             <div class="row">
@@ -44,17 +37,28 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="Password" name="Password" type="text" class="validate" value="@Model.SenhaUsuario" disabled="disabled"/>
+                    <input id="Password" name="Password" type="password" class="validate" value="@Model.SenhaUsuario"/>
                     <label class="active">Password:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="Status" name="Status" type="text" class="validate" value="@Model.Ativo" required="" disabled="disabled">
-                    <label class="active">Status:</label>
+                    <select>
+                        <option value="" disabled >Escolha uma opção</option>
+                        <option value="A" selected>Ativo</option>
+                        <option value="I">Inativo</option>
+                    </select>
+                    <label>Status do usuário</label>
                 </div>
             </div>
             <div class="row center">
-                <a class="btn waves waves-effect waves-light" onclick="AjaxJs.concluirEdicaoUsuario()">Enviar</a>
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large botaoCadastro" onclick="AjaxJs.concluirEdicaoUsuario()"><i class="material-icons left">build</i>Editar</a>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
