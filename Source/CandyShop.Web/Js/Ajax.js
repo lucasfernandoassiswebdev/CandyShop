@@ -117,6 +117,9 @@
     var listarUsuarioInativo = function() {
         chamaPagina(url.listarUsuarioInativo);
     };
+    var listarUsuarioEmDivida = function() {
+        chamaPagina(url.listarUsuarioEmDivida);
+    };
 
     //produtos
     var listaProduto = function () {
@@ -188,6 +191,7 @@
         desativarUsuario: desativarUsuario,
         desativarUsuarioConfirmado: desativarUsuarioConfirmado,
         listarUsuarioInativo: listarUsuarioInativo,
+        listarUsuarioEmDivida: listarUsuarioEmDivida,
         //produtos
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,
