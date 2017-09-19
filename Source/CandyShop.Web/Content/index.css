@@ -1,10 +1,10 @@
 ﻿@media screen and (max-width: 600px) {
 	.batata {
-		width: 80% !important;
+		width: 80%;
 		height: 80%;
 		top: -4.4%;
 		padding-top: 13%;
-		left: 10% !important;
+		left: 10%;
 	}
 	.row .col.s12 {
 		width: 136%;

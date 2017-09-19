@@ -4,12 +4,12 @@
 }
 
 header, main, footer , #DivGrid{
-	padding-left: 500px;
+	padding-left: 278px;
 }
 
 @media only screen and (max-width : 992px) {
 	header, main, footer, #DivGrid {
-		padding-left: 70px;
+		padding-left: 40px;
 	}
 }
 
@@ -51,7 +51,7 @@ h3 {
 }
 
 .btn:hover {
-	color: white !important;
+	color: white;
 }
 
 th {
