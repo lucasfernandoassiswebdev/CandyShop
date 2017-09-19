@@ -26,12 +26,13 @@ namespace CandyShop.WebAPI.Controllers
             try
             {
                 if (_notification.HasNotification())
-                    _produtoRepository.InserirProduto(produto);
+                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+                _produtoRepository.InserirProduto(produto);
                 return Ok();
             }
             catch (Exception)
             {
-                return Content(HttpStatusCode.NotAcceptable,_notification.GetNotification());
+                return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
             }
         }
 
@@ -53,7 +54,7 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-        
+
         [Route("api/produto/desativar/{idProduto}")]
         public IHttpActionResult Delete(int idproduto)
         {

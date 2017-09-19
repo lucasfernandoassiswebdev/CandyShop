@@ -26,7 +26,8 @@ namespace CandyShop.WebAPI.Controllers
             try
             {
                 if (_notification.HasNotification())
-                    _usuarioRepository.InserirUsuario(usuario);
+                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+                _usuarioRepository.InserirUsuario(usuario);
                 return Ok();
             }
             catch (Exception e)
