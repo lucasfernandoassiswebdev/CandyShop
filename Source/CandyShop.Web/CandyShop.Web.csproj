@@ -259,6 +259,7 @@
     <Content Include="Views\Produto\DesativarProduto.cshtml" />
     <Content Include="Views\Usuario\ListarUsuariosEmDivida.cshtml" />
     <Content Include="Views\Usuario\Detalhes.cshtml" />
+    <Content Include="Views\Produto\ListarInativos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

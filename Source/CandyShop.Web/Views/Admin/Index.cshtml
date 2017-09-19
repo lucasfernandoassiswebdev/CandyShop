@@ -24,7 +24,8 @@
             editarProduto: '@Url.Action("EditarProduto", "Produto")',
             concluirEdicaoProduto: '@Url.Action("EditarProduto", "Produto")',
             desativarProduto: '@Url.Action("DesativarProduto", "Produto")',
-            desativarProdutoConfirmado: '@Url.Action("DesativarProdutoConfirmado", "Produto")'
+            desativarProdutoConfirmado: '@Url.Action("DesativarProdutoConfirmado", "Produto")',
+            listarInativos: '@Url.Action("ListarInativos", "Produto")'
         });
     })
 </script>
@@ -91,6 +92,7 @@
                         <li><a href="#!" class="closeMenu" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
                         <li><a href="#modal2" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarInativos()"><i class="material-icons">list</i>Listar Inativos</a></li>
                     </ul>
                 </div>
             </li>

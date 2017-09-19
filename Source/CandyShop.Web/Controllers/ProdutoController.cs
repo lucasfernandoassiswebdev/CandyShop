@@ -33,6 +33,14 @@ namespace CandyShop.Web.Controllers
             return View();
         }
 
+        public ActionResult ListarInativos()
+        {
+            var response = _appProduto.ListarInativos();
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro {response.ContentAsString.First()}");
+            return View(response.Content);
+        }
+
         [HttpPost]
         public ActionResult CadastrarProduto(Produto produto)
         {
