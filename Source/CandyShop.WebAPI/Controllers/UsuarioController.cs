@@ -57,7 +57,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, _notification.HasNotification());
             }
         }
 
