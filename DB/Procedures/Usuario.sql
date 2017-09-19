@@ -212,7 +212,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 	BEGIN
 		SELECT TOP 1 1
 			FROM Usuario
-			WHERE Cpf = @cpf AND NomeUsuario = @nome
+			WHERE Cpf = @cpf AND NomeUsuario <> @nome
 	END
 GO
 
