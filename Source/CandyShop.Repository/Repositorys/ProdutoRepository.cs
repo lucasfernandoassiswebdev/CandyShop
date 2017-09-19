@@ -22,7 +22,8 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisProdutoAbaixoValor,
             CSSP_LisProdutoAcimaValor,
             CSSP_LisProdutoCategoria,
-            CSSP_SelDadosProduto
+            CSSP_SelDadosProduto,
+            CSSP_LisProdPorNome
         }
 
         public void InserirProduto(ProdutoDto produto)
@@ -194,7 +195,7 @@ namespace CandyShop.Repository.Repositorys
 
         public IEnumerable<ProdutoDto> ListarProdutosPorCategoria()
         {
-            ExecuteProcedure(Procedures.CSSP_LisProdutoCategoria);
+            ExecuteProcedure(Procedures.CSSP_LisProdutoCategoria);            
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -209,6 +210,24 @@ namespace CandyShop.Repository.Repositorys
                     });
             return retorno;
         }
-      
+
+        public IEnumerable<ProdutoDto> ProcurarProdutoPorNome(string nome)
+        {
+            ExecuteProcedure(Procedures.CSSP_LisProdPorNome);
+            AddParameter("@NomeProduto", nome);
+            var retorno = new List<ProdutoDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new ProdutoDto
+                    {
+                        IdProduto = reader.ReadAsInt("IdProduto"),
+                        NomeProduto = reader.ReadAsString("NomeProduto"),
+                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Categoria = reader.ReadAsString("Categoria")
+                    });
+            return retorno;
+        }
     }
 }

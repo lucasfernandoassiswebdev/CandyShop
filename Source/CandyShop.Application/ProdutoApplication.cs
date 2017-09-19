@@ -72,5 +72,14 @@ namespace CandyShop.Application
                 return new Response<IEnumerable<Produto>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
+
+        public Response<IEnumerable<Produto>> ProcurarProduto(string nome)
+        {
+            using (var cliente = new HttpClient())
+            {
+                var response = cliente.GetAsync($"{_enderecoApi}/procurar/{nome}").Result;
+                return new Response<IEnumerable<Produto>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
     }
 }

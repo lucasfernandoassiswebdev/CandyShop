@@ -7,7 +7,7 @@
 <script>
     $(document).ready(function () {
         AjaxJs.init({
-            main: '@Url.Action("Index", "Produto")',
+            main: '@Url.Action("Listar", "Produto")',
             //usuários
             listaUsuario: '@Url.Action("Index", "Usuario")',
             mostraSaldo: '@Url.Action("Index", "Shop")',
@@ -20,8 +20,9 @@
             desativarUsuarioConfirmado: '@Url.Action("DesativarUsuario", "Usuario")',
             listarUsuarioInativo: '@Url.Action("ListarInativos", "Usuario")',
             listarUsuarioEmDivida: '@Url.Action("ListarUsuariosEmDivida", "Usuario")',
+            
             //produtos
-            listaProduto: '@Url.Action("Index", "Produto")',
+            listaProduto: '@Url.Action("Listar", "Produto")',
             cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")',
             concluirCadastroProduto: '@Url.Action("CadastrarProduto", "Produto")',
             detalheProduto: '@Url.Action("DetalheProduto", "Produto")',
@@ -29,7 +30,8 @@
             concluirEdicaoProduto: '@Url.Action("EditarProduto", "Produto")',
             desativarProduto: '@Url.Action("DesativarProduto", "Produto")',
             desativarProdutoConfirmado: '@Url.Action("DesativarProdutoConfirmado", "Produto")',
-            listarInativos: '@Url.Action("ListarInativos", "Produto")'
+            listarInativos: '@Url.Action("ListarInativos", "Produto")',
+            listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Produto")'
         });
     })
 </script>
@@ -58,7 +60,7 @@
         </form>
     </div>
     <div class="modal-footer center">
-        <a href="#!" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
+        <a href="#!" onclick="AjaxJs.listarProdutoPorNome()" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
     </div>
 </div>
 
@@ -98,7 +100,7 @@
                         <li><a href="#!" class="closeMenu" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
                         <li><a href="#modal2" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarInativos()"><i class="material-icons">list</i>Listar Inativos</a></li>
                     </ul>
                 </div>
             </li>
