@@ -55,7 +55,7 @@ CREATE PROCEDURE [dbo].[CSSP_DesProduto]
 
 	BEGIN
 	UPDATE [dbo].[Produto]
-		SET Ativo = 'N'
+		SET Ativo = 'I'
 		WHERE IdProduto = @IdProduto
 		IF @@ERROR <> 0
 					RETURN 1
@@ -222,7 +222,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoInativo]
 				Ativo,
 				Categoria
 			 FROM Produto WITH(NOLOCK)
-			 WHERE Ativo = 'N'
+			 WHERE Ativo = 'I'
 	END
 GO
 

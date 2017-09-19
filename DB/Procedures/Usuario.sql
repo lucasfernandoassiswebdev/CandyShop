@@ -162,6 +162,38 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 	END
 GO
 
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_ListarUsuariosInativos]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_ListarUsuariosInativos]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_ListarUsuariosInativos]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Listar todos os usuarios inativos
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 19/09/2017
+	Ex................: EXEC [dbo].[GCS_ListarUsuariosInativos]
+
+	*/
+
+	BEGIN
+	
+		SELECT	Cpf,
+				SenhaUsuario,
+				SaldoUsuario,
+				NomeUsuario,
+				Ativo
+				FROM [dbo].[Usuario]
+				WHERE Ativo = 'I'
+	END
+GO
+				
+
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUsuariosDivida]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 GO
