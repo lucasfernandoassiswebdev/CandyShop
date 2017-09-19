@@ -4,32 +4,17 @@
     Layout = null;
 }
 
-<style>
-    input {
-        text-align: center
-    }    
-</style>
+<link rel="stylesheet" type="text/css" href="../../Content/formCadastroUsuario.css" />
 
 <div class="container">
     <div class="row" style="margin-left: -20%">
         <form class="col s12">
             <div class="row">
                 <div class="center">
-                    <h1 class="center">Cadastrar <font color="brown">Produto</font></h1>
-                    <img class="center responsive-img" src="../../Imagens/bala.jpg" />
-                </div>
-                <div class="file-field input-field">
-                    <div class="btn-floating center alinhamento">
-                        <span class="center">
-                            <a>
-                                <i class="material-icons">add</i>
-                            </a>
-                        </span>
-                        <input id="fotoProduto" type="file" accept="image/x-png,image/gif,image/jpeg">
-                    </div>
-                    <div class="file-path-wrapper" style="display: none">
-                        <input placeholder="foto do produto" class="file-path validate" type="text">
-                    </div>
+                    <label for="fotoUsuario">
+                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :(" />
+                    </label>
+                    <input id="fotoUsuario" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
                 </div>
             </div>
             <div class="row">
@@ -37,7 +22,7 @@
                     <input id="NomeProduto" name="Nome" type="text" class="validate" required="">
                     <label for="NomeProduto">Nome:</label>
                 </div>
-                
+
             </div>
             <div class="row">
                 <div class="input-field col s6">
@@ -47,23 +32,36 @@
                 <div class="input-field col s6">
                     <input id="QtdeProduto" name="QtdeProduto" type="text" class="validate" required="">
                     <label for="QtdeProduto">Quantidade disponível:</label>
-                </div>                
+                </div>
             </div>
             <div class="row">
-                <div class="input-field col s6">
-                    <input id="Categoria" name="Categoria" type="text" class="validate" required="">
-                    <label for="Categoria">Categoria:</label>
+                <div class="input-field col s12">
+                    <select>
+                        <option value="" disabled>Escolha uma opção</option>
+                        <option value="Doces" selected>Doces</option>
+                        <option value="Balas">Balas</option>
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Amendoins">Amendoins</option>
+                        <option value="Chocolates">Chocolates</option>
+                        <option value="Salgadinhos">Salgadinhos</option>
+                    </select>
+                    <label>Categoria</label>
                 </div>
             </div>
 
-            
-            <div class="row", align="center">
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>                
+            <div class="row" , align="center">
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJs.concluirCadastroProduto()"><i class="material-icons left">add_circle</i>Cadastrar</a>
             </div>
-            
+
         </form>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+</script>
 
 

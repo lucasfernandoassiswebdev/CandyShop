@@ -17,3 +17,11 @@ input {
 .alinhamento {
 	margin-left: 48%;
 }
+
+#imagem{
+	cursor: pointer;
+}
+
+#imagem:hover {
+	opacity: 0.9;
+}

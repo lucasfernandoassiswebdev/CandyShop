@@ -5,7 +5,7 @@
 }
 
 <style>
-    .corpo, h4, hr {
+    .corpo, hr {
         width: 100%;
         max-width: 400px;
         margin: 0 auto;
@@ -17,12 +17,16 @@
     }
 
     dd {
-        margin-left: 28%;
+        margin-left: 33%;
         margin-top: -5%;
     }
 
     dt {
-        color: brown;
+        color: black;
+    }
+
+    h4 {
+        margin-left: -1%;
     }
 </style>
 
@@ -52,7 +56,15 @@
             </dt>
 
             <dd>
-                @Model.SaldoUsuario
+                R$ @Model.SaldoUsuario
+            </dd>
+            
+            <dt>
+                Ativo
+            </dt>
+
+            <dd>
+                @Model.Ativo
             </dd>
         </dl>
 

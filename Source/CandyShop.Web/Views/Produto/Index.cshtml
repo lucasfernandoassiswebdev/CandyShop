@@ -35,7 +35,7 @@
                     @Html.DisplayFor(modelItem => item.Categoria)
                 </td>
                 <td>
-                    <a class="btn-floating btn-sm waves-effect waves-light blue darken-1" onclick="AjaxJs.detalheProduto(@item.IdProduto);"><i class="material-icons">info_outline</i></a>
+                    <a class="btn-floating btn-sm waves-effect waves-light brown" onclick="AjaxJs.detalheProduto(@item.IdProduto);"><i class="material-icons">info_outline</i></a>
                 </td>
                 <td>
                     <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto(@item.IdProduto);"><i class="material-icons">edit</i></a>
@@ -62,9 +62,9 @@
                         <br />
                         <span>Categoria: R$ @produto.Categoria</span>
                         <br /><br />
-                        <a class="btn-floating btn-sm waves-effect waves-light blue darken-1" onclick="AjaxJs.detalheUsuario('@produto.IdProduto');"><i class="material-icons">info_outline</i></a>
-                        <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto('@produto.IdProduto');"><i class="material-icons">edit</i></a>
-                        <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJs.excluirUsuario('@produto.IdProduto');"><i class="material-icons">remove_shopping_cart</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light brown" onclick="AjaxJs.detalheUsuario(@produto.IdProduto);"><i class="material-icons">info_outline</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto(@produto.IdProduto);"><i class="material-icons">edit</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJs.desativarProduto(@produto.IdProduto);"><i class="material-icons">remove_shopping_cart</i></a>
                     </div>
                 </li>
             }

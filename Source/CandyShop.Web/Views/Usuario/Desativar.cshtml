@@ -4,48 +4,76 @@
     Layout = null;
 }
 
-<form class="col s12" style="margin-left: -10%">
-    <h3>Tem certeza que deseja desativar este usuário?</h3>
-    <div class="left">
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                CPF:
-            </dt>
+<style>
+    .corpo, hr {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: left;
+    }
 
-            <dd>
-                @Html.DisplayFor(model => model.Cpf)
-            </dd>
+    .corpo {
+        margin-left: -14%;
+    }
 
-            <dt>
-                Nome:
-            </dt>
+    dd {
+        margin-left: 33%;
+        margin-top: -5%;
+    }
 
-            <dd>
-                @Html.DisplayFor(model => model.NomeUsuario)
-            </dd>
+    dt {
+        color: black;
+    }
 
-            <dt>
-                Saldo:
-            </dt>
+    .batata {
+        margin-left: -1%;
+    }
+</style>
 
-            <dd>
-                @Html.DisplayFor(model => model.SaldoUsuario)
-            </dd>
+<div class="corpo left">
+    <div class="col s12">
+        <h4 class="batata">Tem certeza que deseja desativar este usuário?</h4>
+        <div class="left">
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    CPF:
+                </dt>
 
-            <dt>
-                Status:
-            </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Cpf)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Ativo)
-            </dd>
+                <dt>
+                    Nome:
+                </dt>
 
-        </dl>
-        <div class="row" , align="center">
-            <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
-            <a class="waves-effect waves-light btn-large" onclick="AjaxJs.desativarUsuarioConfirmado('@Model.Cpf')"><i class="material-icons left">delete</i>Excluir</a>
+                <dd>
+                    @Html.DisplayFor(model => model.NomeUsuario)
+                </dd>
+
+                <dt>
+                    Saldo:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SaldoUsuario)
+                </dd>
+
+                <dt>
+                    Status:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ativo)
+                </dd>
+
+            </dl>
+            <div class="row" , align="center">
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.desativarUsuarioConfirmado('@Model.Cpf')"><i class="material-icons left">delete</i>Excluir</a>
+            </div>
+
         </div>
-
     </div>
-</form>
+</div>
