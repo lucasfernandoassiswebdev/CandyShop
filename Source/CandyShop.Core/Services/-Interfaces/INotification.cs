@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CandyShop.Core.Services._Interfaces
+namespace CandyShop.Core.Services
 {
     public interface INotification
     {

@@ -1,5 +1,6 @@
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Core.Services.Usuario.Dto;
+using CandyShop.Repository.Database;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository.Repositorys

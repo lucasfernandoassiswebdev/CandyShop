@@ -1,5 +1,4 @@
-﻿using CandyShop.Core.Services._Interfaces;
-using CandyShop.Core.Services.Produto.Dto;
+﻿using CandyShop.Core.Services.Produto.Dto;
 
 namespace CandyShop.Core.Services.Produto
 {

@@ -1,10 +1,11 @@
-﻿using CandyShop.Core.Compra.Dto;
-using CandyShop.Core.CompraProduto.Dto;
-using CandyShop.Core.Services.CompraProduto;
-using CandyShop.Core.Usuario.Dto;
+﻿using CandyShop.Core.Services.Compra;
+using CandyShop.Core.Services.Compra.Dto;
+using CandyShop.Core.Services.CompraProduto.Dto;
+using CandyShop.Core.Services.Usuario.Dto;
+using CandyShop.Repository.Database;
 using System.Collections.Generic;
 
-namespace CandyShop.Repository
+namespace CandyShop.Repository.Repositorys
 {
     public class CompraRepository : ConnectDB, ICompraRepository
     {

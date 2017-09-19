@@ -1,9 +1,10 @@
-﻿using CandyShop.Core;
-using CandyShop.Core.Pagamento.Dto;
-using CandyShop.Core.Usuario.Dto;
+﻿using CandyShop.Core.Services.Pagamento;
+using CandyShop.Core.Services.Pagamento.Dto;
+using CandyShop.Core.Services.Usuario.Dto;
+using CandyShop.Repository.Database;
 using System.Collections.Generic;
 
-namespace CandyShop.Repository
+namespace CandyShop.Repository.Repositorys
 {
     public class PagamentoRepository : ConnectDB, IPagamentoRepository
     {

@@ -1,5 +1,5 @@
-﻿using CandyShop.Core;
-using CandyShop.Core.Pagamento.Dto;
+﻿using CandyShop.Core.Services.Pagamento;
+using CandyShop.Core.Services.Pagamento.Dto;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers

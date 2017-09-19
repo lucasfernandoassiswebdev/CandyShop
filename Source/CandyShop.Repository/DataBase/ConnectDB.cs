@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace CandyShop.Repository
+namespace CandyShop.Repository.Database
 {
     public class ConnectDB
     {

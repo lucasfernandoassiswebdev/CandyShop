@@ -1,8 +1,9 @@
-﻿
+﻿using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Produto.Dto;
+using CandyShop.Repository.Database;
 using System.Collections.Generic;
 
-namespace CandyShop.Repository
+namespace CandyShop.Repository.Repositorys
 
 
 {

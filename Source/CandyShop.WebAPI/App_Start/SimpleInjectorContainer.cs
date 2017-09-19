@@ -1,10 +1,10 @@
-﻿using CandyShop.Core;
-using CandyShop.Core.Infra;
-using CandyShop.Core.Services._Interfaces;
+﻿using CandyShop.Core.Infra;
+using CandyShop.Core.Services;
+using CandyShop.Core.Services.Compra;
 using CandyShop.Core.Services.CompraProduto;
+using CandyShop.Core.Services.Pagamento;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Usuario;
-using CandyShop.Repository;
 using CandyShop.Repository.Repositorys;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;

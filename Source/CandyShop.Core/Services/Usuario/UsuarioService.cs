@@ -1,5 +1,4 @@
-﻿using CandyShop.Core.Services._Interfaces;
-using CandyShop.Core.Services.Usuario.Dto;
+﻿using CandyShop.Core.Services.Usuario.Dto;
 
 namespace CandyShop.Core.Services.Usuario
 {

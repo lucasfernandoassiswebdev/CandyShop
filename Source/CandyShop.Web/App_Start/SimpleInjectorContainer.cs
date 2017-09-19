@@ -3,7 +3,7 @@ using CandyShop.Application.Interfaces;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 
-namespace CandyShop.Web.App_Start
+namespace CandyShop.Web
 {
     public class SimpleInjectorContainer
     {

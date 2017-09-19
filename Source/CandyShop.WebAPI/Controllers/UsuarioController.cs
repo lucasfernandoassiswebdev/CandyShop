@@ -1,6 +1,6 @@
-﻿using CandyShop.Core.Services._Interfaces;
+﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Usuario;
-using CandyShop.Core.Usuario.Dto;
+using CandyShop.Core.Services.Usuario.Dto;
 using System.Net;
 using System.Web.Http;
 

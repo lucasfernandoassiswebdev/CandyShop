@@ -1,5 +1,5 @@
-﻿using CandyShop.Core.CompraProduto.Dto;
-using CandyShop.Core.Services.CompraProduto;
+﻿using CandyShop.Core.Services.CompraProduto;
+using CandyShop.Core.Services.CompraProduto.Dto;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers

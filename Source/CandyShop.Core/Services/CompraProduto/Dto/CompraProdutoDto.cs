@@ -1,6 +1,6 @@
 ﻿using CandyShop.Core.Services.Produto.Dto;
 
-namespace CandyShop.Core.CompraProduto.Dto
+namespace CandyShop.Core.Services.CompraProduto.Dto
 {
     public class CompraProdutoDto
     {

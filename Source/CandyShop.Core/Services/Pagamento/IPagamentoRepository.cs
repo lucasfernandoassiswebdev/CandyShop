@@ -1,7 +1,7 @@
-﻿using CandyShop.Core.Pagamento.Dto;
+﻿using CandyShop.Core.Services.Pagamento.Dto;
 using System.Collections.Generic;
 
-namespace CandyShop.Core
+namespace CandyShop.Core.Services.Pagamento
 {
     public interface IPagamentoRepository
     {

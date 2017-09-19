@@ -1,4 +1,4 @@
-﻿using CandyShop.Core.CompraProduto.Dto;
+﻿using CandyShop.Core.Services.CompraProduto.Dto;
 using System.Collections.Generic;
 
 namespace CandyShop.Core.Services.CompraProduto

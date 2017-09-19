@@ -1,6 +1,7 @@
-﻿using CandyShop.Core.CompraProduto.Dto;
-using CandyShop.Core.Services.CompraProduto;
+﻿using CandyShop.Core.Services.CompraProduto;
+using CandyShop.Core.Services.CompraProduto.Dto;
 using CandyShop.Core.Services.Produto.Dto;
+using CandyShop.Repository.Database;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository.Repositorys

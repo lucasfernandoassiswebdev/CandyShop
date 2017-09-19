@@ -1,4 +1,4 @@
-﻿using CandyShop.Core.Services._Interfaces;
+﻿using CandyShop.Core.Services;
 using System.Collections.Generic;
 using System.Linq;
 

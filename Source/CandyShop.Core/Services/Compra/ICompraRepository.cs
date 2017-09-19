@@ -1,8 +1,8 @@
-﻿using CandyShop.Core.Compra.Dto;
-using CandyShop.Core.CompraProduto.Dto;
+﻿using CandyShop.Core.Services.Compra.Dto;
+using CandyShop.Core.Services.CompraProduto.Dto;
 using System.Collections.Generic;
 
-namespace CandyShop.Core.Services.CompraProduto
+namespace CandyShop.Core.Services.Compra
 {
     public interface ICompraRepository
     {

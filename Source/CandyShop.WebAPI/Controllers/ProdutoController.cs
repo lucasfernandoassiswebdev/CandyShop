@@ -1,4 +1,4 @@
-﻿using CandyShop.Core.Services._Interfaces;
+﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Produto.Dto;
 using System.Net;

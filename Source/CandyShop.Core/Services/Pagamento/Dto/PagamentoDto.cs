@@ -1,7 +1,7 @@
-﻿using CandyShop.Core.Usuario.Dto;
+﻿using CandyShop.Core.Services.Usuario.Dto;
 using System;
 
-namespace CandyShop.Core.Pagamento.Dto
+namespace CandyShop.Core.Services.Pagamento.Dto
 {
     public class PagamentoDto
     {

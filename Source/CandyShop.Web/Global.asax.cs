@@ -1,5 +1,4 @@
-﻿using CandyShop.Web.App_Start;
-using SimpleInjector.Integration.Web.Mvc;
+﻿using SimpleInjector.Integration.Web.Mvc;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
