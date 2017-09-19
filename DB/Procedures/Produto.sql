@@ -129,6 +129,40 @@ CREATE PROCEDURE [dbo].[CSSP_SelProduto]
 	END
 GO
 
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_SelDadosProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_SelDadosProduto]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_SelDadosProduto]
+	@IdProduto int
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produto.sql
+	Objetivo..........: Listar dados de um produto por ID
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 19/09/2017
+	Ex................: EXEC [dbo].[GCS_SelDadosProduto]
+
+	*/
+
+	BEGIN
+	
+		SELECT IdProduto,
+				NomeProduto,
+				PrecoProduto,
+				QtdeProduto,
+				Ativo,
+				Categoria
+			FROM Produto WITH (NOLOCK)
+			WHERE IdProduto = @IdProduto
+
+	END
+GO
+				
+
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisProduto]
 GO
