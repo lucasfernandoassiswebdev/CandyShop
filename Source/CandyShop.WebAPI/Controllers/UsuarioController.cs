@@ -55,7 +55,7 @@ namespace CandyShop.WebAPI.Controllers
                     _usuarioRepository.EditarUsuario(usuario);
                 return Ok();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Content(HttpStatusCode.NotAcceptable, _notification.HasNotification());
             }

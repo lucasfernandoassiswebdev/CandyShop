@@ -10,7 +10,10 @@
         max-width: 400px;
         margin: 0 auto;
         text-align: left;
-        margin-left: -10%;
+    }
+
+    .corpo {
+        margin-left: -14%;
     }
 
     dd {
@@ -19,40 +22,40 @@
     }
 
     dt {
-        color: brown;    
+        color: brown;
     }
 </style>
 
-<div class="corpo left">    
-<h4><font color="brown">Detalhes</font><font color="red"> do Produto :</font></h4>
-<hr/>
-<form class="col s12" style="margin-left: -10%">
-    <dl class="dl-horizontal">
-        <dt>
-            Nome
-        </dt>
+<div class="corpo left">
+    <h4><font color="vinho">Detalhes do usuário :</font></h4>
+    <hr />
+    <div class="col s12">
+        <dl class="dl-horizontal">
+            <dt>
+                Nome
+            </dt>
 
-        <dd>
-            @Model.NomeUsuario
-        </dd>
+            <dd>
+                @Model.NomeUsuario
+            </dd>
 
-        <dt>
-            CPF
-        </dt>
+            <dt>
+                CPF
+            </dt>
 
-        <dd>
-            @Model.Cpf
-        </dd>
+            <dd>
+                @Model.Cpf
+            </dd>
 
-        <dt>
-            Saldo do usuário
-        </dt>
+            <dt>
+                Saldo do usuário
+            </dt>
 
-        <dd>
-            @Model.SaldoUsuario
-        </dd>
-    </dl>
+            <dd>
+                @Model.SaldoUsuario
+            </dd>
+        </dl>
 
-    <a class="waves-effect waves-light btn" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
-</form>
+        <a class="waves-effect waves-light btn" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
+    </div>
 </div>

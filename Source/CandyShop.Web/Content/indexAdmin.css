@@ -4,16 +4,18 @@
 }
 
 header, main, footer, #DivGrid {
-	padding-left: 380px;
+	padding-left: 430px;
+	padding-right: 70px;
 }
 
 @media only screen and (max-width : 992px) {
 	header, main, footer, #DivGrid {
 		padding-left: 0;
+		padding-right: 0;
 	}
 
 	.container {
-		width: 60% !important;
+		width: 90% !important;
 	}
 
 	.waves-effect {
@@ -38,6 +40,15 @@ header, main, footer, #DivGrid {
 
 	.recuaTabela {
 		margin-left: 0 !important;
+	}
+
+	.modal {
+		width: 70%;
+		margin-left: 2.3%;
+	}
+
+	.corpo{
+		margin-left: 2% !important;	
 	}
 }
 

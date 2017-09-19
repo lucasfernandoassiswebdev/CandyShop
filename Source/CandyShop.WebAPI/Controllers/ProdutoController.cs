@@ -29,7 +29,7 @@ namespace CandyShop.WebAPI.Controllers
                     _produtoRepository.InserirProduto(produto);
                 return Ok();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Content(HttpStatusCode.NotAcceptable,_notification.GetNotification());
             }
