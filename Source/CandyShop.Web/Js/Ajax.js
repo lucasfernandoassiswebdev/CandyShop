@@ -167,6 +167,10 @@
     var listarInativos = function() {
         chamaPagina(url.listarInativos);
     };
+    var listarProdutoPorNome = function() {
+        var produto = { Nome: $('#nomeProduto').val() };
+        chamaPaginaComIdentificador(url.listarProdutoPorNome, produto);
+    };
 
 
     //retorna links para acessar as paginas.
@@ -201,6 +205,7 @@
         concluirEdicaoProduto: concluirEdicaoProduto,
         desativarProduto: desativarProduto,
         desativarProdutoConfirmado: desativarProdutoConfirmado,
-        listarInativos: listarInativos
+        listarInativos: listarInativos,
+        listarProdutoPorNome: listarProdutoPorNome
 };
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.

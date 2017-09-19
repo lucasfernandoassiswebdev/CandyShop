@@ -54,6 +54,12 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_produtoRepository.SelecionarDadosProduto(idProduto));
         }
 
+        [Route("api/produto/procurar/{nome}")]
+        public IHttpActionResult GetPorNome(string nome)
+        {
+            return Ok(_produtoRepository.ProcurarProdutoPorNome(nome));
+        }
+
         public IHttpActionResult Put(ProdutoDto produto)
         {
             _produtoRepository.UpdateProduto(produto);

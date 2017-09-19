@@ -17,37 +17,17 @@ namespace CandyShop.Web.Controllers
             _appProduto = produto;
         }
         
+
+        #region Telas
+
         public ActionResult Index()
-        {
-            var response = _appProduto.ListarProdutos();
-            if (response.Status != HttpStatusCode.OK)
-            {
-                return Content("Erro " + response.ContentAsString.First());
-            }
-            
-            return View(response.Content);
+        {            
+            return View();
         }
 
         public ActionResult CadastrarProduto()
         {
             return View();
-        }
-
-        public ActionResult ListarInativos()
-        {
-            var response = _appProduto.ListarInativos();
-            if (response.Status != HttpStatusCode.OK)
-                return Content($"Erro {response.ContentAsString.First()}");
-            return View(response.Content);
-        }
-
-        [HttpPost]
-        public ActionResult CadastrarProduto(Produto produto)
-        {
-            var response = _appProduto.InserirProduto(produto);
-            if (response.Status != HttpStatusCode.OK) 
-               return Content(response.ContentAsString.First());
-            return Content("Produto cadastrado com sucesso!!");
         }
 
         public ActionResult DetalheProduto(int idProduto)
@@ -66,6 +46,56 @@ namespace CandyShop.Web.Controllers
             return View(response.Content);
         }
 
+        public ActionResult DesativarProduto(int idProduto)
+        {
+            var response = _appProduto.DetalharProduto(idProduto);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro" + response.ContentAsString.First());
+            return View(response.Content);
+        }
+
+
+        #endregion
+
+        #region Listas
+
+
+        public ActionResult Listar()
+        {
+            var response = _appProduto.ListarProdutos();
+            if (response.Status != HttpStatusCode.OK)            
+                return Content("Erro " + response.ContentAsString.First());            
+            return View("Index", response.Content);
+        }
+
+        public ActionResult ListarInativos()
+        {
+            var response = _appProduto.ListarInativos();
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro {response.ContentAsString.First()}");
+            return View("Index", response.Content);
+        }
+
+        public ActionResult ProcurarProduto(string nome)
+        {
+            var response = _appProduto.ProcurarProduto(nome);
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro: {response.Status}");
+            return View("Index", response.Content);
+        }
+
+        #endregion
+
+        #region Execucoes
+        [HttpPost]
+        public ActionResult CadastrarProduto(Produto produto)
+        {
+            var response = _appProduto.InserirProduto(produto);
+            if (response.Status != HttpStatusCode.OK)
+                return Content(response.ContentAsString.First());
+            return Content("Produto cadastrado com sucesso!!");
+        }
+
         [HttpPost]
         public ActionResult EditarProduto(Produto produto)
         {
@@ -73,14 +103,6 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content(response.ContentAsString.First());
             return Content("Produto editado com sucesso!");
-        }
-
-        public ActionResult DesativarProduto(int idProduto)
-        {
-            var response = _appProduto.DetalharProduto(idProduto);
-            if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString.First());
-            return View(response.Content);
         }
 
         [HttpPost]
@@ -91,5 +113,7 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro: {response.Status}");
             return Content("Produto desativado com sucesso!");
         }
+        #endregion
+
     }
 }
