@@ -11,28 +11,26 @@ namespace CandyShop.WebAPI.Controllers
     {
         private readonly INotification _notification;
         private readonly IProdutoRepository _produtoRepository;
-        private readonly IProdutoService _produtoService;
 
 
-        public ProdutoController(INotification notification, IProdutoRepository produtoRepository, IProdutoService produtoService)
+        public ProdutoController(INotification notification, IProdutoRepository produtoRepository)
         {
             _notification = notification;
             _produtoRepository = produtoRepository;
-            _produtoService = produtoService;
         }
 
         public IHttpActionResult Post(ProdutoDto produto)
         {
             try
             {
+                _produtoRepository.InserirProduto(produto);
                 if (_notification.HasNotification())
                     return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-                _produtoRepository.InserirProduto(produto);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
+                return Content(HttpStatusCode.NotAcceptable, ex.Message);
             }
         }
 

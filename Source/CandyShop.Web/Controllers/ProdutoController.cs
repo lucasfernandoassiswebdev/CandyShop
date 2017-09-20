@@ -84,7 +84,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.InserirProduto(produto);
             if (response.Status != HttpStatusCode.OK)
-                return Content(response.ContentAsString.First());
+                return Content(response.ContentAsString);
             return Content("Produto cadastrado com sucesso!!");
         }
 
@@ -93,7 +93,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.EditarProduto(produto);
             if (response.Status != HttpStatusCode.OK)
-                return Content(response.ContentAsString.First());
+                return Content(response.ContentAsString);
             return Content("Produto editado com sucesso!");
         }
 

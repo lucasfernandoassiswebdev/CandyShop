@@ -143,6 +143,10 @@
                 Materialize.toast(xhr.responseText, 3000);
             });
     };
+    var logOff = function () {
+        Materialize.toast("Deslogado", 3000);
+        carregaPadrao();
+    }
     //produtos
     var listaProduto = function () {
         chamaPagina(url.listaProduto);
@@ -219,6 +223,7 @@
         listarUsuarioEmDivida: listarUsuarioEmDivida,
         listarUsuarioPorNome: listarUsuarioPorNome,
         verificaLogin: verificaLogin,
+        logOff : logOff,
         //produtos
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,
