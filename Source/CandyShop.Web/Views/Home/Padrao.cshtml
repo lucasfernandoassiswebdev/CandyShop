@@ -9,6 +9,7 @@
         AjaxJs.init({
             main: '@Url.Action("Main", "Home")',
             padrao: '@Url.Action("Padrao", "Home")',
+            logOff: '@Url.Action("Padrao", "Home")',
             pagamento: '@Url.Action("Index", "Pagamento")',
             historicoCompra: '@Url.Action("Historico", "Compra")',
             detalhePagamento: '@Url.Action("Detalhes", "Pagamento")',
@@ -152,7 +153,7 @@
                 <li><a href="#!" onclick="AjaxJs.pagamento()"><i class="material-icons">attach_money</i>Pagamento</a></li>
                 <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
                 <li class="divider"></li>
-                <li><a href="#!"><i class="material-icons">power_settings_new</i>Sair</a></li>
+                <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
         </div>
         <div class="nav-content white">
@@ -205,7 +206,7 @@ else
                 <li><a href="#!" onclick="AjaxJs.pagamento()"><i class="material-icons">attach_money</i>Pagamento</a></li>
                 <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
                 <li class="divider"></li>
-                <li><a href="#!"><i class="material-icons">power_settings_new</i>Sair</a></li>
+                <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
         </div>
         <div class="nav-content white">
@@ -221,4 +222,10 @@ else
 }
 
 <div id="DivGrid"><img src="https://media.tenor.com/images/d6cd5151c04765d1992edfde14483068/tenor.gif" style="width: 100px;height: 100px;margin: 0 auto;display: block;"></div>
+
+<script>
+    $(document).ready(function() {
+        $('.tooltipped').tooltip({ delay: 50 });
+    });
+</script>
 
