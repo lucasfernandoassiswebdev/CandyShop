@@ -21,14 +21,14 @@ CREATE TABLE Usuario (
 
 CREATE TABLE Pagamento (
 	IdPagamento int constraint PK_IdPagamento primary key identity (1,1),
-	Cpf varchar(14) constraint FK_Cpf foreign key references Usuario (Cpf),
+	Cpf varchar(11) constraint FK_Cpf foreign key references Usuario (Cpf),
 	DataPagamento datetime,
 	ValorPagamento decimal
 )
 
 CREATE TABLE Compra(
 	IdCompra int constraint PK_IdCompra primary key identity (1,1),
-	UsuarioCompra varchar(14) constraint FK_UsuarioCompra foreign key references Usuario (Cpf),
+	UsuarioCompra varchar(11) constraint FK_UsuarioCompra foreign key references Usuario (Cpf),
 	DataCompra datetime
 )	
 

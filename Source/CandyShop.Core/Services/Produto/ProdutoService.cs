@@ -20,8 +20,17 @@ namespace CandyShop.Core.Services.Produto
                 _notification.Add("Produto ja existe !!!");
                 return;
             }
+
             _produtoRepository.InserirProduto(produto);
         }
 
+        public void EditarProduto(ProdutoDto produto)
+        {
+            if (_produtoRepository.SelecionarProduto(produto.NomeProduto.Trim()))
+            {
+                _notification.Add("Produto ja existe !!!");
+            }
+            _produtoRepository.UpdateProduto(produto);
+        }
     }
 }
