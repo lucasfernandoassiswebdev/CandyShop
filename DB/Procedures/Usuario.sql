@@ -37,7 +37,6 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DesUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_DesUsuario]
 GO
@@ -105,7 +104,6 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelUsuario]
 GO
@@ -130,7 +128,6 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuario]
 	END
 GO
 				
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisUsuario]
 GO
@@ -163,7 +160,6 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_ListarUsuariosInativos]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 GO
@@ -194,7 +190,6 @@ CREATE PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 	END
 GO
 				
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUsuariosDivida]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 GO
@@ -227,6 +222,10 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUs
 	DROP PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 GO
 
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuarioIgual]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
+GO
+
 CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 	@nome varchar(50),
 	@cpf varchar(11)
@@ -248,6 +247,34 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 			WHERE Cpf = @cpf AND NomeUsuario <> @nome
 	END
 GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_VerificaLoginSenha]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_VerificaLoginSenha]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_VerificaLoginSenha]
+	@Cpf varchar(11),
+	@SenhaUsuario varchar(12)
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Verificar se o login bate
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 20/09/2017
+	Ex................: EXEC [dbo].[GCS_VerificaLoginSenha]
+
+	*/
+
+	BEGIN
+		SELECT TOP 1 1 
+			FROM Usuario
+			WHERE Cpf = @Cpf AND SenhaUsuario = @SenhaUsuario
+	END
+GO
+				
 
 								
 

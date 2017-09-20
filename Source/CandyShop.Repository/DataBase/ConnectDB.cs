@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace CandyShop.Repository.Database
 {
-    public class ConnectDB // : IDisposable
+    public class ConnectDB 
     {
         //Cria o construtor pra que toda vez que o _connection for intanciado abrir a conexão com o banco 
         public ConnectDB()
@@ -54,11 +54,5 @@ namespace CandyShop.Repository.Database
         {
             return _command.ExecuteReader();
         }
-
-        //public void Dispose()
-        //{
-        //    if (_connection.State == ConnectionState.Open)
-        //        _connection.Close();
-        //}
     }
 }
