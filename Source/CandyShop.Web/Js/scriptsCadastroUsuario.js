@@ -89,10 +89,10 @@ function validaBotao() {
     //validando o campo de nome
     var qtde = $('#Nome').val().length;
 
-    if (!TestaCPF(cpfNew) && qtde > 50 || qtde === 0) {
-        $('.botaoCadastro ').prop('disabled', true);
+    if (!TestaCPF(cpfNew) || qtde > 50 || qtde === 0) {
+        $('.botaoCadastro ').attr('disabled', 'disabled');
     } else {
-        $('.botaoCadastro ').prop('disabled', false);
+        $('.botaoCadastro ').removeAttr('disabled');
     }
     console.log('cpf válido: ' + TestaCPF(cpfNew) + ' quantidade de caracteres: ' + qtde);
 }
