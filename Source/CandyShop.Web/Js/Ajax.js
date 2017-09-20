@@ -147,7 +147,7 @@
         $.post(url.verificaLogin, usuario)
             .done(function(message) {
                 carregaPadrao();
-                Materialize.toast(message, 3000);
+                Materialize.toast("Logado com sucesso!", 3000);
             })
             .fail(function(xhr) {
                 Materialize.toast(xhr.responseText, 3000);
