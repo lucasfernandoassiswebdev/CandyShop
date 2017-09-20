@@ -121,6 +121,11 @@
         chamaPagina(url.listarUsuarioEmDivida);
     };
 
+    var listarUsuarioPorNome = function() {
+        var usuario = { Nome: $('#nomeUsuario').val() };
+        chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
+    };
+
     //produtos
     var listaProduto = function () {
         chamaPagina(url.listaProduto);
@@ -195,6 +200,7 @@
         desativarUsuarioConfirmado: desativarUsuarioConfirmado,
         listarUsuarioInativo: listarUsuarioInativo,
         listarUsuarioEmDivida: listarUsuarioEmDivida,
+        listarUsuarioPorNome: listarUsuarioPorNome,
         //produtos
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,

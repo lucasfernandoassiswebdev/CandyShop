@@ -20,7 +20,8 @@
             desativarUsuarioConfirmado: '@Url.Action("DesativarUsuario", "Usuario")',
             listarUsuarioInativo: '@Url.Action("ListarInativos", "Usuario")',
             listarUsuarioEmDivida: '@Url.Action("ListarUsuariosEmDivida", "Usuario")',
-            
+            listarUsuarioPorNome: '@Url.Action("ProcurarUsuario", "Usuario")',
+
             //produtos
             listaProduto: '@Url.Action("Listar", "Produto")',
             cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")',
@@ -60,7 +61,7 @@
         </form>
     </div>
     <div class="modal-footer center">
-        <a href="#!" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
+        <a href="#!" onclick="AjaxJs.listarUsuarioPorNome()" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
     </div>
 </div>
 
