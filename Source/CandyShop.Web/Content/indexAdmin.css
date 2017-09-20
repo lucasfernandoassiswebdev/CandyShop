@@ -120,3 +120,11 @@ th {
 input {
 	color: black;
 }
+
+.brown {
+	background-color: #3E2723 !important;
+}
+
+.orange {
+	background-color: #424242 !important;
+}

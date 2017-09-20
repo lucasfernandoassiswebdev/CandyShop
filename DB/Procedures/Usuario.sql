@@ -41,7 +41,7 @@ GO
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DesUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_DesUsuario]
 GO
-select * from usuario
+
 CREATE PROCEDURE [dbo].[CSSP_DesUsuario]
 	@Cpf varchar(14)
 	AS
