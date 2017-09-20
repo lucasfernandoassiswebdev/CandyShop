@@ -152,7 +152,7 @@ namespace CandyShop.Web.Controllers
         public ActionResult Deslogar()
         {
             Session.Clear();
-            return RedirectToAction("Index");
+            return View("Index");
         }
         #endregion        
     }

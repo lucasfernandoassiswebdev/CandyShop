@@ -135,13 +135,13 @@
         var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
 
         $.post(url.verificaLogin, usuario)
-            .done(function (message) {
+            .done(function(message) {
                 carregaPadrao();
-                Materialize.toast(message, 3000);                
+                Materialize.toast(message, 3000);
             })
             .fail(function(xhr) {
-                Materialize.toast(xhr.responseText,3000);
-            })
+                Materialize.toast(xhr.responseText, 3000);
+            });
     };
     //produtos
     var listaProduto = function () {
