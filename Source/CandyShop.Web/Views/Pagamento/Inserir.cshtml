@@ -2,17 +2,17 @@
 @{
     Layout = null;
 }
-<div class="container">
+<div class="container ">
     <h4>Inserir Pagamento</h4>
-    <div class="row" style="margin-left: -20%">
+    <div class="row">
         <form class="col s12">
-            <div class="row">
+            <div class="row center">
                 <div class="input-field col s6">
                     <input id="valorPago" name="valorPago" type="text" class="validate" required="">
                     <label for="valorPago">Valor:</label>
                 </div>
             </div>
-            <div class="row" , align="center">
+            <div class="row" >
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listarPagamento()"><i class="material-icons left">arrow_back</i>Voltar</a>
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJs.concluirPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
             </div>

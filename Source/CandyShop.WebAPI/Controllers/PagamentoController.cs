@@ -26,9 +26,15 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-        public IHttpActionResult Get(PagamentoDto pagamento )
+        public IHttpActionResult Get()
         {
             return Ok(_pagamentoRepository.ListarPagamentos());
+        }
+
+        [Route("api/cpf/{cpf}")]
+        public IHttpActionResult GetCpf(string cpf)
+        {
+            return Ok(_pagamentoRepository.ListarPagamentosPorCpf(cpf));
         }
 
         public IHttpActionResult Delete(int idpagamento)

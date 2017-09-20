@@ -90,7 +90,13 @@
     var listarPagamento = function () {
         chamaPagina(url.listarPagamento);
     };
-
+    var inserirPagamento = function() {
+        chamaPagina(url.inserirPagamento);
+    };
+    var concluirPagamento = function () {
+        var pagamento = { ValorPagamento: $('#valorPago') };
+        concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);
+    }
     //usuarios
     var cadastroUsuario = function () {
         chamaPagina(url.cadastroUsuario);
@@ -218,6 +224,8 @@
         //pagamento
         listarPagamento: listarPagamento,
         detalhePagamento: detalhePagamento,
+        inserirPagamento: inserirPagamento,
+        concluirPagamento: concluirPagamento,
         //usuario                
         historicoCompra: historicoCompra,
         concluirCadastroUsuario: concluirCadastroUsuario,

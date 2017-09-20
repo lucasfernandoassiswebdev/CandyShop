@@ -30,7 +30,8 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult Listar()
         {
-            var response = _appPagamento.ListarPagamentos();
+
+            var response = _appPagamento.ListarPagamentosCpf();
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
             return View("Index", response.Content);
@@ -47,6 +48,6 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)            
                 return Content("Erro" + response.ContentAsString.First());
             return Content("Pagamento realizado com sucesso!!");
-        }
+        }       
     }
 }
