@@ -59,9 +59,15 @@
     var historicoCompra = function () {
         chamaPagina(url.historicoCompra);
     };
-
     var mostraSaldo = function () {
         chamaPagina(url.mostraSaldo);
+    };
+    //pagamentos
+    var detalhePagamento = function () {
+        chamaPagina(url.detalhePagamento);
+    };
+    var pagamento = function () {
+        chamaPagina(url.pagamento);
     };
 
     //usuarios
@@ -70,13 +76,7 @@
     };
     var listaUsuario = function () {
         chamaPagina(url.listaUsuario);
-    };
-    var detalhePagamento = function () {
-        chamaPagina(url.detalhePagamento);
-    };
-    var pagamento = function () {
-        chamaPagina(url.pagamento);
-    };
+    };    
     var editarUsuario = function (cpf) {
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.editarUsuario, usuario);
@@ -90,7 +90,6 @@
             Cpf: $('#cpf').val(),
             NomeUsuario: $('#Nome').val()
         };
-
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
     var concluirEdicaoUsuario = function () {
@@ -101,7 +100,6 @@
             SenhaUsuario: $('#Password').val(),
             Ativo: $('#Ativo').val()
         };
-
         concluirAcao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };
     var desativarUsuario = function (cpf) {
@@ -185,10 +183,10 @@
 
         //gerenciamento da lojinha
         mostraSaldo: mostraSaldo,
-
-        //usuario
+        //pagamento
         pagamento: pagamento,
         detalhePagamento: detalhePagamento,
+        //usuario                
         historicoCompra: historicoCompra,
         concluirCadastroUsuario: concluirCadastroUsuario,
         listaUsuario: listaUsuario,

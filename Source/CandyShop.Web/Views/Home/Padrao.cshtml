@@ -8,10 +8,10 @@
     $(document).ready(function() {
         AjaxJs.init({
             main: '@Url.Action("Main", "Home")',
-            pagamento: '@Url.Action("Index", "Pagamento")',
+            pagamento: '@Url.Action("Listar", "Pagamento")',
             historicoCompra: '@Url.Action("Historico", "Compra")',
             detalhePagamento: '@Url.Action("Detalhes", "Pagamento")',
-            verificaLogin : '@Url.Action("Logar","Usuario")'
+            verificaLogin: '@Url.Action("Logar","Usuario")'            
         });
     });
 </script>
