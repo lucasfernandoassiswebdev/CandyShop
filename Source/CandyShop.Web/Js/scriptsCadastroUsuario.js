@@ -1,6 +1,7 @@
 ﻿//muda a foto do usuário na tela
 $('#fotoUsuario').change(function () {
     readURL(this);
+    encodeImageFileAsURL();
 });
 
 function readURL(input) {
@@ -92,5 +93,23 @@ function validaBotao() {
         $('.botaoCadastro ').attr('disabled', 'disabled');
     } else {
         $('.botaoCadastro ').removeAttr('disabled');
+    }
+}
+
+function encodeImageFileAsURL() {
+    var filesSelected = document.getElementById("fotoUsuario").files;
+    if (filesSelected.length > 0) {
+        var fileToLoad = filesSelected[0];
+
+        var fileReader = new FileReader();
+
+        fileReader.onload = function (fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+            $("#imagem").html(srcData);
+            alert("Converted Base64 version is " + $("#imagem").html());
+            console.log("Converted Base64 version is " + $("#imagem").html());
+        }
+        fileReader.readAsDataURL(fileToLoad);
     }
 }
