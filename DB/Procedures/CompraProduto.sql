@@ -24,7 +24,17 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompraProduto]
 	BEGIN	
 		INSERT INTO CompraProduto (IdProduto, IdCompra, QtdeProduto)
 			VALUES (@IdProduto, @IdCompra, @QtdeProduto)
-			
+
+			DECLARE @PrecoProduto decimal
+
+			SELECT @PrecoProduto = PrecoProduto
+				 FROM [dbo].[Produto]
+					WHERE IdProduto = @IdProduto
+
+			UPDATE [dbo].[Compra]
+				SET ValorCompra += (@QtdeProduto * @PrecoProduto)
+					WHERE IdCompra = @IdCompra
+
 			if @@ERROR <> 0 
 				RETURN 1
 		RETURN 0
