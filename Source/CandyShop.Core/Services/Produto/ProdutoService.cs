@@ -20,6 +20,7 @@ namespace CandyShop.Core.Services.Produto
                 _notification.Add("Produto ja existe !!!");
                 return;
             }
+
             _produtoRepository.InserirProduto(produto);
         }
 

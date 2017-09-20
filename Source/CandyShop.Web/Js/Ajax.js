@@ -101,7 +101,7 @@
             NomeUsuario: $('#Nome').val(),
             SaldoUsuario: $('#SaldoUsuario').val(),
             SenhaUsuario: $('#Password').val(),
-            Ativo: $('#Status').val()
+            Ativo: $('#Ativo').val()
         };
 
         concluirAcao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
