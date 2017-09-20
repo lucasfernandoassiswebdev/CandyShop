@@ -15,6 +15,6 @@ namespace CandyShop.Core.Services.Usuario
         IEnumerable<UsuarioDto> ListarUsuarioDivida();
         IEnumerable<UsuarioDto> ListarUsuarioPorNome(string nome);
         UsuarioDto SelecionarDadosUsuario(string cpf);
-
+        int VerificaLogin(UsuarioDto usuario);
     }
 }

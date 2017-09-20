@@ -80,11 +80,9 @@
     var editarUsuario = function (cpf) {
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.editarUsuario, usuario);
-    };    
+    };
     var detalheUsuario = function (cpf) {
-        var usuario = {
-            Cpf: cpf
-        };
+        var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.detalheUsuario, usuario);
     };
     var concluirCadastroUsuario = function () {
@@ -110,22 +108,24 @@
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.desativarUsuario, usuario);
     };
-    var desativarUsuarioConfirmado = function(cpf) {
+    var desativarUsuarioConfirmado = function (cpf) {
         var usuario = { Cpf: cpf };
         concluirAcao(url.desativarUsuarioConfirmado, usuario, url.listaUsuario);
     };
-    var listarUsuarioInativo = function() {
+    var listarUsuarioInativo = function () {
         chamaPagina(url.listarUsuarioInativo);
     };
-    var listarUsuarioEmDivida = function() {
+    var listarUsuarioEmDivida = function () {
         chamaPagina(url.listarUsuarioEmDivida);
     };
-
-    var listarUsuarioPorNome = function() {
+    var listarUsuarioPorNome = function () {
         var usuario = { Nome: $('#nomeUsuario').val() };
         chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
     };
-
+    var verificaLogin = function () {
+        var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() }
+        concluirAcao(url.verificaLogin, usuario);
+    }
     //produtos
     var listaProduto = function () {
         chamaPagina(url.listaProduto);
@@ -150,7 +150,7 @@
         var produto = { IdProduto: id };
         chamaPaginaComIdentificador(url.editarProduto, produto);
     };
-    var concluirEdicaoProduto = function() {
+    var concluirEdicaoProduto = function () {
         var produto = {
             IdProduto: $('#IdProduto').val(),
             NomeProduto: $('#NomeProduto').val(),
@@ -165,14 +165,14 @@
         var produto = { IdProduto: id };
         chamaPaginaComIdentificador(url.desativarProduto, produto);
     };
-    var desativarProdutoConfirmado = function(id) {
+    var desativarProdutoConfirmado = function (id) {
         var produto = { IdProduto: id };
         concluirAcao(url.desativarProdutoConfirmado, produto, url.listaProduto);
     };
-    var listarInativos = function() {
+    var listarInativos = function () {
         chamaPagina(url.listarInativos);
     };
-    var listarProdutoPorNome = function() {
+    var listarProdutoPorNome = function () {
         var produto = { Nome: $('#nomeProduto').val() };
         chamaPaginaComIdentificador(url.listarProdutoPorNome, produto);
     };
@@ -201,6 +201,7 @@
         listarUsuarioInativo: listarUsuarioInativo,
         listarUsuarioEmDivida: listarUsuarioEmDivida,
         listarUsuarioPorNome: listarUsuarioPorNome,
+        verificaLogin: verificaLogin,
         //produtos
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,
@@ -212,5 +213,5 @@
         desativarProdutoConfirmado: desativarProdutoConfirmado,
         listarInativos: listarInativos,
         listarProdutoPorNome: listarProdutoPorNome
-};
+    };
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.

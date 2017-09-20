@@ -18,7 +18,8 @@ namespace CandyShop.Repository.Repositorys
             CSSP_DesUsuario,
             CSSP_LisUsuarioIgual,
             CSSP_ListarUsuariosInativos,
-            CSSP_LisUsuarioPorNome
+            CSSP_LisUsuarioPorNome,
+            CSSP_VerificaLoginSenha
         }
 
         public void InserirUsuario(UsuarioDto usuario)
@@ -168,6 +169,17 @@ namespace CandyShop.Repository.Repositorys
                         Ativo = reader.ReadAsString("Ativo")
                     });
             return retorno;
+        }
+
+        public int VerificaLogin(UsuarioDto usuario)
+        {
+            ExecuteProcedure(Procedures.CSSP_VerificaLoginSenha);
+            AddParameter("@Cpf", usuario.Cpf);
+            AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    return 1;
+            return 0;
         }
     }
 }

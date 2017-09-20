@@ -6,5 +6,6 @@ namespace CandyShop.Core.Services.Usuario
     {
         void InserirUsuario(UsuarioDto usuario);
         void EditarUsuario(UsuarioDto usuario);
+        int VerificaLogin(UsuarioDto usuario);
     }
 }

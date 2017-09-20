@@ -35,6 +35,28 @@ namespace CandyShop.WebAPI.Controllers
             }
         }
 
+        [HttpPost, Route("api/Usuario/login")]
+        public IHttpActionResult PostLogin(UsuarioDto usuario)
+        {
+            try
+            {
+                if (_notification.HasNotification())
+                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+
+                var user = _usuarioRepository.SelecionarUsuario(usuario.Cpf);
+                if (user != null)
+                {
+                    return Ok(_usuarioService.VerificaLogin(usuario));
+                }
+
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
+        }
+
         public IHttpActionResult Get()
         {
             return Ok(_usuarioRepository.ListarUsuario());

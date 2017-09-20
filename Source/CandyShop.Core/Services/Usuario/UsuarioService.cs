@@ -7,9 +7,8 @@ namespace CandyShop.Core.Services.Usuario
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
 
-
         public UsuarioService(INotification notification, IUsuarioRepository usuarioRepository)
-        {   
+        {
             _notification = notification;
             _usuarioRepository = usuarioRepository;
         }
@@ -20,7 +19,7 @@ namespace CandyShop.Core.Services.Usuario
             {
                 _notification.Add("Usuario ja cadastrado!!!");
                 return;
-            } 
+            }
 
             _usuarioRepository.InserirUsuario(usuario);
         }
@@ -30,10 +29,16 @@ namespace CandyShop.Core.Services.Usuario
             if (_usuarioRepository.VericaUsuarioIgual(usuario) == 1)
             {
                 _notification.Add("Usuario ja cadastrado!!!");
-                return; 
+                return;
             }
 
             _usuarioRepository.EditarUsuario(usuario);
+        }
+
+        public int VerificaLogin(UsuarioDto usuario)
+        {
+            var retorno = _usuarioRepository.VerificaLogin(usuario) == 1 ? 1 : 0;
+            return retorno;
         }
     }
 }

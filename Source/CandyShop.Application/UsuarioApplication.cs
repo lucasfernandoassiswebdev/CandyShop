@@ -85,5 +85,14 @@ namespace CandyShop.Application
                 return new Response<IEnumerable<Usuario>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
+
+        public Response<string> VerificaLogin(Usuario usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.PostAsync($"{_enderecoApi}/login",usuario, new JsonMediaTypeFormatter()).Result;
+                return response.StatusCode != HttpStatusCode.OK ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) : new Response<string>(response.StatusCode);
+            }
+        }
     }
 }

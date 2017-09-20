@@ -16,7 +16,6 @@ namespace CandyShop.Web.Controllers
         }
 
         #region telas
-
         public ActionResult Index()
         {            
             return View();
@@ -52,7 +51,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro" + response.ContentAsString.First());
             return View(response.Content);
         }
-
         #endregion
 
         #region listas
@@ -135,10 +133,15 @@ namespace CandyShop.Web.Controllers
         [HttpPost]
         public ActionResult Logar(Usuario usuario)
         {
+            var response = _appUsuario.VerificaLogin(usuario);
+            if (response.Content != "1")
+            {
+                return View("Index",response.Content + "Login ou senha incorretos");
+            }
 
-            return Content("Logado com sucesso!");
+            Session["Login"] = "logado";
+            return View("Index",response.Content + "Logado com sucesso");
         }
-
         #endregion        
     }
 }

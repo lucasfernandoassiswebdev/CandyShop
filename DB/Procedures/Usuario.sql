@@ -270,11 +270,11 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuarioPorNome]
 	END
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_VerificaLoginSenha]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_VerificaLoginSenha]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_VerificaLoginSenha]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_VerificaLoginSenha]
 GO
 
-CREATE PROCEDURE [dbo].[GCS_VerificaLoginSenha]
+CREATE PROCEDURE [dbo].[CSSP_VerificaLoginSenha]
 	@Cpf varchar(11),
 	@SenhaUsuario varchar(12)
 
