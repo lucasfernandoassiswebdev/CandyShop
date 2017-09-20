@@ -29,7 +29,8 @@ CREATE TABLE Pagamento (
 CREATE TABLE Compra(
 	IdCompra int constraint PK_IdCompra primary key identity (1,1),
 	UsuarioCompra varchar(11) constraint FK_UsuarioCompra foreign key references Usuario (Cpf),
-	DataCompra datetime
+	DataCompra datetime,
+	ValorCompra decimal(18,2)
 )	
 
 CREATE TABLE CompraProduto(
