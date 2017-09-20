@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System;
 
 namespace CandyShop.Application
 {
@@ -75,6 +76,6 @@ namespace CandyShop.Application
                     return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
                 return new Response<string>(response.StatusCode);
             }
-        }
+        }       
     }
 }
