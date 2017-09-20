@@ -86,6 +86,14 @@ namespace CandyShop.Web.Controllers
             }
             return View("Index", response.Content);
         }
+
+        public ActionResult ProcurarUsuario(string nome)
+        {
+            var response = _appUsuario.ProcurarUsuario(nome);
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro: {response.Status}");
+            return View("Index", response.Content);
+        }
         #endregion
 
         #region execucoes

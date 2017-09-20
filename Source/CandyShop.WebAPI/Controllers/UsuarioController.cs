@@ -51,7 +51,13 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetUsuariosInativos()
         {
             return Ok(_usuarioRepository.ListarUsuarioInativo());
-        }        
+        }
+
+        [Route("api/usuario/procurar/{nome}")]
+        public IHttpActionResult GetPorNome(string nome)
+        {
+            return Ok(_usuarioRepository.ListarUsuarioPorNome(nome));
+        }
 
         public IHttpActionResult Put(UsuarioDto usuario)
         {

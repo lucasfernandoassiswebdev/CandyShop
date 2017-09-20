@@ -249,5 +249,29 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 	END
 GO
 
-								
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuarioPorNome]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisUsuarioPorNome]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_LisUsuarioPorNome]
+	@NomeUsuario varchar (40)
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Listar usuario de acordo com um trecho do nome
+	Autor.............: SMN - Rafael Henrique
+ 	Data..............: 20/09/2017
+	Ex................: EXEC [dbo].[CSSP_LisUsuarioPorNome]
+
+	*/
+
+	BEGIN
+	
+		SELECT * 
+			FROM [dbo].[Usuario] WITH(NOLOCK)
+			WHERE NomeUsuario LIKE '%' + @NomeUsuario + '%'
+	END
+GO							
 

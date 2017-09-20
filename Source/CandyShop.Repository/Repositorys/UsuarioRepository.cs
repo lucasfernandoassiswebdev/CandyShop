@@ -17,7 +17,8 @@ namespace CandyShop.Repository.Repositorys
             CSSP_SelUsuariosDivida,
             CSSP_DesUsuario,
             CSSP_LisUsuarioIgual,
-            CSSP_ListarUsuariosInativos
+            CSSP_ListarUsuariosInativos,
+            CSSP_LisUsuarioPorNome
         }
 
         public void InserirUsuario(UsuarioDto usuario)
@@ -149,6 +150,24 @@ namespace CandyShop.Repository.Repositorys
                 if (reader.Read())
                     return 1;
             return 0;
+        }
+
+        public IEnumerable<UsuarioDto> ListarUsuarioPorNome(string nome)
+        {
+            ExecuteProcedure(Procedures.CSSP_LisUsuarioPorNome);
+            AddParameter("@NomeUsuario", nome);
+            var retorno = new List<UsuarioDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new UsuarioDto
+                    {
+                        Cpf = reader.ReadAsString("Cpf"),
+                        SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
+                        SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
+                        NomeUsuario = reader.ReadAsString("NomeUsuario"),
+                        Ativo = reader.ReadAsString("Ativo")
+                    });
+            return retorno;
         }
     }
 }
