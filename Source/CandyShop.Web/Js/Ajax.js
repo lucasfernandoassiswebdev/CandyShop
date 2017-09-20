@@ -122,10 +122,18 @@
         var usuario = { Nome: $('#nomeUsuario').val() };
         chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
     };
-    var verificaLogin = function () {
-        var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() }
-        concluirAcao(url.verificaLogin, usuario);
-    }
+    var verificaLogin = function() {
+        var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
+
+        $.post(url.verificaLogin, usuario)
+            .done(function(message) {
+                Materialize.toast(message, 5000);
+            })
+            .fail(function(xhr) {
+                Materialize.toast(xhr.responseText, 5000);
+                console.log(xhr.responseText);
+            });
+    };
     //produtos
     var listaProduto = function () {
         chamaPagina(url.listaProduto);
