@@ -55,16 +55,16 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Put(UsuarioDto usuario)
         {
-
             try
             {
                 if (_notification.HasNotification())
-                    _usuarioRepository.EditarUsuario(usuario);
+                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+                _usuarioRepository.EditarUsuario(usuario);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Content(HttpStatusCode.NotAcceptable, _notification.HasNotification());
+                return BadRequest(ex.Message);
             }
         }
 

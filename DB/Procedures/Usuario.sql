@@ -139,7 +139,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 	/*
 	Documentação
 	Arquivo Fonte.....: Usuario.sql
-	Objetivo..........: Listar todos os usuario
+	Objetivo..........: Listar todos os usuarios ativos
 	Autor.............: SMN - Rafael Morais
  	Data..............: 07/07/2017
 	Ex................: EXEC [dbo].[CSSP_LisUsuario]
