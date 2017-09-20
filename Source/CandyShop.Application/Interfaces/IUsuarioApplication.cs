@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.ViewModels;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace CandyShop.Application.Interfaces
 {
@@ -13,6 +14,6 @@ namespace CandyShop.Application.Interfaces
         Response<string> DesativarUsuario(string cpf);
         Response<IEnumerable<Usuario>> ListarInativos();
         Response<IEnumerable<Usuario>> ProcurarUsuario(string nome);
-        Response<string> VerificaLogin(Usuario usuario);
+        HttpResponseMessage VerificaLogin(Usuario usuario);
     }
 }

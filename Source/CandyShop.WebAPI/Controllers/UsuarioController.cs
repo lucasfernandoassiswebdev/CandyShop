@@ -43,6 +43,7 @@ namespace CandyShop.WebAPI.Controllers
                 if (_notification.HasNotification())
                     return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
+                usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
                 var user = _usuarioRepository.SelecionarUsuario(usuario.Cpf);
                 if (user != null)
                 {
@@ -107,6 +108,5 @@ namespace CandyShop.WebAPI.Controllers
         {
             return Ok(_usuarioRepository.SelecionarUsuario(cpf));
         }
-
     }
 }

@@ -18,6 +18,17 @@
         });
     }
 
+    //função que vai carregar o corpo inteiro da pagina
+    function carregaPadrao() {
+        $.get(url.padrao).done(function (data) {
+            $('body').slideUp(function () {
+                $('body').hide().html(data).slideDown(); 
+            });
+        }).fail(function (xhr) { 
+            console.log(xhr.responseText);
+        });
+    }
+
     //Função genérica para carregar o div, de acordo com o endereço passado
     function chamaPagina(endereco) {
         $.get(endereco).done(function (data) { //data é o conteudo da view
@@ -41,9 +52,9 @@
 
     function concluirAcao(endereco, objeto, tela) {
         $.post(endereco, objeto)
-            .done(function (message) { //passar o parametro data aqui quando for definida a mensagem
+            .done(function (message) { //passar o parametro data aqui quando for definida a mensagem 
                 chamaPagina(tela);
-                Materialize.toast(message, 5000);
+                Materialize.toast(message, 3000);
             })
             .fail(function (xhr) {
                 console.log(xhr.responseText);
@@ -59,9 +70,15 @@
     var historicoCompra = function () {
         chamaPagina(url.historicoCompra);
     };
-
     var mostraSaldo = function () {
         chamaPagina(url.mostraSaldo);
+    };
+    //pagamentos
+    var detalhePagamento = function () {
+        chamaPagina(url.detalhePagamento);
+    };
+    var pagamento = function () {
+        chamaPagina(url.pagamento);
     };
 
     //usuarios
@@ -70,13 +87,7 @@
     };
     var listaUsuario = function () {
         chamaPagina(url.listaUsuario);
-    };
-    var detalhePagamento = function () {
-        chamaPagina(url.detalhePagamento);
-    };
-    var pagamento = function () {
-        chamaPagina(url.pagamento);
-    };
+    };    
     var editarUsuario = function (cpf) {
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.editarUsuario, usuario);
@@ -90,7 +101,6 @@
             Cpf: $('#cpf').val(),
             NomeUsuario: $('#Nome').val()
         };
-
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
     var concluirEdicaoUsuario = function () {
@@ -101,7 +111,6 @@
             SenhaUsuario: $('#Password').val(),
             Ativo: $('#Ativo').val()
         };
-
         concluirAcao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };
     var desativarUsuario = function (cpf) {
@@ -122,9 +131,21 @@
         var usuario = { Nome: $('#nomeUsuario').val() };
         chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
     };
-    var verificaLogin = function () {
-        var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() }
-        concluirAcao(url.verificaLogin, usuario);
+    var verificaLogin = function() {
+        var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
+
+        $.post(url.verificaLogin, usuario)
+            .done(function (message) {
+                carregaPadrao();
+                Materialize.toast(message, 3000);                
+            })
+            .fail(function(xhr) {
+                Materialize.toast(xhr.responseText,3000);
+            })
+    };
+    var logOff = function () {
+        Materialize.toast("Deslogado", 3000);
+        carregaPadrao();
     }
     //produtos
     var listaProduto = function () {
@@ -185,10 +206,10 @@
 
         //gerenciamento da lojinha
         mostraSaldo: mostraSaldo,
-
-        //usuario
+        //pagamento
         pagamento: pagamento,
         detalhePagamento: detalhePagamento,
+        //usuario                
         historicoCompra: historicoCompra,
         concluirCadastroUsuario: concluirCadastroUsuario,
         listaUsuario: listaUsuario,
@@ -202,6 +223,7 @@
         listarUsuarioEmDivida: listarUsuarioEmDivida,
         listarUsuarioPorNome: listarUsuarioPorNome,
         verificaLogin: verificaLogin,
+        logOff : logOff,
         //produtos
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,
