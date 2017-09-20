@@ -52,7 +52,8 @@
 
     function concluirAcao(endereco, objeto, tela) {
         $.post(endereco, objeto)
-            .done(function (message) { //passar o parametro data aqui quando for definida a mensagem                
+            .done(function (message) { //passar o parametro data aqui quando for definida a mensagem 
+                chamaPagina(tela);
                 Materialize.toast(message, 3000);
             })
             .fail(function (xhr) {
