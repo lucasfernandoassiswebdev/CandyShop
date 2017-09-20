@@ -146,7 +146,7 @@ namespace CandyShop.Web.Controllers
             }
 
             Session["Login"] = "logado";
-            return Content("Logado com sucesso");
+            return RedirectToAction("Padrao", "Home");
         }
 
         public ActionResult Deslogar()
