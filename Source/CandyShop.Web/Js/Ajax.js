@@ -87,8 +87,8 @@
     var detalhePagamento = function () {
         chamaPagina(url.detalhePagamento);
     };
-    var pagamento = function () {
-        chamaPagina(url.pagamento);
+    var listarPagamento = function () {
+        chamaPagina(url.listarPagamento);
     };
 
     //usuarios
@@ -145,9 +145,8 @@
         var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
 
         $.post(url.verificaLogin, usuario)
-            .done(function(message) {
-                carregaPadrao();
-                Materialize.toast(message, 3000);
+            .done(function() {
+                carregaPadrao();                
             })
             .fail(function(xhr) {
                 Materialize.toast(xhr.responseText, 3000);
@@ -217,7 +216,7 @@
         //gerenciamento da lojinha
         mostraSaldo: mostraSaldo,
         //pagamento
-        pagamento: pagamento,
+        listarPagamento: listarPagamento,
         detalhePagamento: detalhePagamento,
         //usuario                
         historicoCompra: historicoCompra,
