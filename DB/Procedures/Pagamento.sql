@@ -16,11 +16,14 @@ CREATE PROCEDURE [dbo].[CSSP_InsPagamento]
 	Objetivo..........: Inserir um pagamento
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/0/2017
-	Ex................: EXEC [dbo].[CSSP_InsPagamento]
-
+	Ex................: EXEC [dbo].[CSSP_InsPagamento] '12313546464', null,20
 	*/
 
 	BEGIN
+
+		IF @DataPagamento IS NULL
+		SET @DataPagamento = GETDATE()
+
 		INSERT INTO [dbo].[Pagamento] (Cpf, DataPagamento, ValorPagamento)
 			VALUES (@Cpf, @DataPagamento, @ValorPagamento)			
 		

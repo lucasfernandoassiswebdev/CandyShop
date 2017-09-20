@@ -218,14 +218,10 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 			WHERE SaldoUsuario < 0
 	END
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuarioIgual]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
-GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuarioIgual]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 GO
-
 CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 	@nome varchar(50),
 	@cpf varchar(11)
