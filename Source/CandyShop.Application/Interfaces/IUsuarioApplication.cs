@@ -12,5 +12,6 @@ namespace CandyShop.Application.Interfaces
         Response<Usuario> SelecionarUsuario(string cpf);
         Response<string> DesativarUsuario(string cpf);
         Response<IEnumerable<Usuario>> ListarInativos();
+        Response<IEnumerable<Usuario>> ProcurarUsuario(string nome);
     }
 }

@@ -15,58 +15,16 @@ namespace CandyShop.Web.Controllers
             _appUsuario = usuario;
         }
 
+        #region telas
+
         public ActionResult Index()
-        {
-            var response = _appUsuario.ListarUsuarios();
-            if (response.Status != HttpStatusCode.OK)
-            {
-                return Content("Erro " + response.ContentAsString.First());
-            }
-            return View(response.Content);
-        }
-
-        public ActionResult ListarUsuariosEmDivida()
-        {
-            var response = _appUsuario.ListarUsuariosEmDivida();
-            if (response.Status != HttpStatusCode.OK)
-            {
-                return Content("Erro " + response.ContentAsString.First());
-            }
-            return View(response.Content);
-        }
-
-        public ActionResult ListarInativos()
-        {
-            var response = _appUsuario.ListarInativos();
-            if (response.Status != HttpStatusCode.OK)
-            {
-                return Content("Erro " + response.ContentAsString.First());
-            }
-            return View(response.Content);
+        {            
+            return View();
         }
 
         public ActionResult Cadastrar()
         {
             return View();
-        }
-
-        [HttpPost]
-        public ActionResult Cadastrar(Usuario usuario)
-        {
-            var response = _appUsuario.InserirUsuario(usuario);
-            if (response.Status != HttpStatusCode.OK)
-                return Content("Deu ruim!");
-            return Content("Deu bom!!");
-        }
-
-        public ActionResult Detalhes(string cpf)
-        {
-            var usuario = _appUsuario.SelecionarUsuario(cpf);
-
-            if (usuario.Status != HttpStatusCode.OK)
-                return Content("Erro " + usuario.ContentAsString.First());
-            
-            return View(usuario.Content);
         }
 
         public ActionResult Editar(string cpf)
@@ -79,7 +37,76 @@ namespace CandyShop.Web.Controllers
             return View(usuario.Content);
         }
 
-        [HttpPost]        
+        public ActionResult Desativar(string cpf)
+        {
+            var usuario = _appUsuario.SelecionarUsuario(cpf);
+            if (usuario.Status != HttpStatusCode.OK)
+                return Content("Erro " + usuario.ContentAsString.First());
+            return View(usuario.Content);
+        }
+
+        public ActionResult Detalhes(string cpf)
+        {
+            var response = _appUsuario.SelecionarUsuario(cpf);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro" + response.ContentAsString.First());
+            return View(response.Content);
+        }
+
+        #endregion
+
+        #region listas
+
+        public ActionResult Listar()
+        {
+            var response = _appUsuario.ListarUsuarios();
+            if (response.Status != HttpStatusCode.OK)
+            {
+                return Content("Erro " + response.ContentAsString.First());
+            }
+            return View("Index", response.Content);
+        }
+
+        public ActionResult ListarUsuariosEmDivida()
+        {
+            var response = _appUsuario.ListarUsuariosEmDivida();
+            if (response.Status != HttpStatusCode.OK)
+            {
+                return Content("Erro " + response.ContentAsString.First());
+            }
+            return View("Index", response.Content);
+        }
+
+        public ActionResult ListarInativos()
+        {
+            var response = _appUsuario.ListarInativos();
+            if (response.Status != HttpStatusCode.OK)
+            {
+                return Content("Erro " + response.ContentAsString.First());
+            }
+            return View("Index", response.Content);
+        }
+
+        public ActionResult ProcurarUsuario(string nome)
+        {
+            var response = _appUsuario.ProcurarUsuario(nome);
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro: {response.Status}");
+            return View("Index", response.Content);
+        }
+        #endregion
+
+        #region execucoes
+        [HttpPost]
+        public ActionResult Cadastrar(Usuario usuario)
+        {
+            var response = _appUsuario.InserirUsuario(usuario);
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro ao cadastrar usuario: {response.Status}");
+            return Content("Usuário cadastrado com sucesso!!");
+        }
+
+        [HttpPost]
         public ActionResult Editar(Usuario usuario)
         {
             if (ModelState.IsValid)
@@ -92,17 +119,8 @@ namespace CandyShop.Web.Controllers
                 return Content("Edição concluída com sucesso!!");
 
             }
-
-            ModelState.AddModelError("USUARIO","Formulário inválido");
+            ModelState.AddModelError("USUARIO", "Formulário inválido");
             return View("Editar");
-        }
-
-        public ActionResult Desativar(string cpf)
-        {
-            var usuario = _appUsuario.SelecionarUsuario(cpf);
-            if (usuario.Status != HttpStatusCode.OK)
-                return Content("Erro " + usuario.ContentAsString.First());
-            return View(usuario.Content);
         }
 
         [HttpPost]
@@ -113,5 +131,14 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro {response.Status}");
             return Content("Usuario desativado com sucesso!");
         }
+
+        [HttpPost]
+        public ActionResult Logar(Usuario usuario)
+        {
+
+            return Content("Logado com sucesso!");
+        }
+
+        #endregion        
     }
 }

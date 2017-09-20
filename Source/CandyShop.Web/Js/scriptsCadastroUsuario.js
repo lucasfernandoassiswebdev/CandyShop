@@ -83,16 +83,14 @@ function TestaCPF(strCPF) {
 function validaBotao() {
     //validando o cpf
     var cpfNew = $('#cpf').val();
-    cpfNew = cpfNew.replace('.', '');
-    cpfNew = cpfNew.replace('.', '');
-    cpfNew = cpfNew.replace('-', '');
+    cpfNew = cpfNew.replace(/\.|\-/g, '');
+
     //validando o campo de nome
     var qtde = $('#Nome').val().length;
 
-    if (!TestaCPF(cpfNew) && qtde > 50 || qtde === 0) {
-        $('.botaoCadastro ').prop('disabled', true);
+    if (!TestaCPF(cpfNew) || qtde > 50 || qtde === 0) {
+        $('.botaoCadastro ').attr('disabled', 'disabled');
     } else {
-        $('.botaoCadastro ').prop('disabled', false);
+        $('.botaoCadastro ').removeAttr('disabled');
     }
-    console.log('cpf válido: ' + TestaCPF(cpfNew) + ' quantidade de caracteres: ' + qtde);
 }

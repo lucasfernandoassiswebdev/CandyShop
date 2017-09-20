@@ -17,6 +17,16 @@
 
 <link href="~/Content/Main.css" rel="stylesheet" />
 
+<style>
+    input {
+        text-align: center;
+    }
+    h2 {
+        font-weight: bold;
+        color: red;
+    }
+</style>
+
 <!--modal de quantidade-->
 <div id="modal1" class="modal">
     <div class="modal-content center">
@@ -49,8 +59,33 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="Home/Index" class="right modal-action modal-close waves-effect waves-green btn-flat">Confirmar compra</a>
+        <a href="#modalLogin" class="modal-trigger right modal-action modal-close waves-effect waves-green btn-flat">Confirmar compra</a>
         <a href="#!" id="limpar" class="right modal-action waves-effect waves-green btn-flat brown-text">Limpar</a>
+    </div>
+</div>
+
+<!--modal de Login-->
+<div id="modalLogin" class="modal">
+    <div class="modal-content center">
+        <h2>Login</h2>
+        <form>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="cpf" type="text" class="validate">
+                    <label for="cpf">CPF</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="senha" type="password" class="validate">
+                    <label for="senha">Senha</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#modalLogin" class="modal-trigger right modal-action modal-close waves-effect waves-green btn-flat">Logar</a>
+        <a href="#!" id="limpar" class="right modal-action waves-effect waves-green btn-flat brown-text">Cancelar</a>
     </div>
 </div>
 

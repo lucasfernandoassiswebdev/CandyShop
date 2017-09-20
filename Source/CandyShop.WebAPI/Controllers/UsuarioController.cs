@@ -13,8 +13,7 @@ namespace CandyShop.WebAPI.Controllers
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository,
-            IUsuarioService usuarioService)
+        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository,IUsuarioService usuarioService)
         {
             _notification = notification;
             _usuarioRepository = usuarioRepository;
@@ -51,20 +50,26 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetUsuariosInativos()
         {
             return Ok(_usuarioRepository.ListarUsuarioInativo());
-        }        
+        }
+
+        [Route("api/usuario/procurar/{nome}")]
+        public IHttpActionResult GetPorNome(string nome)
+        {
+            return Ok(_usuarioRepository.ListarUsuarioPorNome(nome));
+        }
 
         public IHttpActionResult Put(UsuarioDto usuario)
         {
-
             try
             {
                 if (_notification.HasNotification())
-                    _usuarioRepository.EditarUsuario(usuario);
+                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+                _usuarioRepository.EditarUsuario(usuario);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Content(HttpStatusCode.NotAcceptable, _notification.HasNotification());
+                return BadRequest(ex.Message);
             }
         }
 

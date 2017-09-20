@@ -14,10 +14,10 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	AS
 
 	/*
-	Documentação
+	Documentaï¿½ï¿½o
 	Arquivo Fonte.....: Usuario.sql
 	Objetivo..........: Inserir Usuarios 
-	Autor.............: SMN - João Guilherme
+	Autor.............: SMN - Joï¿½o Guilherme
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[CSSP_InsUsuario]
 	
@@ -37,7 +37,6 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DesUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_DesUsuario]
 GO
@@ -47,10 +46,10 @@ CREATE PROCEDURE [dbo].[CSSP_DesUsuario]
 	AS
 
 	/*
-	Documentação
+	Documentaï¿½ï¿½o
 	Arquivo Fonte.....: Usuario.sql
 	Objetivo..........: Deletar cadatro de usuario
-	Autor.............: SMN - João Guilherme
+	Autor.............: SMN - Joï¿½o Guilherme
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[CSSP_DelUsuario]
 
@@ -80,10 +79,10 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 	AS
 
 	/*
-	Documentação
+	Documentaï¿½ï¿½o
 	Arquivo Fonte.....: Usuario.sql
-	Objetivo..........: Editar informaçoes do usuario
-	Autor.............: SMN - João Guilherme
+	Objetivo..........: Editar informaï¿½oes do usuario
+	Autor.............: SMN - Joï¿½o Guilherme
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[CSSP_UpdUsuario]
 
@@ -105,7 +104,6 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelUsuario]
 GO
@@ -115,10 +113,10 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuario]
 	AS
 
 	/*
-	Documentação
+	Documentaï¿½ï¿½o
 	Arquivo Fonte.....: Usuario.sql
 	Objetivo..........: Selecionar Usuarios
-	Autor.............: SMN - João Guilherme
+	Autor.............: SMN - Joï¿½o Guilherme
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[CSSP_SelUsuario]
 
@@ -130,7 +128,6 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuario]
 	END
 GO
 				
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisUsuario]
 GO
@@ -140,14 +137,14 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 	AS
 
 	/*
-	Documentação
+	Documentaï¿½ï¿½o
 	Arquivo Fonte.....: Usuario.sql
-	Objetivo..........: Listar todos os usuario
+	Objetivo..........: Listar todos os usuarios ativos
 	Autor.............: SMN - Rafael Morais
  	Data..............: 07/07/2017
 	Ex................: EXEC [dbo].[CSSP_LisUsuario]
 
-	Editado Por.......: SMN - João Guilherme
+	Editado Por.......: SMN - Joï¿½o Guilherme
 	Objetivo..........: Alterando o select 
 	Data..............: 12/09/2017
 	*/
@@ -163,7 +160,6 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_ListarUsuariosInativos]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 GO
@@ -173,7 +169,7 @@ CREATE PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 	AS
 
 	/*
-	Documentação
+	Documentaï¿½ï¿½o
 	Arquivo Fonte.....: Usuario.sql
 	Objetivo..........: Listar todos os usuarios inativos
 	Autor.............: SMN - Rafael Morais
@@ -194,7 +190,6 @@ CREATE PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 	END
 GO
 				
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUsuariosDivida]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 GO
@@ -204,7 +199,7 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 	AS
 
 	/*
-	Documentação
+	Documentaï¿½ï¿½o
 	Arquivo Fonte.....: Usuario.sql
 	Objetivo..........: Selecionar usuarios com saldo negativo
 	Autor.............: SMN - Lucas Fernando
@@ -227,15 +222,19 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUs
 	DROP PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 GO
 
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuarioIgual]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
+GO
+
 CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 	@nome varchar(50),
 	@cpf varchar(11)
 	AS
 
 	/*
-	Documentação
+	Documentaï¿½ï¿½o
 	Arquivo Fonte.....: Usuario.sql
-	Objetivo..........: Verificar se já existe um usuário com este mesmo CPF
+	Objetivo..........: Verificar se jï¿½ existe um usuï¿½rio com este mesmo CPF
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 18/09/2017
 	Ex................: EXEC [dbo].[GCS_CSSP_LisUsuarioIgual]
@@ -249,5 +248,50 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 	END
 GO
 
-								
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuarioPorNome]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisUsuarioPorNome]
+GO
 
+CREATE PROCEDURE [dbo].[CSSP_LisUsuarioPorNome]
+	@NomeUsuario varchar (40)
+	AS
+	/*
+	Documentaï¿½ï¿½o
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Listar usuario de acordo com um trecho do nome
+	Autor.............: SMN - Rafael Henrique
+ 	Data..............: 20/09/2017
+	Ex................: EXEC [dbo].[CSSP_LisUsuarioPorNome]
+	*/	
+	BEGIN
+		SELECT * 
+			FROM [dbo].[Usuario] WITH(NOLOCK)
+			WHERE NomeUsuario LIKE '%' + @NomeUsuario + '%'
+	END
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_VerificaLoginSenha]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_VerificaLoginSenha]
+GO
+
+CREATE PROCEDURE [dbo].[GCS_VerificaLoginSenha]
+	@Cpf varchar(11),
+	@SenhaUsuario varchar(12)
+
+	AS
+	/*
+	Documentaï¿½ï¿½o
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Verificar se o login bate
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 20/09/2017
+	Ex................: EXEC [dbo].[GCS_VerificaLoginSenha]
+	*/
+
+	BEGIN									
+		SELECT TOP 1 1 
+			FROM Usuario
+			WHERE Cpf = @Cpf AND SenhaUsuario = @SenhaUsuario
+	END
+GO
+				
