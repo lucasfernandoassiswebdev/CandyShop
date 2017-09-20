@@ -13,8 +13,7 @@ namespace CandyShop.WebAPI.Controllers
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository,
-            IUsuarioService usuarioService)
+        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository,IUsuarioService usuarioService)
         {
             _notification = notification;
             _usuarioRepository = usuarioRepository;

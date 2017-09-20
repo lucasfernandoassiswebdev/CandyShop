@@ -123,6 +123,14 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro {response.Status}");
             return Content("Usuario desativado com sucesso!");
         }
+
+        [HttpPost]
+        public ActionResult Logar(Usuario usuario)
+        {
+
+            return Content("Logado com sucesso!");
+        }
+
         #endregion        
     }
 }
