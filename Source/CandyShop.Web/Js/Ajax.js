@@ -29,6 +29,16 @@
         });
     }
 
+    function deslogar() {
+        $.get(url.logOff).done(function (data) {
+            $('body').slideUp(function () {
+                $('body').hide().html(data).slideDown();
+            });
+        }).fail(function (xhr) {
+            console.log(xhr.responseText);
+        });
+    }
+
     //Função genérica para carregar o div, de acordo com o endereço passado
     function chamaPagina(endereco) {
         $.get(endereco).done(function (data) { //data é o conteudo da view
@@ -144,8 +154,8 @@
             });
     };
     var logOff = function () {
+        deslogar();
         Materialize.toast("Deslogado", 3000);
-        carregaPadrao();
     }
     //produtos
     var listaProduto = function () {
@@ -223,7 +233,7 @@
         listarUsuarioEmDivida: listarUsuarioEmDivida,
         listarUsuarioPorNome: listarUsuarioPorNome,
         verificaLogin: verificaLogin,
-        logOff : logOff,
+        logOff: logOff,
         //produtos
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,

@@ -9,7 +9,7 @@
         AjaxJs.init({
             main: '@Url.Action("Main", "Home")',
             padrao: '@Url.Action("Padrao", "Home")',
-            logOff: '@Url.Action("Padrao", "Home")',
+            logOff: '@Url.Action("Deslogar", "Usuario")',
             pagamento: '@Url.Action("Index", "Pagamento")',
             historicoCompra: '@Url.Action("Historico", "Compra")',
             detalhePagamento: '@Url.Action("Detalhes", "Pagamento")',
@@ -110,7 +110,7 @@
     <li><a href="#!" onclick="AjaxJs.pagamento()"><i class="material-icons">attach_money</i>Pagamento</a></li>
     <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico</a></li>
     <li class="divider"></li>
-    <li><a href="#!"><i class="material-icons">power_settings_new</i>Sair</a></li>
+    <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
 </ul>
 
 @if (Session["Login"].ToString() == "logado")
