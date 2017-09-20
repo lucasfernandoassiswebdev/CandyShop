@@ -4,6 +4,13 @@
     Layout = null;
 }
 
+<style>
+    html {
+        color: #444;
+    }
+   
+</style>
+
 <div class="col s12 recuaTabela">
     <table class="bordered highlight">
         <tr>
@@ -53,18 +60,18 @@
             {
                 <li>
                     <div class="collapsible-header">
-                        <i class="material-icons">bubble_chart</i>@produto.NomeProduto
+                        <i class="material-icons red">bubble_chart</i>@produto.NomeProduto
                     </div>
                     <div class="collapsible-body">
                         <span>Preço: R$ @produto.PrecoProduto</span>
                         <br />
-                        <span>Quantidade: R$ @produto.QtdeProduto</span>
+                        <span>Quantidade: @produto.QtdeProduto</span>
                         <br />
-                        <span>Categoria: R$ @produto.Categoria</span>
+                        <span>Categoria: @produto.Categoria</span>
                         <br /><br />
-                        <a class="btn-floating btn-sm waves-effect waves-light brown" onclick="AjaxJs.detalheUsuario(@produto.IdProduto);"><i class="material-icons">info_outline</i></a>
-                        <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto(@produto.IdProduto);"><i class="material-icons">edit</i></a>
-                        <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJs.desativarProduto(@produto.IdProduto);"><i class="material-icons">remove_shopping_cart</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light brown" onclick="AjaxJs.detalheUsuario(@produto.IdProduto);"><i class="material-icons red">info_outline</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto(@produto.IdProduto);"><i class="material-icons red">edit</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJs.desativarProduto(@produto.IdProduto);"><i class="material-icons red">remove_shopping_cart</i></a>
                     </div>
                 </li>
             }

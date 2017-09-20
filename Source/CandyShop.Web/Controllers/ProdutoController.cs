@@ -9,7 +9,6 @@ namespace CandyShop.Web.Controllers
 {
     public class ProdutoController : Controller
     {
-
         private readonly IProdutoApplication _appProduto;
 
         public ProdutoController(IProdutoApplication produto)
@@ -17,9 +16,7 @@ namespace CandyShop.Web.Controllers
             _appProduto = produto;
         }
         
-
         #region Telas
-
         public ActionResult Index()
         {            
             return View();
@@ -53,13 +50,9 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro" + response.ContentAsString.First());
             return View(response.Content);
         }
-
-
         #endregion
 
         #region Listas
-
-
         public ActionResult Listar()
         {
             var response = _appProduto.ListarProdutos();
@@ -83,7 +76,6 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro: {response.Status}");
             return View("Index", response.Content);
         }
-
         #endregion
 
         #region Execucoes
@@ -114,6 +106,5 @@ namespace CandyShop.Web.Controllers
             return Content("Produto desativado com sucesso!");
         }
         #endregion
-
     }
 }

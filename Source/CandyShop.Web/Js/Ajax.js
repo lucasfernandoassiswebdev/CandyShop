@@ -101,7 +101,7 @@
             NomeUsuario: $('#Nome').val(),
             SaldoUsuario: $('#SaldoUsuario').val(),
             SenhaUsuario: $('#Password').val(),
-            Ativo: $('#Status').val()
+            Ativo: $('#Ativo').val()
         };
 
         concluirAcao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
@@ -152,7 +152,7 @@
             PrecoProduto: $('#PrecoProduto').val(),
             QtdeProduto: $('#QtdeProduto').val(),
             Categoria: $('#Categoria').val(),
-            Ativo: $('#Status').val()
+            Ativo: $('#Ativo').val()
         };
         concluirAcao(url.concluirEdicaoProduto, produto, url.listaProduto);
     };
@@ -163,7 +163,7 @@
     var desativarProdutoConfirmado = function(id) {
         var produto = { IdProduto: id };
         concluirAcao(url.desativarProdutoConfirmado, produto, url.listaProduto);
-    }
+    };
     var listarInativos = function() {
         chamaPagina(url.listarInativos);
     };
@@ -171,7 +171,6 @@
         var produto = { Nome: $('#nomeProduto').val() };
         chamaPaginaComIdentificador(url.listarProdutoPorNome, produto);
     };
-
 
     //retorna links para acessar as paginas.
     return {

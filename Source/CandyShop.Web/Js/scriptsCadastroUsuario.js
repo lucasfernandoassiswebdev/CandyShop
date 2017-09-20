@@ -23,45 +23,27 @@ $(document).ready(function () {
 
     $('#cpf').on('keydown', function () {
         mcpf($('#cpf').val());
+        validaBotao();
     });
 
     $('#cpf').on('blur', function () {
+        mcpf($('#cpf').val());
         //retirando caracteres a mais do campo
         if ($('#cpf').val().length > 14) {
             $('#cpf').val($('#cpf').val().substr(0, 13));
             $('#cpf').keydown();
         }
-        //validando o cpf
-        var cpfNew = $('#cpf').val();
-        cpfNew = cpfNew.replace('.', '');
-        cpfNew = cpfNew.replace('.', '');
-        cpfNew = cpfNew.replace('-', '');
-        if (TestaCPF(cpfNew)) {
-            $('.botaoCadastro ').prop('disabled', true);
-        } else {
-            $('.botaoCadastro ').prop('disabled', false);
-        }
+
+        validaBotao();
     });
-});
 
-$('#Nome').on('keydown', function () {
-    var qtde = $('#Nome').val().length;
+    $('#Nome').on('keydown', function () {
+        validaBotao();
+    });
 
-    if (qtde > 50 || qtde === 0) {
-        $('.botaoCadastro ').prop('disabled', true);
-    } else {
-        $('.botaoCadastro').removeAttr('disabled');
-    }
-});
-
-$('#Nome').on('blur', function () {
-    var qtde = $('#Nome').val().length;
-
-    if (qtde > 50 || qtde === 0) {
-        $('.botaoCadastro ').attr('disabled', true);
-    } else {
-        $('.botaoCadastro').removeAttr('disabled');
-    }
+    $('#Nome').on('blur', function () {
+        validaBotao();
+    });
 });
 
 //função que remove caracteres inválidos do campo de CPF
@@ -78,22 +60,39 @@ function TestaCPF(strCPF) {
     var Resto;
     Soma = 0;
     //strCPF  = RetiraCaracteresInvalidos(strCPF,11);
-    if (strCPF == "00000000000")
+    if (strCPF === "00000000000")
         return false;
     for (i = 1; i <= 9; i++)
         Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
     Resto = (Soma * 10) % 11;
-    if ((Resto == 10) || (Resto == 11))
+    if ((Resto === 10) || (Resto === 11))
         Resto = 0;
-    if (Resto != parseInt(strCPF.substring(9, 10)))
+    if (Resto !== parseInt(strCPF.substring(9, 10)))
         return false;
     Soma = 0;
     for (i = 1; i <= 10; i++)
         Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
     Resto = (Soma * 10) % 11;
-    if ((Resto == 10) || (Resto == 11))
+    if ((Resto === 10) || (Resto === 11))
         Resto = 0;
-    if (Resto != parseInt(strCPF.substring(10, 11)))
+    if (Resto !== parseInt(strCPF.substring(10, 11)))
         return false;
     return true;
+}
+
+function validaBotao() {
+    //validando o cpf
+    var cpfNew = $('#cpf').val();
+    cpfNew = cpfNew.replace('.', '');
+    cpfNew = cpfNew.replace('.', '');
+    cpfNew = cpfNew.replace('-', '');
+    //validando o campo de nome
+    var qtde = $('#Nome').val().length;
+
+    if (!TestaCPF(cpfNew) && qtde > 50 || qtde === 0) {
+        $('.botaoCadastro ').prop('disabled', true);
+    } else {
+        $('.botaoCadastro ').prop('disabled', false);
+    }
+    console.log('cpf válido: ' + TestaCPF(cpfNew) + ' quantidade de caracteres: ' + qtde);
 }
