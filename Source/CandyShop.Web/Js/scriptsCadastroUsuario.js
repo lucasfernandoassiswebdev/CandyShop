@@ -83,10 +83,8 @@ function TestaCPF(strCPF) {
 function validaBotao() {
     //validando o cpf
     var cpfNew = $('#cpf').val();
-    cpfNew = cpfNew.replace('.', '');
-    cpfNew = cpfNew.replace('.', '');
-    cpfNew = cpfNew.replace('-', '');
-    console.log(cpfNew);
+    cpfNew = cpfNew.replace(/\.|\-/g, '');
+
     //validando o campo de nome
     var qtde = $('#Nome').val().length;
 
