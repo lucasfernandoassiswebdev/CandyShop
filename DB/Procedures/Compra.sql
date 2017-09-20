@@ -24,7 +24,7 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompra]
 	BEGIN
 		INSERT INTO [dbo].[Compra] (UsuarioCompra, DataCompra)
 			VALUES(@UsuarioCompra, @DataCompra)	
-			
+
 			if @@ERROR <> 0 
 				RETURN 1
 		RETURN 0	
@@ -39,6 +39,7 @@ CREATE PROCEDURE [dbo].[CSSP_UpdCompra]
 	@UsuarioCompra VARCHAR(14),
 	@IdCompra INT,
 	@DataCompra DATE
+	
 
 	AS
 
@@ -59,12 +60,14 @@ CREATE PROCEDURE [dbo].[CSSP_UpdCompra]
 			WHERE
 				IdCompra = @IdCompra
 			
+			
+	
 			if @@ERROR <> 0 
 				RETURN 1
 		RETURN 0
+
 	END
 GO
-				
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisCompra]
