@@ -18,6 +18,17 @@
         });
     }
 
+    //função que vai carregar o corpo inteiro da pagina
+    function carregaPadrao() {
+        $.get(url.padrao).done(function (data) {
+            $('body').slideUp(function () {
+                $('body').hide().html(data).slideDown(); 
+            });
+        }).fail(function (xhr) { 
+            console.log(xhr.responseText);
+        });
+    }
+
     //Função genérica para carregar o div, de acordo com o endereço passado
     function chamaPagina(endereco) {
         $.get(endereco).done(function (data) { //data é o conteudo da view
@@ -41,9 +52,8 @@
 
     function concluirAcao(endereco, objeto, tela) {
         $.post(endereco, objeto)
-            .done(function (message) { //passar o parametro data aqui quando for definida a mensagem
-                chamaPagina(tela);
-                Materialize.toast(message, 5000);
+            .done(function (message) { //passar o parametro data aqui quando for definida a mensagem                
+                Materialize.toast(message, 3000);
             })
             .fail(function (xhr) {
                 console.log(xhr.responseText);
@@ -120,10 +130,18 @@
         var usuario = { Nome: $('#nomeUsuario').val() };
         chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
     };
-    var verificaLogin = function () {
-        var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() }
-        concluirAcao(url.verificaLogin, usuario);
-    }
+    var verificaLogin = function() {
+        var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
+
+        $.post(url.verificaLogin, usuario)
+            .done(function (message) {
+                carregaPadrao();
+                Materialize.toast(message, 3000);                
+            })
+            .fail(function(xhr) {
+                Materialize.toast(xhr.responseText,3000);
+            })
+    };
     //produtos
     var listaProduto = function () {
         chamaPagina(url.listaProduto);

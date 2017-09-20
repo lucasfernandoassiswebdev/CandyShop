@@ -11,7 +11,9 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult Padrao()
         {
-            Session["Login"] = "logado";
+
+            if(Session["Login"] == null || Session["Login"].ToString() != "logado")
+                Session["Login"] = "deslogado";
             return View();
         }
 

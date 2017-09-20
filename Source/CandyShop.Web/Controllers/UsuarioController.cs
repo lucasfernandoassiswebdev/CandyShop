@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -54,7 +55,6 @@ namespace CandyShop.Web.Controllers
         #endregion
 
         #region listas
-
         public ActionResult Listar()
         {
             var response = _appUsuario.ListarUsuarios();
@@ -134,13 +134,25 @@ namespace CandyShop.Web.Controllers
         public ActionResult Logar(Usuario usuario)
         {
             var response = _appUsuario.VerificaLogin(usuario);
-            if (response.Content != "1")
+            if (!response.IsSuccessStatusCode)
+                return new HttpStatusCodeResult(404, "Deu Pau");
+
+            var model = JsonConvert.DeserializeObject<int>(response.Content.ReadAsStringAsync().Result);
+
+            if (model != 1)
             {
-                return View("Index",response.Content + "Login ou senha incorretos");
+                //return new HttpStatusCodeResult (404,"Login ou senha incorretos");
+                return Content("Login ou senha incorretos");
             }
 
             Session["Login"] = "logado";
-            return View("Index",response.Content + "Logado com sucesso");
+            return RedirectToAction("Padrao", "Home");
+        }
+
+        public ActionResult Deslogar()
+        {
+            Session.Clear();
+            return RedirectToAction("Index");
         }
         #endregion        
     }
