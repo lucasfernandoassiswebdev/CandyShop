@@ -86,6 +86,7 @@ function validaBotao() {
     cpfNew = cpfNew.replace('.', '');
     cpfNew = cpfNew.replace('.', '');
     cpfNew = cpfNew.replace('-', '');
+    console.log(cpfNew);
     //validando o campo de nome
     var qtde = $('#Nome').val().length;
 
@@ -94,5 +95,4 @@ function validaBotao() {
     } else {
         $('.botaoCadastro ').removeAttr('disabled');
     }
-    console.log('cpf válido: ' + TestaCPF(cpfNew) + ' quantidade de caracteres: ' + qtde);
 }
