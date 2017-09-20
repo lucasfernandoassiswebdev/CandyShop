@@ -11,7 +11,9 @@
             main: '@Url.Action("Main", "Home")',
             padrao: '@Url.Action("Padrao", "Home")',
             logOff: '@Url.Action("Deslogar", "Usuario")',
-            pagamento: '@Url.Action("Index", "Pagamento")',
+            listarPagamento: '@Url.Action("Listar", "Pagamento")',
+            inserirPagamento: '@Url.Action("Inserir", "Pagamento")',
+            concluirPagamento: '@Url.Action("InserirPagamento", "Pagamento")',
             historicoCompra: '@Url.Action("Historico", "Compra")',
             detalhePagamento: '@Url.Action("Detalhes", "Pagamento")',
             verificaLogin: '@Url.Action("Logar","Usuario")'            
@@ -108,7 +110,8 @@
 
 <!--barra de navegação-->
 <ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!" onclick="AjaxJs.pagamento()"><i class="material-icons">attach_money</i>Pagamento</a></li>
+    <li><a href="#!" onclick="AjaxJs.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+    <li><a href="#!" onclick="AjaxJs.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
     <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico</a></li>
     <li class="divider"></li>
     <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
@@ -151,7 +154,8 @@
             <ul class="side-nav" id="mobile-demo">
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
-                <li><a href="#!" onclick="AjaxJs.pagamento()"><i class="material-icons">attach_money</i>Pagamento</a></li>
+                <li><a href="#!" onclick="AjaxJs.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+                <li><a href="#!" onclick="AjaxJs.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
                 <li class="divider"></li>
                 <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
@@ -204,7 +208,8 @@ else
             <ul class="side-nav" id="mobile-demo">
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
-                <li><a href="#!" onclick="AjaxJs.pagamento()"><i class="material-icons">attach_money</i>Pagamento</a></li>
+                <li><a href="#!" onclick="AjaxJs.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+                <li><a href="#!" onclick="AjaxJs.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
                 <li class="divider"></li>
                 <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>

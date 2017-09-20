@@ -258,6 +258,7 @@
     <Content Include="Views\Produto\DesativarProduto.cshtml" />
     <Content Include="Views\Usuario\Detalhes.cshtml" />
     <Content Include="Views\Usuario\Desativar.cshtml" />
+    <Content Include="Views\Pagamento\Inserir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -87,10 +87,16 @@
     var detalhePagamento = function () {
         chamaPagina(url.detalhePagamento);
     };
-    var pagamento = function () {
-        chamaPagina(url.pagamento);
+    var listarPagamento = function () {
+        chamaPagina(url.listarPagamento);
     };
-
+    var inserirPagamento = function() {
+        chamaPagina(url.inserirPagamento);
+    };
+    var concluirPagamento = function () {
+        var pagamento = { ValorPagamento: $('#valorPago') };
+        concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);
+    }
     //usuarios
     var cadastroUsuario = function () {
         chamaPagina(url.cadastroUsuario);
@@ -145,9 +151,8 @@
         var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
 
         $.post(url.verificaLogin, usuario)
-            .done(function(message) {
-                carregaPadrao();
-                Materialize.toast("Logado com sucesso!", 3000);
+            .done(function() {
+                carregaPadrao();                
             })
             .fail(function(xhr) {
                 Materialize.toast(xhr.responseText, 3000);
@@ -217,8 +222,10 @@
         //gerenciamento da lojinha
         mostraSaldo: mostraSaldo,
         //pagamento
-        pagamento: pagamento,
+        listarPagamento: listarPagamento,
         detalhePagamento: detalhePagamento,
+        inserirPagamento: inserirPagamento,
+        concluirPagamento: concluirPagamento,
         //usuario                
         historicoCompra: historicoCompra,
         concluirCadastroUsuario: concluirCadastroUsuario,

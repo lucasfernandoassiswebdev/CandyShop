@@ -20,11 +20,11 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<IEnumerable<Pagamento>> ListarPagamentosCpf()
+        public Response<IEnumerable<Pagamento>> ListarPagamentosCpf(string cpf)
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync(_enderecoApi).Result;
+                var response = client.GetAsync($"{_enderecoApi}/cpf/{cpf}").Result;
                 return new Response<IEnumerable<Pagamento>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
