@@ -126,7 +126,12 @@ namespace CandyShop.Web.Controllers
 
                 return View("Cadastrar");
             }
+<<<<<<< HEAD
             return View("Cadastrar");
+=======
+            
+            return RedirectToAction("Index", "Admin");
+>>>>>>> 9d94362870ea325fd2d5588f4a357bfb1c07b174
         }
 
 
