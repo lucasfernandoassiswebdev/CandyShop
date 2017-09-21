@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" type="text/css" href="../../Content/Pagamento/indexPagamento.css"/>
 
-<h2 align="center"><font color="red">Pagamentos</font></h2>
+<h4 align="center"><font color="red">Pagamentos</font></h4>
 
 <div id="filtro">
     <div id="icone"><i class="small material-icons">date_range</i></div>
@@ -30,15 +30,19 @@
 <div id="tabela">
     <table class="striped centered">
         <thead>
-            <tr>
-                <th>Data do Pagamento</th>
-                <th>Valor Pago</th>
-            </tr>
+        <tr>
+            <th>Usuário</th>
+            <th>Data do Pagamento</th>
+            <th>Valor Pago</th>
+        </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DataPagamento)
                     </td>

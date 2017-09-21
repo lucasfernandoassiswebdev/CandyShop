@@ -59,7 +59,8 @@ namespace CandyShop.Repository.Repositorys
                             ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
                             Usuario = new UsuarioDto()
                             {
-                                Cpf = reader.ReadAsString("Cpf")
+                                Cpf = reader.ReadAsString("Cpf"),
+                                NomeUsuario = reader.ReadAsString("NomeUsuario")
                             }
                         });
                     } while (reader.Read());
@@ -79,11 +80,11 @@ namespace CandyShop.Repository.Repositorys
                         {
                             DataPagamento = reader.ReadAsDateTime("DataPagamento"),
                             IdPagamento = reader.ReadAsInt("IdPagamento"),
-                            ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
-                            NomeUsuario = reader.ReadAsString("NomeUsuario"),
+                            ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),                            
                             Usuario = new UsuarioDto
                             {
-                                Cpf = reader.ReadAsString("Cpf")
+                                Cpf = reader.ReadAsString("Cpf"),
+                                NomeUsuario = reader.ReadAsString("NomeUsuario")
                             }
                         });
                     } while (reader.Read());
