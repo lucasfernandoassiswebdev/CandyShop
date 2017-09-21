@@ -98,7 +98,7 @@ namespace CandyShop.Web.Controllers
 
         #region execucoes
         [HttpPost]
-        public ActionResult Cadastrar(Usuario usuario, HttpPostedFileBase File)
+        public ActionResult Cadastrar(UsuarioViewModel usuario)
         {
             if (ModelState.IsValid)
             {
@@ -106,37 +106,17 @@ namespace CandyShop.Web.Controllers
                 if (response.Status != HttpStatusCode.OK)
                     return Content($"Erro ao cadastrar usuario: {response.Status}");
 
-                if (File != null)
-                {
-                    //verificando se a imagem que foi enviada é valida
-                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-                    var checkextension = Path.GetExtension(File.FileName).ToLower();
+               
 
-                    if (!allowedExtensions.Contains(checkextension))
-                    {
-                        return Content("Imagem ou arquivo inválido");
-                    }
-
-                    //salvando imagem que o usuário upou na aplicação
-                    var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-
-                    string pathSave = $"{Server.MapPath("~/Imagens/")}{cpf}.jpg";
-                    File.SaveAs(pathSave);
-                }
-
-                return View("Cadastrar");
+                return Content("Usuário cadastrado com sucesso");
             }
-<<<<<<< HEAD
-            return View("Cadastrar");
-=======
             
             return RedirectToAction("Index", "Admin");
->>>>>>> 9d94362870ea325fd2d5588f4a357bfb1c07b174
         }
 
 
         [HttpPut]
-        public ActionResult Editar(Usuario usuario, HttpPostedFile File)
+        public ActionResult Editar(UsuarioViewModel usuario, HttpPostedFile File)
         {
             if (ModelState.IsValid)
             {
@@ -179,7 +159,7 @@ namespace CandyShop.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Logar(Usuario usuario)
+        public ActionResult Logar(UsuarioViewModel usuario)
         {
             var response = _appUsuario.VerificaLogin(usuario);
             if (!response.IsSuccessStatusCode)

@@ -12,16 +12,16 @@ namespace CandyShop.Application
     {
         private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/produto";
 
-        public Response<IEnumerable<Produto>> ListarProdutos()
+        public Response<IEnumerable<ProdutoViewModel>> ListarProdutos()
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync(_enderecoApi).Result;
-                return new Response<IEnumerable<Produto>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<ProdutoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<string> InserirProduto(Produto produto)
+        public Response<string> InserirProduto(ProdutoViewModel produto)
         {
             using (var client = new HttpClient())
             {
@@ -32,16 +32,16 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<Produto> DetalharProduto(int idProduto)
+        public Response<ProdutoViewModel> DetalharProduto(int idProduto)
         {
             using (var cliente = new HttpClient())
             {
                 var response = cliente.GetAsync($"{_enderecoApi}/selecionar/{idProduto}").Result;
-                return  new Response<Produto>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return  new Response<ProdutoViewModel>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<string> EditarProduto(Produto produto)
+        public Response<string> EditarProduto(ProdutoViewModel produto)
         {
             using (var client = new HttpClient())
             {
@@ -64,21 +64,21 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<IEnumerable<Produto>> ListarInativos()
+        public Response<IEnumerable<ProdutoViewModel>> ListarInativos()
         {
             using (var cliente = new HttpClient())
             {
                 var response = cliente.GetAsync($"{_enderecoApi}/inativos").Result;
-                return new Response<IEnumerable<Produto>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<ProdutoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<IEnumerable<Produto>> ProcurarProduto(string nome)
+        public Response<IEnumerable<ProdutoViewModel>> ProcurarProduto(string nome)
         {
             using (var cliente = new HttpClient())
             {
                 var response = cliente.GetAsync($"{_enderecoApi}/procurar/{nome}").Result;
-                return new Response<IEnumerable<Produto>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<ProdutoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
     }

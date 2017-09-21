@@ -5,12 +5,12 @@ namespace CandyShop.Application.Interfaces
 {
     public interface IProdutoApplication
     {
-        Response<IEnumerable<Produto>> ListarProdutos();
-        Response<string> InserirProduto(Produto produto);
-        Response<Produto> DetalharProduto(int idProduto);
-        Response<string> EditarProduto(Produto produto);
+        Response<IEnumerable<ProdutoViewModel>> ListarProdutos();
+        Response<string> InserirProduto(ProdutoViewModel produto);
+        Response<ProdutoViewModel> DetalharProduto(int idProduto);
+        Response<string> EditarProduto(ProdutoViewModel produto);
         Response<string> DesativarProduto(int idProduto);
-        Response<IEnumerable<Produto>> ListarInativos();
-        Response<IEnumerable<Produto>> ProcurarProduto(string nome);
+        Response<IEnumerable<ProdutoViewModel>> ListarInativos();
+        Response<IEnumerable<ProdutoViewModel>> ProcurarProduto(string nome);
     }
 }

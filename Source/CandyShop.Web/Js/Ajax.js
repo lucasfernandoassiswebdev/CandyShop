@@ -1,12 +1,7 @@
 ﻿var AjaxJs = (function ($) {
-<<<<<<< HEAD
-    //objeto que recebe o nome e endereço da pagina
-    var url = {};
-
-=======
     var url = {}; //objeto que recebe o nome e endereço da pagina
    
->>>>>>> 9d94362870ea325fd2d5588f4a357bfb1c07b174
+
     // Lista de objetos que guarda o nome e o endereco da pagina, sã carregados na pagina padrao
     var init = function (config) {
         url = config;
@@ -125,11 +120,11 @@
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.detalheUsuario, usuario);
     };
-    var concluirCadastroUsuario = function () {
+    var concluirCadastroUsuario = function (imgBase64) {
         var usuario = {
             Cpf: $('#cpf').val(),
             NomeUsuario: $('#Nome').val(),
-
+            Imagem: imgBase64
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
@@ -139,7 +134,8 @@
             NomeUsuario: $('#Nome').val(),
             SaldoUsuario: $('#SaldoUsuario').val(),
             SenhaUsuario: $('#Password').val(),
-            Ativo: $('#Ativo').val()
+            Ativo: $('#Ativo').val(),
+            Imagem: $('#uploadImagem').html()
         };
         concluirAcao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };

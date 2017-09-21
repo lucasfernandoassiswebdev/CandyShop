@@ -6,14 +6,14 @@ namespace CandyShop.Application.Interfaces
 {
     public interface IUsuarioApplication
     {
-        Response<IEnumerable<Usuario>> ListarUsuarios();
-        Response<IEnumerable<Usuario>> ListarUsuariosEmDivida();
-        Response<string> InserirUsuario(Usuario usuario);
-        Response<string> EditarUsuario(Usuario usuario);
-        Response<Usuario> SelecionarUsuario(string cpf);
+        Response<IEnumerable<UsuarioViewModel>> ListarUsuarios();
+        Response<IEnumerable<UsuarioViewModel>> ListarUsuariosEmDivida();
+        Response<string> InserirUsuario(UsuarioViewModel usuario);
+        Response<string> EditarUsuario(UsuarioViewModel usuario);
+        Response<UsuarioViewModel> SelecionarUsuario(string cpf);
         Response<string> DesativarUsuario(string cpf);
-        Response<IEnumerable<Usuario>> ListarInativos();
-        Response<IEnumerable<Usuario>> ProcurarUsuario(string nome);
-        HttpResponseMessage VerificaLogin(Usuario usuario);
+        Response<IEnumerable<UsuarioViewModel>> ListarInativos();
+        Response<IEnumerable<UsuarioViewModel>> ProcurarUsuario(string nome);
+        HttpResponseMessage VerificaLogin(UsuarioViewModel usuario);
     }
 }
