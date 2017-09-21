@@ -10,56 +10,71 @@
 
 <div class="container">
     <div class="row">
-        <form class="col s12">
-            <div class="row">
-                <div class="center">
-                    <label for="fotoUsuario">
-                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/user.png" alt="imagem não disponível :(" />
-                    </label>
-                    <input id="fotoUsuario" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                </div>
+    @using (Ajax.BeginForm("Editar", "Usuario", null, null, new
+    {
+        @id = "formEditar",
+        @enctype = "multipart/form-data",
+        @class = "col s12"
+    }))
+    {
+        <div class="row">
+            <div class="center">
+                <label for="fotoUsuario">
+                    @{ string caminho = @Model.Cpf + ".jpg"; };
+                    <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/@caminho" alt="imagem não disponível :("/>
+                </label>
+                <input id="fotoUsuario" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
             </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="Cpf" name="cpf" type="text" class="validate" value="@Model.Cpf" required data-length="50" autocomplete="off" disabled="disabled">
-                    <label class="active">CPF:</label>
-                </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="Cpf" name="cpf" type="text" class="validate" value="@Model.Cpf" required data-length="50" autocomplete="off" disabled="disabled">
+                <label class="active">CPF:</label>
             </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="Nome" name="Nome" type="text" class="validate" value="@Model.NomeUsuario"/>
-                    <label class="active">Nome:</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="SaldoUsuario" name="SaldoUsuario" type="text" class="validate" value="@Model.SaldoUsuario" required="">
-                    <label class="active">Saldo:</label>
-                </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="Nome" name="Nome" type="text" class="validate" value="@Model.NomeUsuario"/>
+                <label class="active">Nome:</label>
             </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="Password" name="Password" type="password" class="validate" value="@Model.SenhaUsuario"/>
-                    <label class="active">Password:</label>
-                </div>
-                <div class="input-field col s6">
-                    <select id="Ativo">
-                        <option value="" disabled >Escolha uma opção</option>
-                        <option value="A" selected>Ativo</option>
-                        <option value="I">Inativo</option>
-                    </select>
-                    <label>Status do usuário</label>
-                </div>
+            <div class="input-field col s6">
+                <input id="SaldoUsuario" name="SaldoUsuario" type="text" class="validate" value="@Model.SaldoUsuario" required="">
+                <label class="active">Saldo:</label>
             </div>
-            <div class="row center">
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large botaoCadastro" onclick="AjaxJs.concluirEdicaoUsuario()"><i class="material-icons left">build</i>Editar</a>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="Password" name="Password" type="password" class="validate" value="@Model.SenhaUsuario"/>
+                <label class="active">Password:</label>
             </div>
-        </form>
+            <div class="input-field col s6">
+                <select id="Ativo">
+                    <option value="" disabled>Escolha uma opção</option>
+                    <option value="A" selected>Ativo</option>
+                    <option value="I">Inativo</option>
+                </select>
+                <label>Status do usuário</label>
+            </div>
+        </div>
+        <div class="row center">
+            <a class="waves-effect waves-light btn-large botaoVoltar"><i class="material-icons left">arrow_back</i>Voltar</a>
+            <a class="waves-effect waves-light btn-large" onclick="formCadastro.submit()"><i class="material-icons left">build</i>Editar</a>
+        </div>
+    }
     </div>
 </div>
 
 <script>
     $(document).ready(function () {
         $('select').material_select();
+    });
+
+    $('.botaoCadastro').on('click',function() {
+        AjaxJs.concluirEdicaoUsuario();
+    });
+
+    $('.botaoVoltar').on('click',function() {
+        AjaxJs.listaUsuario();
     });
 </script>
 
