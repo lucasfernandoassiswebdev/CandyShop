@@ -1,7 +1,21 @@
-﻿//muda a foto do usuário na tela
-$('#fotoUsuario').change(function () {
+﻿$('#fotoUsuario').change(function () {
+    //função que muda a foto do usuário na tela
     readURL(this);
-    encodeImageFileAsURL();
+});
+
+$('.botaoVoltar').on('click', function() {
+    AjaxJs.listaUsuario();
+});
+
+//burlando o Ajax para enviar a foto do usuário para o controller
+$('#formCadastro, #formEditar').submit(function (e) {
+    e.preventDefault();
+    $(this).ajaxSubmit({
+        error: function (xhr) {
+            Materialize.toast(xhr.responseText, 3000);
+        }
+    });
+    return false;
 });
 
 function readURL(input) {
@@ -11,7 +25,6 @@ function readURL(input) {
         reader.onload = function (e) {
             $('#imagem').attr('src', e.target.result);
         };
-
         reader.readAsDataURL(input.files[0]);
     }
 }
@@ -47,7 +60,7 @@ $(document).ready(function () {
     });
 });
 
-//função que remove caracteres inválidos do campo de CPF
+//função que remove caracteres inválidos do campo de CPF e aplica a máscara
 function mcpf(v) {
     v = v.replace(/\D/g, "");
     v = v.replace(/(\d{3})(\d)/, "$1.$2");
@@ -60,7 +73,6 @@ function TestaCPF(strCPF) {
     var Soma;
     var Resto;
     Soma = 0;
-    //strCPF  = RetiraCaracteresInvalidos(strCPF,11);
     if (strCPF === "00000000000")
         return false;
     for (i = 1; i <= 9; i++)
@@ -89,6 +101,7 @@ function validaBotao() {
     //validando o campo de nome
     var qtde = $('#Nome').val().length;
 
+    //desabilitando o botão caso um dos dois esteja inválido
     if (!TestaCPF(cpfNew) || qtde > 50 || qtde === 0) {
         $('.botaoCadastro ').attr('disabled', 'disabled');
     } else {
@@ -96,20 +109,3 @@ function validaBotao() {
     }
 }
 
-function encodeImageFileAsURL() {
-    var filesSelected = document.getElementById("fotoUsuario").files;
-    if (filesSelected.length > 0) {
-        var fileToLoad = filesSelected[0];
-
-        var fileReader = new FileReader();
-
-        fileReader.onload = function (fileLoadedEvent) {
-            var srcData = fileLoadedEvent.target.result; // <--- data: base64
-
-            $("#imagem").html(srcData);
-            alert("Converted Base64 version is " + $("#imagem").html());
-            console.log("Converted Base64 version is " + $("#imagem").html());
-        }
-        fileReader.readAsDataURL(fileToLoad);
-    }
-}

@@ -14,7 +14,7 @@ namespace CandyShop.Repository.Repositorys
             CSSP_UpdPagamento,
             CSSP_DelPagamento,
             CSSP_LisPagamento,
-            CSSP_LisCpfPagamento,
+            CSSP_LisPagamentoSemana,
             CSSP_SelPagamento
         }
 
@@ -44,52 +44,6 @@ namespace CandyShop.Repository.Repositorys
             ExecuteNonQuery();
         }
 
-        public IEnumerable<PagamentoDto> ListarPagamentos()
-        {
-            ExecuteProcedure(Procedures.CSSP_LisPagamento);
-            var retorno = new List<PagamentoDto>();
-            using (var reader = ExecuteReader())
-                if (reader.Read())
-                    do
-                    {
-                        retorno.Add( new PagamentoDto
-                        {
-                            DataPagamento = reader.ReadAsDateTime("DataPagamento"),
-                            IdPagamento = reader.ReadAsInt("IdPagamento"),
-                            ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
-                            Usuario = new UsuarioDto()
-                            {
-                                Cpf = reader.ReadAsString("Cpf")
-                            }
-                        });
-                    } while (reader.Read());
-            return retorno;
-        }
-
-        public IEnumerable<PagamentoDto> ListarPagamentosPorCpf(string cpf)
-        {
-            ExecuteProcedure(Procedures.CSSP_LisCpfPagamento);
-            AddParameter("@Cpf", cpf);
-            var retorno = new List<PagamentoDto>();
-            using (var reader = ExecuteReader())
-                if (reader.Read())
-                    do
-                    {
-                        retorno.Add(new PagamentoDto
-                        {
-                            DataPagamento = reader.ReadAsDateTime("DataPagamento"),
-                            IdPagamento = reader.ReadAsInt("IdPagamento"),
-                            ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
-                            NomeUsuario = reader.ReadAsString("NomeUsuario"),
-                            Usuario = new UsuarioDto
-                            {
-                                Cpf = reader.ReadAsString("Cpf")
-                            }
-                        });
-                    } while (reader.Read());
-            return retorno;
-        }
-
         public bool SelecionarPagamento(int idPagamento)
         {
             ExecuteProcedure(Procedures.CSSP_SelPagamento);
@@ -115,6 +69,49 @@ namespace CandyShop.Repository.Repositorys
                             Cpf = reader.ReadAsString("Cpf")
                         }
                     };
+            return retorno;
+        }        
+
+        public IEnumerable<PagamentoDto> ListarPagamentos()
+        {
+            return Listar(null, Procedures.CSSP_LisPagamento);
+        }
+
+        public IEnumerable<PagamentoDto> ListarPagamentos(string cpf)
+        {
+            return Listar(cpf, Procedures.CSSP_LisPagamento);
+        }
+
+        public IEnumerable<PagamentoDto> ListarPagamentoSemana()
+        {
+            return Listar(null, Procedures.CSSP_LisPagamentoSemana);
+        }
+
+        public IEnumerable<PagamentoDto> ListarPagamentoSemana(string cpf)
+        {
+            return Listar(cpf, Procedures.CSSP_LisPagamentoSemana);
+        }
+
+        private IEnumerable<PagamentoDto> Listar(string cpf, object procedure)
+        {
+            ExecuteProcedure(procedure);
+            AddParameter("@cpf", cpf);
+            var retorno = new List<PagamentoDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                {
+                    retorno.Add(new PagamentoDto
+                    {
+                        DataPagamento = reader.ReadAsDateTime("DataPagamento"),
+                        IdPagamento = reader.ReadAsInt("IdPagamento"),
+                        ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
+                        Usuario = new UsuarioDto()
+                        {
+                            Cpf = reader.ReadAsString("Cpf"),
+                            NomeUsuario = reader.ReadAsString("NomeUsuario")
+                        }
+                    });
+                }
             return retorno;
         }
     }

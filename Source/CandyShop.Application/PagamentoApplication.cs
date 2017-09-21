@@ -20,11 +20,29 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<IEnumerable<Pagamento>> ListarPagamentosCpf(string cpf)
+        public Response<IEnumerable<Pagamento>> ListarPagamentos(string cpf)
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync($"{_enderecoApi}/cpf/{cpf}").Result;
+                var response = client.GetAsync($"{_enderecoApi}/{cpf}").Result;
+                return new Response<IEnumerable<Pagamento>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        public Response<IEnumerable<Pagamento>> ListarPagamentosSemana()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/semana").Result;
+                return new Response<IEnumerable<Pagamento>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        public Response<IEnumerable<Pagamento>> ListarPagamentosSemana(string cpf)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/semana/{cpf}").Result;
                 return new Response<IEnumerable<Pagamento>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
@@ -37,8 +55,6 @@ namespace CandyShop.Application
         public Response<string> InserirPagamento(Pagamento pagamento)
         {
             throw new NotImplementedException();
-        }
-
-        
+        }                
     }
 }

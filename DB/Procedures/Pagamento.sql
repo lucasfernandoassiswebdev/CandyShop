@@ -5,7 +5,7 @@ GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsPagamento]	
 	@Cpf varchar(14),
-	@DataPagamento datetime,
+	@DataPagamento datetime,  -- como a data sera setada aqui no sql, passar do vs pra ca a data como null
 	@ValorPagamento decimal
 
 	AS
@@ -16,9 +16,9 @@ CREATE PROCEDURE [dbo].[CSSP_InsPagamento]
 	Objetivo..........: Inserir um pagamento
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/0/2017
-	Ex................: EXEC [dbo].[CSSP_InsPagamento] '12313546464', null,20
+	Ex................: EXEC [dbo].[CSSP_InsPagamento] '12313546464', '09/14/2017',20
 	*/
-
+	
 	BEGIN
 
 		IF @DataPagamento IS NULL
@@ -40,22 +40,21 @@ CREATE PROCEDURE [dbo].[CSSP_InsPagamento]
 GO
 
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisPagamento]
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
-
+	@cpf VARCHAR(11) = NULL 
 	AS
 
 	/*
 	Documentação
 	Arquivo Fonte.....: Pagamento.sql
-	Objetivo..........: Listar todos os pagamentos feitos por todos usuarios
+	Objetivo..........: Listar todos os pagamentos feitos por todos usuarios ou pelo passado no cpf
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[CSSP_LisPagamento]
+	Ex................: EXEC [dbo].[CSSP_LisPagamento] '11111111111'
 
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select  e inserindo Inner JOin
@@ -64,7 +63,9 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
 
 	BEGIN
 	
-		SELECT p.IdPagamento,
+		IF @CPF IS NULL
+		BEGIN
+			SELECT p.IdPagamento,
 				p.Cpf,
 				u.NomeUsuario,
 				p.DataPagamento,
@@ -72,9 +73,80 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
 			FROM [dbo].[Pagamento] p WITH(NOLOCK)
 				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
 					ON p.Cpf = u.Cpf
+		END
+		ELSE
+		BEGIN
+			SELECT p.IdPagamento,
+				p.Cpf,
+				u.NomeUsuario,
+				p.DataPagamento,
+				p.ValorPagamento
+			FROM [dbo].[Pagamento] p WITH(NOLOCK)
+				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
+					ON p.Cpf = u.Cpf
+			WHERE p.Cpf = @cpf
+		END
+		
 	END
 GO
 
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisPagamentoSemana]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisPagamentoSemana]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_LisPagamentoSemana]
+	@cpf VARCHAR(11) = NULL
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Pagamento.sql
+	Objetivo..........: Listar os pagamentos da semana atual
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 21/09/2017
+	Ex................: EXEC [dbo].[CSSP_LisPagamentoSemana]
+
+	*/
+
+	BEGIN	
+		
+		DECLARE @domingo AS DATETIME = GETDATE();
+		WHILE ((SELECT DATENAME(weekday, @domingo)) <> 'sunday')
+		BEGIN
+			IF ((SELECT DATENAME(weekday, @domingo)) <> 'sunday')
+			BEGIN				
+				SELECT @domingo = DATEADD(DAY, -1, @domingo)
+			END
+		END
+		
+		IF @cpf IS NULL
+		BEGIN
+			SELECT p.IdPagamento,
+					p.Cpf,
+					u.NomeUsuario,
+					p.DataPagamento,
+					p.ValorPagamento
+				FROM [dbo].[Pagamento] p WITH(NOLOCK)
+					INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
+						ON p.Cpf = u.Cpf
+				WHERE p.DataPagamento > @domingo
+		END
+		ELSE
+		BEGIN 
+			SELECT p.IdPagamento,
+					p.Cpf,
+					u.NomeUsuario,
+					p.DataPagamento,
+					p.ValorPagamento
+				FROM [dbo].[Pagamento] p WITH(NOLOCK)
+					INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
+						ON p.Cpf = u.Cpf
+				WHERE p.Cpf = @cpf and p.DataPagamento > @domingo
+		END
+	END
+GO
+				
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_UpdPagamento]
@@ -109,33 +181,7 @@ CREATE PROCEDURE [dbo].[CSSP_UpdPagamento]
 		RETURN 0
 	END
 GO
-
-
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCpfPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[CSSP_LisCpfPagamento]
-GO
-
-CREATE PROCEDURE [dbo].[CSSP_LisCpfPagamento]
-	@Cpf VARCHAR(14)
-	AS
-
-	/*
-	Documentação
-	Arquivo Fonte.....: Pagamento.sql
-	Objetivo..........: Listar os pagamentos de um usuario
-	Autor.............: SMN - Rafael Morais
- 	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[CSSP_LisCpfPagamento]
-
-	*/
-
-	BEGIN
-	
-		SELECT * FROM [dbo].[Pagamento] WITH(NOLOCK)
-			WHERE Cpf = @Cpf
-
-	END
-GO			
+		
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DelPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_DelPagamento]

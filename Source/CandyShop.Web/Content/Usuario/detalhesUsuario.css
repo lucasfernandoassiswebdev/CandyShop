@@ -21,3 +21,7 @@ dt {
 h4 {
 	margin-left: -1%;
 }
+
+img {
+	max-height: 200px;
+}

@@ -9,6 +9,5 @@ namespace CandyShop.Core.Services.Pagamento.Dto
         public UsuarioDto Usuario { get; set; }
         public DateTime DataPagamento { get; set; }
         public decimal ValorPagamento { get; set; }
-        public string NomeUsuario { get; set; }
     }
 }
