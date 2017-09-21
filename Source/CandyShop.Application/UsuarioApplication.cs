@@ -12,7 +12,7 @@ namespace CandyShop.Application
     {
         private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/Usuario";
 
-        public Response<string> InserirUsuario(Usuario usuario)
+        public Response<string> InserirUsuario(UsuarioViewModel usuario)
         {
             using (var client = new HttpClient())
             {
@@ -21,7 +21,7 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<string> EditarUsuario(Usuario usuario)
+        public Response<string> EditarUsuario(UsuarioViewModel usuario)
         {
             using (var client = new HttpClient())
             {
@@ -30,39 +30,39 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<IEnumerable<Usuario>> ListarUsuarios()
+        public Response<IEnumerable<UsuarioViewModel>> ListarUsuarios()
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync(_enderecoApi).Result;
-                return new Response<IEnumerable<Usuario>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<UsuarioViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<IEnumerable<Usuario>> ListarUsuariosEmDivida()
+        public Response<IEnumerable<UsuarioViewModel>> ListarUsuariosEmDivida()
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/Devedores").Result;
-                return new Response<IEnumerable<Usuario>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<UsuarioViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<IEnumerable<Usuario>> ListarInativos()
+        public Response<IEnumerable<UsuarioViewModel>> ListarInativos()
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/inativos").Result;
-                return new Response<IEnumerable<Usuario>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<UsuarioViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<Usuario> SelecionarUsuario(string cpf)
+        public Response<UsuarioViewModel> SelecionarUsuario(string cpf)
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/{cpf}/Detalhes").Result;
-                return new Response<Usuario>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<UsuarioViewModel>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
@@ -77,16 +77,16 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<IEnumerable<Usuario>> ProcurarUsuario(string nome)
+        public Response<IEnumerable<UsuarioViewModel>> ProcurarUsuario(string nome)
         {
             using (var cliente = new HttpClient())
             {
                 var response = cliente.GetAsync($"{_enderecoApi}/procurar/{nome}").Result;
-                return new Response<IEnumerable<Usuario>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<UsuarioViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public HttpResponseMessage VerificaLogin(Usuario usuario)
+        public HttpResponseMessage VerificaLogin(UsuarioViewModel usuario)
         {
             using (var client = new HttpClient())
             {

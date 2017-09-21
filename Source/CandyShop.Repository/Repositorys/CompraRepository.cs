@@ -124,7 +124,6 @@ namespace CandyShop.Repository.Repositorys
                             Cpf = reader.ReadAsString("UsuarioCompra")
                         }
                     };
-
             return retorno;
         }
 

@@ -1,4 +1,4 @@
-﻿@model  CandyShop.Application.ViewModels.Usuario 
+﻿@model  CandyShop.Application.ViewModels.UsuarioViewModel
 
 @{
     Layout = null;
@@ -14,7 +14,8 @@
             <div class="row">
                 <div class="center">
                     <label for="fotoUsuario">
-                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/user.png" alt="imagem não disponível :(" />
+                        @{ string caminho = @Model.Cpf + ".jpg"; };
+                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/@caminho" alt="imagem não disponível :(" />
                     </label>
                     <input id="fotoUsuario" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
                 </div>
@@ -27,7 +28,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="Nome" name="Nome" type="text" class="validate" value="@Model.NomeUsuario"/>
+                    <input id="Nome" name="Nome" type="text" class="validate" value="@Model.NomeUsuario" />
                     <label class="active">Nome:</label>
                 </div>
                 <div class="input-field col s6">
@@ -37,12 +38,12 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="Password" name="Password" type="password" class="validate" value="@Model.SenhaUsuario"/>
+                    <input id="Password" name="Password" type="password" class="validate" value="@Model.SenhaUsuario" />
                     <label class="active">Password:</label>
                 </div>
                 <div class="input-field col s6">
                     <select id="Ativo">
-                        <option value="" disabled >Escolha uma opção</option>
+                        <option value="" disabled>Escolha uma opção</option>
                         <option value="A" selected>Ativo</option>
                         <option value="I">Inativo</option>
                     </select>
@@ -50,8 +51,8 @@
                 </div>
             </div>
             <div class="row center">
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large botaoCadastro" onclick="AjaxJs.concluirEdicaoUsuario()"><i class="material-icons left">build</i>Editar</a>
+                <a class="waves-effect waves-light btn-large botaoVoltar"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large" onclick="formEditar.submit()"><i class="material-icons left">build</i>Editar</a>
             </div>
         </form>
     </div>
@@ -61,5 +62,8 @@
     $(document).ready(function () {
         $('select').material_select();
     });
-</script>
 
+    $('.botaoCadastro').on('click', function () {
+        AjaxJs.concluirEdicaoUsuario();
+    });
+</script>

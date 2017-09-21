@@ -1,6 +1,7 @@
 ﻿var AjaxJs = (function ($) {
     var url = {}; //objeto que recebe o nome e endereço da pagina
    
+
     // Lista de objetos que guarda o nome e o endereco da pagina, sã carregados na pagina padrao
     var init = function (config) {
         url = config;
@@ -9,11 +10,14 @@
     
     //carrega a pagina de inicio
     function main() {
-        $.get(url.main).done(function (data) { //pega a view main e a carrega no div
+        //pega a view main e a carrega no div
+        $.get(url.main).done(function (data) {
             $("#DivGrid").slideUp(function () {
-                $('#DivGrid').hide().html(data).slideDown(); //desce  o divgrid                                                                                
+                //desce  o divgrid  
+                $('#DivGrid').hide().html(data).slideDown();
             });
-        }).fail(function (xhr) { //xhr é o código do erro, que é retornado caso o get não tenha sucesso
+            //xhr é o código do erro, que é retornado caso o get não tenha sucesso
+        }).fail(function (xhr) {
             console.log(xhr.responseText);
         });
     }
@@ -22,9 +26,9 @@
     function carregaPadrao() {
         $.get(url.padrao).done(function (data) {
             $('body').slideUp(function () {
-                $('body').hide().html(data).slideDown(); 
+                $('body').hide().html(data).slideDown();
             });
-        }).fail(function (xhr) { 
+        }).fail(function (xhr) {
             console.log(xhr.responseText);
         });
     }
@@ -90,11 +94,11 @@
     var listarPagamento = function () {
         chamaPagina(url.listarPagamento);
     };
-    var listarPagamentoSemana = function() {
+    var listarPagamentoSemana = function () {
         chamaPagina(url.listarPagamentoSemana);
     }
 
-    var inserirPagamento = function() {
+    var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
     var concluirPagamento = function () {
@@ -107,7 +111,7 @@
     };
     var listaUsuario = function () {
         chamaPagina(url.listaUsuario);
-    };    
+    };
     var editarUsuario = function (cpf) {
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.editarUsuario, usuario);
@@ -116,11 +120,11 @@
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.detalheUsuario, usuario);
     };
-    var concluirCadastroUsuario = function () {
+    var concluirCadastroUsuario = function (imgBase64) {
         var usuario = {
             Cpf: $('#cpf').val(),
             NomeUsuario: $('#Nome').val(),
-
+            Imagem: imgBase64
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
@@ -130,7 +134,8 @@
             NomeUsuario: $('#Nome').val(),
             SaldoUsuario: $('#SaldoUsuario').val(),
             SenhaUsuario: $('#Password').val(),
-            Ativo: $('#Ativo').val()
+            Ativo: $('#Ativo').val(),
+            Imagem: $('#uploadImagem').html()
         };
         concluirAcao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };
@@ -152,14 +157,14 @@
         var usuario = { Nome: $('#nomeUsuario').val() };
         chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
     };
-    var verificaLogin = function() {
+    var verificaLogin = function () {
         var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
 
         $.post(url.verificaLogin, usuario)
-            .done(function() {
-                carregaPadrao();                
+            .done(function () {
+                carregaPadrao();
             })
-            .fail(function(xhr) {
+            .fail(function (xhr) {
                 Materialize.toast(xhr.responseText, 3000);
             });
     };

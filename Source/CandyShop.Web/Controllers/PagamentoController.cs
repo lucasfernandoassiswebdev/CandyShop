@@ -73,7 +73,7 @@ namespace CandyShop.Web.Controllers
 
         #region Acoes
 
-        public ActionResult InserirPagamento(Pagamento pagamento)
+        public ActionResult InserirPagamento(PagamentoViewModel pagamento)
         {
             var response = _appPagamento.InserirPagamento(pagamento);
             if (response.Status != HttpStatusCode.OK)
@@ -82,7 +82,5 @@ namespace CandyShop.Web.Controllers
         }        
 
         #endregion
-
-
     }
 }

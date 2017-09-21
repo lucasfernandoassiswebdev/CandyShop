@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompraApplication.cs" />
+    <Compile Include="Interfaces\ICompraInterface.cs" />
     <Compile Include="Interfaces\IPagamentoApplication.cs" />
     <Compile Include="Interfaces\IProdutoApplication.cs" />
     <Compile Include="Interfaces\IUsuarioApplication.cs" />
@@ -58,11 +60,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="UsuarioApplication.cs" />
-    <Compile Include="ViewModels\Compra.cs" />
-    <Compile Include="ViewModels\CompraProduto.cs" />
-    <Compile Include="ViewModels\Pagamento.cs" />
-    <Compile Include="ViewModels\Produto.cs" />
-    <Compile Include="ViewModels\Usuario.cs" />
+    <Compile Include="ViewModels\CompraViewModel.cs" />
+    <Compile Include="ViewModels\CompraProdutoViewModel.cs" />
+    <Compile Include="ViewModels\PagamentoViewModel.cs" />
+    <Compile Include="ViewModels\ProdutoViewModel.cs" />
+    <Compile Include="ViewModels\UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
