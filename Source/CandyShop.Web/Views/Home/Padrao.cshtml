@@ -107,7 +107,7 @@
     <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
 </ul>
 
-@if (Session["Login"].ToString() != "logado")
+@if (Session["Login"].ToString() == "logado")
 {
     <nav class="brown nav-extended">
         <div class="nav-wrapper">
