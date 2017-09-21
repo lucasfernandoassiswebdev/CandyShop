@@ -1,12 +1,12 @@
 ﻿var AjaxJs = (function ($) {
     var url = {}; //objeto que recebe o nome e endereço da pagina
-
+   
     // Lista de objetos que guarda o nome e o endereco da pagina, sã carregados na pagina padrao
     var init = function (config) {
         url = config;
-        main();
+        main();               
     };
-
+    
     //carrega a pagina de inicio
     function main() {
         $.get(url.main).done(function (data) { //pega a view main e a carrega no div

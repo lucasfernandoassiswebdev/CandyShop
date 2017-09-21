@@ -123,7 +123,7 @@ namespace CandyShop.Web.Controllers
                 File.SaveAs(pathSave);
             }
             
-            return View("Cadastrar");
+            return RedirectToAction("Index", "Admin");
         }
 
 
