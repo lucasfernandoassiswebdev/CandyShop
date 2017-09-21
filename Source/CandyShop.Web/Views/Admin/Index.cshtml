@@ -7,8 +7,11 @@
 <script type="text/javascript" src="../../Js/Ajax.js?d=@DateTime.Now.Ticks"></script>
 <script>
     $(document).ready(function () {
+        console.log('batataatata' + '@TempData["Verificacao"]');
+        var verificacao = '@TempData["Verificacao"]' == 1 ? '@Url.Action("Cadastrar", "Usuario")' : '@Url.Action("Listar", "Produto")' ;
+
         AjaxJs.init({
-            main: '@Url.Action("Listar", "Produto")',
+            main: verificacao,
             //usuários
             listaUsuario: '@Url.Action("Listar", "Usuario")',
             mostraSaldo: '@Url.Action("Index", "Shop")',
@@ -38,6 +41,8 @@
             listarPagamentoSemana: '@Url.Action("ListarSemana", "Pagamento")',
             detalhePagamento: '@Url.Action("Detalhes", "Pagamento")'
         });
+
+        @{ TempData.Remove("Verificacao");};
     })
 </script>
 

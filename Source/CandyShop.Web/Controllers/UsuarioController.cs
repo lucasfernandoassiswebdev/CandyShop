@@ -122,7 +122,8 @@ namespace CandyShop.Web.Controllers
                 string pathSave = $"{Server.MapPath("~/Imagens/")}{cpf}.jpg";
                 File.SaveAs(pathSave);
             }
-            
+
+            TempData["Verificacao"] = 1;
             return RedirectToAction("Index", "Admin");
         }
 

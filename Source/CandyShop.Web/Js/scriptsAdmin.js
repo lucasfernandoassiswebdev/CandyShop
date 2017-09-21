@@ -1,5 +1,4 @@
-﻿var verificacao = false;
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $('.button-collapse').sideNav();
     $('.collapsible').collapsible();
     $('.modal').modal();
