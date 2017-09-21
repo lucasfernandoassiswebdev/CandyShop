@@ -1,9 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using Newtonsoft.Json;
-using System;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -106,15 +103,15 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro ao cadastrar usuario: {response.Status}");
 
             //salvando imagem que o usuário upou na aplicação
-            byte[] bytes = Convert.FromBase64String(uploadImagem);
+            
 
-            Image image;
-            using (MemoryStream ms = new MemoryStream(bytes))
-            {
-                image = Image.FromStream(ms);
-            }
+            //Image image;
+            //using (MemoryStream ms = new MemoryStream(uploadImagem))
+            //{
+            //    image = Image.FromStream(ms);
+            //}
 
-            image.Save("~Imagens/" + usuario.Cpf, System.Drawing.Imaging.ImageFormat.Png);
+            //image.Save("~Imagens/" + usuario.Cpf, System.Drawing.Imaging.ImageFormat.Png);
 
             return Content("Usuário cadastrado com sucesso!!");
         }
