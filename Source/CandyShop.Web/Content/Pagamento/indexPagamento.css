@@ -1,0 +1,26 @@
+﻿ #tabela {
+	 width: 100%;
+	 max-width: 800px;
+	 margin: 0 auto;
+	 text-align: center;
+ }
+
+ #filtro {
+	 text-align: center;
+ }
+
+ #icone {
+	 display: inline-block;
+	 color: brown;
+ }
+
+ #dropdown {
+	 position: static;
+	 display: inline-block;
+	 font-size: small;
+	 width: 200pt;
+ }
+
+ tr {
+	 color: black;
+ }

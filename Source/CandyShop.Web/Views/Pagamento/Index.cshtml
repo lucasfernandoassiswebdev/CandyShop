@@ -2,14 +2,7 @@
 
 @{ Layout = null; }
 
-<script>
-    $(document).ready(function () {
-        $('select').material_select();
-        $(".penis").last().removeClass('select-dropdown');
-    });
-
-</script>
-
+<link rel="stylesheet" type="text/css" href="../../Content/Pagamento/indexPagamento.css"/>
 
 <h2 align="center"><font color="red">Pagamentos</font></h2>
 
@@ -65,28 +58,5 @@
     <a class="waves-effect waves-light btn" onclick="AjaxJs.voltarInicio()"><i class="material-icons left">arrow_back</i>Voltar</a>
 </div>
 
-<style>
-    #tabela {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        text-align: center;
-    }
 
-    #filtro {
-        text-align: center;
-    }
-
-    #icone {
-        display: inline-block;
-        color: brown;
-    }
-
-    #dropdown {
-        position: static;
-        display: inline-block;
-        font-size: small;
-        width: 200pt;
-    }
-</style>
 

@@ -178,12 +178,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\formCadastroUsuario.css" />
-    <Content Include="Content\index.css" />
-    <Content Include="Content\indexAdmin.css" />
-    <Content Include="Content\Main.css" />
+    <Content Include="Content\Produto\desativarProduto.css" />
+    <Content Include="Content\Usuario\desativarUsuario.css" />
+    <Content Include="Content\Produto\detalheProduto.css" />
+    <Content Include="Content\Pagamento\detalhes.css" />
+    <Content Include="Content\Usuario\detalhesUsuario.css" />
+    <Content Include="Content\Usuario\formCadastroUsuario.css" />
+    <Content Include="Content\Admin\historico.css" />
+    <Content Include="Content\Login%28nao utilizado%29\index.css" />
+    <Content Include="Content\Admin\indexAdmin.css" />
+    <Content Include="Content\Pagamento\indexPagamento.css" />
+    <Content Include="Content\Produto\indexProduto.css" />
+    <Content Include="Content\Principal\Main.css" />
     <Content Include="Content\materialize.min.css" />
-    <Content Include="Content\shop.css" />
+    <Content Include="Content\Principal\shop.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

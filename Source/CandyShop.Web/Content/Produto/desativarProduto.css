@@ -1,0 +1,24 @@
+﻿ .corpo, hr {
+	 width: 100%;
+	 max-width: 400px;
+	 margin: 0 auto;
+	 text-align: left;
+ }
+
+ .corpo {
+	 margin-left: -14%;
+ }
+
+ dd {
+	 margin-left: 54%;
+	 margin-top: -7%;
+	 color: red;
+ }
+
+ dl {
+	 color: black;
+ }
+
+ .batata {
+	 margin-left: -37%;
+ }

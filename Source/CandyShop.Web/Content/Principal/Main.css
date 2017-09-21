@@ -136,3 +136,11 @@ input[id="search"] {
 .row {
 	margin-top: 20px;
 }
+
+input {
+	text-align: center;
+}
+h2 {
+	font-weight: bold;
+	color: red;
+}
