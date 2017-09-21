@@ -90,6 +90,10 @@
     var listarPagamento = function () {
         chamaPagina(url.listarPagamento);
     };
+    var listarPagamentoSemana = function() {
+        chamaPagina(url.listarPagamentoSemana);
+    }
+
     var inserirPagamento = function() {
         chamaPagina(url.inserirPagamento);
     };
@@ -224,6 +228,7 @@
         mostraSaldo: mostraSaldo,
         //pagamento
         listarPagamento: listarPagamento,
+        listarPagamentoSemana: listarPagamentoSemana,
         detalhePagamento: detalhePagamento,
         inserirPagamento: inserirPagamento,
         concluirPagamento: concluirPagamento,
