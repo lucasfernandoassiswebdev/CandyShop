@@ -1,17 +1,28 @@
 ﻿//muda a foto do usuário na tela
 $('#fotoUsuario').change(function () {
+    //readURL(this,encodeImageFileAsURL);
     readURL(this);
-    encodeImageFileAsURL();
 });
 
-function readURL(input) {
+$('.botaoCadastro').on('click',function() {
+    encodeImageFileAsURL();
+    AjaxJs.concluirCadastroUsuario();
+});
+
+$('.botaoVoltar').on('click', function() {
+    AjaxJs.listaUsuario();
+});
+
+function readURL(input/*,callback*/) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
             $('#imagem').attr('src', e.target.result);
+            //if (typeof callback === "function") {
+            //    callback();
+            //}
         };
-
         reader.readAsDataURL(input.files[0]);
     }
 }
@@ -100,16 +111,13 @@ function encodeImageFileAsURL() {
     var filesSelected = document.getElementById("fotoUsuario").files;
     if (filesSelected.length > 0) {
         var fileToLoad = filesSelected[0];
-
         var fileReader = new FileReader();
 
         fileReader.onload = function (fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
-
-            $("#imagem").html(srcData);
-            alert("Converted Base64 version is " + $("#imagem").html());
-            console.log("Converted Base64 version is " + $("#imagem").html());
+            $('#uploadImagem').html(srcData);
         }
+
         fileReader.readAsDataURL(fileToLoad);
     }
 }
