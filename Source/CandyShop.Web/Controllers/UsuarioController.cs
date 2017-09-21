@@ -117,7 +117,9 @@ namespace CandyShop.Web.Controllers
                 }
 
                 //salvando imagem que o usuário upou na aplicação
-                string pathSave = $"{Server.MapPath("~/Imagens/")}{usuario.Cpf}.jpg";
+                var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+
+                string pathSave = $"{Server.MapPath("~/Imagens/")}{cpf}.jpg";
                 File.SaveAs(pathSave);
             }
             
