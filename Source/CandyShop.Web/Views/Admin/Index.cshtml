@@ -31,7 +31,10 @@
             desativarProduto: '@Url.Action("DesativarProduto", "Produto")',
             desativarProdutoConfirmado: '@Url.Action("DesativarProdutoConfirmado", "Produto")',
             listarInativos: '@Url.Action("ListarInativos", "Produto")',
-            listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Produto")'
+            listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Produto")',
+            //pagamentos
+            listarPagamento: '@Url.Action("Listar", "Pagamento")',
+            detalhePagamento: '@Url.Action("Detalhes", "Pagamento")'
         });
     })
 </script>
@@ -100,6 +103,17 @@
                         <li><a href="#modal2" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarInativos()"><i class="material-icons">list</i>Listar Inativos</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header white-text">
+                    <i class="material-icons left">money</i>PAGAMENTOS                    
+                </div>
+                <div class="collapsible-body">
+                    <ul class="brown-text">
+                        <li><a href="#!" class="closeMenu" @*onclick="AjaxJs.listarPagamento();"*@><i class="material-icons">schedule</i>Ultima semana</a></li>                            
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarPagamento();"><i class="material-icons">date_range</i>Ultimo mês</a></li>
                     </ul>
                 </div>
             </li>

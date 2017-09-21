@@ -131,8 +131,15 @@ CREATE PROCEDURE [dbo].[CSSP_LisCpfPagamento]
 
 	BEGIN
 	
-		SELECT * FROM [dbo].[Pagamento] WITH(NOLOCK)
-			WHERE Cpf = @Cpf
+		SELECT p.IdPagamento,
+				p.Cpf,
+				u.NomeUsuario,
+				p.DataPagamento,
+				p.ValorPagamento
+			FROM [dbo].[Pagamento] p WITH(NOLOCK)
+				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
+					ON p.Cpf = u.Cpf
+			WHERE p.Cpf = @Cpf
 
 	END
 GO			

@@ -28,14 +28,13 @@ namespace CandyShop.Web.Controllers
         }
 
 
-        //public ActionResult Listar()
-        //{
-
-        //    var response = _appPagamento.ListarPagamentosCpf();
-        //    if (response.Status != HttpStatusCode.OK)
-        //        return Content("Erro " + response.ContentAsString.First());
-        //    return View("Index", response.Content);
-        //}
+        public ActionResult Listar()
+        {
+            var response = _appPagamento.ListarPagamentos();
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro " + response.ContentAsString.First());
+            return View("Index", response.Content);
+        }
 
         public ActionResult Inserir()
         {
