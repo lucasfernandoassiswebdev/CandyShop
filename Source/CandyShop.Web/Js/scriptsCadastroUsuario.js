@@ -4,10 +4,10 @@ $('#fotoUsuario').change(function () {
     readURL(this);
 });
 
-$('.botaoCadastro').on('click',function() {
-    encodeImageFileAsURL();
-    AjaxJs.concluirCadastroUsuario();
-});
+//$('.botaoCadastro').on('click',function() {
+//    encodeImageFileAsURL();
+//    AjaxJs.concluirCadastroUsuario();
+//});
 
 $('.botaoVoltar').on('click', function() {
     AjaxJs.listaUsuario();
@@ -115,9 +115,19 @@ function encodeImageFileAsURL() {
 
         fileReader.onload = function (fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
-            $('#uploadImagem').html(srcData);
+            $('#uploadImagem').val(srcData);
         }
 
         fileReader.readAsDataURL(fileToLoad);
     }
 }
+
+$('#formCadastro').submit(function (e) {
+    e.preventDefault();
+    $(this).ajaxSubmit({
+        error: function (xhr) {
+            Materialize.toast(xhr.responseText, 3000);
+        }
+    });
+    return false;
+});

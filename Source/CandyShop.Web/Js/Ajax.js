@@ -115,7 +115,8 @@
     var concluirCadastroUsuario = function () {
         var usuario = {
             Cpf: $('#cpf').val(),
-            NomeUsuario: $('#Nome').val()
+            NomeUsuario: $('#Nome').val(),
+
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };

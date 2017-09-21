@@ -1,8 +1,10 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using Newtonsoft.Json;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
@@ -18,7 +20,7 @@ namespace CandyShop.Web.Controllers
 
         #region telas
         public ActionResult Index()
-        {            
+        {
             return View();
         }
 
@@ -96,25 +98,32 @@ namespace CandyShop.Web.Controllers
 
         #region execucoes
         [HttpPost]
-        public ActionResult Cadastrar(Usuario usuario, string uploadImagem)
+        public ActionResult Cadastrar(Usuario usuario, HttpPostedFileBase File)
         {
+
             var response = _appUsuario.InserirUsuario(usuario);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro ao cadastrar usuario: {response.Status}");
 
-            //salvando imagem que o usuário upou na aplicação
+            if (File != null)
+            {
+                //verificando se a imagem que foi enviada é valida
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                var checkextension = Path.GetExtension(File.FileName).ToLower();
+
+                if (!allowedExtensions.Contains(checkextension))
+                {
+                    return Content("Imagem ou arquivo inválido");
+                }
+
+                //salvando imagem que o usuário upou na aplicação
+                string pathSave = $"{Server.MapPath("~/Imagens/")}{usuario.Cpf}.jpg";
+                File.SaveAs(pathSave);
+            }
             
-
-            //Image image;
-            //using (MemoryStream ms = new MemoryStream(uploadImagem))
-            //{
-            //    image = Image.FromStream(ms);
-            //}
-
-            //image.Save("~Imagens/" + usuario.Cpf, System.Drawing.Imaging.ImageFormat.Png);
-
-            return Content("Usuário cadastrado com sucesso!!");
+            return View("Cadastrar");
         }
+
 
         [HttpPost]
         public ActionResult Editar(Usuario usuario)
@@ -164,8 +173,8 @@ namespace CandyShop.Web.Controllers
         public ActionResult Deslogar()
         {
             Session.Clear();
-            return RedirectToAction("Padrao","Home");
+            return RedirectToAction("Padrao", "Home");
         }
-        #endregion        
+        #endregion
     }
 }
