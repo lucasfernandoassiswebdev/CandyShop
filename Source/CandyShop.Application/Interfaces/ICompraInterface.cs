@@ -11,7 +11,7 @@ namespace CandyShop.Application.Interfaces
         Response<IEnumerable<Compra>> ListaCompra();
         Response<IEnumerable<Compra>> ListaCompraPorCpf(string cpf);
         Response<Compra> SelecionarCompra(int idcompra);
-        Response<string> EditaItens();
+        Response<string> EditaItens(CompraProduto compraProduto);
         Response<IEnumerable<Compra>> ListaCompraPorNome(string nomeUsuario);
 
 
