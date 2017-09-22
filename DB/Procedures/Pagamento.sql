@@ -16,7 +16,7 @@ CREATE PROCEDURE [dbo].[CSSP_InsPagamento]
 	Objetivo..........: Inserir um pagamento
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/0/2017
-	Ex................: EXEC [dbo].[CSSP_InsPagamento] '12313546464', '09/14/2017',20
+	Ex................: EXEC [dbo].[CSSP_InsPagamento] '12313546464', '05/14/2017',30
 	*/
 	
 	BEGIN
@@ -44,8 +44,9 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisPa
 	DROP PROCEDURE [dbo].[CSSP_LisPagamento]
 GO
 
-CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
-	@cpf VARCHAR(11) = NULL 
+CREATE PROCEDURE [dbo].[CSSP_LisPagamento]	
+	@cpf VARCHAR(11) = NULL,
+	@mes INT = 0
 	AS
 
 	/*
@@ -54,15 +55,22 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
 	Objetivo..........: Listar todos os pagamentos feitos por todos usuarios ou pelo passado no cpf
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[CSSP_LisPagamento] '11111111111'
-
+	Ex................: EXEC [dbo].[CSSP_LisPagamento] '11111111111'      LISTA OS DO CPF NO MES ATUAL
+														'11111111111', 5	LISTA OS DO CPF NO MES INFORMADO
+														VAZIO              LISTA NO MES ATUAL
+														NULL, 5				LISTA TODOS NO MES INFORMADO - NAO ESQUECER DE PASSAR O NULL
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select  e inserindo Inner JOin
 	Data..............: 13/09/2017
 	*/
 
 	BEGIN
-	
+		
+		IF @mes = 0
+		BEGIN 
+			SELECT @mes = MONTH(GETDATE())
+		END
+
 		IF @CPF IS NULL
 		BEGIN
 			SELECT p.IdPagamento,
@@ -73,6 +81,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
 			FROM [dbo].[Pagamento] p WITH(NOLOCK)
 				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
 					ON p.Cpf = u.Cpf
+			WHERE MONTH(p.DataPagamento) = @mes
 		END
 		ELSE
 		BEGIN
@@ -84,7 +93,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
 			FROM [dbo].[Pagamento] p WITH(NOLOCK)
 				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
 					ON p.Cpf = u.Cpf
-			WHERE p.Cpf = @cpf
+			WHERE (p.Cpf = @cpf) and (MONTH(p.DataPagamento) = @mes)
 		END
 		
 	END
