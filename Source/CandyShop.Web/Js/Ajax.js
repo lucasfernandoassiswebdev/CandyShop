@@ -126,7 +126,7 @@
 	};
 	var concluirPagamento = function () {
 		var pagamento = { ValorPagamento: $('#valorPago').val() };
-		concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);
+		concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);	    
 	};
 	//usuarios
 	var cadastroUsuario = function () {

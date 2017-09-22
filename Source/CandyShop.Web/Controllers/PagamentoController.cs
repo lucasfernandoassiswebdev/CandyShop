@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using System;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -46,9 +47,10 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
-        public ActionResult ListarCpf(string cpf)
+        public ActionResult ListarCpf()
         {
-            ViewBag.drop = 0;
+            var cpf = Session["login"].ToString();
+            ViewBag.drop = 1;
             var response = _appPagamento.ListarPagamentos(cpf);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
@@ -89,6 +91,7 @@ namespace CandyShop.Web.Controllers
         public ActionResult InserirPagamento(PagamentoViewModel pagamento)
         {
             pagamento.Usuario = new UsuarioViewModel { Cpf = Session["login"].ToString() };
+            Session["saldoUsuario"] = Convert.ToDecimal(Session["saldoUsuario"].ToString()) + pagamento.ValorPagamento;
 
             var response = _appPagamento.InserirPagamento(pagamento);
             if (response.Status != HttpStatusCode.OK)

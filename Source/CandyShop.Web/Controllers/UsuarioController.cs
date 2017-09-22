@@ -193,7 +193,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.VerificaLogin(usuario);
             if (!response.IsSuccessStatusCode)
-                return new HttpStatusCodeResult(404, "Deu Pau");
+                return Content("Login incorreto!");
 
             var model = JsonConvert.DeserializeObject<int>(response.Content.ReadAsStringAsync().Result);
 
