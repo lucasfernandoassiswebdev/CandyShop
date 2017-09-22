@@ -39,6 +39,7 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult Listar()
         {
+            ViewBag.drop = 0;
             var response = _appPagamento.ListarPagamentos();
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
@@ -47,6 +48,7 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult ListarCpf(string cpf)
         {
+            ViewBag.drop = 0;
             var response = _appPagamento.ListarPagamentos(cpf);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
@@ -55,15 +57,8 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult ListarSemana()
         {
+            ViewBag.drop = 1;
             var response = _appPagamento.ListarPagamentosSemana();
-            if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
-            return View("Index", response.Content);
-        }
-
-        public ActionResult ListarSemanaCpf(string cpf)
-        {
-            var response = _appPagamento.ListarPagamentosSemana(cpf);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
             return View("Index", response.Content);
@@ -71,7 +66,17 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult ListarMes(int mes)
         {
+            ViewBag.drop = 0;
             var response = _appPagamento.ListarPagamentos(mes);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro " + response.ContentAsString.First());
+            return View("Index", response.Content);
+        }
+
+        public ActionResult ListarDia()
+        {
+            ViewBag.drop = 1;
+            var response = _appPagamento.ListarPagamentosDia();
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
             return View("Index", response.Content);
