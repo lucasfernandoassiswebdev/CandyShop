@@ -1,6 +1,8 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using Newtonsoft.Json;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -106,15 +108,30 @@ namespace CandyShop.Web.Controllers
                 if (response.Status != HttpStatusCode.OK)
                     return Content($"Erro ao cadastrar usuario: {response.Status}");
 
-               
+                if (usuario.Imagem != null)
+                {
+                    const string ExpectedImagePrefix = "data:image/jpeg;base64,";
+                    if (usuario.Imagem.StartsWith(ExpectedImagePrefix))
+                    {
+                        usuario.Imagem = usuario.Imagem.Substring(ExpectedImagePrefix.Length);
+                    }
+                    //transformando base64 em array de bytes
+                    byte[] bytes = System.Convert.FromBase64String(usuario.Imagem);
+
+                    Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
+
+                    //montando o nome e caminho de save da imagem
+                    usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+                    string caminho = $"~/Imagens/{usuario.Cpf}.jpg";
+
+                    imagem.Save(caminho, ImageFormat.Jpeg);
+                }
 
                 return Content("Usuário cadastrado com sucesso");
             }
 
-            TempData["Verificacao"] = 1;
             return RedirectToAction("Index", "Admin");
         }
-
 
         [HttpPut]
         public ActionResult Editar(UsuarioViewModel usuario, HttpPostedFile File)

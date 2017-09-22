@@ -94,16 +94,16 @@
     var listarPagamento = function () {
         chamaPagina(url.listarPagamento);
     };
-    var listarPagamentoSemana = function () {
+    var listarPagamentoSemana = function() {
         chamaPagina(url.listarPagamentoSemana);
-    }
+    };
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
-    var concluirPagamento = function () {
+    var concluirPagamento = function() {
         var pagamento = { ValorPagamento: $('#valorPago') };
         concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);
-    }
+    };
     //usuarios
     var cadastroUsuario = function () {
         chamaPagina(url.cadastroUsuario);
@@ -167,10 +167,10 @@
                 Materialize.toast(xhr.responseText, 3000);
             });
     };
-    var logOff = function () {
+    var logOff = function() {
         deslogar();
         Materialize.toast("Deslogado", 3000);
-    }
+    };
     //produtos
     var listaProduto = function () {
         chamaPagina(url.listaProduto);
