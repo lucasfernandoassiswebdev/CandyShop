@@ -2,6 +2,7 @@
 using CandyShop.Core.Services.Pagamento.Dto;
 using CandyShop.Core.Services.Usuario.Dto;
 using CandyShop.Repository.Database;
+using System;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository.Repositorys
@@ -15,14 +16,14 @@ namespace CandyShop.Repository.Repositorys
             CSSP_DelPagamento,
             CSSP_LisPagamento,
             CSSP_LisPagamentoSemana,
-            CSSP_SelPagamento
+            CSSP_SelPagamento,
+            CSSP_ListarPagamentoDia
         }
 
         public void InserirPagamento(PagamentoDto pagamento)
         {
             ExecuteProcedure(Procedures.CSSP_InsPagamento);
             AddParameter("@Cpf", pagamento.Usuario.Cpf);
-            AddParameter("@DataPagamento", pagamento.DataPagamento);
             AddParameter("@ValorPagamento", pagamento.ValorPagamento);
             ExecuteNonQuery();
         }
@@ -74,28 +75,53 @@ namespace CandyShop.Repository.Repositorys
 
         public IEnumerable<PagamentoDto> ListarPagamentos()
         {
-            return Listar(null, Procedures.CSSP_LisPagamento);
+            ExecuteProcedure(Procedures.CSSP_LisPagamento);
+            return Listar();
+        }
+
+        public IEnumerable<PagamentoDto> ListarPagamentos(int mes)
+        {
+            ExecuteProcedure(Procedures.CSSP_LisPagamento);
+            AddParameter("@cpf", null);
+            AddParameter("@mes", mes);
+            return Listar();
         }
 
         public IEnumerable<PagamentoDto> ListarPagamentos(string cpf)
         {
-            return Listar(cpf, Procedures.CSSP_LisPagamento);
+            ExecuteProcedure(Procedures.CSSP_LisPagamento);
+            AddParameter("@cpf", cpf);
+            return Listar();
         }
 
         public IEnumerable<PagamentoDto> ListarPagamentoSemana()
         {
-            return Listar(null, Procedures.CSSP_LisPagamentoSemana);
+            ExecuteProcedure(Procedures.CSSP_LisPagamentoSemana);
+            return Listar();
         }
-
+        
         public IEnumerable<PagamentoDto> ListarPagamentoSemana(string cpf)
         {
-            return Listar(cpf, Procedures.CSSP_LisPagamentoSemana);
+            ExecuteProcedure(Procedures.CSSP_LisPagamentoSemana);
+            AddParameter("cpf", cpf);
+            return Listar();
         }
 
-        private IEnumerable<PagamentoDto> Listar(string cpf, object procedure)
+        public IEnumerable<PagamentoDto> ListarPagamentoDia()
         {
-            ExecuteProcedure(procedure);
-            AddParameter("@cpf", cpf);
+            ExecuteProcedure(Procedures.CSSP_ListarPagamentoDia);
+            return Listar();
+        }
+
+        public IEnumerable<PagamentoDto> ListarPagamentoDia(DateTime data)
+        {
+            ExecuteProcedure(Procedures.CSSP_ListarPagamentoDia);
+            AddParameter("@data", data);
+            return Listar();
+        }
+
+        private IEnumerable<PagamentoDto> Listar()
+        {
             var retorno = new List<PagamentoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -113,6 +139,6 @@ namespace CandyShop.Repository.Repositorys
                     });
                 }
             return retorno;
-        }
+        }    
     }
 }

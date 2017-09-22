@@ -102,6 +102,7 @@
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
+
     var concluirPagamento = function() {
         var pagamento = { ValorPagamento: $('#valorPago') };
         concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);

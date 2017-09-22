@@ -3,13 +3,17 @@ using CandyShop.Application.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 
 namespace CandyShop.Application
 {
     public class PagamentoApplication : IPagamentoApplication
     {
         private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/pagamento";
+
+        #region gets
 
         public Response<IEnumerable<PagamentoViewModel>> ListarPagamentos()
         {
@@ -25,6 +29,15 @@ namespace CandyShop.Application
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/{cpf}").Result;
+                return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentos(int mes)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/mes/{mes}").Result;
                 return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
@@ -47,6 +60,27 @@ namespace CandyShop.Application
             }
         }
 
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosDia()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/dia").Result;
+                return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosDia(DateTime dia)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/dia/{dia}").Result;
+                return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        #endregion
+
+
         public Response<PagamentoViewModel> DetalharPagamento(int idPagamento)
         {
             throw new NotImplementedException();
@@ -54,7 +88,13 @@ namespace CandyShop.Application
 
         public Response<string> InserirPagamento(PagamentoViewModel pagamento)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                var response = client.PostAsync(_enderecoApi, pagamento, new JsonMediaTypeFormatter()).Result;
+                if (response.StatusCode != HttpStatusCode.OK)
+                    return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<string>(response.StatusCode);
+            }
         }                
     }
 }
