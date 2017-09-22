@@ -96,6 +96,11 @@
     var listarPagamento = function () {
         chamaPagina(url.listarPagamento);
     };
+
+    var listarPagamentoMes = function (mes) {
+        var parametro = { mes: mes };
+        chamaPaginaComIdentificador(url.listarPagamentoMes, parametro);
+    }
     var listarPagamentoSemana = function() {
         chamaPagina(url.listarPagamentoSemana);
     };
@@ -240,6 +245,7 @@
         detalhePagamento: detalhePagamento,
         inserirPagamento: inserirPagamento,
         concluirPagamento: concluirPagamento,
+        listarPagamentoMes: listarPagamentoMes,
         //usuario                
         historicoCompra: historicoCompra,
         concluirCadastroUsuario: concluirCadastroUsuario,

@@ -69,6 +69,14 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        public ActionResult ListarMes(int mes)
+        {
+            var response = _appPagamento.ListarPagamentos(mes);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro " + response.ContentAsString.First());
+            return View("Index", response.Content);
+        }
+
         #endregion
 
         #region Acoes
