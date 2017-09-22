@@ -110,7 +110,6 @@ function encodeImageFileAsURL(callback) {
 
         fileReader.onload = function (fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
-            console.log(srcData);
             if (typeof callback === "function") {
                 callback(srcData);
             }

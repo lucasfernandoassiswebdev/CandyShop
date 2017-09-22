@@ -5,26 +5,36 @@
 <link rel="stylesheet" type="text/css" href="../../Content/Pagamento/indexPagamento.css"/>
 
 <h4 align="center"><font color="brown">Pagamentos</font></h4>
-
-<div id="filtro">
+<script>
+    $('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrainWidth: false, // Does not change width of dropdown to that of the activator
+            gutter: 0, // Spacing from edge
+            belowOrigin: false, // Displays dropdown below the button
+            alignment: 'left', // Displays dropdown with edge aligned to the left of button
+            stopPropagation: false // Stops event propagation
+        }
+    );
+</script>
+<div id="filtro" class="row">
     <div id="icone"><i class="small material-icons">date_range</i></div>
-    <div id="dropdown" class="input-field">
-        <select id="FiltroMes">
-            <option class="black-text" value="" selected disabled>Escolha um mês para filtrar</option>
-            <option value="1">Janeiro</option>
-            <option value="2">Fevereiro</option>
-            <option value="3">Março</option>
-            <option value="4">Abril</option>
-            <option value="5">Maio</option>
-            <option value="6">Junho</option>
-            <option value="7">Julho</option>
-            <option value="8">Agosto</option>
-            <option value="9">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-        </select>
-    </div>
+    <a class='dropdown-button btn' href='#' data-activates='dropdown2'>Escolha o mês!</a>    
+    <ul id='dropdown2' class='dropdown-content'>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(1)">Janeiro</a></li>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(2)">Fevereiro</a></li>        
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(3)">Março</a></li>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(4)">Abril</a></li>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(5)">Maio</a></li>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(6)">Junho</a></li>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(7)">Julho</a></li>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(8)">Agosto</a></li>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(9)">Setembro</a></li>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(10)">Outubro</a></li>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(11)">Novembro</a></li>
+        <li><a href="#!" onclick="AjaxJs.listarPagamentoMes(12)">Dezembro</a></li>
+    </ul>  
+  
 </div>
 
 <div id="tabela">

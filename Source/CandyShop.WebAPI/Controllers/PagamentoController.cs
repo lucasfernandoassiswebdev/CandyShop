@@ -1,5 +1,6 @@
 ﻿using CandyShop.Core.Services.Pagamento;
 using CandyShop.Core.Services.Pagamento.Dto;
+using System;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
@@ -37,6 +38,12 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_pagamentoRepository.ListarPagamentos(cpf));
         }
 
+        [Route("api/pagamento/mes/{mes}")]
+        public IHttpActionResult GetMes(int mes)
+        {
+            return Ok(_pagamentoRepository.ListarPagamentos(mes));
+        }
+
         [Route("api/pagamento/semana")]
         public IHttpActionResult GetSemana()
         {
@@ -47,6 +54,18 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetSemanaCpf(string cpf)
         {
             return Ok(_pagamentoRepository.ListarPagamentoSemana(cpf));
+        }
+
+        [Route("api/pagamento/dia")]
+        public IHttpActionResult GetDia()
+        {
+            return Ok(_pagamentoRepository.ListarPagamentoDia());
+        }
+
+        [Route("api/pagamento/dia/{dia}")]
+        public IHttpActionResult GetDia(DateTime dia)
+        {
+            return Ok(_pagamentoRepository.ListarPagamentoDia(dia));
         }
 
         public IHttpActionResult Delete(int idpagamento)

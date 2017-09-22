@@ -6,7 +6,7 @@
  }
 
  #filtro {
-	 text-align: center;
+	 text-align: center;     
  }
 
  #icone {
@@ -14,12 +14,6 @@
 	 color: brown;
  }
 
- #dropdown {
-	 position: static;
-	 display: inline-block;
-	 font-size: small;
-	 width: 200pt;
- }
 
  tr {
 	 color: black;
