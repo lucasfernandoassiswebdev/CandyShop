@@ -262,7 +262,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuarioPorNome]
 	BEGIN
 		SELECT * 
 			FROM [dbo].[Usuario] WITH(NOLOCK)
-			WHERE NomeUsuario LIKE '%' + @NomeUsuario + '%'
+			WHERE NomeUsuario LIKE '%' + @NomeUsuario + '%' AND Ativo = 'A'
 	END
 GO
 
