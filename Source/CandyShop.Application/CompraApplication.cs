@@ -12,7 +12,7 @@ namespace CandyShop.Application
     {
         private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/compra";
 
-        public Response<string> InserirCompra(Compra compra)
+        public Response<string> InserirCompra(CompraViewModel compra)
         {
             using (var client = new HttpClient())
             {
@@ -23,7 +23,7 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<string> InserirItens(Produto produto)
+        public Response<string> InserirItens(ProdutoViewModel produto)
         {
             using (var client = new HttpClient())
             {
@@ -34,7 +34,7 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<string> EditarCompra(Compra compra)
+        public Response<string> EditarCompra(CompraViewModel compra)
         {
             using (var client = new HttpClient())
             {
@@ -45,34 +45,34 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<IEnumerable<Compra>> ListaCompra()
+        public Response<IEnumerable<CompraViewModel>> ListaCompra()
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/listacompra").Result;
-                return new Response<IEnumerable<Compra>>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
+                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
             }
         }
 
-        public Response<IEnumerable<Compra>> ListaCompraPorCpf(string cpf)
+        public Response<IEnumerable<CompraViewModel>> ListaCompraPorCpf(string cpf)
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/listacompracpf").Result;
-                return new Response<IEnumerable<Compra>>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
+                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
             }
         }
 
-        public Response<Compra> SelecionarCompra(int idcompra)
+        public Response<CompraViewModel> SelecionarCompra(int idcompra)
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/selecionacompra").Result;
-                return new Response<Compra>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
+                return new Response<CompraViewModel>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
             }
         }
 
-        public Response<string> EditaItens(CompraProduto compraProduto)
+        public Response<string> EditaItens(CompraProdutoViewModel compraProduto)
         {
             using (var client = new HttpClient())
             {
@@ -82,12 +82,12 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<IEnumerable<Compra>> ListaCompraPorNome(string nomeUsuario)
+        public Response<IEnumerable<CompraViewModel>> ListaCompraPorNome(string nomeUsuario)
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/{nomeUsuario}").Result;
-                return new Response<IEnumerable<Compra>>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
+                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
             }
         }
     }
