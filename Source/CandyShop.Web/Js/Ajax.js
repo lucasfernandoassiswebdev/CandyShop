@@ -125,7 +125,7 @@
 		chamaPagina(url.inserirPagamento);
 	};
 	var concluirPagamento = function () {
-		var pagamento = { ValorPagamento: $('#valorPago') };
+		var pagamento = { ValorPagamento: $('#valorPago').val() };
 		concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);
 	};
 	//usuarios
