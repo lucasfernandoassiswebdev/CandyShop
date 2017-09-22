@@ -65,6 +65,8 @@ namespace CandyShop.Web.Controllers
             {
                 return Content("Erro " + response.ContentAsString.First());
             }
+
+            TempData["caminhoImagens"] = "../../Imagens";
             return View("Index", response.Content);
         }
 
