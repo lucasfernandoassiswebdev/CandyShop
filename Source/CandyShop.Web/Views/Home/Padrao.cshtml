@@ -107,8 +107,8 @@
     <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
 </ul>
 
-@if (Session["Login"].ToString() == "logado")
-{
+@if (Session["Login"].ToString() != "off")
+{    
     <nav class="brown nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -116,7 +116,7 @@
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
-                <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuário R$ 0,00</a></li>
+                <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Seu Carrinho</a></li>
                 <li>
                     <div class="col s4 hide-on-med-and-down">
@@ -142,7 +142,7 @@
             </ul>
 
             <ul class="side-nav" id="mobile-demo">
-                <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
+                <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
                 <li><a href="#!" onclick="AjaxJs.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJs.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
@@ -163,7 +163,7 @@
     </nav>
 }
 else
-{
+{   
     <nav class="brown nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>

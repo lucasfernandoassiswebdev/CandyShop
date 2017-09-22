@@ -200,12 +200,15 @@ namespace CandyShop.Web.Controllers
                 return Content("Login ou senha incorretos");
             }
 
-            //Response<UsuarioViewModel> user = _appUsuario.SelecionarUsuario(usuario.Cpf);
-            //string nomeUsuario = user.Content.NomeUsuario;
-            //decimal saldoUsuario = user.Content.SaldoUsuario;
-            //string dadosSession = nomeUsuario + '|' + saldoUsuario;
+            var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+            var user = _appUsuario.SelecionarUsuario(cpf);
+            if(user.Status != HttpStatusCode.OK)
+                return Content("Erro ao resgatar dados");           
 
-            Session["Login"] = "logado";
+            Session["nomeUsuario"] = user.Content.NomeUsuario;
+            Session["saldoUsuario"] = user.Content.SaldoUsuario;            
+
+            Session["Login"] = user.Content.Cpf;
             return RedirectToAction("Padrao", "Home");
         }
 
