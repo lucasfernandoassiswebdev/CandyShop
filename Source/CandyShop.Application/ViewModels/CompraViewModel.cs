@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace CandyShop.Application.ViewModels
 {
-    public class Compra
+    public class CompraViewModel
     {
         public int IdCompra { get; set; }
-        public Usuario Usuario { get; set; }
+        public UsuarioViewModel Usuario { get; set; }
         public DateTime DataCompra { get; set; }
-        public IEnumerable<CompraProduto> Itens { get; set; }
+        public IEnumerable<CompraProdutoViewModel> Itens { get; set; }
     }
 }

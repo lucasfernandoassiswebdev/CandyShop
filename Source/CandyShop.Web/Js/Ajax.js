@@ -119,11 +119,11 @@
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.detalheUsuario, usuario);
     };
-    var concluirCadastroUsuario = function () {
+    var concluirCadastroUsuario = function (imgBase64) {
         var usuario = {
             Cpf: $('#cpf').val(),
             NomeUsuario: $('#Nome').val(),
-
+            Imagem: imgBase64
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
@@ -133,7 +133,8 @@
             NomeUsuario: $('#Nome').val(),
             SaldoUsuario: $('#SaldoUsuario').val(),
             SenhaUsuario: $('#Password').val(),
-            Ativo: $('#Ativo').val()
+            Ativo: $('#Ativo').val(),
+            Imagem: $('#uploadImagem').html()
         };
         concluirAcao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };

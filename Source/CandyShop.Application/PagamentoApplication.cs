@@ -11,48 +11,48 @@ namespace CandyShop.Application
     {
         private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/pagamento";
 
-        public Response<IEnumerable<Pagamento>> ListarPagamentos()
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentos()
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync(_enderecoApi).Result;
-                return new Response<IEnumerable<Pagamento>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<IEnumerable<Pagamento>> ListarPagamentos(string cpf)
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentos(string cpf)
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/{cpf}").Result;
-                return new Response<IEnumerable<Pagamento>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<IEnumerable<Pagamento>> ListarPagamentosSemana()
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosSemana()
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/semana").Result;
-                return new Response<IEnumerable<Pagamento>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<IEnumerable<Pagamento>> ListarPagamentosSemana(string cpf)
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosSemana(string cpf)
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/semana/{cpf}").Result;
-                return new Response<IEnumerable<Pagamento>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<Pagamento> DetalharPagamento(int idPagamento)
+        public Response<PagamentoViewModel> DetalharPagamento(int idPagamento)
         {
             throw new NotImplementedException();
         }
 
-        public Response<string> InserirPagamento(Pagamento pagamento)
+        public Response<string> InserirPagamento(PagamentoViewModel pagamento)
         {
             throw new NotImplementedException();
         }                

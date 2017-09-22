@@ -7,15 +7,8 @@ $('.botaoVoltar').on('click', function() {
     AjaxJs.listaUsuario();
 });
 
-//burlando o Ajax para enviar a foto do usuário para o controller
-$('#formCadastro, #formEditar').submit(function (e) {
-    e.preventDefault();
-    $(this).ajaxSubmit({
-        error: function (xhr) {
-            Materialize.toast(xhr.responseText, 3000);
-        }
-    });
-    return false;
+$('.botaoCadastro').on('click', function () {
+    encodeImageFileAsURL(AjaxJs.concluirCadastroUsuario);
 });
 
 function readURL(input) {
@@ -106,6 +99,24 @@ function validaBotao() {
         $('.botaoCadastro ').attr('disabled', 'disabled');
     } else {
         $('.botaoCadastro ').removeAttr('disabled');
+    }
+}
+
+function encodeImageFileAsURL(callback) {
+    var filesSelected = document.getElementById("fotoUsuario").files;
+    if (filesSelected.length > 0) {
+        var fileToLoad = filesSelected[0];
+        var fileReader = new FileReader();
+
+        fileReader.onload = function (fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+            console.log(srcData);
+            if (typeof callback === "function") {
+                callback(srcData);
+            }
+        }
+
+        fileReader.readAsDataURL(fileToLoad);
     }
 }
 

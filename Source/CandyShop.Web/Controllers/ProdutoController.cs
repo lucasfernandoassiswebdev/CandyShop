@@ -80,7 +80,7 @@ namespace CandyShop.Web.Controllers
 
         #region Execucoes
         [HttpPost]
-        public ActionResult CadastrarProduto(Produto produto)
+        public ActionResult CadastrarProduto(ProdutoViewModel produto)
         {
             var response = _appProduto.InserirProduto(produto);
             if (response.Status != HttpStatusCode.OK)
@@ -89,7 +89,7 @@ namespace CandyShop.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditarProduto(Produto produto)
+        public ActionResult EditarProduto(ProdutoViewModel produto)
         {
             var response = _appProduto.EditarProduto(produto);
             if (response.Status != HttpStatusCode.OK)

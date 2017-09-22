@@ -1,6 +1,6 @@
 ﻿namespace CandyShop.Application.ViewModels
 {
-    public class Produto
+    public class ProdutoViewModel
     {
         public int IdProduto { get; set; }
         public string NomeProduto { get; set; }
