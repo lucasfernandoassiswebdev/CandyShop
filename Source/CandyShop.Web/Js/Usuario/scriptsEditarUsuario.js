@@ -9,7 +9,11 @@ $('.botaoVoltar').on('click', function () {
 });
 
 $('.botaoEditar').on('click', function () {
-    encodeImageFileAsURL(AjaxJs.concluirEdicaoUsuario);
+    var filesSelected = document.getElementById("fotoUsuario").files;
+    if (filesSelected.length > 0)
+        encodeImageFileAsURL(AjaxJs.concluirEdicaoUsuario);
+    else
+        AjaxJs.concluirEdicaoUsuario();
 });
 
 function readURL(input) {
@@ -43,7 +47,7 @@ function validaBotao() {
     var qtdeNome = $('#Nome').val().length;
     //validando o campo de senha
     var qtdeSenha = $('#Password').val().length;
-    
+
     //desabilitando o botão caso um dos dois esteja inválido
     if (qtdeNome > 50 || qtdeSenha > 12 || qtdeNome === 0 || qtdeSenha === 0) {
         $('.botaoEditar').attr('disabled', 'disabled');
@@ -58,7 +62,7 @@ function encodeImageFileAsURL(callback) {
         var fileToLoad = filesSelected[0];
         var fileReader = new FileReader();
 
-        fileReader.onload = function(fileLoadedEvent) {
+        fileReader.onload = function (fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
             if (typeof callback === "function") {
                 callback(srcData);

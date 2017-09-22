@@ -17,7 +17,7 @@
                         @{ string caminho = @Model.Cpf + ".jpg"; };
                         <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/@caminho" alt="imagem não disponível :(" />
                     </label>
-                    <input id="fotoUsuario" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                    <input id="fotoUsuario" type="file" class="file-path validate" style="display: none" accept="image/*">
                 </div>
             </div>
             <div class="row">
@@ -52,7 +52,7 @@
             </div>
             <div class="row center">
                 <a class="waves-effect waves-light btn-large botaoVoltar"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large botaoEditar" onclick="AjaxJs.concluirEdicaoUsuario()"><i class="material-icons left">build</i>Editar</a>
+                <a class="waves-effect waves-light btn-large botaoEditar"><i class="material-icons left">build</i>Editar</a>
             </div>
         </form>
     </div>

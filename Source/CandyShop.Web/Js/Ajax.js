@@ -109,7 +109,6 @@
 	var listarPagamento = function () {
 		chamaPagina(url.listarPagamento);
 	};
-
 	var listarPagamentoMes = function (mes) {
 		var parametro = { mes: mes };
 		chamaPaginaComIdentificador(url.listarPagamentoMes, parametro);
