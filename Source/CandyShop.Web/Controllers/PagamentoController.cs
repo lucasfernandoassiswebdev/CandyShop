@@ -87,8 +87,9 @@ namespace CandyShop.Web.Controllers
         #region Acoes
 
         public ActionResult InserirPagamento(PagamentoViewModel pagamento)
-        {            
-            pagamento.Usuario = new UsuarioViewModel {Cpf = "11111111111" };
+        {
+            pagamento.Usuario = new UsuarioViewModel { Cpf = Session["login"].ToString() };
+
             var response = _appPagamento.InserirPagamento(pagamento);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro" + response.ContentAsString.First());
