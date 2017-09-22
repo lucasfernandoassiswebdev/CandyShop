@@ -38,22 +38,17 @@ $(document).ready(function () {
     });
 });
 
-
-
-
 function validaBotao() {
-    //validando o cpf
-    var cpfNew = $('#cpf').val();
-    cpfNew = cpfNew.replace(/\.|\-/g, '');
-
     //validando o campo de nome
-    var qtde = $('#Nome').val().length;
-
+    var qtdeNome = $('#Nome').val().length;
+    //validando o campo de senha
+    var qtdeSenha = $('#Password').val().length;
+    
     //desabilitando o botão caso um dos dois esteja inválido
-    if (qtde > 50 || qtde === 0) {
-        $('.botaoCadastro').attr('disabled', 'disabled');
+    if (qtdeNome > 50 || qtdeSenha > 12 || qtdeNome === 0 || qtdeSenha === 0) {
+        $('.botaoEditar').attr('disabled', 'disabled');
     } else {
-        $('.botaoCadastro').removeAttr('disabled');
+        $('.botaoEditar').removeAttr('disabled');
     }
 }
 
@@ -63,14 +58,16 @@ function encodeImageFileAsURL(callback) {
         var fileToLoad = filesSelected[0];
         var fileReader = new FileReader();
 
-        fileReader.onload = function (fileLoadedEvent) {
+        fileReader.onload = function(fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
             if (typeof callback === "function") {
                 callback(srcData);
             }
-        }
+        };
 
         fileReader.readAsDataURL(fileToLoad);
     }
 }
+
+
 

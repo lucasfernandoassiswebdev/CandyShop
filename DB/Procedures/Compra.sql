@@ -133,7 +133,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisCpfCompra]
 	END
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].CSSP_DelCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_DelCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_DelCompra]
 GO
 
@@ -217,11 +217,5 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraNomeUsuario]
 	END
 GO
 
-select * from Compra
-select * from CompraProduto
 
-select cp.IdProduto, p.NomeProduto, p.PrecoProduto, c.IdCompra, cp.QtdeProduto from Produto p
-inner join CompraProduto cp on cp.IdProduto = p.IdProduto
-inner join Compra c on c.IdCompra = cp.IdCompra 
-								
 																			

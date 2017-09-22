@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Image = System.Drawing.Image;
 
 namespace CandyShop.Web.Controllers
 {
@@ -198,6 +199,11 @@ namespace CandyShop.Web.Controllers
             {
                 return Content("Login ou senha incorretos");
             }
+
+            //Response<UsuarioViewModel> user = _appUsuario.SelecionarUsuario(usuario.Cpf);
+            //string nomeUsuario = user.Content.NomeUsuario;
+            //decimal saldoUsuario = user.Content.SaldoUsuario;
+            //string dadosSession = nomeUsuario + '|' + saldoUsuario;
 
             Session["Login"] = "logado";
             return RedirectToAction("Padrao", "Home");
