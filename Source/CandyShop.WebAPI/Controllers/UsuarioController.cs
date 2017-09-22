@@ -75,7 +75,7 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_usuarioRepository.ListarUsuarioInativo());
         }
 
-        [Route("api/usuario/procurar/{nome}")]
+        [HttpGet, Route("api/usuario/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {
             return Ok(_usuarioRepository.ListarUsuarioPorNome(nome));
@@ -96,10 +96,10 @@ namespace CandyShop.WebAPI.Controllers
             }
         }
 
-        [Route("api/usuario/desativar/{cpf}")]
-        public IHttpActionResult Delete(string cpf)
+        [HttpPut,Route("api/usuario/desativar/{cpf}")]
+        public IHttpActionResult PutDesativar(UsuarioDto usuario)
         {
-            _usuarioRepository.DesativarUsuario(cpf);
+            _usuarioRepository.DesativarUsuario(usuario.Cpf);
             return Ok();
         }
 

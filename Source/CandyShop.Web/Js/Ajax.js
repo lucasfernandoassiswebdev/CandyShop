@@ -86,7 +86,7 @@
 			data: objeto,
 			success: function (message) {
 				chamaPagina(tela);
-				Materialize.toast(message, 3000);
+				Materialize.toast(message, 1500);
 			}
 		});
 	}
@@ -117,9 +117,9 @@
 		chamaPagina(url.listarPagamentoSemana);
 	};
 
-    var listarPagamentoDia = function () {
-        chamaPagina(url.listarPagamentoDia);
-    };
+	var listarPagamentoDia = function () {
+		chamaPagina(url.listarPagamentoDia);
+	};
 
 	var inserirPagamento = function () {
 		chamaPagina(url.inserirPagamento);
@@ -164,12 +164,16 @@
 		concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
 	};
 	var desativarUsuario = function (cpf) {
-		var usuario = { Cpf: cpf };
+		alert(cpf);
+		var usuario = {
+			Cpf: cpf
+		};
 		chamaPaginaComIdentificador(url.desativarUsuario, usuario);
 	};
 	var desativarUsuarioConfirmado = function (cpf) {
+		alert(cpf);
 		var usuario = { Cpf: cpf };
-		concluirAcao(url.desativarUsuarioConfirmado, usuario, url.listaUsuario);
+		concluirAcaoEdicao(url.desativarUsuarioConfirmado, usuario, url.listarUsuarioInativo)
 	};
 	var listarUsuarioInativo = function () {
 		chamaPagina(url.listarUsuarioInativo);

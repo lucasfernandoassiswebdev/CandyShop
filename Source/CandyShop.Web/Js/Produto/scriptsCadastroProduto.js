@@ -49,3 +49,20 @@ function readURL3(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function encodeImageFileAsURL(callback) {
+    var filesSelected = document.getElementById("fotoUsuario").files;
+    if (filesSelected.length > 0) {
+        var fileToLoad = filesSelected[0];
+        var fileReader = new FileReader();
+
+        fileReader.onload = function (fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+            if (typeof callback === "function") {
+                callback(srcData);
+            }
+        };
+
+        fileReader.readAsDataURL(fileToLoad);
+    }
+}

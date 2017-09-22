@@ -179,10 +179,10 @@ namespace CandyShop.Web.Controllers
             return View("Editar");
         }
 
-        [HttpPost]
-        public ActionResult DesativarUsuario(string cpf)
+        [HttpPut]
+        public ActionResult DesativarUsuario(UsuarioViewModel usuario)
         {
-            var response = _appUsuario.DesativarUsuario(cpf);
+            var response = _appUsuario.DesativarUsuario(usuario);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro {response.Status}");
             return Content("Usuario desativado com sucesso!");
