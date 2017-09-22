@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-<link rel="stylesheet" type="text/css" href="../../Content/Usuario/desativarUsuario.css"/>
+<link rel="stylesheet" type="text/css" href="../../Content/Usuario/desativarUsuario.css?d=@DateTime.Now.Ticks"/>
 
 <div class="corpo left">
     <div class="col s12">
@@ -12,6 +12,11 @@
         <div class="left">
             <hr />
             <dl class="dl-horizontal">
+                <dt>
+                    @{ string caminho = @Model.Cpf + ".jpg";}
+                    <img id="imagemUsuario" src="@TempData["caminhoImagens"]/@caminho?d=@DateTime.Now.Ticks"/>
+                </dt>
+
                 <dt>
                     CPF:
                 </dt>

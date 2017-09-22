@@ -109,7 +109,6 @@
 	var listarPagamento = function () {
 		chamaPagina(url.listarPagamento);
 	};
-
 	var listarPagamentoMes = function (mes) {
 		var parametro = { mes: mes };
 		chamaPaginaComIdentificador(url.listarPagamentoMes, parametro);
@@ -117,9 +116,11 @@
 	var listarPagamentoSemana = function() {
 		chamaPagina(url.listarPagamentoSemana);
 	};
+
     var listarPagamentoDia = function () {
         chamaPagina(url.listarPagamentoDia);
     };
+
 	var inserirPagamento = function () {
 		chamaPagina(url.inserirPagamento);
 	};
@@ -246,48 +247,48 @@
 		chamaPaginaComIdentificador(url.listarProdutoPorNome, produto);
 	};
 	
-    //retorna links para acessar as paginas.
-    return {
-        //para admin  e usuario
-        init: init,
-        voltarInicio: voltarInicio,
-        //gerenciamento da lojinha
-        mostraSaldo: mostraSaldo,
-        //pagamento
-        listarPagamento: listarPagamento,
-        listarPagamentoSemana: listarPagamentoSemana,
-        detalhePagamento: detalhePagamento,
-        inserirPagamento: inserirPagamento,
-        concluirPagamento: concluirPagamento,
-        listarPagamentoMes: listarPagamentoMes,
-        listarPagamentoDia: listarPagamentoDia,
+	//retorna links para acessar as paginas.
+	return {
+		//para admin  e usuario
+		init: init,
+		voltarInicio: voltarInicio,
+		//gerenciamento da lojinha
+		mostraSaldo: mostraSaldo,
+		//pagamento
+		listarPagamento: listarPagamento,
+		listarPagamentoSemana: listarPagamentoSemana,
+		detalhePagamento: detalhePagamento,
+		inserirPagamento: inserirPagamento,
+		concluirPagamento: concluirPagamento,
+		listarPagamentoMes: listarPagamentoMes,
+		listarPagamentoDia: listarPagamentoDia,
 
-        //usuario                
-        historicoCompra: historicoCompra,
-        concluirCadastroUsuario: concluirCadastroUsuario,
-        listaUsuario: listaUsuario,
-        cadastroUsuario: cadastroUsuario,
-        concluirEdicaoUsuario: concluirEdicaoUsuario,
-        editarUsuario: editarUsuario,
-        detalheUsuario: detalheUsuario,
-        desativarUsuario: desativarUsuario,
-        desativarUsuarioConfirmado: desativarUsuarioConfirmado,
-        listarUsuarioInativo: listarUsuarioInativo,
-        listarUsuarioEmDivida: listarUsuarioEmDivida,
-        listarUsuarioPorNome: listarUsuarioPorNome,
-        verificaLogin: verificaLogin,
-        logOff: logOff,
-        //produtos
-        listaProduto: listaProduto,
-        cadastrarProduto: cadastrarProduto,
-        concluirCadastroProduto: concluirCadastroProduto,
-        detalheProduto: detalheProduto,
-        editarProduto: editarProduto,
-        concluirEdicaoProduto: concluirEdicaoProduto,
-        desativarProduto: desativarProduto,
-        desativarProdutoConfirmado: desativarProdutoConfirmado,
-        listarInativos: listarInativos,
-        listarProdutoPorNome: listarProdutoPorNome
-    };
+		//usuario                
+		historicoCompra: historicoCompra,
+		concluirCadastroUsuario: concluirCadastroUsuario,
+		listaUsuario: listaUsuario,
+		cadastroUsuario: cadastroUsuario,
+		concluirEdicaoUsuario: concluirEdicaoUsuario,
+		editarUsuario: editarUsuario,
+		detalheUsuario: detalheUsuario,
+		desativarUsuario: desativarUsuario,
+		desativarUsuarioConfirmado: desativarUsuarioConfirmado,
+		listarUsuarioInativo: listarUsuarioInativo,
+		listarUsuarioEmDivida: listarUsuarioEmDivida,
+		listarUsuarioPorNome: listarUsuarioPorNome,
+		verificaLogin: verificaLogin,
+		logOff: logOff,
+		//produtos
+		listaProduto: listaProduto,
+		cadastrarProduto: cadastrarProduto,
+		concluirCadastroProduto: concluirCadastroProduto,
+		detalheProduto: detalheProduto,
+		editarProduto: editarProduto,
+		concluirEdicaoProduto: concluirEdicaoProduto,
+		desativarProduto: desativarProduto,
+		desativarProdutoConfirmado: desativarProdutoConfirmado,
+		listarInativos: listarInativos,
+		listarProdutoPorNome: listarProdutoPorNome
+	};
 
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.

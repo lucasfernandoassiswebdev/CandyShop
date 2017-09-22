@@ -23,11 +23,8 @@ namespace CandyShop.Core.Services.Usuario
 
         public void EditarUsuario(UsuarioDto usuario)
         {
-            if (_usuarioRepository.VericaUsuarioIgual(usuario) == 1)
-            {
-                _notification.Add("Usuario ja cadastrado!!!");
+            if (!usuario.IsValid(_notification))
                 return;
-            }
 
             _usuarioRepository.EditarUsuario(usuario);
         }
