@@ -109,7 +109,16 @@
     var listarPagamento = function () {
         chamaPagina(url.listarPagamento);
     };
+<<<<<<< HEAD
     var listarPagamentoSemana = function () {
+=======
+
+    var listarPagamentoMes = function (mes) {
+        var parametro = { mes: mes };
+        chamaPaginaComIdentificador(url.listarPagamentoMes, parametro);
+    }
+    var listarPagamentoSemana = function() {
+>>>>>>> f01d16996e7c8b101caffe0704a3c8d41f9347d3
         chamaPagina(url.listarPagamentoSemana);
     };
     var inserirPagamento = function () {
@@ -252,6 +261,7 @@
         detalhePagamento: detalhePagamento,
         inserirPagamento: inserirPagamento,
         concluirPagamento: concluirPagamento,
+        listarPagamentoMes: listarPagamentoMes,
         //usuario                
         historicoCompra: historicoCompra,
         concluirCadastroUsuario: concluirCadastroUsuario,

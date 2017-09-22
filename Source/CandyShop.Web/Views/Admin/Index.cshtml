@@ -35,9 +35,10 @@
             //pagamentos
             listarPagamento: '@Url.Action("Listar", "Pagamento")',
             listarPagamentoSemana: '@Url.Action("ListarSemana", "Pagamento")',
+            listarPagamentoMes: '@Url.Action("ListarMes", "Pagamento")',
             detalhePagamento: '@Url.Action("Detalhes", "Pagamento")'
         });
-
+        
         @{ TempData.Remove("Verificacao");};
     })
 </script>

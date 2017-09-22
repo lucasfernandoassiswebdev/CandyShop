@@ -19,21 +19,22 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisUsuarioIgual,
             CSSP_ListarUsuariosInativos,
             CSSP_LisUsuarioPorNome,
-            CSSP_VerificaLoginSenha
+            CSSP_VerificaLoginSenha,
         }
 
         public void InserirUsuario(UsuarioDto usuario)
         {
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+            {
+                ExecuteProcedure(Procedures.CSSP_InsUsuario);
+                AddParameter("@NomeUsuario", usuario.NomeUsuario);
+                AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
+                AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
+                AddParameter("@CpfUsuario", cpf);
+                AddParameter("@Ativo", usuario.Ativo);
 
-            ExecuteProcedure(Procedures.CSSP_InsUsuario);
-            AddParameter("@NomeUsuario", usuario.NomeUsuario);
-            AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
-            AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
-            AddParameter("@CpfUsuario", cpf);
-            AddParameter("@Ativo",usuario.Ativo);
-
-            ExecuteNonQuery();
+                ExecuteNonQuery();
+            }
         }
 
         public void EditarUsuario(UsuarioDto usuario)
@@ -52,7 +53,7 @@ namespace CandyShop.Repository.Repositorys
         {
             ExecuteProcedure(Procedures.CSSP_DesUsuario);
             AddParameter("@Cpf", cpf);
-         
+
             ExecuteNonQuery();
         }
 
@@ -181,5 +182,7 @@ namespace CandyShop.Repository.Repositorys
                     return 1;
             return 0;
         }
+
+       
     }
 }
