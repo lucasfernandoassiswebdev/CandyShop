@@ -104,6 +104,9 @@
     var listarPagamentoSemana = function() {
         chamaPagina(url.listarPagamentoSemana);
     };
+    var listarPagamentoDia = function () {
+        chamaPagina(url.listarPagamentoDia);
+    };
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
@@ -246,6 +249,8 @@
         inserirPagamento: inserirPagamento,
         concluirPagamento: concluirPagamento,
         listarPagamentoMes: listarPagamentoMes,
+        listarPagamentoDia: listarPagamentoDia,
+
         //usuario                
         historicoCompra: historicoCompra,
         concluirCadastroUsuario: concluirCadastroUsuario,

@@ -37,9 +37,10 @@
             listarPagamento: '@Url.Action("Listar", "Pagamento")',
             listarPagamentoSemana: '@Url.Action("ListarSemana", "Pagamento")',
             listarPagamentoMes: '@Url.Action("ListarMes", "Pagamento")',
+            listarPagamentoDia: '@Url.Action("ListarDia", "Pagamento")',
             detalhePagamento: '@Url.Action("Detalhes", "Pagamento")'
         });
-        
+
         @{ TempData.Remove("Verificacao");};
     })
 </script>
@@ -117,8 +118,9 @@
                 </div>
                 <div class="collapsible-body">
                     <ul class="brown-text">
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarPagamentoSemana();"><i class="material-icons">schedule</i>Ultima semana</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarPagamento();"><i class="material-icons">date_range</i>Ultimo mês</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarPagamentoDia();"><i class="material-icons">access_time</i>Hoje</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarPagamentoSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarPagamento();"><i class="material-icons">book</i>Ultimo mês</a></li>
                     </ul>
                 </div>
             </li>

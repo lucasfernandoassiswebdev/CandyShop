@@ -164,15 +164,15 @@ CREATE PROCEDURE [dbo].[CSSP_ListarPagamentoDia]
 	/*
 	Documentação
 	Arquivo Fonte.....: Pagamento.sql
-	Objetivo..........: Listar todos os pagamentos feitos em uma data informada ou dia atual, por cpf ou todos
+	Objetivo..........: Listar todos os pagamentos feitos em uma data informada ou dia atual
 	Autor.............: SMN - Rafael Morais
  	Data..............: 22/09/2017
 	Ex................: EXEC [dbo].[CSSP_ListarPagamentoDia] '09/14/2017'	
 	*/
-
+	
 	BEGIN
 	
-		IF @data = NULL
+		IF @data is NULL
 		BEGIN 
 			SELECT @data = GETDATE()		
 		END	
