@@ -88,7 +88,7 @@ namespace CandyShop.Web.Controllers
             return Content("Produto cadastrado com sucesso!!");
         }
 
-        [HttpPost]
+        [HttpPut]
         public ActionResult EditarProduto(ProdutoViewModel produto)
         {
             var response = _appProduto.EditarProduto(produto);
@@ -97,7 +97,7 @@ namespace CandyShop.Web.Controllers
             return Content("Produto editado com sucesso!");
         }
 
-        [HttpPost]
+        [HttpPut]
         public ActionResult DesativarProdutoConfirmado(int idProduto)
         {
             var response = _appProduto.DesativarProduto(idProduto);
