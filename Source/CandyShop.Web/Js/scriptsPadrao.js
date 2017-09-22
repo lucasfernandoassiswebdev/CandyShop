@@ -1,6 +1,8 @@
 ﻿var imagem, preco, nome, imagem, quantidade;
 
 $(document).ready(function () {
+    $('.tooltipped').tooltip({ delay: 50 });
+
     $('#DivGrid').on('click', '.btn-floating', function () {
         preco = $(this).attr('data-Preco');
         nome = $(this).attr('data-Nome');
