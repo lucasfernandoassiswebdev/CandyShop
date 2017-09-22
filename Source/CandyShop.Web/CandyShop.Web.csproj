@@ -214,8 +214,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Js\Ajax.js" />
+    <Content Include="Js\Ajax\AjaxCompra.js" />
+    <Content Include="Js\Ajax\AjaxPagamento.js" />
+    <Content Include="Js\Ajax\AjaxProduto.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Js\Ajax\AjaxShop.js" />
+    <Content Include="Js\Ajax\AjaxUsuario.js" />
+    <Content Include="Js\Ajax\funcoesAjax.js" />
     <Content Include="Js\Produto\scriptsCadastroProduto.js" />
     <Content Include="Js\scriptsAdmin.js" />
     <Content Include="Js\Usuario\scriptsCadastroUsuario.js" />

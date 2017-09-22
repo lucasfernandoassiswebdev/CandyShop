@@ -6,9 +6,7 @@
 <script type="text/javascript" src="../../Js/Ajax.js?d=@DateTime.Now.Ticks"></script>
 <script>
     $(document).ready(function () {
-        AjaxJs.init({
-            main: '@Url.Action("Listar", "Produto")',
-            //usuários
+        AjaxJsUsuario.init({
             listaUsuario: '@Url.Action("Listar", "Usuario")',
             mostraSaldo: '@Url.Action("Index", "Shop")',
             cadastroUsuario: '@Url.Action("Cadastrar","Usuario")',
@@ -21,7 +19,10 @@
             listarUsuarioInativo: '@Url.Action("ListarInativos", "Usuario")',
             listarUsuarioEmDivida: '@Url.Action("ListarUsuariosEmDivida", "Usuario")',
             listarUsuarioPorNome: '@Url.Action("ProcurarUsuario", "Usuario")',
-            //produtos
+        });
+
+        AjaxJsProduto.init({
+            main: '@Url.Action("Listar", "Produto")',
             listaProduto: '@Url.Action("Listar", "Produto")',
             cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")',
             concluirCadastroProduto: '@Url.Action("CadastrarProduto", "Produto")',
@@ -31,16 +32,16 @@
             desativarProduto: '@Url.Action("DesativarProduto", "Produto")',
             desativarProdutoConfirmado: '@Url.Action("DesativarProdutoConfirmado", "Produto")',
             listarInativos: '@Url.Action("ListarInativos", "Produto")',
-            listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Produto")',
-            //pagamentos
+            listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Produto")'
+        });
+
+        AjaxJsPagamento.init({
             listarPagamento: '@Url.Action("Listar", "Pagamento")',
             listarPagamentoSemana: '@Url.Action("ListarSemana", "Pagamento")',
             listarPagamentoMes: '@Url.Action("ListarMes", "Pagamento")',
             listarPagamentoDia: '@Url.Action("ListarDia", "Pagamento")',
             detalhePagamento: '@Url.Action("Detalhes", "Pagamento")'
         });
-
-        @{ TempData.Remove("Verificacao");};
     })
 </script>
 
