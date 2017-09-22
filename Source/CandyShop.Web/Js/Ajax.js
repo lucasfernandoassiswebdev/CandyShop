@@ -203,12 +203,15 @@
 	var cadastrarProduto = function () {
 		chamaPagina(url.cadastrarProduto);
 	};
-	var concluirCadastroProduto = function () {
+	var concluirCadastroProduto = function (baseA,baseB,baseC) {
 		var produto = {
 			NomeProduto: $('#NomeProduto').val(),
 			PrecoProduto: $('#PrecoProduto').val(),
 			QtdeProduto: $('#QtdeProduto').val(),
-			Categoria: $('#Categoria').val()
+			Categoria: $('#Categoria').val(),
+			ImagemA: baseA,
+			ImagemB: baseB,
+			ImagemC: baseC
 		};
 		concluirAcao(url.concluirCadastroProduto, produto, url.cadastrarProduto);
 	};

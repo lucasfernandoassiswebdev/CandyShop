@@ -222,6 +222,7 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuarioIgual]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 GO
+
 CREATE PROCEDURE [dbo].[CSSP_LisUsuarioIgual]
 	@nome varchar(50),
 	@cpf varchar(11)
@@ -291,30 +292,7 @@ CREATE PROCEDURE [dbo].[CSSP_VerificaLoginSenha]
 	END
 
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_ValidaCpf]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[GCS_ValidaCpf]
-GO
 
-CREATE PROCEDURE [dbo].[GCS_ValidaCpf]
-		@Cpf varchar(11)
-	AS
-
-	/*
-	Documentação
-	Arquivo Fonte.....: Usuario.sql
-	Objetivo..........: Validar se cpf é valido
-	Autor.............: SMN - João Guilherme
- 	Data..............: 22/09/2017
-	Ex................: EXEC [dbo].[GCS_ValidaCpf]
-
-	*/
-
-	BEGIN
-		SELECT TOP 1 1		
-			FROM Usuario	
-			WHERE Cpf = @Cpf
-	END
-GO
 				
-GO
+
 				

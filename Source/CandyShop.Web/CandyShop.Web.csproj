@@ -179,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Produto\desativarProduto.css" />
+    <Content Include="Content\Produto\formCadastroProduto.css" />
     <Content Include="Content\Usuario\desativarUsuario.css" />
     <Content Include="Content\Produto\detalheProduto.css" />
     <Content Include="Content\Pagamento\detalhes.css" />
@@ -215,6 +216,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Js\Ajax.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Js\Produto\scriptsCadastroProduto.js" />
     <Content Include="Js\scriptsAdmin.js" />
     <Content Include="Js\Usuario\scriptsCadastroUsuario.js" />
     <Content Include="Js\scriptsMain.js" />
