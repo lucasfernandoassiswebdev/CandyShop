@@ -103,7 +103,6 @@ GO
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisPagamentoSemana]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisPagamentoSemana]
 GO
-
 CREATE PROCEDURE [dbo].[CSSP_LisPagamentoSemana]
 	@cpf VARCHAR(11) = NULL
 	AS
@@ -114,7 +113,8 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamentoSemana]
 	Objetivo..........: Listar os pagamentos da semana atual
 	Autor.............: SMN - Rafael Morais
  	Data..............: 21/09/2017
-	Ex................: EXEC [dbo].[CSSP_LisPagamentoSemana]
+	Ex................: EXEC [dbo].[CSSP_LisPagamentoSemana] 'cpf'		lista os pagamentos feitos na semana pelo cpf
+															 vazio		lista todos os pagamentos feitos na semana por todos
 
 	*/
 
@@ -156,6 +156,61 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamentoSemana]
 	END
 GO
 				
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_ListarPagamentoDia]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_ListarPagamentoDia]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_ListarPagamentoDia]
+	@data date = null,
+	@cpf varchar(11) = null
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Pagamento.sql
+	Objetivo..........: Listar todos os pagamentos feitos em uma data informada ou dia atual, por cpf ou todos
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 22/09/2017
+	Ex................: EXEC [dbo].[CSSP_ListarPagamentoDia] '09/14/2017'	
+	*/
+
+	BEGIN
+	
+		IF @data = NULL
+		BEGIN 
+			SELECT @data = GETDATE()		
+		END	
+
+		IF @cpf IS NULL
+		BEGIN
+			SELECT p.IdPagamento,
+				p.Cpf,
+				u.NomeUsuario,
+				p.DataPagamento,
+				p.ValorPagamento
+			FROM [dbo].[Pagamento] p WITH(NOLOCK)
+				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
+					ON p.Cpf = u.Cpf
+			WHERE cast(p.DataPagamento as date) = CAST(@data as date)
+		END
+		ELSE
+		BEGIN 
+			SELECT p.IdPagamento,
+				p.Cpf,
+				u.NomeUsuario,
+				p.DataPagamento,
+				p.ValorPagamento
+			FROM [dbo].[Pagamento] p WITH(NOLOCK)
+				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
+					ON p.Cpf = u.Cpf
+			WHERE (p.Cpf = @cpf) and (cast(p.DataPagamento as date) = CAST(@data as date))
+		END
+
+	END
+GO
+				
+
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_UpdPagamento]
