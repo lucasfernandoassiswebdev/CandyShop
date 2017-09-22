@@ -23,13 +23,14 @@
 
     //função que vai carregar o corpo inteiro da pagina
     function carregaPadrao() {
-        $.get(url.padrao).done(function (data) {
-            $('body').slideUp(function () {
-                $('body').hide().html(data).slideDown();
+        $.get(url.padrao)
+            .done(function (data) {
+                $('body').slideUp(function () {
+                    $('body').hide().html(data).slideDown();
+                });
+            }).fail(function (xhr) {
+                console.log(xhr.responseText);
             });
-        }).fail(function (xhr) {
-            console.log(xhr.responseText);
-        });
     }
 
     function deslogar() {
@@ -45,11 +46,11 @@
     //Função genérica para carregar o div, de acordo com o endereço passado
     function chamaPagina(endereco) {
         //data é o conteudo da view
-        $.get(endereco).done(function (data) { 
+        $.get(endereco).done(function (data) {
             //a div é recolhida
-            $('#DivGrid').slideUp(function () { 
+            $('#DivGrid').slideUp(function () {
                 //escondida, carregada e demonstrada novamente                
-                $('#DivGrid').hide().html(data).slideDown(); 
+                $('#DivGrid').hide().html(data).slideDown();
             });
         }).fail(function (xhr) {
             console.log(xhr.responseText);
@@ -57,8 +58,8 @@
     }
 
     function chamaPaginaComIdentificador(endereco, identificador) {
-        $.get(endereco, identificador).done(function (data) { 
-            $('#DivGrid').slideUp(function () { 
+        $.get(endereco, identificador).done(function (data) {
+            $('#DivGrid').slideUp(function () {
                 $('#DivGrid').hide().html(data).slideDown();
             });
         }).fail(function (xhr) {
@@ -69,7 +70,7 @@
     function concluirAcao(endereco, objeto, tela) {
         $.post(endereco, objeto)
             //passar o parametro data aqui quando for definida a mensagem 
-            .done(function (message) { 
+            .done(function (message) {
                 chamaPagina(tela);
                 Materialize.toast(message, 3000);
             })
@@ -77,7 +78,19 @@
                 console.log(xhr.responseText);
             });
     }
-    
+
+    function concluirAcaoEdicao(endereco, objeto, tela) {
+        $.ajax({
+            url: endereco,
+            type: 'PUT',
+            data:objeto,
+            sucess: function (message) {
+                chamaPagina(tela);
+                Materialize.toast(message, 3000);
+            }
+        });
+    }
+
     var voltarInicio = function () {
         main();
     };
@@ -96,14 +109,13 @@
     var listarPagamento = function () {
         chamaPagina(url.listarPagamento);
     };
-    var listarPagamentoSemana = function() {
+    var listarPagamentoSemana = function () {
         chamaPagina(url.listarPagamentoSemana);
     };
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
-
-    var concluirPagamento = function() {
+    var concluirPagamento = function () {
         var pagamento = { ValorPagamento: $('#valorPago') };
         concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);
     };
@@ -131,16 +143,16 @@
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
-    var concluirEdicaoUsuario = function () {
+    var concluirEdicaoUsuario = function (imgBase64) {
         var usuario = {
             Cpf: $('#Cpf').val(),
             NomeUsuario: $('#Nome').val(),
             SaldoUsuario: $('#SaldoUsuario').val(),
             SenhaUsuario: $('#Password').val(),
             Ativo: $('#Ativo').val(),
-            Imagem: $('#uploadImagem').html()
+            Imagem: imgBase64
         };
-        concluirAcao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
+        concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };
     var desativarUsuario = function (cpf) {
         var usuario = { Cpf: cpf };
@@ -171,7 +183,7 @@
                 Materialize.toast(xhr.responseText, 3000);
             });
     };
-    var logOff = function() {
+    var logOff = function () {
         deslogar();
         Materialize.toast("Deslogado", 3000);
     };
@@ -208,7 +220,7 @@
             Categoria: $('#Categoria').val(),
             Ativo: $('#Ativo').val()
         };
-        concluirAcao(url.concluirEdicaoProduto, produto, url.listaProduto);
+        concluirAcaoEdicao(url.concluirEdicaoProduto, produto, url.listaProduto);
     };
     var desativarProduto = function (id) {
         var produto = { IdProduto: id };

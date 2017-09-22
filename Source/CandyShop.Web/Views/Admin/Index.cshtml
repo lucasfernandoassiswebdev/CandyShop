@@ -1,5 +1,4 @@
-﻿@using System.Security.Policy
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
@@ -14,9 +13,9 @@
             mostraSaldo: '@Url.Action("Index", "Shop")',
             cadastroUsuario: '@Url.Action("Cadastrar","Usuario")',
             concluirCadastroUsuario: '@Url.Action("Cadastrar", "Usuario")',
+            editarUsuario: '@Url.Action("Editar","Usuario")',
             concluirEdicaoUsuario: '@Url.Action("Editar","Usuario")',
             detalheUsuario: '@Url.Action("Detalhes","Usuario")',
-            editarUsuario: '@Url.Action("Editar","Usuario")',
             desativarUsuario: '@Url.Action("Desativar", "Usuario")',
             desativarUsuarioConfirmado: '@Url.Action("DesativarUsuario", "Usuario")',
             listarUsuarioInativo: '@Url.Action("ListarInativos", "Usuario")',

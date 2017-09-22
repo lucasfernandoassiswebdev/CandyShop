@@ -196,7 +196,6 @@ namespace CandyShop.Web.Controllers
 
             if (model != 1)
             {
-                //return new HttpStatusCodeResult (404,"Login ou senha incorretos");
                 return Content("Login ou senha incorretos");
             }
 

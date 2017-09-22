@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" href="../../Content/Usuario/formCadastroUsuario.css" />
 
-<script type="text/javascript" src="../../Js/scriptsCadastroUsuario.js"></script>
+<script type="text/javascript" src="../../Js/Usuario/scriptsEditarUsuario.js"></script>
 
 <div class="container">
     <div class="row">
@@ -52,7 +52,7 @@
             </div>
             <div class="row center">
                 <a class="waves-effect waves-light btn-large botaoVoltar"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJs.concluirEdicaoUsuario()"><i class="material-icons left">build</i>Editar</a>
+                <a class="waves-effect waves-light btn-large botaoEditar"><i class="material-icons left">build</i>Editar</a>
             </div>
         </form>
     </div>
@@ -61,9 +61,5 @@
 <script>
     $(document).ready(function () {
         $('select').material_select();
-    });
-
-    $('.botaoCadastro').on('click', function () {
-        AjaxJs.concluirEdicaoUsuario();
     });
 </script>
