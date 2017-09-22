@@ -4,8 +4,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsPa
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsPagamento]	
-	@Cpf varchar(14),
-	@DataPagamento datetime,  -- como a data sera setada aqui no sql, passar do vs pra ca a data como null
+	@Cpf varchar(14),  
 	@ValorPagamento decimal
 
 	AS
@@ -16,16 +15,13 @@ CREATE PROCEDURE [dbo].[CSSP_InsPagamento]
 	Objetivo..........: Inserir um pagamento
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/0/2017
-	Ex................: EXEC [dbo].[CSSP_InsPagamento] '12313546464', '05/14/2017',30
+	Ex................: EXEC [dbo].[CSSP_InsPagamento] '12313546464',30
 	*/
 	
 	BEGIN
 
-		IF @DataPagamento IS NULL
-		SET @DataPagamento = GETDATE()
-
 		INSERT INTO [dbo].[Pagamento] (Cpf, DataPagamento, ValorPagamento)
-			VALUES (@Cpf, @DataPagamento, @ValorPagamento)			
+			VALUES (@Cpf, GETDATE(), @ValorPagamento)			
 		
 		-- Somar o pagamento feito ao saldo do usuario em questão
 		UPDATE [dbo].[Usuario] 
@@ -162,8 +158,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_Lista
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_ListarPagamentoDia]
-	@data date = null,
-	@cpf varchar(11) = null
+	@data date = null
 	AS
 
 	/*
@@ -181,31 +176,17 @@ CREATE PROCEDURE [dbo].[CSSP_ListarPagamentoDia]
 		BEGIN 
 			SELECT @data = GETDATE()		
 		END	
-
-		IF @cpf IS NULL
-		BEGIN
-			SELECT p.IdPagamento,
-				p.Cpf,
-				u.NomeUsuario,
-				p.DataPagamento,
-				p.ValorPagamento
-			FROM [dbo].[Pagamento] p WITH(NOLOCK)
-				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
-					ON p.Cpf = u.Cpf
-			WHERE cast(p.DataPagamento as date) = CAST(@data as date)
-		END
-		ELSE
-		BEGIN 
-			SELECT p.IdPagamento,
-				p.Cpf,
-				u.NomeUsuario,
-				p.DataPagamento,
-				p.ValorPagamento
-			FROM [dbo].[Pagamento] p WITH(NOLOCK)
-				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
-					ON p.Cpf = u.Cpf
-			WHERE (p.Cpf = @cpf) and (cast(p.DataPagamento as date) = CAST(@data as date))
-		END
+		
+		SELECT p.IdPagamento,
+			p.Cpf,
+			u.NomeUsuario,
+			p.DataPagamento,
+			p.ValorPagamento
+		FROM [dbo].[Pagamento] p WITH(NOLOCK)
+			INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
+				ON p.Cpf = u.Cpf
+		WHERE cast(p.DataPagamento as date) = CAST(@data as date)
+		
 
 	END
 GO
