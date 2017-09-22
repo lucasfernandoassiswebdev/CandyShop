@@ -15,7 +15,7 @@
         {
             if (string.IsNullOrEmpty(NomeProduto.Trim()) || NomeProduto.Length > 40)
                 notification.Add("Nome do produto invalido");
-            if (PrecoProduto < 0)
+            if (PrecoProduto <= 0)
                 notification.Add("Preço do produto nao pode ser negativo");
             if (string.IsNullOrEmpty(Ativo))
                 notification.Add("Status do produto nao pode ser nulo");
