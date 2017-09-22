@@ -3,11 +3,13 @@
     readURL(this);
 });
 
-$('.botaoVoltar').on('click', function() {
+$('.botaoVoltar').on('click', function () {
+    //voltando a lista de usuários
     AjaxJs.listaUsuario();
 });
 
 $('.botaoCadastro').on('click', function () {
+    //convertendo a imagem para base64
     encodeImageFileAsURL(AjaxJs.concluirCadastroUsuario);
 });
 
@@ -96,9 +98,9 @@ function validaBotao() {
 
     //desabilitando o botão caso um dos dois esteja inválido
     if (!TestaCPF(cpfNew) || qtde > 50 || qtde === 0) {
-        $('.botaoCadastro ').attr('disabled', 'disabled');
+        $('.botaoCadastro').attr('disabled', 'disabled');
     } else {
-        $('.botaoCadastro ').removeAttr('disabled');
+        $('.botaoCadastro').removeAttr('disabled');
     }
 }
 
@@ -108,12 +110,12 @@ function encodeImageFileAsURL(callback) {
         var fileToLoad = filesSelected[0];
         var fileReader = new FileReader();
 
-        fileReader.onload = function (fileLoadedEvent) {
+        fileReader.onload = function(fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
             if (typeof callback === "function") {
                 callback(srcData);
             }
-        }
+        };
 
         fileReader.readAsDataURL(fileToLoad);
     }
