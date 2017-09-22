@@ -64,15 +64,6 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
-        public ActionResult ListarSemanaCpf(string cpf)
-        {
-            ViewBag.drop = 1;
-            var response = _appPagamento.ListarPagamentosSemana(cpf);
-            if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
-            return View("Index", response.Content);
-        }
-
         public ActionResult ListarMes(int mes)
         {
             ViewBag.drop = 0;

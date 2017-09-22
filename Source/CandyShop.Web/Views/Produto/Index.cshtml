@@ -55,7 +55,7 @@
             {
                 <li>
                     <div class="collapsible-header">
-                        <i class="material-icons red">bubble_chart</i>@produto.NomeProduto
+                        <i class="material-icons red-text">bubble_chart</i>@produto.NomeProduto
                     </div>
                     <div class="collapsible-body">
                         <span>Preço: R$ @produto.PrecoProduto</span>
@@ -74,5 +74,10 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('.collapsible').collapsible();
+    });
+</script>
 
 

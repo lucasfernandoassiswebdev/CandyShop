@@ -28,18 +28,10 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompraProduto]
 			DECLARE @PrecoProduto decimal
 			DECLARE @Cpf varchar(11)
 
-			SELECT @PrecoProduto = PrecoProduto
-				 FROM [dbo].[Produto]
-					WHERE IdProduto = @IdProduto
-
-			SELECT @Cpf = UsuarioCompra
-				FROM [dbo].[Compra]
-					WHERE IdCompra = @IdCompra
-
 			UPDATE [dbo].[Compra]
 				SET ValorCompra += (@QtdeProduto * @PrecoProduto)
 					WHERE IdCompra = @IdCompra
-
+					
 			UPDATE [dbo].[Usuario]
 				SET SaldoUsuario -= (@QtdeProduto * @PrecoProduto)
 					WHERE Cpf = @Cpf
