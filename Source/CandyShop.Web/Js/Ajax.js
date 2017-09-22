@@ -44,9 +44,12 @@
 
     //Função genérica para carregar o div, de acordo com o endereço passado
     function chamaPagina(endereco) {
-        $.get(endereco).done(function (data) { //data é o conteudo da view
-            $('#DivGrid').slideUp(function () { //a div é recolhida
-                $('#DivGrid').hide().html(data).slideDown(); //escondida, carregada e demonstrada novamente                
+        //data é o conteudo da view
+        $.get(endereco).done(function (data) { 
+            //a div é recolhida
+            $('#DivGrid').slideUp(function () { 
+                //escondida, carregada e demonstrada novamente                
+                $('#DivGrid').hide().html(data).slideDown(); 
             });
         }).fail(function (xhr) {
             console.log(xhr.responseText);
@@ -54,9 +57,9 @@
     }
 
     function chamaPaginaComIdentificador(endereco, identificador) {
-        $.get(endereco, identificador).done(function (data) { //data é o conteudo da view
-            $('#DivGrid').slideUp(function () { //a div é recolhida
-                $('#DivGrid').hide().html(data).slideDown(); //escondida, carregada e demonstrada novamente
+        $.get(endereco, identificador).done(function (data) { 
+            $('#DivGrid').slideUp(function () { 
+                $('#DivGrid').hide().html(data).slideDown();
             });
         }).fail(function (xhr) {
             console.log(xhr.responseText);
@@ -65,7 +68,8 @@
 
     function concluirAcao(endereco, objeto, tela) {
         $.post(endereco, objeto)
-            .done(function (message) { //passar o parametro data aqui quando for definida a mensagem 
+            //passar o parametro data aqui quando for definida a mensagem 
+            .done(function (message) { 
                 chamaPagina(tela);
                 Materialize.toast(message, 3000);
             })
@@ -73,8 +77,7 @@
                 console.log(xhr.responseText);
             });
     }
-
-    //Variavel que retorna para o inicio
+    
     var voltarInicio = function () {
         main();
     };
@@ -119,6 +122,7 @@
         chamaPaginaComIdentificador(url.detalheUsuario, usuario);
     };
     var concluirCadastroUsuario = function (imgBase64) {
+        //montantando o objeto que vai chegar no controller
         var usuario = {
             Cpf: $('#cpf').val(),
             NomeUsuario: $('#Nome').val(),
