@@ -16,6 +16,8 @@
                 notification.Add("Nome do Usuario invalido ");
             if (string.IsNullOrEmpty(SenhaUsuario.Trim()) || SenhaUsuario.Length > 12)
                 notification.Add("Senha invalida");
+            if (string.IsNullOrEmpty(Ativo))
+                notification.Add("Status do usuario nao pode ser nulo");                
 
             return !notification.HasNotification();
         }

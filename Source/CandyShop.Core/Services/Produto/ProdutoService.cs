@@ -15,23 +15,17 @@ namespace CandyShop.Core.Services.Produto
 
         public void InserirProduto(ProdutoDto produto)
         {
-            if (_produtoRepository.SelecionarProduto(produto.NomeProduto.Trim()))
-            {
-                _notification.Add("Produto ja existe !!!");
+            if (!produto.IsValid(_notification))
                 return;
-            }
             _produtoRepository.InserirProduto(produto);
         }
 
         public void EditarProduto(ProdutoDto produto)
         {
-            if (_produtoRepository.SelecionarProduto(produto.NomeProduto.Trim()))
-            {
-                _notification.Add("Produto ja existe !!!");
-            }
+            if (!produto.IsValid(_notification))
+                return;
+
             _produtoRepository.UpdateProduto(produto);
         }
-
-        
     }
 }

@@ -248,7 +248,9 @@ CREATE PROCEDURE [dbo].CSSP_LisProdutoValorCres
 	BEGIN
 		SELECT * 
 			FROM Produto
+			WHERE Ativo = 'A'
 			ORDER BY PrecoProduto
+			 
 	END
 GO
 				
@@ -274,6 +276,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoValorDesc]
 	BEGIN
 	SELECT * 
 		FROM Produto
+		WHERE Ativo = 'A'
 		ORDER BY PrecoProduto desc
 END
 GO
@@ -300,7 +303,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoAbaixoValor]
 	BEGIN
 	SELECT * 
 		FROM Produto
-		WHERE PrecoProduto <= @Valor	
+		WHERE PrecoProduto <= @Valor AND Ativo = 'A'
 	END
 GO
 				
@@ -325,7 +328,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoAcimaValor]
 	BEGIN
 	SELECT * 
 		FROM Produto
-		WHERE PrecoProduto >= @valor
+		WHERE PrecoProduto >= @valor AND Ativo = 'A'
 	END
 GO
 
@@ -351,7 +354,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoCategoria]
 	BEGIN
 		SELECT * 
 			FROM Produto
-			WHERE Categoria like '%' + @Categoria + '@%'
+			WHERE Categoria like '%' + @Categoria + '@%' AND Ativo = 'A'
 	END
 GO
 
@@ -378,7 +381,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdPorNome]
 	
 		SELECT * 
 			FROM [dbo].[Produto] WITH(NOLOCK)
-			WHERE NomeProduto LIKE '%' + @NomeProduto + '%'
+			WHERE NomeProduto LIKE '%' + @NomeProduto + '%' AND Ativo = 'A'
 	END
 GO
 				
