@@ -130,6 +130,7 @@ namespace CandyShop.Web.Controllers
                 return Content("Usuário cadastrado com sucesso");
             }
 
+
             return RedirectToAction("Index", "Admin");
         }
 
