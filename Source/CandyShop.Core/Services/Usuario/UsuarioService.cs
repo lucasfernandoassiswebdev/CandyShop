@@ -15,12 +15,9 @@ namespace CandyShop.Core.Services.Usuario
 
         public void InserirUsuario(UsuarioDto usuario)
         {
-            if (_usuarioRepository.VericaUsuarioIgual(usuario) == 1)
-            {
-                _notification.Add("Usuario ja cadastrado!!!");
+            if (!usuario.IsValid(_notification))
                 return;
-            }
-
+            
             _usuarioRepository.InserirUsuario(usuario);
         }
 
@@ -40,5 +37,6 @@ namespace CandyShop.Core.Services.Usuario
             var retorno = _usuarioRepository.VerificaLogin(usuario) == 1 ? 1 : 0;
             return retorno;
         }
+       
     }
 }
