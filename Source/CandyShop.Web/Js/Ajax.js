@@ -96,7 +96,6 @@
     var listarPagamentoSemana = function () {
         chamaPagina(url.listarPagamentoSemana);
     }
-
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
