@@ -1,6 +1,5 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
-using Newtonsoft.Json;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -193,14 +192,14 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.VerificaLogin(usuario);
             if (!response.IsSuccessStatusCode)
-                return Content("Login incorreto!");
+                return Content("1"); //Content("CPF ou senha incorretos!");
 
-            var model = JsonConvert.DeserializeObject<int>(response.Content.ReadAsStringAsync().Result);
+            //var model = JsonConvert.DeserializeObject<int>(response.Content.ReadAsStringAsync().Result);
 
-            if (model != 1)
-            {
-                return Content("Login ou senha incorretos");
-            }
+            //if (model != 1)
+            //{
+            //    return Content("Login ou senha incorretos");
+            //}
 
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
             var user = _appUsuario.SelecionarUsuario(cpf);

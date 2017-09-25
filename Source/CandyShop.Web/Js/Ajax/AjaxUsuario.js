@@ -62,15 +62,21 @@
     var verificaLogin = function () {
         var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
         $.post(url.verificaLogin, usuario)
-            .done(function () {
-                $.get(url.padrao)
-                    .done(function (data) {
-                        $('body').slideUp(function () {
-                            $('body').hide().html(data).slideDown();                            
+            .done(function (res) {
+                if (res != "1") {
+                    $.get(url.padrao)
+                        .done(function (data) {
+                            $('body').slideUp(function () {
+                                $('body').hide().html(data).slideDown(
+                                    function() { Materialize.toast("Login feito com sucesso!", 4000); }
+                                );
+                            });
+                        }).fail(function (xhr) {
+                            Materialize.toast(xhr.responseText, 4000);
                         });
-                    }).fail(function (xhr) {
-                        console.log(xhr.responseText);
-                    });
+                } else {
+                    Materialize.toast("Login Incorreto", 4000);
+                }                
             })
             .fail(function (xhr) {
                 Materialize.toast(xhr.responseText, 3000);
@@ -80,12 +86,11 @@
     var logOff = function () {
         $.get(url.logOff).done(function (data) {
             $('body').slideUp(function () {
-                $('body').hide().html(data).slideDown();
+                $('body').hide().html(data).slideDown(function () { Materialize.toast("LogOff feito com sucesso", 3000); });
             });
         }).fail(function (xhr) {
             console.log(xhr.responseText);
-        });
-        Materialize.toast("Deslogado", 3000);
+        });        
     };
    
     return {
