@@ -32,13 +32,20 @@
 
         $.post(url.concluirPagamento, pagamento)            
             .done(function (message) {
-                carregaPadrao();
-                chamaPagina(url.listarPagamento);
-                Materialize.toast(message, 3000);
+                $.get(url.padrao)
+                    .done(function (data) {
+                        $('body').slideUp(function () {
+                            $('body').hide().html(data).slideDown(function() {
+                                Materialize.toast(message, 3000);
+                            });
+                        });
+                    }).fail(function (xhr) {
+                        console.log(xhr.responseText);
+                    });                
             })
             .fail(function (xhr) {
                 console.log(xhr.responseText);
-            });
+            });        
     };
 
     return {

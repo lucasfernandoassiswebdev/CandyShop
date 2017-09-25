@@ -12,30 +12,6 @@ function main(endereco) {
     });
 }
 
-//função que vai carregar o corpo inteiro da pagina
-function carregaPadrao() {
-    console.log(url.padrao);
-    $.get(url.padrao)
-        .done(function (data) {
-            $('body').slideUp(function () {
-                $('body').hide().html(data).slideDown();
-                console.log("carrega padrao");
-            });
-        }).fail(function (xhr) {
-            console.log(xhr.responseText);
-        });
-}
-
-function deslogar() {
-    $.get(url.logOff).done(function (data) {
-        $('body').slideUp(function () {
-            $('body').hide().html(data).slideDown();
-        });
-    }).fail(function (xhr) {
-        console.log(xhr.responseText);
-    });
-}
-
 //Função genérica para carregar o div, de acordo com o endereço passado
 function chamaPagina(endereco) {
     //data é o conteudo da view

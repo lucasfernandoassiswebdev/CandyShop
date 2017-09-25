@@ -9,8 +9,8 @@
         AjaxJsPagamento.init({
             listarPagamento: '@Url.Action("ListarCpf", "Pagamento")',
             inserirPagamento: '@Url.Action("Inserir", "Pagamento")',
-            concluirPagamento: '@Url.Action("InserirPagamento", "Pagamento")'
-
+            concluirPagamento: '@Url.Action("InserirPagamento", "Pagamento")',
+            padrao: '@Url.Action("Padrao", "Home")'
         });
 
         AjaxJsCompra.init({
@@ -19,7 +19,8 @@
 
         AjaxJsUsuario.init({
             logOff: '@Url.Action("Deslogar", "Usuario")',
-            verificaLogin: '@Url.Action("Logar","Usuario")'
+            verificaLogin: '@Url.Action("Logar","Usuario")',
+            padrao: '@Url.Action("Padrao", "Home")'
         });
 
         AjaxJsProduto.init({
@@ -27,7 +28,7 @@
         });
 
         AjaxJsShop.init({
-            padrao: '@Url.Action("Padrao", "Home")'
+
         });
     });
 </script>
