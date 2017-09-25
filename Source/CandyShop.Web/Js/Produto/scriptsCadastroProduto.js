@@ -56,7 +56,7 @@ function encodeImageFileAsURL(callback) {
         var fileToLoad = filesSelected[0];
         var fileReader = new FileReader();
 
-        fileReader.onload = function (fileLoadedEvent) {
+        fileReader.onload = function(fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
             if (typeof callback === "function") {
                 callback(srcData);
@@ -64,5 +64,7 @@ function encodeImageFileAsURL(callback) {
         };
 
         fileReader.readAsDataURL(fileToLoad);
+    } else {
+        callback();
     }
 }

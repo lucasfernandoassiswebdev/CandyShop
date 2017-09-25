@@ -37,13 +37,13 @@
                     @Html.DisplayFor(modelItem => item.Categoria)
                 </td>
                 <td>
-                    <a class="btn-floating btn-sm waves-effect waves-light brown" onclick="AjaxJs.detalheProduto(@item.IdProduto);"><i class="material-icons">info_outline</i></a>
+                    <a class="btn-floating btn-sm waves-effect waves-light brown" onclick="AjaxJsProduto.detalheProduto(@item.IdProduto);"><i class="material-icons">info_outline</i></a>
                 </td>
                 <td>
-                    <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto(@item.IdProduto);"><i class="material-icons">edit</i></a>
+                    <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJsProduto.editarProduto(@item.IdProduto);"><i class="material-icons">edit</i></a>
                 </td>
                 <td>
-                    <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJs.desativarProduto(@item.IdProduto);"><i class="material-icons">remove_shopping_cart</i></a>
+                    <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJsProduto.desativarProduto(@item.IdProduto);"><i class="material-icons">remove_shopping_cart</i></a>
                 </td>
             </tr>
             }
@@ -64,9 +64,9 @@
                         <br />
                         <span>Categoria: @produto.Categoria</span>
                         <br /><br />
-                        <a class="btn-floating btn-sm waves-effect waves-light brown" onclick="AjaxJs.detalheUsuario(@produto.IdProduto);"><i class="material-icons red">info_outline</i></a>
-                        <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJs.editarProduto(@produto.IdProduto);"><i class="material-icons red">edit</i></a>
-                        <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJs.desativarProduto(@produto.IdProduto);"><i class="material-icons red">remove_shopping_cart</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light brown" onclick="AjaxJsProduto.detalheUsuario(@produto.IdProduto);"><i class="material-icons red">info_outline</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light orange" onclick="AjaxJsProduto.editarProduto(@produto.IdProduto);"><i class="material-icons red">edit</i></a>
+                        <a class="btn-floating btn-sm waves-effect waves-light red" onclick="AjaxJsProduto.desativarProduto(@produto.IdProduto);"><i class="material-icons red">remove_shopping_cart</i></a>
                     </div>
                 </li>
             }
