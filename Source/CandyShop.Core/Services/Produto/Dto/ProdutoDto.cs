@@ -17,6 +17,8 @@
                 notification.Add("Nome do produto invalido");
             if (PrecoProduto <= 0)
                 notification.Add("Preço do produto nao pode ser negativo");
+            if (QtdeProduto < 0)
+                notification.Add("Quantidade do produto não pode ser negativa");
             if (string.IsNullOrEmpty(Ativo))
                 notification.Add("Status do produto nao pode ser nulo");
 
