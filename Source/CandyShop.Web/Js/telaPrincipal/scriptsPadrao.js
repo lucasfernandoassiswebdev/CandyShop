@@ -31,7 +31,7 @@ $(document).ready(function () {
                             {
                                 html: 'mode_edit',
                                 class: 'material-icons',
-                                data-NomeProduto: nome
+                                'data-NomeProduto' : nome
                             })
                     ]
                 })

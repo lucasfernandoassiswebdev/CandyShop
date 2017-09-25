@@ -1,3 +1,4 @@
-﻿$('#quantidadeEdit').on('click', function() {
-    $('data-NomeProdutoe')
+﻿$('#editarQuantidade').on('click', function () {
+    alert('batataaa');
+    $('p').html('Quantidade: ' + $('#quantidadeEdit').val());
 });
