@@ -20,6 +20,7 @@ namespace CandyShop.Repository.Repositorys
             CSSP_ListarUsuariosInativos,
             CSSP_LisUsuarioPorNome,
             CSSP_VerificaLoginSenha,
+            CSSP_VerificaSaldoLoja
         }
 
         public void InserirUsuario(UsuarioDto usuario)
@@ -183,6 +184,13 @@ namespace CandyShop.Repository.Repositorys
             return 0;
         }
 
-       
+        public decimal VerificaCreditoLoja()
+        {
+            ExecuteProcedure(Procedures.CSSP_VerificaSaldoLoja);
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    return reader.ReadAsDecimal("saldo");
+            return 0;
+        }
     }
 }

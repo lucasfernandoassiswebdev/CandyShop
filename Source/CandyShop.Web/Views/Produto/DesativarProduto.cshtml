@@ -13,15 +13,14 @@
         <div class="left">
 
             <hr />
-            <dl class="dl-horizontal">
-                @{ var nomeA = @Model.IdProduto + "_A.jpg";}
-                @{ var nomeB = @Model.IdProduto + "_B.jpg";}
-                @{ var nomeC = @Model.IdProduto + "_C.jpg";}
+            @{ var nomeA = @Model.IdProduto + "_A.jpg";}
+            @{ var nomeB = @Model.IdProduto + "_B.jpg";}
+            @{ var nomeC = @Model.IdProduto + "_C.jpg";}
 
-                <img src="@TempData["caminhoImagens"]/@nomeA?d=@DateTime.Now.Ticks"/>
-                <img src="@TempData["caminhoImagens"]/@nomeB?d=@DateTime.Now.Ticks"/>
-                <img src="@TempData["caminhoImagens"]/@nomeC?d=@DateTime.Now.Ticks"/>
-                
+            <img src="@TempData["caminhoImagens"]/@nomeA?d=@DateTime.Now.Ticks"/>
+            <img src="@TempData["caminhoImagens"]/@nomeB?d=@DateTime.Now.Ticks"/>
+            <img src="@TempData["caminhoImagens"]/@nomeC?d=@DateTime.Now.Ticks"/>
+            <dl class="dl-horizontal">
                 <dt>
                     ID:
                 </dt>
