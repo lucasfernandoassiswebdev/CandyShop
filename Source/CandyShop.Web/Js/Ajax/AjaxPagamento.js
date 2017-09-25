@@ -28,7 +28,17 @@
     };
     var concluirPagamento = function () {
         var pagamento = { ValorPagamento: $('#valorPago').val() };
-        concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);
+        //concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);
+
+        $.post(url.concluirPagamento, pagamento)            
+            .done(function (message) {
+                carregaPadrao();
+                chamaPagina(url.listarPagamento);
+                Materialize.toast(message, 3000);
+            })
+            .fail(function (xhr) {
+                console.log(xhr.responseText);
+            });
     };
 
     return {

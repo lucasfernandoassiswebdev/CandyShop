@@ -9,6 +9,7 @@
 <script type="text/javascript" src="../../Js/Ajax/AjaxShop.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="../../Js/Ajax/AjaxUsuario.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="../../Js/Ajax/funcoesAjax.js?d=@DateTime.Now.Ticks"></script>
+
 <script>
     $(document).ready(function () {
         AjaxJsUsuario.init({
@@ -27,6 +28,7 @@
         });
 
         AjaxJsProduto.init({
+            main: '@Url.Action("Listar", "Produto")',
             listaProduto: '@Url.Action("Listar", "Produto")',
             cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")',
             concluirCadastroProduto: '@Url.Action("CadastrarProduto", "Produto")',

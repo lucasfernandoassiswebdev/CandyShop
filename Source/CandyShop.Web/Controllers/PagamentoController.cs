@@ -40,6 +40,7 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult Listar()
         {
+            ViewBag.tituloPagina = "Pagamentos do ultimo mês";
             ViewBag.drop = 0;
             var response = _appPagamento.ListarPagamentos();
             if (response.Status != HttpStatusCode.OK)
@@ -49,6 +50,7 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult ListarCpf()
         {
+            ViewBag.tituloPagina = "Meus pagamentos";
             var cpf = Session["login"].ToString();
             ViewBag.drop = 1;
             var response = _appPagamento.ListarPagamentos(cpf);
@@ -59,6 +61,7 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult ListarSemana()
         {
+            ViewBag.tituloPagina = $"Pagamentos da ultima semana";
             ViewBag.drop = 1;
             var response = _appPagamento.ListarPagamentosSemana();
             if (response.Status != HttpStatusCode.OK)
@@ -68,6 +71,7 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult ListarMes(int mes)
         {
+            ViewBag.tituloPagina = $"Pagamento do mês {mes}";
             ViewBag.drop = 0;
             var response = _appPagamento.ListarPagamentos(mes);
             if (response.Status != HttpStatusCode.OK)
@@ -77,6 +81,7 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult ListarDia()
         {
+            ViewBag.tituloPagina = $"Pagamentos do dia {DateTime.Now.ToShortDateString()}";
             ViewBag.drop = 1;
             var response = _appPagamento.ListarPagamentosDia();
             if (response.Status != HttpStatusCode.OK)

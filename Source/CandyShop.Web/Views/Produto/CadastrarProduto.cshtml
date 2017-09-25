@@ -5,25 +5,26 @@
 }
 
 <link rel="stylesheet" type="text/css" href="../../Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
-<script type="text/javascript" src="../../Js/Produto/scriptsCadastroProduto.js"></script>
+<script type="text/javascript" src="../../Js/Produto/scriptsCadastroProduto.js?d=@DateTime.Now.Ticks"></script>
 
 <div class="container">
     <div class="row" style="margin-left: -20%">
         <form class="col s12">
             <div class="row">
+                <!--fotos-->
                 <div class="center">
                     <label for="fotoProduto1">
                         <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :("/>
                     </label>
                     <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                    
+
                     <label for="fotoProduto2">
-                        <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :(" />
+                        <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :("/>
                     </label>
                     <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                    
+
                     <label for="fotoProduto3">
-                        <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :(" />
+                        <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :("/>
                     </label>
                     <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
                 </div>
@@ -37,11 +38,11 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="PrecoProduto" name="PrecoProduto" type="text" class="validate" required="">
+                    <input id="PrecoProduto" name="PrecoProduto" type="number" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required="">
                     <label for="PrecoProduto">Valor:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="QtdeProduto" name="QtdeProduto" type="number" class="validate" required="">
+                    <input id="QtdeProduto" name="QtdeProduto" type="number" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required="">
                     <label for="QtdeProduto">Quantidade disponível:</label>
                 </div>
             </div>
@@ -59,13 +60,11 @@
                     <label>Categoria</label>
                 </div>
             </div>
-
             <div class="row" , align="center">
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJsProduto.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJsProduto.concluirCadastroProduto()"><i class="material-icons left">add_circle</i>Cadastrar</a>
+                <a class="waves-effect waves-light btn-large botaoVoltar"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large botaoCadastro"><i class="material-icons left">add_circle</i>Cadastrar</a>
             </div>
-
-        </form>
+    </form>
     </div>
 </div>
 

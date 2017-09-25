@@ -77,6 +77,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
 				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
 					ON p.Cpf = u.Cpf
 			WHERE MONTH(p.DataPagamento) = @mes
+			ORDER BY p.DataPagamento DESC
 		END
 		ELSE
 		BEGIN
@@ -89,6 +90,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
 				INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
 					ON p.Cpf = u.Cpf
 			WHERE (p.Cpf = @cpf) and (MONTH(p.DataPagamento) = @mes)
+			ORDER BY p.DataPagamento DESC
 		END
 		
 	END
@@ -135,6 +137,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamentoSemana]
 					INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
 						ON p.Cpf = u.Cpf
 				WHERE p.DataPagamento > @domingo
+				ORDER BY p.DataPagamento DESC
 		END
 		ELSE
 		BEGIN 
@@ -147,6 +150,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamentoSemana]
 					INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
 						ON p.Cpf = u.Cpf
 				WHERE p.Cpf = @cpf and p.DataPagamento > @domingo
+				ORDER BY p.DataPagamento DESC
 		END
 	END
 GO
@@ -185,6 +189,7 @@ CREATE PROCEDURE [dbo].[CSSP_ListarPagamentoDia]
 			INNER JOIN [dbo].[Usuario] u WITH(NOLOCK)
 				ON p.Cpf = u.Cpf
 		WHERE cast(p.DataPagamento as date) = CAST(@data as date)
+		ORDER BY p.DataPagamento DESC
 		
 
 	END

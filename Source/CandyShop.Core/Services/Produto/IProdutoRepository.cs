@@ -18,6 +18,7 @@ namespace CandyShop.Core.Services.Produto
         IEnumerable<ProdutoDto> ListarProdutosAcimaValor();
         IEnumerable<ProdutoDto> ListarProdutosPorCategoria();
         IEnumerable<ProdutoDto> ProcurarProdutoPorNome(string nome);
+        int BuscaUltimoProduto();
     }
 }
 
