@@ -13,9 +13,11 @@
         main(url.main);
     };
 
+    //função que vai carregar o corpo inteiro da pagina    
+
     return {
         init: init,
         mostraSaldo: mostraSaldo,
-        voltarInicio: voltarInicio
+        voltarInicio: voltarInicio,        
 }
 })(jQuery);

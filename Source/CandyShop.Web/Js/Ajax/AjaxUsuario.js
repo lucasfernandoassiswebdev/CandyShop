@@ -61,17 +61,30 @@
     };
     var verificaLogin = function () {
         var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
-
         $.post(url.verificaLogin, usuario)
             .done(function () {
-                carregaPadrao();
+                $.get(url.padrao)
+                    .done(function (data) {
+                        $('body').slideUp(function () {
+                            $('body').hide().html(data).slideDown();                            
+                        });
+                    }).fail(function (xhr) {
+                        console.log(xhr.responseText);
+                    });
             })
             .fail(function (xhr) {
                 Materialize.toast(xhr.responseText, 3000);
             });
     };
+
     var logOff = function () {
-        deslogar();
+        $.get(url.logOff).done(function (data) {
+            $('body').slideUp(function () {
+                $('body').hide().html(data).slideDown();
+            });
+        }).fail(function (xhr) {
+            console.log(xhr.responseText);
+        });
         Materialize.toast("Deslogado", 3000);
     };
    
