@@ -10,7 +10,7 @@
     };
 
     var voltarInicio = function() {
-        main();
+        main(url.main);
     };
 
     return {

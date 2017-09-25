@@ -4,9 +4,8 @@
     // Lista de objetos que guarda o nome e o endereco da pagina, sã carregados na pagina padrao
     var init = function (config) {
         url = config;
-        main();
 
-        //main(url.main);
+        main(url.main);
     };
 
     var listaProduto = function () {

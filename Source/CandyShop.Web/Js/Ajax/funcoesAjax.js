@@ -1,7 +1,7 @@
 ﻿//carrega a pagina de inicio
-function main() {
+function main(endereco) {
     //pega a view main e a carrega no div
-    $.get(url.main).done(function (data) {
+    $.get(endereco).done(function (data) {
         $("#DivGrid").slideUp(function () {
             //desce  o divgrid  
             $('#DivGrid').hide().html(data).slideDown();
