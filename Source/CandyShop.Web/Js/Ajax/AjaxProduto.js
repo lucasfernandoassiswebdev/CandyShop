@@ -4,7 +4,7 @@
     // Lista de objetos que guarda o nome e o endereco da pagina, sã carregados na pagina padrao
     var init = function (config) {
         url = config;
-        //main(url.main);
+        main(url.main);
     };
 
     var listaProduto = function () {
@@ -50,7 +50,7 @@
     };
     var desativarProdutoConfirmado = function (id) {
         var produto = { IdProduto: id };
-        concluirAcao(url.desativarProdutoConfirmado, produto, url.listaProduto);
+        concluirAcaoEdicao(url.desativarProdutoConfirmado, produto, url.listaProduto);
     };
     var listarInativos = function () {
         chamaPagina(url.listarInativos);
