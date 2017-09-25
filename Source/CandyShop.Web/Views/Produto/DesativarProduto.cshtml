@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-<link rel="stylesheet" type="text/css" href="../../Content/Produto/desativarProduto.css"/>
+<link rel="stylesheet" type="text/css" href="../../Content/Produto/desativarProduto.css?d=@DateTime.Now.Ticks"/>
 
 <div class="corpo left">
     <div class="col s12">
@@ -14,6 +14,14 @@
 
             <hr />
             <dl class="dl-horizontal">
+                @{ var nomeA = @Model.IdProduto + "_A.jpg";}
+                @{ var nomeB = @Model.IdProduto + "_B.jpg";}
+                @{ var nomeC = @Model.IdProduto + "_C.jpg";}
+
+                <img src="@TempData["caminhoImagens"]/@nomeA?d=@DateTime.Now.Ticks"/>
+                <img src="@TempData["caminhoImagens"]/@nomeB?d=@DateTime.Now.Ticks"/>
+                <img src="@TempData["caminhoImagens"]/@nomeC?d=@DateTime.Now.Ticks"/>
+                
                 <dt>
                     ID:
                 </dt>

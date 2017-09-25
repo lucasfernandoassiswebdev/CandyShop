@@ -10,8 +10,8 @@
 <div class="container">
     <div class="row" style="margin-left: -20%">
         <form class="col s12">
+            <!--fotos-->
             <div class="row">
-                <!--fotos-->
                 <div class="center">
                     <label for="fotoProduto1">
                         <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :("/>
@@ -31,14 +31,14 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="NomeProduto" name="Nome" type="text" class="validate" required data-length="40"  autocomplete="off">
+                    <input id="NomeProduto" name="Nome" type="text" class="validate" required data-length="40" autocomplete="off">
                     <label for="NomeProduto">Nome:</label>
                 </div>
 
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="PrecoProduto" name="PrecoProduto" type="number" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required="">
+                    <input id="PrecoProduto" name="PrecoProduto" type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required>
                     <label for="PrecoProduto">Valor:</label>
                 </div>
                 <div class="input-field col s6">
@@ -64,7 +64,7 @@
                 <a class="waves-effect waves-light btn-large botaoVoltar"><i class="material-icons left">arrow_back</i>Voltar</a>
                 <a class="waves-effect waves-light btn-large botaoCadastro"><i class="material-icons left">add_circle</i>Cadastrar</a>
             </div>
-    </form>
+        </form>
     </div>
 </div>
 

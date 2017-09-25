@@ -4,13 +4,21 @@
     Layout = null;
 }
 
-<link rel="stylesheet" type="text/css" href="../../Content/Produto/detalheProduto.css"/>
+<link rel="stylesheet" type="text/css" href="../../Content/Produto/detalheProduto.css?d=@DateTime.Now.Ticks" />
 
-<div class="corpo left">    
+<div class="corpo left">
     <h4><font color="brown">Detalhes</font><font color="red"> do Produto :</font></h4>
-    <hr/>
+    <hr />
     <div class="col s12">
         <dl class="dl-horizontal">
+            @{ var nomeA = @Model.IdProduto + "_A.jpg";}
+            @{ var nomeB = @Model.IdProduto + "_B.jpg";}
+            @{ var nomeC = @Model.IdProduto + "_C.jpg";}
+
+            <img src="@TempData["caminhoImagens"]/@nomeA?d=@DateTime.Now.Ticks" />
+            <img src="@TempData["caminhoImagens"]/@nomeB?d=@DateTime.Now.Ticks" />
+            <img src="@TempData["caminhoImagens"]/@nomeC?d=@DateTime.Now.Ticks" />
+
             <dt>
                 ID:
             </dt>
@@ -34,10 +42,10 @@
             <dd>
                 @Html.DisplayFor(model => model.PrecoProduto)
             </dd>
-            
+
 
             <dt>
-                Categoria: 
+                Categoria:
             </dt>
 
             <dd>
@@ -51,7 +59,7 @@
             <dd>
                 @Html.DisplayFor(model => model.QtdeProduto)
             </dd>
-            
+
             <dt>
                 Status do Produto:
             </dt>

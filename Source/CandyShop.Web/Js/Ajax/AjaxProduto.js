@@ -33,14 +33,17 @@
         var produto = { IdProduto: id };
         chamaPaginaComIdentificador(url.editarProduto, produto);
     };
-    var concluirEdicaoProduto = function () {
+    var concluirEdicaoProduto = function (baseA, baseB, baseC) {
         var produto = {
             IdProduto: $('#IdProduto').val(),
             NomeProduto: $('#NomeProduto').val(),
             PrecoProduto: $('#PrecoProduto').val(),
             QtdeProduto: $('#QtdeProduto').val(),
             Categoria: $('#Categoria').val(),
-            Ativo: $('#Ativo').val()
+            Ativo: $('#Ativo').val(),
+            ImagemA: baseA,
+            ImagemB: baseB,
+            ImagemC: baseC
         };
         concluirAcaoEdicao(url.concluirEdicaoProduto, produto, url.listaProduto);
     };
