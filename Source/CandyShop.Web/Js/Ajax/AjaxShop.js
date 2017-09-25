@@ -2,15 +2,15 @@
     var url = {};
 
     var init = function (config) {
-        url = config;
+        url = config;        
     };
 
     var mostraSaldo = function () {
         chamaPagina(url.mostraSaldo);
-    };
+    };   
 
     return {
         init: init,
-        mostraSaldo: mostraSaldo
-    }
+        mostraSaldo: mostraSaldo         
+}
 })(jQuery);

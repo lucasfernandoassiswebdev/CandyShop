@@ -18,6 +18,7 @@ function carregaPadrao() {
         .done(function (data) {
             $('body').slideUp(function () {
                 $('body').hide().html(data).slideDown();
+                console.log("carrega padrao");
             });
         }).fail(function (xhr) {
             console.log(xhr.responseText);

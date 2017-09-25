@@ -3,20 +3,34 @@
     ViewBag.Title = "Padrao";
 }
 
-<script src="~/Js/Ajax.js?d=@DateTime.Now.Ticks" type="text/javascript"></script>
+<script type="text/javascript" src="../../Js/scriptsAdmin.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/AjaxCompra.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/AjaxPagamento.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/AjaxShop.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/AjaxProduto.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/AjaxUsuario.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/funcoesAjax.js?d=@DateTime.Now.Ticks"></script>
+
 <script type="text/javascript" src="../../Js/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
 <script>
     $(document).ready(function() {
-        AjaxJs.init({
-            main: '@Url.Action("Main", "Home")',
-            padrao: '@Url.Action("Padrao", "Home")',
-            logOff: '@Url.Action("Deslogar", "Usuario")',
+        AjaxJsPagamento.init({
             listarPagamento: '@Url.Action("ListarCpf", "Pagamento")',
             inserirPagamento: '@Url.Action("Inserir", "Pagamento")',
-            concluirPagamento: '@Url.Action("InserirPagamento", "Pagamento")',
-            historicoCompra: '@Url.Action("Historico", "Compra")',
-            detalhePagamento: '@Url.Action("Detalhes", "Pagamento")',
-            verificaLogin: '@Url.Action("Logar","Usuario")'            
+            concluirPagamento: '@Url.Action("InserirPagamento", "Pagamento")'
+        });
+        AjaxJsCompra.init({
+            historicoCompra: '@Url.Action("Historico", "Compra")'
+        });
+        AjaxJsUsuario.init({
+            logOff: '@Url.Action("Deslogar", "Usuario")',
+            verificaLogin: '@Url.Action("Logar","Usuario")'
+        });
+        AjaxJsProduto.init({
+            main: '@Url.Action("Main", "Home")'
+        });
+        AjaxJsShop.init({
+            padrao: '@Url.Action("Padrao", "Home")'
         });
     });
 </script>
@@ -80,7 +94,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#modalLogin" class="modal-trigger right modal-action modal-close waves-effect waves-green btn-flat" onclick="AjaxJs.verificaLogin()">Logar</a>
+        <a href="#modalLogin" class="modal-trigger right modal-action modal-close waves-effect waves-green btn-flat" onclick="AjaxJsUsuario.verificaLogin()">Logar</a>
         <a href="#!" id="limpar" class="right modal-action waves-effect waves-green btn-flat brown-text">Cancelar</a>
     </div>
 </div>
@@ -100,11 +114,11 @@
 
 <!--barra de navegação-->
 <ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!" onclick="AjaxJs.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
-    <li><a href="#!" onclick="AjaxJs.inserirPagamento()"><i class="material-icons">add</i>Efetuar Pagamentos</a></li>
-    <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico</a></li>
+    <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+    <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Efetuar Pagamentos</a></li>
+    <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico</a></li>
     <li class="divider"></li>
-    <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
+    <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
 </ul>
 
 @if (Session["Login"].ToString() != "off")
@@ -112,7 +126,7 @@
     <nav class="brown nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJs.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
+            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.main()"><i class="material-icons">store</i>Candy Shop</a>
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -144,11 +158,11 @@
             <ul class="side-nav" id="mobile-demo">
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
-                <li><a href="#!" onclick="AjaxJs.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
-                <li><a href="#!" onclick="AjaxJs.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
-                <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
+                <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
                 <li class="divider"></li>
-                <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
+                <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
         </div>
         <div class="nav-content white">
@@ -167,7 +181,7 @@ else
     <nav class="brown nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJs.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
+            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.main()"><i class="material-icons">store</i>Candy Shop</a>
 
             <ul class="hide-on-med-and-down">
                 
@@ -198,11 +212,11 @@ else
             <ul class="side-nav" id="mobile-demo">
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
-                <li><a href="#!" onclick="AjaxJs.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
-                <li><a href="#!" onclick="AjaxJs.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
-                <li><a href="#!" onclick="AjaxJs.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
                 <li class="divider"></li>
-                <li><a href="#!" onclick="AjaxJs.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
+                <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
         </div>
         <div class="nav-content white">
