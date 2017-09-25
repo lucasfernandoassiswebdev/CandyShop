@@ -52,6 +52,14 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_produtoRepository.SelecionarDadosProduto(idProduto));
         }
 
+        [HttpGet]
+        [Route("api/produto/ultimo")]
+        public IHttpActionResult GetUltimoProduto()
+        {
+            return Ok(_produtoRepository.BuscaUltimoProduto());
+        }
+
+        [HttpGet]
         [Route("api/produto/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {
@@ -64,9 +72,9 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-
+        [HttpPut]
         [Route("api/produto/desativar/{idProduto}")]
-        public IHttpActionResult Delete(int idproduto)
+        public IHttpActionResult PutDesativar(int idproduto)
         {
             _produtoRepository.DesativarProduto(idproduto);
             return Ok();

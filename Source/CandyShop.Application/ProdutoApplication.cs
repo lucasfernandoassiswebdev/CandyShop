@@ -81,5 +81,14 @@ namespace CandyShop.Application
                 return new Response<IEnumerable<ProdutoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
+
+        public Response<int> BuscaUltimoProduto()
+        {
+            using (var cliente = new HttpClient())
+            {
+                var response = cliente.GetAsync($"{_enderecoApi}/ultimo").Result;
+                return new Response<int>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
     }
 }

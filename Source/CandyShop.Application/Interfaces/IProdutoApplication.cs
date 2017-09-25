@@ -12,5 +12,6 @@ namespace CandyShop.Application.Interfaces
         Response<string> DesativarProduto(int idProduto);
         Response<IEnumerable<ProdutoViewModel>> ListarInativos();
         Response<IEnumerable<ProdutoViewModel>> ProcurarProduto(string nome);
+        Response<int> BuscaUltimoProduto();
     }
 }

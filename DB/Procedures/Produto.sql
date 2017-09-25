@@ -7,7 +7,7 @@ GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsProduto]
 	@NomeProduto varchar(40),
-	@PrecoProduto decimal,
+	@PrecoProduto decimal(15,2),
 	@QtdeProduto int,
 	@Ativo varchar(1) = 'A',
 	@Categoria varchar(50)
@@ -384,6 +384,32 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdPorNome]
 			WHERE NomeProduto LIKE '%' + @NomeProduto + '%' AND Ativo = 'A'
 	END
 GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUltimoId]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelUltimoId]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_SelUltimoId]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produto.sql
+	Objetivo..........: Pegar Id ultimo produto inserido
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 25/09/2017
+	Ex................: EXEC [dbo].[GCS_SelUltimoId]
+
+	*/
+
+	BEGIN
+		SELECT MAX(IdProduto) as 'IdProduto'
+			FROM Produto
+	END
+GO
+				
 				
 
 
