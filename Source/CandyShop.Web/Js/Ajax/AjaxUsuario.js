@@ -40,14 +40,12 @@
         concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };
     var desativarUsuario = function (cpf) {
-        alert(cpf);
         var usuario = {
             Cpf: cpf
         };
         chamaPaginaComIdentificador(url.desativarUsuario, usuario);
     };
     var desativarUsuarioConfirmado = function (cpf) {
-        alert(cpf);
         var usuario = { Cpf: cpf };
         concluirAcaoEdicao(url.desativarUsuarioConfirmado, usuario, url.listarUsuarioInativo);
     };

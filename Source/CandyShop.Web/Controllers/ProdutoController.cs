@@ -176,9 +176,9 @@ namespace CandyShop.Web.Controllers
         }
 
         [HttpPut]
-        public ActionResult DesativarProdutoConfirmado(int idProduto)
+        public ActionResult DesativarProdutoConfirmado(ProdutoViewModel produto)
         {
-            var response = _appProduto.DesativarProduto(idProduto);
+            var response = _appProduto.DesativarProduto(produto);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
             return Content("Produto desativado com sucesso!");

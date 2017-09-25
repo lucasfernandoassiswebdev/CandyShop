@@ -38,7 +38,6 @@ namespace CandyShop.Repository.Repositorys
             ExecuteNonQuery();
         }
 
-        //não será mais usado temporariamente
         public void DesativarProduto(int idProduto)
         {
             ExecuteProcedure(Procedures.CSSP_DesProduto);

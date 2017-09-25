@@ -9,7 +9,7 @@ namespace CandyShop.Application.Interfaces
         Response<string> InserirProduto(ProdutoViewModel produto);
         Response<ProdutoViewModel> DetalharProduto(int idProduto);
         Response<string> EditarProduto(ProdutoViewModel produto);
-        Response<string> DesativarProduto(int idProduto);
+        Response<string> DesativarProduto(ProdutoViewModel produto);
         Response<IEnumerable<ProdutoViewModel>> ListarInativos();
         Response<IEnumerable<ProdutoViewModel>> ProcurarProduto(string nome);
         Response<int> BuscaUltimoProduto();

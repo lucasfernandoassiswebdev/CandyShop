@@ -12,16 +12,20 @@
             concluirPagamento: '@Url.Action("InserirPagamento", "Pagamento")'
 
         });
+
         AjaxJsCompra.init({
             historicoCompra: '@Url.Action("Historico", "Compra")'
         });
+
         AjaxJsUsuario.init({
             logOff: '@Url.Action("Deslogar", "Usuario")',
             verificaLogin: '@Url.Action("Logar","Usuario")'
         });
+
         AjaxJsProduto.init({
             main: '@Url.Action("Main", "Home")'
         });
+
         AjaxJsShop.init({
             padrao: '@Url.Action("Padrao", "Home")'
         });

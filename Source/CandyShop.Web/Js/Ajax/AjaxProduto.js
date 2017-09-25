@@ -5,6 +5,8 @@
     var init = function (config) {
         url = config;
         main();
+
+        //main(url.main);
     };
 
     var listaProduto = function () {
@@ -50,7 +52,7 @@
     };
     var desativarProdutoConfirmado = function (id) {
         var produto = { IdProduto: id };
-        concluirAcao(url.desativarProdutoConfirmado, produto, url.listaProduto);
+        concluirAcaoEdicao(url.desativarProdutoConfirmado, produto, url.listaProduto);
     };
     var listarInativos = function () {
         chamaPagina(url.listarInativos);

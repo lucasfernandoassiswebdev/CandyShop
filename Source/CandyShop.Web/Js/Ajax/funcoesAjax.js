@@ -62,10 +62,9 @@ function chamaPaginaComIdentificador(endereco, identificador) {
 
 function concluirAcao(endereco, objeto, tela) {
     $.post(endereco, objeto)
-        //passar o parametro data aqui quando for definida a mensagem 
         .done(function (message) {
             chamaPagina(tela);
-            Materialize.toast(message, 3000);
+            Materialize.toast(message, 1500);
         })
         .fail(function (xhr) {
             console.log(xhr.responseText);
