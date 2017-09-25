@@ -5,12 +5,12 @@
 
 $('.botaoVoltar').on('click', function () {
     //voltando a lista de usuários
-    AjaxJs.listaUsuario();
+    AjaxJsUsuario.listaUsuario();
 });
 
 $('.botaoCadastro').on('click', function () {
     //convertendo a imagem para base64
-    encodeImageFileAsURL(AjaxJs.concluirCadastroUsuario);
+    encodeImageFileAsURL(AjaxJsUsuario.concluirCadastroUsuario);
 });
 
 function readURL(input) {
@@ -118,6 +118,8 @@ function encodeImageFileAsURL(callback) {
         };
 
         fileReader.readAsDataURL(fileToLoad);
+    } else {
+        callback();
     }
 }
 

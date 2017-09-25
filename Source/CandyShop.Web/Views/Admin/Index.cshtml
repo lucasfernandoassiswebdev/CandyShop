@@ -3,12 +3,15 @@
 }
 
 <script type="text/javascript" src="../../Js/scriptsAdmin.js?d=@DateTime.Now.Ticks"></script>
-<script type="text/javascript" src="../../Js/Ajax.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/AjaxCompra.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/AjaxPagamento.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/AjaxProduto.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/AjaxShop.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/AjaxUsuario.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/Ajax/funcoesAjax.js?d=@DateTime.Now.Ticks"></script>
 <script>
     $(document).ready(function () {
-        AjaxJs.init({
-            main: '@Url.Action("Listar", "Produto")',
-            //usuários
+        AjaxJsUsuario.init({
             listaUsuario: '@Url.Action("Listar", "Usuario")',
             mostraSaldo: '@Url.Action("Index", "Shop")',
             cadastroUsuario: '@Url.Action("Cadastrar","Usuario")',
@@ -20,8 +23,10 @@
             desativarUsuarioConfirmado: '@Url.Action("DesativarUsuario", "Usuario")',
             listarUsuarioInativo: '@Url.Action("ListarInativos", "Usuario")',
             listarUsuarioEmDivida: '@Url.Action("ListarUsuariosEmDivida", "Usuario")',
-            listarUsuarioPorNome: '@Url.Action("ProcurarUsuario", "Usuario")',
-            //produtos
+            listarUsuarioPorNome: '@Url.Action("ProcurarUsuario", "Usuario")'
+        });
+
+        AjaxJsProduto.init({
             listaProduto: '@Url.Action("Listar", "Produto")',
             cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")',
             concluirCadastroProduto: '@Url.Action("CadastrarProduto", "Produto")',
@@ -31,8 +36,10 @@
             desativarProduto: '@Url.Action("DesativarProduto", "Produto")',
             desativarProdutoConfirmado: '@Url.Action("DesativarProdutoConfirmado", "Produto")',
             listarInativos: '@Url.Action("ListarInativos", "Produto")',
-            listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Produto")',
-            //pagamentos
+            listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Produto")'
+        });
+
+        AjaxJsPagamento.init({
             listarPagamento: '@Url.Action("Listar", "Pagamento")',
             listarPagamentoSemana: '@Url.Action("ListarSemana", "Pagamento")',
             listarPagamentoMes: '@Url.Action("ListarMes", "Pagamento")',
@@ -40,7 +47,16 @@
             detalhePagamento: '@Url.Action("Detalhes", "Pagamento")'
         });
 
-        @{ TempData.Remove("Verificacao");};
+        AjaxJsCompra.init({
+            historicoCompra : '@Url.Action("Listar", "Compra")'
+        });
+
+        AjaxJsShop.init({
+            mostraSaldo : '@Url.Action("Listar", "Shop")'
+        });
+
+
+
     })
 </script>
 
@@ -55,7 +71,7 @@
         </form>
     </div>
     <div class="modal-footer center">
-        <a href="#!" onclick="AjaxJs.listarUsuarioPorNome()" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
+        <a href="#!" onclick="AjaxJsUsuario.listarUsuarioPorNome()" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
     </div>
 </div>
 
@@ -68,7 +84,7 @@
         </form>
     </div>
     <div class="modal-footer center">
-        <a href="#!" onclick="AjaxJs.listarProdutoPorNome()" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
+        <a href="#!" onclick="AjaxJsProduto.listarProdutoPorNome()" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
     </div>
 </div>
 
@@ -89,11 +105,11 @@
                 </div>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a class="closeMenu" href="#!" onclick="AjaxJs.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
-                        <li><a class="closeMenu" href="#!" onclick="AjaxJs.listarUsuarioEmDivida()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
+                        <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
+                        <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listarUsuarioEmDivida()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
                         <li><a class="close-menu modal-trigger" href="#modal1"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
-                        <li><a class="closeMenu" href="#!" onclick="AjaxJs.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
-                        <li><a class="closeMenu" href="#!" onclick="AjaxJs.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
+                        <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
+                        <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
                     </ul>
                 </div>
             </li>
@@ -104,10 +120,10 @@
                 </div>
                 <div class="collapsible-body">
                     <ul class="brown-text">
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
                         <li><a href="#modal2" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarInativos()"><i class="material-icons">list</i>Listar Inativos</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.listarInativos()"><i class="material-icons">list</i>Listar Inativos</a></li>
                     </ul>
                 </div>
             </li>
@@ -117,15 +133,15 @@
                 </div>
                 <div class="collapsible-body">
                     <ul class="brown-text">
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarPagamentoDia();"><i class="material-icons">access_time</i>Hoje</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarPagamentoSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJs.listarPagamento();"><i class="material-icons">book</i>Ultimo mês</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamentoDia();"><i class="material-icons">access_time</i>Hoje</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamentoSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamento();"><i class="material-icons">book</i>Ultimo mês</a></li>
                     </ul>
                 </div>
             </li>
         </ul>
     </li>
-    <li><a class="dropdown-button white-text" href="#!" onclick="AjaxJs.mostraSaldo()"><i class="material-icons left white-text">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
+    <li><a class="dropdown-button white-text" href="#!" onclick="AjaxJsShop.mostraSaldo()"><i class="material-icons left white-text">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
     <li>
         <div class="divider"></div>
     </li>
