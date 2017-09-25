@@ -1,9 +1,17 @@
-﻿using System.Web.Mvc;
+﻿using CandyShop.Application.Interfaces;
+using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IProdutoApplication _appProduto;
+
+        public HomeController(IProdutoApplication produto)
+        {
+            _appProduto = produto;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -18,7 +26,9 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult Main()
         {
-            return View();
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
+            var produtos = _appProduto.ListarProdutos();
+            return View(produtos.Content);
         }
     }
 }

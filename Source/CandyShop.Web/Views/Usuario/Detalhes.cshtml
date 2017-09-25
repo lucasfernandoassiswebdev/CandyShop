@@ -28,7 +28,7 @@
                 CPF
             </dt>
 
-            <dd>
+            <dd class="cpf">
                 @Model.Cpf
             </dd>
 
@@ -52,3 +52,20 @@
         <a class="waves-effect waves-light btn" onclick="AjaxJsUsuario.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.cpf').each(function () {
+            $(this).html(mcpf($(this).html()));
+        });
+    });
+
+    function mcpf(v) {
+        v = v.replace(/\D/g, "");
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+        return v;
+    }
+</script>

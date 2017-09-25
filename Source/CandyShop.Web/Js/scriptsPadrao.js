@@ -2,7 +2,9 @@
 
 $(document).ready(function () {
     $('.tooltipped').tooltip({ delay: 50 });
-
+    $(".button-collapse").sideNav();
+   
+   
     $('#DivGrid').on('click', '.btn-floating', function () {
         preco = $(this).attr('data-Preco');
         nome = $(this).attr('data-Nome');
@@ -17,7 +19,7 @@ $(document).ready(function () {
         $("div[class='collection']").append($("<li>",
         {
             html: [
-                $('<img>', { src: imagem, class: 'circle' }),
+                $('<img>', { src: imagem, class: 'circle', style: 'max-width:100px;margin-top:-1.1%'}),
                 $('<span>', { html: nome, class: 'title' }),
                 $('<p>', { html: 'Quantidade: ' + quantidade }),
                 $('<a>',

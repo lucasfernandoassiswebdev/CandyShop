@@ -1,24 +1,33 @@
-﻿@{ Layout = null; }
+﻿@model IEnumerable<CandyShop.Application.ViewModels.ProdutoViewModel>
 
-<script type="text/javascript" src="../../Js/scriptsMain.js"></script>
-<script type="text/javascript" src="../../Js/scriptsPadrao.js"></script>
+@{ Layout = null; }
+
+<style>
+    img {
+        max-width: 100%;
+    }
+</style>
 
 <!--exemplo do grid de produtos-->
 <!--6 produtos por linha!!!!-->
 <!--depois disso deverá ser criada uma nova-->
 <div class="row">
-    <div class="col s12 m4 l2">
-        <div class="card">
-            <div class="card-image">
-                <img src="../../Imagens/moranguete.jpg">
-                <span class="card-title flow-text">Moranguete</span>
-                <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50"  data-tooltip="Nome do produto R$ 0,80" data-Preco="0.8" data-Nome="Moranguete" data-Imagem="moranguete.jpg"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-                <p>R$ 0,80</p>
+    @foreach (var produto in Model)
+    {
+        <div class="col s12 m4 l2">
+            <div class="card">
+                <div class="card-image">
+                    @{ string nomeA = @produto.IdProduto + "_A.jpg";}
+                    <img src="@TempData["caminhoImagensProdutos"]/@nomeA">
+                    <span class="card-title flow-text">@produto.NomeProduto</span>
+                    <a href="#modal1" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nome do produto R$ 0,80" data-Preco="@produto.PrecoProduto" data-Nome="@produto.NomeProduto" data-Imagem="@TempData["caminhoImagensProdutos"]/@nomeA"><i class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>R$ @produto.PrecoProduto</p>
+                </div>
             </div>
         </div>
-    </div>
+    }
 </div>
 
 

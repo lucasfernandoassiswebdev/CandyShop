@@ -1,9 +1,7 @@
-﻿@using CandyShop.Application.ViewModels
-@{
+﻿@{
     ViewBag.Title = "Padrao";
 }
 
-<script type="text/javascript" src="../../Js/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
 <script>
     $(document).ready(function() {
         AjaxJsPagamento.init({
@@ -182,7 +180,7 @@ else
             <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
 
             <ul class="hide-on-med-and-down">
-                
+                <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
                 <li>
                     <div class="col s4 hide-on-med-and-down">
@@ -230,6 +228,14 @@ else
 }
 
 <div id="DivGrid"><img src="https://media.tenor.com/images/d6cd5151c04765d1992edfde14483068/tenor.gif" style="width: 100px;height: 100px;margin: 0 auto;display: block;"></div>
+
+<script type="text/javascript" src="../../Scripts/materialize.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.tooltipped').tooltip({ delay: 50 });
+        $(".button-collapse").sideNav();
+    });
+</script>
 
 
 
