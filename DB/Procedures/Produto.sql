@@ -287,7 +287,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisPr
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_LisProdutoAbaixoValor]
-	@Valor decimal(18,2)
+	@Valor decimal(15,2)
 	AS
 
 	/*
@@ -312,7 +312,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisPr
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_LisProdutoAcimaValor]
-	@valor decimal(18,2)
+	@valor decimal(15,2)
 	AS
 
 	/*
