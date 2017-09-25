@@ -14,6 +14,7 @@ namespace CandyShop.Application.Interfaces
         Response<string> DesativarUsuario(UsuarioViewModel usuario);
         Response<IEnumerable<UsuarioViewModel>> ListarInativos();
         Response<IEnumerable<UsuarioViewModel>> ProcurarUsuario(string nome);
+        Response<decimal> VerificaCreditoLoja();
         HttpResponseMessage VerificaLogin(UsuarioViewModel usuario);
     }
 }
