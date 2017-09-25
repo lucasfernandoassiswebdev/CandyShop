@@ -7,10 +7,15 @@
 
     var mostraSaldo = function () {
         chamaPagina(url.mostraSaldo);
-    };   
+    };
+
+    var voltarInicio = function() {
+        main();
+    };
 
     return {
         init: init,
-        mostraSaldo: mostraSaldo         
+        mostraSaldo: mostraSaldo,
+        voltarInicio: voltarInicio
 }
 })(jQuery);

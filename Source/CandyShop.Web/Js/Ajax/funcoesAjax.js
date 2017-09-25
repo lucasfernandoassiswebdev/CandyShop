@@ -1,7 +1,7 @@
 ﻿//carrega a pagina de inicio
-function main(endereco) {
+function main() {
     //pega a view main e a carrega no div
-    $.get(endereco).done(function (data) {
+    $.get(url.main).done(function (data) {
         $("#DivGrid").slideUp(function () {
             //desce  o divgrid  
             $('#DivGrid').hide().html(data).slideDown();
@@ -14,6 +14,7 @@ function main(endereco) {
 
 //função que vai carregar o corpo inteiro da pagina
 function carregaPadrao() {
+    console.log(url.padrao);
     $.get(url.padrao)
         .done(function (data) {
             $('body').slideUp(function () {
