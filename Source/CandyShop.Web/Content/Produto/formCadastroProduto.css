@@ -25,3 +25,8 @@ img {
 img:hover {
 	opacity: 0.7;
 }
+
+.ajuste {
+	margin-left: -20%;
+	margin-top: -7%;
+}

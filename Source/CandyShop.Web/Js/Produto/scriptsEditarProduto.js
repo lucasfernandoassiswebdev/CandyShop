@@ -9,8 +9,8 @@ $('.botaoVoltar').on('click', function () {
 });
 
 //cadastrando o produto
-$('.botaoCadastro').on('click', function () {
-    encodeImageFileAsURL(AjaxJsProduto.concluirCadastroProduto);
+$('.botaoEditar').on('click', function () {
+    encodeImageFileAsURL(AjaxJsProduto.concluirEdicaoProduto);
 });
 
 function encodeImageFileAsURL(callback) {
@@ -55,6 +55,7 @@ function encodeImageFileAsURL(callback) {
             fileReaderC.onload = function (fileLoadedEvent) {
                 base64C = fileLoadedEvent.target.result;
                 if (typeof callback === "function") {
+                    console.log(base64A,base64B,base64C);
                     callback(base64A, base64B, base64C);
                 }
             };

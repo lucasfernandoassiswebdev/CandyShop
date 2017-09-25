@@ -1,6 +1,5 @@
 ﻿.corpo, hr {
 	width: 100%;
-	max-width: 400px;
 	margin: 0 auto;
 	text-align: left;
 }
@@ -10,8 +9,8 @@
 }
 
 dd {
-	margin-left: 33%;
-	margin-top: -5%;
+	margin-left: 16%;
+	margin-top: -2.5%;
 }
 
 dt {
@@ -20,4 +19,9 @@ dt {
 
 h4 {
 	margin-left: -1%;
+}
+
+img {
+	max-width: 200px;
+	display: inline-block;
 }

@@ -1,6 +1,5 @@
 ﻿ .corpo, hr {
 	 width: 100%;
-	 max-width: 400px;
 	 margin: 0 auto;
 	 text-align: left;
  }
@@ -10,8 +9,8 @@
  }
 
  dd {
-	 margin-left: 54%;
-	 margin-top: -7%;
+	 margin-left: 29%;
+	 margin-top: -3.5%;
 	 color: red;
  }
 
@@ -20,5 +19,10 @@
  }
 
  .batata {
-	 margin-left: -37%;
+	 margin-left: -70%;
+ }
+
+ img {
+	 max-width: 200px;
+	 display: inline-block;
  }

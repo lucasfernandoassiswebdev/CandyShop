@@ -4,48 +4,66 @@
     Layout = null;
 }
 
+<link rel="stylesheet" type="text/css" href="../../Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
+<script type="text/javascript" src="../../Js/Produto/scriptsEditarProduto.js?d=@DateTime.Now.Ticks"></script>
+
 <div class="container">
-    <div class="row" style="margin-left: -20%">
+    <div class="row ajuste">
         <form class="col s12">
             <div class="row">
                 <div class="center">
                     <h1 class="center">Editar <font color="brown">Produto</font></h1>
                 </div>
-                <div class="file-field input-field">
-                    <div class="btn">
-                        <span>File</span>
-                        <input type="file">
-                    </div>                    
-                    <div class="file-path-wrapper">
-                        <input placeholder="foto do produto" class="file-path validate" type="text">
-                    </div>
+            </div>
+            <!--fotos-->
+            <div class="row">
+                <!--pegando o caminho das fotos-->
+                @{ var nomeA = @Model.IdProduto + "_A.jpg";}
+                @{ var nomeB = @Model.IdProduto + "_B.jpg";}
+                @{ var nomeC = @Model.IdProduto + "_C.jpg";}
+                <div class="center">
+                    <label for="fotoProduto1">
+                        <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagens"]/@nomeA?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                    </label>
+                    <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+
+                    <label for="fotoProduto2">
+                        <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagens"]/@nomeB?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                    </label>
+                    <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+
+                    <label for="fotoProduto3">
+                        <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagens"]/@nomeC?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                    </label>
+                    <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
                 </div>
             </div>
-            <div class="row">                
-                <div class="input-field col s6">
-                    <input placeholder="Placeholder" id="NomeProduto" name="Nome" type="text" class="validate" required="" value="@Model.NomeProduto">
-                    <label class="active">Nome:</label>
-                </div>
-                
-                <div class="input-field col s6">
+            <div class="row">
+                <div class="input-field col s12">
                     <input placeholder="Placeholder" id="IdProduto" name="IdProduto" type="text" class="validate" required="" value="@Model.IdProduto" disabled="disabled">
                     <label class="active">ID do Produto:</label>
-                </div>                
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Placeholder" id="NomeProduto" name="Nome" type="text" class="validate" required data-length="40" autocomplete="off" value="@Model.NomeProduto">
+                    <label class="active">Nome:</label>
+                </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="PrecoProduto" type="text" class="validate" value="@Model.PrecoProduto">
+                    <input id="PrecoProduto" type="text" type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" value="@Model.PrecoProduto">
                     <label class="active" for="PrecoProduto">Preco do Produto:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="QtdeProduto" name="QtdeProduto" type="text" class="validate" required="" value="@Model.QtdeProduto">
+                    <input id="QtdeProduto" name="QtdeProduto" type="text"  type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required value="@Model.QtdeProduto">
                     <label class="active">Quantidade em estoque:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     <select id="Categoria">
-                        <option value="" disabled >Escolha uma opção</option>
+                        <option value="" disabled>Escolha uma opção</option>
                         <option value="Doces" selected>Doces</option>
                         <option value="Balas">Balas</option>
                         <option value="Bebidas">Bebidas</option>
@@ -65,8 +83,8 @@
                 </div>
             </div>
             <div class="row" , align="center">
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJsProduto.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJsProduto.concluirEdicaoProduto()"><i class="material-icons left">edit</i>Editar</a>
+                <a class="waves-effect waves-light btn-large botaoVoltar"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large botaoEditar"><i class="material-icons left">edit</i>Editar</a>
             </div>
         </form>
     </div>
