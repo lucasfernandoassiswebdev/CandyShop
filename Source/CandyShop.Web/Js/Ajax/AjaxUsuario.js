@@ -76,10 +76,9 @@
         deslogar();
         Materialize.toast("Deslogado", 3000);
     };
-
+   
     return {
         init: init,
-        historicoCompra: historicoCompra,
         concluirCadastroUsuario: concluirCadastroUsuario,
         listaUsuario: listaUsuario,
         cadastroUsuario: cadastroUsuario,

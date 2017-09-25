@@ -5,15 +5,15 @@
 
 $('.botaoVoltar').on('click', function () {
     //voltando a lista de usuários
-    AjaxJs.listaUsuario();
+    AjaxJsUsuario.listaUsuario();
 });
 
 $('.botaoEditar').on('click', function () {
     var filesSelected = document.getElementById("fotoUsuario").files;
     if (filesSelected.length > 0)
-        encodeImageFileAsURL(AjaxJs.concluirEdicaoUsuario);
+        encodeImageFileAsURL(AjaxJsUsuario.concluirEdicaoUsuario);
     else
-        AjaxJs.concluirEdicaoUsuario();
+        AjaxJsUsuario.concluirEdicaoUsuario();
 });
 
 function readURL(input) {

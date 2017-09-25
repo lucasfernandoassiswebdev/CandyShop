@@ -4,6 +4,7 @@
     // Lista de objetos que guarda o nome e o endereco da pagina, sã carregados na pagina padrao
     var init = function (config) {
         url = config;
+        main(url.listaProduto);
     };
 
     var listaProduto = function () {
@@ -62,7 +63,6 @@
     //retorna links para acessar as paginas.
     return {
         init: init,
-        voltarInicio: voltarInicio,
         listaProduto: listaProduto,
         cadastrarProduto: cadastrarProduto,
         concluirCadastroProduto: concluirCadastroProduto,

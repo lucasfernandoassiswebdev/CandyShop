@@ -32,13 +32,13 @@
                     R$ @Html.DisplayFor(modelItem => usuario.SaldoUsuario)
                 </td>
                 <td>
-                    <a class="btn-floating waves-effect waves-light brown" onclick="AjaxJs.detalheUsuario('@usuario.Cpf');"><i class="material-icons">info_outline</i></a>
+                    <a class="btn-floating waves-effect waves-light brown" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf');"><i class="material-icons">info_outline</i></a>
                 </td>
                 <td>
-                    <a class="btn-floating waves-effect waves-light orange" onclick="AjaxJs.editarUsuario('@usuario.Cpf');"><i class="material-icons">edit</i></a>
+                    <a class="btn-floating waves-effect waves-light orange" onclick="AjaxJsUsuario.editarUsuario('@usuario.Cpf');"><i class="material-icons">edit</i></a>
                 </td>
                 <td>
-                    <a class="btn-floating waves-effect waves-light red" onclick="AjaxJs.desativarUsuario('@usuario.Cpf');"><i class="material-icons">remove_shopping_cart</i></a>
+                    <a class="btn-floating waves-effect waves-light red" onclick="AjaxJsUsuario.desativarUsuario('@usuario.Cpf');"><i class="material-icons">remove_shopping_cart</i></a>
                 </td>
             </tr>
         }
@@ -57,9 +57,9 @@
                         <br />
                         <span>Saldo : R$ @usuario.SaldoUsuario</span>
                         <br /><br />
-                        <a class="btn-floating waves-effect waves-light brown" onclick="AjaxJs.detalheUsuario('@usuario.Cpf');"><i class="material-icons">info_outline</i></a>
-                        <a class="btn-floating waves-effect waves-light orange" onclick="AjaxJs.editarUsuario('@usuario.Cpf');"><i class="material-icons">edit</i></a>
-                        <a class="btn-floating waves-effect waves-light red" onclick="AjaxJs.desativarUsuario('@usuario.Cpf');"><i class="material-icons">remove_shopping_cart</i></a>
+                        <a class="btn-floating waves-effect waves-light brown" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf');"><i class="material-icons">info_outline</i></a>
+                        <a class="btn-floating waves-effect waves-light orange" onclick="AjaxJsUsuario.editarUsuario('@usuario.Cpf');"><i class="material-icons">edit</i></a>
+                        <a class="btn-floating waves-effect waves-light red" onclick="AjaxJsUsuario.desativarUsuario('@usuario.Cpf');"><i class="material-icons">remove_shopping_cart</i></a>
                     </div>
                 </li>
             }

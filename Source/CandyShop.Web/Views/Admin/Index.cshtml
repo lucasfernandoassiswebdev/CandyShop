@@ -27,7 +27,6 @@
         });
 
         AjaxJsProduto.init({
-            main: '@Url.Action("Listar", "Produto")',
             listaProduto: '@Url.Action("Listar", "Produto")',
             cadastrarProduto: '@Url.Action("CadastrarProduto", "Produto")',
             concluirCadastroProduto: '@Url.Action("CadastrarProduto", "Produto")',
@@ -47,6 +46,17 @@
             listarPagamentoDia: '@Url.Action("ListarDia", "Pagamento")',
             detalhePagamento: '@Url.Action("Detalhes", "Pagamento")'
         });
+
+        AjaxJsCompra.init({
+            historicoCompra : '@Url.Action("Listar", "Compra")'
+        });
+
+        AjaxJsShop.init({
+            mostraSaldo : '@Url.Action("Listar", "Shop")'
+        });
+
+
+
     })
 </script>
 

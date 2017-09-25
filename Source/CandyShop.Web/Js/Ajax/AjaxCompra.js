@@ -11,6 +11,6 @@
    
     return {
         init: init,
-       
+        historicoCompra: historicoCompra
     }
 })(jQuery);
