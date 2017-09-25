@@ -3,14 +3,6 @@
     ViewBag.Title = "Padrao";
 }
 
-<script type="text/javascript" src="../../Js/scriptsAdmin.js?d=@DateTime.Now.Ticks"></script>
-<script type="text/javascript" src="../../Js/Ajax/AjaxCompra.js?d=@DateTime.Now.Ticks"></script>
-<script type="text/javascript" src="../../Js/Ajax/AjaxPagamento.js?d=@DateTime.Now.Ticks"></script>
-<script type="text/javascript" src="../../Js/Ajax/AjaxShop.js?d=@DateTime.Now.Ticks"></script>
-<script type="text/javascript" src="../../Js/Ajax/AjaxProduto.js?d=@DateTime.Now.Ticks"></script>
-<script type="text/javascript" src="../../Js/Ajax/AjaxUsuario.js?d=@DateTime.Now.Ticks"></script>
-<script type="text/javascript" src="../../Js/Ajax/funcoesAjax.js?d=@DateTime.Now.Ticks"></script>
-
 <script type="text/javascript" src="../../Js/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
 <script>
     $(document).ready(function() {
@@ -18,6 +10,7 @@
             listarPagamento: '@Url.Action("ListarCpf", "Pagamento")',
             inserirPagamento: '@Url.Action("Inserir", "Pagamento")',
             concluirPagamento: '@Url.Action("InserirPagamento", "Pagamento")'
+
         });
 
         AjaxJsCompra.init({
@@ -130,7 +123,7 @@
     <nav class="brown nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.main()"><i class="material-icons">store</i>Candy Shop</a>
+            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -185,7 +178,7 @@ else
     <nav class="brown nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.main()"><i class="material-icons">store</i>Candy Shop</a>
+            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
 
             <ul class="hide-on-med-and-down">
                 

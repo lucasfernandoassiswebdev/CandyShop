@@ -14,6 +14,7 @@ function main(endereco) {
 
 //função que vai carregar o corpo inteiro da pagina
 function carregaPadrao() {
+    console.log(url.padrao);
     $.get(url.padrao)
         .done(function (data) {
             $('body').slideUp(function () {
