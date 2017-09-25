@@ -25,7 +25,7 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompraProduto]
 		INSERT INTO CompraProduto (IdProduto, IdCompra, QtdeProduto)
 			VALUES (@IdProduto, @IdCompra, @QtdeProduto)
 
-			DECLARE @PrecoProduto decimal
+			DECLARE @PrecoProduto decimal(15,2)
 			DECLARE @Cpf varchar(11)
 
 			UPDATE [dbo].[Compra]

@@ -42,7 +42,7 @@ GO
 CREATE PROCEDURE [dbo].[CSSP_DesProduto]
 	@IdProduto int
 	AS
-
+	
 	/*
 	Documentação
 	Arquivo Fonte.....: Produto.sql

@@ -5,7 +5,7 @@ use CandyShop
 CREATE TABLE Produto (
 	IdProduto int constraint PK_Produto primary key identity (1,1),
 	NomeProduto varchar(40),
-	PrecoProduto decimal(18,2),
+	PrecoProduto decimal(15,2),
 	QtdeProduto int,
 	Ativo varchar(1),
 	Categoria varchar(50)
@@ -30,7 +30,7 @@ CREATE TABLE Compra(
 	IdCompra int constraint PK_IdCompra primary key identity (1,1),
 	UsuarioCompra varchar(11) constraint FK_UsuarioCompra foreign key references Usuario (Cpf),
 	DataCompra datetime,
-	ValorCompra decimal(18,2)
+	ValorCompra decimal(15,2)
 )	
 
 CREATE TABLE CompraProduto(
