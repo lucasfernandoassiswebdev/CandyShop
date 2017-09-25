@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CandyShop.Application.Interfaces;
+using System;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using CandyShop.Application.Interfaces;
 
 namespace CandyShop.Web.Controllers
 {
@@ -14,7 +14,6 @@ namespace CandyShop.Web.Controllers
         {
             _appCompra = compra;
         }
-
 
         // GET: Compra
         public ActionResult Index()
@@ -59,7 +58,7 @@ namespace CandyShop.Web.Controllers
         {
             ViewBag.tituloPagina = $"Compra do mês {mes}";
             ViewBag.drop = 0;
-            var response = _appCompra.ListarCompras(mes);
+            var response = _appCompra.ListarComprasMes(mes);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
             return View("Index", response.Content);

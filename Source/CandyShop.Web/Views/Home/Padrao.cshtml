@@ -3,7 +3,10 @@
 }
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
+        $('.tooltipped').tooltip({ delay: 50 });
+        $(".button-collapse").sideNav();
+
         AjaxJsPagamento.init({
             listarPagamento: '@Url.Action("ListarCpf", "Pagamento")',
             inserirPagamento: '@Url.Action("Inserir", "Pagamento")',
@@ -12,7 +15,7 @@
         });
 
         AjaxJsCompra.init({
-            historicoCompra: '@Url.Action("Historico", "Compra")'
+            historicoCompra: '@Url.Action("Listar", "Compra")'
         });
 
         AjaxJsUsuario.init({
@@ -32,6 +35,7 @@
 </script>
 
 <link href="~/Content/Principal/Main.css" rel="stylesheet" />
+<script type="text/javascript" src="../../Js/telaPrincipal/scriptsCarrinho.js"></script>
 
 <!--modal de quantidade-->
 <div id="modal1" class="modal">
@@ -104,7 +108,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#!" id="confirmaCompra" class="modal-action modal-close waves-effect waves-green btn-flat">Confirmar</a>
+        <a href="#!" id="editarQuantidade" class="modal-action modal-close waves-effect waves-green btn-flat">Confirmar</a>
     </div>
 </div>
 
@@ -229,13 +233,7 @@ else
 
 <div id="DivGrid"><img src="https://media.tenor.com/images/d6cd5151c04765d1992edfde14483068/tenor.gif" style="width: 100px;height: 100px;margin: 0 auto;display: block;"></div>
 
-<script type="text/javascript" src="../../Scripts/materialize.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.tooltipped').tooltip({ delay: 50 });
-        $(".button-collapse").sideNav();
-    });
-</script>
+
 
 
 

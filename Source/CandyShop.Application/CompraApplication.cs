@@ -64,10 +64,7 @@ namespace CandyShop.Application
             }
         }
 
-
-
         #region Listas
-
         public Response<IEnumerable<CompraViewModel>> ListaCompra()
         {
             using (var client = new HttpClient())

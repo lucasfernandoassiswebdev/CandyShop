@@ -27,7 +27,12 @@ $(document).ready(function () {
                     href: '#modal4',
                     class: 'modal-trigger secondary-content',
                     html: [
-                        $('<i>', { html: 'mode_edit', class: 'material-icons' })
+                        $('<i>',
+                            {
+                                html: 'mode_edit',
+                                class: 'material-icons',
+                                data-NomeProduto: nome
+                            })
                     ]
                 })
             ],
