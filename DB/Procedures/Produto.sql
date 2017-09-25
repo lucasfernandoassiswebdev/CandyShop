@@ -7,7 +7,7 @@ GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsProduto]
 	@NomeProduto varchar(40),
-	@PrecoProduto decimal,
+	@PrecoProduto decimal(15,2),
 	@QtdeProduto int,
 	@Ativo varchar(1) = 'A',
 	@Categoria varchar(50)
