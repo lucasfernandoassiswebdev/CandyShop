@@ -23,7 +23,8 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisProdutoAcimaValor,
             CSSP_LisProdutoCategoria,
             CSSP_SelDadosProduto,
-            CSSP_LisProdPorNome
+            CSSP_LisProdPorNome,
+            CSSP_SelUltimoId
         }
 
         public void InserirProduto(ProdutoDto produto)
@@ -38,7 +39,7 @@ namespace CandyShop.Repository.Repositorys
         }
 
         //não será mais usado temporariamente
-        public void DesativarProduto(int idProduto) 
+        public void DesativarProduto(int idProduto)
         {
             ExecuteProcedure(Procedures.CSSP_DesProduto);
             AddParameter("@IdProduto", idProduto);
@@ -195,7 +196,7 @@ namespace CandyShop.Repository.Repositorys
 
         public IEnumerable<ProdutoDto> ListarProdutosPorCategoria()
         {
-            ExecuteProcedure(Procedures.CSSP_LisProdutoCategoria);            
+            ExecuteProcedure(Procedures.CSSP_LisProdutoCategoria);
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
@@ -228,6 +229,15 @@ namespace CandyShop.Repository.Repositorys
                         Categoria = reader.ReadAsString("Categoria")
                     });
             return retorno;
+        }
+
+        public int BuscaUltimoProduto()
+        {
+            ExecuteProcedure(Procedures.CSSP_SelUltimoId);
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    return reader.ReadAsInt("IdProduto");
+            return 0;
         }
     }
 }

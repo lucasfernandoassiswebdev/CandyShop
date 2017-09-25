@@ -66,7 +66,7 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro " + response.ContentAsString.First());
             }
 
-            TempData["caminhoImagens"] = "../../Imagens";
+            TempData["caminhoImagens"] = "../../Imagens/Usuarios";
             return View("Index", response.Content);
         }
 
@@ -125,7 +125,7 @@ namespace CandyShop.Web.Controllers
 
                             //montando o nome e caminho de save da imagem
                             usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                            string caminho = $"~/Imagens/{usuario.Cpf}.jpg";
+                            string caminho = $"~/Imagens/Usuarios/{usuario.Cpf}.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                         }
