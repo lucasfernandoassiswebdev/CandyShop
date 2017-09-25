@@ -8,7 +8,7 @@ using System.Net.Http.Formatting;
 
 namespace CandyShop.Application
 {
-    public class CompraApplication : ICompraInterface
+    public class CompraApplication : ICompraApplication
     {
         private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/compra";
 
@@ -17,17 +17,6 @@ namespace CandyShop.Application
             using (var client = new HttpClient())
             {
                 var response = client.PostAsync(_enderecoApi, compra, new JsonMediaTypeFormatter()).Result;
-                return response.StatusCode != HttpStatusCode.OK
-                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
-                    : new Response<string>(response.StatusCode);
-            }
-        }
-
-        public Response<string> InserirItens(ProdutoViewModel produto)
-        {
-            using (var client = new HttpClient())
-            {
-                var response = client.PostAsync(_enderecoApi, produto, new JsonMediaTypeFormatter()).Result;
                 return response.StatusCode != HttpStatusCode.OK
                     ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
                     : new Response<string>(response.StatusCode);
@@ -45,30 +34,23 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<IEnumerable<CompraViewModel>> ListaCompra()
+        public Response<string> InserirItens(ProdutoViewModel compraProduto)
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync($"{_enderecoApi}/listacompra").Result;
-                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
+                var response = client.PostAsync(_enderecoApi, compraProduto, new JsonMediaTypeFormatter()).Result;
+                return response.StatusCode != HttpStatusCode.OK
+                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
+                    : new Response<string>(response.StatusCode);
             }
         }
 
-        public Response<IEnumerable<CompraViewModel>> ListaCompraPorCpf(string cpf)
+        public Response<CompraViewModel> SelecionarCompra(int idCompra)
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync($"{_enderecoApi}/listacompracpf").Result;
-                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
-            }
-        }
-
-        public Response<CompraViewModel> SelecionarCompra(int idcompra)
-        {
-            using (var client = new HttpClient())
-            {
-                var response = client.GetAsync($"{_enderecoApi}/selecionacompra").Result;
-                return new Response<CompraViewModel>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
+                var response = client.GetAsync($"{_enderecoApi}/selecionaCompra").Result;
+                return new Response<CompraViewModel>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
@@ -82,13 +64,67 @@ namespace CandyShop.Application
             }
         }
 
+
+
+        #region Listas
+
+        public Response<IEnumerable<CompraViewModel>> ListaCompra()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/listaCompra").Result;
+                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        public Response<IEnumerable<CompraViewModel>> ListaCompraPorCpf(string cpf)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/listaCompracpf/{cpf}").Result;
+                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        public Response<IEnumerable<CompraViewModel>> ListarComprasSemana()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/semana").Result;
+                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        public Response<IEnumerable<CompraViewModel>> ListarComprasMes(int mes)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/mes/{mes}").Result;
+                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        public Response<IEnumerable<CompraViewModel>> ListarComprasDia()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/dia").Result;
+                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
         public Response<IEnumerable<CompraViewModel>> ListaCompraPorNome(string nomeUsuario)
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync($"{_enderecoApi}/{nomeUsuario}").Result;
-                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result,response.StatusCode);
+                return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
+
+
+        #endregion
+
+
     }
 }
