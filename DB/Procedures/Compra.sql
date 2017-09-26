@@ -73,8 +73,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCo
 	DROP PROCEDURE [dbo].[CSSP_LisCompra]
 GO
 
-CREATE PROCEDURE [dbo].[CSSP_LisCompra]
-	@cpf VARCHAR(11) = NULL,
+CREATE PROCEDURE [dbo].[CSSP_LisCompra]	
 	@mes INT = 0
 	AS
 
@@ -95,31 +94,19 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompra]
 		IF @mes = 0
 		BEGIN 
 			SELECT @mes = MONTH(GETDATE())
-		END		
-		IF @CPF IS NULL
+		END				
 		BEGIN
 			SELECT	c.IdCompra,
 					c.UsuarioCompra ,
 					u.NomeUsuario as 'nomeUsuario',
-					c.DataCompra 
+					c.DataCompra,
+					c.ValorCompra
 			 FROM [dbo].[Compra] c WITH(NOLOCK)
 				INNER JOIN Usuario u 
 					ON u.Cpf = c.UsuarioCompra
 			WHERE MONTH(c.DataCompra) = @mes
 			ORDER BY c.DataCompra DESC
-		END
-		ELSE
-		BEGIN
-			SELECT	c.IdCompra,
-					c.UsuarioCompra ,
-					u.NomeUsuario as 'nomeUsuario',
-					c.DataCompra 
-			 FROM [dbo].[Compra] c WITH(NOLOCK)
-				INNER JOIN Usuario u 
-					ON u.Cpf = c.UsuarioCompra
-			WHERE (c.UsuarioCompra = @cpf) and (MONTH(c.DataCompra) = @mes)
-			ORDER BY c.DataCompra DESC			
-		END
+		END		
 	END
 GO
 
@@ -156,7 +143,8 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraSemana]
 			SELECT	c.IdCompra,
 					c.UsuarioCompra ,
 					u.NomeUsuario as 'nomeUsuario',
-					c.DataCompra 
+					c.DataCompra,
+					c.ValorCompra 
 			 FROM [dbo].[Compra] c WITH(NOLOCK)
 				INNER JOIN Usuario u 
 					ON u.Cpf = c.UsuarioCompra
@@ -168,7 +156,8 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraSemana]
 			SELECT	c.IdCompra,
 					c.UsuarioCompra ,
 					u.NomeUsuario as 'nomeUsuario',
-					c.DataCompra 
+					c.DataCompra,
+					c.ValorCompra 
 			 FROM [dbo].[Compra] c WITH(NOLOCK)
 				INNER JOIN Usuario u 
 					ON u.Cpf = c.UsuarioCompra
@@ -205,7 +194,8 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraDia]
 		SELECT	c.IdCompra,
 					c.UsuarioCompra ,
 					u.NomeUsuario as 'nomeUsuario',
-					c.DataCompra 
+					c.DataCompra,
+					c.ValorCompra 
 			 FROM [dbo].[Compra] c WITH(NOLOCK)
 				INNER JOIN Usuario u 
 					ON u.Cpf = c.UsuarioCompra
@@ -223,7 +213,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisCpfCompra]
 	@Cpf varchar(14)
 	
 	AS
-
+	
 	/*
 	Documentação
 	Arquivo Fonte.....: Compra.sql
@@ -239,7 +229,8 @@ CREATE PROCEDURE [dbo].[CSSP_LisCpfCompra]
 		SELECT	c.IdCompra,
 				c.UsuarioCompra as 'nomeUsuario',
 				u.NomeUsuario,
-				c.DataCompra 
+				c.DataCompra,
+				c.ValorCompra 
 		 FROM [dbo].[Compra] c WITH(NOLOCK)
 		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
 		 WHERE c.UsuarioCompra = @Cpf
