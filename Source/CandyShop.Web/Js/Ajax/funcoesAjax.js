@@ -13,13 +13,10 @@ function main(endereco) {
 }
 
 //Função genérica para carregar o div, de acordo com o endereço passado
-function chamaPagina(endereco) {
-    //data é o conteudo da view
-    $.get(endereco).done(function (data) {
-        //a div é recolhida
-        $('#DivGrid').slideUp(function () {
-            //escondida, carregada e demonstrada novamente                
-            $('#DivGrid').hide().html(data).slideDown();
+function chamaPagina(endereco) {    
+    $.get(endereco).done(function (data) {        
+        $('#DivGrid').slideUp(function () {            
+            $('#DivGrid').hide().html(data).slideDown();            
         });
     }).fail(function (xhr) {
         console.log(xhr.responseText);

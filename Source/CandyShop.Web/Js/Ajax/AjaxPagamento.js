@@ -27,9 +27,7 @@
         chamaPagina(url.inserirPagamento);
     };
     var concluirPagamento = function () {
-        var pagamento = { ValorPagamento: $('#valorPago').val() };
-        //concluirAcao(url.concluirPagamento, pagamento, url.listarPagamento);
-
+        var pagamento = { ValorPagamento: $('#valorPago').val() };        
         $.post(url.concluirPagamento, pagamento)            
             .done(function (message) {
                 $.get(url.padrao)

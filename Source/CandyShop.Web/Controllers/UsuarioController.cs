@@ -193,13 +193,13 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.VerificaLogin(usuario);
             if (!response.IsSuccessStatusCode)
-                return Content("Login incorreto!");
+                return Content("1"); //Content("CPF ou senha incorretos!");
 
             var model = JsonConvert.DeserializeObject<int>(response.Content.ReadAsStringAsync().Result);
 
             if (model != 1)
             {
-                return Content("Login ou senha incorretos");
+                return Content("1");
             }
 
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");

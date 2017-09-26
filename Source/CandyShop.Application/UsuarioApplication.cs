@@ -95,5 +95,17 @@ namespace CandyShop.Application
                 return client.PostAsync($"{_enderecoApi}/login",usuario, new JsonMediaTypeFormatter()).Result;
             }
         }
+
+        public Response<decimal> VerificaCreditoLoja()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/saldo").Result;
+                if (response.StatusCode != HttpStatusCode.OK)
+                    return new Response<decimal>(response.StatusCode);
+
+                return new Response<decimal>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
     }
 }

@@ -81,6 +81,12 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_usuarioRepository.ListarUsuarioPorNome(nome));
         }
 
+        [HttpGet, Route("api/Usuario/saldo")]
+        public IHttpActionResult GetSaldo()
+        {
+            return Ok(_usuarioRepository.VerificaCreditoLoja());
+        }
+
         public IHttpActionResult Put(UsuarioDto usuario)
         {
             try

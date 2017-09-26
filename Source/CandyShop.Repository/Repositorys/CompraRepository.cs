@@ -14,13 +14,15 @@ namespace CandyShop.Repository.Repositorys
             CSSP_InsCompra,
             CSSP_UpdCompra,
             CSSP_LisCompra,
-            CSSP_DelCompra,
-            CSSP_LisCpfCompra,
+            CSSP_DelCompra,            
             CSSP_SelCompra,
             CSSP_InsCompraProduto,
             CSSP_UpdCompraProduto,
             CSSP_DelCompraProduto,
-            CSSP_LisCompraNomeUsuario
+            CSSP_LisCompraNomeUsuario,
+            CSSP_LisCompraSemana,
+            CSSP_LisCompraDia,
+            CSSP_LisCpfCompra
         }
 
         public void InserirCompra(CompraDto compra)
@@ -57,46 +59,6 @@ namespace CandyShop.Repository.Repositorys
             ExecuteProcedure(Procedures.CSSP_DelCompra);
             AddParameter("@IdCompra", idCompra);
             ExecuteNonQuery();
-        }
-
-        public IEnumerable<CompraDto> ListarCompra()
-        {
-            ExecuteProcedure(Procedures.CSSP_LisCompra);
-            var retorno = new List<CompraDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new CompraDto()
-                    {
-
-                        IdCompra = reader.ReadAsInt("IdCompra"),
-                        DataCompra = reader.ReadAsDateTime("DataCompra"),
-                        Usuario = new UsuarioDto()
-                        {
-                            NomeUsuario = reader.ReadAsString("nomeUsuario"),
-                            Cpf = reader.ReadAsString("UsuarioCompra")
-                        }
-                    });
-            return retorno;
-        }
-
-        public IEnumerable<CompraDto> ListarCompraPorCpf(string cpf)
-        {
-            ExecuteProcedure(Procedures.CSSP_LisCpfCompra);
-            AddParameter("@Cpf", cpf);
-            var retorno = new List<CompraDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new CompraDto()
-                    {
-                        DataCompra = reader.ReadAsDateTime("DataCompra"),
-                        IdCompra = reader.ReadAsInt("IdCompra"),
-                        Usuario = new UsuarioDto()
-                        {
-                            Cpf = reader.ReadAsString("UsuarioCompra")
-                        }
-                    });
-
-            return retorno;
         }
 
         public int SelecionarCompra(int idCompra)
@@ -144,24 +106,63 @@ namespace CandyShop.Repository.Repositorys
             ExecuteNonQuery();
         }
 
+        public IEnumerable<CompraDto> ListarCompra()
+        {
+            ExecuteProcedure(Procedures.CSSP_LisCompra);
+            return Listar();
+        }
+
+        public IEnumerable<CompraDto> ListarCompraMes(int mes)
+        {
+            ExecuteProcedure(Procedures.CSSP_LisCompra);
+            AddParameter("@cpf", null);
+            AddParameter("@mes", mes);
+            return Listar();
+        }
+
+        public IEnumerable<CompraDto> ListarCompraPorCpf(string cpf)
+        {
+            ExecuteProcedure(Procedures.CSSP_LisCpfCompra);
+            AddParameter("@Cpf", cpf);            
+            return Listar();
+        }
+       
         public IEnumerable<CompraDto> ListarCompraPorNome(string nome)
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraNomeUsuario);
-            AddParameter("@Nome", nome);
+            AddParameter("@Nome", nome);            
+            return Listar();
+        }
+
+        public IEnumerable<CompraDto> ListarCompraSemana()
+        {
+            ExecuteProcedure(Procedures.CSSP_LisCompraSemana);
+            return Listar();
+        }       
+
+        public IEnumerable<CompraDto> ListarCompraDia()
+        {
+            ExecuteProcedure(Procedures.CSSP_LisCompraDia);
+            return Listar();
+        }
+
+        private IEnumerable<CompraDto> Listar()
+        {
             var retorno = new List<CompraDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
                     retorno.Add(new CompraDto()
                     {
+
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         DataCompra = reader.ReadAsDateTime("DataCompra"),
+                        ValorCompra = reader.ReadAsDecimal("ValorCompra"),
                         Usuario = new UsuarioDto()
                         {
                             NomeUsuario = reader.ReadAsString("nomeUsuario"),
                             Cpf = reader.ReadAsString("UsuarioCompra")
                         }
                     });
-
             return retorno;
         }
     }

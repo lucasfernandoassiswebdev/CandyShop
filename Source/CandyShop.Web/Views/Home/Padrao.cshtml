@@ -1,11 +1,12 @@
-﻿@using CandyShop.Application.ViewModels
-@{
+﻿@{
     ViewBag.Title = "Padrao";
 }
 
-<script type="text/javascript" src="../../Js/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
+        $('.tooltipped').tooltip({ delay: 50 });
+        $(".button-collapse").sideNav();
+
         AjaxJsPagamento.init({
             listarPagamento: '@Url.Action("ListarCpf", "Pagamento")',
             inserirPagamento: '@Url.Action("Inserir", "Pagamento")',
@@ -14,7 +15,7 @@
         });
 
         AjaxJsCompra.init({
-            historicoCompra: '@Url.Action("Historico", "Compra")'
+            historicoCompra: '@Url.Action("Listar", "Compra")'
         });
 
         AjaxJsUsuario.init({
@@ -26,25 +27,28 @@
         AjaxJsProduto.init({
             main: '@Url.Action("Main", "Home")'
         });
-
+        AjaxJsCompra.init({
+            historicoCompra: '@Url.Action("ListarCpf", "Compra")'
+        });
         AjaxJsShop.init({
 
         });
-    });
+});
 </script>
 
-<link href="~/Content/Principal/Main.css" rel="stylesheet" />
+<link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
+<script type="text/javascript" src="../../Js/telaPrincipal/scriptsMain.js?d=@DateTime.Now.Ticks"></script>
 
 <!--modal de quantidade-->
 <div id="modal1" class="modal">
     <div class="modal-content center">
         <h3>Quantidade</h3>
         <form class="center">
-            <input type="text" id="quantidade" class="center" autocomplete="off" />
+            <input type="number" id="quantidade" class="center" autocomplete="off" />
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#modal2" id="confirmacao" class="modal-trigger modal-close waves-effect waves-green btn-flat brown-text">Confirma</a>
+        <a id="confirmacao" class="waves-effect waves-green btn-flat brown-text">Confirma</a>
     </div>
 </div>
 
@@ -61,7 +65,7 @@
 <!--modal de compra-->
 <div id="modal3" class="modal">
     <div class="modal-content center">
-        <h3>Carrinho</h3>
+        <h3 style="font-weight: bold">Carrinho</h3>
         <div class="collection">
 
         </div>
@@ -93,7 +97,7 @@
     </div>
     <div class="modal-footer">
         <a href="#modalLogin" class="modal-trigger right modal-action modal-close waves-effect waves-green btn-flat" onclick="AjaxJsUsuario.verificaLogin()">Logar</a>
-        <a href="#!" id="limpar" class="right modal-action waves-effect waves-green btn-flat brown-text">Cancelar</a>
+        <a href="#!" id="limpar" class="right modal-close waves-effect waves-green btn-flat brown-text">Cancelar</a>
     </div>
 </div>
 
@@ -106,7 +110,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#!" id="confirmaCompra" class="modal-action modal-close waves-effect waves-green btn-flat">Confirmar</a>
+        <a href="#!" id="editarQuantidade" class="modal-action modal-close waves-effect waves-green btn-flat">Confirmar</a>
     </div>
 </div>
 
@@ -118,10 +122,16 @@
     <li class="divider"></li>
     <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
 </ul>
+<ul id="dropdown2" class="dropdown-content">
+    <li><a href="#!">Doces</a></li>
+    <li><a href="#!">Chocolates</a></li>
+    <li><a href="#!">Amendoins</a></li>
+    <li><a href="#!">Salgadinhos</a></li>
+</ul>
 
 @if (Session["Login"].ToString() != "off")
-{    
-    <nav class="brown nav-extended">
+{
+    <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
@@ -175,14 +185,14 @@
     </nav>
 }
 else
-{   
-    <nav class="brown nav-extended">
+{
+    <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
 
             <ul class="hide-on-med-and-down">
-                
+                <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
                 <li>
                     <div class="col s4 hide-on-med-and-down">
@@ -198,12 +208,7 @@ else
                     </div>
                 </li>
                 <li style="margin-left: 250px">
-                    <select style="position: absolute; margin-top: 30px">
-                        <option value="" disabled selected class="white-text">Filtro</option>
-                        <option value="1">Chocolates</option>
-                        <option value="2">Amendoins</option>
-                        <option value="3">Salgadinhos</option>
-                    </select>
+                    <a class="dropdown-button" href="#!" data-activates="dropdown2">Filtro<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
             </ul>
 
@@ -230,6 +235,8 @@ else
 }
 
 <div id="DivGrid"><img src="https://media.tenor.com/images/d6cd5151c04765d1992edfde14483068/tenor.gif" style="width: 100px;height: 100px;margin: 0 auto;display: block;"></div>
+
+
 
 
 

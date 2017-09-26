@@ -48,7 +48,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisPagamento]
 	/*
 	Documentação
 	Arquivo Fonte.....: Pagamento.sql
-	Objetivo..........: Listar todos os pagamentos feitos por todos usuarios ou pelo passado no cpf
+	Objetivo..........: Listar todos os pagamentos feitos no mes atual ou infomado, por todos usuarios ou pelo passado no cpf
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[CSSP_LisPagamento] '43838601840'      LISTA OS DO CPF NO MES ATUAL

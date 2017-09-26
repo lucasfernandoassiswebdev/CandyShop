@@ -4,6 +4,11 @@
     Layout = null;
 }
 
+<style>
+    tr {
+        color: black;
+    }
+</style>
 <div class="col s12 recuaTabela">
     <table class="bordered highlight">
         <tr>
@@ -22,7 +27,7 @@
         @foreach (var usuario in Model)
         {
             <tr>
-                <td>
+                <td class="cpf">
                     @Html.DisplayFor(modelItem => usuario.Cpf)
                 </td>
                 <td>
@@ -70,6 +75,18 @@
 <script>
     $(document).ready(function() {
         $('.collapsible').collapsible();
+        
+        $('.cpf').each(function () {
+            $(this).html(mcpf($(this).html()));
+        });
     });
+
+    function mcpf(v) {
+        v = v.replace(/\D/g, "");
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        return v;
+    }
 </script>
 

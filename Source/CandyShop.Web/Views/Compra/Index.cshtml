@@ -1,0 +1,109 @@
+﻿@model IEnumerable<CandyShop.Application.ViewModels.CompraViewModel>
+
+@{ Layout = null; }
+
+<link rel="stylesheet" type="text/css" href="../../Content/Admin/historico.css"/>
+
+<h4 align="center"><font color="brown">@ViewBag.tituloPagina</font></h4>
+<script>
+    $('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrainWidth: false, // Does not change width of dropdown to that of the activator
+            gutter: 0, // Spacing from edge
+            belowOrigin: false, // Displays dropdown below the button
+            alignment: 'left', // Displays dropdown with edge aligned to the left of button
+            stopPropagation: false // Stops event propagation
+        }
+    );
+</script>
+@if (ViewBag.drop == 0)
+{
+    <div id="filtro" class="row">
+        <div id="icone"><i class="small material-icons">date_range</i></div>
+        <a class='dropdown-button btn' href='#' data-activates='dropdown2'>Escolha o mês!</a>
+        <ul id='dropdown2' class='dropdown-content'>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(1)">Janeiro</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(2)">Fevereiro</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(3)">Março</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(4)">Abril</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(5)">Maio</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(6)">Junho</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(7)">Julho</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(8)">Agosto</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(9)">Setembro</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(10)">Outubro</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(11)">Novembro</a></li>
+            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(12)">Dezembro</a></li>
+        </ul>
+
+    </div>
+
+}
+<br/>
+<div id ="tabela">    
+    <table class="striped centered">
+        <thead>
+        <tr>
+            <th>
+                Usuario
+            </th>
+            <th>
+                Data da Compra
+            </th>
+            <th>
+                Valor da Compra
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="center">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataCompra)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorCompra)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new {/* id=item.PrimaryKey */}) |
+                        @Html.ActionLink("Detalhes", "Details", new {/* id=item.PrimaryKey */}) |
+                        @Html.ActionLink("Deletar", "Delete", new {/* id=item.PrimaryKey */})
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+<br/>
+@*<div align="center">
+    <a class="waves-effect waves-light btn" onclick="AjaxJsCompra.voltarInicio()"><i class="material-icons left">arrow_back</i>Voltar</a>
+</div>*@
+
+<style>
+    #tabela {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    #filtro {
+        text-align: center;     
+    }
+
+    #icone {
+        display: inline-block;
+        color: brown;
+    }
+
+
+    tr {
+        color: black;
+    }
+</style>

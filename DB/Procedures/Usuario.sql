@@ -156,6 +156,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 				Ativo
 				FROM [dbo].[Usuario]
 				WHERE Ativo = 'A'
+				ORDER BY NomeUsuario
 	END
 GO
 
@@ -289,4 +290,36 @@ CREATE PROCEDURE [dbo].[CSSP_VerificaLoginSenha]
 			FROM Usuario
 			WHERE Cpf = @Cpf AND SenhaUsuario = @SenhaUsuario
 	END
+GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_VerificaSaldoLoja]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_VerificaSaldoLoja]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_VerificaSaldoLoja]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: ArquivoFonte.sql
+	Objetivo..........: Objetivo
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 01/01/2017
+	Ex................: EXEC [dbo].[GCS_NomeProcedure]
+
+	*/
+
+	BEGIN
+		SELECT SUM(SaldoUsuario) as 'saldo'
+			FROM Usuario
+			WHERE Ativo = 'A'
+	END
+GO
+
+
+
+
+				
 

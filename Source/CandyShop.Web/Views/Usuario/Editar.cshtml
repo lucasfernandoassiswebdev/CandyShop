@@ -22,7 +22,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="Cpf" name="cpf" type="text" class="validate" value="@Model.Cpf" required data-length="50" autocomplete="off" disabled="disabled">
+                    <input id="Cpf" name="cpf" type="text" class="validate cpf" value="@Model.Cpf" required data-length="50" autocomplete="off" disabled>
                     <label class="active">CPF:</label>
                 </div>
             </div>
@@ -61,5 +61,16 @@
 <script>
     $(document).ready(function () {
         $('select').material_select();
+        $('.cpf').each(function () {
+            $(this).val(mcpf($(this).val()));
+        });
     });
+   
+    function mcpf(v) {
+        v = v.replace(/\D/g, "");
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        return v;
+    }
 </script>

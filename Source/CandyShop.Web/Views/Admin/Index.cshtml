@@ -2,7 +2,7 @@
     ViewBag.Title = "Index";
 }
 
-<script type="text/javascript" src="../../Js/scriptsAdmin.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/telaPrincipal/scriptsAdmin.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="../../Js/Ajax/AjaxCompra.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="../../Js/Ajax/AjaxPagamento.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="../../Js/Ajax/AjaxProduto.js?d=@DateTime.Now.Ticks"></script>
@@ -50,11 +50,14 @@
         });
 
         AjaxJsCompra.init({
-            historicoCompra : '@Url.Action("Listar", "Compra")'
+            historicoCompra: '@Url.Action("Listar", "Compra")',
+            listarCompraSemana: '@Url.Action("ListarSemana", "Compra")',
+            listarCompraMes: '@Url.Action("ListarMes", "Compra")',
+            listarCompraDia: '@Url.Action("ListarDia", "Compra")'
         });
 
         AjaxJsShop.init({
-            mostraSaldo : '@Url.Action("Listar", "Shop")'
+            mostraSaldo : '@Url.Action("Index", "Shop")'
         });
 
 
@@ -138,6 +141,18 @@
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamentoDia();"><i class="material-icons">access_time</i>Hoje</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamentoSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamento();"><i class="material-icons">book</i>Ultimo mês</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header white-text">
+                    <i class="material-icons left">shopping basket</i>COMPRAS
+                </div>
+                <div class="collapsible-body">
+                    <ul class="brown-text">
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompraDia();"><i class="material-icons">access_time</i>Hoje</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompraSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.historicoCompra();"><i class="material-icons">book</i>Ultimo mês</a></li>
                     </ul>
                 </div>
             </li>

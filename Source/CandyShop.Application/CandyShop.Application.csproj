@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompraApplication.cs" />
-    <Compile Include="Interfaces\ICompraInterface.cs" />
+    <Compile Include="Interfaces\ICompraApplication.cs" />
     <Compile Include="Interfaces\IPagamentoApplication.cs" />
     <Compile Include="Interfaces\IProdutoApplication.cs" />
     <Compile Include="Interfaces\IUsuarioApplication.cs" />
