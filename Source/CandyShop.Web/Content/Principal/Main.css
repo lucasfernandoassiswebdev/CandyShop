@@ -34,7 +34,7 @@ img:hover {
 .card .card-image .card-title {
 	color: black;
 	font-weight: bold;
-	top: 160px;
+	top: 142px;
 	font-size:19px;
 }
 
@@ -115,8 +115,7 @@ li img {
 }
 
 .card .card-content {
-	margin-top: 40px;
-	margin-left: 20%;
+	margin-top: 0px;
 	font-weight: bold;
 }
 
