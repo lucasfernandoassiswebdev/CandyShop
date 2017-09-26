@@ -91,9 +91,9 @@ namespace CandyShop.Application
             using (var client = new HttpClient())
             {
                 var response = client.PostAsync(_enderecoApi, pagamento, new JsonMediaTypeFormatter()).Result;
-                if (response.StatusCode != HttpStatusCode.OK)
-                    return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
-                return new Response<string>(response.StatusCode);
+                return response.StatusCode != HttpStatusCode.OK 
+                   ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) 
+                   :new Response<string>(response.StatusCode);
             }
         }                
     }

@@ -34,7 +34,7 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<string> InserirItens(ProdutoViewModel compraProduto)
+        public Response<string> InserirItens(CompraProdutoViewModel compraProduto)
         {
             using (var client = new HttpClient())
             {
@@ -59,7 +59,8 @@ namespace CandyShop.Application
             using (var client = new HttpClient())
             {
                 var response = client.PutAsync(_enderecoApi, compraProduto, new JsonMediaTypeFormatter()).Result;
-                return response.StatusCode != HttpStatusCode.OK ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
+                return response.StatusCode != HttpStatusCode.OK 
+                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
                     : new Response<string>(response.StatusCode);
             }
         }
@@ -118,10 +119,6 @@ namespace CandyShop.Application
                 return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-
-
         #endregion
-
-
     }
 }

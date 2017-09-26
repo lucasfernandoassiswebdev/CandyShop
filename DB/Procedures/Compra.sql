@@ -6,8 +6,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsCo
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsCompra]
-	@UsuarioCompra VARCHAR(14),
-	@DataCompra DATE
+	@UsuarioCompra VARCHAR(14)
 
 	AS
 
@@ -20,13 +19,13 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompra]
 	Ex................: EXEC [dbo].[CSSP_InsCompra] 
 
 	*/
-
+	
 	BEGIN
 		INSERT INTO [dbo].[Compra] (UsuarioCompra, DataCompra)
-			VALUES(@UsuarioCompra, @DataCompra)	
+			VALUES(@UsuarioCompra, GETDATE())	
 
 			if @@ERROR <> 0 
-				RETURN 1
+				RETURN SCOPE_IDENTITY()	
 		RETURN 0	
 	END
 GO
@@ -110,7 +109,6 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompra]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCompraSemana]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisCompraSemana]
 GO
@@ -167,7 +165,6 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraSemana]
 	END
 GO
 				
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCompraDia]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisCompraDia]
 GO
@@ -204,7 +201,6 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraDia]
 	END
 GO
 				
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCpfCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisCpfCompra]
 GO
@@ -264,7 +260,6 @@ CREATE PROCEDURE [dbo].[CSSP_DelCompra]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelCompra]
 GO
@@ -319,7 +314,31 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraNomeUsuario]
 		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
 		 WHERE u.NomeUsuario = '%' + @Nome + '%' 
 	END
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelLastCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelLastCompra]
 GO
+
+CREATE PROCEDURE [dbo].[CSSP_SelLastCompra]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Compra.sql
+	Objetivo..........: Retornar a última compra inserida
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 26/09/2017
+	Ex................: EXEC [dbo].[GCS_SelLastCompra]
+
+	*/
+
+	BEGIN
+		SELECT  as 'Item' 
+	END
+GO
+
 
 
 																			

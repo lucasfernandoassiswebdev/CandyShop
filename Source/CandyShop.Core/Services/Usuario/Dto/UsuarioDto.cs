@@ -8,6 +8,9 @@
         public decimal SaldoUsuario { get; set; }
         public string Ativo { get; set; }
 
+
+        /* As linhas de codigo abaixo é onde fica todas as verificações de usuario como 
+            validar cpf senha  etc*/
         public bool IsValid(INotification notification)
         {
             if (!ValidaCpf(Cpf))
@@ -21,6 +24,8 @@
 
             return !notification.HasNotification();
         }
+
+        //Função de calculo para verificar se o cpf é valido
 
         private bool ValidaCpf(string cpf)
         {

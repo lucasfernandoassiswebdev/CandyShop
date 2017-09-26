@@ -102,8 +102,6 @@ CREATE PROCEDURE [dbo].[CSSP_UpdProduto]
 	END
 GO
 		
-		
-		
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelProduto]
 GO
@@ -162,7 +160,6 @@ CREATE PROCEDURE [dbo].[CSSP_SelDadosProduto]
 	END
 GO
 				
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisProduto]
 GO
@@ -332,7 +329,6 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoAcimaValor]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdutoCategoria]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisProdutoCategoria]
 GO
@@ -357,7 +353,6 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoCategoria]
 			WHERE Categoria like '%' + @Categoria + '@%' AND Ativo = 'A'
 	END
 GO
-
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdPorNome]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisProdPorNome]
@@ -385,7 +380,6 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdPorNome]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUltimoId]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelUltimoId]
 GO
@@ -398,7 +392,7 @@ CREATE PROCEDURE [dbo].[CSSP_SelUltimoId]
 	Documentação
 	Arquivo Fonte.....: Produto.sql
 	Objetivo..........: Pegar Id ultimo produto inserido
-	Autor.............: SMN - Lucas Fernando
+	Autor.............: SMN - Ninguém
  	Data..............: 25/09/2017
 	Ex................: EXEC [dbo].[GCS_SelUltimoId]
 
@@ -409,6 +403,9 @@ CREATE PROCEDURE [dbo].[CSSP_SelUltimoId]
 			FROM Produto
 	END
 GO
+
+select * from Produto
+
 
 
 
