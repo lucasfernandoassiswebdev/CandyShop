@@ -8,6 +8,7 @@ namespace CandyShop.Repository.Repositorys
 {
     public class CompraProdutoRepository : ConnectDB, ICompraProdutoRepository
     {
+        //Cria uma lista com as procedures do banco pra serem usadas 
         private enum Procedures
         {
             CSSP_LisCompraProduto,
@@ -16,6 +17,9 @@ namespace CandyShop.Repository.Repositorys
             CSSP_UpdCompraProduto
         }
 
+        /* Cria o metodo usando o ExecuteProcedure que é o metodo encapsulado para executar as procs
+         e o AddPaarmeter para adicionar os parametros que são pedidos nas procedures e para finalizae
+         usa o ExecuteNonQuery para executar procedures que não retornam valores*/
         public void EditarCompraProduto(CompraProdutoDto compraProduto)
         {
             ExecuteProcedure(Procedures.CSSP_UpdCompraProduto);
@@ -32,9 +36,12 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
-
+             
             ExecuteNonQuery();
         }
+
+
+        // 
 
         public IEnumerable<CompraProdutoDto> ListarCompraProduto()
         {

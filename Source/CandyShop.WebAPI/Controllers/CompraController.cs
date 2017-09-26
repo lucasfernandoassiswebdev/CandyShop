@@ -13,23 +13,27 @@ namespace CandyShop.WebAPI.Controllers
             _compraRepository = compraRepository;
         }
 
+        // Método Post que ira inserir uma compra e retornar um 200 (Ok)
         public IHttpActionResult PostCompra(CompraDto compra)
         {
             _compraRepository.InserirCompra(compra);
             return Ok();
         }
 
+        //Método get que lista todas as compras e retorna a lista e um status 200 (OK)
         public IHttpActionResult GetCompra()
         {
             return Ok(_compraRepository.ListarCompra());
         }
 
+        //Método put que edita as compras 
         public IHttpActionResult PutCompra(CompraDto compra)
         {
             _compraRepository.EditarCompra(compra);
             return Ok();
         }
 
+        // Esse route sempre tem que ser definido quando existe métodos iguais na api pra nao gerar erro
         [Route("api/compra/listacomnpracpf/{cpf}")]
         public IHttpActionResult Get(string cpf)
         {
