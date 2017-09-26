@@ -6,12 +6,12 @@ namespace CandyShop.Repository.Database
 {
     public class ConnectDB 
     {
-        //Cria o construtor pra que toda vez que o _connection for intanciado abrir a conexão com o banco 
+        //Cria o construtor pra que toda vez que o _connection for instanciado abrir a conexão com o banco 
         public ConnectDB()
         {
             _connection = Connect();
         }
-        // Pega a minha connection string do webConfig
+        // Pega a minha connection string que esta no webConfig
         private string _connectionString => ConfigurationManager.ConnectionStrings["DbCandyShop"].ToString();
         private readonly SqlConnection _connection;
         private SqlCommand _command;

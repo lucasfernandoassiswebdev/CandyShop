@@ -26,9 +26,9 @@ namespace CandyShop.Application
             using (var client = new HttpClient())
             {
                 var response = client.PostAsync(_enderecoApi, produto, new JsonMediaTypeFormatter()).Result;
-                if (response.StatusCode != HttpStatusCode.OK)
-                    return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
-                return new Response<string>(response.StatusCode);
+                return response.StatusCode != HttpStatusCode.OK 
+                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
+                    :new Response<string>(response.StatusCode);
             }
         }
 
@@ -46,10 +46,9 @@ namespace CandyShop.Application
             using (var client = new HttpClient())
             {
                 var response = client.PutAsync(_enderecoApi, produto, new JsonMediaTypeFormatter()).Result;
-                if(response.StatusCode != HttpStatusCode.OK)
-                    return  new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
-
-                return new Response<string>(response.StatusCode);
+               return response.StatusCode != HttpStatusCode.OK  
+                     ?new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) 
+                     :new Response<string>(response.StatusCode);
             }
         }
 
@@ -58,9 +57,9 @@ namespace CandyShop.Application
             using (var cliente = new HttpClient())
             {
                 var response = cliente.PutAsync($"{_enderecoApi}/desativar/{produto.IdProduto}",produto, new JsonMediaTypeFormatter()).Result;
-                if (response.StatusCode != HttpStatusCode.OK)
-                    return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
-                return new Response<string>(response.StatusCode);                
+                return response.StatusCode != HttpStatusCode.OK 
+                     ?new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) 
+                     :new Response<string>(response.StatusCode); 
             }
         }
 
