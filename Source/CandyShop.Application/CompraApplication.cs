@@ -34,7 +34,7 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<string> InserirItens(ProdutoViewModel compraProduto)
+        public Response<string> InserirItens(CompraProdutoViewModel compraProduto)
         {
             using (var client = new HttpClient())
             {
@@ -118,10 +118,6 @@ namespace CandyShop.Application
                 return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-
-
         #endregion
-
-
     }
 }

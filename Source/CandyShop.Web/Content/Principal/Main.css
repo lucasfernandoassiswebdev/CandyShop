@@ -140,7 +140,12 @@ input[id="search"] {
 input {
 	text-align: center;
 }
-h2 {
+
+h3 {
 	font-weight: bold;
 	color: red;
+}
+
+#search {
+	text-align: left;
 }

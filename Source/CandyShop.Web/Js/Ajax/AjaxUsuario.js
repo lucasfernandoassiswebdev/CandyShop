@@ -1,7 +1,7 @@
-﻿var AjaxJsUsuario = (function($) {
+﻿var AjaxJsUsuario = (function ($) {
     var url = {};
 
-    var init = function(config) {
+    var init = function (config) {
         url = config;
     };
 
@@ -59,30 +59,31 @@
         var usuario = { Nome: $('#nomeUsuario').val() };
         chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
     };
-    var verificaLogin = function () {
+    var verificaLogin = function (callback) {
         var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
         $.post(url.verificaLogin, usuario)
             .done(function (res) {
-                if (res != "1") {
+                if (res !== "1")
                     $.get(url.padrao)
                         .done(function (data) {
                             $('body').slideUp(function () {
-                                $('body').hide().html(data).slideDown(
-                                    function() { Materialize.toast("Login feito com sucesso!", 4000); }
-                                );
+                                $('body').hide().html(data).slideDown(function () {
+                                    Materialize.toast("Login feito com sucesso!", 4000);
+                                    if (callback === "function")
+                                        callback();
+                                });
                             });
                         }).fail(function (xhr) {
                             Materialize.toast(xhr.responseText, 4000);
                         });
-                } else {
+                else
                     Materialize.toast("Login Incorreto", 4000);
-                }                
+
             })
             .fail(function (xhr) {
                 Materialize.toast(xhr.responseText, 3000);
             });
     };
-
     var logOff = function () {
         $.get(url.logOff).done(function (data) {
             $('body').slideUp(function () {
@@ -90,9 +91,9 @@
             });
         }).fail(function (xhr) {
             console.log(xhr.responseText);
-        });        
+        });
     };
-   
+
     return {
         init: init,
         concluirCadastroUsuario: concluirCadastroUsuario,

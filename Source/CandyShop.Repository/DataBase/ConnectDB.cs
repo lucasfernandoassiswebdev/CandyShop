@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -49,6 +48,12 @@ namespace CandyShop.Repository.Database
         public void ExecuteNonQuery()
         {
             _command.ExecuteNonQuery();
+        }
+        // Método para executar procedure que tem nenhum retorno (Insert,Delete)
+        public int ExecuteNonQueryWithReturn()
+        {
+            _command.ExecuteNonQuery();
+            return int.Parse(_command.Parameters["@RETURN_VALUE"].Value.ToString());
         }
         // Metodo exclusivo para procedure que retorna valores (Select)
         public SqlDataReader ExecuteReader()

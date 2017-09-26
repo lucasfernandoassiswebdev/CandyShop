@@ -1,4 +1,6 @@
-﻿@{
+﻿@model CandyShop.Application.ViewModels.CompraViewModel
+
+@{
     ViewBag.Title = "Padrao";
 }
 
@@ -28,6 +30,7 @@
             main: '@Url.Action("Main", "Home")'
         });
         AjaxJsCompra.init({
+            inserirCompra : '@Url.Action("Cadastrar","Compra")',
             historicoCompra: '@Url.Action("ListarCpf", "Compra")'
         });
         AjaxJsShop.init({
@@ -65,7 +68,7 @@
 <!--modal de compra-->
 <div id="modal3" class="modal">
     <div class="modal-content center">
-        <h3 style="font-weight: bold">Carrinho</h3>
+        <h3>Carrinho</h3>
         <div class="collection">
 
         </div>
@@ -96,7 +99,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#modalLogin" class="modal-trigger right modal-action modal-close waves-effect waves-green btn-flat" onclick="AjaxJsUsuario.verificaLogin()">Logar</a>
+        <a href="#modalLogin" id="logar" class="modal-trigger right modal-action modal-close waves-effect waves-green btn-flat" onclick="AjaxJsCompra.inserirCompra()">Logar</a>
         <a href="#!" id="limpar" class="right modal-close waves-effect waves-green btn-flat brown-text">Cancelar</a>
     </div>
 </div>
@@ -144,7 +147,7 @@
                     <div class="col s4 hide-on-med-and-down">
                         <form>
                             <div class="input-field">
-                                <input id="search" type="search" placeholder="Encontre seu item" required>
+                                <input id="search" type="search" placeholder="Encontre seu item">
                                 <label class="label-icon" for="search">
                                     <i class="material-icons">search</i>
                                 </label>

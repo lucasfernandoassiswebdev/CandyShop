@@ -14,7 +14,7 @@ namespace CandyShop.Repository.Repositorys
             CSSP_InsCompra,
             CSSP_UpdCompra,
             CSSP_LisCompra,
-            CSSP_DelCompra,            
+            CSSP_DelCompra,
             CSSP_SelCompra,
             CSSP_InsCompraProduto,
             CSSP_UpdCompraProduto,
@@ -25,13 +25,12 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisCpfCompra
         }
 
-        public void InserirCompra(CompraDto compra)
+        public int InserirCompra(CompraDto compra)
         {
             ExecuteProcedure(Procedures.CSSP_InsCompra);
             AddParameter("@UsuarioCompra", compra.Usuario.Cpf);
-            AddParameter("@DataCompra", compra.DataCompra);
 
-            ExecuteNonQuery();
+            return ExecuteNonQueryWithReturn();
         }
 
         public void InserirItens(CompraProdutoDto item)
@@ -41,13 +40,12 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@QtdeProduto", item.QtdeCompra);
             AddParameter("@IdCompra", item.IdCompra);
             ExecuteNonQuery();
-
         }
 
         public void EditarCompra(CompraDto compra)
         {
             ExecuteProcedure(Procedures.CSSP_UpdCompra);
-            AddParameter("@UsuarioCompra", compra.Usuario.Cpf);
+            AddParameter("@UsuarioCompra", compra.Usuario);
             AddParameter("@IdCompra", compra.IdCompra);
             AddParameter("@DataCompra", compra.DataCompra);
 
@@ -123,14 +121,14 @@ namespace CandyShop.Repository.Repositorys
         public IEnumerable<CompraDto> ListarCompraPorCpf(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_LisCpfCompra);
-            AddParameter("@Cpf", cpf);            
+            AddParameter("@Cpf", cpf);
             return Listar();
         }
-       
+
         public IEnumerable<CompraDto> ListarCompraPorNome(string nome)
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraNomeUsuario);
-            AddParameter("@Nome", nome);            
+            AddParameter("@Nome", nome);
             return Listar();
         }
 
@@ -138,7 +136,7 @@ namespace CandyShop.Repository.Repositorys
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraSemana);
             return Listar();
-        }       
+        }
 
         public IEnumerable<CompraDto> ListarCompraDia()
         {

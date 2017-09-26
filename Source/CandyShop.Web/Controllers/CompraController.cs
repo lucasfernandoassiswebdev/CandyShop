@@ -1,4 +1,5 @@
 ﻿using CandyShop.Application.Interfaces;
+using CandyShop.Application.ViewModels;
 using System;
 using System.Linq;
 using System.Net;
@@ -22,7 +23,6 @@ namespace CandyShop.Web.Controllers
         }
 
         #region listas
-
         public ActionResult Listar()
         {
             ViewBag.tituloPagina = "Compras do ultimo mês";
@@ -72,10 +72,40 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
             return View("Index", response.Content);
-        }        
+        }
+        #endregion
 
-        
+        #region execuções
 
+        [HttpPost]
+        public ActionResult Cadastrar(CompraViewModel compra)
+        {
+
+            if (Session["login"].ToString() == "off")
+            {
+                return Content("Você não está logado");
+            }
+           
+            if (ModelState.IsValid)
+            {
+                compra.Usuario = new UsuarioViewModel();
+                compra.Usuario.Cpf = Session["Login"].ToString();
+
+                var response = _appCompra.InserirCompra(compra);
+                
+                foreach (var produto in compra.Itens)
+                {
+                    produto.IdProduto = int.Parse(response.Content);
+                    _appCompra.InserirItens(produto);
+                }
+
+                if (response.Status != HttpStatusCode.OK)
+                    return Content($"Não foi possível registrar sua compra: {response.Status}");
+
+                return Content("Sua compra foi registrada com sucesso");
+            }
+            return RedirectToAction("Index", "Home");
+        }
         #endregion
     }
 }
