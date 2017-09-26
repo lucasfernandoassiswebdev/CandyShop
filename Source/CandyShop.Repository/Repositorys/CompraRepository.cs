@@ -3,6 +3,7 @@ using CandyShop.Core.Services.Compra.Dto;
 using CandyShop.Core.Services.CompraProduto.Dto;
 using CandyShop.Core.Services.Usuario.Dto;
 using CandyShop.Repository.Database;
+using System;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository.Repositorys
@@ -163,6 +164,21 @@ namespace CandyShop.Repository.Repositorys
                     });
 
             return retorno;
+        }
+
+        public IEnumerable<CompraDto> ListarCompraSemana()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<CompraDto> ListarCompraMes(int mes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<CompraDto> ListarCompraDia()
+        {
+            throw new NotImplementedException();
         }
     }
 }

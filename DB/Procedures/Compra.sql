@@ -74,7 +74,8 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCo
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_LisCompra]
-
+	@cpf VARCHAR(11) = NULL,
+	@mes INT = 0
 	AS
 
 	/*
@@ -90,17 +91,129 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompra]
 	Data..............: 14/09/2017
 
 	*/
-
 	BEGIN
-		SELECT	c.IdCompra,
-				c.UsuarioCompra ,
-				u.NomeUsuario as 'nomeUsuario',
-				c.DataCompra 
-		 FROM [dbo].[Compra] c WITH(NOLOCK)
-		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
+		IF @mes = 0
+		BEGIN 
+			SELECT @mes = MONTH(GETDATE())
+		END		
+		IF @CPF IS NULL
+		BEGIN
+			SELECT	c.IdCompra,
+					c.UsuarioCompra ,
+					u.NomeUsuario as 'nomeUsuario',
+					c.DataCompra 
+			 FROM [dbo].[Compra] c WITH(NOLOCK)
+				INNER JOIN Usuario u 
+					ON u.Cpf = c.UsuarioCompra
+			WHERE MONTH(c.DataCompra) = @mes
+			ORDER BY c.DataCompra DESC
+		END
+		ELSE
+		BEGIN
+			SELECT	c.IdCompra,
+					c.UsuarioCompra ,
+					u.NomeUsuario as 'nomeUsuario',
+					c.DataCompra 
+			 FROM [dbo].[Compra] c WITH(NOLOCK)
+				INNER JOIN Usuario u 
+					ON u.Cpf = c.UsuarioCompra
+			WHERE (c.UsuarioCompra = @cpf) and (MONTH(c.DataCompra) = @mes)
+			ORDER BY c.DataCompra DESC			
+		END
 	END
 GO
 
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCompraSemana]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisCompraSemana]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_LisCompraSemana]
+	@cpf VARCHAR(11) = NULL
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Compra.sql
+	Objetivo..........: Listar todas as compras da semana, ou as compra da semana de um usuario
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 26/09/2017
+	Ex................: EXEC [dbo].[CSSP_LisCompraSemana]
+
+	*/
+
+	BEGIN
+		DECLARE @domingo AS DATETIME = GETDATE();
+		WHILE ((SELECT DATENAME(weekday, @domingo)) <> 'sunday')
+		BEGIN
+			IF ((SELECT DATENAME(weekday, @domingo)) <> 'sunday')
+			BEGIN				
+				SELECT @domingo = DATEADD(DAY, -1, @domingo)
+			END
+		END
+		IF @cpf IS NULL
+		BEGIN
+			SELECT	c.IdCompra,
+					c.UsuarioCompra ,
+					u.NomeUsuario as 'nomeUsuario',
+					c.DataCompra 
+			 FROM [dbo].[Compra] c WITH(NOLOCK)
+				INNER JOIN Usuario u 
+					ON u.Cpf = c.UsuarioCompra
+			WHERE c.DataCompra > @domingo
+			ORDER BY c.DataCompra DESC
+		END
+		ELSE
+		BEGIN
+			SELECT	c.IdCompra,
+					c.UsuarioCompra ,
+					u.NomeUsuario as 'nomeUsuario',
+					c.DataCompra 
+			 FROM [dbo].[Compra] c WITH(NOLOCK)
+				INNER JOIN Usuario u 
+					ON u.Cpf = c.UsuarioCompra
+			WHERE c.DataCompra > @domingo and c.UsuarioCompra = @cpf
+			ORDER BY c.DataCompra DESC
+		END
+	END
+GO
+				
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCompraDia]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisCompraDia]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_LisCompraDia]
+	@data date = null
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Compra.sql
+	Objetivo..........: Listar todas as compras feitas em uma data informada, se nao informar a data, retorna do dia atual
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 26/09/2017
+	Ex................: EXEC [dbo].[CSSP_LisCompraDia]
+
+	*/
+
+	BEGIN
+		IF @data is NULL
+		BEGIN 
+			SELECT @data = GETDATE()		
+		END	
+		SELECT	c.IdCompra,
+					c.UsuarioCompra ,
+					u.NomeUsuario as 'nomeUsuario',
+					c.DataCompra 
+			 FROM [dbo].[Compra] c WITH(NOLOCK)
+				INNER JOIN Usuario u 
+					ON u.Cpf = c.UsuarioCompra
+		WHERE CAST(c.DataCompra AS DATE) = CAST(@data AS DATE)
+		ORDER BY c.DataCompra DESC
+	END
+GO
+				
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCpfCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisCpfCompra]

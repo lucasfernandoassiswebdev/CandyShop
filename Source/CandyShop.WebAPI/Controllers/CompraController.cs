@@ -17,29 +17,49 @@ namespace CandyShop.WebAPI.Controllers
         {
             _compraRepository.InserirCompra(compra);
             return Ok();
-        }
-
-        public IHttpActionResult GetCompra()
-        {
-            return Ok(_compraRepository.ListarCompra());
-        }
+        }        
 
         public IHttpActionResult PutCompra(CompraDto compra)
         {
             _compraRepository.EditarCompra(compra);
             return Ok();
         }
+        
+        #region Gets
+        public IHttpActionResult GetCompra()
+        {
+            return Ok(_compraRepository.ListarCompra());
+        }
 
-        [Route("api/compra/listacomnpracpf/{cpf}")]
-        public IHttpActionResult Get(string cpf)
+        [Route("api/compra/listaCompracpf/{cpf}")]
+        public IHttpActionResult GetCpf(string cpf)
         {
             return Ok(_compraRepository.ListarCompraPorCpf(cpf));
         }
 
-        [Route("api/compra/listacomprapornome/{nomeUsuario}")]
-        public IHttpActionResult GetNome(string nomeusuUsuario)
+        [Route("api/compra/semana")]
+        public IHttpActionResult GetSemana()
         {
-            return Ok(_compraRepository.ListarCompraPorNome(nomeusuUsuario));
+            return Ok(_compraRepository.ListarCompraSemana());
         }
+
+        [Route("api/compra/mes/{mes}")]
+        public IHttpActionResult GetMes(int mes)
+        {
+            return Ok(_compraRepository.ListarCompraMes(mes));
+        }
+
+        [Route("api/compra/dia")]
+        public IHttpActionResult GetDia()
+        {
+            return Ok(_compraRepository.ListarCompraDia());
+        }
+        [Route("api/compra/{nomeUsuario}")]
+        public IHttpActionResult GetNome(string nomeUsuario)
+        {
+            return Ok(_compraRepository.ListarCompraPorNome(nomeUsuario));
+        }
+
+        #endregion
     }
 }
