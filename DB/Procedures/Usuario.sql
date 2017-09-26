@@ -73,7 +73,7 @@ GO
 CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 	@Cpf varchar(14),
 	@NomeUsuario varchar(50),
-	@SenhaUsuario varchar(12) = 'password',
+	@SenhaUsuario varchar(12),
 	@SaldoUsuario decimal,
 	@Ativo varchar(1)
 	AS
@@ -87,7 +87,6 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 	Ex................: EXEC [dbo].[CSSP_UpdUsuario]
 
 	*/
-	select * from usuario
 	BEGIN
 	
 		UPDATE [dbo].[Usuario]

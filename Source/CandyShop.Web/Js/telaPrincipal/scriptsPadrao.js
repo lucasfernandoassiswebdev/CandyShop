@@ -8,7 +8,7 @@ $(document).ready(function () {
     $('#DivGrid').on('click', '.btn-floating', function () {
         preco = $(this).attr('data-Preco');
         nome = $(this).attr('data-Nome');
-        imagem = '../../Imagens/' + $(this).attr('data-Imagem');
+        imagem = $(this).attr('data-Imagem');
     });
     
     $('#confirmacao').click(function () {
@@ -25,12 +25,12 @@ $(document).ready(function () {
                 $('<a>',
                 {
                     href: '#modal4',
-                    class: 'modal-trigger secondary-content',
+                    'class': 'modal-trigger secondary-content',
                     html: [
                         $('<i>',
                             {
                                 html: 'mode_edit',
-                                class: 'material-icons',
+                                'class': 'material-icons',
                                 'data-NomeProduto' : nome
                             })
                     ]

@@ -19,7 +19,7 @@
 }
 
 img {
-	max-height: 180px;
+	max-height: 140px;
 	margin-bottom: 20px;
 	width: auto !important;
 	height: 100% !important;
@@ -34,7 +34,7 @@ img:hover {
 .card .card-image .card-title {
 	color: black;
 	font-weight: bold;
-	top: 142px;
+	top: 112px;
 	font-size:19px;
 }
 
@@ -74,7 +74,8 @@ select {
 
 .select-wrapper input.select-dropdown {
 	height: 2rem;
-	margin: 16px 33px 0 10px
+	margin: 13px 33px 0 10px;
+	padding-left: -50cm;
 }
 
 input[type="text"], .modal-close, h3 {
@@ -115,7 +116,7 @@ li img {
 }
 
 .card .card-content {
-	margin-top: 0px;
+	margin-top: 4px;
 	font-weight: bold;
 }
 
