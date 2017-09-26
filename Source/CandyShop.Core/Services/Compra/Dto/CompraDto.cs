@@ -10,6 +10,7 @@ namespace CandyShop.Core.Services.Compra.Dto
         public int IdCompra { get; set; }
         public UsuarioDto Usuario { get; set; }
         public DateTime DataCompra { get; set; }
+        public decimal ValorCompra { get; set; }
         public IEnumerable<CompraProdutoDto> Itens { get; set; }
     }
 }

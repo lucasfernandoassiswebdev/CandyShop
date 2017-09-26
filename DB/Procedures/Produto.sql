@@ -1,7 +1,7 @@
 USE CandyShop
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_InsProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_InsProduto]
 GO
 
@@ -211,7 +211,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoInativo]
 	Objetivo..........: Listar todos os produtos que estão inativos
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 14/09/2017
-	Ex................: EXEC [dbo].[CSSP_LisProduto]
+	Ex................: EXEC [dbo].[CSSP_LisProdutoInativo]
 
 	*/
 
@@ -409,8 +409,7 @@ CREATE PROCEDURE [dbo].[CSSP_SelUltimoId]
 			FROM Produto
 	END
 GO
-				
-				
+
 
 
 				
