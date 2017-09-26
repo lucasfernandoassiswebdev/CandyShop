@@ -157,6 +157,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 				Ativo
 				FROM [dbo].[Usuario]
 				WHERE Ativo = 'A'
+				ORDER BY NomeUsuario
 	END
 GO
 
