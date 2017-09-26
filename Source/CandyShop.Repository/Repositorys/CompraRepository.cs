@@ -22,15 +22,16 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisCompraNomeUsuario,
             CSSP_LisCompraSemana,
             CSSP_LisCompraDia,
-            CSSP_LisCpfCompra
+            CSSP_LisCpfCompra,
+            CSSP_SelLastCompra
         }
 
-        public int InserirCompra(CompraDto compra)
+        public void InserirCompra(CompraDto compra)
         {
             ExecuteProcedure(Procedures.CSSP_InsCompra);
             AddParameter("@UsuarioCompra", compra.Usuario.Cpf);
 
-            return ExecuteNonQueryWithReturn();
+            ExecuteNonQuery();
         }
 
         public void InserirItens(CompraProdutoDto item)
@@ -162,6 +163,15 @@ namespace CandyShop.Repository.Repositorys
                         }
                     });
             return retorno;
+        }
+
+        public int BuscaUltimaCompra()
+        {
+            ExecuteProcedure(Procedures.CSSP_SelLastCompra);
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    return ExecuteScalar();
+            return 0;
         }
     }
 }

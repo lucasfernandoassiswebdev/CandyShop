@@ -235,7 +235,7 @@ namespace CandyShop.Repository.Repositorys
             ExecuteProcedure(Procedures.CSSP_SelUltimoId);
             using (var reader = ExecuteReader())
                 if (reader.Read())
-                    return reader.ReadAsInt("IdProduto");
+                    return reader.ReadAsInt("Item");
             return 0;
         }
     }

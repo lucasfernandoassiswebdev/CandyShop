@@ -76,7 +76,6 @@ namespace CandyShop.Web.Controllers
         #endregion
 
         #region execuções
-
         [HttpPost]
         public ActionResult Cadastrar(CompraViewModel compra)
         {
@@ -92,10 +91,14 @@ namespace CandyShop.Web.Controllers
                 compra.Usuario.Cpf = Session["Login"].ToString();
 
                 var response = _appCompra.InserirCompra(compra);
-                
+
+                var ultimaCompra = _appCompra.VerificarUltimaCompra().Content;
+                if (ultimaCompra == 0)
+                        return Content($"Os itens da compra não puderam ser registrados: {response.Status}");
+
                 foreach (var produto in compra.Itens)
                 {
-                    produto.IdProduto = int.Parse(response.Content);
+                    produto.IdProduto = ultimaCompra;
                     _appCompra.InserirItens(produto);
                 }
 

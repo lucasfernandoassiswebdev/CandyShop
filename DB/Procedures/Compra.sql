@@ -19,11 +19,12 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompra]
 	Ex................: EXEC [dbo].[CSSP_InsCompra] 
 
 	*/
-	
+	select * from Compra
 	BEGIN
 		INSERT INTO [dbo].[Compra] (UsuarioCompra, DataCompra)
+			OUTPUT INSERTED.IdCompra
 			VALUES(@UsuarioCompra, GETDATE())	
-
+			
 			if @@ERROR <> 0 
 				RETURN SCOPE_IDENTITY()	
 		RETURN 0	
@@ -286,7 +287,6 @@ CREATE PROCEDURE [dbo].[CSSP_SelCompra]
 	END
 GO
 		
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCompraNomeUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisCompraNomeUsuario]
 GO
@@ -320,6 +320,9 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelLa
 	DROP PROCEDURE [dbo].[CSSP_SelLastCompra]
 GO
 
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelLastCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelLastCompra]
+GO
 CREATE PROCEDURE [dbo].[CSSP_SelLastCompra]
 
 	AS
@@ -335,7 +338,7 @@ CREATE PROCEDURE [dbo].[CSSP_SelLastCompra]
 	*/
 
 	BEGIN
-		SELECT  as 'Item' 
+		SELECT  IDENT_CURRENT('Produto') as 'Item' 
 	END
 GO
 

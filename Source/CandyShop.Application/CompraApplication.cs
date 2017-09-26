@@ -119,6 +119,15 @@ namespace CandyShop.Application
                 return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
+
+        public Response<int> VerificarUltimaCompra()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/ultima").Result;
+                return new Response<int>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
         #endregion
     }
 }

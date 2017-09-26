@@ -15,5 +15,6 @@ namespace CandyShop.Application.Interfaces
         Response<IEnumerable<CompraViewModel>> ListarComprasSemana();
         Response<IEnumerable<CompraViewModel>> ListarComprasMes(int mes);
         Response<IEnumerable<CompraViewModel>> ListarComprasDia();
+        Response<int> VerificarUltimaCompra();
     }
 }

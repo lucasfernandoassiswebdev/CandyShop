@@ -6,7 +6,7 @@ namespace CandyShop.Core.Services.Compra
 {
     public interface ICompraRepository
     {
-        int InserirCompra(CompraDto compra);
+        void InserirCompra(CompraDto compra);
         void EditarCompra(CompraDto compra);
         void DeletarCompra(int idCompra);        
         int SelecionarCompra(int idCompra);
@@ -20,5 +20,6 @@ namespace CandyShop.Core.Services.Compra
         IEnumerable<CompraDto> ListarCompraSemana();
         IEnumerable<CompraDto> ListarCompraMes(int mes);
         IEnumerable<CompraDto> ListarCompraDia();
+        int BuscaUltimaCompra();
     }
 }
