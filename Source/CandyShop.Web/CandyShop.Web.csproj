@@ -224,7 +224,6 @@
     <Content Include="Js\Produto\scriptsCadastroProduto.js" />
     <Content Include="Js\Produto\scriptsEditarProduto.js" />
     <Content Include="Js\telaPrincipal\scriptsAdmin.js" />
-    <Content Include="Js\telaPrincipal\scriptsCarrinho.js" />
     <Content Include="Js\Usuario\scriptsCadastroUsuario.js" />
     <Content Include="Js\telaPrincipal\scriptsMain.js" />
     <Content Include="Js\telaPrincipal\scriptsPadrao.js" />

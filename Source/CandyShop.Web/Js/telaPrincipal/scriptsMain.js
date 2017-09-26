@@ -43,11 +43,9 @@
         }
     );
 
-    $('.btn-floating').on('click',
-        function () {
-            $('#quantidade, #quantidadeEdit').val('');
-        }
-    );
+    $('.btn-floating').on('click', function () {
+        $('#quantidade, #quantidadeEdit').val('');
+    });
 
     $('#quantidadeEdit').on('blur',
         function () {
@@ -78,6 +76,11 @@
             $('.collection li').remove();
         }
     );
+
+    $("#editarQuantidade").on("click", function() {
+        $("#modal3 .collection li:eq(" + $("#modal4").data("index") + ") p")
+            .text("Quantidade: " + $("#quantidadeEdit").val());
+    });
 });
 
 function mNumbers(v) {
