@@ -114,8 +114,7 @@ namespace CandyShop.Repository.Repositorys
 
         public IEnumerable<CompraDto> ListarCompraMes(int mes)
         {
-            ExecuteProcedure(Procedures.CSSP_LisCompra);
-            AddParameter("@cpf", null);
+            ExecuteProcedure(Procedures.CSSP_LisCompra);           
             AddParameter("@mes", mes);
             return Listar();
         }
