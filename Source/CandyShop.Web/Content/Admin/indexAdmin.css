@@ -9,7 +9,7 @@ header, main, footer, #DivGrid {
 }
 
 .btn-large {
-	background-color: #CD2626;
+	background-color: #ec407a;
 }
 
 .btn-floating {
@@ -131,7 +131,7 @@ input {
 }
 
 .pink-text, .dropdown-content li > a, .dropdown-content li > span {
-	color: rgb(236, 64, 122);
+	color: #ec407a !important;
 }
 
 .material-icons {
