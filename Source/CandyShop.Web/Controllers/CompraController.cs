@@ -92,18 +92,17 @@ namespace CandyShop.Web.Controllers
 
                 var response = _appCompra.InserirCompra(compra);
 
-                var ultimaCompra = _appCompra.VerificarUltimaCompra().Content;
-                if (ultimaCompra == 0)
-                        return Content($"Os itens da compra não puderam ser registrados: {response.Status}");
+                if (response.Content == -1)
+                        return Content($"Os itens da compra não puderam ser registrados: {response}");
 
                 foreach (var produto in compra.Itens)
                 {
-                    produto.IdProduto = ultimaCompra;
+                    produto.IdCompra = response.Content;
                     _appCompra.InserirItens(produto);
                 }
 
-                if (response.Status != HttpStatusCode.OK)
-                    return Content($"Não foi possível registrar sua compra: {response.Status}");
+                //if (response.Status != HttpStatusCode.OK)
+                //    return Content($"Não foi possível registrar sua compra: {response.Status}");
 
                 return Content("Sua compra foi registrada com sucesso");
             }

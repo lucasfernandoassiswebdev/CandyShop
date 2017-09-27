@@ -4,6 +4,7 @@ using CandyShop.Core.Services.CompraProduto.Dto;
 using CandyShop.Core.Services.Usuario.Dto;
 using CandyShop.Repository.Database;
 using System.Collections.Generic;
+using System.Data;
 
 namespace CandyShop.Repository.Repositorys
 {
@@ -26,12 +27,15 @@ namespace CandyShop.Repository.Repositorys
             CSSP_SelLastCompra
         }
 
-        public void InserirCompra(CompraDto compra)
+        public int InserirCompra(CompraDto compra, out int sequencial)
         {
+            sequencial = 0;
             ExecuteProcedure(Procedures.CSSP_InsCompra);
             AddParameter("@UsuarioCompra", compra.Usuario.Cpf);
-
-            ExecuteNonQuery();
+            AddParameterOutput("@sequencial", sequencial, DbType.Int32);
+            var retorno = ExecuteNonQueryWithReturn();
+            sequencial = int.Parse(GetParameterOutput("@sequencial"));
+            return retorno;
         }
 
         public void InserirItens(CompraProdutoDto item)
@@ -167,10 +171,7 @@ namespace CandyShop.Repository.Repositorys
         public int BuscaUltimaCompra()
         {
             ExecuteProcedure(Procedures.CSSP_SelLastCompra);
-            using (var reader = ExecuteReader())
-                if (reader.Read())
-                    return ExecuteScalar();
-            return 0;
+            return ExecuteScalar();
         }
     }
 }

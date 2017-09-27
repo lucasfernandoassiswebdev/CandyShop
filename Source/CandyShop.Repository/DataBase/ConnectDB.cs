@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace CandyShop.Repository.Database
 {
-    public class ConnectDB 
+    public class ConnectDB
     {
         //Cria o construtor pra que toda vez que o _connection for instanciado abrir a conexão com o banco 
         public ConnectDB()
@@ -21,7 +21,7 @@ namespace CandyShop.Repository.Database
         private SqlConnection Connect()
         {
             var connection = new SqlConnection(_connectionString);
-            
+
             if (connection.State == ConnectionState.Broken)
             {
                 connection.Close();
@@ -48,15 +48,39 @@ namespace CandyShop.Repository.Database
             _command.Parameters.AddWithValue(parameterName, parameterValue);
         }
 
+        protected void AddParameterOutput(string parameterName, object parameterValue, DbType parameterType)
+        {
+            _command.Parameters.Add(new SqlParameter
+            {
+                ParameterName = parameterName,
+                Direction = ParameterDirection.Output,
+                Value = parameterValue,
+                DbType = parameterType
+            });
+        }
+
+        protected string GetParameterOutput(string parameter) => _command.Parameters[parameter].Value.ToString();
+
         // Método para executar procedure que não tem nenhum retorno (Insert,Delete)
         public void ExecuteNonQuery()
         {
             _command.ExecuteNonQuery();
         }
-        
+
+        protected void AddParameterReturn(string parameterName = "@RETURN_VALUE", DbType parameterType = DbType.Int16)
+        {
+            _command.Parameters.Add(new SqlParameter
+            {
+                ParameterName = parameterName,
+                Direction = ParameterDirection.ReturnValue,
+                DbType = parameterType
+            });
+        }
+
         // Método para executar procedure que tem nenhum retorno (Insert,Delete)
         public int ExecuteNonQueryWithReturn()
         {
+            AddParameterReturn();
             _command.ExecuteNonQuery();
             return int.Parse(_command.Parameters["@RETURN_VALUE"].Value.ToString());
         }
@@ -64,7 +88,7 @@ namespace CandyShop.Repository.Database
         // Método que executa scalar
         public int ExecuteScalar()
         {
-            Int32 Resultado = (Int32) _command.ExecuteScalar();
+            int Resultado = (Int32)_command.ExecuteScalar();
             return Resultado;
         }
 

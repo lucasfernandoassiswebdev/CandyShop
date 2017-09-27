@@ -5,7 +5,7 @@ namespace CandyShop.Application.Interfaces
 {
     public interface ICompraApplication
     {
-        Response<string> InserirCompra(CompraViewModel compra);
+        Response<int> InserirCompra(CompraViewModel compra);
         Response<string> EditarCompra(CompraViewModel compra);
         Response<string> InserirItens(CompraProdutoViewModel produto);
         Response<CompraViewModel> SelecionarCompra(int idcompra);

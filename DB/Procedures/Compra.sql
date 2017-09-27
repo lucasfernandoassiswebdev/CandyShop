@@ -6,7 +6,8 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsCo
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsCompra]
-	@UsuarioCompra VARCHAR(14)
+	@UsuarioCompra VARCHAR(14),
+	@sequencial int = 0 output
 
 	AS
 
@@ -16,17 +17,17 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompra]
 	Objetivo..........: Inserir uma compra
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[CSSP_InsCompra] 
-
+	Ex................: EXEC [dbo].[CSSP_InsCompra] '44413074890'
 	*/
-	select * from Compra
+
 	BEGIN
 		INSERT INTO [dbo].[Compra] (UsuarioCompra, DataCompra)
-			OUTPUT INSERTED.IdCompra
 			VALUES(@UsuarioCompra, GETDATE())	
-			
+
+			SELECT @sequencial = SCOPE_IDENTITY()
+		
 			if @@ERROR <> 0 
-				RETURN SCOPE_IDENTITY()	
+				RETURN -1
 		RETURN 0	
 	END
 GO
