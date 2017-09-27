@@ -5,7 +5,13 @@
 }
 
 <link rel="stylesheet" type="text/css" href="../../Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
+
 <script type="text/javascript" src="../../Js/Produto/scriptsEditarProduto.js?d=@DateTime.Now.Ticks"></script>
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+</script>
 
 <div class="container">
     <div class="row ajuste">
@@ -90,9 +96,5 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('select').material_select();
-    });
-</script>
+
 

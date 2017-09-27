@@ -11,15 +11,14 @@ namespace CandyShop.Application
     public class CompraApplication : ICompraApplication
     {
         private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/compra";
+        private readonly string _enderecoApiCP = $"{ConfigurationManager.AppSettings["IP_API"]}/compraproduto";
 
-        public Response<string> InserirCompra(CompraViewModel compra)
+        public Response<int> InserirCompra(CompraViewModel compra)
         {
             using (var client = new HttpClient())
             {
                 var response = client.PostAsync(_enderecoApi, compra, new JsonMediaTypeFormatter()).Result;
-                return response.StatusCode != HttpStatusCode.OK
-                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
-                    : new Response<string>(response.StatusCode);
+                return new Response<int>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
@@ -38,7 +37,7 @@ namespace CandyShop.Application
         {
             using (var client = new HttpClient())
             {
-                var response = client.PostAsync(_enderecoApi, compraProduto, new JsonMediaTypeFormatter()).Result;
+                var response = client.PostAsync(_enderecoApiCP, compraProduto, new JsonMediaTypeFormatter()).Result;
                 return response.StatusCode != HttpStatusCode.OK
                     ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
                     : new Response<string>(response.StatusCode);

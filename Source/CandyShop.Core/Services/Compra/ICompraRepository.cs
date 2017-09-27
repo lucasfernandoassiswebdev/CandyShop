@@ -6,7 +6,7 @@ namespace CandyShop.Core.Services.Compra
 {
     public interface ICompraRepository
     {
-        void InserirCompra(CompraDto compra);
+        int InserirCompra(CompraDto compra, out int sequencial);
         void EditarCompra(CompraDto compra);
         void DeletarCompra(int idCompra);        
         int SelecionarCompra(int idCompra);
