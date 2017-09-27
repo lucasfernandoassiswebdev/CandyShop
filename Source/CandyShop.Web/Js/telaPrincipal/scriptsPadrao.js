@@ -40,19 +40,19 @@ $(document).ready(function () {
                             "data-Quantidade": produto.Quantidade
                         }),
                     $("<a>", {
-                        href: "#modal4",
+                        href: "#modalQuantidade",
                         'class': "modal-trigger secondary-content",
                         html: [
                             $("<i>", {
                                 html: "mode_edit",
                                 "class": "material-icons"
                             }).on("click", function () {
-                                $("#modal4").data("index", $(this).closest("li").index());
+                                $("#modalQuantidade").data("index", $(this).closest("li").index());
                             })
                         ]
                     })
-                ]
-                class: "collection-item avatar"
+                ],
+                "class": "collection-item avatar"
             }));
         });
     }
@@ -74,19 +74,19 @@ $(document).ready(function () {
                         "data-Quantidade": quantidade
                     }),
                 $("<a>", {
-                    href: "#modal4",
+                    href: "#modalQuantidade",
                     'class': "modal-trigger secondary-content",
                     html: [
                         $("<i>", {
                             html: "mode_edit",
                             "class": "material-icons"
                         }).on("click", function () {
-                            $("#modal4").data("index", $(this).closest("li").index());
+                            $("#modalQuantidade").data("index", $(this).closest("li").index());
                         })
                     ]
                 })
             ],
-            class: "collection-item avatar"
+            "class": "collection-item avatar"
         }));
 
         var produto = {
