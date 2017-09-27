@@ -56,13 +56,13 @@
                     R$ @Html.DisplayFor(modelItem => usuario.SaldoUsuario)
                 </td>
                 <td>
-                    <a class="btn-floating waves-effect waves-light brown" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf');"><i class="material-icons">info_outline</i></a>
+                    <a class="btn-floating waves-effect waves-light light-blue darken-3" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf');"><i class="material-icons">info_outline</i></a>
                 </td>
                 <td>
-                    <a class="btn-floating waves-effect waves-light orange" onclick="AjaxJsUsuario.editarUsuario('@usuario.Cpf');"><i class="material-icons">edit</i></a>
+                    <a class="btn-floating waves-effect waves-light yellow darken-3" onclick="AjaxJsUsuario.editarUsuario('@usuario.Cpf');"><i class="material-icons">edit</i></a>
                 </td>
                 <td>
-                    <a class="btn-floating waves-effect waves-light red" onclick="AjaxJsUsuario.desativarUsuario('@usuario.Cpf');"><i class="material-icons">remove_shopping_cart</i></a>
+                    <a class="btn-floating waves-effect waves-light pink lighten-1" onclick="AjaxJsUsuario.desativarUsuario('@usuario.Cpf');"><i class="material-icons">remove_shopping_cart</i></a>
                 </td>
             </tr>
         }
