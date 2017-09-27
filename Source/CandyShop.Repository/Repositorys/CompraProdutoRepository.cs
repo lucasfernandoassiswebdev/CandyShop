@@ -46,7 +46,7 @@ namespace CandyShop.Repository.Repositorys
             var retorno = new List<CompraProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
-                    retorno.Add(new CompraProdutoDto()
+                    retorno.Add( new CompraProdutoDto()
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),

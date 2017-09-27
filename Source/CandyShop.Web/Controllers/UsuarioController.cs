@@ -27,6 +27,7 @@ namespace CandyShop.Web.Controllers
 
         public ActionResult Cadastrar()
         {
+            TempData["caminhoImagensUsuarios"] = "../../Imagens/Usuarios";
             return View();
         }
 
@@ -66,7 +67,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro " + response.ContentAsString.First());
             }
 
-            TempData["caminhoImagens"] = "../../Imagens/Usuarios";
             return View("Index", response.Content);
         }
 

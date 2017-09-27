@@ -23,7 +23,7 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisProdutoAcimaValor,
             CSSP_LisProdutoCategoria,
             CSSP_SelDadosProduto,
-            CSSP_LisProdPorNome,
+            CSSP_LisProdPorNome
         }
 
         public int InserirProduto(ProdutoDto produto, out int sequencial)
@@ -232,6 +232,5 @@ namespace CandyShop.Repository.Repositorys
                     });
             return retorno;
         }
-        
     }
 }

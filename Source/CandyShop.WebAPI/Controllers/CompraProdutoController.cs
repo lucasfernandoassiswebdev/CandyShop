@@ -1,6 +1,7 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.CompraProduto.Dto;
+using CandyShop.Core.Services.Produto;
 using System;
 using System.Net;
 using System.Web.Http;
@@ -10,12 +11,14 @@ namespace CandyShop.WebAPI.Controllers
     public class CompraProdutoController : ApiController
     {
         private readonly ICompraProdutoRepository _compraProdutoRepository;
+        private readonly IProdutoRepository _produtoRepository;
         private readonly INotification _notification;
-
-        public CompraProdutoController(ICompraProdutoRepository compraProdutoRepository, INotification notification)
+        
+        public CompraProdutoController(ICompraProdutoRepository compraProdutoRepository, INotification notification, IProdutoRepository produtoRepository)
         {
             _notification = notification;
             _compraProdutoRepository = compraProdutoRepository;
+            _produtoRepository = produtoRepository;
         }
 
         public IHttpActionResult Post(CompraProdutoDto compraProduto)
@@ -24,6 +27,10 @@ namespace CandyShop.WebAPI.Controllers
             {
                 if (_notification.HasNotification())
                     return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+
+                if (VerificaEstoque(compraProduto.QtdeCompra,compraProduto.Produto.IdProduto))
+                    return BadRequest("Quantidade da compra indisponível no estoque!");
+
                 _compraProdutoRepository.InserirCompraProduto(compraProduto);
                 return Ok();
             }
@@ -47,6 +54,12 @@ namespace CandyShop.WebAPI.Controllers
         {
             _compraProdutoRepository.EditarCompraProduto(compraProduto);
             return Ok();
+        }
+
+        private bool VerificaEstoque(int qtde, int idProduto)
+        {
+            var estoque = _produtoRepository.SelecionarDadosProduto(idProduto).QtdeProduto;
+            return qtde > estoque;
         }
     }
 }
