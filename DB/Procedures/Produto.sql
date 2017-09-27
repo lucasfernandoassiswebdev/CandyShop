@@ -10,7 +10,8 @@ CREATE PROCEDURE [dbo].[CSSP_InsProduto]
 	@PrecoProduto decimal(15,2),
 	@QtdeProduto int,
 	@Ativo varchar(1) = 'A',
-	@Categoria varchar(50)
+	@Categoria varchar(50),
+	@sequencial int = 0 output
 	AS
 			
 	/*
@@ -28,8 +29,10 @@ CREATE PROCEDURE [dbo].[CSSP_InsProduto]
 		INSERT INTO [dbo].[Produto] (NomeProduto,PrecoProduto,QtdeProduto,Ativo,Categoria)
 			VALUES (@NomeProduto,@PrecoProduto,@QtdeProduto,@Ativo,@Categoria)
 
+			SELECT @sequencial = SCOPE_IDENTITY()
+
 				IF @@ERROR <> 0
-					RETURN 1
+					RETURN -1
 		RETURN 0
 	END
 GO
@@ -380,43 +383,10 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdPorNome]
 	END
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUltimoId]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[CSSP_SelUltimoId]
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelLastProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelLastProduto]
 GO
 
-CREATE PROCEDURE [dbo].[CSSP_SelUltimoId]
-
-	AS
-
-	/*
-	Documentação
-	Arquivo Fonte.....: Produto.sql
-	Objetivo..........: Pegar Id ultimo produto inserido
-	Autor.............: SMN - Ninguém
- 	Data..............: 25/09/2017
-	Ex................: EXEC [dbo].[GCS_SelUltimoId]
-
-	*/
-
-	BEGIN
-		SELECT MAX(IdProduto) as 'IdProduto'
-			FROM Produto
-	END
-GO
 
 select * from Produto
-
-
-
-
-				
-				
-
-
-				
-
-				
-
-
-				
-
