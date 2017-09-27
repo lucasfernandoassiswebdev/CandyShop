@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -83,13 +82,6 @@ namespace CandyShop.Repository.Database
             AddParameterReturn();
             _command.ExecuteNonQuery();
             return int.Parse(_command.Parameters["@RETURN_VALUE"].Value.ToString());
-        }
-
-        // Método que executa scalar
-        public int ExecuteScalar()
-        {
-            int Resultado = (Int32)_command.ExecuteScalar();
-            return Resultado;
         }
 
         // Metodo exclusivo para procedure que retorna valores (Select)

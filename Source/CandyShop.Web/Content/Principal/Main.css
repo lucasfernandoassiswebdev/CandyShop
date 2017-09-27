@@ -4,6 +4,13 @@
 	}
 }
 
+@media only screen and (max-width: 992px) {
+	.modal {
+		width: 94%;
+		top: 22% !important;
+	}
+}
+
 @media screen and (max-width: 1214px) {
 	.select-wrapper {
 		display: none;
@@ -26,34 +33,38 @@ img {
 	margin: 0 auto;
 }
 
-img:hover {
-	top: -2px;
-	transform: scale(1.3,1.3);
-}
+	img:hover {
+		top: -2px;
+		transform: scale(1.3,1.3);
+	}
 
 .card .card-image .card-title {
 	color: black;
 	font-weight: bold;
 	top: 112px;
-	font-size:19px;
+	font-size: 19px;
 }
 
 .nav-wrapper .input-field input[type=search] {
 	height: 70px;
 	margin-bottom: -100%;
 }
+
 .nav-wrapper input[type="search"]:focus {
 	position: fixed;
 	top: 0;
 	left: 0;
 }
+
 .input-field label {
 	max-height: 64px;
 }
+
 .nav-wrapper input[type="search"]:focus ~ .label-icon.active {
 	position: fixed;
 	left: 10px;
 }
+
 .nav-wrapper input[type="search"]:focus ~ .closed {
 	position: fixed;
 	right: 10px;
@@ -64,9 +75,9 @@ nav .input-field label {
 	left: 0;
 }
 
-nav .input-field label i {
-	color: white;		
-}
+	nav .input-field label i {
+		color: white;
+	}
 
 select {
 	margin-bottom: -300%;
@@ -79,7 +90,7 @@ select {
 }
 
 input[type="text"], .modal-close, h3 {
-	color: brown;
+	color: black;
 }
 
 .caret {
@@ -94,8 +105,9 @@ select {
 .select-dropdown {
 	color: white !important;
 }
+
 h3 {
-	color: brown;
+	color: black;
 }
 
 .material-icons {
@@ -148,4 +160,21 @@ h3 {
 
 #search {
 	text-align: left;
+}
+
+.pink-text, .dropdown-content li > a, .dropdown-content li > span {
+	color: rgb(236, 64, 122);
+}
+
+#modalQuantidade {
+	width: 24%;
+	top: 25% !important;
+}
+
+#modalLogin {
+	width: 42%;
+}
+
+.divider {
+	background-color: rgb(236, 64, 122);
 }

@@ -43,15 +43,15 @@
 <link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
 
 <!--modal de quantidade-->
-<div id="modal1" class="modal">
+<div id="modalQuantidade" class="modal">
     <div class="modal-content center">
-        <h3>Quantidade</h3>
+        <h3 class="pink-text lighten-1">Quantidade</h3>
         <form class="center">
             <input type="number" id="quantidade" class="center" autocomplete="off" />
         </form>
     </div>
     <div class="modal-footer">
-        <a id="confirmacao" class="waves-effect waves-green btn-flat brown-text">Confirma</a>
+        <a id="confirmacao" class="waves-effect waves-green btn-flat pink-text" style="font-weight: bold">Confirma</a>
     </div>
 </div>
 
@@ -66,23 +66,23 @@
 </div>
 
 <!--modal do carrinho-->
-<div id="modal3" class="modal">
+<div id="modalCarrinho" class="modal">
     <div class="modal-content center">
-        <h3>Carrinho</h3>
+        <h3 class="pink-text" style="font-weight: bold">Carrinho</h3>
         <div class="collection">
 
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-trigger right modal-action modal-close waves-effect waves-green btn-flat" onclick="AjaxJsCompra.inserirCompra()">Confirmar compra</a>
-        <a href="#!" id="limpar" class="right modal-action waves-effect waves-green btn-flat brown-text">Limpar</a>
+        <a href="#!" class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold" onclick="AjaxJsCompra.inserirCompra()">Confirmar compra</a>
+        <a href="#!" id="limpar" class="right modal-action waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Limpar</a>
     </div>
 </div>
 
 <!--modal de Login-->
 <div id="modalLogin" class="modal">
     <div class="modal-content center">
-        <h2>Login</h2>
+        <h2 class="pink-text" style="font-weight: bold">Login</h2>
         <form>
             <div class="row">
                 <div class="input-field col s12">
@@ -99,33 +99,33 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#modalLogin" id="logar" class="modal-trigger right modal-action modal-close waves-effect waves-green btn-flat" onclick="AjaxJsUsuario.verificaLogin()">Logar</a>
-        <a href="#!" id="limpar" class="right modal-close waves-effect waves-green btn-flat brown-text">Cancelar</a>
+        <a href="#modalLogin" id="logar" class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" onclick="AjaxJsUsuario.verificaLogin()" style="font-weight: bold">Logar</a>
+        <a href="#!" id="limpar" class="right modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Cancelar</a>
     </div>
 </div>
 
 <!--modal de editar compra-->
 <div id="modal4" class="modal">
     <div class="modal-content center">
-        <h3>Quantidade:</h3>
+        <h3 class="pink-text lighten-1">Quantidade:</h3>
         <form class="center">
             <input type="text" id="quantidadeEdit" class="center" autocomplete="off" />
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#!" id="editarQuantidade" class="modal-action modal-close waves-effect waves-green btn-flat">Confirmar</a>
+        <a href="#!" id="editarQuantidade" class="modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Confirmar</a>
     </div>
 </div>
 
 <!--barra de navegação-->
-<ul id="dropdown1" class="dropdown-content">
+<ul id="dropdownMenu" class="dropdown-content">
     <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
     <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Efetuar Pagamentos</a></li>
     <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico</a></li>
     <li class="divider"></li>
     <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
 </ul>
-<ul id="dropdown2" class="dropdown-content">
+<ul id="dropdownFiltro" class="dropdown-content">
     <li><a href="#!">Doces</a></li>
     <li><a href="#!">Chocolates</a></li>
     <li><a href="#!">Amendoins</a></li>
@@ -140,9 +140,9 @@
             <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
 
             <ul class="hide-on-med-and-down">
-                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdownMenu">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
-                <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Seu Carrinho</a></li>
+                <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Seu Carrinho</a></li>
                 <li>
                     <div class="col s4 hide-on-med-and-down">
                         <form>
@@ -157,18 +157,13 @@
                     </div>
                 </li>
                 <li style="margin-left: 250px">
-                    <select style="position: absolute; margin-top: 30px">
-                        <option value="" disabled selected class="white-text">Filtro</option>
-                        <option value="1">Chocolates</option>
-                        <option value="2">Amendoins</option>
-                        <option value="3">Salgadinhos</option>
-                    </select>
+                    <a class="dropdown-button" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
             </ul>
 
             <ul class="side-nav" id="mobile-demo">
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
-                <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
+                <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
@@ -189,14 +184,14 @@
 }
 else
 {
-    <nav class="brown darken-3 nav-extended">
+    <nav class="brown darken-2 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
+            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
-                <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
+                <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
                 <li>
                     <div class="col s4 hide-on-med-and-down">
                         <form>
@@ -211,13 +206,13 @@ else
                     </div>
                 </li>
                 <li style="margin-left: 250px">
-                    <a class="dropdown-button" href="#!" data-activates="dropdown2">Filtro<i class="material-icons right">arrow_drop_down</i></a>
+                    <a class="dropdown-button" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
             </ul>
 
             <ul class="side-nav" id="mobile-demo">
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
-                <li><a class="dropdown-button modal-trigger" href="#modal3"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
+                <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.historicoCompra()"><i class="material-icons">find_in_page</i>Historico</a></li>
