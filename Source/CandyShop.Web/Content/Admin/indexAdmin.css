@@ -134,4 +134,8 @@ input {
 	color: black;
 }
 
+.pink-text, .dropdown-content li > a, .dropdown-content li > span {
+	color: rgb(236, 64, 122);
+}
+
 
