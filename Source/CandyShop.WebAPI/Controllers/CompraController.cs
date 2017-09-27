@@ -20,8 +20,6 @@ namespace CandyShop.WebAPI.Controllers
             var result = _compraRepository.InserirCompra(compra, out sequencial);
             if (result == -1)
                 return BadRequest("Falha ao inserir compra");
-
-
             return Ok(sequencial);
         }
 

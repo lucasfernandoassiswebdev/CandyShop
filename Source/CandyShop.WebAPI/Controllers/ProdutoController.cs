@@ -1,6 +1,7 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Produto.Dto;
+using System.Net;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
@@ -9,16 +10,22 @@ namespace CandyShop.WebAPI.Controllers
     {
         private readonly INotification _notification;
         private readonly IProdutoRepository _produtoRepository;
+        private readonly IProdutoService _produtoService;
 
 
-        public ProdutoController(INotification notification, IProdutoRepository produtoRepository)
+        public ProdutoController(INotification notification, IProdutoRepository produtoRepository, IProdutoService produtoService)
         {
             _notification = notification;
             _produtoRepository = produtoRepository;
+            _produtoService = produtoService;
         }
 
         public IHttpActionResult Post(ProdutoDto produto)
         {
+            _produtoService.InserirProduto(produto);
+            if (_notification.HasNotification())            
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());            
+
             int sequencial;
             var result = _produtoRepository.InserirProduto(produto, out sequencial);
             if (result == -1)
