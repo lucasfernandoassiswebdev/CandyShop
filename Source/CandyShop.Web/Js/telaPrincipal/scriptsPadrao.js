@@ -18,10 +18,6 @@ $(document).ready(function () {
         Id = $(this).attr("data-Id");
     });
 
-    $("#confirmacao").click(function () {
-        quantidade = $("#quantidade").val();
-    });
-
     if (localStorage.getItem('listaProdutos') !== null) {
         JSON.parse(localStorage.getItem('listaProdutos')).forEach( function (produto) {
             $("div[class='collection']").append($("<li>", {
@@ -62,6 +58,7 @@ $(document).ready(function () {
     }
 
     $("#adicionaCarrinho").off("click").on("click", function () {
+        quantidade = $("#quantidade").val();
         $("div[class='collection']").append($("<li>", {
             html: [
                 $("<img>", { src: imagem, class: "circle", style: "max-width:100px;margin-top:-1.1%" }),
@@ -102,7 +99,6 @@ $(document).ready(function () {
         listaProdutos.push(produto);
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
     });
-
 
     $("#cpf").on("keydown", function () {
         mcpf($("#cpf").val());
