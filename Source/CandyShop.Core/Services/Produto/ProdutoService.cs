@@ -46,13 +46,7 @@ namespace CandyShop.Core.Services.Produto
             {
                 _notification.Add("Preço do produto nao pode ser negativo ou zerado");
                 return true;
-            }
-
-            if (string.IsNullOrEmpty(produto.Ativo))
-            {
-                _notification.Add("Status do produto nao pode ser nulo");
-                return true;
-            }
+            }            
 
             return false;
 

@@ -388,5 +388,3 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelLa
 	DROP PROCEDURE [dbo].[CSSP_SelLastProduto]
 GO
 
-
-select * from Produto
