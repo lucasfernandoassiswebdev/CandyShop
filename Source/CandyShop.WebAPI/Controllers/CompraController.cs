@@ -57,12 +57,6 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_compraRepository.ListarCompraMes(mes));
         }
 
-        [HttpGet, Route("api/compra/ultima")]
-        public IHttpActionResult GetUltimaCompra()
-        {
-            return Ok(_compraRepository.BuscaUltimaCompra());
-        }
-
         [HttpGet, Route("api/compra/dia")]
         public IHttpActionResult GetDia()
         {
