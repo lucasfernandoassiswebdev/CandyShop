@@ -11,3 +11,17 @@
 .center {
 	text-align: center;
 }
+
+#filtro {
+	text-align: center;     
+}
+
+#icone {
+	display: inline-block;
+	color: brown;
+}
+
+
+tr {
+	color: black;
+}
