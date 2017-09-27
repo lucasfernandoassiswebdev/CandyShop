@@ -18,7 +18,7 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompra]
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[CSSP_InsCompra] '43838601840'	
-	*/
+	*/					EXEC [dbo].[CSSP_LisCompra]
 
 	BEGIN
 		INSERT INTO [dbo].[Compra] (UsuarioCompra, DataCompra, ValorCompra)
