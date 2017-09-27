@@ -20,6 +20,5 @@ namespace CandyShop.Core.Services.Compra
         IEnumerable<CompraDto> ListarCompraSemana();
         IEnumerable<CompraDto> ListarCompraMes(int mes);
         IEnumerable<CompraDto> ListarCompraDia();
-        int BuscaUltimaCompra();
     }
 }

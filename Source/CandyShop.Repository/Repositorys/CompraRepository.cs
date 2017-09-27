@@ -167,11 +167,5 @@ namespace CandyShop.Repository.Repositorys
                     });
             return retorno;
         }
-
-        public int BuscaUltimaCompra()
-        {
-            ExecuteProcedure(Procedures.CSSP_SelLastCompra);
-            return ExecuteScalar();
-        }
     }
 }
