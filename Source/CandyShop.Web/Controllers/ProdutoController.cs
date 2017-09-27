@@ -93,7 +93,7 @@ namespace CandyShop.Web.Controllers
                 if (response.Status != HttpStatusCode.OK)
                     return Content(response.ContentAsString);
 
-                var id = _appProduto.BuscaUltimoProduto();
+                
                 //salvando todas as imagens 
                 if (produto.ImagemA != null)
                 {
@@ -109,7 +109,7 @@ namespace CandyShop.Web.Controllers
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
 
-                            string caminho = $"~/Imagens/Produtos/{id.Content}_A.jpg";
+                            string caminho = $"~/Imagens/Produtos/{response}_A.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                         }
@@ -131,7 +131,7 @@ namespace CandyShop.Web.Controllers
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
 
-                            string caminho = $"~/Imagens/Produtos/{id.Content}_B.jpg";
+                            string caminho = $"~/Imagens/Produtos/{response}_B.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                         }
@@ -152,7 +152,7 @@ namespace CandyShop.Web.Controllers
 
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
-                            string caminho = $"~/Imagens/Produtos/{id.Content}_C.jpg";
+                            string caminho = $"~/Imagens/Produtos/{response}_C.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                         }

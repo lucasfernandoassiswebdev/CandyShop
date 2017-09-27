@@ -5,7 +5,7 @@ namespace CandyShop.Core.Services.Produto
 {
     public interface IProdutoRepository
     {
-        void InserirProduto(ProdutoDto nomeProduto);
+        int InserirProduto(ProdutoDto nomeProduto, out int sequencial);
         void DesativarProduto(int idProduto);
         void UpdateProduto(ProdutoDto produto);
         bool SelecionarProduto(string nomeProduto);

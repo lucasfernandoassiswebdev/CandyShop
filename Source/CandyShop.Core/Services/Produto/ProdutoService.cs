@@ -17,7 +17,7 @@ namespace CandyShop.Core.Services.Produto
         {
             if (!produto.IsValid(_notification))
                 return;
-            _produtoRepository.InserirProduto(produto);
+            _produtoRepository.InserirProduto(produto,out int sequencial);
         }
 
         public void EditarProduto(ProdutoDto produto)
