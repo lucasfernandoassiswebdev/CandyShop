@@ -51,7 +51,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a id="adicionaCarrinho" class="waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
+        <a id="adicionaCarrinho" href="#modalCarrinho" class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
     </div>
 </div>
 
@@ -127,17 +127,20 @@
     <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons">store</i>Candy Shop</a>
+            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdownMenu">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Seu Carrinho</a></li>
                 <li>
+                    <a class="dropdown-button" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
+                </li>
+                <li>
                     <div class="col s4 hide-on-med-and-down">
                         <form>
                             <div class="input-field">
-                                <input id="search" type="search" placeholder="Encontre seu item">
+                                <input id="search" type="search">
                                 <label class="label-icon" for="search">
                                     <i class="material-icons">search</i>
                                 </label>
@@ -145,9 +148,6 @@
                             </div>
                         </form>
                     </div>
-                </li>
-                <li style="margin-left: 250px">
-                    <a class="dropdown-button" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
             </ul>
 
@@ -182,10 +182,13 @@ else
                 <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
                 <li>
+                    <a class="dropdown-button" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
+                </li>
+                <li>
                     <div class="col s4 hide-on-med-and-down">
                         <form>
                             <div class="input-field">
-                                <input id="search" type="search" placeholder="pesquise por itens aqui" required>
+                                <input id="search" type="search" required>
                                 <label class="label-icon" for="search">
                                     <i class="material-icons">search</i>
                                 </label>
@@ -193,9 +196,6 @@ else
                             </div>
                         </form>
                     </div>
-                </li>
-                <li style="margin-left: 250px">
-                    <a class="dropdown-button" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
             </ul>
 
