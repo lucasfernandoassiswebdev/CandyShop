@@ -36,12 +36,9 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
-             
+
             ExecuteNonQuery();
         }
-
-
-        // 
 
         public IEnumerable<CompraProdutoDto> ListarCompraProduto()
         {
@@ -55,7 +52,7 @@ namespace CandyShop.Repository.Repositorys
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),
                         Produto = new ProdutoDto()
                         {
-                            IdProduto =  reader.ReadAsInt("IdProduto"),
+                            IdProduto = reader.ReadAsInt("IdProduto"),
                             NomeProduto = reader.ReadAsString("NomeProduto"),
                             PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
                             Ativo = reader.ReadAsString("Ativo")
@@ -67,11 +64,11 @@ namespace CandyShop.Repository.Repositorys
         public IEnumerable<CompraProdutoDto> ListarCompraProdutoIdVenda(int idVenda)
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraProdutoIdVenda);
-            AddParameter("@IdCompra",idVenda);
+            AddParameter("@IdCompra", idVenda);
             var retorno = new List<CompraProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
-                    retorno.Add( new CompraProdutoDto()
+                    retorno.Add(new CompraProdutoDto()
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),

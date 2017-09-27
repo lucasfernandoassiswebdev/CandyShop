@@ -16,7 +16,6 @@ namespace CandyShop.Web.Controllers
             _appCompra = compra;
         }
 
-        // GET: Compra
         public ActionResult Index()
         {
             return View();

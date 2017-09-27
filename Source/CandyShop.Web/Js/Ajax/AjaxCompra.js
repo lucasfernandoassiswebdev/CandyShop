@@ -12,7 +12,7 @@
         var i = 0;
         $.each(produtos, function () {
             produto = {
-                IdProduto: $('span:eq('+ i +')').attr('data-Id'),
+                Produto: { IdProduto: $('span:eq('+ i + ')').attr('data-Id')},
                 QtdeCompra: $('p:eq('+ i +')').attr('data-Quantidade')
             };
             listaProdutos.push(produto);

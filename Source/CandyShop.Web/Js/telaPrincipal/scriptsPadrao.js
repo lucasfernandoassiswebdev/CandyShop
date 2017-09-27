@@ -100,7 +100,6 @@ $(document).ready(function () {
         }
 
         listaProdutos.push(produto);
-        console.log(listaProdutos);
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
     });
 
