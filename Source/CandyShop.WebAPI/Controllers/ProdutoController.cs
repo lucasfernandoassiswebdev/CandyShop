@@ -1,8 +1,6 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Produto.Dto;
-using System;
-using System.Net;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
@@ -21,17 +19,11 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Post(ProdutoDto produto)
         {
-            try
-            {
-                _produtoRepository.InserirProduto(produto);
-                if (_notification.HasNotification())
-                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return Content(HttpStatusCode.NotAcceptable, ex.Message);
-            }
+            int sequencial;
+            var result = _produtoRepository.InserirProduto(produto, out sequencial);
+            if (result == -1)
+                return BadRequest("Falha ao inserir o produto");
+            return Ok(sequencial);
         }
 
         public IHttpActionResult Get()
@@ -50,13 +42,6 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetId(int idProduto)
         {
             return Ok(_produtoRepository.SelecionarDadosProduto(idProduto));
-        }
-
-        [HttpGet]
-        [Route("api/produto/ultimo")]
-        public IHttpActionResult GetUltimoProduto()
-        {
-            return Ok(_produtoRepository.BuscaUltimoProduto());
         }
 
         [HttpGet]
