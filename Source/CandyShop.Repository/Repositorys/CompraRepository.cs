@@ -160,7 +160,7 @@ namespace CandyShop.Repository.Repositorys
                         ValorCompra = reader.ReadAsDecimal("ValorCompra"),
                         Usuario = new UsuarioDto()
                         {
-                            NomeUsuario = reader.ReadAsString("nomeUsuario"),
+                            NomeUsuario = reader.ReadAsString("NomeUsuario"),
                             Cpf = reader.ReadAsString("UsuarioCompra")
                         }
                     });

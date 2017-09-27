@@ -55,12 +55,10 @@ CREATE PROCEDURE [dbo].[CSSP_UpdCompra]
 	*/
 
 	BEGIN	
-		UPDATE [dbo].[Compra] SET 
-			UsuarioCompra = @UsuarioCompra,			
-			DataCompra = @DataCompra
-			WHERE
-				IdCompra = @IdCompra
-			
+		UPDATE [dbo].[Compra] 
+			SET UsuarioCompra = @UsuarioCompra,			
+				DataCompra = @DataCompra
+			WHERE IdCompra = @IdCompra			
 			
 	
 			if @@ERROR <> 0 
@@ -99,7 +97,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompra]
 		BEGIN
 			SELECT	c.IdCompra,
 					c.UsuarioCompra ,
-					u.NomeUsuario as 'nomeUsuario',
+					u.NomeUsuario as 'NomeUsuario',
 					c.DataCompra,
 					c.ValorCompra
 			 FROM [dbo].[Compra] c WITH(NOLOCK)
@@ -142,7 +140,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraSemana]
 		BEGIN
 			SELECT	c.IdCompra,
 					c.UsuarioCompra ,
-					u.NomeUsuario as 'nomeUsuario',
+					u.NomeUsuario as 'NomeUsuario',
 					c.DataCompra,
 					c.ValorCompra 
 			 FROM [dbo].[Compra] c WITH(NOLOCK)
@@ -155,7 +153,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraSemana]
 		BEGIN
 			SELECT	c.IdCompra,
 					c.UsuarioCompra ,
-					u.NomeUsuario as 'nomeUsuario',
+					u.NomeUsuario as 'NomeUsuario',
 					c.DataCompra,
 					c.ValorCompra 
 			 FROM [dbo].[Compra] c WITH(NOLOCK)
@@ -192,7 +190,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraDia]
 		END	
 		SELECT	c.IdCompra,
 					c.UsuarioCompra ,
-					u.NomeUsuario as 'nomeUsuario',
+					u.NomeUsuario as 'NomeUsuario',
 					c.DataCompra,
 					c.ValorCompra 
 			 FROM [dbo].[Compra] c WITH(NOLOCK)
@@ -218,19 +216,19 @@ CREATE PROCEDURE [dbo].[CSSP_LisCpfCompra]
 	Objetivo..........: Listar as compras feitas por um usuario
 	Autor.............: SMN - Rafael Morais
  	Data..............: 07/07/2017
-	Ex................: EXEC [dbo].[CSSP_LisCpfCompra]
+	Ex................: EXEC [dbo].[CSSP_LisCpfCompra] '43838601840'
 
 	*/
 
 	BEGIN
 	
 		SELECT	c.IdCompra,
-				c.UsuarioCompra as 'nomeUsuario',
-				u.NomeUsuario,
 				c.DataCompra,
-				c.ValorCompra 
+				c.ValorCompra,
+				c.UsuarioCompra,
+				u.NomeUsuario as 'NomeUsuario'				
 		 FROM [dbo].[Compra] c WITH(NOLOCK)
-		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
+			INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
 		 WHERE c.UsuarioCompra = @Cpf
 	END
 GO
@@ -308,7 +306,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraNomeUsuario]
 
 	BEGIN
 		SELECT	c.IdCompra,
-				c.UsuarioCompra as 'nomeUsuario',
+				c.UsuarioCompra as 'NomeUsuario',
 				u.NomeUsuario,
 				c.DataCompra 
 		 FROM [dbo].[Compra] c WITH(NOLOCK)
