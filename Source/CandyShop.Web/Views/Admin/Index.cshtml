@@ -62,13 +62,13 @@
 <!--modal de pesquisa de usuários-->
 <div id="modalPesquisaUsuario" class="modal">
     <div class="modal-content">
-        <h3 class="center">Nome do usuário</h3>
+        <h3 class="center pink-text">Nome do usuário</h3>
         <form>
             <input type="text" id="nomeUsuario" autocomplete="off" />
         </form>
     </div>
     <div class="modal-footer center">
-        <a href="#!" onclick="AjaxJsUsuario.listarUsuarioPorNome()" class="btn waves waves-light modal-close waves-effect waves-green btn-flat brown-text">Encontrar<i class="material-icons right brown-text">search</i></a>
+        <a href="#!" onclick="AjaxJsUsuario.listarUsuarioPorNome()" class="btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
     </div>
 </div>
 
@@ -104,7 +104,7 @@
                     <ul>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listarUsuarioEmDivida()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
-                        <li><a class="close-menu modal-trigger" href="#modal1"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
+                        <li><a class="close-menu modal-trigger" href="#modalPesquisaUsuario"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
                     </ul>
@@ -118,7 +118,7 @@
                 <div class="collapsible-body">
                     <ul class="brown-text">
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
-                        <li><a href="#modal2" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
+                        <li><a href="#modalPesquisaProduto" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.listarInativos()"><i class="material-icons">list</i>Listar Inativos</a></li>
                     </ul>

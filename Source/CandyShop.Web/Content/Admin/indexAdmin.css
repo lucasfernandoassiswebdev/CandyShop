@@ -106,12 +106,8 @@ h4 {
 	text-align: center;
 }
 
-.btn:hover {
-	color: white;
-}
-
-th {
-	color: brown;
+.btn:hover,.btn:hover i {
+	color: white !important;
 }
 
 .vinho {
@@ -138,4 +134,11 @@ input {
 	color: rgb(236, 64, 122);
 }
 
+.material-icons {
+	font-size:25px
+}
+
+.btn:hover, .btn-large:hover {
+	background-color: rgb(236,64,122) !important;
+}
 
