@@ -17,19 +17,21 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompraProduto]
 	Objetivo..........: Inserir um produto e a quantidade dele numa venda.
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[CSSP_InsCompraProduto]
-
-	*/
-
+	Ex................: EXEC [dbo].[CSSP_InsCompraProduto] 7, 7, 2
+						
+	*/	
 	BEGIN	
-		INSERT INTO CompraProduto (IdProduto, IdCompra, QtdeProduto)
-			VALUES (@IdProduto, @IdCompra, @QtdeProduto)
+		INSERT INTO CompraProduto (IdCompra, IdProduto, QtdeProduto)
+			VALUES (@IdCompra, @IdProduto, @QtdeProduto)
 
 			DECLARE @PrecoProduto decimal(15,2)
+			SELECT @PrecoProduto = (SELECT PrecoProduto FROM Produto WHERE IdProduto = @IdProduto)
+			
 			DECLARE @Cpf varchar(11)
-
+			SELECT @Cpf = (SELECT UsuarioCompra FROM COMPRA WHERE IdCompra = @IdCompra)
+			
 			UPDATE [dbo].[Compra]
-				SET ValorCompra += (@QtdeProduto * @PrecoProduto)
+				SET ValorCompra += (@QtdeProduto * @PrecoProduto)					
 					WHERE IdCompra = @IdCompra
 					
 			UPDATE [dbo].[Usuario]

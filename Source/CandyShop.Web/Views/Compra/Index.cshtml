@@ -4,7 +4,6 @@
 
 <link rel="stylesheet" type="text/css" href="../../Content/Admin/historico.css"/>
 
-<h4 align="center"><font color="brown">@ViewBag.tituloPagina</font></h4>
 <script>
     $('.dropdown-button').dropdown({
             inDuration: 300,
@@ -17,6 +16,9 @@
         }
     );
 </script>
+
+<h4 align="center"><font color="brown">@ViewBag.tituloPagina</font></h4>
+
 @if (ViewBag.drop == 0)
 {
     <div id="filtro" class="row">
@@ -85,25 +87,3 @@
     <a class="waves-effect waves-light btn" onclick="AjaxJsCompra.voltarInicio()"><i class="material-icons left">arrow_back</i>Voltar</a>
 </div>*@
 
-<style>
-    #tabela {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    #filtro {
-        text-align: center;     
-    }
-
-    #icone {
-        display: inline-block;
-        color: brown;
-    }
-
-
-    tr {
-        color: black;
-    }
-</style>

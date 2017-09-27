@@ -23,8 +23,7 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisCompraNomeUsuario,
             CSSP_LisCompraSemana,
             CSSP_LisCompraDia,
-            CSSP_LisCpfCompra,
-            CSSP_SelLastCompra
+            CSSP_LisCpfCompra           
         }
 
         public int InserirCompra(CompraDto compra, out int sequencial)
@@ -166,12 +165,6 @@ namespace CandyShop.Repository.Repositorys
                         }
                     });
             return retorno;
-        }
-
-        public int BuscaUltimaCompra()
-        {
-            ExecuteProcedure(Procedures.CSSP_SelLastCompra);
-            return ExecuteScalar();
         }
     }
 }
