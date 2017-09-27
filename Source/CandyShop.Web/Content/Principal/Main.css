@@ -7,7 +7,7 @@
 @media only screen and (max-width: 992px) {
 	.modal {
 		width: 94% !important;
-		top: 22% !important;
+		top: 7% !important;
 	}
 }
 
@@ -170,6 +170,7 @@ h3 {
 	width: 24%;
 	top: 25% !important;
 }
+
 
 #modalLogin {
 	width: 42%;
