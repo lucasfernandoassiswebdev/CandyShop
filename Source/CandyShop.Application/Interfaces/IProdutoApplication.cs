@@ -6,7 +6,7 @@ namespace CandyShop.Application.Interfaces
     public interface IProdutoApplication
     {
         Response<IEnumerable<ProdutoViewModel>> ListarProdutos();
-        Response<string> InserirProduto(ProdutoViewModel produto);
+        Response<int> InserirProduto(ProdutoViewModel produto);
         Response<ProdutoViewModel> DetalharProduto(int idProduto);
         Response<string> EditarProduto(ProdutoViewModel produto);
         Response<string> DesativarProduto(ProdutoViewModel produto);

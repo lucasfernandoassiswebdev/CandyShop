@@ -29,10 +29,8 @@ namespace CandyShop.Core.Services.Produto
 
         public void EditarProduto(ProdutoDto produto)
         {
-            if (!produto.IsValid(_notification))
-                return;
-
-            _produtoRepository.UpdateProduto(produto);
+            if (IsValid(produto))
+                return;           
         }
 
 
