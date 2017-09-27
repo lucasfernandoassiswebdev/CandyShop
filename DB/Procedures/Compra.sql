@@ -17,12 +17,12 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompra]
 	Objetivo..........: Inserir uma compra
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[CSSP_InsCompra] '44413074890'
+	Ex................: EXEC [dbo].[CSSP_InsCompra] '43838601840'	
 	*/
 
 	BEGIN
-		INSERT INTO [dbo].[Compra] (UsuarioCompra, DataCompra)
-			VALUES(@UsuarioCompra, GETDATE())	
+		INSERT INTO [dbo].[Compra] (UsuarioCompra, DataCompra, ValorCompra)
+			VALUES(@UsuarioCompra, GETDATE(), 0)	
 
 			SELECT @sequencial = SCOPE_IDENTITY()
 		
@@ -85,7 +85,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompra]
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[CSSP_LisCompra]
-
+	
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select 
 	Data..............: 14/09/2017
