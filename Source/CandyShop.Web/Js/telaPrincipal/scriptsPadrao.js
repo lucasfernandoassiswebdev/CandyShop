@@ -51,7 +51,7 @@ $(document).ready(function () {
                             })
                         ]
                     })
-                ],
+                ]
                 class: "collection-item avatar"
             }));
         });

@@ -5,8 +5,8 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsCo
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsCompraProduto]
-	@IdProduto int,
 	@IdCompra int,
+	@IdProduto int,	
 	@QtdeProduto int
 
 	AS
@@ -17,7 +17,7 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompraProduto]
 	Objetivo..........: Inserir um produto e a quantidade dele numa venda.
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[CSSP_InsCompraProduto] 7, 7, 2
+	Ex................: EXEC [dbo].[CSSP_InsCompraProduto] 10, 7, 2
 						
 	*/	
 	BEGIN	
@@ -32,11 +32,15 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompraProduto]
 			
 			UPDATE [dbo].[Compra]
 				SET ValorCompra += (@QtdeProduto * @PrecoProduto)					
-					WHERE IdCompra = @IdCompra
+				WHERE IdCompra = @IdCompra
 					
 			UPDATE [dbo].[Usuario]
 				SET SaldoUsuario -= (@QtdeProduto * @PrecoProduto)
-					WHERE Cpf = @Cpf
+				WHERE Cpf = @Cpf
+			
+			UPDATE [dbo].[Produto]
+				SET QtdeProduto -= @QtdeProduto
+				WHERE IdProduto = @IdProduto
 
 			if @@ERROR <> 0 
 				RETURN 1

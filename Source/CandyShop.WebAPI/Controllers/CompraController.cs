@@ -56,7 +56,6 @@ namespace CandyShop.WebAPI.Controllers
         {
             return Ok(_compraRepository.ListarCompraMes(mes));
         }
-
         [HttpGet, Route("api/compra/dia")]
         public IHttpActionResult GetDia()
         {
