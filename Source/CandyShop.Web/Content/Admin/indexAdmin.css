@@ -1,25 +1,7 @@
-﻿html {
-	color: black;
-	font-family: Arial;
-}
-
-header, main, footer, #DivGrid {
-	padding-left: 430px;
-	padding-right: 70px;
-}
-
-.btn-large {
-	background-color: #ec407a;
-}
-
-.btn-floating {
-	background-color: #cd2626;
-}
-
-@media only screen and (max-width : 992px) {
+﻿@media only screen and (max-width : 992px) {
 	header, main, footer, #DivGrid {
-		padding-left: 0;
-		padding-right: 0;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
 	}
 
 	.container {
@@ -55,9 +37,27 @@ header, main, footer, #DivGrid {
 		margin-left: 2.3%;
 	}
 
-	.corpo{
-		margin-left: 2% !important;	
+	.corpo {
+		margin-left: 2% !important;
 	}
+}
+
+html {
+	color: black;
+	font-family: Arial;
+}
+
+header, main, footer, #DivGrid {
+	padding-left: 430px;
+	padding-right: 70px;
+}
+
+.btn-large {
+	background-color: #e781a3;
+}
+
+.btn-floating {
+	background-color: #cd2626;
 }
 
 .gridCelular {

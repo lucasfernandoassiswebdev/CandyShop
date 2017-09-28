@@ -26,7 +26,6 @@ namespace CandyShop.Web
                       "~/Content/materialize.css",
                       "~/Content/site.css",
                       "~/Content/Admin/historico.css",
-                      "~/Content/Admin/indexAdmin.css",
                       "~/Content/Principal/shop.css"));
         }
     }
