@@ -4,9 +4,13 @@
     ViewBag.Title = "Padrao";
 }
 
-<script type="text/javascript" src="../../Js/telaPrincipal/scriptsMain.js?d=@DateTime.Now.Ticks"></script>
 <script>
     $(document).ready(function () {
+        //limpando os inputs
+        $('.modal-close').on('click', function () {
+            $('#quantidade, #quantidadeEdit').val('');
+        });
+
         $('.tooltipped').tooltip({ delay: 50 });
         $(".button-collapse").sideNav();
 
@@ -43,8 +47,9 @@
 <link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
 
 <!--modal de quantidade-->
-<div id="modalQuantidade" class="modal">
+<div id="modalQuantidade" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
+        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
         <h3 class="pink-text lighten-1">Quantidade</h3>
         <form class="center">
             <input type="number" id="quantidade" class="center" autocomplete="off" />
@@ -52,6 +57,20 @@
     </div>
     <div class="modal-footer">
         <a id="adicionaCarrinho" href="#modalCarrinho" class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
+    </div>
+</div>
+
+<!--modal de editar quantidade-->
+<div id="modalEditarQuantidade" class="modal" style="z-index: 99999999">
+    <div class="modal-content center">
+        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <h3 class="pink-text lighten-1">Quantidade</h3>
+        <form class="center">
+            <input type="number" id="quantidadeEdit" class="center" autocomplete="off" />
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a id="editarQuantidade" href="#modalCarrinho" class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
     </div>
 </div>
 
@@ -73,6 +92,7 @@
 <!--modal de Login-->
 <div id="modalLogin" class="modal">
     <div class="modal-content center">
+        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
         <h2 class="pink-text" style="font-weight: bold">Login</h2>
         <form>
             <div class="row">
@@ -96,8 +116,9 @@
 </div>
 
 <!--modal de editar compra-->
-<div id="modal4" class="modal">
+<div id="modalEditarCompra" class="modal">
     <div class="modal-content center">
+        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
         <h3 class="pink-text lighten-1">Quantidade:</h3>
         <form class="center">
             <input type="text" id="quantidadeEdit" class="center" autocomplete="off" />

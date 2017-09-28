@@ -8,8 +8,6 @@
     }
 </style>
 
-<script type="text/javascript" src="../../Js/telaPrincipal/scriptsMain.js?d=@DateTime.Now.Ticks"></script>
-
 <div class="row">
     @foreach (var produto in Model)
     {
@@ -28,5 +26,12 @@
         </div>
     }
 </div>
+
+<script>
+    //limpando os inputs
+    $('.btn-floating, #modalEditarQuantidade').on('click', function () {
+        $('#quantidade, #quantidadeEdit').val('');
+    });
+</script>
 
 
