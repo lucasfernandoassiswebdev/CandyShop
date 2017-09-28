@@ -69,15 +69,12 @@ namespace CandyShop.Repository.Repositorys
             using (var reader = ExecuteReader())
                 while (reader.Read())
                     retorno.Add(new CompraProdutoDto()
-                    {
-                        IdCompra = reader.ReadAsInt("IdCompra"),
+                    {                        
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),
-                        Produto = new ProdutoDto()
-                        {
-                            IdProduto = reader.ReadAsInt("IdProduto"),
+                        Produto = new ProdutoDto
+                        {                            
                             NomeProduto = reader.ReadAsString("NomeProduto"),
-                            PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
-                            Ativo = reader.ReadAsString("Ativo")
+                            PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),                            
                         }
                     });
             return retorno;

@@ -37,6 +37,12 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_compraRepository.ListarCompra());
         }
 
+        [HttpGet, Route("api/compra/selecionarcompra/{idCompra}")]
+        public IHttpActionResult GetUmaCompra(int idCompra)
+        {
+            return Ok(_compraRepository.SelecionarDadosCompra(idCompra));
+        }
+
         [HttpGet, Route("api/compra/listaCompracpf/{cpf}")]
         public IHttpActionResult GetCpf(string cpf)
         {

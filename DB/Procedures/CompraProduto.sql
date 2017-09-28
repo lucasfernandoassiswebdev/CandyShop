@@ -146,10 +146,10 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraProduto]
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCompraProdutoIdVenda]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].CSSP_LisCompraProdutoIdVenda
+	DROP PROCEDURE [dbo].[CSSP_LisCompraProdutoIdVenda]
 GO
 
-CREATE PROCEDURE [dbo].CSSP_LisCompraProdutoIdVenda
+CREATE PROCEDURE [dbo].[CSSP_LisCompraProdutoIdVenda]
 	@IdCompra int
 
 	AS
@@ -160,7 +160,7 @@ CREATE PROCEDURE [dbo].CSSP_LisCompraProdutoIdVenda
 	Objetivo..........: Listar produtos de uma compra específica
 	Autor.............: SMN - Rafael Morais
  	Data..............: 01/01/2017
-	Ex................: EXEC [dbo].[CSSP_LisCompraProduto]
+	Ex................: EXEC [dbo].[CSSP_LisCompraProdutoIdVenda] 10
 
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select 
@@ -174,9 +174,10 @@ CREATE PROCEDURE [dbo].CSSP_LisCompraProdutoIdVenda
 				p.NomeProduto,
 				p.PrecoProduto,
 				p.Ativo
-		 FROM CompraProduto cp WITH(NOLOCK)
-		 INNER JOIN Produto p on p.IdProduto = cp.IdProduto
-		 WHERE cp.IdCompra = @IdCompra
+			FROM CompraProduto cp WITH(NOLOCK)
+				INNER JOIN Produto p
+					ON p.IdProduto = cp.IdProduto
+			WHERE cp.IdCompra = @IdCompra
 	END
 GO
 

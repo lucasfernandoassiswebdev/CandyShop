@@ -5,6 +5,7 @@ using CandyShop.Core.Services.Produto;
 using System;
 using System.Net;
 using System.Web.Http;
+using CandyShop.Core.Services.Produto.Dto;
 
 namespace CandyShop.WebAPI.Controllers
 {
@@ -25,11 +26,12 @@ namespace CandyShop.WebAPI.Controllers
         {
             try
             {
+                VerificaEstoque(compraProduto);
                 if (_notification.HasNotification())
                     return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
-                if (VerificaEstoque(compraProduto.QtdeCompra,compraProduto.Produto.IdProduto))
-                    return BadRequest("Quantidade da compra indisponível no estoque!");
+                //if (VerificaEstoque(compraProduto.QtdeCompra,compraProduto.Produto.IdProduto))
+                //    return BadRequest("Quantidade da compra indisponível no estoque!");
 
                 _compraProdutoRepository.InserirCompraProduto(compraProduto);
                 return Ok();
@@ -56,10 +58,11 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-        private bool VerificaEstoque(int qtde, int idProduto)
+        private void VerificaEstoque(CompraProdutoDto item)
         {
-            var estoque = _produtoRepository.SelecionarDadosProduto(idProduto).QtdeProduto;
-            return qtde > estoque;
+            var estoque = _produtoRepository.SelecionarDadosProduto(item.Produto.IdProduto).QtdeProduto;
+            if (item.QtdeCompra > estoque)
+                _notification.Add("Quantidade da compra indisponível no estoque!");            
         }
     }
 }

@@ -11,21 +11,9 @@ namespace CandyShop.Core.Services.Produto
         {
             _notification = notification;
             _produtoRepository = produtoRepository;
-        }
+        }        
 
-        public void InserirProduto(ProdutoDto produto)
-        {
-            IsValid(produto);
-                           
-        }
-
-        public void EditarProduto(ProdutoDto produto)
-        {
-            IsValid(produto);
-        }
-
-
-        private void IsValid(ProdutoDto produto)
+        public void IsValid(ProdutoDto produto)
         {
             if (string.IsNullOrEmpty(produto.NomeProduto.Trim()) || produto.NomeProduto.Length > 40)
             {

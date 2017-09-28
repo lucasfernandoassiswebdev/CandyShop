@@ -230,6 +230,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisCpfCompra]
 		 FROM [dbo].[Compra] c WITH(NOLOCK)
 			INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
 		 WHERE c.UsuarioCompra = @Cpf
+		 ORDER BY c.DataCompra DESC
 	END
 GO
 
@@ -285,6 +286,38 @@ CREATE PROCEDURE [dbo].[CSSP_SelCompra]
 		 WHERE IdCompra = @IdCompra
 	END
 GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelDadosCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelDadosCompra]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_SelDadosCompra]
+	@IdCompra int	
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Compra.sql
+	Objetivo..........: Selecionar dados de uma compra específica
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 28/09/2017
+	Ex................: EXEC [dbo].[CSSP_SelDadosCompra] 10
+
+	*/
+	BEGIN	
+		SELECT  c.IdCompra,
+				c.UsuarioCompra,
+				c.DataCompra,
+				c.ValorCompra,
+				u.NomeUsuario as 'NomeUsuario'
+			FROM [dbo].[Compra] c WITH(NOLOCK)
+				INNER JOIN [dbo].[Usuario] u 
+					ON c.UsuarioCompra = u.Cpf
+			WHERE IdCompra = @IdCompra
+	END
+GO
+				
 		
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCompraNomeUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisCompraNomeUsuario]

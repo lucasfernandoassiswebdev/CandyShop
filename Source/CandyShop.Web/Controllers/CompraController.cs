@@ -97,11 +97,15 @@ namespace CandyShop.Web.Controllers
                 foreach (var produto in compra.Itens)
                 {
                     produto.IdCompra = response.Content;
-                    _appCompra.InserirItens(produto);
+                    var callback = _appCompra.InserirItens(produto);
+                    if (callback.Status != HttpStatusCode.OK)
+                        return Content($"{callback.ContentAsString.First()}");
                 }
 
-                //if (response.Status != HttpStatusCode.OK)
-                //    return Content($"Não foi possível registrar sua compra: {response.Status}");
+                var totalCompra = _appCompra.SelecionarCompra(response.Content);
+                if (response.Status != HttpStatusCode.OK)
+                    return Content("Erro ao atualizar saldo" + response.ContentAsString.First());
+                Session["saldoUsuario"] = Convert.ToDecimal(Session["saldoUsuario"].ToString()) - totalCompra.Content.ValorCompra;
 
                 return Content("Sua compra foi registrada com sucesso");
             }
