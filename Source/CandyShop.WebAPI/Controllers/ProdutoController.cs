@@ -22,7 +22,7 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Post(ProdutoDto produto)
         {
-            _produtoService.InserirProduto(produto);
+            _produtoService.IsValid(produto);
             if (_notification.HasNotification())            
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());            
 
