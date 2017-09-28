@@ -1,0 +1,35 @@
+﻿@media only screen and (max-width : 992px) {
+	dd {
+		margin-left: 140px !important;
+		margin-top: -5% !important;
+	}
+}
+
+.corpo, hr {
+	width: 100%;
+	margin: 0 auto;
+	text-align: left;
+}
+
+.corpo {
+	margin-left: -14%;
+}
+
+dd {
+	margin-left: 16%;
+	margin-top: -2.5%;
+}
+
+dl {
+	color: black;
+}
+
+h4 {
+	margin-left: -1%;
+}
+
+img {
+	max-width: 150px;
+	max-height: 150px;
+	display: inline-block;
+}
