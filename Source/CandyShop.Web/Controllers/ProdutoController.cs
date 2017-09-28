@@ -1,7 +1,9 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -93,8 +95,9 @@ namespace CandyShop.Web.Controllers
                 if (response.Status != HttpStatusCode.OK)
                     return Content(response.ContentAsString.ToString());
 
-                
-                //salvando todas as imagens 
+
+                //salvando todas as imagens que o usuário inseriu
+                int cont = 0;
                 if (produto.ImagemA != null)
                 {
                     string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
@@ -112,6 +115,7 @@ namespace CandyShop.Web.Controllers
                             string caminho = $"~/Imagens/Produtos/{response}_A.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                            cont++;
                         }
 
                     }
@@ -134,6 +138,7 @@ namespace CandyShop.Web.Controllers
                             string caminho = $"~/Imagens/Produtos/{response}_B.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                            cont++;
                         }
 
                     }
@@ -155,9 +160,24 @@ namespace CandyShop.Web.Controllers
                             string caminho = $"~/Imagens/Produtos/{response}_C.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                            cont++;
                         }
 
                     }
+                }
+
+                if (cont == 0)
+                {
+                    //pegando a imagem na aplicação e transformando em base 64
+                    string imagem = ConvertTo64();
+                    //transformando em array de bytes e salvando com o cpf do usuário
+                    byte[] bytes = Convert.FromBase64String(imagem);
+
+                    Image imagem2 = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
+
+                    string caminho = $"~/Imagens/Produtos/{response.Content}_A.jpg";
+
+                    imagem2.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                 }
 
                 return Content("Produto cadastrado com sucesso!!");
@@ -256,5 +276,22 @@ namespace CandyShop.Web.Controllers
             return Content("Produto desativado com sucesso!");
         }
         #endregion
+
+        private string ConvertTo64()
+        {
+            using (Image image = Image.FromFile(Server.MapPath("~/Imagens/Produtos/sem-foto.png")))
+            {
+                using (MemoryStream m = new MemoryStream())
+                {
+                    image.Save(m, image.RawFormat);
+                    byte[] imageBytes = m.ToArray();
+
+                    // Convert byte[] to Base64 String
+                    string base64String = Convert.ToBase64String(imageBytes);
+                    return base64String;
+                }
+            }
+        }
     }
 }
+

@@ -24,10 +24,9 @@ namespace CandyShop.WebAPI.Controllers
         {
             _produtoService.IsValid(produto);
             if (_notification.HasNotification())            
-                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());            
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
-            int sequencial;
-            var result = _produtoRepository.InserirProduto(produto, out sequencial);
+            var result = _produtoRepository.InserirProduto(produto, out int sequencial);
             if (result == -1)
                 return BadRequest("Falha ao inserir o produto");
             return Ok(sequencial);
