@@ -4,8 +4,7 @@ GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsPagamento]	
 	@Cpf varchar(14),  
-	@ValorPagamento decimal(15,2)
-
+	@ValorPagamento decimal (15,2)
 	AS
 
 	/*
@@ -202,7 +201,7 @@ GO
 CREATE PROCEDURE [dbo].[CSSP_UpdPagamento]
 	@IdPagamento int,	
 	@DataPagamento datetime,
-	@ValorPagamento decimal
+	@ValorPagamento decimal(15,2)
 
 	AS
 
@@ -284,4 +283,6 @@ CREATE PROCEDURE [dbo].[CSSP_SelPagamento]
 
 	END
 GO
-													
+
+
+select * from Pagamento
