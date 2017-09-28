@@ -1,28 +1,28 @@
-﻿ .corpo, hr {
-	 width: 100%;
-	 margin: 0 auto;
-	 text-align: left;
- }
+﻿.corpo, hr {
+	width: 100%;
+	margin: 0 auto;
+	text-align: left;
+}
 
- .corpo {
-	 margin-left: -14%;
- }
+.corpo {
+	margin-left: -14%;
+}
 
- dd {
-	 margin-left: 28%;
-	 margin-top: -3.5%;	 
- }
+dd {
+	margin-left: 28%;
+	margin-top: -3.5%;
+}
 
- dl {
-	 color: black;
-     width: 700px;
- }
+dl {
+	color: black;
+	width: 700px;
+}
 
- .batata {
-	 margin-left: -70%;
- }
+.batata {
+	margin-left: -65%;
+}
 
- img {
-	 max-width: 200px;
-	 display: inline-block;
- }
+img {
+	max-width: 200px;
+	display: inline-block;
+}
