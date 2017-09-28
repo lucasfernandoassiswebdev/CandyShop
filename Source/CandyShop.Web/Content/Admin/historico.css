@@ -2,25 +2,20 @@
 	width: 100%;
 	max-width: 800px;
 	margin: 0 auto;
-	text-align: center        
+	text-align: center
 }
-#tabela td {
-	text-align: center;
-}
+
+	#tabela td {
+		text-align: center;
+	}
 
 .center {
 	text-align: center;
 }
 
 #filtro {
-	text-align: center;     
+	text-align: center;
 }
-
-#icone {
-	display: inline-block;
-	color: brown;
-}
-
 
 tr {
 	color: black;

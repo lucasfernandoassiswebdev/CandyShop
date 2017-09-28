@@ -16,14 +16,13 @@ namespace CandyShop.Core.Services.Produto
         public void InserirProduto(ProdutoDto produto)
         {
             IsValid(produto);
-                           
+
         }
 
         public void EditarProduto(ProdutoDto produto)
         {
             IsValid(produto);
         }
-
 
         public void IsValid(ProdutoDto produto)
         {
@@ -48,7 +47,7 @@ namespace CandyShop.Core.Services.Produto
                     _notification.Add("Produto já existente");
                     return;
                 }
-            }            
+            }
         }
     }
 }
