@@ -8,7 +8,7 @@ namespace CandyShop.Application.ViewModels
         public int IdCompra { get; set; }
         public UsuarioViewModel Usuario { get; set; }
         public DateTime DataCompra { get; set; }
-        public decimal ValorCompra { get; set; }
+        public decimal? ValorCompra { get; set; }
         public IEnumerable<CompraProdutoViewModel> Itens { get; set; }
     }
 }
