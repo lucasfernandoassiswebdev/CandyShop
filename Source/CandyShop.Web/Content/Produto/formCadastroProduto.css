@@ -3,7 +3,9 @@
 }
 
 img {
-	max-height: 120px;
+	max-width: 150px;
+	max-height: 150px;
+	display: inline-block;
 }
 
 .container {

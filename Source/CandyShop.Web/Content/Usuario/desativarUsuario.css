@@ -23,6 +23,6 @@ dl {
 }
 
 img {
-	max-height: 200px;
-
+	max-height: 18px;
+	max-width: 18px;
 }
