@@ -56,7 +56,7 @@ $(document).ready(function () {
                         }),
                     $("<a>", {
                         href: "#modalQuantidade",
-                        'class': "modal-trigger secondary-content",
+                        'class': "modal-trigger modal-close secondary-content",
                         html: [
                             $("<i>", {
                                 html: "mode_edit",
@@ -89,14 +89,14 @@ $(document).ready(function () {
                         "data-Quantidade": quantidade
                     }),
                 $("<a>", {
-                    href: "#modalQuantidade",
-                    'class': "modal-trigger secondary-content",
+                    href: "#modalEditarQuantidade",
+                    'class': "modal-close modal-trigger secondary-content",
                     html: [
                         $("<i>", {
                             html: "mode_edit",
                             "class": "material-icons"
                         }).on("click", function () {
-                            $("#modalQuantidade").data("index", $(this).closest("li").index());
+                            $("#modalEditarQuantidade").data("index", $(this).closest("li").index());
                         })
                     ]
                 })

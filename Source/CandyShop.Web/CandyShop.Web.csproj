@@ -178,6 +178,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Compra\detalhesCompra.css" />
     <Content Include="Content\Produto\desativarProduto.css" />
     <Content Include="Content\Produto\formCadastroProduto.css" />
     <Content Include="Content\Usuario\desativarUsuario.css" />

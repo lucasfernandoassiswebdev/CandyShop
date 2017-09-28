@@ -184,14 +184,9 @@ h3 {
 	color: #ec407a;
 }
 
-#modalQuantidade {
+#modalQuantidade, #modalEditarQuantidade {
 	width: 24%;
 	top: 25% !important;
-}
-
-
-#modalLogin {
-	width: 42%;
 }
 
 .divider {
