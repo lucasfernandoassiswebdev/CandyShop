@@ -1,0 +1,65 @@
+﻿@model CandyShop.Application.ViewModels.CompraViewModel
+
+@{
+    Layout = null;
+}
+
+<h4>Detalhes da Compra</h4>
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Id Compra:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCompra)
+        </dd>
+        @if (Session["login"].ToString() != "off")
+        {
+            <dt>
+                Usuario:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Usuario.NomeUsuario)
+            </dd>
+        }
+
+        <dt>
+            Data da compra:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCompra)
+        </dd>
+
+        <dt>
+            Valor Total da Compra:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorCompra)
+        </dd>
+        <dt>
+            Itens:
+        </dt>
+        @foreach (var item in Model.Itens)
+        {
+            <dt>Produto</dt>
+            <dd>
+                @Html.DisplayFor(model => item.Produto.NomeProduto)
+            </dd>
+            <dt>Quantidade</dt>
+            <dd>
+                @Html.DisplayFor(model => item.QtdeCompra)
+            </dd>
+            <dt>Preço do item:</dt>
+            <dd>R$ @(item.Produto.PrecoProduto * item.QtdeCompra)</dd>
+        }
+    </dl>
+</div>
+<p>
+    <a href="!#" onclick="AjaxJsCompra.historicoCompra()">Voltar</a>    
+</p>

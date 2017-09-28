@@ -71,8 +71,10 @@
                         @Html.DisplayFor(modelItem => item.ValorCompra)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new {/* id=item.PrimaryKey */}) |
-                        @Html.ActionLink("Detalhes", "Details", new {/* id=item.PrimaryKey */}) |
+                        <a class="btn-floating btn-sm waves-effect waves-light  light-blue darken-3" onclick="AjaxJsCompra.detalheCompra(@item.IdCompra);"><i class="material-icons">info_outline</i></a>
+                    </td>                    
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new {/* id=item.PrimaryKey */}) |                        
                         @Html.ActionLink("Deletar", "Delete", new {/* id=item.PrimaryKey */})
                     </td>
                 </tr>
