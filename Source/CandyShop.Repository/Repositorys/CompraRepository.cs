@@ -164,7 +164,7 @@ namespace CandyShop.Repository.Repositorys
 
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         DataCompra = reader.ReadAsDateTime("DataCompra"),
-                        ValorCompra = reader.ReadAsDecimal("ValorCompra"),
+                        ValorCompra = reader.ReadAsDecimalNull("ValorCompra"),
                         Usuario = new UsuarioDto()
                         {
                             NomeUsuario = reader.ReadAsString("NomeUsuario"),

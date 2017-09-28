@@ -2,30 +2,29 @@
 
 @{ Layout = null; }
 
-<link rel="stylesheet" type="text/css" href="../../Content/Pagamento/indexPagamento.css"/>
+<link rel="stylesheet" type="text/css" href="../../Content/Pagamento/indexPagamento.css" />
 
-<h4 align="center"><font color="brown">@ViewBag.tituloPagina</font></h4>
+<h4 class="center pink-text">@ViewBag.tituloPagina</h4>
 <script>
     $('.dropdown-button').dropdown({
-            inDuration: 300,
-            outDuration: 225,
-            constrainWidth: false, 
-            gutter: 0,
-            belowOrigin: false, 
-            alignment: 'left',
-            stopPropagation: false
-        }
+        inDuration: 300,
+        outDuration: 225,
+        constrainWidth: false,
+        gutter: 0,
+        belowOrigin: false,
+        alignment: 'left',
+        stopPropagation: false
+    }
     );
 </script>
 
 @if (ViewBag.drop == 0)
 {
     <div id="filtro" class="row">
-        <div id="icone"><i class="small material-icons">date_range</i></div>
-        <a class='dropdown-button btn' href='#' data-activates='dropdown2'>Escolha o mês!</a>    
-        <ul id='dropdown2' class='dropdown-content'>
+        <a class='dropdown-button btn' href='#' data-activates='dropdownMes'><i class="left material-icons">date_range</i>Escolha o mês!</a>
+        <ul id='dropdownMes' class='dropdown-content'>
             <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(1)">Janeiro</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(2)">Fevereiro</a></li>        
+            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(2)">Fevereiro</a></li>
             <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(3)">Março</a></li>
             <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(4)">Abril</a></li>
             <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(5)">Maio</a></li>
@@ -36,10 +35,10 @@
             <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(10)">Outubro</a></li>
             <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(11)">Novembro</a></li>
             <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(12)">Dezembro</a></li>
-        </ul>  
-  
+        </ul>
+
     </div>
-        
+
 }
 <style>
     #icone {
@@ -50,11 +49,11 @@
 <div id="tabela">
     <table class="striped centered">
         <thead>
-        <tr>
-            <th>Usuário</th>
-            <th>Data do Pagamento</th>
-            <th>Valor Pago</th>
-        </tr>
+            <tr>
+                <th>Usuário</th>
+                <th>Data do Pagamento</th>
+                <th>Valor Pago</th>
+            </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
@@ -68,7 +67,7 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ValorPagamento)
-                    </td>                    
+                    </td>
                 </tr>
             }
         </tbody>
@@ -76,5 +75,5 @@
 </div>
 <br />
 @*<div align="center">
-    <a class="waves-effect waves-light btn" onclick="A.listarPagamentos()"><i class="material-icons left">arrow_back</i>Voltar</a>
-</div>*@
+        <a class="waves-effect waves-light btn" onclick="A.listarPagamentos()"><i class="material-icons left">arrow_back</i>Voltar</a>
+    </div>*@

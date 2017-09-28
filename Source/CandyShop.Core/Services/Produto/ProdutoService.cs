@@ -36,7 +36,7 @@ namespace CandyShop.Core.Services.Produto
                     _notification.Add("Produto já existente");
                     return;
                 }
-            }            
+            }
         }
     }
 }

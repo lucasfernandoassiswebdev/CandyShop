@@ -38,6 +38,7 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro " + usuario.ContentAsString.First());
 
+            TempData["caminhoImagensUsuarios"] = "../../Imagens/Usuarios";
             return View(usuario.Content);
         }
 
@@ -46,6 +47,8 @@ namespace CandyShop.Web.Controllers
             var usuario = _appUsuario.SelecionarUsuario(cpf);
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro " + usuario.ContentAsString.First());
+
+            TempData["caminhoImagensUsuarios"] = "../../Imagens/Usuarios";
             return View(usuario.Content);
         }
 
@@ -54,6 +57,8 @@ namespace CandyShop.Web.Controllers
             var response = _appUsuario.SelecionarUsuario(cpf);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro" + response.ContentAsString.First());
+
+            TempData["caminhoImagensUsuarios"] = "../../Imagens/Usuarios";
             return View(response.Content);
         }
         #endregion

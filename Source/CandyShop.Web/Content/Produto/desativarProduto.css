@@ -1,28 +1,35 @@
-﻿ .corpo, hr {
-	 width: 100%;
-	 margin: 0 auto;
-	 text-align: left;
- }
+﻿@media only screen and (max-width : 992px) {
+	.batata {
+		margin-left: -33% !important;
+	}
+}
 
- .corpo {
-	 margin-left: -14%;
- }
+.corpo, hr {
+	width: 100%;
+	margin: 0 auto;
+	text-align: left;
+}
 
- dd {
-	 margin-left: 28%;
-	 margin-top: -3.5%;	 
- }
+.corpo {
+	margin-left: -14%;
+}
 
- dl {
-	 color: black;
-     width: 700px;
- }
+dd {
+	margin-left: 23%;
+	margin-top: -3.5%;
+}
 
- .batata {
-	 margin-left: -70%;
- }
+dl {
+	color: black;
+	width: 700px;
+}
 
- img {
-	 max-width: 200px;
-	 display: inline-block;
- }
+.batata {
+	margin-left: -65%;
+}
+
+img {
+	max-width: 150px;
+	max-height: 150px;
+	display: inline-block;
+}

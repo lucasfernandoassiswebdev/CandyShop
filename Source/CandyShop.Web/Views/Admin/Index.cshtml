@@ -51,10 +51,7 @@
         AjaxJsShop.init({
             mostraSaldo : '@Url.Action("Index", "Shop")'
         });
-
-
-
-    })
+ })
 </script>
 
 <link rel="stylesheet" type="text/css" href="../../Content/Admin/indexAdmin.css">
@@ -68,7 +65,7 @@
         </form>
     </div>
     <div class="modal-footer center">
-        <a href="#!" onclick="AjaxJsUsuario.listarUsuarioPorNome()" class="btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
+        <a href="#!" onclick="AjaxJsUsuario.listarUsuarioPorNome()" class="closeMenu btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
     </div>
 </div>
 
@@ -81,7 +78,7 @@
         </form>
     </div>
     <div class="modal-footer center">
-        <a href="#!" onclick="AjaxJsProduto.listarProdutoPorNome()" class="btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
+        <a href="#!" onclick="AjaxJsProduto.listarProdutoPorNome()" class="closeMenu btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
     </div>
 </div>
 
@@ -104,7 +101,7 @@
                     <ul>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listarUsuarioEmDivida()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
-                        <li><a class="close-menu modal-trigger" href="#modalPesquisaUsuario"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
+                        <li><a class="modal-trigger" href="#modalPesquisaUsuario"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
                     </ul>
@@ -118,7 +115,7 @@
                 <div class="collapsible-body">
                     <ul class="brown-text">
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
-                        <li><a href="#modalPesquisaProduto" class="closeMenu modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
+                        <li><a href="#modalPesquisaProduto" class="modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.listarInativos()"><i class="material-icons">list</i>Listar Inativos</a></li>
                     </ul>
@@ -150,14 +147,14 @@
             </li>
         </ul>
     </li>
-    <li><a class="dropdown-button white-text" href="#!" onclick="AjaxJsShop.mostraSaldo()"><i class="material-icons left white-text small">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
+    <li><a class="dropdown-button white-text closeMenu" href="#!" onclick="AjaxJsShop.mostraSaldo()"><i class="material-icons left white-text small">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
     <li>
         <div class="divider"></div>
     </li>
     <li><a class="dropdown-button white-text" href="#!"><i class="material-icons left white-text small">power_settings_new</i>SAIR</a></li>
 </ul>
 
-<a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse brown-text"><i class="material-icons">menu</i></a>
+<a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse pink-text"><i class="material-icons">menu</i></a>
 
 <div id="DivGrid">
     <img src="https://media.tenor.com/images/d6cd5151c04765d1992edfde14483068/tenor.gif" style="width: 100px;height: 100px;margin: 0 auto;display: block;" alt="carregando...">

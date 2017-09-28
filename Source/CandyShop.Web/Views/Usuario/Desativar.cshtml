@@ -8,13 +8,13 @@
 
 <div class="corpo left">
     <div class="col s12">
-        <h5 class="batata">Tem certeza que deseja desativar este usuário?</h5>
+        <h5 class="batata pink-text">Tem certeza que deseja desativar este usuário?</h5>
         <div class="left">
             <hr />
             <dl class="dl-horizontal">
                 <dt>
                     @{ string caminho = @Model.Cpf + ".jpg";}
-                    <img id="imagemUsuario" src="@TempData["caminhoImagens"]/@caminho?d=@DateTime.Now.Ticks"/>
+                    <img id="imagemUsuario" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks"/>
                 </dt>
 
                 <dt>

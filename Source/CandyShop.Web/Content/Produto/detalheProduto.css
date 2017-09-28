@@ -1,4 +1,11 @@
-﻿.corpo, hr {
+﻿@media only screen and (max-width : 992px) {
+	dd {
+		margin-left: 140px !important;
+		margin-top: -5% !important;
+	}
+}
+
+.corpo, hr {
 	width: 100%;
 	margin: 0 auto;
 	text-align: left;
@@ -10,7 +17,7 @@
 
 dd {
 	margin-left: 16%;
-	margin-top: -2%;
+	margin-top: -2.5%;
 }
 
 dl {
@@ -22,6 +29,7 @@ h4 {
 }
 
 img {
-	max-width: 200px;
+	max-width: 150px;
+	max-height: 150px;
 	display: inline-block;
 }

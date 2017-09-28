@@ -16,8 +16,7 @@ namespace CandyShop.WebAPI.Controllers
         [HttpPost]
         public IHttpActionResult PostCompra(CompraDto compra)
         {
-            int sequencial;
-            var result = _compraRepository.InserirCompra(compra, out sequencial);
+            var result = _compraRepository.InserirCompra(compra, out int sequencial);
             if (result == -1)
                 return BadRequest("Falha ao inserir compra");
             return Ok(sequencial);

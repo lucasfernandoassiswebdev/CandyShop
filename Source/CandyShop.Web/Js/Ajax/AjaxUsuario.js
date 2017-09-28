@@ -87,6 +87,9 @@
     var logOff = function () {
         $.get(url.logOff).done(function (data) {
             $('body').slideUp(function () {
+                if (localStorage.getItem('listaProdutos') != null) {
+                    localStorage.removeItem('listaProdutos');
+                }
                 $('body').hide().html(data).slideDown(function () { Materialize.toast("LogOff feito com sucesso", 3000); });
             });
         }).fail(function (xhr) {

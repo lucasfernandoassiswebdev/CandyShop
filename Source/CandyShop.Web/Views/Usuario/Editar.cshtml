@@ -30,8 +30,8 @@
             <div class="row">
                 <div class="center">
                     <label for="fotoUsuario">
-                        @{ string caminho = @Model.Cpf + ".jpg"; };
-                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagens"]/@caminho" alt="imagem não disponível :(" />
+                        @{ string caminho = @Model.Cpf + ".jpg"; }
+                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensUsuarios"]/@caminho" alt="imagem não disponível :(" />
                     </label>
                     <input id="fotoUsuario" type="file" class="file-path validate" style="display: none" accept="image/*">
                 </div>
