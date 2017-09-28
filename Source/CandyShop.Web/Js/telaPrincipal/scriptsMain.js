@@ -62,7 +62,7 @@
         $('#quantidade, #quantidadeEdit').val('');
     });
 
-    //limpando o carrinho
+    //limpando o carrinho e a localStorage
     $('#limpar').on('click', function () {
         $('.collection li').remove();
         if (localStorage.getItem('listaProdutos') != null) {
