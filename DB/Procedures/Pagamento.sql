@@ -1,11 +1,10 @@
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_InsPagamento]
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsPagamento]	
 	@Cpf varchar(14),  
-	@ValorPagamento decimal
+	@ValorPagamento decimal(15,2)
 
 	AS
 
@@ -34,7 +33,6 @@ CREATE PROCEDURE [dbo].[CSSP_InsPagamento]
 		
 	END
 GO
-
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisPagamento]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisPagamento]
