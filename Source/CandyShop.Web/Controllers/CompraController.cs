@@ -111,6 +111,14 @@ namespace CandyShop.Web.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult Detalhes(int idCompra)
+        {
+            var response = _appCompra.SelecionarCompra(idCompra);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro ao detalhar compra", response.ContentAsString.First());
+            return View(response.Content);
+        }
         #endregion
     }
 }

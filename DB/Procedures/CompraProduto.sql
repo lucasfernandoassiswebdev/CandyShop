@@ -131,8 +131,10 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraProduto]
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select 
 	Data..............: 12/09/2017
+	select * from compraproduto 
+	select * from compra
 	*/
-
+	
 	BEGIN
 		SELECT	cp.IdCompra,
 				cp.QtdeProduto,

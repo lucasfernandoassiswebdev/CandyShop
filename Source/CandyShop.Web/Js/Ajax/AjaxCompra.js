@@ -1,56 +1,61 @@
-﻿var AjaxJsCompra = (function ($) {
+﻿var AjaxJsCompra = (function($) {
     var url = {};
 
-    var init = function (config) {
+    var init = function(config) {
         url = config;
     };
 
-    var inserirCompra = function () {
+    var inserirCompra = function() {
         var listaProdutos = [];
         var produto;
         var produtos = $('.collection li');
         var i = 0;
-        $.each(produtos, function () {
-            produto = {
-                Produto: { IdProduto: $('span:eq('+ i + ')').attr('data-Id')},
-                QtdeCompra: $('p:eq('+ i +')').attr('data-Quantidade')
-            };
-            listaProdutos.push(produto);
-            i++;
-        });
+        $.each(produtos,
+            function() {
+                produto = {
+                    Produto: { IdProduto: $('span:eq(' + i + ')').attr('data-Id') },
+                    QtdeCompra: $('p:eq(' + i + ')').attr('data-Quantidade')
+                };
+                listaProdutos.push(produto);
+                i++;
+            });
 
         var compra = { Itens: listaProdutos };
         $.post(url.inserirCompra, compra)
-            .done(function (message) {
+            .done(function(message) {
                 $.get(url.padrao)
-                    .done(function (data) {
-                        $('body').slideUp(function () {
-                            $('body').hide().html(data).slideDown(function () {
+                    .done(function(data) {
+                        $('body').slideUp(function() {
+                            $('body').hide().html(data).slideDown(function() {
                                 Materialize.toast(message, 3000);
                             });
                         });
-                    }).fail(function (xhr) {
+                    }).fail(function(xhr) {
                         console.log(xhr.responseText);
                     });
             })
-            .fail(function (xhr) {
+            .fail(function(xhr) {
                 console.log(xhr.responseText);
             });
     }
 
-    var historicoCompra = function () {
+    var historicoCompra = function() {
         chamaPagina(url.historicoCompra);
     };
-    var listarCompraMes = function (mes) {
+    var listarCompraMes = function(mes) {
         var parametro = { mes: mes };
         chamaPaginaComIdentificador(url.listarCompraMes, parametro);
     };
-    var listarCompraSemana = function () {
+    var listarCompraSemana = function() {
         chamaPagina(url.listarCompraSemana);
     };
 
-    var listarCompraDia = function () {
+    var listarCompraDia = function() {
         chamaPagina(url.listarCompraDia);
+    };
+
+    var detalheCompra = function(idCompra) {
+        chamaPaginaComIdentificador(url.detalheCompra, { idCompra: idCompra });
     };
 
     return {
@@ -59,6 +64,7 @@
         listarCompraSemana: listarCompraSemana,
         listarCompraMes: listarCompraMes,
         listarCompraDia: listarCompraDia,
-        inserirCompra: inserirCompra
+        inserirCompra: inserirCompra,
+        detalheCompra: detalheCompra
     };
 })(jQuery);
