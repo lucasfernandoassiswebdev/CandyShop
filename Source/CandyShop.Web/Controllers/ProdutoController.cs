@@ -94,7 +94,8 @@ namespace CandyShop.Web.Controllers
                     return Content(response.ContentAsString);
 
                 
-                //salvando todas as imagens 
+                //salvando todas as imagens que o usuário inseriu
+                int cont = 0;
                 if (produto.ImagemA != null)
                 {
                     string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
@@ -112,6 +113,7 @@ namespace CandyShop.Web.Controllers
                             string caminho = $"~/Imagens/Produtos/{response}_A.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                            cont++;
                         }
 
                     }
@@ -134,6 +136,7 @@ namespace CandyShop.Web.Controllers
                             string caminho = $"~/Imagens/Produtos/{response}_B.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                            cont++;
                         }
 
                     }
@@ -155,9 +158,15 @@ namespace CandyShop.Web.Controllers
                             string caminho = $"~/Imagens/Produtos/{response}_C.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                            cont++;
                         }
 
                     }
+                }
+
+                if (cont == 0)
+                {
+
                 }
 
                 return Content("Produto cadastrado com sucesso!!");
