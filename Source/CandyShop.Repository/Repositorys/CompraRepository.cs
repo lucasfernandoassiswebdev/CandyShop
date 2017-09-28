@@ -1,5 +1,6 @@
 ﻿using CandyShop.Core.Services.Compra;
 using CandyShop.Core.Services.Compra.Dto;
+using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.CompraProduto.Dto;
 using CandyShop.Core.Services.Usuario.Dto;
 using CandyShop.Repository.Database;
@@ -23,8 +24,11 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisCompraNomeUsuario,
             CSSP_LisCompraSemana,
             CSSP_LisCompraDia,
-            CSSP_LisCpfCompra           
+            CSSP_LisCpfCompra,
+            CSSP_SelDadosCompra
         }
+
+        private readonly ICompraProdutoRepository _compraProdutoRepositorio = new CompraProdutoRepository();
 
         public int InserirCompra(CompraDto compra, out int sequencial)
         {
@@ -74,21 +78,24 @@ namespace CandyShop.Repository.Repositorys
 
         public CompraDto SelecionarDadosCompra(int idCompra)
         {
-            ExecuteProcedure(Procedures.CSSP_SelCompra);
+            ExecuteProcedure(Procedures.CSSP_SelDadosCompra);
             AddParameter("@IdCompra", idCompra);
-            CompraDto retorno = new CompraDto();
+            var retorno = new CompraDto();
             using (var reader = ExecuteReader())
                 if (reader.Read())
                     retorno = new CompraDto
                     {
-                        DataCompra = reader.ReadAsDateTime("DataCompra"),
                         IdCompra = reader.ReadAsInt("IdCompra"),
+                        DataCompra = reader.ReadAsDateTime("DataCompra"),
+                        ValorCompra = reader.ReadAsDecimal("ValorCompra"),
                         Usuario = new UsuarioDto()
                         {
-                            Cpf = reader.ReadAsString("UsuarioCompra")
-                        }
+                            NomeUsuario = reader.ReadAsString("NomeUsuario")
+                        }                        
                     };
+            retorno.Itens = _compraProdutoRepositorio.ListarCompraProdutoIdVenda(idCompra);
             return retorno;
+
         }
 
         public void EditaItens(CompraProdutoDto compraProduto)
@@ -116,7 +123,7 @@ namespace CandyShop.Repository.Repositorys
 
         public IEnumerable<CompraDto> ListarCompraMes(int mes)
         {
-            ExecuteProcedure(Procedures.CSSP_LisCompra);           
+            ExecuteProcedure(Procedures.CSSP_LisCompra);
             AddParameter("@mes", mes);
             return Listar();
         }

@@ -22,7 +22,16 @@
         var compra = { Itens: listaProdutos };
         $.post(url.inserirCompra, compra)
             .done(function (message) {
-                Materialize.toast(message, 1500);
+                $.get(url.padrao)
+                    .done(function (data) {
+                        $('body').slideUp(function () {
+                            $('body').hide().html(data).slideDown(function () {
+                                Materialize.toast(message, 3000);
+                            });
+                        });
+                    }).fail(function (xhr) {
+                        console.log(xhr.responseText);
+                    });
             })
             .fail(function (xhr) {
                 console.log(xhr.responseText);

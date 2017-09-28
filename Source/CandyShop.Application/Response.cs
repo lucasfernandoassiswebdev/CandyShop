@@ -20,7 +20,7 @@ namespace CandyShop.Application
         public HttpStatusCode Status { get; }
 
         public T Content => JsonConvert.DeserializeObject<T>(Json);
-        public string ContentAsString => JsonConvert.DeserializeObject<string>(Json);
+        public string[] ContentAsString => JsonConvert.DeserializeObject<string[]>(Json);
     }
 
 }
