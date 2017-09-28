@@ -2,6 +2,7 @@
 using CandyShop.Core.Services.Produto.Dto;
 using CandyShop.Repository.Database;
 using System.Collections.Generic;
+using System.Data;
 
 namespace CandyShop.Repository.Repositorys
 
@@ -35,7 +36,7 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@QtdeProduto", produto.QtdeProduto);
             AddParameter("@Ativo", "A");
             AddParameter("@Categoria", produto.Categoria);
-            AddParameter("@sequencial",sequencial);
+            AddParameterOutput("@sequencial",sequencial, DbType.Int32);
             var retorno = ExecuteNonQueryWithReturn();
             sequencial = int.Parse(GetParameterOutput("@sequencial"));
             return retorno;
