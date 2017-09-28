@@ -1,4 +1,10 @@
-﻿.corpo, hr {
+﻿@media only screen and (max-width : 992px) {
+	.batata {
+		margin-left: -33% !important;
+	}
+}
+
+.corpo, hr {
 	width: 100%;
 	margin: 0 auto;
 	text-align: left;
@@ -9,7 +15,7 @@
 }
 
 dd {
-	margin-left: 28%;
+	margin-left: 23%;
 	margin-top: -3.5%;
 }
 
