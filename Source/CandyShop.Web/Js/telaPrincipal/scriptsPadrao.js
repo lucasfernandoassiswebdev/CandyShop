@@ -18,8 +18,23 @@ $(document).ready(function () {
         Id = $(this).attr("data-Id");
     });
 
+    //populando a lista novamente com os itens do localstorage
     if (localStorage.getItem('listaProdutos') !== null) {
-        JSON.parse(localStorage.getItem('listaProdutos')).forEach( function (produto) {
+        JSON.parse(localStorage.getItem('listaProdutos')).forEach(function (produto) {
+            var item = {
+                Id: produto.Id,
+                Nome: produto.Nome,
+                Quantidade: produto.Quantidade,
+                Imagem: produto.Imagem
+            }
+
+            listaProdutos.push(item);
+        });
+    }
+
+    //adicionando os itens do localstorage no carrinho
+    if (localStorage.getItem('listaProdutos') !== null) {
+        JSON.parse(localStorage.getItem('listaProdutos')).forEach(function (produto) {
             $("div[class='collection']").append($("<li>", {
                 html: [
                     $("<img>",

@@ -25,7 +25,7 @@ namespace CandyShop.Core.Services.Produto
         }
 
 
-        private void IsValid(ProdutoDto produto)
+        public void IsValid(ProdutoDto produto)
         {
             if (string.IsNullOrEmpty(produto.NomeProduto.Trim()) || produto.NomeProduto.Length > 40)
             {

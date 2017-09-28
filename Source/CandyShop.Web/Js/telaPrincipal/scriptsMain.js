@@ -65,6 +65,9 @@
     //limpando o carrinho
     $('#limpar').on('click', function () {
         $('.collection li').remove();
+        if (localStorage.getItem('listaProdutos') != null) {
+            localStorage.removeItem('listaProdutos');
+        }
     });
 
     //editando a quantidade dos itens no carrinho
