@@ -16,7 +16,7 @@
         <dd>
             @Html.DisplayFor(model => model.IdCompra)
         </dd>
-        @if (Session["login"].ToString() != "off")
+        @if (Session["login"].ToString() == "off")
         {
             <dt>
                 Usuario:

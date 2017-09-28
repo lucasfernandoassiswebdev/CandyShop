@@ -2,13 +2,19 @@
 using CandyShop.Core.Services.Pagamento.Dto;
 using CandyShop.Core.Services.Usuario.Dto;
 using CandyShop.Repository.Database;
+using CandyShop.Repository.DataBase;
 using System;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository.Repositorys
 {
-    public class PagamentoRepository : ConnectDB, IPagamentoRepository
+    public class PagamentoRepository : Execucao, IPagamentoRepository
     {
+        public PagamentoRepository(Conexao conexao) : base(conexao)
+        {
+
+        }
+
         private enum Procedures
         {
             CSSP_InsPagamento,
@@ -139,6 +145,6 @@ namespace CandyShop.Repository.Repositorys
                     });
                 }
             return retorno;
-        }    
+        }
     }
 }

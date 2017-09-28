@@ -10,40 +10,41 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompraProduto]
 	@QtdeProduto int
 
 	AS
-
 	/*
 	Documentação
 	Arquivo Fonte.....: CompraProduto.sql
 	Objetivo..........: Inserir um produto e a quantidade dele numa venda.
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[CSSP_InsCompraProduto] 10, 7, 2
-						
+	Ex................: EXEC [dbo].[CSSP_InsCompraProduto] 45, 13, 1
+						select * from Produto
 	*/	
 	BEGIN	
+
 		INSERT INTO CompraProduto (IdCompra, IdProduto, QtdeProduto)
 			VALUES (@IdCompra, @IdProduto, @QtdeProduto)
 
-			DECLARE @PrecoProduto decimal(15,2)
-			SELECT @PrecoProduto = (SELECT PrecoProduto FROM Produto WHERE IdProduto = @IdProduto)
-			
-			DECLARE @Cpf varchar(11)
-			SELECT @Cpf = (SELECT UsuarioCompra FROM COMPRA WHERE IdCompra = @IdCompra)
-			
-			UPDATE [dbo].[Compra]
-				SET ValorCompra += (@QtdeProduto * @PrecoProduto)					
-				WHERE IdCompra = @IdCompra
-					
-			UPDATE [dbo].[Usuario]
-				SET SaldoUsuario -= (@QtdeProduto * @PrecoProduto)
-				WHERE Cpf = @Cpf
-			
-			UPDATE [dbo].[Produto]
-				SET QtdeProduto -= @QtdeProduto
-				WHERE IdProduto = @IdProduto
+		DECLARE @PrecoProduto decimal(15,2)
+		SET @PrecoProduto = (SELECT PrecoProduto FROM Produto WITH(NOLOCK) WHERE IdProduto = @IdProduto)
 
-			if @@ERROR <> 0 
-				RETURN 1
+		DECLARE @Cpf varchar(11)
+		SET @Cpf = (SELECT UsuarioCompra FROM COMPRA WITH(NOLOCK) WHERE IdCompra = @IdCompra)
+
+		UPDATE [dbo].[Compra]
+			SET ValorCompra += (@QtdeProduto * @PrecoProduto)					
+			WHERE IdCompra = @IdCompra
+					
+		UPDATE [dbo].[Usuario]
+			SET SaldoUsuario -= (@QtdeProduto * @PrecoProduto)
+			WHERE Cpf = @Cpf
+			
+		UPDATE [dbo].[Produto]
+			SET QtdeProduto -= @QtdeProduto
+			WHERE IdProduto = @IdProduto
+
+		if @@ERROR <> 0 
+			RETURN 1
+
 		RETURN 0
 	END
 GO

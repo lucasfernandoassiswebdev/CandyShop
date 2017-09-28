@@ -1,15 +1,19 @@
 ﻿using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Produto.Dto;
 using CandyShop.Repository.Database;
+using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
 using System.Data;
 
 namespace CandyShop.Repository.Repositorys
-
-
 {
-    public class ProdutoRepository : ConnectDB, IProdutoRepository
+    public class ProdutoRepository : Execucao, IProdutoRepository
     {
+        public ProdutoRepository(Conexao conexao) : base(conexao)
+        {
+
+        }
+
         private enum Procedures
         {
             CSSP_InsProduto,
@@ -104,6 +108,7 @@ namespace CandyShop.Repository.Repositorys
                         Ativo = reader.ReadAsString("Ativo"),
                         Categoria = reader.ReadAsString("Categoria")
                     };
+
             return retorno;
         }
 

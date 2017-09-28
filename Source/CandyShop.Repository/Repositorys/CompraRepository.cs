@@ -1,16 +1,21 @@
 ﻿using CandyShop.Core.Services.Compra;
 using CandyShop.Core.Services.Compra.Dto;
-using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.CompraProduto.Dto;
 using CandyShop.Core.Services.Usuario.Dto;
 using CandyShop.Repository.Database;
+using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
 using System.Data;
 
 namespace CandyShop.Repository.Repositorys
 {
-    public class CompraRepository : ConnectDB, ICompraRepository
+    public class CompraRepository : Execucao, ICompraRepository
     {
+        public CompraRepository(Conexao conexao) : base(conexao)
+        {
+            
+        }
+
         private enum Procedures
         {
             CSSP_InsCompra,
@@ -18,7 +23,6 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisCompra,
             CSSP_DelCompra,
             CSSP_SelCompra,
-            CSSP_InsCompraProduto,
             CSSP_UpdCompraProduto,
             CSSP_DelCompraProduto,
             CSSP_LisCompraNomeUsuario,
@@ -27,8 +31,6 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisCpfCompra,
             CSSP_SelDadosCompra
         }
-
-        private readonly ICompraProdutoRepository _compraProdutoRepositorio = new CompraProdutoRepository();
 
         public int InserirCompra(CompraDto compra, out int sequencial)
         {
@@ -39,15 +41,6 @@ namespace CandyShop.Repository.Repositorys
             var retorno = ExecuteNonQueryWithReturn();
             sequencial = int.Parse(GetParameterOutput("@sequencial"));
             return retorno;
-        }
-
-        public void InserirItens(CompraProdutoDto item)
-        {
-            ExecuteProcedure(Procedures.CSSP_InsCompraProduto);
-            AddParameter("@IdProduto", item.Produto.IdProduto);
-            AddParameter("@QtdeProduto", item.QtdeCompra);
-            AddParameter("@IdCompra", item.IdCompra);
-            ExecuteNonQuery();
         }
 
         public void EditarCompra(CompraDto compra)
@@ -91,9 +84,9 @@ namespace CandyShop.Repository.Repositorys
                         Usuario = new UsuarioDto()
                         {
                             NomeUsuario = reader.ReadAsString("NomeUsuario")
-                        }                        
+                        }
                     };
-            retorno.Itens = _compraProdutoRepositorio.ListarCompraProdutoIdVenda(idCompra);
+
             return retorno;
 
         }

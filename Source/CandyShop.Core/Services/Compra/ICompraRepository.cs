@@ -10,8 +10,7 @@ namespace CandyShop.Core.Services.Compra
         void EditarCompra(CompraDto compra);
         void DeletarCompra(int idCompra);        
         int SelecionarCompra(int idCompra);
-        CompraDto SelecionarDadosCompra(int idCompra);
-        void InserirItens(CompraProdutoDto compraProduto);
+        CompraDto SelecionarDadosCompra(int idCompra);        
         void EditaItens(CompraProdutoDto compraProduto);
         void DeletaItens(int idcompra, int idproduto);
         IEnumerable<CompraDto> ListarCompra();
@@ -20,5 +19,8 @@ namespace CandyShop.Core.Services.Compra
         IEnumerable<CompraDto> ListarCompraSemana();
         IEnumerable<CompraDto> ListarCompraMes(int mes);
         IEnumerable<CompraDto> ListarCompraDia();
+        void CommitTransaction();
+        void RollBackTransaction();
+        void BeginTransaction();
     }
 }

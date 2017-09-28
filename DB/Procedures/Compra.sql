@@ -24,10 +24,11 @@ CREATE PROCEDURE [dbo].[CSSP_InsCompra]
 		INSERT INTO [dbo].[Compra] (UsuarioCompra, DataCompra, ValorCompra)
 			VALUES(@UsuarioCompra, GETDATE(), 0)	
 
-			SELECT @sequencial = SCOPE_IDENTITY()
+		SET @sequencial = SCOPE_IDENTITY()
 		
-			if @@ERROR <> 0 
-				RETURN -1
+		if @@ERROR <> 0 
+			RETURN -1
+
 		RETURN 0	
 	END
 GO

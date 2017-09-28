@@ -1,44 +1,24 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 
-namespace CandyShop.Repository.Database
+namespace CandyShop.Repository.DataBase
 {
-    public class ConnectDB
+    public class Execucao
     {
-        //Cria o construtor pra que toda vez que o _connection for instanciado abrir a conexão com o banco 
-        public ConnectDB()
-        {
-            _connection = Connect();
-        }
-        // Pega a minha connection string que esta no webConfig
-        private string _connectionString => ConfigurationManager.ConnectionStrings["DbCandyShop"].ToString();
-        private readonly SqlConnection _connection;
+        private readonly Conexao _conexao;
         private SqlCommand _command;
-        // Testa a conexão com o banco se ela estiver quebrada entao fecha e abre denovo e se a conexao
-        // estiver fechada abre ela
-        private SqlConnection Connect()
-        {
-            var connection = new SqlConnection(_connectionString);
 
-            if (connection.State == ConnectionState.Broken)
-            {
-                connection.Close();
-                connection.Open();
-            }
-            if (connection.State != ConnectionState.Open)
-            {
-                connection.Open();
-            }
-            return connection;
+        public Execucao(Conexao conexao)
+        {
+            _conexao = conexao;
         }
 
-        // Cria o metodo para executar procedure 
         public void ExecuteProcedure(object procName)
         {
-            _command = new SqlCommand(procName.ToString(), _connection)
+            _command = new SqlCommand(procName.ToString(), _conexao.Connection, _conexao.Transaction)
             {
-                CommandType = CommandType.StoredProcedure
+                CommandType = CommandType.StoredProcedure,
+                CommandTimeout = int.MaxValue
             };
         }
 
@@ -63,6 +43,7 @@ namespace CandyShop.Repository.Database
         // Método para executar procedure que não tem nenhum retorno (Insert,Delete)
         public void ExecuteNonQuery()
         {
+            _conexao.Open();
             _command.ExecuteNonQuery();
         }
 
@@ -80,6 +61,7 @@ namespace CandyShop.Repository.Database
         public int ExecuteNonQueryWithReturn()
         {
             AddParameterReturn();
+            _conexao.Open();
             _command.ExecuteNonQuery();
             return int.Parse(_command.Parameters["@RETURN_VALUE"].Value.ToString());
         }
@@ -87,7 +69,23 @@ namespace CandyShop.Repository.Database
         // Metodo exclusivo para procedure que retorna valores (Select)
         public SqlDataReader ExecuteReader()
         {
+            _conexao.Open();
             return _command.ExecuteReader();
+        }
+
+        public void BeginTransaction()
+        {
+            _conexao.BeginTransaction();
+        }
+
+        public void CommitTransaction()
+        {
+            _conexao.CommitTransaction();
+        }
+
+        public void RollBackTransaction()
+        {
+            _conexao.RollBackTransaction();
         }
     }
 }

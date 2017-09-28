@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBase\Conexao.cs" />
+    <Compile Include="DataBase\Execucao.cs" />
     <Compile Include="Repositorys\CompraProdutoRepository.cs" />
     <Compile Include="Repositorys\CompraRepository.cs" />
-    <Compile Include="DataBase\ConnectDB.cs" />
     <Compile Include="Repositorys\PagamentoRepository.cs" />
     <Compile Include="Repositorys\ProdutoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

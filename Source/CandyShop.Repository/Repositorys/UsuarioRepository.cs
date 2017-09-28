@@ -1,13 +1,19 @@
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Core.Services.Usuario.Dto;
 using CandyShop.Repository.Database;
+using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository.Repositorys
 {
 
-    public class UsuarioRepository : ConnectDB, IUsuarioRepository
+    public class UsuarioRepository : Execucao, IUsuarioRepository
     {
+        public UsuarioRepository(Conexao conexao) : base(conexao)
+        {
+
+        }
+
         private enum Procedures
         {
             CSSP_InsUsuario,

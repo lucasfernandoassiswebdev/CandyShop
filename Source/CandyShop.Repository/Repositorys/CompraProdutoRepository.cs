@@ -2,12 +2,18 @@
 using CandyShop.Core.Services.CompraProduto.Dto;
 using CandyShop.Core.Services.Produto.Dto;
 using CandyShop.Repository.Database;
+using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository.Repositorys
 {
-    public class CompraProdutoRepository : ConnectDB, ICompraProdutoRepository
+    public class CompraProdutoRepository : Execucao, ICompraProdutoRepository
     {
+        public CompraProdutoRepository(Conexao conexao) : base(conexao)
+        {
+
+        }
+
         //Cria uma lista com as procedures do banco pra serem usadas 
         private enum Procedures
         {
@@ -36,7 +42,6 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
             AddParameter("@IdCompra", compraProduto.IdCompra);
             AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
-
             ExecuteNonQuery();
         }
 

@@ -86,25 +86,15 @@ namespace CandyShop.Web.Controllers
            
             if (ModelState.IsValid)
             {
-                compra.Usuario = new UsuarioViewModel();
-                compra.Usuario.Cpf = Session["Login"].ToString();
+                compra.Usuario = new UsuarioViewModel {Cpf = Session["Login"].ToString()};
 
                 var response = _appCompra.InserirCompra(compra);
-
-                if (response.Content == -1)
-                        return Content($"Os itens da compra não puderam ser registrados: {response}");
-
-                foreach (var produto in compra.Itens)
-                {
-                    produto.IdCompra = response.Content;
-                    var callback = _appCompra.InserirItens(produto);
-                    if (callback.Status != HttpStatusCode.OK)
-                        return Content($"{callback.ContentAsString.First()}");
-                }
+                if (response.Status != HttpStatusCode.OK)
+                    return Content($"Os itens da compra não puderam ser registrados: {response.ContentAsString.First()}");
 
                 var totalCompra = _appCompra.SelecionarCompra(response.Content);
-                if (response.Status != HttpStatusCode.OK)
-                    return Content("Erro ao atualizar saldo" + response.ContentAsString.First());
+                if (totalCompra.Status != HttpStatusCode.OK)
+                    return Content("Erro ao atualizar saldo" + totalCompra.ContentAsString.First());
                 Session["saldoUsuario"] = Convert.ToDecimal(Session["saldoUsuario"].ToString()) - totalCompra.Content.ValorCompra;
 
                 return Content("Sua compra foi registrada com sucesso");

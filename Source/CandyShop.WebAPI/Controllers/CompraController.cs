@@ -1,5 +1,8 @@
-﻿using CandyShop.Core.Services.Compra;
+﻿using CandyShop.Core.Services;
+using CandyShop.Core.Services.Compra;
 using CandyShop.Core.Services.Compra.Dto;
+using CandyShop.Core.Services.CompraProduto;
+using System.Net;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
@@ -7,19 +10,28 @@ namespace CandyShop.WebAPI.Controllers
     public class CompraController : ApiController
     {
         private readonly ICompraRepository _compraRepository;
+        private readonly ICompraProdutoRepository _compraProdutoRepository;
+        private readonly INotification _notification;
+        private readonly CompraService _appService;
+        
 
-        public CompraController(ICompraRepository compraRepository)
+        public CompraController(ICompraRepository compraRepository, ICompraProdutoRepository compraProdutoRepository, INotification notification, CompraService service)
         {
-            _compraRepository = compraRepository;
+            _compraRepository = compraRepository;            
+            _compraProdutoRepository = compraProdutoRepository;
+            _notification = notification;
+            _appService = service;
         }
 
         [HttpPost]
         public IHttpActionResult PostCompra(CompraDto compra)
         {
-            var result = _compraRepository.InserirCompra(compra, out int sequencial);
-            if (result == -1)
-                return BadRequest("Falha ao inserir compra");
-            return Ok(sequencial);
+            var result = _appService.InserirCompra(compra);
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+
+            return Ok(result);
+
         }
 
         [HttpPut]
@@ -39,7 +51,9 @@ namespace CandyShop.WebAPI.Controllers
         [HttpGet, Route("api/compra/selecionarcompra/{idCompra}")]
         public IHttpActionResult GetUmaCompra(int idCompra)
         {
-            return Ok(_compraRepository.SelecionarDadosCompra(idCompra));
+            var compra = _compraRepository.SelecionarDadosCompra(idCompra);
+            compra.Itens = _compraProdutoRepository.ListarCompraProdutoIdVenda(idCompra);
+            return Ok(compra);
         }
 
         [HttpGet, Route("api/compra/listaCompracpf/{cpf}")]
@@ -71,5 +85,6 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_compraRepository.ListarCompraPorNome(nomeUsuario));
         }
         #endregion
+        
     }
 }
