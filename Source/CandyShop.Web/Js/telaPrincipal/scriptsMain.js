@@ -3,7 +3,18 @@
     $(".button-collapse").sideNav();
     $('select').material_select();
     $('.caret').hide();
-    $('.modal').modal();
+    $('.modal').modal({
+        dismissible: false
+    });
+
+    $(window).on('dblclick', function() {
+        $('#modalCarrinho').modal('close');
+        $('#modalQuantidade').modal('close');
+        $('#modalLogin').modal('close');
+        $('#modalEditarCompra').modal('close');
+        $('#modalQuantidade').modal('close');
+        $('#modalEditarQuantidade').modal('close');
+    });
 
     //não deixando que o usuário insira valores inválidos
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
@@ -18,7 +29,7 @@
             $('#quantidade').val('');
             $('#confirmacao').removeAttr('href').removeClass('modal-trigger modal-close');
         } else {
-            $('#confirmacao').attr('href', '#modal2').addClass('modal-trigger modal-close');
+            $('#confirmacao').attr('href', '#modalCarrinho').addClass('modal-trigger modal-close');
         }
     });
 
@@ -57,12 +68,7 @@
         mNumbers($(this).val());
     });
 
-    //limpando os inputs
-    $('.btn-floating').on('click', function () {
-        $('#quantidade, #quantidadeEdit').val('');
-    });
-
-    //limpando o carrinho e a localStorage
+    //limpando o carrinho
     $('#limpar').on('click', function () {
         $('.collection li').remove();
         if (localStorage.getItem('listaProdutos') != null) {
@@ -72,15 +78,10 @@
 
     //editando a quantidade dos itens no carrinho
     $("#editarQuantidade").on("click", function () {
-        $("#modal3 .collection li:eq(" + $("#modal4").data("index") + ") p")
+        $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
             .text("Quantidade: " + $("#quantidadeEdit").val())
             .attr('data-Quantidade', $("#quantidadeEdit").val());
     });
-
-    //realizando a compra
-    //$('#logar').on('click', function() {
-        
-    //});
 });
 
 //função que remove caracteres que não sejam numéricos

@@ -23,7 +23,7 @@ CREATE TABLE Pagamento (
 	IdPagamento int constraint PK_IdPagamento primary key identity (1,1),
 	Cpf varchar(11) constraint FK_Cpf foreign key references Usuario (Cpf),
 	DataPagamento datetime,
-	ValorPagamento decimal
+	ValorPagamento decimal(15,2)
 )
 
 CREATE TABLE Compra(
