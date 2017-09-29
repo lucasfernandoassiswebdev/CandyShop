@@ -27,10 +27,11 @@ namespace CandyShop.Core.Services.Compra
             _compraRepository.BeginTransaction();
             try
             {
-                _compraRepository.InserirCompra(compra, out int valor);
-                
+                int valor = 0;
+                _compraRepository.InserirCompra(compra, out valor);
 
-                var result = _compraRepository.InserirCompra(compra, out int valor);
+                int valor2 = 0;
+                var result = _compraRepository.InserirCompra(compra, out valor);
                 if (result == -1)
                 {
                     _compraRepository.RollBackTransaction();
