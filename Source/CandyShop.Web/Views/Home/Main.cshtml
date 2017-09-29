@@ -38,7 +38,10 @@
             //mostrando a quantidade de produto dispónível em estoque
             var quantidadeDisponivel = $(this).attr('data-quantidadeDisponivel');
             $('#modalQuantidade div p').html("Quantidade disponível em estoque: " + quantidadeDisponivel);
-
+            //exibindo a quantidade disponível em estoque no modal de edição do carrinho
+            $(".secondary-content").on("click", function () {
+                $("#modalEditarQuantidade div p").html("Quantidade disponível em estoque: " + $(this).attr("data-quantidadedisponivel"));
+            });
         });
 });
 </script>
