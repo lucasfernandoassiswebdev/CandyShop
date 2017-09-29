@@ -10,14 +10,17 @@
         var produto;
         var produtos = $('.collection li');
         var i = 0;
+        var j = 2;
         $.each(produtos,
             function() {
                 produto = {
                     Produto: { IdProduto: $('span:eq(' + i + ')').attr('data-Id') },
-                    QtdeCompra: $('p:eq(' + i + ')').attr('data-Quantidade')
+                    QtdeCompra: $('p:eq(' + j + ')').attr('data-quantidade')
                 };
+                console.log(produto.QtdeCompra);
                 listaProdutos.push(produto);
                 i++;
+                j++;
             });
 
         var compra = { Itens: listaProdutos };

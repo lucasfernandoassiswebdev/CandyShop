@@ -2,17 +2,18 @@
     Layout = null;
 }
 
+<link rel="stylesheet" type="text/css" href="../../Content/Pagamento/indexPagamento.css?d=@DateTime.Now.Ticks" />
 <div class="container ">
-    <h4>Efetuar Pagamento</h4>
-    <div class="row">
+    <h2 class="center pink-text" style="font-weight: bold">Efetuar Pagamento</h2>
+    <div class="row center">
         <form class="col s12">
-            <div class="row center">
-                <div class="input-field col s6">
-                    <input id="valorPago" name="valorPago" type="text" class="validate" required="">
+            <div class="row">
+                <div class="input-field col s6 push-l3">
+                    <input id="valorPago" name="valorPago" type="text" onkeyup="maskIt(this,event,'###.###.###,##',true)" class="validate" required="">
                     <label for="valorPago">Valor:</label>
                 </div>
             </div>
-            <div class="row" >
+            <div class="row">
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons left">arrow_back</i>Voltar</a>
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
             </div>
@@ -21,5 +22,48 @@
 </div>
 
 <script>
+    //$('#valorPago').on('keydown',
+    //    function () {
+    //        verificaLetras($('#valorPago').val());
+    //    });
+
+    //$('#valorPago').on('blur',
+    //    function () {
+    //        verificaLetras($('#valorPago').val());
+    //    });
+
+    //function verificaLetras(texto) {
+    //    texto = texto.replace(/\D/g, "");
+    //    texto = texto.replace(/(\d{2})(\d)/, "$1,$2");
+
+    //    console.log(texto);
+    //    $('#valorPago').val(texto);
+    //}
+
+    //function maskIt(w, e, m, r, a) {
+    //    // Cancela se o evento for Backspace
+    //    if (!e) var e = window.event
+    //    if (e.keyCode) code = e.keyCode;
+    //    else if (e.which) code = e.which;
+    //    // Variáveis da função
+    //    var txt = (!r) ? w.value.replace(/[^\d]+/gi, '') : w.value.replace(/[^\d]+/gi, '').reverse();
+    //    var mask = (!r) ? m : m.reverse();
+    //    var pre = (a) ? a.pre : "";
+    //    var pos = (a) ? a.pos : "";
+    //    var ret = "";
+    //    if (code == 9 || code == 8 || txt.length == mask.replace(/[^#]+/g, '').length) return false;
+    //    // Loop na máscara para aplicar os caracteres
+    //    for (var x = 0, y = 0, z = mask.length; x < z && y < txt.length;) {
+    //        if (mask.charAt(x) != '#') {
+    //            ret += mask.charAt(x); x++;
+    //        }
+    //        else {
+    //            ret += txt.charAt(y); y++; x++;
+    //        }
+    //    }
+    //    // Retorno da função
+    //    ret = (!r) ? ret : ret.reverse();
+    //    w.value = pre + ret + pos;
+    //}
     
 </script>
