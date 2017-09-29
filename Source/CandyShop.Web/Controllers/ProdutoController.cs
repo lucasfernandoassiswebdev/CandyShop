@@ -70,7 +70,7 @@ namespace CandyShop.Web.Controllers
 
             TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
 
-            if(Session["login"] == "admin")
+            if(Session["login"].ToString() == "admin")
                 return View("Index", response.Content);
             return View("Main", response.Content);
         }
@@ -96,6 +96,9 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.ListarCategoria(categoria);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
+
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
+
             return View("Main", response.Content);
         }
 
