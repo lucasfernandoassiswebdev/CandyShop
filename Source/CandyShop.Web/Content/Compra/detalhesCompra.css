@@ -15,9 +15,14 @@
 	margin-left: -14%;
 }
 
+dt {
+	margin-top: 12px;
+	margin-left: 3%;
+}
+
 dd {
-	margin-top: -2.6%;
-	margin-left: 20%;
+	margin-top: -21.6px;
+	margin-left: 25%;
 }
 
 h4 {

@@ -5,67 +5,67 @@
 }
 <link rel="stylesheet" type="text/css" href="../../Content/Compra/detalhesCompra.css?d=@DateTime.Now.Ticks" />
 
-<div class="center">
-    <h4 class="pink-text" style="font-weight: bold">Detalhes da Compra</h4>
-    <div>
-        <hr />
-        <div class="center" style="padding-left: 42%">
-            <dl class="dl-horizontal" style="text-align: left">
+<h4 class="pink-text" style="font-weight: bold; padding-left: 100px">Detalhes da Compra</h4>
+<div style="padding-left: 9px">
+    <hr />
+    <div style="padding-left: 40px">
+        <dl class="dl-horizontal">
+            <dt>
+                Id Compra:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IdCompra)
+            </dd>
+            @if (Session["login"].ToString() == "off")
+            {
                 <dt>
-                    Id Compra:
+                    Usuario:
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.IdCompra)
+                    @Html.DisplayFor(model => model.Usuario.NomeUsuario)
                 </dd>
-                @if (Session["login"].ToString() == "off")
-                {
-                    <dt>
-                        Usuario:
-                    </dt>
+            }
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Usuario.NomeUsuario)
-                    </dd>
-                }
+            <dt>
+                Data da compra:
+            </dt>
 
-                <dt>
-                    Data da compra:
-                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DataCompra)
+            </dd>
 
+            <dt>
+                Valor Total da Compra:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ValorCompra)
+            </dd>
+            <dt>
+                Itens:
+            </dt>
+            @foreach (var item in Model.Itens)
+            {
+                <dt>Produto</dt>
                 <dd>
-                    @Html.DisplayFor(model => model.DataCompra)
+                    @Html.DisplayFor(model => item.Produto.NomeProduto)
                 </dd>
-
-                <dt>
-                    Valor Total da Compra:
-                </dt>
-
+                <dt>Quantidade</dt>
                 <dd>
-                    @Html.DisplayFor(model => model.ValorCompra)
+                    @Html.DisplayFor(model => item.QtdeCompra)
                 </dd>
-                <dt>
-                    Itens:
-                </dt>
-                @foreach (var item in Model.Itens)
-                {
-                    <dt>Produto</dt>
-                    <dd>
-                        @Html.DisplayFor(model => item.Produto.NomeProduto)
-                    </dd>
-                    <dt>Quantidade</dt>
-                    <dd>
-                        @Html.DisplayFor(model => item.QtdeCompra)
-                    </dd>
-                    <dt>Preço do item:</dt>
-                    <dd>R$ @(item.Produto.PrecoProduto * item.QtdeCompra)</dd>
-                }
-            </dl>
+                <dt>Preço do item:</dt>
+                <dd>R$ @(item.Produto.PrecoProduto * item.QtdeCompra)</dd>
+            }
+        </dl>
+        <div style="padding-left: 3.0%">
+            <a class="waves-effect waves-light btn" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons left">arrow_back</i>Voltar</a>
         </div>
     </div>
-    <div>
-        <a class="waves-effect waves-light btn" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons left">arrow_back</i>Voltar</a>
-    </div>
 </div>
+
+
 
 
