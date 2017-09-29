@@ -188,7 +188,6 @@
     <Content Include="Content\Usuario\detalhesUsuario.css" />
     <Content Include="Content\Usuario\formCadastroUsuario.css" />
     <Content Include="Content\Admin\historico.css" />
-    <Content Include="Content\Login%28nao utilizado%29\index.css" />
     <Content Include="Content\Admin\indexAdmin.css" />
     <Content Include="Content\Pagamento\indexPagamento.css" />
     <Content Include="Content\Produto\indexProduto.css" />

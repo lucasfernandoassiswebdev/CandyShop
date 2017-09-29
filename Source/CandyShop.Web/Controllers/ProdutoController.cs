@@ -41,6 +41,7 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro" + response.ContentAsString.First());
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
             return View(response.Content);
         }
 

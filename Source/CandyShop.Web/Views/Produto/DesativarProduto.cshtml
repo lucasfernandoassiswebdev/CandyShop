@@ -17,9 +17,9 @@
             @{ var nomeB = @Model.IdProduto + "_B.jpg";}
             @{ var nomeC = @Model.IdProduto + "_C.jpg";}
 
-            <img src="@TempData["caminhoImagens"]/@nomeA?d=@DateTime.Now.Ticks"/>
-            <img src="@TempData["caminhoImagens"]/@nomeB?d=@DateTime.Now.Ticks"/>
-            <img src="@TempData["caminhoImagens"]/@nomeC?d=@DateTime.Now.Ticks"/>
+            <img src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks"/>
+            <img src="@TempData["caminhoImagensProdutos"]/@nomeB?d=@DateTime.Now.Ticks"/>
+            <img src="@TempData["caminhoImagensProdutos"]/@nomeC?d=@DateTime.Now.Ticks"/>
             <dl class="dl-horizontal">
                 <dt>
                     ID:
