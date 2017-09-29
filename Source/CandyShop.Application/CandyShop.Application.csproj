@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiConfig.cs" />
     <Compile Include="CompraApplication.cs" />
     <Compile Include="Interfaces\ICompraApplication.cs" />
     <Compile Include="Interfaces\IPagamentoApplication.cs" />
