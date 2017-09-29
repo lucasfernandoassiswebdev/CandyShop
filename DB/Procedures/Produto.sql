@@ -324,7 +324,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoAcimaValor]
 	Ex................: EXEC [dbo].[CSSP_LisProdutoAcimaValor]
 
 	*/
-
+	
 	BEGIN
 	SELECT * 
 		FROM Produto
@@ -346,14 +346,13 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoCategoria]
 	Objetivo..........: Listar os produtos de acordo com a sua categoria
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 14/09/2017
-	Ex................: EXEC [dbo].[CSSP_LisProdutoCategoria]
+	Ex................: EXEC [dbo].[CSSP_LisProdutoCategoria] 'Doces'
 
-	*/
-
+	*/	
 	BEGIN
 		SELECT * 
 			FROM Produto
-			WHERE Categoria like '%' + @Categoria + '@%' AND Ativo = 'A'
+			WHERE Categoria like @Categoria AND Ativo = 'A'
 	END
 GO
 

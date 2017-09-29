@@ -26,6 +26,11 @@ namespace CandyShop.Web.Controllers
             return View();
         }
 
+        public ActionResult Main()
+        {           
+            return View();
+        }
+
         public ActionResult CadastrarProduto()
         {
             return View();
@@ -63,8 +68,11 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
 
-            TempData["caminhoImagens"] = "../../Imagens/Produtos";
-            return View("Index", response.Content);
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
+
+            if(Session["login"] == "admin")
+                return View("Index", response.Content);
+            return View("Main", response.Content);
         }
 
         public ActionResult ListarInativos()
@@ -82,6 +90,15 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro: {response.Status}");
             return View("Index", response.Content);
         }
+
+        public ActionResult ListarCategoria(string categoria)
+        {
+            var response = _appProduto.ListarCategoria(categoria);
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro: {response.Status}");
+            return View("Main", response.Content);
+        }
+
         #endregion
 
         #region Execucoes

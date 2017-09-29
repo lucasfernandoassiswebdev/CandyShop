@@ -32,8 +32,9 @@
         });
 
         AjaxJsProduto.init({
-            main: '@Url.Action("Main", "Home")',
-            listaProduto : '@Url.Action("Main", "Home")'
+            main: '@Url.Action("Listar", "Produto")',
+            listaProduto: '@Url.Action("Listar", "Produto")',
+            listaCategoria: '@Url.Action("ListarCategoria", "Produto")'
         });
 
         AjaxJsCompra.init({
@@ -143,10 +144,12 @@
     <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
 </ul>
 <ul id="dropdownFiltro" class="dropdown-content">
-    <li><a href="#!">Doces</a></li>
-    <li><a href="#!">Chocolates</a></li>
-    <li><a href="#!">Amendoins</a></li>
-    <li><a href="#!">Salgadinhos</a></li>
+    <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Amendoins')">Amendoins</a></li>
+    <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Balas')">Balas</a></li>
+    <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Bebidas')">Bebidas</a></li>
+    <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Chocolates')">Chocolates</a></li>
+    <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Doces')">Doces</a></li>    
+    <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Salgadinhos')">Salgadinhos</a></li>
 </ul>
 
 @if (Session["Login"].ToString() != "off")
