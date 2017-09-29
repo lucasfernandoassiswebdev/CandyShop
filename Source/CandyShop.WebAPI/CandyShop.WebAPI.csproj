@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\SimpleInjectorContainer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\CompraProdutoController.cs" />
     <Compile Include="Controllers\PagamentoController.cs" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Auth\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CandyShop.Core\CandyShop.Core.csproj">

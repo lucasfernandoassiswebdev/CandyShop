@@ -23,6 +23,7 @@ namespace CandyShop.WebAPI.Controllers
             _appService = service;
         }
 
+        //Método post para inserir uma compra, se der erro adiciona uma notification senão retorna Ok(200)
         [HttpPost]
         public IHttpActionResult PostCompra(CompraDto compra)
         {
@@ -31,7 +32,6 @@ namespace CandyShop.WebAPI.Controllers
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
             return Ok(result);
-
         }
 
         [HttpPut]
