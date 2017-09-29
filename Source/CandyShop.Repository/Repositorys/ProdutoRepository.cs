@@ -73,24 +73,6 @@ namespace CandyShop.Repository.Repositorys
                 return retornobd.Read();
         }
 
-        public IEnumerable<ProdutoDto> ListarProdutos()
-        {
-            ExecuteProcedure(Procedures.CSSP_LisProduto);
-            var retorno = new List<ProdutoDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new ProdutoDto
-                    {
-                        IdProduto = reader.ReadAsInt("IdProduto"),
-                        NomeProduto = reader.ReadAsString("NomeProduto"),
-                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
-                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
-                        Ativo = reader.ReadAsString("Ativo"),
-                        Categoria = reader.ReadAsString("Categoria")
-                    });
-            return retorno;
-        }
-
         public ProdutoDto SelecionarDadosProduto(int idProduto)
         {
             ExecuteProcedure(Procedures.CSSP_SelDadosProduto);
@@ -112,118 +94,59 @@ namespace CandyShop.Repository.Repositorys
             return retorno;
         }
 
+        public IEnumerable<ProdutoDto> ListarProdutos()
+        {
+            ExecuteProcedure(Procedures.CSSP_LisProduto);
+            return Listar();
+        }        
+
         public IEnumerable<ProdutoDto> ListarProdutosInativos()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoInativo);
-            var retorno = new List<ProdutoDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new ProdutoDto
-                    {
-                        IdProduto = reader.ReadAsInt("IdProduto"),
-                        NomeProduto = reader.ReadAsString("NomeProduto"),
-                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
-                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
-                        Ativo = reader.ReadAsString("Ativo"),
-                        Categoria = reader.ReadAsString("Categoria")
-                    });
-            return retorno;
+            return Listar();
         }
 
         public IEnumerable<ProdutoDto> ListarProdutosValorCrescente()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoValorCres);
-            var retorno = new List<ProdutoDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new ProdutoDto
-                    {
-                        IdProduto = reader.ReadAsInt("IdProduto"),
-                        NomeProduto = reader.ReadAsString("NomeProduto"),
-                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
-                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
-                        Ativo = reader.ReadAsString("Ativo"),
-                        Categoria = reader.ReadAsString("Categoria")
-                    });
-            return retorno;
+            return Listar();
         }
 
         public IEnumerable<ProdutoDto> ListarProdutosValorDecrescente()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoValorDesc);
-            var retorno = new List<ProdutoDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new ProdutoDto
-                    {
-                        IdProduto = reader.ReadAsInt("IdProduto"),
-                        NomeProduto = reader.ReadAsString("NomeProduto"),
-                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
-                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
-                        Ativo = reader.ReadAsString("Ativo"),
-                        Categoria = reader.ReadAsString("Categoria")
-                    });
-            return retorno;
+            return Listar();
         }
 
         public IEnumerable<ProdutoDto> ListarProdutosAbaixoValor()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoAbaixoValor);
-            var retorno = new List<ProdutoDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new ProdutoDto
-                    {
-                        IdProduto = reader.ReadAsInt("IdProduto"),
-                        NomeProduto = reader.ReadAsString("NomeProduto"),
-                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
-                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
-                        Ativo = reader.ReadAsString("Ativo"),
-                        Categoria = reader.ReadAsString("Categoria")
-                    });
-            return retorno;
+            return Listar();
         }
 
         public IEnumerable<ProdutoDto> ListarProdutosAcimaValor()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoAcimaValor);
-            var retorno = new List<ProdutoDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new ProdutoDto
-                    {
-                        IdProduto = reader.ReadAsInt("IdProduto"),
-                        NomeProduto = reader.ReadAsString("NomeProduto"),
-                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
-                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
-                        Ativo = reader.ReadAsString("Ativo"),
-                        Categoria = reader.ReadAsString("Categoria")
-                    });
-            return retorno;
+            return Listar();
         }
 
-        public IEnumerable<ProdutoDto> ListarProdutosPorCategoria()
+        public IEnumerable<ProdutoDto> ListarProdutosPorCategoria(string categoria)
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoCategoria);
-            var retorno = new List<ProdutoDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new ProdutoDto
-                    {
-                        IdProduto = reader.ReadAsInt("IdProduto"),
-                        NomeProduto = reader.ReadAsString("NomeProduto"),
-                        PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
-                        QtdeProduto = reader.ReadAsInt("QtdeProduto"),
-                        Ativo = reader.ReadAsString("Ativo"),
-                        Categoria = reader.ReadAsString("Categoria")
-                    });
-            return retorno;
+            AddParameter("@Categoria", categoria);
+            return Listar();
         }
 
         public IEnumerable<ProdutoDto> ProcurarProdutoPorNome(string nome)
         {
             ExecuteProcedure(Procedures.CSSP_LisProdPorNome);
             AddParameter("@NomeProduto", nome);
+            
+            return Listar();
+        }
+
+        private IEnumerable<ProdutoDto> Listar()
+        {
             var retorno = new List<ProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())

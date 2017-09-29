@@ -51,7 +51,7 @@ namespace CandyShop.Core.Services.Compra
                 }
 
                 _compraRepository.CommitTransaction();
-                return result;
+                return valor;
             }
             catch (Exception e)
             {

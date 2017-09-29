@@ -11,13 +11,19 @@
     }
 </style>
 
+@*<link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
+<link href="~/Js/telaPrincipal/scriptsMain.js?d=@DateTime.Now.Ticks" rel="stylesheet" />*@
+
+<script type="text/javascript" src="~/Js/telaPrincipal/scriptsMain.js?d=@DateTime.Now.Ticks"></script>
+<style type="text/css" src="~/Js/telaPrincipal/scriptsMain.js?d=@DateTime.Now.Ticks" ></style>
+
 <div class="row">
     @foreach (var produto in Model)
     {
         <div class="col s12 m4 l2">
             <div class="card">
                 <div class="card-image">
-                    @{ string nomeA = @produto.IdProduto + "_A.jpg";}
+                    @{ string nomeA = produto.IdProduto + "_A.jpg";}
                     <img src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks">
                     <span class="card-title flow-text">@produto.NomeProduto</span>
                     <a href="#modalQuantidade" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light pink lighten-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="@produto.NomeProduto R$ @produto.PrecoProduto" data-Preco="@produto.PrecoProduto" data-Nome="@produto.NomeProduto" data-Id="@produto.IdProduto" data-Imagem="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" data-quantidadeDisponivel="@produto.QtdeProduto"><i class="material-icons">add</i></a>

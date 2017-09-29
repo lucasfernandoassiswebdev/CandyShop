@@ -62,22 +62,24 @@
     var verificaLogin = function (callback) {
         var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
         $.post(url.verificaLogin, usuario)
-            .done(function (res) {
-                if (res !== "1")
+            .done(function (res) {                 
                     $.get(url.padrao)
                         .done(function (data) {
                             $('body').slideUp(function () {
                                 $('body').hide().html(data).slideDown(function () {
-                                    Materialize.toast("Login feito com sucesso!", 4000);
-                                    if (callback === "function")
-                                        callback();
+                                    if (res !== "1") {
+                                        Materialize.toast("Login feito com sucesso!", 4000);
+                                        if (callback === "function")
+                                            callback();    
+                                    } else {
+                                        Materialize.toast("Login Incorreto!", 4000);
+                                    }
+                                    
                                 });
                             });
                         }).fail(function (xhr) {
                             Materialize.toast(xhr.responseText, 4000);
-                        });
-                else
-                    Materialize.toast("Login Incorreto", 4000);
+                        });                
 
             })
             .fail(function (xhr) {
