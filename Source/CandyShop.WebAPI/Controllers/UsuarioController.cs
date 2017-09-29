@@ -20,6 +20,7 @@ namespace CandyShop.WebAPI.Controllers
             _usuarioService = usuarioService;
         }
 
+
         public IHttpActionResult Post(UsuarioDto usuario)
         {
             try
