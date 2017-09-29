@@ -16,8 +16,7 @@
                 produto = {
                     Produto: { IdProduto: $('span:eq(' + i + ')').attr('data-Id') },
                     QtdeCompra: $('p:eq(' + j + ')').attr('data-quantidade')
-                };
-                console.log(produto.QtdeCompra);
+                };                
                 listaProdutos.push(produto);
                 i++;
                 j++;
@@ -26,7 +25,7 @@
         var compra = { Itens: listaProdutos };
         $.post(url.inserirCompra, compra)
             .done(function(message) {
-                $.get(url.padrao)
+                $.get(url.navbar)
                     .done(function(data) {
                         $('body').slideUp(function() {
                             $('body').hide().html(data).slideDown(function() {
