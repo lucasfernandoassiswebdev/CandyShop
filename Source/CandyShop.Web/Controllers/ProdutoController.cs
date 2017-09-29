@@ -21,13 +21,13 @@ namespace CandyShop.Web.Controllers
         }
 
         #region Telas
-        public ActionResult Index()
+        public ActionResult ListaProdutos()
         {
             return View();
         }
 
-        public ActionResult Main()
-        {           
+        public ActionResult GridProdutos()
+        {
             return View();
         }
 
@@ -70,9 +70,9 @@ namespace CandyShop.Web.Controllers
 
             TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
 
-            if(Session["login"] == "admin")
-                return View("Index", response.Content);
-            return View("Main", response.Content);
+            if (Session["login"] == "admin")
+                return View("ListaProdutos", response.Content);
+            return View("GridProdutos", response.Content);
         }
 
         public ActionResult ListarInativos()
@@ -80,7 +80,7 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.ListarInativos();
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro {response.ContentAsString.First()}");
-            return View("Index", response.Content);
+            return View("ListaProdutos", response.Content);
         }
 
         public ActionResult ProcurarProduto(string nome)
@@ -88,7 +88,7 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.ProcurarProduto(nome);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
-            return View("Index", response.Content);
+            return View("ListaProdutos", response.Content);
         }
 
         public ActionResult ListarCategoria(string categoria)
@@ -96,7 +96,8 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.ListarCategoria(categoria);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
-            return View("Main", response.Content);
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
+            return View("GridProdutos", response.Content);
         }
 
         #endregion
