@@ -28,15 +28,14 @@ namespace CandyShop.Core.Services.Compra
             try
             {
                 int valor = 0;
-                var result = _compraRepository.InserirCompra(compra, out valor);
+                _compraRepository.InserirCompra(compra, out valor);
+                var result = valor;
                 if (result == -1)
                 {
                     _compraRepository.RollBackTransaction();
                     _notification.Add("Falha ao inserir compra");
                     return 0;
-                }
-
-                compra.IdCompra = valor;
+                }                
 
                 foreach (var item in compra.Itens)
                 {
