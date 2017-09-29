@@ -26,11 +26,9 @@ namespace CandyShop.Core.Services.Compra
         {
             _compraRepository.BeginTransaction();
             try
-            {
-                int valor = 0;
-                _compraRepository.InserirCompra(compra, out valor);
+            {                
 
-                int valor2 = 0;
+                int valor = 0;
                 var result = _compraRepository.InserirCompra(compra, out valor);
                 if (result == -1)
                 {
@@ -48,7 +46,7 @@ namespace CandyShop.Core.Services.Compra
                         return 0;
                     }
 
-                    item.IdCompra = compra.IdCompra;
+                    item.IdCompra = valor;
                     _compraProdutoRepository.InserirCompraProduto(item);
                 }
 
