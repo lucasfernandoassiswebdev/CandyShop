@@ -4,7 +4,6 @@
 
 <link rel="stylesheet" type="text/css" href="../../Content/Pagamento/indexPagamento.css" />
 
-<h4 class="center pink-text">@ViewBag.tituloPagina</h4>
 <script>
     $('.dropdown-button').dropdown({
         inDuration: 300,
@@ -17,6 +16,8 @@
     }
     );
 </script>
+
+<h4 class="center pink-text">@ViewBag.tituloPagina</h4>
 
 @if (ViewBag.drop == 0)
 {
@@ -66,7 +67,7 @@
                         @Html.DisplayFor(modelItem => item.DataPagamento)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ValorPagamento)
+                        R$ @Html.DisplayFor(modelItem => item.ValorPagamento)
                     </td>
                 </tr>
             }
