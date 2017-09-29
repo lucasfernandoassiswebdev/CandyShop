@@ -5,7 +5,11 @@
 }
 
 <link rel="stylesheet" type="text/css" href="../../Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
+
 <script type="text/javascript" src="../../Js/Produto/scriptsCadastroProduto.js?d=@DateTime.Now.Ticks"></script>
+<!--plugin para campos monetários-->
+<script type="text/javascript" src="../../Js/plugins/jquery.maskMoney.js"></script>
+
 
 <div class="container">
     <div class="row" style="margin-left: -20%">
@@ -68,6 +72,17 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('#PrecoProduto').maskMoney({
+            prefix: 'R$ ',
+            allowNegative: true,
+            thousands: '.',
+            decimal: ',',
+            affixesStay: false
+        });
+    });
+</script>
 
 
 

@@ -15,13 +15,14 @@
 	margin-left: -14%;
 }
 
-dd {
-	margin-left: 16%;
-	margin-top: -2.5%;
+dt {
+	margin-top: 12px;
+	margin-left: 3%;
 }
 
-dl {
-	color: black;
+dd {
+	margin-top: -21.6px;
+	margin-left: 25%;
 }
 
 h4 {
@@ -33,3 +34,5 @@ img {
 	max-height: 150px;
 	display: inline-block;
 }
+
+

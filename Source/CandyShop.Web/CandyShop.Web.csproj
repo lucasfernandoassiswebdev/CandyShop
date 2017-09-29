@@ -223,6 +223,7 @@
     <Content Include="Js\Ajax\AjaxShop.js" />
     <Content Include="Js\Ajax\AjaxUsuario.js" />
     <Content Include="Js\Ajax\funcoesAjax.js" />
+    <Content Include="Js\plugins\jquery.maskMoney.js" />
     <Content Include="Js\Produto\scriptsCadastroProduto.js" />
     <Content Include="Js\Produto\scriptsEditarProduto.js" />
     <Content Include="Js\telaPrincipal\scriptsAdmin.js" />

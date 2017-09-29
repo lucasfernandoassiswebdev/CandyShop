@@ -7,12 +7,15 @@ namespace CandyShop.Repository.DataBase
     {
         private readonly Conexao _conexao;
         private SqlCommand _command;
-
+        /*
+          Classe onde são encapsulados os métodos para que sejam feitas as execuções
+          de tarefas no banco de dados */
         public Execucao(Conexao conexao)
         {
             _conexao = conexao;
         }
 
+        // Monta o comando
         public void ExecuteProcedure(object procName)
         {
             _command = new SqlCommand(procName.ToString(), _conexao.Connection, _conexao.Transaction)
@@ -22,11 +25,15 @@ namespace CandyShop.Repository.DataBase
             };
         }
 
+        // Adiciona os parâmetros na procedure caso seja necessário
         public void AddParameter(string parameterName, object parameterValue)
         {
             _command.Parameters.AddWithValue(parameterName, parameterValue);
         }
 
+        /* 
+          Adiciona um parâmetro de saída na procedure, esse método geralmente 
+          será utilizado com o método ExecuteNonQueryWithReturn */
         protected void AddParameterOutput(string parameterName, object parameterValue, DbType parameterType)
         {
             _command.Parameters.Add(new SqlParameter
@@ -40,7 +47,7 @@ namespace CandyShop.Repository.DataBase
 
         protected string GetParameterOutput(string parameter) => _command.Parameters[parameter].Value.ToString();
 
-        // Método para executar procedure que não tem nenhum retorno (Insert,Delete)
+        // Método para executar procedures que não tem nenhum retorno (Insert,Delete)
         public void ExecuteNonQuery()
         {
             _conexao.Open();
@@ -66,13 +73,14 @@ namespace CandyShop.Repository.DataBase
             return int.Parse(_command.Parameters["@RETURN_VALUE"].Value.ToString());
         }
 
-        // Metodo exclusivo para procedure que retorna valores (Select)
+        // Metodo utilizado para executar procedures que retorna valores (Select)
         public SqlDataReader ExecuteReader()
         {
             _conexao.Open();
             return _command.ExecuteReader();
         }
 
+        // Métodos de transação
         public void BeginTransaction()
         {
             _conexao.BeginTransaction();
