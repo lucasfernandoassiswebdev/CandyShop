@@ -10,3 +10,11 @@
         $('.button-collapse').sideNav('hide');
     });
 });
+
+$(document).ajaxStart(function () {
+    $("#DivLoad").fadeIn(500);
+});
+
+$(document).ajaxStop(function () {
+    $("#DivLoad").fadeOut(500);
+});
