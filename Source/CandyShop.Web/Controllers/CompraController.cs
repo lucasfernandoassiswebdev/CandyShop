@@ -83,10 +83,10 @@ namespace CandyShop.Web.Controllers
             {
                 return Content("Você não está logado");
             }
-           
+
             if (ModelState.IsValid)
             {
-                compra.Usuario = new UsuarioViewModel {Cpf = Session["Login"].ToString()};
+                compra.Usuario = new UsuarioViewModel { Cpf = Session["Login"].ToString() };
 
                 var response = _appCompra.InserirCompra(compra);
                 if ((response.Status != HttpStatusCode.OK) || (response.Content < 1))
