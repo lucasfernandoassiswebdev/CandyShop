@@ -216,7 +216,7 @@ namespace CandyShop.Web.Controllers
             Session["saldoUsuario"] = user.Content.SaldoUsuario;            
 
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
-            return RedirectToAction("Padrao", "Home");
+            return RedirectToAction("NavBar", "Home");
         }
 
         public ActionResult Deslogar()
