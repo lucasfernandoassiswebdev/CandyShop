@@ -49,8 +49,7 @@ $(document).ready(function () {
                         {
                             html: produto.Nome,
                             "class": "title",
-                            "data-Id": produto.Id,
-                            "data-quantidadeDisponivel": produto.QuantidadeDisponivel
+                            "data-Id": produto.Id
                         }),
                     $("<p>",
                         {
@@ -60,6 +59,7 @@ $(document).ready(function () {
                     $("<a>", {
                         href: "#modalQuantidade",
                         'class': "modal-trigger modal-close secondary-content",
+                        "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
                         html: [
                             $("<i>", {
                                 html: "mode_edit",
@@ -85,8 +85,7 @@ $(document).ready(function () {
                     {
                         html: nome,
                         "class": "title",
-                        "data-Id": Id,
-                        "data-quantidadeDisponivel": quantidadeDisponivel
+                        "data-Id": Id
                     }),
                 $("<p>",
                     {
@@ -96,6 +95,7 @@ $(document).ready(function () {
                 $("<a>", {
                     href: "#modalEditarQuantidade",
                     'class': "modal-close modal-trigger secondary-content",
+                    "data-quantidadeDisponivel": quantidadeDisponivel,
                     html: [
                         $("<i>", {
                             html: "mode_edit",

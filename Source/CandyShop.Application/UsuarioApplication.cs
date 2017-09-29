@@ -1,7 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -10,7 +9,7 @@ namespace CandyShop.Application
 {
     public class UsuarioApplication : IUsuarioApplication
     {
-        private readonly string _enderecoApi = $"{ConfigurationManager.AppSettings["IP_API"]}/Usuario";
+        private readonly string _enderecoApi = $"{ApiConfig.enderecoApi}/Usuario";
 
         public Response<string> InserirUsuario(UsuarioViewModel usuario)
         {
