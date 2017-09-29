@@ -107,12 +107,12 @@ namespace CandyShop.Web.Controllers
                         {
                             produto.ImagemA = produto.ImagemA.Substring(prefixo.Length);
 
-                            byte[] bytes = System.Convert.FromBase64String(produto.ImagemA);
+                            byte[] bytes = Convert.FromBase64String(produto.ImagemA);
 
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
 
-                            string caminho = $"~/Imagens/Produtos/{response}_A.jpg";
+                            string caminho = $"~/Imagens/Produtos/{response.Content}_A.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                             cont++;
@@ -130,12 +130,12 @@ namespace CandyShop.Web.Controllers
                         {
                             produto.ImagemB = produto.ImagemB.Substring(prefixo.Length);
 
-                            byte[] bytes = System.Convert.FromBase64String(produto.ImagemB);
+                            byte[] bytes = Convert.FromBase64String(produto.ImagemB);
 
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
 
-                            string caminho = $"~/Imagens/Produtos/{response}_B.jpg";
+                            string caminho = $"~/Imagens/Produtos/{response.Content}_B.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                             cont++;
@@ -153,11 +153,11 @@ namespace CandyShop.Web.Controllers
                         {
                             produto.ImagemC = produto.ImagemC.Substring(prefixo.Length);
 
-                            byte[] bytes = System.Convert.FromBase64String(produto.ImagemC);
+                            byte[] bytes = Convert.FromBase64String(produto.ImagemC);
 
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
-                            string caminho = $"~/Imagens/Produtos/{response}_C.jpg";
+                            string caminho = $"~/Imagens/Produtos/{response.Content}_C.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                             cont++;
@@ -205,7 +205,7 @@ namespace CandyShop.Web.Controllers
                         {
                             produto.ImagemA = produto.ImagemA.Substring(prefixo.Length);
 
-                            byte[] bytes = System.Convert.FromBase64String(produto.ImagemA);
+                            byte[] bytes = Convert.FromBase64String(produto.ImagemA);
 
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
@@ -227,7 +227,7 @@ namespace CandyShop.Web.Controllers
                         {
                             produto.ImagemB = produto.ImagemB.Substring(prefixo.Length);
 
-                            byte[] bytes = System.Convert.FromBase64String(produto.ImagemB);
+                            byte[] bytes = Convert.FromBase64String(produto.ImagemB);
 
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
@@ -249,7 +249,7 @@ namespace CandyShop.Web.Controllers
                         {
                             produto.ImagemC = produto.ImagemC.Substring(prefixo.Length);
 
-                            byte[] bytes = System.Convert.FromBase64String(produto.ImagemC);
+                            byte[] bytes = Convert.FromBase64String(produto.ImagemC);
 
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
