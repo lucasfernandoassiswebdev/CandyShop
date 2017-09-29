@@ -50,6 +50,7 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro" + response.ContentAsString.First());
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
             return View(response.Content);
         }
 
@@ -58,6 +59,7 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro" + response.ContentAsString.First());
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
             return View(response.Content);
         }
         #endregion
@@ -71,7 +73,7 @@ namespace CandyShop.Web.Controllers
 
             TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
 
-            if (Session["login"] == "admin")
+            if (Session["login"].ToString() == "admin")
                 return View("ListaProdutos", response.Content);
             return View("GridProdutos", response.Content);
         }
