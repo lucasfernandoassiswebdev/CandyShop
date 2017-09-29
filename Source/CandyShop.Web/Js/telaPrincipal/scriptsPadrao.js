@@ -3,7 +3,7 @@
 //e do nosso ego e auto-estima
 //(no fundo ele ainda tem coração, mas gosta de pinto)
 
-var imagem, preco, nome, imagem, quantidade, Id;
+var imagem, preco, nome, imagem, quantidade, quantidadeDisponivel, Id;
 var listaProdutos = [];
 
 $(document).ready(function () {
@@ -16,6 +16,7 @@ $(document).ready(function () {
         nome = $(this).attr("data-Nome");
         imagem = $(this).attr("data-Imagem");
         Id = $(this).attr("data-Id");
+        quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
     });
 
     //populando a lista novamente com os itens do localstorage
@@ -25,7 +26,8 @@ $(document).ready(function () {
                 Id: produto.Id,
                 Nome: produto.Nome,
                 Quantidade: produto.Quantidade,
-                Imagem: produto.Imagem
+                Imagem: produto.Imagem,
+                QuantidadeDisponivel: produto.quantidadeDisponivel
             }
 
             listaProdutos.push(item);
@@ -57,6 +59,7 @@ $(document).ready(function () {
                     $("<a>", {
                         href: "#modalQuantidade",
                         'class': "modal-trigger modal-close secondary-content",
+                        "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
                         html: [
                             $("<i>", {
                                 html: "mode_edit",
@@ -72,6 +75,7 @@ $(document).ready(function () {
         });
     }
 
+    //adicionando os itens no carrinho
     $("#adicionaCarrinho").off("click").on("click", function () {
         quantidade = $("#quantidade").val();
         $("div[class='collection']").append($("<li>", {
@@ -86,11 +90,12 @@ $(document).ready(function () {
                 $("<p>",
                     {
                         html: "Quantidade: " + quantidade,
-                        "data-Quantidade": quantidade
+                        "data-Quantidade": quantidade                        
                     }),
                 $("<a>", {
                     href: "#modalEditarQuantidade",
                     'class': "modal-close modal-trigger secondary-content",
+                    "data-quantidadeDisponivel": quantidadeDisponivel,
                     html: [
                         $("<i>", {
                             html: "mode_edit",

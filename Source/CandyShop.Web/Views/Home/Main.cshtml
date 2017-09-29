@@ -6,6 +6,9 @@
     img {
         max-width: 100%;
     }
+    body {
+        overflow-y: scroll;
+    }
 </style>
 
 <div class="row">
@@ -17,21 +20,28 @@
                     @{ string nomeA = @produto.IdProduto + "_A.jpg";}
                     <img src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks">
                     <span class="card-title flow-text">@produto.NomeProduto</span>
-                    <a href="#modalQuantidade" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light pink lighten-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="@produto.NomeProduto R$ @produto.PrecoProduto" data-Preco="@produto.PrecoProduto" data-Nome="@produto.NomeProduto" data-Id="@produto.IdProduto" data-Imagem="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks"><i class="material-icons">add</i></a>
+                    <a href="#modalQuantidade" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light pink lighten-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="@produto.NomeProduto R$ @produto.PrecoProduto" data-Preco="@produto.PrecoProduto" data-Nome="@produto.NomeProduto" data-Id="@produto.IdProduto" data-Imagem="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" data-quantidadeDisponivel="@produto.QtdeProduto"><i class="material-icons">add</i></a>
                 </div>
                 <div class="card-content">
                     <p>R$ @produto.PrecoProduto</p>
                 </div>
             </div>
         </div>
-    }
+                        }
 </div>
 
 <script>
-    //limpando os inputs
-    $('.btn-floating, #modalEditarQuantidade').on('click', function () {
-        $('#quantidade, #quantidadeEdit').val('');
-    });
+    $(document).ready(function () {
+        $('.btn-floating, #modalEditarQuantidade').on('click', function () {
+            //limpando os inputs 
+            $('#quantidade, #quantidadeEdit').val('');
+            //mostrando a quantidade de produto dispónível em estoque
+            var quantidadeDisponivel = $(this).attr('data-quantidadeDisponivel');
+            $('#modalQuantidade div p').html("Quantidade disponível em estoque: " + quantidadeDisponivel);
+            //exibindo a quantidade disponível em estoque no modal de edição do carrinho
+            $(".secondary-content").on("click", function () {
+                $("#modalEditarQuantidade div p").html("Quantidade disponível em estoque: " + $(this).attr("data-quantidadedisponivel"));
+            });
+        });
+});
 </script>
-
-

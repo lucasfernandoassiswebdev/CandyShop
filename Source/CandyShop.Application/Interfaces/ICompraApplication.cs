@@ -7,7 +7,6 @@ namespace CandyShop.Application.Interfaces
     {
         Response<int> InserirCompra(CompraViewModel compra);
         Response<string> EditarCompra(CompraViewModel compra);
-        //Response<string> InserirItens(CompraProdutoViewModel produto);
         Response<CompraViewModel> SelecionarCompra(int idcompra);
         Response<IEnumerable<CompraViewModel>> ListaCompra();
         Response<IEnumerable<CompraViewModel>> ListaCompraPorCpf(string cpf);                
