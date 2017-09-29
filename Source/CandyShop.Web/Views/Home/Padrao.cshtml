@@ -32,15 +32,17 @@
         });
 
         AjaxJsProduto.init({
-            main: '@Url.Action("Main", "Home")'
+            main: '@Url.Action("Main", "Home")',
+            listaProduto : '@Url.Action("Main", "Home")'
         });
+
         AjaxJsCompra.init({
             inserirCompra : '@Url.Action("Cadastrar","Compra")',
             historicoCompra: '@Url.Action("ListarCpf", "Compra")',
             detalheCompra: '@Url.Action("Detalhes", "Compra")'
         });
         AjaxJsShop.init({
-
+            
         });
 });
 </script>
@@ -152,7 +154,7 @@
     <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
+            <a href="#!" class="brand-logo right" onclick="AjaxJsProduto.listaProduto()" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdownMenu">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -202,7 +204,7 @@ else
     <nav class="brown darken-2 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio()" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
+            <a href="#!" class="brand-logo right" onclick="AjaxJsProduto.listaProduto()" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
