@@ -3,7 +3,7 @@
 //e do nosso ego e auto-estima
 //(no fundo ele ainda tem coração, mas gosta de pinto)
 
-var imagem, preco, nome, imagem, quantidade, Id;
+var imagem, preco, nome, imagem, quantidade, quantidadeDisponivel, Id;
 var listaProdutos = [];
 
 $(document).ready(function () {
@@ -16,6 +16,7 @@ $(document).ready(function () {
         nome = $(this).attr("data-Nome");
         imagem = $(this).attr("data-Imagem");
         Id = $(this).attr("data-Id");
+        quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
     });
 
     //populando a lista novamente com os itens do localstorage
@@ -25,7 +26,8 @@ $(document).ready(function () {
                 Id: produto.Id,
                 Nome: produto.Nome,
                 Quantidade: produto.Quantidade,
-                Imagem: produto.Imagem
+                Imagem: produto.Imagem,
+                QuantidadeDisponivel: produto.quantidadeDisponivel
             }
 
             listaProdutos.push(item);
@@ -47,7 +49,8 @@ $(document).ready(function () {
                         {
                             html: produto.Nome,
                             "class": "title",
-                            "data-Id": produto.Id
+                            "data-Id": produto.Id,
+                            "data-quantidadeDisponivel": produto.QuantidadeDisponivel
                         }),
                     $("<p>",
                         {
@@ -72,6 +75,7 @@ $(document).ready(function () {
         });
     }
 
+    //adicionando os itens no carrinho
     $("#adicionaCarrinho").off("click").on("click", function () {
         quantidade = $("#quantidade").val();
         $("div[class='collection']").append($("<li>", {
@@ -81,12 +85,13 @@ $(document).ready(function () {
                     {
                         html: nome,
                         "class": "title",
-                        "data-Id": Id
+                        "data-Id": Id,
+                        "data-quantidadeDisponivel": quantidadeDisponivel
                     }),
                 $("<p>",
                     {
                         html: "Quantidade: " + quantidade,
-                        "data-Quantidade": quantidade
+                        "data-Quantidade": quantidade                        
                     }),
                 $("<a>", {
                     href: "#modalEditarQuantidade",
