@@ -6,7 +6,7 @@ namespace CandyShop.Core.Infra
 {
     public class Notification : INotification
     {
-        //Criando uma lista para guardar as notification
+        // Criando uma lista para guardar as notifications
         private readonly List<string> _notifications;
         
         public Notification()
@@ -14,19 +14,21 @@ namespace CandyShop.Core.Infra
             _notifications = new List<string>();
         }
 
-        //Método pra adicionar notification no sistema caso precisar
+        // Método pra adicionar uma notification
         public void Add(string notification)
         {
             _notifications.Add(notification);
         }
 
-        //Verifica se tem notification na lista (serve para verificações posteriores)
+        /* 
+          Verifica se há alguma notification na lista 
+          (É utilizado para verificações posteriores) */
         public bool HasNotification()
         {
             return _notifications != null && _notifications.Any();
         }
 
-        //Pega alguma notification dentro da lista 
+        // Pega a notification dentro da lista 
         public IEnumerable<string> GetNotification()
         {
             return _notifications;

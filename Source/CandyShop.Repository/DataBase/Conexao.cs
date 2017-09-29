@@ -6,6 +6,9 @@ namespace CandyShop.Repository.DataBase
 {
     public class Conexao
     {
+        /* A classe de conexão contém as informações necesárias para 
+           que seja estabelecida a conexão com o banco, ela é separada 
+           dos métodos que executam as ações no banco */
         public readonly SqlConnection Connection;
         public SqlTransaction Transaction;
 
@@ -28,6 +31,7 @@ namespace CandyShop.Repository.DataBase
             return Connection;
         }
 
+        //Métodos utilizados nas transações 
         public void BeginTransaction()
         {
             Open();

@@ -9,16 +9,7 @@ namespace CandyShop.Application
 {
     public class ProdutoApplication : IProdutoApplication
     {
-        private readonly string _enderecoApi = $"{ApiConfig.enderecoApi}/produto";
-
-        public Response<IEnumerable<ProdutoViewModel>> ListarProdutos()
-        {
-            using (var client = new HttpClient())
-            {
-                var response = client.GetAsync(_enderecoApi).Result;
-                return new Response<IEnumerable<ProdutoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
-            }
-        }
+        private readonly string _enderecoApi = $"{ApiConfig.enderecoApi}/produto";        
 
         public Response<int> InserirProduto(ProdutoViewModel produto)
         {
@@ -58,6 +49,17 @@ namespace CandyShop.Application
                      ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
                      : new Response<string>(response.StatusCode);
             }
+        }        
+
+        #region GETS
+
+        public Response<IEnumerable<ProdutoViewModel>> ListarProdutos()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync(_enderecoApi).Result;
+                return new Response<IEnumerable<ProdutoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
         }
 
         public Response<IEnumerable<ProdutoViewModel>> ListarInativos()
@@ -78,13 +80,15 @@ namespace CandyShop.Application
             }
         }
 
-        public Response<int> BuscaUltimoProduto()
+        public Response<IEnumerable<ProdutoViewModel>> ListarCategoria(string categoria)
         {
             using (var cliente = new HttpClient())
             {
-                var response = cliente.GetAsync($"{_enderecoApi}/ultimo").Result;
-                return new Response<int>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                var response = cliente.GetAsync($"{_enderecoApi}/categoria/{categoria}").Result;
+                return new Response<IEnumerable<ProdutoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
+
+        #endregion
     }
 }

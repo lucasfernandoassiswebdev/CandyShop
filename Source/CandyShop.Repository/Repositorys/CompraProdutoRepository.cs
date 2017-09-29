@@ -4,11 +4,16 @@ using CandyShop.Core.Services.Produto.Dto;
 using CandyShop.Repository.Database;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CandyShop.Repository.Repositorys
 {
     public class CompraProdutoRepository : Execucao, ICompraProdutoRepository
     {
+        /* A classe de execução exige um parâmetro no seu construtor, no caso
+           uma instância de conexão, ao herdar dess classe, a classe que está herdando
+           deve passar em seu construtor o construtor que é exigido pela classe que está
+           sendo herdada, assim como feito abaixo */
         public CompraProdutoRepository(Conexao conexao) : base(conexao)
         {
 
@@ -23,9 +28,11 @@ namespace CandyShop.Repository.Repositorys
             CSSP_UpdCompraProduto
         }
 
-        /* Cria o metodo usando o ExecuteProcedure que é o metodo encapsulado para executar as procs
-         e o AddPaarmeter para adicionar os parametros que são pedidos nas procedures e para finalizae
-         usa o ExecuteNonQuery para executar procedures que não retornam valores*/
+        /* O método ExecuteProcedure é o metodo encapsulado para montar os
+           comandos que serão executados no banco, o método encapsulado 
+           AddPaarmeter adiciona os parametros que são pedidos nas 
+           procedures e para finalizar o método ExecuteNonQuery executa procedures 
+           que não retornam valores */
         public void EditarCompraProduto(CompraProdutoDto compraProduto)
         {
             ExecuteProcedure(Procedures.CSSP_UpdCompraProduto);
@@ -45,13 +52,19 @@ namespace CandyShop.Repository.Repositorys
             ExecuteNonQuery();
         }
 
+        /*
+         Nesse caso a procedure retornará uma lista de ubjetos, por
+         isso aqui é osado o método ExecuteReader(), e enquanto o reader estiver
+         lendo as linhas que foram retornadas pela procedure, são criados novos objetos
+         e adicionados numa lista de objetos, quando o reader terminar de ser executado
+         a lista de objetos é retornada */
         public IEnumerable<CompraProdutoDto> ListarCompraProduto()
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraProduto);
             var retorno = new List<CompraProdutoDto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
-                    retorno.Add( new CompraProdutoDto()
+                    retorno.Add(new CompraProdutoDto()
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),
@@ -63,7 +76,9 @@ namespace CandyShop.Repository.Repositorys
                             Ativo = reader.ReadAsString("Ativo")
                         }
                     });
-            return retorno;
+
+            //verificando se a lista de objetos não veio nula e a retornando caso sim
+            return retorno.Any() ? retorno : null;
         }
 
         public IEnumerable<CompraProdutoDto> ListarCompraProdutoIdVenda(int idVenda)
@@ -74,15 +89,15 @@ namespace CandyShop.Repository.Repositorys
             using (var reader = ExecuteReader())
                 while (reader.Read())
                     retorno.Add(new CompraProdutoDto()
-                    {                        
+                    {
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),
                         Produto = new ProdutoDto
-                        {                            
+                        {
                             NomeProduto = reader.ReadAsString("NomeProduto"),
-                            PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),                            
+                            PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
                         }
                     });
-            return retorno;
+            return retorno.Any() ? retorno : null;
         }
     }
 }

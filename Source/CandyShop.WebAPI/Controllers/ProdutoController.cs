@@ -30,32 +30,7 @@ namespace CandyShop.WebAPI.Controllers
             if (result == -1)
                 return BadRequest("Falha ao inserir o produto");
             return Ok(sequencial);
-        }
-
-        public IHttpActionResult Get()
-        {
-            return Ok(_produtoRepository.ListarProdutos());
-        }
-
-        [Route("api/produto/inativos")]
-        public IHttpActionResult GetInativos()
-        {
-            return Ok(_produtoRepository.ListarProdutosInativos());
-        }
-
-        [HttpGet]
-        [Route("api/produto/selecionar/{idProduto}")]
-        public IHttpActionResult GetId(int idProduto)
-        {
-            return Ok(_produtoRepository.SelecionarDadosProduto(idProduto));
-        }
-
-        [HttpGet]
-        [Route("api/produto/procurar/{nome}")]
-        public IHttpActionResult GetPorNome(string nome)
-        {
-            return Ok(_produtoRepository.ProcurarProdutoPorNome(nome));
-        }
+        }        
 
         public IHttpActionResult Put(ProdutoDto produto)
         {
@@ -70,5 +45,38 @@ namespace CandyShop.WebAPI.Controllers
             _produtoRepository.DesativarProduto(idproduto);
             return Ok();
         }
+
+        #region GETS
+
+        public IHttpActionResult Get()
+        {
+            return Ok(_produtoRepository.ListarProdutos());
+        }
+
+        [HttpGet, Route("api/produto/inativos")]
+        public IHttpActionResult GetInativos()
+        {
+            return Ok(_produtoRepository.ListarProdutosInativos());
+        }
+        
+        [HttpGet, Route("api/produto/selecionar/{idProduto}")]
+        public IHttpActionResult GetId(int idProduto)
+        {
+            return Ok(_produtoRepository.SelecionarDadosProduto(idProduto));
+        }
+        
+        [HttpGet, Route("api/produto/procurar/{nome}")]
+        public IHttpActionResult GetPorNome(string nome)
+        {
+            return Ok(_produtoRepository.ProcurarProdutoPorNome(nome));
+        }
+
+        [HttpGet, Route("api/produto/categoria/{categoria}")]
+        public IHttpActionResult GetCategoria(string categoria)
+        {
+            return Ok(_produtoRepository.ListarProdutosPorCategoria(categoria));
+        }
+
+        #endregion
     }
 }

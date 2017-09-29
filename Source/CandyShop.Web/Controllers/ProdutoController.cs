@@ -21,7 +21,12 @@ namespace CandyShop.Web.Controllers
         }
 
         #region Telas
-        public ActionResult Index()
+        public ActionResult ListaProdutos()
+        {
+            return View();
+        }
+
+        public ActionResult GridProdutos()
         {
             return View();
         }
@@ -36,6 +41,7 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro" + response.ContentAsString.First());
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
             return View(response.Content);
         }
 
@@ -63,8 +69,11 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
 
-            TempData["caminhoImagens"] = "../../Imagens/Produtos";
-            return View("Index", response.Content);
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
+
+            if (Session["login"].ToString() == "admin")
+                return View("ListaProdutos", response.Content);
+            return View("GridProdutos", response.Content);
         }
 
         public ActionResult ListarInativos()
@@ -72,7 +81,7 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.ListarInativos();
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro {response.ContentAsString.First()}");
-            return View("Index", response.Content);
+            return View("ListaProdutos", response.Content);
         }
 
         public ActionResult ProcurarProduto(string nome)
@@ -80,8 +89,19 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.ProcurarProduto(nome);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
-            return View("Index", response.Content);
+            return View("ListaProdutos", response.Content);
         }
+
+        public ActionResult ListarCategoria(string categoria)
+        {
+            var response = _appProduto.ListarCategoria(categoria);
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro: {response.Status}");
+
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
+            return View("GridProdutos", response.Content);
+        }
+
         #endregion
 
         #region Execucoes

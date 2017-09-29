@@ -63,6 +63,10 @@
         var produto = { Nome: $('#nomeProduto').val() };
         chamaPaginaComIdentificador(url.listarProdutoPorNome, produto);
     };
+
+    var listaCategoria = function(categoria) {
+        chamaPaginaComIdentificador(url.listaCategoria, { categoria: categoria });
+    }
     
     //retorna links para acessar as paginas.
     return {
@@ -76,7 +80,8 @@
         desativarProduto: desativarProduto,
         desativarProdutoConfirmado: desativarProdutoConfirmado,
         listarInativos: listarInativos,
-        listarProdutoPorNome: listarProdutoPorNome
+        listarProdutoPorNome: listarProdutoPorNome,
+        listaCategoria: listaCategoria
     };
 
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.

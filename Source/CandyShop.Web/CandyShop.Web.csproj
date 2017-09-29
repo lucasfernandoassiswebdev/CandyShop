@@ -188,7 +188,6 @@
     <Content Include="Content\Usuario\detalhesUsuario.css" />
     <Content Include="Content\Usuario\formCadastroUsuario.css" />
     <Content Include="Content\Admin\historico.css" />
-    <Content Include="Content\Login%28nao utilizado%29\index.css" />
     <Content Include="Content\Admin\indexAdmin.css" />
     <Content Include="Content\Pagamento\indexPagamento.css" />
     <Content Include="Content\Produto\indexProduto.css" />
@@ -258,16 +257,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Main.cshtml" />
-    <Content Include="Views\Home\Padrao.cshtml" />
+    <Content Include="Views\Produto\GridProdutos.cshtml" />
+    <Content Include="Views\Home\NavBar.cshtml" />
     <Content Include="Views\Pagamento\Index.cshtml" />
     <Content Include="Views\Compra\Index.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
-    <Content Include="Views\Produto\Index.cshtml" />
+    <Content Include="Views\Produto\ListaProdutos.cshtml" />
     <Content Include="Views\Pagamento\Detalhes.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Usuario\Cadastrar.cshtml" />
