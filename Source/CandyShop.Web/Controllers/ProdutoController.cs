@@ -91,7 +91,11 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.ProcurarProduto(nome);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
-            return View("ListaProdutos", response.Content);
+
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
+            if (Session["login"].ToString() == "admin")
+                return View("ListaProdutos", response.Content);
+            return View("GridProdutos", response.Content);
         }
 
         public ActionResult ListarCategoria(string categoria)

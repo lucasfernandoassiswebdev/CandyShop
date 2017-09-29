@@ -59,8 +59,8 @@
     var listarInativos = function () {
         chamaPagina(url.listarInativos);
     };
-    var listarProdutoPorNome = function () {
-        var produto = { Nome: $('#nomeProduto').val() };
+    var listarProdutoPorNome = function (produto) {        
+        var produto = { Nome: produto };
         chamaPaginaComIdentificador(url.listarProdutoPorNome, produto);
     };
 

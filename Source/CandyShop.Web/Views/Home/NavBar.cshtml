@@ -34,15 +34,16 @@
         AjaxJsProduto.init({
             main: '@Url.Action("Listar", "Produto")',
             listaProduto: '@Url.Action("Listar", "Produto")',
-            listaCategoria: '@Url.Action("ListarCategoria", "Produto")'
+            listaCategoria: '@Url.Action("ListarCategoria", "Produto")',
+            listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Produto")'
         });
 
         AjaxJsCompra.init({
-            inserirCompra : '@Url.Action("Cadastrar","Compra")',
+            inserirCompra: '@Url.Action("Cadastrar","Compra")',
             historicoCompra: '@Url.Action("ListarCpf", "Compra")',
             detalheCompra: '@Url.Action("Detalhes", "Compra")'
         });
-});
+    });
 </script>
 
 <link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
@@ -141,7 +142,7 @@
     <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
 </ul>
 <ul id="dropdownFiltro" class="dropdown-content">
-    <li><a href="#!" onclick="AjaxJsProduto.listaProduto()">Todos</a></li>
+    <li><a href="#!" onclick="AjaxJsProduto.listaProduto(); alert('batata 1')">Todos</a></li>
     <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Amendoins')">Amendoins</a></li>
     <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Balas')">Balas</a></li>
     <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Bebidas')">Bebidas</a></li>
@@ -155,7 +156,7 @@
     <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJsProduto.listaProduto()" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
+            <a href="#!" class="brand-logo right" onclick="AjaxJsProduto.listaProduto(); alert('batata 2')" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdownMenu">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -166,7 +167,7 @@
                 </li>
                 <li>
                     <div class="col s4 hide-on-med-and-down">
-                        <form>
+                        <div>
                             <div class="input-field">
                                 <input id="search" type="search">
                                 <label class="label-icon" for="search">
@@ -174,7 +175,7 @@
                                 </label>
                                 <i class="material-icons closed ">close</i>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -205,7 +206,7 @@ else
     <nav class="brown darken-2 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJsProduto.listaProduto()" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
+            <a href="#!" class="brand-logo right" onclick="AjaxJsProduto.listaProduto(); alert('batata 3')" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
@@ -214,7 +215,7 @@ else
                 </li>
                 <li>
                     <div class="col s4 hide-on-med-and-down">
-                        <form>
+                        <div>
                             <div class="input-field">
                                 <input id="search" type="search" required>
                                 <label class="label-icon" for="search">
@@ -222,7 +223,7 @@ else
                                 </label>
                                 <i class="material-icons closed ">close</i>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -251,7 +252,12 @@ else
 
 <div id="DivGrid"></div>
 
-
-
-
-
+<script>
+    $(document).ready(function () {
+        $('#search').on('keypress', function (e) {
+            var textoPesquisa = $('#search').val();
+            if (e.which == 13)
+                AjaxJsProduto.listarProdutoPorNome(textoPesquisa);
+        });
+    });
+</script>
