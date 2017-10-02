@@ -27,7 +27,6 @@ namespace CandyShop.Core.Services.Compra
             _compraRepository.BeginTransaction();
             try
             {                
-
                 int valor = 0;
                 var result = _compraRepository.InserirCompra(compra, out valor);
                 if (result == -1)
@@ -35,8 +34,12 @@ namespace CandyShop.Core.Services.Compra
                     _compraRepository.RollBackTransaction();
                     _notification.Add("Falha ao inserir compra");
                     return 0;
-                }                
+                }
 
+                //if (compra.Itens)
+                //{
+                    
+                //}
                 foreach (var item in compra.Itens)
                 {
                     VerificaEstoque(item);

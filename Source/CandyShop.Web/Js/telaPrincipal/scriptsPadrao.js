@@ -118,6 +118,8 @@ $(document).ready(function () {
 
         listaProdutos.push(produto);
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
+        localStorage.removeItem('listaProdutos');
+
     });
 
     $("#cpf").on("keydown", function () {
