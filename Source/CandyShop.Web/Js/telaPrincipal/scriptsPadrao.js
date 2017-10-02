@@ -120,10 +120,13 @@ $(document).ready(function () {
                 Imagem: imagem
             }
 
+            $("#QtdeInvalida").html("");
             listaProdutos.push(produto);
             localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
         }
-        $("#QtdeInvalida").html("Quantidade deve ser maior que zero!");                        
+        $("#QtdeInvalida").html("Quantidade deve ser maior que zero!");
+        console.log("penis");
+        //$("#modalCarrinho").hide();
     });
 
     $("#cpf").on("keydown", function () {
