@@ -222,7 +222,7 @@ namespace CandyShop.Web.Controllers
         public ActionResult Deslogar()
         {
             Session.Clear();
-            return RedirectToAction("Padrao", "Home");
+            return RedirectToAction("NavBar", "Home");
         }
         #endregion
     }
