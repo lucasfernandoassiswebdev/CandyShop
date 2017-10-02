@@ -26,7 +26,7 @@ namespace CandyShop.Core.Services.Compra
         {
             _compraRepository.BeginTransaction();
             try
-            {                
+            {
                 int valor = 0;
                 var result = _compraRepository.InserirCompra(compra, out valor);
                 if (result == -1)
@@ -36,12 +36,13 @@ namespace CandyShop.Core.Services.Compra
                     return 0;
                 }
 
-                //if (compra.Itens)
-                //{
-                    
-                //}
                 foreach (var item in compra.Itens)
                 {
+                    if (item.QtdeCompra <= 0)
+                    {
+                        _notification.Add("Quantidade do produto nao pode ser zero ou menor");
+                    }
+
                     VerificaEstoque(item);
                     if (_notification.HasNotification())
                     {
@@ -69,9 +70,7 @@ namespace CandyShop.Core.Services.Compra
             var consulta = _produtoRepository.SelecionarDadosProduto(item.Produto.IdProduto);
             var estoque = consulta.QtdeProduto;
             if (item.QtdeCompra > estoque)
-            {
                 _notification.Add($"Quantidade de {consulta.NomeProduto} indisponível no estoque!");
-            }
         }
     }
 }
