@@ -119,6 +119,7 @@ $(document).ready(function () {
         }
         listaProdutos.push(produto);
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
+        localStorage.removeItem('listaProdutos');
     });
 
     //desabilitando botão que adiciona ao carrinho quando houver quantidades inválidas
