@@ -6,10 +6,10 @@ namespace CandyShop.Web.Controllers
     {
         public ActionResult NavBar()
         {
-            if (Session["Login"] == null || Session["Login"].ToString() == "admin")
+            if (Session["Login"] == null)
                 Session["Login"] = "off";
+            Session["TipoDeLogin"] = "User";           
             return View();
         }
-
     }
 }

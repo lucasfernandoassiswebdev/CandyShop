@@ -39,6 +39,7 @@ namespace CandyShop.Repository.Repositorys
                 AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
                 AddParameter("@CpfUsuario", cpf);
                 AddParameter("@Ativo", usuario.Ativo);
+                AddParameter("@Classificacao", usuario.Classificacao);
 
                 ExecuteNonQuery();
             }
@@ -52,6 +53,7 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
             AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
             AddParameter("@Ativo", usuario.Ativo);
+            AddParameter("@Classificacao", usuario.Classificacao);
 
             ExecuteNonQuery();
         }
@@ -76,60 +78,28 @@ namespace CandyShop.Repository.Repositorys
                         SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
                         SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
                         NomeUsuario = reader.ReadAsString("NomeUsuario"),
-                        Ativo = reader.ReadAsString("Ativo")
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Classificacao = reader.ReadAsString("Classificacao")
                     };
             return null;
         }
 
         public IEnumerable<UsuarioDto> ListarUsuario()
         {
-            ExecuteProcedure(Procedures.CSSP_LisUsuario);
-            var retorno = new List<UsuarioDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new UsuarioDto()
-                    {
-                        Cpf = reader.ReadAsString("Cpf"),
-                        SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
-                        SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
-                        NomeUsuario = reader.ReadAsString("NomeUsuario"),
-                        Ativo = reader.ReadAsString("Ativo")
-                    });
-            return retorno;
+            ExecuteProcedure(Procedures.CSSP_LisUsuario);            
+            return Listar();
         }
 
         public IEnumerable<UsuarioDto> ListarUsuarioDivida()
         {
-            ExecuteProcedure(Procedures.CSSP_SelUsuariosDivida);
-            var retorno = new List<UsuarioDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new UsuarioDto()
-                    {
-                        Cpf = reader.ReadAsString("Cpf"),
-                        SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
-                        SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
-                        NomeUsuario = reader.ReadAsString("NomeUsuario"),
-                        Ativo = reader.ReadAsString("Ativo")
-                    });
-            return retorno;
+            ExecuteProcedure(Procedures.CSSP_SelUsuariosDivida);           
+            return Listar();
         }
 
         public IEnumerable<UsuarioDto> ListarUsuarioInativo()
         {
-            ExecuteProcedure(Procedures.CSSP_ListarUsuariosInativos);
-            var retorno = new List<UsuarioDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new UsuarioDto()
-                    {
-                        Cpf = reader.ReadAsString("Cpf"),
-                        SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
-                        SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
-                        NomeUsuario = reader.ReadAsString("NomeUsuario"),
-                        Ativo = reader.ReadAsString("Ativo")
-                    });
-            return retorno;
+            ExecuteProcedure(Procedures.CSSP_ListarUsuariosInativos);            
+            return Listar();
         }
 
         public UsuarioDto SelecionarDadosUsuario(string cpf)
@@ -145,7 +115,8 @@ namespace CandyShop.Repository.Repositorys
                         SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
                         SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
                         NomeUsuario = reader.ReadAsString("NomeUsuario"),
-                        Ativo = reader.ReadAsString("Ativo")
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Classificacao = reader.ReadAsString("Classificacao")
                     };
             return retorno;
         }
@@ -165,18 +136,7 @@ namespace CandyShop.Repository.Repositorys
         {
             ExecuteProcedure(Procedures.CSSP_LisUsuarioPorNome);
             AddParameter("@NomeUsuario", nome);
-            var retorno = new List<UsuarioDto>();
-            using (var reader = ExecuteReader())
-                while (reader.Read())
-                    retorno.Add(new UsuarioDto
-                    {
-                        Cpf = reader.ReadAsString("Cpf"),
-                        SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
-                        SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
-                        NomeUsuario = reader.ReadAsString("NomeUsuario"),
-                        Ativo = reader.ReadAsString("Ativo")
-                    });
-            return retorno;
+            return Listar();
         }
 
         public int VerificaLogin(UsuarioDto usuario)
@@ -197,6 +157,23 @@ namespace CandyShop.Repository.Repositorys
                 if (reader.Read())
                     return reader.ReadAsDecimal("saldo");
             return 0;
+        }
+
+        private IEnumerable<UsuarioDto> Listar()
+        {
+            var retorno = new List<UsuarioDto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new UsuarioDto
+                    {
+                        Cpf = reader.ReadAsString("Cpf"),
+                        SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
+                        SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
+                        NomeUsuario = reader.ReadAsString("NomeUsuario"),
+                        Ativo = reader.ReadAsString("Ativo"),
+                        Classificacao = reader.ReadAsString("Classificacao")
+                    });
+            return retorno;
         }
     }
 }

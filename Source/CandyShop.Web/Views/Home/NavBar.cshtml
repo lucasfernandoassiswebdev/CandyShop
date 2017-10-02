@@ -43,7 +43,10 @@
             historicoCompra: '@Url.Action("ListarCpf", "Compra")',
             detalheCompra: '@Url.Action("Detalhes", "Compra")',
             navbar: '@Url.Action("NavBar", "Home")'
-    });
+        });
+        AjaxJsShop.init({
+            administracao: '@Url.Action("Index", "Admin")'
+        });
     });
 </script>
 
@@ -135,14 +138,7 @@
     </div>
 </div>
 
-<!--barra de navegação-->
-<ul id="dropdownMenu" class="dropdown-content">
-    <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
-    <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Efetuar Pagamentos</a></li>
-    <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico de Compra</a></li>
-    <li class="divider"></li>
-    <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
-</ul>
+
 <ul id="dropdownFiltro" class="dropdown-content">
     <li><a href="#!" onclick="AjaxJsProduto.listaProduto(); ">Todos</a></li>
     <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Amendoins')">Amendoins</a></li>
@@ -153,12 +149,27 @@
     <li><a href="#!" onclick="AjaxJsProduto.listaCategoria('Salgadinhos')">Salgadinhos</a></li>
 </ul>
 
-@if (Session["Login"].ToString() != "off")
+@if (!Session["Login"].ToString().Equals("off"))
 {
     <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <a href="#!" class="brand-logo right" onclick="AjaxJsProduto.listaProduto();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
+            
+            
+            <!--barra de navegação-->
+            <ul id="dropdownMenu" class="dropdown-content">
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Efetuar Pagamentos</a></li>
+                <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico de Compra</a></li>
+                <li class="divider"></li>               
+                @if (Session["classificacao"].ToString().Equals("A"))
+                {
+                    <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">book</i>Administrativo</a></li>
+                    <li class="divider"></li>
+                }
+                <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
+            </ul>
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdownMenu">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -189,6 +200,11 @@
                 <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Historico de Compra</a></li>
                 <li class="divider"></li>
+                @if (Session["classificacao"].ToString().Equals("A"))
+                {
+                    <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">find_in_page</i>Administrativo</a></li>
+                    <li class="divider"></li>    
+                }                
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
         </div>
@@ -251,6 +267,7 @@ else
         </div>
     </nav>
 }
+
 
 <div id="DivGrid"></div>
 

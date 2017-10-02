@@ -6,10 +6,8 @@ namespace CandyShop.Web.Controllers
     {
         public ActionResult Index()
         {
-            //if (Session["Login"].ToString() == "off")
-            Session["Login"] = "admin";
+            Session["TipoDeLogin"] = "Admin";
             return View();
-        }
-        
+        }        
     }
 }

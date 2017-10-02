@@ -285,4 +285,3 @@ CREATE PROCEDURE [dbo].[CSSP_SelPagamento]
 GO
 
 
-select * from Pagamento

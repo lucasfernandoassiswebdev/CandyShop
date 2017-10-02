@@ -104,7 +104,7 @@ namespace CandyShop.Web.Controllers
         }
         #endregion
 
-        #region execucoes
+        #region EXECUCOES
         [HttpPost]
         public ActionResult Cadastrar(UsuarioViewModel usuario)
         {
@@ -208,12 +208,13 @@ namespace CandyShop.Web.Controllers
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
             var user = _appUsuario.SelecionarUsuario(cpf);
             if(user.Status != HttpStatusCode.OK)
-                return Content("Erro ao resgatar dados");           
+                return Content("Erro ao resgatar dados");
 
+            Session["classificacao"] = user.Content.Classificacao;
             Session["nomeUsuario"] = user.Content.NomeUsuario;
             Session["saldoUsuario"] = user.Content.SaldoUsuario;            
-
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
+
             return RedirectToAction("NavBar", "Home");
         }
 

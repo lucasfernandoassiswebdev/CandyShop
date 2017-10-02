@@ -32,6 +32,7 @@ function readURL(input) {
 $(document).ready(function () {
     $('input').characterCounter();
     $('.tooltipped').tooltip({ delay: 50 });
+    $('select').material_select();
 
     $('#Nome, #SaldoUsuario, #Password').on('keydown', function () {
         validaBotao();

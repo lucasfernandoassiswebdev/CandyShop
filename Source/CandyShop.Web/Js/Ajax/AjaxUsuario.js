@@ -24,7 +24,8 @@
         var usuario = {
             Cpf: $('#cpf').val(),
             NomeUsuario: $('#Nome').val(),
-            Imagem: imgBase64
+            Imagem: imgBase64,
+            Classificacao: $('#Classificacao').val()
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
@@ -35,7 +36,8 @@
             SaldoUsuario: $('#SaldoUsuario').val(),
             SenhaUsuario: $('#Password').val(),
             Ativo: $('#Ativo').val(),
-            Imagem: imgBase64
+            Imagem: imgBase64,
+            Classificacao: $('#Classificacao').val()
         };
         concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };

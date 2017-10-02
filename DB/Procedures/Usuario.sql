@@ -10,9 +10,10 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	@SenhaUsuario varchar(12) = 'password',
 	@SaldoUsuario decimal(18,2) = 0,
 	@CpfUsuario varchar(14),
-	@Ativo varchar(1) = 'A'
+	@Ativo varchar(1) = 'A',
+	@Classificacao varchar(1)
 	AS
-
+	
 	/*
 	Documenta��o
 	Arquivo Fonte.....: Usuario.sql
@@ -28,8 +29,8 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	*/
 	
 	BEGIN
-		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario,Ativo)
-			VALUES (@CpfUsuario,@NomeUsuario,@SenhaUsuario,@SaldoUsuario,@Ativo)		
+		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario,Ativo, Classificacao)
+			VALUES (@CpfUsuario,@NomeUsuario,@SenhaUsuario,@SaldoUsuario,@Ativo, @Classificacao)		
 			
 				IF @@ERROR <> 0
 					RETURN 1
@@ -75,7 +76,8 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 	@NomeUsuario varchar(50),
 	@SenhaUsuario varchar(12),
 	@SaldoUsuario decimal,
-	@Ativo varchar(1)
+	@Ativo varchar(1),
+	@Classificacao varchar(1)
 	AS
 
 	/*
@@ -93,7 +95,8 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 			SET NomeUsuario = @NomeUsuario,
 				SenhaUsuario = @SenhaUsuario,
 				SaldoUsuario = @SaldoUsuario,
-				Ativo = @Ativo
+				Ativo = @Ativo,
+				Classificacao = @Classificacao
 				WHERE Cpf = @Cpf
 
 				IF @@ERROR <> 0 
@@ -153,7 +156,8 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 				SenhaUsuario,
 				SaldoUsuario,
 				NomeUsuario,
-				Ativo
+				Ativo,
+				Classificacao
 				FROM [dbo].[Usuario]
 				WHERE Ativo = 'A'
 				ORDER BY NomeUsuario
@@ -184,7 +188,8 @@ CREATE PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 				SenhaUsuario,
 				SaldoUsuario,
 				NomeUsuario,
-				Ativo
+				Ativo,
+				Classificacao
 				FROM [dbo].[Usuario]
 				WHERE Ativo = 'I'
 	END
@@ -213,7 +218,8 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 				SenhaUsuario,
 				SaldoUsuario,
 				NomeUsuario,
-				Ativo
+				Ativo,
+				Classificacao
 			FROM [dbo].[Usuario]
 			WHERE SaldoUsuario < 0 AND Ativo = 'A'
 	END
@@ -261,7 +267,12 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuarioPorNome]
 	Ex................: EXEC [dbo].[CSSP_LisUsuarioPorNome]
 	*/	
 	BEGIN
-		SELECT * 
+		SELECT Cpf,
+				SenhaUsuario,
+				SaldoUsuario,
+				NomeUsuario,
+				Ativo,
+				Classificacao 
 			FROM [dbo].[Usuario] WITH(NOLOCK)
 			WHERE NomeUsuario LIKE '%' + @NomeUsuario + '%' AND Ativo = 'A'
 	END

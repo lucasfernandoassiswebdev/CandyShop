@@ -8,5 +8,6 @@
         public decimal SaldoUsuario { get; set; }
         public string Ativo { get; set; }
         public string Imagem { get; set; }
+        public string Classificacao { get; set; }
     }
 }

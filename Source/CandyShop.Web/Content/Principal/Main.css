@@ -196,3 +196,7 @@ h3 {
 .divider {
 	background-color: rgb(236, 64, 122);
 }
+
+#dropdownMenu {
+    width: 335px !important;
+}

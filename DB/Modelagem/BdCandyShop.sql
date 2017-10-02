@@ -16,8 +16,11 @@ CREATE TABLE Usuario (
 	NomeUsuario varchar(50),
 	SenhaUsuario varchar(12),
 	SaldoUsuario decimal,
-	Ativo varchar(1)
+	Ativo varchar(1),
+	Classificacao varchar(1)		--Por padrão =>	'A' -> Admin______'U' -> Usuario
 )
+select * from usuario
+alter table usuario add Classificacao varchar(1)
 
 CREATE TABLE Pagamento (
 	IdPagamento int constraint PK_IdPagamento primary key identity (1,1),

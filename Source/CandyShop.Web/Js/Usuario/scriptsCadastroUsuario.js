@@ -29,6 +29,7 @@ function readURL(input) {
 $(document).ready(function () {
     $('input').characterCounter();
     $('.tooltipped').tooltip({ delay: 50 });
+    $('select').material_select();
 
     $('#cpf').on('keydown', function () {
         mcpf($('#cpf').val());

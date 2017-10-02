@@ -7,6 +7,7 @@
         public string SenhaUsuario { get; set; }
         public decimal SaldoUsuario { get; set; }
         public string Ativo { get; set; }
+        public string Classificacao { get; set; }
 
 
         /* As linhas de codigo abaixo é onde fica todas as verificações de usuario como 
@@ -20,7 +21,9 @@
             if (string.IsNullOrEmpty(SenhaUsuario.Trim()) || SenhaUsuario.Length > 12)
                 notification.Add("Senha invalida");
             if (string.IsNullOrEmpty(Ativo))
-                notification.Add("Status do usuario nao pode ser nulo");                
+                notification.Add("Status do usuario nao pode ser nulo");          
+            if(string.IsNullOrEmpty(Classificacao.Trim()) || Classificacao.Length > 1)
+                notification.Add("Classificacao irregular");      
 
             return !notification.HasNotification();
         }
