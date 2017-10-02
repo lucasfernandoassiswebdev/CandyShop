@@ -3,7 +3,7 @@
 //e do nosso ego e auto-estima
 //(no fundo ele ainda tem coração, mas gosta de pinto)
 
-var imagem, preco, nome, imagem, quantidade, quantidadeDisponivel, Id;
+var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id;
 var listaProdutos = [];
 
 $(document).ready(function () {
@@ -65,7 +65,7 @@ $(document).ready(function () {
                                 html: "mode_edit",
                                 "class": "material-icons"
                             }).on("click", function () {
-                                $("#modalQuantidade").data("index", $(this).closest("li").index());                                
+                                $("#modalQuantidade").data("index", $(this).closest("li").index());
                             })
                         ]
                     })
@@ -77,6 +77,53 @@ $(document).ready(function () {
 
     //adicionando os itens no carrinho
     $("#adicionaCarrinho").off("click").on("click", function () {
+        $("div[class='collection']").append($("<li>",
+            {
+                html: [
+                    $("<img>", { src: imagem, class: "circle", style: "max-width:100px;margin-top:-1.1%" }),
+                    $("<span>",
+                        {
+                            html: nome,
+                            "class": "title",
+                            "data-Id": Id
+                        }),
+                    $("<p>",
+                        {
+                            html: "Quantidade: " + quantidade,
+                            "data-Quantidade": quantidade
+                        }),
+                    $("<a>",
+                        {
+                            href: "#modalEditarQuantidade",
+                            'class': "modal-close modal-trigger secondary-content",
+                            "data-quantidadeDisponivel": quantidadeDisponivel,
+                            html: [
+                                $("<i>",
+                                    {
+                                        html: "mode_edit",
+                                        "class": "material-icons"
+                                    }).on("click",
+                                    function () {
+                                        $("#modalEditarQuantidade").data("index", $(this).closest("li").index());
+                                    })
+                            ]
+                        })
+                ],
+                "class": "collection-item avatar"
+            }));
+        var produto = {
+            Id: Id,
+            Nome: nome,
+            Quantidade: quantidade,
+            Imagem: imagem
+        }
+        listaProdutos.push(produto);
+        localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
+        localStorage.removeItem('listaProdutos');
+    });
+
+    //desabilitando botão que adiciona ao carrinho quando houver quantidades inválidas
+    $('#quantidade').on('blur', function () {
         quantidade = $("#quantidade").val();
         console.log(quantidade);
         if (quantidade > 0 && quantidade != null) {
@@ -107,7 +154,7 @@ $(document).ready(function () {
                                             html: "mode_edit",
                                             "class": "material-icons"
                                         }).on("click",
-                                        function() {
+                                        function () {
                                             $("#modalEditarQuantidade").data("index", $(this).closest("li").index());
                                         })
                                 ]
@@ -125,15 +172,51 @@ $(document).ready(function () {
 
             localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
             $('#modalCarrinho').closest(function () {
-                    console.log("penis");
-                    $('#modalCarrinho').show();
-                });
+                console.log("penis");
+                $('#modalCarrinho').show();
+            });
         } else {
             console.log("else");
             $("#QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-        }                        
+        }
+
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#adicionaCarrinho').attr('disabled', 'disabled');
+        } else {
+            $('#adicionaCarrinho').removeAttr('disabled');
+        }
+    });
+    $('#quantidade').on('keydown', function () {
+        quantidade = $("#quantidade").val();
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#adicionaCarrinho').attr('disabled', 'disabled');
+        } else {
+            $('#adicionaCarrinho').removeAttr('disabled');
+        }
+    });
+    //desabilitando no modal de editar a quantidade
+    $('#quantidadeEdit').on('blur', function () {
+        quantidade = $("#quantidadeEdit").val();
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#editarQuantidade').attr('disabled', 'disabled');
+        } else {
+            $('#editarQuantidade').removeAttr('disabled');
+        }
+    });
+    $('#quantidadeEdit').on('keydown', function () {
+        quantidade = $("#quantidadeEdit").val();
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#editarQuantidade').attr('disabled', 'disabled');
+        } else {
+            $('#editarQuantidade').removeAttr('disabled');
+        }
     });
 
+    //validando campo de CPF
     $("#cpf").on("keydown", function () {
         mcpf($("#cpf").val());
     });

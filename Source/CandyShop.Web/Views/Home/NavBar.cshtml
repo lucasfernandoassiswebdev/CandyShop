@@ -56,30 +56,34 @@
 <div id="modalQuantidade" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
         <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
-        <h3 class="pink-text lighten-1">Quantidade</h3>
-        <p class="pink-text center"></p>
+        <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
+        <p class="pink-text center identQuant"></p>
         <form class="center">
             <input type="number" id="quantidade" class="center identQuant" autocomplete="off" />
-            <span id="QtdeInvalida" color="red"></span>
+            <span class="QtdeInvalida" color="red"></span>
         </form>
     </div>
     <div class="modal-footer">
         <a id="adicionaCarrinho" class="@*modal-trigger*@ waves-effect waves-green btn-flat pink-text @*modal-close*@" style="font-weight: bold">Confirma</a>
     </div>
+    @*<div class="modal-footer identQuant">
+        <a id="adicionaCarrinho" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
+    </div>*@
 </div>
 
 <!--modal de editar quantidade-->
 <div id="modalEditarQuantidade" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
         <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
-        <h3 class="pink-text lighten-1">Quantidade</h3>
-        <p class="pink-text center"></p>
+        <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
+        <p class="pink-text center identQuant"></p>
         <form class="center">
-            <input type="number" id="quantidadeEdit" class="center" autocomplete="off" />
+            <input type="number" id="quantidadeEdit" class="center identQuant" autocomplete="off" />
+            <span class="QtdeInvalida" color="red"></span>
         </form>
     </div>
-    <div class="modal-footer">
-        <a id="editarQuantidade" href="#modalCarrinho" class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
+    <div class="modal-footer identQuant">
+        <a id="editarQuantidade" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
     </div>
 </div>
 
@@ -87,12 +91,12 @@
 <div id="modalCarrinho" class="modal">
     <div class="modal-content center">
         <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
-        <h3 class="pink-text" style="font-weight: bold">Carrinho</h3>
-        <div class="collection">
+        <h3 class="pink-text identQuant" style="font-weight: bold">Carrinho</h3>
+        <div class="collection identQuant">
 
         </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer identQuant">
         <a href="#!" class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold" onclick="AjaxJsCompra.inserirCompra()">Confirmar compra</a>
         <a href="#!" id="limpar" class="modal-close right modal-action waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Limpar</a>
     </div>
@@ -100,25 +104,25 @@
 
 <!--modal de Login-->
 <div id="modalLogin" class="modal">
-    <div class="modal-content center">
+    <div class="modal-content center identQuant">
         <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
-        <h2 class="pink-text" style="font-weight: bold">Login</h2>
+        <h2 class="pink-text identQuant" style="font-weight: bold">Login</h2>
         <form>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="cpf" type="text" class="validate">
+                    <input id="cpf" type="text" class="validate identQuant">
                     <label for="cpf">CPF</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="senha" type="password" class="validate">
+                    <input id="senha" type="password" class="validate identQuant">
                     <label for="senha">Senha</label>
                 </div>
             </div>
         </form>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer identQuant">
         <a href="#modalLogin" id="logar" class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" onclick="AjaxJsUsuario.verificaLogin()" style="font-weight: bold">Logar</a>
         <a href="#!" id="limpar" class="right modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Cancelar</a>
     </div>
@@ -126,14 +130,14 @@
 
 <!--modal de editar compra-->
 <div id="modalEditarCompra" class="modal">
-    <div class="modal-content center">
+    <div class="modal-content center identQuant">
         <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
-        <h3 class="pink-text lighten-1">Quantidade:</h3>
+        <h3 class="pink-text lighten-1 identQuant">Quantidade:</h3>
         <form class="center">
-            <input type="text" id="quantidadeEdit" class="center" autocomplete="off" />
+            <input type="text" id="quantidadeEdit" class="center identQuant" autocomplete="off" />
         </form>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer identQuant">
         <a href="#!" id="editarQuantidade" class="modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Confirmar</a>
     </div>
 </div>

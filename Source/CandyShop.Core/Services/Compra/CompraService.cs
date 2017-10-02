@@ -41,6 +41,7 @@ namespace CandyShop.Core.Services.Compra
                     if (item.QtdeCompra <= 0)
                     {
                         _notification.Add("Quantidade do produto nao pode ser zero ou menor");
+                        return 0;
                     }
 
                     VerificaEstoque(item);
