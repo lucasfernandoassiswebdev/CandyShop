@@ -57,11 +57,11 @@
         <p class="pink-text center"></p>
         <form class="center">
             <input type="number" id="quantidade" class="center identQuant" autocomplete="off" />
-            <span id="QtdeInvalida" color="red"></span>
+            <span class="QtdeInvalida" color="red"></span>
         </form>
     </div>
     <div class="modal-footer">
-        <a id="adicionaCarrinho" href="#modalCarrinho" class="modal-trigger waves-effect waves-green btn-flat pink-text @*modal-close*@" style="font-weight: bold">Confirma</a>
+        <a id="adicionaCarrinho" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
     </div>
 </div>
 
@@ -73,10 +73,11 @@
         <p class="pink-text center"></p>
         <form class="center">
             <input type="number" id="quantidadeEdit" class="center" autocomplete="off" />
+            <span class="QtdeInvalida" color="red"></span>
         </form>
     </div>
     <div class="modal-footer">
-        <a id="editarQuantidade" href="#modalCarrinho" class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
+        <a id="editarQuantidade" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
     </div>
 </div>
 
