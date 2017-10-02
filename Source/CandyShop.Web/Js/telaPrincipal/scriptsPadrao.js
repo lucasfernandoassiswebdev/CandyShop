@@ -78,7 +78,9 @@ $(document).ready(function () {
     //adicionando os itens no carrinho
     $("#adicionaCarrinho").off("click").on("click", function () {
         quantidade = $("#quantidade").val();
-        if (quantidade > 0 || quantidade == null) {
+        console.log(quantidade);
+        if (quantidade > 0 && quantidade != null) {
+            console.log("if");
             $("div[class='collection']").append($("<li>",
                 {
                     html: [
@@ -106,7 +108,7 @@ $(document).ready(function () {
                                             "class": "material-icons"
                                         }).on("click",
                                         function() {
-                                            $("#modalEditarQuantidade").data("index", $(this).closest("li").index());                                            
+                                            $("#modalEditarQuantidade").data("index", $(this).closest("li").index());
                                         })
                                 ]
                             })
@@ -118,13 +120,18 @@ $(document).ready(function () {
                 Nome: nome,
                 Quantidade: quantidade,
                 Imagem: imagem
-            }                                                           
+            }
             listaProdutos.push(produto);
+
             localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
-        }
-        //$("#QtdeInvalida").html("Quantidade deve ser maior que zero!");
-        $("#QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);        
-        //$("#modalCarrinho").hide();
+            $('#modalCarrinho').closest(function () {
+                    console.log("penis");
+                    $('#modalCarrinho').show();
+                });
+        } else {
+            console.log("else");
+            $("#QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+        }                        
     });
 
     $("#cpf").on("keydown", function () {
