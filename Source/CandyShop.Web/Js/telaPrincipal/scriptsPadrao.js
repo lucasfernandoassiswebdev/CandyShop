@@ -123,6 +123,7 @@ $(document).ready(function () {
             $("#QtdeInvalida").html("");
             listaProdutos.push(produto);
             localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
+          
         }
         $("#QtdeInvalida").html("Quantidade deve ser maior que zero!");
         console.log("penis");
