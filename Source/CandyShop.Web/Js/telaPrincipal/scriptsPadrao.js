@@ -121,7 +121,7 @@ $(document).ready(function () {
             }                                                           
             listaProdutos.push(produto);
             localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
-          
+            localStorage.removeItem('listaProdutos');
         }
         //$("#QtdeInvalida").html("Quantidade deve ser maior que zero!");
         $("#QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);        
