@@ -65,7 +65,7 @@ $(document).ready(function () {
                                 html: "mode_edit",
                                 "class": "material-icons"
                             }).on("click", function () {
-                                $("#modalQuantidade").data("index", $(this).closest("li").index());
+                                $("#modalQuantidade").data("index", $(this).closest("li").index());                                
                             })
                         ]
                     })
@@ -78,46 +78,55 @@ $(document).ready(function () {
     //adicionando os itens no carrinho
     $("#adicionaCarrinho").off("click").on("click", function () {
         quantidade = $("#quantidade").val();
-        $("div[class='collection']").append($("<li>", {
-            html: [
-                $("<img>", { src: imagem, class: "circle", style: "max-width:100px;margin-top:-1.1%" }),
-                $("<span>",
-                    {
-                        html: nome,
-                        "class": "title",
-                        "data-Id": Id
-                    }),
-                $("<p>",
-                    {
-                        html: "Quantidade: " + quantidade,
-                        "data-Quantidade": quantidade                        
-                    }),
-                $("<a>", {
-                    href: "#modalEditarQuantidade",
-                    'class': "modal-close modal-trigger secondary-content",
-                    "data-quantidadeDisponivel": quantidadeDisponivel,
+        if (quantidade > 0 || quantidade == null) {
+            $("div[class='collection']").append($("<li>",
+                {
                     html: [
-                        $("<i>", {
-                            html: "mode_edit",
-                            "class": "material-icons"
-                        }).on("click", function () {
-                            $("#modalEditarQuantidade").data("index", $(this).closest("li").index());
-                        })
-                    ]
-                })
-            ],
-            "class": "collection-item avatar"
-        }));
+                        $("<img>", { src: imagem, class: "circle", style: "max-width:100px;margin-top:-1.1%" }),
+                        $("<span>",
+                            {
+                                html: nome,
+                                "class": "title",
+                                "data-Id": Id
+                            }),
+                        $("<p>",
+                            {
+                                html: "Quantidade: " + quantidade,
+                                "data-Quantidade": quantidade
+                            }),
+                        $("<a>",
+                            {
+                                href: "#modalEditarQuantidade",
+                                'class': "modal-close modal-trigger secondary-content",
+                                "data-quantidadeDisponivel": quantidadeDisponivel,
+                                html: [
+                                    $("<i>",
+                                        {
+                                            html: "mode_edit",
+                                            "class": "material-icons"
+                                        }).on("click",
+                                        function() {
+                                            $("#modalEditarQuantidade").data("index", $(this).closest("li").index());                                            
+                                        })
+                                ]
+                            })
+                    ],
+                    "class": "collection-item avatar"
+                }));
+            var produto = {
+                Id: Id,
+                Nome: nome,
+                Quantidade: quantidade,
+                Imagem: imagem
+            }
 
-        var produto = {
-            Id: Id,
-            Nome: nome,
-            Quantidade: quantidade,
-            Imagem: imagem
+            $("#QtdeInvalida").html("");
+            listaProdutos.push(produto);
+            localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
         }
-
-        listaProdutos.push(produto);
-        localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
+        $("#QtdeInvalida").html("Quantidade deve ser maior que zero!");
+        console.log("penis");
+        //$("#modalCarrinho").hide();
     });
 
     $("#cpf").on("keydown", function () {

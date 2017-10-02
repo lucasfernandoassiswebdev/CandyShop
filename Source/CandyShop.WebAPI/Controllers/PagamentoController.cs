@@ -1,6 +1,8 @@
-﻿using CandyShop.Core.Services.Pagamento;
+﻿using CandyShop.Core.Services;
+using CandyShop.Core.Services.Pagamento;
 using CandyShop.Core.Services.Pagamento.Dto;
 using System;
+using System.Net;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
@@ -8,15 +10,22 @@ namespace CandyShop.WebAPI.Controllers
     public class PagamentoController : ApiController
     {
         private readonly IPagamentoRepository _pagamentoRepository;
+        private readonly INotification _notification;
+        private readonly IPagamentoService _pagamentoService;
         
 
-        public PagamentoController(IPagamentoRepository pagamentoRepository)
+        public PagamentoController(IPagamentoRepository pagamentoRepository, INotification notification, IPagamentoService pagamentoService)
         {
-           _pagamentoRepository = pagamentoRepository;
+            _pagamentoRepository = pagamentoRepository;
+            _notification = notification;
+            _pagamentoService = pagamentoService;
         }
 
         public IHttpActionResult Post(PagamentoDto pagamento)
         {
+            _pagamentoService.ValidarPagamento(pagamento);
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
             _pagamentoRepository.InserirPagamento(pagamento);
             return Ok();
         }

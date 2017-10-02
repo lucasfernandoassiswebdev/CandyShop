@@ -30,7 +30,6 @@ namespace CandyShop.WebAPI.Controllers
             var result = _appService.InserirCompra(compra);
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-
             return Ok(result);
         }
 
