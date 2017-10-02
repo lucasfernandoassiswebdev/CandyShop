@@ -12,9 +12,9 @@
 });
 
 $(document).ajaxStart(function () {
-    $("#DivLoad").fadeIn(500);
+    $("#DivLoad").fadeIn(300);
 });
 
 $(document).ajaxStop(function () {
-    $("#DivLoad").fadeOut(500);
+    $("#DivLoad").fadeOut(300);
 });

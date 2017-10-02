@@ -118,14 +118,12 @@ $(document).ready(function () {
                 Nome: nome,
                 Quantidade: quantidade,
                 Imagem: imagem
-            }
-
-            $("#QtdeInvalida").html("");
+            }                                                           
             listaProdutos.push(produto);
             localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
         }
-        $("#QtdeInvalida").html("Quantidade deve ser maior que zero!");
-        console.log("penis");
+        //$("#QtdeInvalida").html("Quantidade deve ser maior que zero!");
+        $("#QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);        
         //$("#modalCarrinho").hide();
     });
 
