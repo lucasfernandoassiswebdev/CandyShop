@@ -27,6 +27,12 @@ namespace CandyShop.Core.Services.Produto
                 return;
             }
 
+            if (string.IsNullOrEmpty(produto.QtdeProduto.ToString()))
+            {
+                _notification.Add("Quantidade do produto nao pode ser nula");
+                return;
+            }
+
             //verificando se já existe um produto com o mesmo nome
             var produtos = _produtoRepository.ListarProdutos();
             foreach (var item in produtos)

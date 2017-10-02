@@ -163,14 +163,12 @@ namespace CandyShop.Web.Controllers
                         {
                             usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
 
-                            //transformando base64 em array de bytes
                             byte[] bytes = System.Convert.FromBase64String(usuario.Imagem);
 
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
-                            //montando o nome e caminho de save da imagem
                             usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                            string caminho = $"~/Imagens/Usuario/{usuario.Cpf}.jpg";
+                            string caminho = $"~/Imagens/Usuarios/{usuario.Cpf}.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                         }
