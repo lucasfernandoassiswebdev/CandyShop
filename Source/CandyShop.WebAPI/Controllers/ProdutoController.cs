@@ -28,7 +28,7 @@ namespace CandyShop.WebAPI.Controllers
 
             var result = _produtoRepository.InserirProduto(produto, out int sequencial);
             if (result == -1)
-                return BadRequest("Falha ao inserir o produto");
+                return Content(HttpStatusCode.BadRequest, "[Falha ao inserir o produto]");
             return Ok(sequencial);
         }        
 

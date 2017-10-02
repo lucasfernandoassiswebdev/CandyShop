@@ -24,6 +24,7 @@ namespace CandyShop.WebAPI
             container.Register<IUsuarioService, UsuarioService>();
             container.Register<IProdutoService, ProdutoService>();
             container.Register<IPagamentoRepository, PagamentoRepository>();
+            container.Register<IPagamentoService, PagamentoService>();
             container.Register<IProdutoRepository, ProdutoRepository>();
             container.Register<ICompraRepository, CompraRepository>();
             container.Register<ICompraProdutoRepository, CompraProdutoRepository>();

@@ -100,7 +100,7 @@ namespace CandyShop.Web.Controllers
 
             var response = _appPagamento.InserirPagamento(pagamento);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString.First());
+                return Content("Erro " + response.ContentAsString.First());
             return Content("Pagamento realizado com sucesso!!");
         }        
 
