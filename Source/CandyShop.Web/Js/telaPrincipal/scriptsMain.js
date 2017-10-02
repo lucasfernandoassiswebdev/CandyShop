@@ -11,7 +11,7 @@
         if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") || $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant")) {
             return false;
         }
-
+        
         $("#modalCarrinho").modal("close");
         $("#modalQuantidade").modal("close");
         $("#modalLogin").modal("close");
