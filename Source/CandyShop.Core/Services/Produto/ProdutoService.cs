@@ -12,7 +12,7 @@ namespace CandyShop.Core.Services.Produto
             _notification = notification;
             _produtoRepository = produtoRepository;
         }        
-
+        // Método IsValid on são feitas todas as verificaçoes de produto
         public void IsValid(ProdutoDto produto)
         {
             if (string.IsNullOrEmpty(produto.NomeProduto.Trim()) || produto.NomeProduto.Length > 40)
