@@ -1,0 +1,73 @@
+﻿@model CandyShop.Application.ViewModels.PagamentoViewModel
+@{
+    Layout = null;
+}
+
+<!--plugin para campos monetários-->
+<script type="text/javascript" src="../../Js/plugins/jquery.maskMoney.js"></script>
+<script type="text/javascript" src="../../Js/Pagamento/scriptEditarPagamento.js"></script>
+
+
+<div class="container">
+    <div class="row ajuste">
+        <form class="col s12">
+            <div class="row">
+                <div class="center">
+                    <h2 class="center pink-text" style="font-weight: bold">Editar Produto</h2>
+                </div>
+            </div>
+            <input type="hidden" id="IdPagamento" value="@Model.IdPagamento" />
+           
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="Cpf" name="Cpf" type="text" class="validate " required="" value="@Model.Usuario.Cpf" disabled="disabled">
+                    <label class ="active" for="Cpf">Cpf:</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="Nome" name="Nome" type="text" class="validate " required="" value="@Model.Usuario.NomeUsuario" disabled="disabled">
+                    <label class ="active" for="Nome">Nome:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="valorPago" name="valorPago" type="text" class="validate " required="" value="@Model.ValorPagamento">
+                    <label class ="active" for="valorPago">Valor:</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="DataPagamento" name="DataPagamento" type="datetime" class="validate " required="" value="@Model.DataPagamento" disabled="disabled">
+                    <label class ="active" for="Nome">DataPagamento:</label>
+                </div>
+            </div>
+            <div class="row">
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirEdicaoPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#valorPago').maskMoney({
+            prefix: 'R$ ',
+            allowNegative: true,
+            thousands: '.',
+            decimal: ',',
+            affixesStay: false
+        });
+    });
+</script>
+
+
+
+<style>
+    
+    .container {
+        m
+    }
+</style>

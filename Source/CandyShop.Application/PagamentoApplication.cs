@@ -79,12 +79,6 @@ namespace CandyShop.Application
 
         #endregion
 
-
-        public Response<PagamentoViewModel> DetalharPagamento(int idPagamento)
-        {
-            throw new NotImplementedException();
-        }
-
         public Response<string> InserirPagamento(PagamentoViewModel pagamento)
         {
             using (var client = new HttpClient())
@@ -94,6 +88,26 @@ namespace CandyShop.Application
                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) 
                    :new Response<string>(response.StatusCode);
             }
-        }                
+        }
+
+        public Response<string> EditarPagamento(PagamentoViewModel pagamento)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.PutAsync(_enderecoApi, pagamento, new JsonMediaTypeFormatter()).Result;
+                return response.StatusCode != HttpStatusCode.OK
+                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
+                    : new Response<string>(response.StatusCode);
+            }
+        }
+
+        public Response<PagamentoViewModel> SelecionarPagamento(int idPagamento)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApi}/id/{idPagamento}").Result;
+                return new Response<PagamentoViewModel>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
     }
 }

@@ -37,8 +37,7 @@ namespace CandyShop.Repository.Repositorys
         public void EditarPagamento(PagamentoDto pagamento)
         {
             ExecuteProcedure(Procedures.CSSP_UpdPagamento);
-            AddParameter("@IdPagamento", pagamento.IdPagamento);
-            AddParameter("@DataPagamento", pagamento.DataPagamento);
+            AddParameter("@IdPagamento", pagamento.IdPagamento);            
             AddParameter("@ValorPagamento", pagamento.ValorPagamento);
 
             ExecuteNonQuery();
@@ -68,12 +67,13 @@ namespace CandyShop.Repository.Repositorys
                 if (reader.Read())
                     retorno = new PagamentoDto
                     {
-                        DataPagamento = reader.ReadAsDateTime("DataPagamento"),
                         IdPagamento = reader.ReadAsInt("IdPagamento"),
+                        DataPagamento = reader.ReadAsDateTime("DataPagamento"),                        
                         ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
                         Usuario = new UsuarioDto
                         {
-                            Cpf = reader.ReadAsString("Cpf")
+                            Cpf = reader.ReadAsString("Cpf"),
+                            NomeUsuario = reader.ReadAsString("NomeUsuario")
                         }
                     };
             return retorno;

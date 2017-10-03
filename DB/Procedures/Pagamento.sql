@@ -220,7 +220,7 @@ CREATE PROCEDURE [dbo].[CSSP_UpdPagamento]
 		UPDATE [dbo].[Pagamento] 
 			SET	DataPagamento = @DataPagamento,
 				ValorPagamento = @ValorPagamento		
-				WHERE IdPagamento = @IdPagamento
+			WHERE IdPagamento = @IdPagamento
 			
 			IF @@ERROR <> 0 
 				RETURN 1
@@ -278,7 +278,14 @@ CREATE PROCEDURE [dbo].[CSSP_SelPagamento]
 
 	BEGIN
 	
-		SELECT * FROM [dbo].[Pagamento]	WITH(NOLOCK)
+		SELECT	p.IdPagamento,
+				u.Cpf as 'Cpf',
+				u.NomeUsuario as 'NomeUsuario',
+				p.DataPagamento,
+				p.ValorPagamento
+			FROM [dbo].[Pagamento] p	WITH(NOLOCK)
+				INNER JOIN [dbo].[Usuario] u 
+					ON p.Cpf = u.Cpf
 			WHERE IdPagamento = @IdPagamento
 
 	END
