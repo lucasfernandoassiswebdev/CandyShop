@@ -131,6 +131,8 @@ namespace CandyShop.WebAPI.Controllers
             {
                 if (_notification.HasNotification())
                     return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+
+                usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
                 _usuarioRepository.EditarUsuario(usuario);
                 return Ok();
             }

@@ -135,21 +135,6 @@
     </div>
 </div>
 
-<!--modal de editar compra-->
-<div id="modalEditarCompra" class="modal">
-    <div class="modal-content center identQuant">
-        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
-        <h3 class="pink-text lighten-1 identQuant">Quantidade:</h3>
-        <form class="center">
-            <input type="text" id="quantidadeEdit" class="center identQuant" autocomplete="off" />
-        </form>
-    </div>
-    <div class="modal-footer identQuant">
-        <a href="#!" id="editarQuantidade" class="modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Confirmar</a>
-    </div>
-</div>
-
-
 <ul id="dropdownFiltro" class="dropdown-content">
     <li><a href="#!" onclick="AjaxJsShop.voltarInicio(); ">Todos</a></li>
     <li><a href="#!" onclick="AjaxJsShop.listaCategoria('Amendoins')">Amendoins</a></li>
@@ -165,9 +150,7 @@
     <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJsProduto.listaProduto();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
-
-
+            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
             <!--barra de navegação-->
             <ul id="dropdownMenu" class="dropdown-content">
                 <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
