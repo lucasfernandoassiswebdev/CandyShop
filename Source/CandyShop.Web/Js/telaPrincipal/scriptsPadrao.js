@@ -7,6 +7,18 @@ var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id;
 var listaProdutos = [];
 
 $(document).ready(function () {
+    //pesquisa por nome é feita quando se aperta a tecla "enter" na barra de pesquisa
+    $('#search').on('keypress', function (e) {
+        var textoPesquisa = $('#search').val();
+        if (e.which == 13)
+            AjaxJsProduto.listarProdutoPorNome(textoPesquisa);
+    });
+
+    //limpando os inputs
+    $('.modal-close').on('click', function () {
+        $('#quantidade, #quantidadeEdit').val('');
+    });
+
     $(".tooltipped").tooltip({ delay: 50 });
     $(".button-collapse").sideNav();
 
@@ -37,7 +49,7 @@ $(document).ready(function () {
     //adicionando os itens do localstorage no carrinho
     if (localStorage.getItem('listaProdutos') !== null) {
         JSON.parse(localStorage.getItem('listaProdutos')).forEach(function (produto) {
-            $("div[class='collection']").append($("<li>", {
+            $(".collection").append($("<li>", {
                 html: [
                     $("<img>",
                         {
@@ -77,10 +89,10 @@ $(document).ready(function () {
 
     //adicionando os itens no carrinho
     $("#adicionaCarrinho").off("click").on("click", function () {
-        $("div[class='collection']").append($("<li>",
+        $(".collection").append( $("<li>",
             {
                 html: [
-                    $("<img>", { src: imagem, class: "circle", style: "max-width:100px;margin-top:-1.1%" }),
+                    $("<img>", { src: imagem, "class": "circle", style: "max-width:100px;margin-top:-1.1%" }),
                     $("<span>",
                         {
                             html: nome,
@@ -119,77 +131,22 @@ $(document).ready(function () {
         }
         listaProdutos.push(produto);
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
-        localStorage.removeItem('listaProdutos');
     });
 
-    //desabilitando botão que adiciona ao carrinho quando houver quantidades inválidas
-    $('#quantidade').on('blur', function () {
+    //desabilitando botão quando houverem quantidades inválidas
+    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
+    $('#quantidade').on('keydown', function () {
         quantidade = $("#quantidade").val();
-        console.log(quantidade);
-        if (quantidade > 0 && quantidade != null) {
-            console.log("if");
-            $("div[class='collection']").append($("<li>",
-                {
-                    html: [
-                        $("<img>", { src: imagem, class: "circle", style: "max-width:100px;margin-top:-1.1%" }),
-                        $("<span>",
-                            {
-                                html: nome,
-                                "class": "title",
-                                "data-Id": Id
-                            }),
-                        $("<p>",
-                            {
-                                html: "Quantidade: " + quantidade,
-                                "data-Quantidade": quantidade
-                            }),
-                        $("<a>",
-                            {
-                                href: "#modalEditarQuantidade",
-                                'class': "modal-close modal-trigger secondary-content",
-                                "data-quantidadeDisponivel": quantidadeDisponivel,
-                                html: [
-                                    $("<i>",
-                                        {
-                                            html: "mode_edit",
-                                            "class": "material-icons"
-                                        }).on("click",
-                                        function () {
-                                            $("#modalEditarQuantidade").data("index", $(this).closest("li").index());
-                                        })
-                                ]
-                            })
-                    ],
-                    "class": "collection-item avatar"
-                }));
-            var produto = {
-                Id: Id,
-                Nome: nome,
-                Quantidade: quantidade,
-                Imagem: imagem
-            }
-            listaProdutos.push(produto);
-
-            localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
-            $('#modalCarrinho').closest(function () {
-                console.log("penis");
-                $('#modalCarrinho').show();
-            });
-        } else {
-            console.log("else");
-            $("#QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-        }
-
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
             $('#adicionaCarrinho').removeAttr('disabled');
         }
     });
-    $('#quantidade').on('keydown', function () {
+    $('#quantidade').on('blur', function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
@@ -199,7 +156,7 @@ $(document).ready(function () {
     //desabilitando no modal de editar a quantidade
     $('#quantidadeEdit').on('blur', function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
@@ -208,7 +165,7 @@ $(document).ready(function () {
     });
     $('#quantidadeEdit').on('keydown', function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
@@ -216,17 +173,31 @@ $(document).ready(function () {
         }
     });
 
-    //validando campo de CPF
-    $("#cpf").on("keydown", function () {
-        mcpf($("#cpf").val());
+    $('#quantidade, #quantidadeEdit').on('keydown', function() {
+        mNumbers($(this).val());
     });
 
-    $("#cpf").on("blur", function () {
-        if ($("#cpf").val().length > 14) {
-            $("#cpf").val($("#cpf").val().substr(0, 13));
-            $("#cpf").keydown();
+    //limpando o carrinho
+    $("#limpar").on("click", function () {
+        $(".collection li").remove();
+        if (localStorage.getItem("listaProdutos") != null) {
+            localStorage.removeItem("listaProdutos");
         }
     });
+});
+
+
+
+//validando campo de CPF
+$("#cpf").on("keydown", function () {
+    mcpf($("#cpf").val());
+});
+
+$("#cpf").on("blur", function () {
+    if ($("#cpf").val().length > 14) {
+        $("#cpf").val($("#cpf").val().substr(0, 13));
+        $("#cpf").keydown();
+    }
 });
 
 function mcpf(v) {
@@ -235,4 +206,10 @@ function mcpf(v) {
     v = v.replace(/(\d{3})(\d)/, "$1.$2");
     v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     $("#cpf").val(v);
+}
+
+//função que remove caracteres que não sejam numéricos
+function mNumbers(v) {
+    v = v.replace(/\D/g, "");
+    $("#quantidade, #quantidadeEdit").val(v);
 }
