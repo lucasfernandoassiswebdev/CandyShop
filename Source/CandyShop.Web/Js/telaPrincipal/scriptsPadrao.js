@@ -89,7 +89,7 @@ $(document).ready(function () {
 
     //adicionando os itens no carrinho
     $("#adicionaCarrinho").off("click").on("click", function () {
-        $("div[class='collection']").append($("<li>",
+        $(".collection").append( $("<li>",
             {
                 html: [
                     $("<img>", { src: imagem, "class": "circle", style: "max-width:100px;margin-top:-1.1%" }),
@@ -131,7 +131,6 @@ $(document).ready(function () {
         }
         listaProdutos.push(produto);
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
-        localStorage.removeItem('listaProdutos');
     });
 
     //desabilitando botão quando houverem quantidades inválidas
