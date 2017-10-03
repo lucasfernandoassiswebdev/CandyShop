@@ -16,7 +16,6 @@
         $("#modalCarrinho").modal("close");
         $("#modalQuantidade").modal("close");
         $("#modalLogin").modal("close");
-        $("#modalEditarCompra").modal("close");
         $("#modalQuantidade").modal("close");
         $("#modalEditarQuantidade").modal("close");
     });

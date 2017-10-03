@@ -33,8 +33,6 @@ $(document).ready(function () {
 
     //adicionando os itens do localstorage no carrinho
     if (localStorage.getItem('listaProdutos') !== null) {
-        //$('.collection').empty();
-        
         JSON.parse(localStorage.getItem('listaProdutos')).forEach(function (produto) {
             $(".collection").append($("<li>", {
                 html: [
