@@ -177,26 +177,6 @@ $(document).ready(function () {
 
 
 
-//validando campo de CPF
-$("#cpf").on("keydown", function () {
-    mcpf($("#cpf").val());
-});
-
-$("#cpf").on("blur", function () {
-    if ($("#cpf").val().length > 14) {
-        $("#cpf").val($("#cpf").val().substr(0, 13));
-        $("#cpf").keydown();
-    }
-});
-
-function mcpf(v) {
-    v = v.replace(/\D/g, "");
-    v = v.replace(/(\d{3})(\d)/, "$1.$2");
-    v = v.replace(/(\d{3})(\d)/, "$1.$2");
-    v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    $("#cpf").val(v);
-}
-
 //função que remove caracteres que não sejam numéricos
 function mNumbers(v) {
     v = v.replace(/\D/g, "");
