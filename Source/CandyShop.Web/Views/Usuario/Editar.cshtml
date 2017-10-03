@@ -41,9 +41,7 @@
                     <input id="Cpf" name="cpf" type="text" class="validate cpf" value="@Model.Cpf" required data-length="50" autocomplete="off" disabled>
                     <label class="active">CPF:</label>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s4">
+                <div class="input-field col s6">
                     <select name="Classificacao" id="Classificacao">
                         <option value="" disabled>Tipo da conta</option>
                         @if (Model.Classificacao == 'U'.ToString())
@@ -53,9 +51,9 @@
                         }
                         else
                         {
-                            <option value="U" >Usuario</option>
+                            <option value="U">Usuario</option>
                             <option value="A" selected>Administrador</option>
-                        }                                                  
+                        }
                     </select>
                     <label>Tipo de Usuário:</label>
                 </div>
