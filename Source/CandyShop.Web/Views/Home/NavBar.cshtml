@@ -34,8 +34,7 @@
             padrao: '@Url.Action("NavBar", "Home")',            
             listaCategoria: '@Url.Action("ListarCategoria", "Home")',
             listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Home")'
-        });
-
+        });       
         //validando campo de CPF
         $("#cpf").on("keydown", function () {
             mcpf($("#cpf").val());
@@ -47,8 +46,6 @@
                 $("#cpf").keydown();
             }
         });
-
-
     });
 
     function mcpf(v) {
@@ -61,6 +58,7 @@
 </script>
 
 <link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
+<script type="text/javascript" src="../../Js/telaPrincipal/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
 
 <!--modal de quantidade-->
 <div id="modalQuantidade" class="modal" style="z-index: 99999999">
@@ -176,7 +174,7 @@
                     <div class="col s4 hide-on-med-and-down">
                         <div>
                             <div class="input-field">
-                                <input id="search" type="search">
+                                <input id="search" type="search" autocomplete="off">
                                 <label class="label-icon" for="search">
                                     <i class="material-icons">search</i>
                                 </label>
@@ -203,13 +201,13 @@
             </ul>
         </div>
         <div class="nav-content white">
-            <form class="pesquisaMobile">
+            <div class="pesquisaMobile">
                 <div class="input-field">
-                    <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required>
+                    <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required autocomplete="off">
                     <label class="label-icon" for="search"></label>
                     <i class="material-icons black-text">close</i>
                 </div>
-            </form>
+            </div>
         </div>
     </nav>
 }
@@ -229,7 +227,7 @@ else
                     <div class="col s4 hide-on-med-and-down">
                         <div>
                             <div class="input-field">
-                                <input id="search" type="search" required>
+                                <input id="search" type="search" required autocomplete="off">
                                 <label class="label-icon" for="search">
                                     <i class="material-icons">search</i>
                                 </label>
@@ -251,13 +249,13 @@ else
             </ul>
         </div>
         <div class="nav-content white">
-            <form class="pesquisaMobile">
+            <div class="pesquisaMobile">
                 <div class="input-field">
-                    <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required>
+                    <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required autocomplete="off">
                     <label class="label-icon" for="search"></label>
                     <i class="material-icons black-text">close</i>
                 </div>
-            </form>
+            </div>
         </div>
     </nav>
 }
