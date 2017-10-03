@@ -6,14 +6,6 @@
 
 <script>
     $(document).ready(function () {
-        //limpando os inputs
-        $('.modal-close').on('click', function () {
-            $('#quantidade, #quantidadeEdit').val('');
-        });
-
-        $('.tooltipped').tooltip({ delay: 50 });
-        $(".button-collapse").sideNav();
-
         AjaxJsPagamento.init({
             listarPagamento: '@Url.Action("ListarCpf", "Pagamento")',
             inserirPagamento: '@Url.Action("Inserir", "Pagamento")',
@@ -49,6 +41,7 @@
         });
     });
 </script>
+<script type="text/javascript" src="../../Js/telaPrincipal/scriptsPadrao.js"></script>
 
 <link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
 
@@ -63,12 +56,9 @@
             <span class="QtdeInvalida" color="red"></span>
         </form>
     </div>
-    <div class="modal-footer">
-        <a id="adicionaCarrinho" class="@*modal-trigger*@ waves-effect waves-green btn-flat pink-text @*modal-close*@" style="font-weight: bold">Confirma</a>
-    </div>
-    @*<div class="modal-footer identQuant">
+    <div class="modal-footer identQuant">
         <a id="adicionaCarrinho" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
-    </div>*@
+    </div>
 </div>
 
 <!--modal de editar quantidade-->
@@ -159,18 +149,18 @@
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <a href="#!" class="brand-logo right" onclick="AjaxJsProduto.listaProduto();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
-            
-            
+
+
             <!--barra de navegação-->
             <ul id="dropdownMenu" class="dropdown-content">
                 <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Efetuar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico de Compra</a></li>
-                <li class="divider"></li>               
+                <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                    <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">book</i>Administrativo</a></li>
-                    <li class="divider"></li>
+                <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">book</i>Administrativo</a></li>
+                <li class="divider"></li>
                 }
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
@@ -206,9 +196,9 @@
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                    <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">find_in_page</i>Administrativo</a></li>
-                    <li class="divider"></li>    
-                }                
+                <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">find_in_page</i>Administrativo</a></li>
+                <li class="divider"></li>
+                }
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
         </div>
@@ -272,15 +262,4 @@ else
     </nav>
 }
 
-
 <div id="DivGrid"></div>
-
-<script>
-    $(document).ready(function () {
-        $('#search').on('keypress', function (e) {
-            var textoPesquisa = $('#search').val();
-            if (e.which == 13)
-                AjaxJsProduto.listarProdutoPorNome(textoPesquisa);
-        });
-    });
-</script>
