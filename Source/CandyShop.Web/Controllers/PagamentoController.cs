@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
-    public class PagamentoController : Controller
+    public class PagamentoController : AuthController
     {
         private readonly IPagamentoApplication _appPagamento;
 

@@ -3,6 +3,7 @@
 
     var init = function (config) {
         url = config;
+        main(url.main);
     };
 
     var mostraSaldo = function () {
@@ -29,9 +30,53 @@
         });
     }
 
-    var voltarInicio = function () {
-        main(url.main);
+    var verificaLogin = function (callback) {
+        var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
+        $.post(url.verificaLogin, usuario)
+            .done(function (res) {
+                $.get(url.padrao)
+                    .done(function (data) {
+                        $('body').slideUp(function () {
+                            $('body').hide().html(data).slideDown(function () {
+                                if (res !== "1") {
+                                    Materialize.toast("Login feito com sucesso!", 4000);
+                                    if (callback === "function")
+                                        callback();
+                                } else {
+                                    Materialize.toast("Login Incorreto!", 4000);
+                                }
+
+                            });
+                        });
+                    }).fail(function (xhr) {
+                        Materialize.toast(xhr.responseText, 4000);
+                    });
+
+            })
+            .fail(function (xhr) {
+                Materialize.toast(xhr.responseText, 4000);
+            });
     };
+
+    var voltarInicio = function () {        
+        $.get(url.padrao)
+            .done(function (data) {
+                $('body').slideUp(function () {
+                    $('body').hide().html(data).slideDown();
+                });
+            }).fail(function (xhr) {
+                Materialize.toast(xhr.responseText, 4000);
+        });            
+    };
+
+    var listarProdutoPorNome = function (nome) {
+        var produto = { Nome: nome };
+        chamaPaginaComIdentificador(url.listarProdutoPorNome, produto);
+    };
+
+    var listaCategoria = function (categoria) {
+        chamaPaginaComIdentificador(url.listaCategoria, { categoria: categoria });
+    }
 
     //função que vai carregar o corpo inteiro da pagina    
 
@@ -40,6 +85,9 @@
         mostraSaldo: mostraSaldo,
         voltarInicio: voltarInicio,
         administracao: administracao,
+        verificaLogin: verificaLogin,
+        listarProdutoPorNome: listarProdutoPorNome,
+        listaCategoria: listaCategoria,
         loja: loja
     }
 })(jQuery);

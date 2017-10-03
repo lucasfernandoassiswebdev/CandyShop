@@ -61,33 +61,7 @@
         var usuario = { Nome: $('#nomeUsuario').val() };
         chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
     };
-    var verificaLogin = function (callback) {
-        var usuario = { Cpf: $('#cpf').val(), SenhaUsuario: $('#senha').val() };
-        $.post(url.verificaLogin, usuario)
-            .done(function (res) {                 
-                    $.get(url.padrao)
-                        .done(function (data) {
-                            $('body').slideUp(function () {
-                                $('body').hide().html(data).slideDown(function () {
-                                    if (res !== "1") {
-                                        Materialize.toast("Login feito com sucesso!", 4000);
-                                        if (callback === "function")
-                                            callback();    
-                                    } else {
-                                        Materialize.toast("Login Incorreto!", 4000);
-                                    }
-                                    
-                                });
-                            });
-                        }).fail(function (xhr) {
-                            Materialize.toast(xhr.responseText, 4000);
-                        });                
-
-            })
-            .fail(function (xhr) {
-                Materialize.toast(xhr.responseText, 3000);
-            });
-    };
+    
     var logOff = function () {
         $.get(url.logOff).done(function (data) {
             $('body').slideUp(function () {
@@ -113,8 +87,7 @@
         desativarUsuarioConfirmado: desativarUsuarioConfirmado,
         listarUsuarioInativo: listarUsuarioInativo,
         listarUsuarioEmDivida: listarUsuarioEmDivida,
-        listarUsuarioPorNome: listarUsuarioPorNome,
-        verificaLogin: verificaLogin,
+        listarUsuarioPorNome: listarUsuarioPorNome,        
         logOff: logOff
     }
 })(jQuery);

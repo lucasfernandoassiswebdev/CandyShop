@@ -3,9 +3,7 @@
 
     // Lista de objetos que guarda o nome e o endereco da pagina, sã carregados na pagina padrao
     var init = function (config) {
-        url = config;
-
-        main(url.main);
+        url = config;        
     };
 
     var listaProduto = function () {
@@ -59,8 +57,8 @@
     var listarInativos = function () {
         chamaPagina(url.listarInativos);
     };
-    var listarProdutoPorNome = function (produto) {        
-        var produto = { Nome: produto };
+    var listarProdutoPorNome = function (nome) {        
+        var produto = { Nome: nome };
         chamaPaginaComIdentificador(url.listarProdutoPorNome, produto);
     };
 

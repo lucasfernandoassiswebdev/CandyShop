@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
-    public class CompraController : Controller
+    public class CompraController : AuthController
     {
         private readonly ICompraApplication _appCompra;
 

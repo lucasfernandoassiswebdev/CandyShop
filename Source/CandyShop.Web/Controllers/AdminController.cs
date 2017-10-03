@@ -2,7 +2,7 @@
 
 namespace CandyShop.Web.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : AuthController
     {
         public ActionResult Index()
         {

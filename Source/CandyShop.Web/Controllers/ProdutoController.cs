@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
-    public class ProdutoController : Controller
+    public class ProdutoController : AuthController
     {
         private readonly IProdutoApplication _appProduto;
 
@@ -24,12 +24,7 @@ namespace CandyShop.Web.Controllers
         public ActionResult ListaProdutos()
         {
             return View();
-        }
-
-        public ActionResult GridProdutos()
-        {
-            return View();
-        }
+        }        
 
         public ActionResult CadastrarProduto()
         {
@@ -71,11 +66,8 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
 
-            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
-
-            if (Session["TipoDeLogin"].ToString().Equals("Admin"))
-                return View("ListaProdutos", response.Content);
-            return View("GridProdutos", response.Content);
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";            
+            return View("ListaProdutos", response.Content);            
         }
 
         public ActionResult ListarInativos()
@@ -83,6 +75,7 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.ListarInativos();
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro {response.ContentAsString.First()}");
+
             return View("ListaProdutos", response.Content);
         }
 
@@ -92,10 +85,8 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
-            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
-            if (Session["TipoDeLogin"].ToString().Equals("Admin"))
-                return View("ListaProdutos", response.Content);
-            return View("GridProdutos", response.Content);
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";            
+            return View("ListaProdutos", response.Content);            
         }
 
         public ActionResult ListarCategoria(string categoria)
@@ -105,7 +96,7 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro: {response.Status}");
 
             TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
-            return View("GridProdutos", response.Content);
+            return View("ListaProdutos", response.Content);
         }
 
         #endregion
