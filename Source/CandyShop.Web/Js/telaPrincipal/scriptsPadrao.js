@@ -49,7 +49,7 @@ $(document).ready(function () {
     //adicionando os itens do localstorage no carrinho
     if (localStorage.getItem('listaProdutos') !== null) {
         JSON.parse(localStorage.getItem('listaProdutos')).forEach(function (produto) {
-            $("div[class='collection']").append($("<li>", {
+            $(".collection").append($("<li>", {
                 html: [
                     $("<img>",
                         {
@@ -134,9 +134,10 @@ $(document).ready(function () {
     });
 
     //desabilitando botão quando houverem quantidades inválidas
+    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
     $('#quantidade').on('keydown', function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
@@ -145,7 +146,7 @@ $(document).ready(function () {
     });
     $('#quantidade').on('blur', function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
@@ -155,7 +156,7 @@ $(document).ready(function () {
     //desabilitando no modal de editar a quantidade
     $('#quantidadeEdit').on('blur', function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
@@ -164,11 +165,23 @@ $(document).ready(function () {
     });
     $('#quantidadeEdit').on('keydown', function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined') {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
             $('#editarQuantidade').removeAttr('disabled');
+        }
+    });
+
+    $('#quantidade, #quantidadeEdit').on('keydown', function() {
+        mNumbers($(this).val());
+    });
+
+    //limpando o carrinho
+    $("#limpar").on("click", function () {
+        $(".collection li").remove();
+        if (localStorage.getItem("listaProdutos") != null) {
+            localStorage.removeItem("listaProdutos");
         }
     });
 });
@@ -193,4 +206,10 @@ function mcpf(v) {
     v = v.replace(/(\d{3})(\d)/, "$1.$2");
     v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     $("#cpf").val(v);
+}
+
+//função que remove caracteres que não sejam numéricos
+function mNumbers(v) {
+    v = v.replace(/\D/g, "");
+    $("#quantidade, #quantidadeEdit").val(v);
 }
