@@ -259,7 +259,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Produto\GridProdutos.cshtml" />
+    <Content Include="Views\Home\GridProdutos.cshtml" />
     <Content Include="Views\Home\NavBar.cshtml" />
     <Content Include="Views\Pagamento\Index.cshtml" />
     <Content Include="Views\Compra\Index.cshtml" />

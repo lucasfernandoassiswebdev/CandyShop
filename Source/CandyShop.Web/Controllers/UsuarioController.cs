@@ -10,7 +10,7 @@ using Image = System.Drawing.Image;
 
 namespace CandyShop.Web.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : AuthController
     {
         private readonly IUsuarioApplication _appUsuario;
 
@@ -189,34 +189,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro {response.Status}");
             return Content("Usuario desativado com sucesso!");
-        }
-
-        [HttpPost]
-        public ActionResult Logar(UsuarioViewModel usuario)
-        {
-            var response = _appUsuario.VerificaLogin(usuario);
-            if (!response.IsSuccessStatusCode)
-                return Content("1"); //Content("CPF ou senha incorretos!");
-
-            var model = JsonConvert.DeserializeObject<int>(response.Content.ReadAsStringAsync().Result);
-
-            if (model != 1)
-            {
-                return Content("1");
-            }
-
-            var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-            var user = _appUsuario.SelecionarUsuario(cpf);
-            if(user.Status != HttpStatusCode.OK)
-                return Content("Erro ao resgatar dados");
-
-            Session["classificacao"] = user.Content.Classificacao;
-            Session["nomeUsuario"] = user.Content.NomeUsuario;
-            Session["saldoUsuario"] = user.Content.SaldoUsuario;            
-            Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
-
-            return RedirectToAction("NavBar", "Home");
-        }
+        }        
 
         public ActionResult Deslogar()
         {

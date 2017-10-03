@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
-    public class ShopController : Controller
+    public class ShopController : AuthController
     {
         private readonly IUsuarioApplication _appUsuario;
 
