@@ -69,7 +69,9 @@ $(document).ready(function () {
                 ],
                 "class": "collection-item avatar"
             }));
+
         });
+        localStorage.removeItem('listaProdutos');
     }
 
     //adicionando os itens no carrinho
