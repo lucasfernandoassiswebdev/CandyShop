@@ -1,6 +1,8 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.CompraProduto.Dto;
+using System;
+using System.Net;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
@@ -36,20 +38,41 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Get()
         {
-            return Ok(_compraProdutoRepository.ListarCompraProduto());
+            try
+            {
+                return Ok(_compraProdutoRepository.ListarCompraProduto());
+
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         public IHttpActionResult Get(int id)
         {
-            return Ok(_compraProdutoRepository.ListarCompraProdutoIdVenda(id));
+            try
+            {
+                return Ok(_compraProdutoRepository.ListarCompraProdutoIdVenda(id));
+
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         public IHttpActionResult Put(CompraProdutoDto compraProduto)
         {
-            _compraProdutoRepository.EditarCompraProduto(compraProduto);
-            return Ok();
+            try
+            {
+                _compraProdutoRepository.EditarCompraProduto(compraProduto);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
-
-        
     }
 }
