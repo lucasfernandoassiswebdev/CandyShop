@@ -58,6 +58,7 @@
 </script>
 
 <link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
+<script type="text/javascript" src="../../Js/telaPrincipal/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
 
 <!--modal de quantidade-->
 <div id="modalQuantidade" class="modal" style="z-index: 99999999">
@@ -148,10 +149,6 @@
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
-<<<<<<< HEAD
-            
-=======
->>>>>>> 79ac5a4740f7a87dfd34529364a7f76d6e83f15f
             <!--barra de navegação-->
             <ul id="dropdownMenu" class="dropdown-content">
                 <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
@@ -177,7 +174,7 @@
                     <div class="col s4 hide-on-med-and-down">
                         <div>
                             <div class="input-field">
-                                <input id="search" type="search">
+                                <input id="search" type="search" autocomplete="off">
                                 <label class="label-icon" for="search">
                                     <i class="material-icons">search</i>
                                 </label>
@@ -206,7 +203,7 @@
         <div class="nav-content white">
             <div class="pesquisaMobile">
                 <div class="input-field">
-                    <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required>
+                    <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required autocomplete="off">
                     <label class="label-icon" for="search"></label>
                     <i class="material-icons black-text">close</i>
                 </div>
@@ -230,7 +227,7 @@ else
                     <div class="col s4 hide-on-med-and-down">
                         <div>
                             <div class="input-field">
-                                <input id="search" type="search" required>
+                                <input id="search" type="search" required autocomplete="off">
                                 <label class="label-icon" for="search">
                                     <i class="material-icons">search</i>
                                 </label>
@@ -254,7 +251,7 @@ else
         <div class="nav-content white">
             <div class="pesquisaMobile">
                 <div class="input-field">
-                    <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required>
+                    <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required autocomplete="off">
                     <label class="label-icon" for="search"></label>
                     <i class="material-icons black-text">close</i>
                 </div>
