@@ -7,7 +7,5 @@ namespace CandyShop.Core.Services.CompraProduto.Dto
         public int IdCompra { get; set; }
         public int QtdeCompra { get; set; }
         public ProdutoDto Produto { get; set; }
-
-
     }
 }

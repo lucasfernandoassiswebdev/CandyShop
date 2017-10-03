@@ -280,6 +280,7 @@
     <Content Include="Views\Usuario\Desativar.cshtml" />
     <Content Include="Views\Pagamento\Inserir.cshtml" />
     <Content Include="Views\Compra\Detalhes.cshtml" />
+    <Content Include="Views\Compra\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
