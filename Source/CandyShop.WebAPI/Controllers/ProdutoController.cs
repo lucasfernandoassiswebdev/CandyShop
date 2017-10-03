@@ -1,6 +1,7 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Produto.Dto;
+using System;
 using System.Net;
 using System.Web.Http;
 
@@ -22,59 +23,116 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Post(ProdutoDto produto)
         {
-            _produtoService.IsValid(produto);
-            if (_notification.HasNotification())            
-                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+            try
+            {
+                _produtoService.IsValid(produto);
+                if (_notification.HasNotification())
+                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
-            var result = _produtoRepository.InserirProduto(produto, out int sequencial);
-            if (result == -1)
-                return Content(HttpStatusCode.BadRequest, "[Falha ao inserir o produto]");
-            return Ok(sequencial);
+                var result = _produtoRepository.InserirProduto(produto, out int sequencial);
+                if (result == -1)
+                    return Content(HttpStatusCode.BadRequest, "[Falha ao inserir o produto]");
+                return Ok(sequencial);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
+            
         }        
 
         public IHttpActionResult Put(ProdutoDto produto)
         {
-            _produtoRepository.UpdateProduto(produto);
-            return Ok();
+            try
+            {
+                _produtoRepository.UpdateProduto(produto);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpPut]
         [Route("api/produto/desativar/{idProduto}")]
         public IHttpActionResult PutDesativar(int idproduto)
         {
-            _produtoRepository.DesativarProduto(idproduto);
-            return Ok();
+            try
+            {
+                _produtoRepository.DesativarProduto(idproduto);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         #region GETS
 
         public IHttpActionResult Get()
         {
-            return Ok(_produtoRepository.ListarProdutos());
+            try
+            {
+                return Ok(_produtoRepository.ListarProdutos());
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpGet, Route("api/produto/inativos")]
         public IHttpActionResult GetInativos()
         {
-            return Ok(_produtoRepository.ListarProdutosInativos());
+            try
+            {
+                return Ok(_produtoRepository.ListarProdutosInativos());
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
         
         [HttpGet, Route("api/produto/selecionar/{idProduto}")]
         public IHttpActionResult GetId(int idProduto)
         {
-            return Ok(_produtoRepository.SelecionarDadosProduto(idProduto));
+            try
+            {
+                return Ok(_produtoRepository.SelecionarDadosProduto(idProduto));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
         
         [HttpGet, Route("api/produto/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {
-            return Ok(_produtoRepository.ProcurarProdutoPorNome(nome));
+            try
+            {
+                return Ok(_produtoRepository.ProcurarProdutoPorNome(nome));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpGet, Route("api/produto/categoria/{categoria}")]
         public IHttpActionResult GetCategoria(string categoria)
         {
-            return Ok(_produtoRepository.ListarProdutosPorCategoria(categoria));
+            try
+            {
+                return Ok(_produtoRepository.ListarProdutosPorCategoria(categoria));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         #endregion

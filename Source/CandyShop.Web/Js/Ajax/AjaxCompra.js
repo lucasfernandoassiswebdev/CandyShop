@@ -9,7 +9,7 @@
         var listaProdutos = [];
         var produto;
         var produtos = $('.collection li');
-        var i = 0;
+        var i = 2;
         var j = 2;
         $.each(produtos,
             function() {
@@ -23,6 +23,7 @@
             });
 
         var compra = { Itens: listaProdutos };
+
         $.post(url.inserirCompra, compra)
             .done(function(message) {
                 $.get(url.navbar)

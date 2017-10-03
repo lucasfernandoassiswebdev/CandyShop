@@ -34,21 +34,6 @@ $(document).ready(function () {
         quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
     });
 
-    //populando a lista novamente com os itens do localstorage
-    if (localStorage.getItem('listaProdutos') !== null) {
-        JSON.parse(localStorage.getItem('listaProdutos')).forEach(function (produto) {
-            var item = {
-                Id: produto.Id,
-                Nome: produto.Nome,
-                Quantidade: produto.Quantidade,
-                Imagem: produto.Imagem,
-                QuantidadeDisponivel: produto.quantidadeDisponivel
-            }
-
-            listaProdutos.push(item);
-        });
-    }
-
     //adicionando os itens do localstorage no carrinho
     if (localStorage.getItem('listaProdutos') !== null) {
         JSON.parse(localStorage.getItem('listaProdutos')).forEach(function (produto) {
@@ -91,8 +76,8 @@ $(document).ready(function () {
     }
 
     //adicionando os itens no carrinho
-    $("#adicionaCarrinho").off("click").on("click", function () {
-        $(".collection").append( $("<li>",
+    $("#adicionaCarrinho").on("click", function () {
+        $(".collection").append($("<li>",
             {
                 html: [
                     $("<img>", { src: imagem, "class": "circle", style: "max-width:100px;margin-top:-1.1%" }),
@@ -133,6 +118,7 @@ $(document).ready(function () {
             Imagem: imagem
         }
         listaProdutos.push(produto);
+        localStorage.removeItem('listaProdutos');
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
     });
 
@@ -176,7 +162,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#quantidade, #quantidadeEdit').on('keydown', function() {
+    $('#quantidade, #quantidadeEdit').on('keydown', function () {
         mNumbers($(this).val());
     });
 
@@ -185,31 +171,12 @@ $(document).ready(function () {
         $(".collection li").remove();
         if (localStorage.getItem("listaProdutos") != null) {
             localStorage.removeItem("listaProdutos");
+            listaProdutos = [];
         }
     });
 });
 
 
-
-//validando campo de CPF
-$("#cpf").on("keydown", function () {
-    mcpf($("#cpf").val());
-});
-
-$("#cpf").on("blur", function () {
-    if ($("#cpf").val().length > 14) {
-        $("#cpf").val($("#cpf").val().substr(0, 13));
-        $("#cpf").keydown();
-    }
-});
-
-function mcpf(v) {
-    v = v.replace(/\D/g, "");
-    v = v.replace(/(\d{3})(\d)/, "$1.$2");
-    v = v.replace(/(\d{3})(\d)/, "$1.$2");
-    v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    $("#cpf").val(v);
-}
 
 //função que remove caracteres que não sejam numéricos
 function mNumbers(v) {
