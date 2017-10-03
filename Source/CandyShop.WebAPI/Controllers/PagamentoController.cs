@@ -12,7 +12,7 @@ namespace CandyShop.WebAPI.Controllers
         private readonly IPagamentoRepository _pagamentoRepository;
         private readonly INotification _notification;
         private readonly IPagamentoService _pagamentoService;
-        
+
 
         public PagamentoController(IPagamentoRepository pagamentoRepository, INotification notification, IPagamentoService pagamentoService)
         {
@@ -23,64 +23,143 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Post(PagamentoDto pagamento)
         {
-            _pagamentoService.ValidarPagamento(pagamento);
-            if (_notification.HasNotification())
-                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-            _pagamentoRepository.InserirPagamento(pagamento);
-            return Ok();
+            try
+            {
+                _pagamentoService.ValidarPagamento(pagamento);
+                if (_notification.HasNotification())
+                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+                _pagamentoRepository.InserirPagamento(pagamento);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
+
 
         public IHttpActionResult Put(PagamentoDto pagamento)
         {
-            _pagamentoRepository.EditarPagamento(pagamento);
-            return Ok();
+            try
+            {
+                _pagamentoRepository.EditarPagamento(pagamento);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
+
         }
 
         public IHttpActionResult Get()
         {
-            return Ok(_pagamentoRepository.ListarPagamentos());
+            try
+            {
+                return Ok(_pagamentoRepository.ListarPagamentos());
+
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [Route("api/pagamento/{cpf}")]
         public IHttpActionResult GetCpf(string cpf)
         {
-            return Ok(_pagamentoRepository.ListarPagamentos(cpf));
+            try
+            {
+                return Ok(_pagamentoRepository.ListarPagamentos(cpf));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
+            
         }
 
         [Route("api/pagamento/mes/{mes}")]
         public IHttpActionResult GetMes(int mes)
         {
-            return Ok(_pagamentoRepository.ListarPagamentos(mes));
+            try
+            {
+                return Ok(_pagamentoRepository.ListarPagamentos(mes));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [Route("api/pagamento/semana")]
         public IHttpActionResult GetSemana()
         {
-            return Ok(_pagamentoRepository.ListarPagamentoSemana());
+            try
+            {
+                return Ok(_pagamentoRepository.ListarPagamentoSemana());
+
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+
+            }
         }
 
         [Route("api/pagamento/semana/{cpf}")]
         public IHttpActionResult GetSemanaCpf(string cpf)
         {
-            return Ok(_pagamentoRepository.ListarPagamentoSemana(cpf));
+            try
+            {
+                return Ok(_pagamentoRepository.ListarPagamentoSemana(cpf));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+
+            }
         }
 
         [Route("api/pagamento/dia")]
         public IHttpActionResult GetDia()
         {
-            return Ok(_pagamentoRepository.ListarPagamentoDia());
+            try
+            {
+                return Ok(_pagamentoRepository.ListarPagamentoDia());
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+
+            }
         }
 
         [Route("api/pagamento/dia/{dia}")]
         public IHttpActionResult GetDia(DateTime dia)
         {
-            return Ok(_pagamentoRepository.ListarPagamentoDia(dia));
+            try
+            {
+                return Ok(_pagamentoRepository.ListarPagamentoDia(dia));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         public IHttpActionResult Delete(int idpagamento)
         {
-            _pagamentoRepository.DeletarPagamento(idpagamento);
-            return Ok();
+            try
+            {
+                _pagamentoRepository.DeletarPagamento(idpagamento);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
+            
         }
     }
 }

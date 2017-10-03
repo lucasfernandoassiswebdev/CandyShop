@@ -6,12 +6,15 @@
 var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id;
 var listaProdutos = [];
 
+
 $(document).ready(function () {
     //pesquisa por nome é feita quando se aperta a tecla "enter" na barra de pesquisa
-    $('#search').on('keypress', function (e) {
+    $('#search').on('keydown', function (e) {
         var textoPesquisa = $('#search').val();
-        if (e.which == 13)
-            AjaxJsProduto.listarProdutoPorNome(textoPesquisa);
+        if (e.which === 13) {
+            AjaxJsShop.listarProdutoPorNome(textoPesquisa);
+            console.log(textoPesquisa);
+        }
     });
 
     //limpando os inputs
@@ -69,7 +72,9 @@ $(document).ready(function () {
                 ],
                 "class": "collection-item avatar"
             }));
+
         });
+        localStorage.removeItem('listaProdutos');
     }
 
     //adicionando os itens no carrinho

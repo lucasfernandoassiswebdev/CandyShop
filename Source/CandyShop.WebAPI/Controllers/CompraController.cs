@@ -2,6 +2,7 @@
 using CandyShop.Core.Services.Compra;
 using CandyShop.Core.Services.Compra.Dto;
 using CandyShop.Core.Services.CompraProduto;
+using System;
 using System.Net;
 using System.Web.Http;
 
@@ -27,61 +28,124 @@ namespace CandyShop.WebAPI.Controllers
         [HttpPost]
         public IHttpActionResult PostCompra(CompraDto compra)
         {
-            var result = _appService.InserirCompra(compra);
-            if (_notification.HasNotification())
-                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-            return Ok(result);
+            try
+            {
+                var result = _appService.InserirCompra(compra);
+                if (_notification.HasNotification())
+                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpPut]
         public IHttpActionResult PutCompra(CompraDto compra)
         {
-            _compraRepository.EditarCompra(compra);
-            return Ok();
+            try
+            {
+                _compraRepository.EditarCompra(compra);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         #region Gets
         [HttpGet]
         public IHttpActionResult GetCompra()
         {
-            return Ok(_compraRepository.ListarCompra());
+            try
+            {
+                return Ok(_compraRepository.ListarCompra());
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpGet, Route("api/compra/selecionarcompra/{idCompra}")]
         public IHttpActionResult GetUmaCompra(int idCompra)
         {
-            var compra = _compraRepository.SelecionarDadosCompra(idCompra);
-            compra.Itens = _compraProdutoRepository.ListarCompraProdutoIdVenda(idCompra);
-            return Ok(compra);
+            try
+            {
+                var compra = _compraRepository.SelecionarDadosCompra(idCompra);
+                compra.Itens = _compraProdutoRepository.ListarCompraProdutoIdVenda(idCompra);
+                return Ok(compra);
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpGet, Route("api/compra/listaCompracpf/{cpf}")]
         public IHttpActionResult GetCpf(string cpf)
         {
-            return Ok(_compraRepository.ListarCompraPorCpf(cpf));
+            try
+            {
+                return Ok(_compraRepository.ListarCompraPorCpf(cpf));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpGet, Route("api/compra/semana")]
         public IHttpActionResult GetSemana()
         {
-            return Ok(_compraRepository.ListarCompraSemana());
+            try
+            {
+                return Ok(_compraRepository.ListarCompraSemana());
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpGet, Route("api/compra/mes/{mes}")]
         public IHttpActionResult GetMes(int mes)
         {
-            return Ok(_compraRepository.ListarCompraMes(mes));
+            try
+            {
+                return Ok(_compraRepository.ListarCompraMes(mes));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
         [HttpGet, Route("api/compra/dia")]
         public IHttpActionResult GetDia()
         {
-            return Ok(_compraRepository.ListarCompraDia());
+            try
+            {
+                return Ok(_compraRepository.ListarCompraDia());
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpGet, Route("api/compra/{nomeUsuario}")]
         public IHttpActionResult GetNome(string nomeUsuario)
         {
-            return Ok(_compraRepository.ListarCompraPorNome(nomeUsuario));
+            try
+            {
+                return Ok(_compraRepository.ListarCompraPorNome(nomeUsuario));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
         #endregion
         

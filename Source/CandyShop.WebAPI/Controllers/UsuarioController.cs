@@ -61,31 +61,68 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Get()
         {
-            return Ok(_usuarioRepository.ListarUsuario());
+            try
+            {
+                return Ok(_usuarioRepository.ListarUsuario());
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpGet, Route("api/Usuario/Devedores")] // Colocar quando controller tiver mais de um metodos GET
         public IHttpActionResult GetUsuariosDivida()
         {
-            return Ok(_usuarioRepository.ListarUsuarioDivida());
+            try
+            {
+                return Ok(_usuarioRepository.ListarUsuarioDivida());
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
+            
 
         [HttpGet, Route("api/Usuario/inativos")] // Colocar quando controller tiver mais de um metodos GET
         public IHttpActionResult GetUsuariosInativos()
         {
-            return Ok(_usuarioRepository.ListarUsuarioInativo());
+            try
+            {
+                return Ok(_usuarioRepository.ListarUsuarioInativo());
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpGet, Route("api/usuario/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {
-            return Ok(_usuarioRepository.ListarUsuarioPorNome(nome));
+            try
+            {
+                return Ok(_usuarioRepository.ListarUsuarioPorNome(nome));
+
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         [HttpGet, Route("api/Usuario/saldo")]
         public IHttpActionResult GetSaldo()
         {
-            return Ok(_usuarioRepository.VerificaCreditoLoja());
+            try
+            {
+                return Ok(_usuarioRepository.VerificaCreditoLoja());
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
 
         public IHttpActionResult Put(UsuarioDto usuario)
@@ -108,14 +145,29 @@ namespace CandyShop.WebAPI.Controllers
         [HttpPut,Route("api/usuario/desativar/{cpf}")]
         public IHttpActionResult PutDesativar(UsuarioDto usuario)
         {
-            _usuarioRepository.DesativarUsuario(usuario.Cpf);
-            return Ok();
+            try
+            {
+                _usuarioRepository.DesativarUsuario(usuario.Cpf);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
+            
         }
 
         [HttpGet, Route("api/Usuario/{cpf}/Detalhes")]
         public IHttpActionResult GetWithCpf(string cpf)
         {
-            return Ok(_usuarioRepository.SelecionarUsuario(cpf));
+            try
+            {
+                return Ok(_usuarioRepository.SelecionarUsuario(cpf));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
         }
     }
 }
