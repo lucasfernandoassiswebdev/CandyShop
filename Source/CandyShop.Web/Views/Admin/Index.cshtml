@@ -48,7 +48,9 @@
             listarCompraSemana: '@Url.Action("ListarSemana", "Compra")',
             listarCompraMes: '@Url.Action("ListarMes", "Compra")',
             listarCompraDia: '@Url.Action("ListarDia", "Compra")',
-            detalheCompra: '@Url.Action("Detalhes", "Compra")'
+            detalheCompra: '@Url.Action("Detalhes", "Compra")',
+            editarCompra: '@Url.Action("Editar","Compra")',
+            concluirEdicaoCompra: '@Url.Action("Editar","Compra")'
         });
 
         AjaxJsShop.init({
@@ -59,7 +61,7 @@
  })
 </script>
 
-<link rel="stylesheet" type="text/css" href="../../Content/Admin/indexAdmin.css">
+<link rel="stylesheet" type="text/css" href="../../Content/Admin/indexAdmin.css?d=@DateTime.Now.Ticks">
 
 <!--modal de pesquisa de usuários-->
 <div id="modalPesquisaUsuario" class="modal">

@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="ApiConfig.cs" />
     <Compile Include="CompraApplication.cs" />
+    <Compile Include="CompraProdutoApplication.cs" />
     <Compile Include="Interfaces\ICompraApplication.cs" />
+    <Compile Include="Interfaces\ICompraProdutoApplication.cs" />
     <Compile Include="Interfaces\IPagamentoApplication.cs" />
     <Compile Include="Interfaces\IProdutoApplication.cs" />
     <Compile Include="Interfaces\IUsuarioApplication.cs" />
