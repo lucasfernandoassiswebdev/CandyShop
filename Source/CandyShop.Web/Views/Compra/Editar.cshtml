@@ -1,12 +1,12 @@
-﻿@using System.Collections
-@using CandyShop.Application.ViewModels
+﻿@using CandyShop.Application.ViewModels
 
-@model IEnumerable<CandyShop.Application.ViewModels.CompraProdutoViewModel>
+@model IEnumerable<CompraProdutoViewModel>
 
 @{
     Layout = null;
 }
 
+<h3 class="center pink-text" style="font-weight: bold">Editar compra</h3>
 <form>
     <div class="row">
         <div class="input-field col s6">
@@ -29,8 +29,11 @@
                     <option value="@produto.IdProduto" @(compraProduto.Produto.IdProduto == produto.IdProduto ? "selected" : string.Empty)>@produto.NomeProduto</option>
                 }
             </select>
-            <input class="col s4" type="number" placeholder="Quantidade: " value="@compraProduto.QtdeCompra" style="text-align: center"/>
+            <input class="col s4" type="number" placeholder="Quantidade: " value="@compraProduto.QtdeCompra" style="text-align: center" />
         }
+    </div>
+    <div class="center">
+        <a class="btn" onclick="AjaxJsCompra.concluirEdicaoCompra(@ViewBag.IdCompra,@ViewBag.Usuario)"><i class="material-icons left">edit</i>Editar</a>
     </div>
 </form>
 

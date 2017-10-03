@@ -57,12 +57,29 @@
         chamaPaginaComIdentificador(url.detalheCompra, { idCompra: idCompra });
     };
     var editarCompra = function (idCompra) {
-        chamaPaginaComIdentificador(url.editarCompra, {IdCompra : idCompra});
-    }
-    var concluirEdicaoCompra = function() {
-        var compra = { IdCompra: idCompra };
+        chamaPaginaComIdentificador(url.editarCompra, { IdCompra: idCompra });
+    };
+    var concluirEdicaoCompra = function (idCompra, cpfUsuario) {
+        var listaProdutos = [], i = 3;
+        $('select').each(function () {
+            var itemCompra = {
+                Id: $(this).val(),
+                QtdeProduto: $('input:eq(' + i + ')').val()
+            };
+            listaProdutos.push(itemCompra);
+            i++;
+        });
+
+        var compra = {
+            IdCompra: idCompra,
+            DataCompra: $('input:eq(0)').val() + $('input:eq(1)').val(),
+            Usuario : {
+              Cpf : cpfUsuario   
+            },
+            Itens: listaProdutos
+        };
         concluirAcaoEdicao(url.editarCompra, compra, url.listarCompraMes);
-    }
+    };
     return {
         init: init,
         historicoCompra: historicoCompra,

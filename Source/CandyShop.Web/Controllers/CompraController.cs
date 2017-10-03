@@ -29,6 +29,10 @@ namespace CandyShop.Web.Controllers
         {
             var itens = _appCompraProduto.ListarProdutos(idCompra);
             ViewBag.Produtos = _appProdutos.ListarProdutos().Content;
+            ViewBag.IdCompra = idCompra;
+            var compra = _appCompra.SelecionarCompra(idCompra);
+            ViewBag.Usuario = compra.Content.Usuario.Cpf;
+
             return View(itens.Content);
         }
 
@@ -137,7 +141,6 @@ namespace CandyShop.Web.Controllers
             var compras = _appCompra.ListaCompra();
             return View("Index", compras.Content);
         }
-
         #endregion
     }
 }
