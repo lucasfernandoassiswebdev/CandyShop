@@ -199,9 +199,8 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdPa
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_UpdPagamento]
-	@IdPagamento int,	
-	@DataPagamento datetime,
-	@ValorPagamento decimal(15,2)
+	@IdPagamento int,		
+	@ValorPagamento decimal(15,2)	
 
 	AS
 
@@ -211,17 +210,33 @@ CREATE PROCEDURE [dbo].[CSSP_UpdPagamento]
 	Objetivo..........: Editar um pagamento
 	Autor.............: SMN - Rafael Morais
  	Data..............: 06/09/2017
-	Ex................: EXEC [dbo].[CSSP_UpdPagamento]
+	Ex................: EXEC [dbo].[CSSP_UpdPagamento] 9, 5
 
-	*/
+	*/	
 
 	BEGIN
-	
+		DECLARE @REVOGAR NUMERIC(15,2)
+		SET @REVOGAR = (SELECT valorPagamento 
+							FROM [dbo].[Pagamento]
+							WHERE IdPagamento =	@IdPagamento)
+		
+		DECLARE @cpf VARCHAR(11)
+		SET @CPF = (SELECT CPF 
+						FROM [dbo].[Pagamento]
+						WHERE IdPagamento =	@IdPagamento)
+
+		UPDATE [dbo].[Usuario] 
+			SET	SaldoUsuario -= @Revogar		
+			WHERE Cpf = @cpf
+
 		UPDATE [dbo].[Pagamento] 
-			SET	DataPagamento = @DataPagamento,
-				ValorPagamento = @ValorPagamento		
-				WHERE IdPagamento = @IdPagamento
+			SET	ValorPagamento = @ValorPagamento		
+			WHERE IdPagamento = @IdPagamento
 			
+		UPDATE [dbo].[Usuario] 
+			SET SaldoUsuario += @ValorPagamento			
+			WHERE Cpf = @Cpf
+
 			IF @@ERROR <> 0 
 				RETURN 1
 		RETURN 0
@@ -278,7 +293,14 @@ CREATE PROCEDURE [dbo].[CSSP_SelPagamento]
 
 	BEGIN
 	
-		SELECT * FROM [dbo].[Pagamento]	WITH(NOLOCK)
+		SELECT	p.IdPagamento,
+				u.Cpf as 'Cpf',
+				u.NomeUsuario as 'NomeUsuario',
+				p.DataPagamento,
+				p.ValorPagamento
+			FROM [dbo].[Pagamento] p	WITH(NOLOCK)
+				INNER JOIN [dbo].[Usuario] u 
+					ON p.Cpf = u.Cpf
 			WHERE IdPagamento = @IdPagamento
 
 	END

@@ -222,6 +222,7 @@
     <Content Include="Js\Ajax\AjaxShop.js" />
     <Content Include="Js\Ajax\AjaxUsuario.js" />
     <Content Include="Js\Ajax\funcoesAjax.js" />
+    <Content Include="Js\Pagamento\scriptEditarPagamento.js" />
     <Content Include="Js\plugins\jquery.maskMoney.js" />
     <Content Include="Js\plugins\Lenon-devBox.message.css" />
     <Content Include="Js\plugins\Lenon-jquery.devBox.message.js" />
@@ -280,6 +281,9 @@
     <Content Include="Views\Usuario\Desativar.cshtml" />
     <Content Include="Views\Pagamento\Inserir.cshtml" />
     <Content Include="Views\Compra\Detalhes.cshtml" />
+    <Content Include="Views\Pagamento\Editar.cshtml" />
+    <Content Include="Views\Compra\Editar.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

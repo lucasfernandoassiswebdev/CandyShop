@@ -83,7 +83,6 @@ namespace CandyShop.Web.Controllers
             Session["nomeUsuario"] = user.Content.NomeUsuario;
             Session["saldoUsuario"] = user.Content.SaldoUsuario;
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
-
             return View("NavBar");
         }
 

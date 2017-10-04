@@ -10,10 +10,11 @@ namespace CandyShop.Web.Controllers
     public class PagamentoController : AuthController
     {
         private readonly IPagamentoApplication _appPagamento;
-
-        public PagamentoController(IPagamentoApplication pagamento)
+        private readonly IUsuarioApplication _appUsuario;
+        public PagamentoController(IPagamentoApplication pagamento, IUsuarioApplication usuario)
         {
             _appPagamento = pagamento;
+            _appUsuario = usuario;
         }
 
 
@@ -32,6 +33,14 @@ namespace CandyShop.Web.Controllers
         public ActionResult Inserir()
         {
             return View();
+        }
+
+        public ActionResult Editar(int idPagamento)
+        {
+            var result = _appPagamento.SelecionarPagamento(idPagamento);
+            if (result.Status != HttpStatusCode.OK)
+                return Content("Erro ao localizar produto");
+            return View(result.Content);
         }
 
         #endregion
@@ -102,7 +111,25 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
             return Content("Pagamento realizado com sucesso!!");
-        }        
+        }
+
+        public ActionResult EditarPagamento(PagamentoViewModel pagamento)
+        {                        
+            var response = _appPagamento.EditarPagamento(pagamento);                        
+
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro " + response.ContentAsString.First());
+
+            if (Session["Login"].ToString().Equals(pagamento.Usuario.Cpf))
+            {
+                var user = _appUsuario.SelecionarUsuario(pagamento.Usuario.Cpf);
+                if (user.Status != HttpStatusCode.OK)
+                    return Content("Erro ao atualizar seu próprio saldo");
+                Session["saldoUsuario"] = user.Content.SaldoUsuario;
+            }
+
+            return Content("Pagamento editado com sucesso!!");            
+        }
 
         #endregion
     }

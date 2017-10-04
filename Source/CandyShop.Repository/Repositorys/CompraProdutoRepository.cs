@@ -90,11 +90,14 @@ namespace CandyShop.Repository.Repositorys
                 while (reader.Read())
                     retorno.Add(new CompraProdutoDto()
                     {
+                        IdCompra = reader.ReadAsInt("IdCompra"),
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),
                         Produto = new ProdutoDto
                         {
+                            IdProduto =  reader.ReadAsInt("IdProduto"),
                             NomeProduto = reader.ReadAsString("NomeProduto"),
                             PrecoProduto = reader.ReadAsDecimal("PrecoProduto"),
+                            QtdeProduto = reader.ReadAsInt("QtdeProduto")
                         }
                     });
             return retorno.Any() ? retorno : null;

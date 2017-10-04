@@ -132,18 +132,30 @@ $(document).ready(function () {
 
     //desabilitando botão quando houverem quantidades inválidas
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
+    //tecla pressionada
     $('#quantidade').on('keydown', function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
             $('#adicionaCarrinho').removeAttr('disabled');
         }
     });
+    //foco saindo do input
     $('#quantidade').on('blur', function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#adicionaCarrinho').attr('disabled', 'disabled');
+        } else {
+            $('#adicionaCarrinho').removeAttr('disabled');
+        }
+    });
+    //texto colado no input
+    $('#quantidade').on('paste', function () {
+        quantidade = $("#quantidade").val();
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
@@ -153,7 +165,7 @@ $(document).ready(function () {
     //desabilitando no modal de editar a quantidade
     $('#quantidadeEdit').on('blur', function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
@@ -162,7 +174,16 @@ $(document).ready(function () {
     });
     $('#quantidadeEdit').on('keydown', function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#editarQuantidade').attr('disabled', 'disabled');
+        } else {
+            $('#editarQuantidade').removeAttr('disabled');
+        }
+    });
+    $('#quantidadeEdit').on('paste', function () {
+        quantidade = $("#quantidadeEdit").val();
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
@@ -170,7 +191,12 @@ $(document).ready(function () {
         }
     });
 
+    //tirando caracteres inválidos dos campos de quantidade
     $('#quantidade, #quantidadeEdit').on('keydown', function () {
+        mNumbers($(this).val());
+    });
+
+    $('#quantidade, #quantidadeEdit').on('paste', function () {
         mNumbers($(this).val());
     });
 

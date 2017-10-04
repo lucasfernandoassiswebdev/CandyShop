@@ -1,0 +1,65 @@
+﻿@using CandyShop.Application.ViewModels
+
+@model IEnumerable<CompraProdutoViewModel>
+
+@{
+    Layout = null;
+}
+
+<h3 class="center pink-text" style="font-weight: bold">Editar compra</h3>
+<form>
+    <div class="row">
+        <div class="input-field col s6">
+            <label for="data">Selecione a data da compra</label>
+            <input id="data" type="text" class="datepicker" />
+        </div>
+        <div class="input-field col s6">
+            <label for="hora">Selecione a hora da compra</label>
+            <input id="hora" type="text" class="timepicker" />
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var compraProduto in Model)
+        {
+            <select class="col s8">
+                @foreach (var produto in (IEnumerable<ProdutoViewModel>)ViewBag.Produtos)
+                {
+                    <!--Esse operador ternário feito com o razor diz que se o Id do produto atual bater com o Id do produto da Model,
+                    a opção deste produto ficará previamente selecionada-->
+                    <option value="@produto.IdProduto" @(compraProduto.Produto.IdProduto == produto.IdProduto ? "selected" : string.Empty)>@produto.NomeProduto</option>
+                }
+            </select>
+            <input class="col s4" type="number" placeholder="Quantidade: " value="@compraProduto.QtdeCompra" style="text-align: center" />
+        }
+    </div>
+    <div class="center">
+        <a class="btn" onclick="AjaxJsCompra.concluirEdicaoCompra(@ViewBag.IdCompra,@ViewBag.Usuario)"><i class="material-icons left">edit</i>Editar</a>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('.datepicker').pickadate({
+            selectMonths: true,
+            selectYears: 15,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: false
+        });
+
+        $('.timepicker').pickatime({
+            default: 'now',
+            fromnow: 0,
+            twelvehour: false,
+            donetext: 'OK',
+            cleartext: 'Clear',
+            canceltext: 'Cancel',
+            autoclose: false,
+            ampmclickable: true,
+            aftershow: function () { }
+        });
+
+        $('select').material_select();
+    });
+</script>

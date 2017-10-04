@@ -7,7 +7,7 @@ namespace CandyShop.Web.Controllers
         //Método que autentica o login, se a session Login estiver nula retorna um content com uma string
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {            
-            if (Session["Login"].ToString() == "off")
+            if (Session["classificacao"] == null || Session["classificacao"].ToString() != "A")
                 filterContext.Result = new RedirectResult("/Home/NavBar");
             base.OnActionExecuting(filterContext);
         }

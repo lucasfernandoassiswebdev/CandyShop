@@ -149,3 +149,27 @@ input {
 	width: 39%;
 	background-color: white;
 }
+
+.picker__date-display {
+	background-color: #ec407a !important;
+}
+
+.picker__close, .picker__today, .picker__clear {
+	color: #ec407a !important;
+}
+
+.picker__clear {
+	color: #ec407a !important;
+}
+
+.clockpicker-canvas line {
+	stroke: #ec407a !important;
+}
+
+.clockpicker-canvas-bg {
+	fill: #ec407a !important;
+}
+
+.clockpicker-canvas-bearing {
+	fill: #ec407a !important;
+}

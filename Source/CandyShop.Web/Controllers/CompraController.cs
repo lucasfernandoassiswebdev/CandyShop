@@ -10,15 +10,30 @@ namespace CandyShop.Web.Controllers
     public class CompraController : Controller
     {
         private readonly ICompraApplication _appCompra;
+        private readonly ICompraProdutoApplication _appCompraProduto;
+        private readonly IProdutoApplication _appProdutos;
 
-        public CompraController(ICompraApplication compra)
+        public CompraController(ICompraApplication compra, ICompraProdutoApplication compraProduto, IProdutoApplication produtos)
         {
             _appCompra = compra;
+            _appCompraProduto = compraProduto;
+            _appProdutos = produtos;
         }
 
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Editar(int idCompra)
+        {
+            var itens = _appCompraProduto.ListarProdutos(idCompra);
+            ViewBag.Produtos = _appProdutos.ListarProdutos().Content;
+            ViewBag.IdCompra = idCompra;
+            var compra = _appCompra.SelecionarCompra(idCompra);
+            ViewBag.Usuario = compra.Content.Usuario.Cpf;
+
+            return View(itens.Content);
         }
 
         #region listas
@@ -104,12 +119,27 @@ namespace CandyShop.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
         public ActionResult Detalhes(int idCompra)
         {
             var response = _appCompra.SelecionarCompra(idCompra);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro ao detalhar compra", response.ContentAsString.First());
+
             return View(response.Content);
+        }
+
+        [HttpPut]
+        public ActionResult Editar(CompraViewModel Compra)
+        {
+            var response = _appCompra.EditarCompra(Compra);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro ao editar a compra", response.ContentAsString.First());
+
+            ViewBag.tituloPagina = "Compras do ultimo mês";
+            ViewBag.drop = 0;
+            var compras = _appCompra.ListaCompra();
+            return View("Index", compras.Content);
         }
         #endregion
     }

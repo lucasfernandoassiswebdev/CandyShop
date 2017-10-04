@@ -26,8 +26,8 @@
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
-    var concluirPagamento = function () {
-        var pagamento = { ValorPagamento: $('#valorPago').val() };        
+    var concluirPagamento = function () {        
+        var pagamento = { ValorPagamento: $('#valorPago').val()};
         $.post(url.concluirPagamento, pagamento)            
             .done(function (message) {
                 $.get(url.padrao)
@@ -46,6 +46,26 @@
             });        
     };
 
+    var editarPagamento = function(idPagamento) {
+        chamaPaginaComIdentificador(url.editarPagamento, { idPagamento: idPagamento });
+    }
+
+    var concluirEdicaoPagamento = function() {
+        console.log($('#Cpf').val());
+        var pagamento = {
+            IdPagamento: $('#IdPagamento').val(),
+            ValorPagamento: $('#valorPago').val(),
+            Usuario: { Cpf: $('#Cpf').val() } 
+        };
+        $.post(url.concluirEdicaoPagamento, pagamento)
+            .done(function(data) {
+                chamaPagina(url.listarPagamento);
+                Materialize.toast(data);
+            }).fail(function(xhr) {
+                Materialize.toast(xhr.responseText, 4000);
+            });
+    };
+
     return {
         init: init,
         //pagamento
@@ -55,6 +75,8 @@
         inserirPagamento: inserirPagamento,
         concluirPagamento: concluirPagamento,
         listarPagamentoMes: listarPagamentoMes,
-        listarPagamentoDia: listarPagamentoDia
+        listarPagamentoDia: listarPagamentoDia,
+        editarPagamento: editarPagamento,
+        concluirEdicaoPagamento: concluirEdicaoPagamento
     }
 })(jQuery);

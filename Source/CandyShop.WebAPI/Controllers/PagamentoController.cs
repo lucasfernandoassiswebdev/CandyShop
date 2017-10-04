@@ -42,6 +42,9 @@ namespace CandyShop.WebAPI.Controllers
         {
             try
             {
+                _pagamentoService.ValidarPagamento(pagamento);
+                if (_notification.HasNotification())
+                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
                 _pagamentoRepository.EditarPagamento(pagamento);
                 return Ok();
             }
@@ -58,6 +61,19 @@ namespace CandyShop.WebAPI.Controllers
             {
                 return Ok(_pagamentoRepository.ListarPagamentos());
 
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message);
+            }
+        }
+
+        [Route("api/pagamento/id/{idPagamento}")]
+        public IHttpActionResult GetEspecifico(int idPagamento)
+        {
+            try
+            {
+                return Ok(_pagamentoRepository.SelecionarDadosPagamento(idPagamento));
             }
             catch (Exception e)
             {
