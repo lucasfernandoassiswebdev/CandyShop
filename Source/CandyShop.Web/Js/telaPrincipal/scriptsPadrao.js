@@ -134,7 +134,7 @@ $(document).ready(function () {
     //desabilitando botão quando houverem quantidades inválidas
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
     //tecla pressionada
-    $('#quantidade').on('keydown', function () {
+    $('#quantidade').keydown(function () {
         quantidade = $("#quantidade").val();
         if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
@@ -144,7 +144,7 @@ $(document).ready(function () {
         }
     });
     //foco saindo do input
-    $('#quantidade').on('blur', function () {
+    $('#quantidade').blur(function () {
         quantidade = $("#quantidade").val();
         if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
@@ -173,7 +173,7 @@ $(document).ready(function () {
             $('#editarQuantidade').removeAttr('disabled');
         }
     });
-    $('#quantidadeEdit').on('keydown', function () {
+    $('#quantidadeEdit').keydown(function () {
         quantidade = $("#quantidadeEdit").val();
         if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
@@ -193,7 +193,7 @@ $(document).ready(function () {
     });
 
     //tirando caracteres inválidos dos campos de quantidade
-    $('#quantidade, #quantidadeEdit').on('keydown', function () {
+    $('#quantidade, #quantidadeEdit').keydown(function () {
         mNumbers($(this).val());
     });
 
@@ -202,7 +202,7 @@ $(document).ready(function () {
     });
 
     //limpando o carrinho
-    $("#limpar").on("click", function () {
+    $("#limpar").click(function () {
         $(".collection li").remove();
         if (localStorage.getItem("listaProdutos") != null) {
             localStorage.removeItem("listaProdutos");

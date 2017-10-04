@@ -12,7 +12,7 @@
         if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") || $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant")) {
             return false;
         }
-        
+
         $("#modalCarrinho").modal("close");
         $("#modalQuantidade").modal("close");
         $("#modalLogin").modal("close");
@@ -21,7 +21,7 @@
     });
 
     //editando a quantidade dos itens no carrinho
-    $("#editarQuantidade").on("click", function () {
+    $("#editarQuantidade").click(function () {
         $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
             .text("Quantidade: " + $("#quantidadeEdit").val())
             .attr("data-Quantidade", $("#quantidadeEdit").val());

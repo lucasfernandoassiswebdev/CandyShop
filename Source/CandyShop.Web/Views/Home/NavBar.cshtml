@@ -36,7 +36,7 @@
             listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Home")'
         });       
         //validando campo de CPF
-        $("#cpf").on("keydown", function () {
+        $("#cpf").keydown(function () {
             mcpf($("#cpf").val());
         });
 
