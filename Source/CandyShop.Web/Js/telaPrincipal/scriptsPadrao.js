@@ -128,7 +128,7 @@ $(document).ready(function () {
     //tecla pressionada
     $('#quantidade').on('keydown', function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
@@ -138,7 +138,7 @@ $(document).ready(function () {
     //foco saindo do input
     $('#quantidade').on('blur', function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
@@ -148,7 +148,7 @@ $(document).ready(function () {
     //texto colado no input
     $('#quantidade').on('paste', function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
@@ -158,7 +158,7 @@ $(document).ready(function () {
     //desabilitando no modal de editar a quantidade
     $('#quantidadeEdit').on('blur', function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
@@ -167,7 +167,7 @@ $(document).ready(function () {
     });
     $('#quantidadeEdit').on('keydown', function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
@@ -176,7 +176,7 @@ $(document).ready(function () {
     });
     $('#quantidadeEdit').on('paste', function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
@@ -202,8 +202,6 @@ $(document).ready(function () {
         }
     });
 });
-
-
 
 //função que remove caracteres que não sejam numéricos
 function mNumbers(v) {
