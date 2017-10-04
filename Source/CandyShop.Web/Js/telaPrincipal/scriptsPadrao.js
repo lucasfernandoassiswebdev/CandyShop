@@ -230,7 +230,7 @@ $(document).ready(function () {
     //    } else {
     //        $('#editarQuantidade').removeAttr('disabled');
     //    }
-    });
+    //});
 
     //tirando caracteres inválidos dos campos de quantidade
     $('#quantidade, #quantidadeEdit').keydown(function () {
