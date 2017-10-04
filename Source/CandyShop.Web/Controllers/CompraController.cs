@@ -123,7 +123,7 @@ namespace CandyShop.Web.Controllers
                     return Content("Erro ao atualizar saldo" + totalCompra.ContentAsString.First());
 
                 Session["saldoUsuario"] = Convert.ToDecimal(Session["saldoUsuario"].ToString()) - totalCompra.Content.ValorCompra;
-
+                TempData["LimparCarrinho"] = true;
                 return Content("Sua compra foi registrada com sucesso");
             }
             return RedirectToAction("Index", "Home");

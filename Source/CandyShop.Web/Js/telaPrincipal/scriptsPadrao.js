@@ -4,7 +4,6 @@
 //(no fundo ele ainda tem coração, mas gosta de pinto)
 
 var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id;
-var listaProdutos = [];
 
 
 $(document).ready(function () {
@@ -25,13 +24,13 @@ $(document).ready(function () {
     $(".tooltipped").tooltip({ delay: 50 });
     $(".button-collapse").sideNav();
 
-
     $("#DivGrid").on("click", ".btn-floating", function () {
         preco = $(this).attr("data-Preco");
         nome = $(this).attr("data-Nome");
         imagem = $(this).attr("data-Imagem");
         Id = $(this).attr("data-Id");
         quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
+        console.log(quantidadeDisponivel);
     });
 
     //adicionando os itens do localstorage no carrinho
@@ -112,31 +111,52 @@ $(document).ready(function () {
                 ],
                 "class": "collection-item avatar"
             }));
+
+        var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
+
         var produto = {
             Id: Id,
             Nome: nome,
             Quantidade: quantidade,
             Imagem: imagem
         }
-        listaProdutos.push(produto);
+        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length)
+            console.log('produto ja existe');
+        else
+            listaProdutos.push(produto);
+
+        quantidade = 0;
+        $('#adicionaCarrinho').attr('disabled', '');
         localStorage.removeItem('listaProdutos');
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
     });
 
     //desabilitando botão quando houverem quantidades inválidas
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
-    $('#quantidade').on('keydown', function () {
+    //tecla pressionada
+    $('#quantidade').keydown(function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#adicionaCarrinho').attr('disabled', 'disabled');
+            $('#adicionaCarrinho').attr('disabled', '');
         } else {
             $('#adicionaCarrinho').removeAttr('disabled');
         }
     });
-    $('#quantidade').on('blur', function () {
+    //foco saindo do input
+    $('#quantidade').blur(function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
+            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#adicionaCarrinho').attr('disabled', '');
+        } else {
+            $('#adicionaCarrinho').removeAttr('disabled');
+        }
+    });
+    //texto colado no input
+    $('#quantidade').on('paste', function () {
+        quantidade = $("#quantidade").val();
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
@@ -146,16 +166,25 @@ $(document).ready(function () {
     //desabilitando no modal de editar a quantidade
     $('#quantidadeEdit').on('blur', function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
             $('#editarQuantidade').removeAttr('disabled');
         }
     });
-    $('#quantidadeEdit').on('keydown', function () {
+    $('#quantidadeEdit').keydown(function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt)) {
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#editarQuantidade').attr('disabled', 'disabled');
+        } else {
+            $('#editarQuantidade').removeAttr('disabled');
+        }
+    });
+    $('#quantidadeEdit').on('paste', function () {
+        quantidade = $("#quantidadeEdit").val();
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#editarQuantidade').attr('disabled', 'disabled');
         } else {
@@ -163,12 +192,17 @@ $(document).ready(function () {
         }
     });
 
-    $('#quantidade, #quantidadeEdit').on('keydown', function () {
+    //tirando caracteres inválidos dos campos de quantidade
+    $('#quantidade, #quantidadeEdit').keydown(function () {
+        mNumbers($(this).val());
+    });
+
+    $('#quantidade, #quantidadeEdit').on('paste', function () {
         mNumbers($(this).val());
     });
 
     //limpando o carrinho
-    $("#limpar").on("click", function () {
+    $("#limpar").click(function () {
         $(".collection li").remove();
         if (localStorage.getItem("listaProdutos") != null) {
             localStorage.removeItem("listaProdutos");
@@ -176,8 +210,6 @@ $(document).ready(function () {
         }
     });
 });
-
-
 
 //função que remove caracteres que não sejam numéricos
 function mNumbers(v) {

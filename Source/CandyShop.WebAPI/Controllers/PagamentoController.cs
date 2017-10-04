@@ -2,6 +2,7 @@
 using CandyShop.Core.Services.Pagamento;
 using CandyShop.Core.Services.Pagamento.Dto;
 using System;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 
@@ -33,7 +34,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -50,7 +51,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
 
         }
@@ -64,7 +65,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -77,7 +78,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -90,7 +91,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
             
         }
@@ -104,7 +105,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -118,7 +119,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
 
             }
         }
@@ -132,7 +133,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
 
             }
         }
@@ -146,7 +147,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
 
             }
         }
@@ -160,7 +161,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -173,7 +174,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
             
         }
