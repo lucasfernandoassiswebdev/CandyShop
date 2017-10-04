@@ -222,14 +222,14 @@ $(document).ready(function () {
             $('#editarQuantidade').removeAttr('disabled');
         }
     });
-    $('#quantidadeEdit').on('paste', function () {
-        quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
-            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#editarQuantidade').attr('disabled', 'disabled');
-        } else {
-            $('#editarQuantidade').removeAttr('disabled');
-        }
+    //$('#quantidadeEdit').on('paste', function () {
+    //    quantidade = $("#quantidadeEdit").val();
+    //    if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+    //        $(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+    //        $('#editarQuantidade').attr('disabled', 'disabled');
+    //    } else {
+    //        $('#editarQuantidade').removeAttr('disabled');
+    //    }
     });
 
     //tirando caracteres inválidos dos campos de quantidade
