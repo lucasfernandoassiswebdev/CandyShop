@@ -3,6 +3,7 @@ using CandyShop.Core.Services.Compra;
 using CandyShop.Core.Services.Compra.Dto;
 using CandyShop.Core.Services.CompraProduto;
 using System;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 
@@ -37,7 +38,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -51,7 +52,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -65,7 +66,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -80,7 +81,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -93,7 +94,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -106,7 +107,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -119,7 +120,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
         [HttpGet, Route("api/compra/dia")]
@@ -131,7 +132,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
 
@@ -144,7 +145,7 @@ namespace CandyShop.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message);
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
         #endregion
