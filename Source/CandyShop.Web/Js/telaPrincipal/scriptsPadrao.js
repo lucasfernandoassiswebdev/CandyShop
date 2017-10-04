@@ -4,7 +4,6 @@
 //(no fundo ele ainda tem coração, mas gosta de pinto)
 
 var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id;
-var listaProdutos = [];
 
 
 $(document).ready(function () {
@@ -74,7 +73,6 @@ $(document).ready(function () {
             }));
 
         });
-        localStorage.removeItem('listaProdutos');
     }
 
     //adicionando os itens no carrinho
@@ -113,13 +111,21 @@ $(document).ready(function () {
                 ],
                 "class": "collection-item avatar"
             }));
+
+        var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
+
         var produto = {
             Id: Id,
             Nome: nome,
             Quantidade: quantidade,
             Imagem: imagem
         }
-        listaProdutos.push(produto);
+        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length) 
+            console.log('produto ja existe');
+         else
+            listaProdutos.push(produto);
+
+        
         localStorage.removeItem('listaProdutos');
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
     });
@@ -177,8 +183,6 @@ $(document).ready(function () {
         }
     });
 });
-
-
 
 //função que remove caracteres que não sejam numéricos
 function mNumbers(v) {
