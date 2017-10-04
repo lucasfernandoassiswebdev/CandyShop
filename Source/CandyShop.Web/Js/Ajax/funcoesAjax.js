@@ -38,7 +38,7 @@ function concluirAcao(endereco, objeto, tela) {
     $.post(endereco, objeto)
         .done(function (message) {
             chamaPagina(tela);
-            Materialize.toast(message, 1500);
+            Materialize.toast(message, 4000);
         })
         .fail(function (xhr) {
             console.log(xhr.responseText);
@@ -52,7 +52,7 @@ function concluirAcaoEdicao(endereco, objeto, tela) {
         data: objeto,
         success: function (message) {
             chamaPagina(tela);
-            Materialize.toast(message, 1500);
+            Materialize.toast(message, 4000);
         }
     });
 }

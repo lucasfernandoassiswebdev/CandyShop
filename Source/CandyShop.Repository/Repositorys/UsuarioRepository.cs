@@ -26,7 +26,8 @@ namespace CandyShop.Repository.Repositorys
             CSSP_ListarUsuariosInativos,
             CSSP_LisUsuarioPorNome,
             CSSP_VerificaLoginSenha,
-            CSSP_VerificaSaldoLoja
+            CSSP_VerificaSaldoLoja,
+            CSSP_UpdSenha
         }
 
         public void InserirUsuario(UsuarioDto usuario)
@@ -55,6 +56,14 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@Ativo", usuario.Ativo);
             AddParameter("@Classificacao", usuario.Classificacao);
 
+            ExecuteNonQuery();
+        }
+
+        public void TrocarSenha(UsuarioDto usuario)
+        {
+            ExecuteProcedure(Procedures.CSSP_UpdSenha);
+            AddParameter("@cpf", usuario.Cpf);
+            AddParameter("@senha", usuario.SenhaUsuario);
             ExecuteNonQuery();
         }
 

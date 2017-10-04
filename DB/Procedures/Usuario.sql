@@ -106,6 +106,30 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 	END
 GO
 
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdSenha]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_UpdSenha]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_UpdSenha]
+	@senha varchar(8),
+	@cpf varchar(11)
+	AS
+	/*
+	Documentação
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Trocar somente a senha do usuario
+	Autor.............: SMN - Rafael Morais
+ 	Data..............: 04/10/2017
+	Ex................: EXEC [dbo].[CSSP_UpdSenha]
+	*/	
+	BEGIN	
+		UPDATE [dbo].[Usuario] 
+			SET SenhaUsuario = @senha
+			WHERE Cpf = @cpf
+	END
+GO
+				
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelUsuario]
 GO

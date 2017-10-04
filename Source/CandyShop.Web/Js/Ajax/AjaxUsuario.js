@@ -1,25 +1,25 @@
-﻿var AjaxJsUsuario = (function ($) {
+﻿var AjaxJsUsuario = (function($) {
     var url = {};
 
-    var init = function (config) {
+    var init = function(config) {
         url = config;
     };
 
-    var cadastroUsuario = function () {
+    var cadastroUsuario = function() {
         chamaPagina(url.cadastroUsuario);
     };
-    var listaUsuario = function () {
+    var listaUsuario = function() {
         chamaPagina(url.listaUsuario);
     };
-    var editarUsuario = function (cpf) {
+    var editarUsuario = function(cpf) {
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.editarUsuario, usuario);
     };
-    var detalheUsuario = function (cpf) {
+    var detalheUsuario = function(cpf) {
         var usuario = { Cpf: cpf };
         chamaPaginaComIdentificador(url.detalheUsuario, usuario);
     };
-    var concluirCadastroUsuario = function (imgBase64) {
+    var concluirCadastroUsuario = function(imgBase64) {
         //montantando o objeto que vai chegar no controller
         var usuario = {
             Cpf: $('#cpf').val(),
@@ -29,7 +29,7 @@
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
-    var concluirEdicaoUsuario = function (imgBase64) {
+    var concluirEdicaoUsuario = function(imgBase64) {
         var usuario = {
             Cpf: $('#Cpf').val(),
             NomeUsuario: $('#Nome').val(),
@@ -41,38 +41,49 @@
         };
         concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };
-    var desativarUsuario = function (cpf) {
+    var desativarUsuario = function(cpf) {
         var usuario = {
             Cpf: cpf
         };
         chamaPaginaComIdentificador(url.desativarUsuario, usuario);
     };
-    var desativarUsuarioConfirmado = function (cpf) {
+    var desativarUsuarioConfirmado = function(cpf) {
         var usuario = { Cpf: cpf };
         concluirAcaoEdicao(url.desativarUsuarioConfirmado, usuario, url.listarUsuarioInativo);
     };
-    var listarUsuarioInativo = function () {
+    var listarUsuarioInativo = function() {
         chamaPagina(url.listarUsuarioInativo);
     };
-    var listarUsuarioEmDivida = function () {
+    var listarUsuarioEmDivida = function() {
         chamaPagina(url.listarUsuarioEmDivida);
     };
-    var listarUsuarioPorNome = function () {
+    var listarUsuarioPorNome = function() {
         var usuario = { Nome: $('#nomeUsuario').val() };
         chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
     };
-    
-    var logOff = function () {
-        $.get(url.logOff).done(function (data) {
-            $('body').slideUp(function () {
+    var logOff = function() {
+        $.get(url.logOff).done(function(data) {
+            $('body').slideUp(function() {
                 if (localStorage.getItem('listaProdutos') != null) {
                     localStorage.removeItem('listaProdutos');
                 }
-                $('body').hide().html(data).slideDown(function () { Materialize.toast("LogOff feito com sucesso", 3000); });
+                $('body').hide().html(data).slideDown(function() {
+                    Materialize.toast("LogOff feito com sucesso", 3000);
+                });
             });
-        }).fail(function (xhr) {
+        }).fail(function(xhr) {
             console.log(xhr.responseText);
-        });     
+        });
+    };
+    var trocarSenha = function () {
+        var senhas = { NovaSenha: $('#novaSenha').val(), ConfirmaNovaSenha: $('#confirmaNovaSenha').val() };        
+        $.post(url.trocarSenha, senhas)
+            .done(function (message) {                
+                Materialize.toast(message, 4000);                
+            })
+            .fail(function (xhr) {
+                console.log(xhr.responseText);
+            });
     };
 
     return {
@@ -88,6 +99,7 @@
         listarUsuarioInativo: listarUsuarioInativo,
         listarUsuarioEmDivida: listarUsuarioEmDivida,
         listarUsuarioPorNome: listarUsuarioPorNome,        
-        logOff: logOff
+        logOff: logOff,
+        trocarSenha: trocarSenha
     }
 })(jQuery);

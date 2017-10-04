@@ -31,6 +31,17 @@ namespace CandyShop.Application
             }
         }
 
+        public Response<string> TrocarSenha(UsuarioViewModel usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.PutAsync($"{_enderecoApi}/trocarSenha", usuario, new JsonMediaTypeFormatter()).Result;
+                return response.StatusCode != HttpStatusCode.OK
+                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
+                    : new Response<string>(response.StatusCode);
+            }
+        }
+
         public Response<IEnumerable<UsuarioViewModel>> ListarUsuarios()
         {
             using (var client = new HttpClient())

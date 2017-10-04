@@ -143,6 +143,21 @@ namespace CandyShop.WebAPI.Controllers
             }
         }
 
+        [HttpPut, Route("api/usuario/trocarSenha")]
+        public IHttpActionResult PutSenha(UsuarioDto usuario)
+        {
+            try
+            {
+                _usuarioRepository.TrocarSenha(usuario);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
+            }
+
+        }
+
         [HttpPut,Route("api/usuario/desativar/{cpf}")]
         public IHttpActionResult PutDesativar(UsuarioDto usuario)
         {

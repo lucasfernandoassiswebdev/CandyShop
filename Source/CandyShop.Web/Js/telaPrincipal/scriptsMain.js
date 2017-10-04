@@ -18,6 +18,7 @@
         $("#modalLogin").modal("close");
         $("#modalQuantidade").modal("close");
         $("#modalEditarQuantidade").modal("close");
+        $("#trocaSenha").modal("close");        
     });
 
     //editando a quantidade dos itens no carrinho

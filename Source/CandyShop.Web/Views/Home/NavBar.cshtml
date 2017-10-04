@@ -18,7 +18,8 @@
         });
 
         AjaxJsUsuario.init({
-            logOff: '@Url.Action("Deslogar", "Usuario")'
+            logOff: '@Url.Action("Deslogar", "Usuario")',
+            trocarSenha: '@Url.Action("TrocarSenha", "Usuario")'
         });
 
         AjaxJsCompra.init({
@@ -75,6 +76,31 @@
         <a id="adicionaCarrinho" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
     </div>
 </div>
+
+<!--modal de Trocar a senha-->
+<div id="trocaSenha" class="modal" style="z-index: 99999999">
+    <div class="modal-content center">
+        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <h3 class="pink-text lighten-1 identQuant">Troca de Senha</h3>
+        <p class="pink-text center identQuant"></p>
+        <form class="center">
+            <div class="input-field col s12">
+                <input type="password" id="novaSenha" class="center identQuant" autocomplete="off"/>
+                <span id="senhaInvalida" color="red"></span>
+                <label for="novaSenha">Nova Senha: </label>
+            </div>
+            <div class="input-field col s12">
+                <input type="password" id="confirmaNovaSenha" class="center identQuant" autocomplete="off" />
+                <span id="senhaConfirmadaInvalida" color="red"></span>
+                <label for="confirmaNovaSenha">Confirmar: </label>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer identQuant">
+        <a id="TrocarSenha" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text" style="font-weight: bold">Salvar</a>
+    </div>
+</div>
+
 
 <!--modal de editar quantidade-->
 <div id="modalEditarQuantidade" class="modal" style="z-index: 99999999">
@@ -165,7 +191,7 @@
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdownMenu">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
-                <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
+                <li><a class="dropdown-button modal-trigger" href="#trocaSenha"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Seu Carrinho</a></li>
                 <li>
                     <a class="dropdown-button" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
@@ -186,7 +212,7 @@
             </ul>
 
             <ul class="side-nav" id="mobile-demo">
-                <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
+                <li><a class="dropdown-button modal-trigger" href="#trocaSenha"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>

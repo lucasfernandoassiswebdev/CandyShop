@@ -69,9 +69,12 @@
                     <td>
                         R$ @Html.DisplayFor(modelItem => item.ValorPagamento)
                     </td>
-                    <td>
-                        <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsPagamento.editarPagamento(@item.IdPagamento);"><i class="material-icons">edit</i></a>
-                    </td>
+                    @if (Session["TipoDeLogin"].ToString().Equals("Admin"))
+                    {
+                        <td>
+                            <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsPagamento.editarPagamento(@item.IdPagamento);"><i class="material-icons">edit</i></a>
+                        </td>   
+                    }                    
                 </tr>
             }
         </tbody>

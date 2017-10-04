@@ -1,11 +1,11 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using CandyShop.Web.Filters;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using CandyShop.Web.Filters;
 using Image = System.Drawing.Image;
 
 namespace CandyShop.Web.Controllers
@@ -193,6 +193,24 @@ namespace CandyShop.Web.Controllers
 
             }
             return View("Editar");
+        }
+
+        [UserFilterResult]
+        public ActionResult TrocarSenha(TrocaSenhaViewModel senhas)
+        {
+            if (senhas.ConfirmaNovaSenha.Equals(senhas.NovaSenha))
+            {                                           
+                var usuario = new UsuarioViewModel
+                {
+                    Cpf = Session["Login"].ToString(),                        
+                    SenhaUsuario = senhas.NovaSenha 
+                };
+                var response = _appUsuario.TrocarSenha(usuario);
+                if (response.Status != HttpStatusCode.OK)
+                    return Content($"Erro ao trocar a senha, {response.ContentAsString}");
+                return Content("Senha atualizada com sucesso");                                
+            }
+            return Content("Senhas não conferem");
         }
 
         [AdminFilterResult]

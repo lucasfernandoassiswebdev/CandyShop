@@ -18,7 +18,8 @@ $(document).ready(function () {
 
     //limpando os inputs
     $('.modal-close').on('click', function () {
-        $('#quantidade, #quantidadeEdit').val('');
+        $('#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha').val('');
+        $('#novaSenha').removeAttr('disabled');
     });
 
     $(".tooltipped").tooltip({ delay: 50 });
@@ -32,6 +33,45 @@ $(document).ready(function () {
         quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
         console.log(quantidadeDisponivel);
     });
+
+
+    //verificando senhas e chamando ajax pra efetivar alteracoes    
+    var ilegais = /[\W_]/;    
+
+    $('#novaSenha').on('blur',
+        function () {
+            if ($(this).val().length < 8 || $(this).val().length > 12) {
+                $('#senhaInvalida').errorMessage("Senha deve conter de 8 a 12 caracteres!", 5000);
+                $(this).focus();
+            }
+            if (ilegais.test($(this).val())) {
+                $('#senhaInvalida').errorMessage("Digite apenas letras e numeros!", 5000);
+                $(this).focus();
+            } else {
+                $(this).attr('disabled', 'disabled');
+            }
+        });
+
+    $('#confirmaNovaSenha').on('blur',
+        function() {
+            if ($(this).val() == $('#novaSenha').val()) {
+                $('#TrocarSenha').removeAttr('disabled');
+            } else {
+                $('#TrocarSenha').attr('disabled', 'disabled');
+                $('#senhaConfirmadaInvalida').errorMessage("As senhas não conferem!", 5000);                
+            }
+            if ($(this).val() == "") {
+                $('#novaSenha').removeAttr('disabled');
+            }
+         });
+
+    $('#TrocarSenha').on('click',function () {            
+        AjaxJsUsuario.trocarSenha();
+        $('#trocaSenha').modal('close');
+        $('#novaSenha').removeAttr('disabled');
+        $(this).Attr('disabled', 'disabled');
+    });
+
 
     //adicionando os itens do localstorage no carrinho
     if (localStorage.getItem('listaProdutos') !== null) {

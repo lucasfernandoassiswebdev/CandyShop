@@ -8,6 +8,7 @@ namespace CandyShop.Core.Services.Usuario
         void InserirUsuario(UsuarioDto usuario);
         void EditarUsuario(UsuarioDto usuario);
         void DesativarUsuario(string cpf);
+        void TrocarSenha(UsuarioDto usuario);
         int VericaUsuarioIgual(UsuarioDto usuario);
         UsuarioDto SelecionarUsuario(string cpf);
         IEnumerable<UsuarioDto> ListarUsuario();

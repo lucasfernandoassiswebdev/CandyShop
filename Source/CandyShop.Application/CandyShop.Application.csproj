@@ -67,6 +67,7 @@
     <Compile Include="ViewModels\CompraProdutoViewModel.cs" />
     <Compile Include="ViewModels\PagamentoViewModel.cs" />
     <Compile Include="ViewModels\ProdutoViewModel.cs" />
+    <Compile Include="ViewModels\TrocaSenhaViewModel.cs" />
     <Compile Include="ViewModels\UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

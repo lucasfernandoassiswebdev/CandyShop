@@ -10,6 +10,7 @@ namespace CandyShop.Application.Interfaces
         Response<IEnumerable<UsuarioViewModel>> ListarUsuariosEmDivida();
         Response<string> InserirUsuario(UsuarioViewModel usuario);
         Response<string> EditarUsuario(UsuarioViewModel usuario);
+        Response<string> TrocarSenha(UsuarioViewModel usuario);
         Response<UsuarioViewModel> SelecionarUsuario(string cpf);
         Response<string> DesativarUsuario(UsuarioViewModel usuario);
         Response<IEnumerable<UsuarioViewModel>> ListarInativos();
