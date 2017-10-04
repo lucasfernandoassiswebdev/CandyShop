@@ -125,7 +125,8 @@ $(document).ready(function () {
         else
             listaProdutos.push(produto);
 
-
+        quantidade = 0;
+        $('#adicionaCarrinho').attr('disabled', '');
         localStorage.removeItem('listaProdutos');
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
     });
@@ -135,7 +136,7 @@ $(document).ready(function () {
     //tecla pressionada
     $('#quantidade').on('keydown', function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', '');
         } else {
@@ -145,7 +146,7 @@ $(document).ready(function () {
     //foco saindo do input
     $('#quantidade').on('blur', function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $('#adicionaCarrinho').attr('disabled', '');
         } else {
