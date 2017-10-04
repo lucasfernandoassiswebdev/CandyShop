@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using CandyShop.Web.Filters;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -11,7 +12,7 @@ using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
-    public class ProdutoController : AuthController
+    public class ProdutoController : Controller
     {
         private readonly IProdutoApplication _appProduto;
 
@@ -21,16 +22,20 @@ namespace CandyShop.Web.Controllers
         }
 
         #region Telas
+
+        [AdminFilterResult]
         public ActionResult ListaProdutos()
         {
             return View();
-        }        
+        }
 
+        [AdminFilterResult]
         public ActionResult CadastrarProduto()
         {
             return View();
         }
 
+        [AdminFilterResult]
         public ActionResult DetalheProduto(int idProduto)
         {
             var response = _appProduto.DetalharProduto(idProduto);
@@ -40,6 +45,7 @@ namespace CandyShop.Web.Controllers
             return View(response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult EditarProduto(int idProduto)
         {
             var response = _appProduto.DetalharProduto(idProduto);
@@ -49,6 +55,7 @@ namespace CandyShop.Web.Controllers
             return View(response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult DesativarProduto(int idProduto)
         {
             var response = _appProduto.DetalharProduto(idProduto);
@@ -60,6 +67,8 @@ namespace CandyShop.Web.Controllers
         #endregion
 
         #region Listas
+
+        [AdminFilterResult]
         public ActionResult Listar()
         {
             var response = _appProduto.ListarProdutos();
@@ -70,6 +79,7 @@ namespace CandyShop.Web.Controllers
             return View("ListaProdutos", response.Content);            
         }
 
+        [AdminFilterResult]
         public ActionResult ListarInativos()
         {
             var response = _appProduto.ListarInativos();
@@ -79,6 +89,7 @@ namespace CandyShop.Web.Controllers
             return View("ListaProdutos", response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult ProcurarProduto(string nome)
         {
             var response = _appProduto.ProcurarProduto(nome);
@@ -89,6 +100,7 @@ namespace CandyShop.Web.Controllers
             return View("ListaProdutos", response.Content);            
         }
 
+        [AdminFilterResult]
         public ActionResult ListarCategoria(string categoria)
         {
             var response = _appProduto.ListarCategoria(categoria);
@@ -102,6 +114,8 @@ namespace CandyShop.Web.Controllers
         #endregion
 
         #region Execucoes
+
+        [AdminFilterResult]
         [HttpPost]
         public ActionResult CadastrarProduto(ProdutoViewModel produto)
         {
@@ -203,6 +217,7 @@ namespace CandyShop.Web.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
+        [AdminFilterResult]
         [HttpPut]
         public ActionResult EditarProduto(ProdutoViewModel produto)
         {
@@ -284,6 +299,7 @@ namespace CandyShop.Web.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
+        [AdminFilterResult]
         [HttpPut]
         public ActionResult DesativarProdutoConfirmado(ProdutoViewModel produto)
         {

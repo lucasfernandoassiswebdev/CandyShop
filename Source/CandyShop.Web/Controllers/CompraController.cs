@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using CandyShop.Web.Filters;
 using System;
 using System.Linq;
 using System.Net;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
-    public class CompraController : AuthController
+    public class CompraController : Controller
     {
         private readonly ICompraApplication _appCompra;
         private readonly ICompraProdutoApplication _appCompraProduto;
@@ -20,11 +21,13 @@ namespace CandyShop.Web.Controllers
             _appProdutos = produtos;
         }
 
+        [UserFilterResult]
         public ActionResult Index()
         {
             return View();
         }
 
+        [AdminFilterResult]
         public ActionResult Editar(int idCompra)
         {
             var itens = _appCompraProduto.ListarProdutos(idCompra);
@@ -37,6 +40,7 @@ namespace CandyShop.Web.Controllers
         }
 
         #region listas
+        [AdminFilterResult]
         public ActionResult Listar()
         {
             ViewBag.tituloPagina = "Compras do ultimo mês";
@@ -47,6 +51,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [UserFilterResult]
         public ActionResult ListarCpf()
         {
             ViewBag.tituloPagina = "Minhas Compras";
@@ -58,6 +63,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult ListarSemana()
         {
             ViewBag.tituloPagina = "Compras da ultima semana";
@@ -68,6 +74,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult ListarMes(int mes)
         {
             ViewBag.tituloPagina = $"Compra do mês {mes}";
@@ -78,6 +85,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult ListarDia()
         {
             ViewBag.tituloPagina = $"Compras do dia {DateTime.Now.ToShortDateString()}";
@@ -90,11 +98,13 @@ namespace CandyShop.Web.Controllers
         #endregion
 
         #region execuções
+
         [HttpPost]
+        [UserFilterResult]
         public ActionResult Cadastrar(CompraViewModel compra)
         {
 
-            if (Session["login"].ToString() == "off")
+            if (Session["Login"].ToString() == "off")
             {
                 return Content("Você não está logado");
             }
@@ -120,6 +130,7 @@ namespace CandyShop.Web.Controllers
         }
 
         [HttpGet]
+        [UserFilterResult]
         public ActionResult Detalhes(int idCompra)
         {
             var response = _appCompra.SelecionarCompra(idCompra);
@@ -130,6 +141,7 @@ namespace CandyShop.Web.Controllers
         }
 
         [HttpPut]
+        [AdminFilterResult]
         public ActionResult Editar(CompraViewModel Compra)
         {
             var response = _appCompra.EditarCompra(Compra);

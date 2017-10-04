@@ -4,10 +4,11 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using CandyShop.Web.Filters;
 
 namespace CandyShop.Web.Controllers
 {
-    public class PagamentoController : AuthController
+    public class PagamentoController : Controller
     {
         private readonly IPagamentoApplication _appPagamento;
         private readonly IUsuarioApplication _appUsuario;
@@ -19,22 +20,25 @@ namespace CandyShop.Web.Controllers
 
 
         #region Telas
-
+        [AdminFilterResult]
         public ActionResult Index()
         {
             return View();
         }
 
+        [AdminFilterResult]
         public ActionResult Detalhes()
         {
             return View();
         }
 
+        [UserFilterResult]
         public ActionResult Inserir()
         {
             return View();
         }
 
+        [AdminFilterResult]
         public ActionResult Editar(int idPagamento)
         {
             var result = _appPagamento.SelecionarPagamento(idPagamento);
@@ -47,6 +51,7 @@ namespace CandyShop.Web.Controllers
 
         #region Listas
 
+        [AdminFilterResult]
         public ActionResult Listar()
         {
             ViewBag.tituloPagina = "Pagamentos do ultimo mês";
@@ -57,6 +62,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [UserFilterResult]
         public ActionResult ListarCpf()
         {
             ViewBag.tituloPagina = "Meus pagamentos";
@@ -68,6 +74,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult ListarSemana()
         {
             ViewBag.tituloPagina = $"Pagamentos da ultima semana";
@@ -78,6 +85,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult ListarMes(int mes)
         {
             ViewBag.tituloPagina = $"Pagamento do mês {mes}";
@@ -88,6 +96,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult ListarDia()
         {
             ViewBag.tituloPagina = $"Pagamentos do dia {DateTime.Now.ToShortDateString()}";
@@ -101,7 +110,7 @@ namespace CandyShop.Web.Controllers
         #endregion
 
         #region Acoes
-
+        [UserFilterResult]
         public ActionResult InserirPagamento(PagamentoViewModel pagamento)
         {
             pagamento.Usuario = new UsuarioViewModel { Cpf = Session["login"].ToString() };
@@ -112,7 +121,7 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro " + response.ContentAsString.First());
             return Content("Pagamento realizado com sucesso!!");
         }
-
+        [AdminFilterResult]
         public ActionResult EditarPagamento(PagamentoViewModel pagamento)
         {                        
             var response = _appPagamento.EditarPagamento(pagamento);                        

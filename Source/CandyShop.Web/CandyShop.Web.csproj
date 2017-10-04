@@ -161,17 +161,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filters\AdminFilterResult.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SimpleInjectorContainer.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagamentoController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Filters\UserFilterResult.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -283,7 +284,6 @@
     <Content Include="Views\Compra\Detalhes.cshtml" />
     <Content Include="Views\Pagamento\Editar.cshtml" />
     <Content Include="Views\Compra\Editar.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

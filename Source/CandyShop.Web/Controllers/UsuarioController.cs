@@ -1,16 +1,16 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
-using Newtonsoft.Json;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using CandyShop.Web.Filters;
 using Image = System.Drawing.Image;
 
 namespace CandyShop.Web.Controllers
 {
-    public class UsuarioController : AuthController
+    public class UsuarioController : Controller
     {
         private readonly IUsuarioApplication _appUsuario;
 
@@ -20,17 +20,21 @@ namespace CandyShop.Web.Controllers
         }
 
         #region telas
+
+        [AdminFilterResult]
         public ActionResult Index()
         {
             return View();
         }
 
+        [AdminFilterResult]
         public ActionResult Cadastrar()
         {
             TempData["caminhoImagensUsuarios"] = "../../Imagens/Usuarios";
             return View();
         }
 
+        [AdminFilterResult]
         public ActionResult Editar(string cpf)
         {
             var usuario = _appUsuario.SelecionarUsuario(cpf);
@@ -42,6 +46,7 @@ namespace CandyShop.Web.Controllers
             return View(usuario.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult Desativar(string cpf)
         {
             var usuario = _appUsuario.SelecionarUsuario(cpf);
@@ -52,6 +57,7 @@ namespace CandyShop.Web.Controllers
             return View(usuario.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult Detalhes(string cpf)
         {
             var response = _appUsuario.SelecionarUsuario(cpf);
@@ -64,6 +70,8 @@ namespace CandyShop.Web.Controllers
         #endregion
 
         #region listas
+
+        [AdminFilterResult]
         public ActionResult Listar()
         {
             var response = _appUsuario.ListarUsuarios();
@@ -75,6 +83,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult ListarUsuariosEmDivida()
         {
             var response = _appUsuario.ListarUsuariosEmDivida();
@@ -85,6 +94,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult ListarInativos()
         {
             var response = _appUsuario.ListarInativos();
@@ -95,6 +105,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [AdminFilterResult]
         public ActionResult ProcurarUsuario(string nome)
         {
             var response = _appUsuario.ProcurarUsuario(nome);
@@ -105,6 +116,7 @@ namespace CandyShop.Web.Controllers
         #endregion
 
         #region EXECUCOES
+        [AdminFilterResult]
         [HttpPost]
         public ActionResult Cadastrar(UsuarioViewModel usuario)
         {
@@ -144,6 +156,7 @@ namespace CandyShop.Web.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
+        [AdminFilterResult]
         [HttpPut]
         public ActionResult Editar(UsuarioViewModel usuario)
         {
@@ -182,6 +195,7 @@ namespace CandyShop.Web.Controllers
             return View("Editar");
         }
 
+        [AdminFilterResult]
         [HttpPut]
         public ActionResult DesativarUsuario(UsuarioViewModel usuario)
         {
@@ -191,6 +205,7 @@ namespace CandyShop.Web.Controllers
             return Content("Usuario desativado com sucesso!");
         }        
 
+        [UserFilterResult]
         public ActionResult Deslogar()
         {
             Session.Clear();
