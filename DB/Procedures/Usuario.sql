@@ -299,7 +299,7 @@ CREATE PROCEDURE [dbo].[CSSP_VerificaLoginSenha]
 	BEGIN									
 		SELECT TOP 1 1 
 			FROM Usuario
-			WHERE Cpf = @Cpf AND SenhaUsuario = @SenhaUsuario
+			WHERE Cpf = @Cpf AND SenhaUsuario = @SenhaUsuario AND Ativo = 'A'
 	END
 GO
 
