@@ -37,7 +37,8 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
 
-            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";                            
+            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
+            TempData["LimparCarrinho"] = false;
             return View("GridProdutos", response.Content);
         }
 

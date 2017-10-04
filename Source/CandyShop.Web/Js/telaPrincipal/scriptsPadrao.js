@@ -24,13 +24,13 @@ $(document).ready(function () {
     $(".tooltipped").tooltip({ delay: 50 });
     $(".button-collapse").sideNav();
 
-
     $("#DivGrid").on("click", ".btn-floating", function () {
         preco = $(this).attr("data-Preco");
         nome = $(this).attr("data-Nome");
         imagem = $(this).attr("data-Imagem");
         Id = $(this).attr("data-Id");
         quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
+        console.log(quantidadeDisponivel);
     });
 
     //adicionando os itens do localstorage no carrinho
@@ -120,12 +120,12 @@ $(document).ready(function () {
             Quantidade: quantidade,
             Imagem: imagem
         }
-        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length) 
+        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length)
             console.log('produto ja existe');
-         else
+        else
             listaProdutos.push(produto);
 
-        
+
         localStorage.removeItem('listaProdutos');
         localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
     });
@@ -137,7 +137,7 @@ $(document).ready(function () {
         quantidade = $("#quantidade").val();
         if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#adicionaCarrinho').attr('disabled', 'disabled');
+            $('#adicionaCarrinho').attr('disabled', '');
         } else {
             $('#adicionaCarrinho').removeAttr('disabled');
         }
@@ -147,7 +147,7 @@ $(document).ready(function () {
         quantidade = $("#quantidade").val();
         if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#adicionaCarrinho').attr('disabled', 'disabled');
+            $('#adicionaCarrinho').attr('disabled', '');
         } else {
             $('#adicionaCarrinho').removeAttr('disabled');
         }
