@@ -31,7 +31,7 @@
                 <div class="center">
                     <label for="fotoUsuario">
                         @{ string caminho = @Model.Cpf + ".jpg"; }
-                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensUsuarios"]/@caminho" alt="imagem não disponível :(" />
+                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
                     </label>
                     <input id="fotoUsuario" type="file" class="file-path validate" style="display: none" accept="image/*">
                 </div>
@@ -76,8 +76,8 @@
                 <div class="input-field col s6">
                     <select id="Ativo">
                         <option value="" disabled>Escolha uma opção</option>
-                        <option value="A" selected>Ativo</option>
-                        <option value="I">Inativo</option>
+                        <option value="A" @if (Convert.ToString(Model.Ativo) == "A") {<text>selected</text>} >Ativo</option>
+                        <option value="I" @if (Convert.ToString(Model.Ativo) == "I") {<text>selected</text>} >Inativo</option>
                     </select>
                     <label>Status do usuário</label>
                 </div>
