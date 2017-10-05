@@ -163,7 +163,7 @@ $(document).ready(function () {
         if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length)
             console.log('produto ja existe');
         else
-            listaProdutos.push(produto);
+            listaProdutos.push(produto); 
 
         quantidade = 0;
         $('#adicionaCarrinho').attr('disabled', '');
