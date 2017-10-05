@@ -78,12 +78,12 @@
                 <div class="input-field col s6">
                     <select id="Categoria">
                         <option value="" disabled>Escolha uma opção</option>
-                        <option value="Doces" selected>Doces</option>
-                        <option value="Balas">Balas</option>
-                        <option value="Bebidas">Bebidas</option>
-                        <option value="Amendoins">Amendoins</option>
-                        <option value="Chocolates">Chocolates</option>
-                        <option value="Salgadinhos">Salgadinhos</option>
+                        <option value="Doces" @if (Convert.ToString(Model.Categoria) == "Doces") {<text>selected</text>}>Doces</option>
+                        <option value="Balas" @if (Convert.ToString(Model.Categoria) == "Balas") {<text>selected</text>}>Balas</option>
+                        <option value="Bebidas" @if (Convert.ToString(Model.Categoria) == "Bebidas") {<text>selected</text>}>Bebidas</option>
+                        <option value="Amendoins" @if (Convert.ToString(Model.Categoria) == "Amendoins") {<text>selected</text>}>Amendoins</option>
+                        <option value="Chocolates" @if (Convert.ToString(Model.Categoria) == "Chocolates") {<text>selected</text>}>Chocolates</option>
+                        <option value="Salgadinhos" @if (Convert.ToString(Model.Categoria) == "Salgadinhos") {<text>selected</text>}>Salgadinhos</option>
                     </select>
                     <label>Categoria do produto</label>
                 </div>
