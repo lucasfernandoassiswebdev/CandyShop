@@ -32,10 +32,10 @@
             administracao: '@Url.Action("Index", "Admin")',
             main: '@Url.Action("Index", "Home")',
             verificaLogin: '@Url.Action("Logar","Home")',
-            padrao: '@Url.Action("NavBar", "Home")',            
+            padrao: '@Url.Action("NavBar", "Home")',
             listaCategoria: '@Url.Action("ListarCategoria", "Home")',
             listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Home")'
-        });       
+        });
         //validando campo de CPF
         $("#cpf").keydown(function () {
             mcpf($("#cpf").val());
@@ -47,7 +47,7 @@
                 $("#cpf").keydown();
             }
         });
-    });
+});
 
     function mcpf(v) {
         v = v.replace(/\D/g, "");
@@ -71,9 +71,9 @@
             <input type="number" id="quantidade" class="center identQuant" autocomplete="off" />
             <span class="QtdeInvalida" color="red"></span>
         </form>
-    </div>   
+    </div>
     <div class="modal-footer identQuant">
-        <a id="adicionaCarrinho" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
+        <a id="adicionaCarrinho" href="#modalCarrinho" class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
     </div>
 </div>
 
@@ -85,7 +85,7 @@
         <p class="pink-text center identQuant"></p>
         <form class="center">
             <div class="input-field col s12">
-                <input type="password" id="novaSenha" class="center identQuant" autocomplete="off"/>
+                <input type="password" id="novaSenha" class="center identQuant" autocomplete="off" />
                 <span id="senhaInvalida" color="red"></span>
                 <label for="novaSenha">Nova Senha: </label>
             </div>
@@ -102,7 +102,7 @@
 </div>
 
 
-<!--modal de editar quantidade-->
+<!--modal de editar quantidade
 @*<div id="modalEditarQuantidade" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
         <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
@@ -117,7 +117,7 @@
         <a id="editarQuantidade" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
     </div>
 </div>*@
-
+-->
 <!--modal do carrinho-->
 <div id="modalCarrinho" class="modal">
     <div class="modal-content center">
@@ -128,7 +128,7 @@
         </div>
     </div>
     <div class="modal-footer identQuant">
-        <a href="#!" class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold" onclick="AjaxJsCompra.inserirCompra()">Confirmar compra</a>
+        <a href="#!" id="confirmarCompra" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold" onclick="AjaxJsCompra.inserirCompra()">Confirmar compra</a>
         <a href="#!" id="limpar" class="modal-close right modal-action waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Limpar</a>
     </div>
 </div>
@@ -183,8 +183,8 @@
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">book</i>Administrativo</a></li>
-                <li class="divider"></li>
+                    <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">book</i>Administrativo</a></li>
+                    <li class="divider"></li>
                 }
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
@@ -220,8 +220,8 @@
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">find_in_page</i>Administrativo</a></li>
-                <li class="divider"></li>
+                    <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">find_in_page</i>Administrativo</a></li>
+                    <li class="divider"></li>
                 }
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
