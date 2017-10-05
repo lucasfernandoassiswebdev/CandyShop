@@ -162,6 +162,7 @@ $(document).ready(function () {
                 "class": "collection-item avatar"
             }));
         i++;
+       
 
         var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
 
@@ -171,6 +172,7 @@ $(document).ready(function () {
             Quantidade: quantidade,
             Imagem: imagem
         }
+
         if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length)
             console.log('produto ja existe');
         else
@@ -183,7 +185,7 @@ $(document).ready(function () {
     });
 
     //desabilitando botão quando houverem quantidades inválidas
-    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
+    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;                                     
     //tecla pressionada
     $('#quantidade').keydown(function () {
         quantidade = $("#quantidade").val();

@@ -12,11 +12,11 @@ var AjaxJsCompra = (function ($) {
         var i = 1;
         //var j = 0;
         $.each(produtos,
-        
+
             function () {
                 produto = {
-                    Produto: { IdProduto: $('li:nth-child('+ i +') span').attr('data-id') },
-                    QtdeCompra: $('li:nth-child('+ i +') p').attr('data-Quantidade')
+                    Produto: { IdProduto: $('li:nth-child(' + i + ') span').attr('data-id') },
+                    QtdeCompra: $('li:nth-child(' + i + ') p').attr('data-Quantidade')
                 };
                 listaProdutos.push(produto);
                 i++;
@@ -37,6 +37,7 @@ var AjaxJsCompra = (function ($) {
                     }).fail(function (xhr) {
                         console.log(xhr.responseText);
                     });
+                localStorage.removeItem('listaProdutos');
             })
             .fail(function (xhr) {
                 console.log(xhr.responseText);
@@ -76,8 +77,8 @@ var AjaxJsCompra = (function ($) {
         var compra = {
             IdCompra: idCompra,
             DataCompra: $('input:eq(0)').val() + $('input:eq(1)').val(),
-            Usuario : {
-              Cpf : cpfUsuario   
+            Usuario: {
+                Cpf: cpfUsuario
             },
             Itens: listaProdutos
         };
