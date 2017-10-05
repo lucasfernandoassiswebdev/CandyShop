@@ -109,6 +109,11 @@ $(document).ready(function () {
                             }).on("click", function () {
                                 //$("#modalQuantidade").data("index", $(this).closest("li").index());                                
                                 $(this).closest('li').remove();
+
+                                var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
+                                listaProdutos.pop(produto);
+                                localStorage.removeItem('listaProdutos');
+                                localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
                             })
                         ]
                     })
@@ -140,7 +145,7 @@ $(document).ready(function () {
                     $("<a>",
                         {
                             href: "#!",
-                            'class': "modal-close modal-trigger secondary-content",
+                            'class': "modal-trigger secondary-content",
                             "data-quantidadeDisponivel": quantidadeDisponivel,
                             html: [
                                 $("<i>",
@@ -149,7 +154,7 @@ $(document).ready(function () {
                                         "class": "small material-icons"
                                     }).on("click", function () {
                                     //$("#modalQuantidade").data("index", $(this).closest("li").index());
-                                    $('.collection li:nth-child(' + i + ')').remove();
+                                    $(this).closest('li').remove();
                                 })
                             ]
                         })
