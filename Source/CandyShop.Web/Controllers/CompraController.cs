@@ -99,8 +99,7 @@ namespace CandyShop.Web.Controllers
 
         #region execuções
 
-        [HttpPost]
-        [UserFilterResult]
+        [HttpPost]        
         public ActionResult Cadastrar(CompraViewModel compra)
         {
 
