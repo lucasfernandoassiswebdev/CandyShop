@@ -5,11 +5,19 @@
 }
 
 <link rel="stylesheet" type="text/css" href="../../Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
-
 <script type="text/javascript" src="../../Js/Produto/scriptsEditarProduto.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="../../Js/plugins/jquery.maskMoney.js"></script>
 <script>
     $(document).ready(function () {
         $('select').material_select();
+
+        $('#PrecoProduto').maskMoney({
+            prefix: 'R$ ',
+            allowNegative: true,
+            thousands: '.',
+            decimal: ',',
+            affixesStay: false
+        });
     });
 </script>
 
