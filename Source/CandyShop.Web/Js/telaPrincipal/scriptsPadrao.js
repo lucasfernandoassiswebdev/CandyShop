@@ -30,8 +30,7 @@ $(document).ready(function () {
         nome = $(this).attr("data-Nome");
         imagem = $(this).attr("data-Imagem");
         Id = $(this).attr("data-Id");
-        quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
-        console.log(quantidadeDisponivel);
+        quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");        
     });
 
 
@@ -193,21 +192,19 @@ $(document).ready(function () {
     //desabilitando botão quando houverem quantidades inválidas
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;                                     
     //tecla pressionada
-    $('#quantidade').keydown(function () {
-        quantidade = $("#quantidade").val();
-        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
-            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#adicionaCarrinho').attr('disabled', '');
-        } else {
+    $('#quantidade').on('keyup', function () {
+        quantidade = $("#quantidade").val();        
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {                        
+            $('#adicionaCarrinho').attr('disabled', 'disabled');
+        } else {            
             $('#adicionaCarrinho').removeAttr('disabled');
         }
     });
     //foco saindo do input
     $('#quantidade').blur(function () {
         quantidade = $("#quantidade").val();
-        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
-            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#adicionaCarrinho').attr('disabled', '');
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {            
+            $('#adicionaCarrinho').attr('disabled', 'disabled');
         } else {
             $('#adicionaCarrinho').removeAttr('disabled');
         }
@@ -222,25 +219,25 @@ $(document).ready(function () {
             $('#adicionaCarrinho').removeAttr('disabled');
         }
     });
-    //desabilitando no modal de editar a quantidade
-    $('#quantidadeEdit').on('blur', function () {
-        quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
-            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#editarQuantidade').attr('disabled', 'disabled');
-        } else {
-            $('#editarQuantidade').removeAttr('disabled');
-        }
-    });
-    $('#quantidadeEdit').keydown(function () {
-        quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
-            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#editarQuantidade').attr('disabled', 'disabled');
-        } else {
-            $('#editarQuantidade').removeAttr('disabled');
-        }
-    });
+    ////desabilitando no modal de editar a quantidade
+    //$('#quantidadeEdit').on('blur', function () {
+    //    quantidade = $("#quantidadeEdit").val();
+    //    if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+    //        //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+    //        $('#editarQuantidade').attr('disabled', 'disabled');
+    //    } else {
+    //        $('#editarQuantidade').removeAttr('disabled');
+    //    }
+    //});
+    //$('#quantidadeEdit').keydown(function () {
+    //    quantidade = $("#quantidadeEdit").val();
+    //    if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+    //        //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+    //        $('#editarQuantidade').attr('disabled', 'disabled');
+    //    } else {
+    //        $('#editarQuantidade').removeAttr('disabled');
+    //    }
+    //});
     //$('#quantidadeEdit').on('paste', function () {
     //    quantidade = $("#quantidadeEdit").val();
     //    if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
