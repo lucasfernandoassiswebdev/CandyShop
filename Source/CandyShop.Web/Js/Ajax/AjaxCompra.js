@@ -42,6 +42,7 @@ var AjaxJsCompra = (function ($) {
                 console.log(xhr.responseText);
             });
     }
+
     var historicoCompra = function () {
         chamaPagina(url.historicoCompra);
     };
@@ -82,6 +83,7 @@ var AjaxJsCompra = (function ($) {
         };
         concluirAcaoEdicao(url.editarCompra, compra, url.listarCompraMes);
     };
+
     return {
         init: init,
         historicoCompra: historicoCompra,

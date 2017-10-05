@@ -75,7 +75,8 @@ $(document).ready(function () {
 
     //adicionando os itens do localstorage no carrinho
     if (localStorage.getItem('listaProdutos') !== null) {
-        JSON.parse(localStorage.getItem('listaProdutos')).forEach(function (produto) {
+        var i = 1;
+        JSON.parse(localStorage.getItem('listaProdutos')).forEach(function (produto) {            
             $(".collection").append($("<li>", {
                 html: [
                     $("<img>",
@@ -96,27 +97,31 @@ $(document).ready(function () {
                             "data-Quantidade": produto.Quantidade
                         }),
                     $("<a>", {
-                        href: "#modalQuantidade",
-                        'class': "modal-trigger modal-close secondary-content",
+                        //href: "#modalQuantidade",
+                        href: "#!",
+                        'class': "modal-trigger secondary-content",                        
                         "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
                         html: [
                             $("<i>", {
-                                html: "mode_edit",
-                                "class": "material-icons"
+                                html: "delete",
+                                "class": "small material-icons",
+                                "id": i
                             }).on("click", function () {
-                                $("#modalQuantidade").data("index", $(this).closest("li").index());
+                                //$("#modalQuantidade").data("index", $(this).closest("li").index());                                
+                                $(this).closest('li').remove();
                             })
                         ]
                     })
                 ],
                 "class": "collection-item avatar"
             }));
-
+            i++;
         });
     }
 
     //adicionando os itens no carrinho
     $("#adicionaCarrinho").on("click", function () {
+        var i = 1;
         $(".collection").append($("<li>",
             {
                 html: [
@@ -134,23 +139,24 @@ $(document).ready(function () {
                         }),
                     $("<a>",
                         {
-                            href: "#modalEditarQuantidade",
+                            href: "#!",
                             'class': "modal-close modal-trigger secondary-content",
                             "data-quantidadeDisponivel": quantidadeDisponivel,
                             html: [
                                 $("<i>",
-                                    {
-                                        html: "mode_edit",
-                                        "class": "material-icons"
-                                    }).on("click",
-                                    function () {
-                                        $("#modalEditarQuantidade").data("index", $(this).closest("li").index());
-                                    })
+                                    {                                                                       
+                                        html: "delete",
+                                        "class": "small material-icons"
+                                    }).on("click", function () {
+                                    //$("#modalQuantidade").data("index", $(this).closest("li").index());
+                                    $('.collection li:nth-child(' + i + ')').remove();
+                                })
                             ]
                         })
                 ],
                 "class": "collection-item avatar"
             }));
+        i++;
 
         var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
 
