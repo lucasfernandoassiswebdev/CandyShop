@@ -1,4 +1,5 @@
-﻿var AjaxJsCompra = (function ($) {
+﻿
+var AjaxJsCompra = (function ($) {
     var url = {};
 
     var init = function (config) {
@@ -11,6 +12,7 @@
         var i = 1;
         //var j = 0;
         $.each(produtos,
+        
             function () {
                 produto = {
                     Produto: { IdProduto: $('li:nth-child('+ i +') span').attr('data-id') },
