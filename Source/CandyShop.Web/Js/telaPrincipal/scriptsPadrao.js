@@ -97,7 +97,6 @@ $(document).ready(function () {
                             "data-Quantidade": produto.Quantidade
                         }),
                     $("<a>", {
-                        //href: "#modalQuantidade",
                         href: "#!",
                         'class': "modal-trigger secondary-content",                        
                         "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
@@ -108,12 +107,14 @@ $(document).ready(function () {
                                 "id": i
                             }).on("click", function () {
                                 //$("#modalQuantidade").data("index", $(this).closest("li").index());                                
-                                $(this).closest('li').remove();
-
+                                var li = $(this).closest("li");
                                 var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
-                                listaProdutos.pop(produto);
+                                listaProdutos = listaProdutos.filter(function (item) {
+                                    return item.Id != li.find('[data-Id]').attr('data-Id');
+                                });                                
                                 localStorage.removeItem('listaProdutos');
                                 localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
+                                li.remove();
                             })
                         ]
                     })
@@ -127,6 +128,20 @@ $(document).ready(function () {
     //adicionando os itens no carrinho
     $("#adicionaCarrinho").on("click", function () {
         var i = 1;
+
+        var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
+
+        var produto = {
+            Id: Id,
+            Nome: nome,
+            Quantidade: quantidade,
+            Imagem: imagem
+        }
+        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length)
+            console.log('produto ja existe');
+        else
+            listaProdutos.push(produto);
+        console.log(produto);
         $(".collection").append($("<li>",
             {
                 html: [
@@ -152,9 +167,15 @@ $(document).ready(function () {
                                     {                                                                       
                                         html: "delete",
                                         "class": "small material-icons"
-                                    }).on("click", function () {
-                                    //$("#modalQuantidade").data("index", $(this).closest("li").index());
-                                    $(this).closest('li').remove();
+                                    }).on("click", function () {                                                                                  
+                                        var li = $(this).closest("li");
+                                        var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
+                                        listaProdutos = listaProdutos.filter(function (item) {
+                                            return item.Id != li.find('[data-Id]').attr('data-Id');
+                                        });
+                                        localStorage.removeItem('listaProdutos');
+                                        localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
+                                        li.remove();
                                 })
                             ]
                         })
@@ -162,20 +183,7 @@ $(document).ready(function () {
                 "class": "collection-item avatar"
             }));
         i++;
-
-        var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
-
-        var produto = {
-            Id: Id,
-            Nome: nome,
-            Quantidade: quantidade,
-            Imagem: imagem
-        }
-        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length)
-            console.log('produto ja existe');
-        else
-            listaProdutos.push(produto); 
-
+        
         quantidade = 0;
         $('#adicionaCarrinho').attr('disabled', '');
         localStorage.removeItem('listaProdutos');
