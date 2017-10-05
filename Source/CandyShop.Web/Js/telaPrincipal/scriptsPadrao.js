@@ -183,7 +183,7 @@ $(document).ready(function () {
                 "class": "collection-item avatar"
             }));
         i++;
-        
+
         quantidade = 0;
         $('#adicionaCarrinho').attr('disabled', '');
         localStorage.removeItem('listaProdutos');
@@ -191,7 +191,7 @@ $(document).ready(function () {
     });
 
     //desabilitando botão quando houverem quantidades inválidas
-    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
+    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;                                     
     //tecla pressionada
     $('#quantidade').keydown(function () {
         quantidade = $("#quantidade").val();
