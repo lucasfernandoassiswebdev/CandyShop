@@ -9,20 +9,20 @@ var AjaxJsCompra = (function ($) {
         var listaProdutos = [];
         var produto;
         var produtos = $('.collection li');
-        var i = 2;
-        var j = 2;
+        var i = 1;
+        //var j = 0;
         $.each(produtos,
         
             function () {
                 produto = {
-                    Produto: { IdProduto: $('span:eq(' + i + ')').attr('data-Id') },
-                    QtdeCompra: $('p:eq(' + j + ')').attr('data-quantidade')
+                    Produto: { IdProduto: $('li:nth-child('+ i +') span').attr('data-id') },
+                    QtdeCompra: $('li:nth-child('+ i +') p').attr('data-Quantidade')
                 };
                 listaProdutos.push(produto);
                 i++;
-                j++;
+                //j++;
             });
-
+        console.log(listaProdutos);
         var compra = { Itens: listaProdutos };
 
         $.post(url.inserirCompra, compra)
