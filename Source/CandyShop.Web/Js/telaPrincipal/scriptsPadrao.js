@@ -200,6 +200,16 @@ $(document).ready(function () {
             $('#adicionaCarrinho').removeAttr('disabled');
         }
     });
+    //onclick dentro da modal
+    $('#modalQuantidade').on('click', function () {
+        quantidade = $("#quantidade").val();
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
+            $('#adicionaCarrinho').attr('disabled', 'disabled');
+        } else {
+            $('#adicionaCarrinho').removeAttr('disabled');
+        }
+    });
+
     //foco saindo do input
     $('#quantidade').blur(function () {
         quantidade = $("#quantidade").val();
