@@ -42,6 +42,10 @@
 	}
 }
 
+body, #DivGrid {
+	overflow-y: scroll;
+}
+
 html {
 	color: black;
 	font-family: Arial;
