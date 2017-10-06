@@ -40,12 +40,12 @@ $("#fotoUsuario").change(function () {
     $("#removerImagem").show();
 });
 
-$(".botaoVoltar").on("click", function () {
+$(".botaoVoltar").click(function () {
     //voltando a lista de usuários
     AjaxJsUsuario.listaUsuario();
 });
 
-$(".botaoCadastro").on("click", function () {
+$(".botaoCadastro").click(function () {
     //convertendo a imagem para base64
     encodeImageFileAsURL(AjaxJsUsuario.concluirCadastroUsuario);
 });
