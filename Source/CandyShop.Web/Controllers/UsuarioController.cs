@@ -190,7 +190,7 @@ namespace CandyShop.Web.Controllers
                 }
                 else {
                     var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                    var filePath = Server.MapPath("../Imagens/Usuarios/" + cpf + ".jpg");
+                    var filePath = Server.MapPath("Imagens/Usuarios/" + cpf + ".jpg");
                     if (System.IO.File.Exists(filePath))
                     {
                         System.IO.File.Delete(filePath);

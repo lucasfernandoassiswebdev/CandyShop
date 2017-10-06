@@ -4,15 +4,12 @@
     Layout = null;
 }
 
-<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="~/Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
+<link rel="stylesheet" type="text/css" href="~Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
 
 <script type="text/javascript" src="~/Js/Produto/scriptsEditarProduto.js?d=@DateTime.Now.Ticks"></script>
-=======
-<link rel="stylesheet" type="text/css" href="../../Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
-<script type="text/javascript" src="../../Js/Produto/scriptsEditarProduto.js?d=@DateTime.Now.Ticks"></script>
-<script type="text/javascript" src="../../Js/plugins/jquery.maskMoney.js"></script>
->>>>>>> 1f2e8d6e9d87128b02323057060db31628d51af8
+<script type="text/javascript" src="~Js/plugins/jquery.maskMoney.js"></script>
+
 <script>
     $(document).ready(function () {
         $('select').material_select();
@@ -57,6 +54,11 @@
                     </label>
                     <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
                 </div>
+            </div>
+            <div class="row center">
+                <a class="btn" id="removerImagem1" style="margin-right:50px"><i class="material-icons left">block</i>Remover</a>
+                <a class="btn" id="removerImagem2"><i class="material-icons left">block</i>Remover</a>
+                <a class="btn" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
             </div>
             <div class="row">
                 <div class="input-field col s12">

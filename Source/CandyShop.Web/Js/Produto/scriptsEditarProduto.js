@@ -103,6 +103,21 @@ $('#fotoProduto3').change(function () {
     readURL3(this);
 });
 
+$("#removerImagem1").click(function () {
+    $("#imagem1").attr("src", "../../Imagens/retirado.png");
+    $("#fotoProduto1").val("");
+});
+
+$("#removerImagem2").click(function () {
+    $("#imagem2").attr("src", "../../Imagens/retirado.png");
+    $("#fotoProduto2").val("");
+});
+
+$("#removerImagem3").click(function () {
+    $("#imagem3").attr("src", "../../Imagens/retirado.png");
+    $("#fotoProduto3").val("");
+});
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
