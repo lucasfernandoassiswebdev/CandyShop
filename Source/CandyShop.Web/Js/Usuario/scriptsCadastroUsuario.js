@@ -1,16 +1,59 @@
-﻿$('#fotoUsuario').change(function () {
-    //função que muda a foto do usuário na tela
-    readURL(this);
+﻿//inicia os métodos que o materialize pede 
+//e desativa os botões de envio caso o formulário esteja inválido
+$(document).ready(function () {
+    $("input").characterCounter();
+    $(".tooltipped").tooltip({ delay: 50 });
+    $("select").material_select();
+
+    $("#cpf").keydown(function () {
+        mcpf($("#cpf").val());
+        validaBotao();
+    });
+
+    $("#cpf").on("blur", function () {
+        mcpf($("#cpf").val());
+        //retirando caracteres a mais do campo
+        if ($("#cpf").val().length > 14) {
+            $("#cpf").val($("#cpf").val().substr(0, 13));
+            $("#cpf").keydown();
+        }
+        validaBotao();
+    });
+
+    $("#Nome").keydown(function () {
+        validaBotao();
+    });
+
+    $("#Nome").on("blur", function () {
+        validaBotao();
+    });
+
+    //esconde o botão que retira a imagem
+    $("#removerImagem").hide();
 });
 
-$('.botaoVoltar').on('click', function () {
+$("#fotoUsuario").change(function () {
+    //função que muda a foto do usuário na tela
+    readURL(this);
+
+    //mostrando o botão que retira a imagem
+    $("#removerImagem").show();
+});
+
+$(".botaoVoltar").click(function () {
     //voltando a lista de usuários
     AjaxJsUsuario.listaUsuario();
 });
 
-$('.botaoCadastro').on('click', function () {
+$(".botaoCadastro").click(function () {
     //convertendo a imagem para base64
     encodeImageFileAsURL(AjaxJsUsuario.concluirCadastroUsuario);
+});
+
+//mudando a imagem quando o usário retirar a atual
+$("#removerImagem").click(function () {
+    $("#imagem").attr("src", "../../Imagens/retirado.png");
+    $("#fotoUsuario").val("");
 });
 
 function readURL(input) {
@@ -18,43 +61,11 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imagem').attr('src', e.target.result);
+            $("#imagem").attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-//inicia os métodos que o materialize pede 
-//e desativa os botões de envio caso o formulário esteja inválido
-$(document).ready(function () {
-    $('input').characterCounter();
-    $('.tooltipped').tooltip({ delay: 50 });
-    $('select').material_select();
-
-    $('#cpf').on('keydown', function () {
-        mcpf($('#cpf').val());
-        validaBotao();
-    });
-
-    $('#cpf').on('blur', function () {
-        mcpf($('#cpf').val());
-        //retirando caracteres a mais do campo
-        if ($('#cpf').val().length > 14) {
-            $('#cpf').val($('#cpf').val().substr(0, 13));
-            $('#cpf').keydown();
-        }
-
-        validaBotao();
-    });
-
-    $('#Nome').on('keydown', function () {
-        validaBotao();
-    });
-
-    $('#Nome').on('blur', function () {
-        validaBotao();
-    });
-});
 
 //função que remove caracteres inválidos do campo de CPF e aplica a máscara
 function mcpf(v) {
@@ -62,7 +73,7 @@ function mcpf(v) {
     v = v.replace(/(\d{3})(\d)/, "$1.$2");
     v = v.replace(/(\d{3})(\d)/, "$1.$2");
     v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    $('#cpf').val(v);
+    $("#cpf").val(v);
 }
 
 function TestaCPF(strCPF) {
@@ -91,17 +102,17 @@ function TestaCPF(strCPF) {
 
 function validaBotao() {
     //validando o cpf
-    var cpfNew = $('#cpf').val();
-    cpfNew = cpfNew.replace(/\.|\-/g, '');
+    var cpfNew = $("#cpf").val();
+    cpfNew = cpfNew.replace(/\.|\-/g, "");
 
     //validando o campo de nome
-    var qtde = $('#Nome').val().length;
+    var qtde = $("#Nome").val().length;
 
     //desabilitando o botão caso um dos dois esteja inválido
     if (!TestaCPF(cpfNew) || qtde > 50 || qtde === 0) {
-        $('.botaoCadastro').attr('disabled', 'disabled');
+        $(".botaoCadastro").attr("disabled", "disabled");
     } else {
-        $('.botaoCadastro').removeAttr('disabled');
+        $(".botaoCadastro").removeAttr("disabled");
     }
 }
 
@@ -111,7 +122,7 @@ function encodeImageFileAsURL(callback) {
         var fileToLoad = filesSelected[0];
         var fileReader = new FileReader();
 
-        fileReader.onload = function(fileLoadedEvent) {
+        fileReader.onload = function (fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
             if (typeof callback === "function") {
                 callback(srcData);

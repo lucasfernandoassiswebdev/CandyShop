@@ -8,18 +8,16 @@ var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id;
 
 $(document).ready(function () {
     //pesquisa por nome é feita quando se aperta a tecla "enter" na barra de pesquisa
-    $('#search').on('keydown', function (e) {
-        var textoPesquisa = $('#search').val();
+    $("#search").keydown(function (e) {
         if (e.which === 13) {
-            AjaxJsShop.listarProdutoPorNome(textoPesquisa);
-            console.log(textoPesquisa);
+            AjaxJsShop.listarProdutoPorNome($("#search").val());
         }
     });    
 
     //limpando os inputs
-    $('.modal-close').on('click', function () {
-        $('#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha').val('');
-        $('#novaSenha').removeAttr('disabled');
+    $(".modal-close").click(function () {
+        $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha").val("");
+        $("#novaSenha").removeAttr("disabled");
     });
 
     $(".tooltipped").tooltip({ delay: 50 });
@@ -30,52 +28,48 @@ $(document).ready(function () {
         nome = $(this).attr("data-Nome");
         imagem = $(this).attr("data-Imagem");
         Id = $(this).attr("data-Id");
-        quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");        
+        quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
     });
-
 
     //verificando senhas e chamando ajax pra efetivar alteracoes    
-    var ilegais = /[\W_]/;    
+    var ilegais = /[\W_]/;
 
-    $('#novaSenha').on('blur',
-        function () {
-            if ($(this).val().length < 8 || $(this).val().length > 12) {
-                $('#senhaInvalida').errorMessage("Senha deve conter de 8 a 12 caracteres!", 5000);
-                $(this).focus();
-            }
-            if (ilegais.test($(this).val())) {
-                $('#senhaInvalida').errorMessage("Digite apenas letras e numeros!", 5000);
-                $(this).focus();
-            } else {
-                $(this).attr('disabled', 'disabled');
-            }
-        });
-
-    $('#confirmaNovaSenha').on('blur',
-        function() {
-            if ($(this).val() == $('#novaSenha').val()) {
-                $('#TrocarSenha').removeAttr('disabled');
-            } else {
-                $('#TrocarSenha').attr('disabled', 'disabled');
-                $('#senhaConfirmadaInvalida').errorMessage("As senhas não conferem!", 5000);                
-            }
-            if ($(this).val() == "") {
-                $('#novaSenha').removeAttr('disabled');
-            }
-         });
-
-    $('#TrocarSenha').on('click',function () {            
-        AjaxJsUsuario.trocarSenha();
-        $('#trocaSenha').modal('close');
-        $('#novaSenha').removeAttr('disabled');
-        $(this).Attr('disabled', 'disabled');
+    $("#novaSenha").on("blur", function () {
+        if ($(this).val().length < 8 || $(this).val().length > 12) {
+            $("#senhaInvalida").errorMessage("Senha deve conter de 8 a 12 caracteres!", 5000);
+            $(this).focus();
+        }
+        if (ilegais.test($(this).val())) {
+            $("#senhaInvalida").errorMessage("Digite apenas letras e numeros!", 5000);
+            $(this).focus();
+        } else {
+            $(this).attr("disabled", "disabled");
+        }
     });
 
+    $("#confirmaNovaSenha").on("blur", function () {
+        if ($(this).val() == $("#novaSenha").val()) {
+            $("#TrocarSenha").removeAttr("disabled");
+        } else {
+            $("#TrocarSenha").attr("disabled", "disabled");
+            $("#senhaConfirmadaInvalida").errorMessage("As senhas não conferem!", 5000);
+        }
+        if ($(this).val() == "") {
+            $("#novaSenha").removeAttr("disabled");
+        }
+    });
+
+    $("#TrocarSenha").click(function () {
+        AjaxJsUsuario.trocarSenha();
+        $("#trocaSenha").modal("close");
+        $("#novaSenha").removeAttr("disabled");
+        $(this).Attr("disabled", "disabled");
+    });
 
     //adicionando os itens do localstorage no carrinho
-    if (localStorage.getItem('listaProdutos') !== null) {
+    if (localStorage.getItem("listaProdutos") !== null) {
         var i = 1;
-        JSON.parse(localStorage.getItem('listaProdutos')).forEach(function (produto) {            
+        JSON.parse(localStorage.getItem("listaProdutos")).forEach(function (produto) {
             $(".collection").append($("<li>", {
                 html: [
                     $("<img>",
@@ -97,22 +91,22 @@ $(document).ready(function () {
                         }),
                     $("<a>", {
                         href: "#!",
-                        'class': "modal-trigger secondary-content",                        
+                        "class": "modal-trigger secondary-content",
                         "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
                         html: [
                             $("<i>", {
                                 html: "delete",
                                 "class": "small material-icons",
                                 "id": i
-                            }).on("click", function () {
+                            }).click(function () {
                                 //$("#modalQuantidade").data("index", $(this).closest("li").index());                                
                                 var li = $(this).closest("li");
-                                var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
+                                var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
                                 listaProdutos = listaProdutos.filter(function (item) {
-                                    return item.Id != li.find('[data-Id]').attr('data-Id');
-                                });                                
-                                localStorage.removeItem('listaProdutos');
-                                localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
+                                    return item.Id != li.find("[data-Id]").attr("data-Id");
+                                });
+                                localStorage.removeItem("listaProdutos");
+                                localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
                                 li.remove();
                             })
                         ]
@@ -125,10 +119,11 @@ $(document).ready(function () {
     }
 
     //adicionando os itens no carrinho
-    $("#adicionaCarrinho").on("click", function () {
+    $("#adicionaCarrinho").click(function () {
+        $("#confirmarCompra").removeAttr("disabled");
         var i = 1;
 
-        var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
+        var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
 
         var produto = {
             Id: Id,
@@ -137,10 +132,10 @@ $(document).ready(function () {
             Imagem: imagem
         }
         if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length)
-            console.log('produto ja existe');
+            console.log("produto ja existe");
         else
             listaProdutos.push(produto);
-        console.log(produto);
+
         $(".collection").append($("<li>",
             {
                 html: [
@@ -159,23 +154,23 @@ $(document).ready(function () {
                     $("<a>",
                         {
                             href: "#!",
-                            'class': "modal-trigger secondary-content",
+                            "class": "modal-trigger secondary-content",
                             "data-quantidadeDisponivel": quantidadeDisponivel,
                             html: [
                                 $("<i>",
-                                    {                                                                       
+                                    {
                                         html: "delete",
                                         "class": "small material-icons"
-                                    }).on("click", function () {                                                                                  
+                                    }).on("click", function () {
                                         var li = $(this).closest("li");
-                                        var listaProdutos = localStorage.getItem('listaProdutos') ? JSON.parse(localStorage.listaProdutos) : [];
+                                        var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
                                         listaProdutos = listaProdutos.filter(function (item) {
-                                            return item.Id != li.find('[data-Id]').attr('data-Id');
+                                            return item.Id != li.find("[data-Id]").attr("data-Id");
                                         });
-                                        localStorage.removeItem('listaProdutos');
-                                        localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
+                                        localStorage.removeItem("listaProdutos");
+                                        localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
                                         li.remove();
-                                })
+                                    })
                             ]
                         })
                 ],
@@ -184,86 +179,104 @@ $(document).ready(function () {
         i++;
 
         quantidade = 0;
-        $('#adicionaCarrinho').attr('disabled', '');
-        localStorage.removeItem('listaProdutos');
-        localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos));
+        $("#adicionaCarrinho").attr("disabled", "");
+        localStorage.removeItem("listaProdutos");
+        localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+    });
+
+    //desabilita o botão de confirmar compra ao abrir o carrinho
+    $("a[href='#modalCarrinho'], #modalCarrinho").click(function () {
+        if ($(".collection li").length > 0)
+            $("#confirmarCompra").removeAttr("disabled");
+        else
+            $("#confirmarCompra").attr("disabled", "disabled");
+    });
+
+    //colocando foco nos inputs
+    $("#modalQuantidade").modal({
+        ready: function (modal, trigger) {
+            $("#quantidade").focus();
+        } 
     });
 
     //desabilitando botão quando houverem quantidades inválidas
-    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;                                     
+    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
     //tecla pressionada
-    $('#quantidade').on('keyup', function () {
-        quantidade = $("#quantidade").val();        
-        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {                        
-            $('#adicionaCarrinho').attr('disabled', 'disabled');
-        } else {            
-            $('#adicionaCarrinho').removeAttr('disabled');
+    $("#quantidade").on("keyup", function () {
+        quantidade = $("#quantidade").val();
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
+            $("#adicionaCarrinho").attr("disabled", "disabled");
+        } else {
+            $("#adicionaCarrinho").removeAttr("disabled");
         }
     });
     //onclick dentro da modal
-    $('#modalQuantidade').on('click', function () {
+    $("#modalQuantidade").on("click", function () {
         quantidade = $("#quantidade").val();
-        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
-            $('#adicionaCarrinho').attr('disabled', 'disabled');
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
+            $("#adicionaCarrinho").attr("disabled", "disabled");
         } else {
-            $('#adicionaCarrinho').removeAttr('disabled');
+            $("#adicionaCarrinho").removeAttr("disabled");
         }
     });
 
     //foco saindo do input
-    $('#quantidade').blur(function () {
+    $("#quantidade").blur(function () {
         quantidade = $("#quantidade").val();
-        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {            
-            $('#adicionaCarrinho').attr('disabled', 'disabled');
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
+            $("#adicionaCarrinho").attr("disabled", "disabled");
         } else {
-            $('#adicionaCarrinho').removeAttr('disabled');
+            $("#adicionaCarrinho").removeAttr("disabled");
         }
     });
     //texto colado no input
-    $('#quantidade').on('paste', function () {
+    $("#quantidade").on("paste", function () {
         quantidade = $("#quantidade").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+        if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#adicionaCarrinho').attr('disabled', 'disabled');
+            $("#adicionaCarrinho").attr("disabled", "disabled");
         } else {
-            $('#adicionaCarrinho').removeAttr('disabled');
+            $("#adicionaCarrinho").removeAttr("disabled");
         }
     });
-    ////desabilitando no modal de editar a quantidade
-    //$('#quantidadeEdit').on('blur', function () {
-    //    quantidade = $("#quantidadeEdit").val();
-    //    if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
-    //        //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-    //        $('#editarQuantidade').attr('disabled', 'disabled');
-    //    } else {
-    //        $('#editarQuantidade').removeAttr('disabled');
-    //    }
-    //});
-    //$('#quantidadeEdit').keydown(function () {
-    //    quantidade = $("#quantidadeEdit").val();
-    //    if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
-    //        //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-    //        $('#editarQuantidade').attr('disabled', 'disabled');
-    //    } else {
-    //        $('#editarQuantidade').removeAttr('disabled');
-    //    }
-    //});
-    //$('#quantidadeEdit').on('paste', function () {
-    //    quantidade = $("#quantidadeEdit").val();
-    //    if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
-    //        $(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-    //        $('#editarQuantidade').attr('disabled', 'disabled');
-    //    } else {
-    //        $('#editarQuantidade').removeAttr('disabled');
-    //    }
-    //});
+
+    //desabilitando no modal de editar a quantidade
+    /*
+    $('#quantidadeEdit').on('blur', function () {
+        quantidade = $("#quantidadeEdit").val();
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#editarQuantidade').attr('disabled', 'disabled');
+        } else {
+            $('#editarQuantidade').removeAttr('disabled');
+        }
+    });
+    $('#quantidadeEdit').keydown(function () {
+        quantidade = $("#quantidadeEdit").val();
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#editarQuantidade').attr('disabled', 'disabled');
+        } else {
+            $('#editarQuantidade').removeAttr('disabled');
+        }
+    });
+    $('#quantidadeEdit').on('paste', function () {
+        quantidade = $("#quantidadeEdit").val();
+        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+            $(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
+            $('#editarQuantidade').attr('disabled', 'disabled');
+        } else {
+            $('#editarQuantidade').removeAttr('disabled');
+        }
+    });
+    */
 
     //tirando caracteres inválidos dos campos de quantidade
-    $('#quantidade, #quantidadeEdit').keydown(function () {
+    $("#quantidade, #quantidadeEdit").keydown(function () {
         mNumbers($(this).val());
     });
 
-    $('#quantidade, #quantidadeEdit').on('paste', function () {
+    $("#quantidade, #quantidadeEdit").on("paste", function () {
         mNumbers($(this).val());
     });
 

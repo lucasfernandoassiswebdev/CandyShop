@@ -173,3 +173,7 @@ input {
 .clockpicker-canvas-bearing {
 	fill: #ec407a !important;
 }
+
+.modal .modal-footer {
+	background-color: #ffffff !important;
+}

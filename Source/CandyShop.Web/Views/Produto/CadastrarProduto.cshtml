@@ -18,6 +18,7 @@
             <!--fotos-->
             <div class="row">
                 <div class="center">
+<<<<<<< HEAD
                     <label for="fotoProduto1">
                         <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="Imagens/fotoProduto.png" alt="imagem não disponível :("/>
                     </label>
@@ -32,6 +33,34 @@
                         <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="Imagens/fotoProduto.png" alt="imagem não disponível :("/>
                     </label>
                     <input id="fotoProduto3" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
+=======
+                    <div>
+                        <label for="fotoProduto1">
+                            <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :(" />
+                        </label>
+                        <br/>
+                        <a class="btn" id="removerImagem1"><i class="material-icons left">block</i>Remover</a>
+                        <input id="fotoProduto1" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
+                    </div>
+
+                    <div>
+                        <label for="fotoProduto2">
+                            <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :(" />
+                        </label>
+                        <br />
+                        <a class="btn" id="removerImagem2"><i class="material-icons left">block</i>Remover</a>
+                        <input id="fotoProduto2" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
+                    </div>
+
+                    <div>
+                        <label for="fotoProduto3">
+                            <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :(" />
+                        </label>
+                        <br />
+                        <a class="btn" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
+                        <input id="fotoProduto3" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
+                    </div>
+>>>>>>> 1f2e8d6e9d87128b02323057060db31628d51af8
                 </div>
             </div>
             <div class="row">
@@ -42,11 +71,11 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="PrecoProduto" name="PrecoProduto" type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required>
+                    <input id="PrecoProduto" name="PrecoProduto" type="text" class="validate" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
                     <label for="PrecoProduto">Valor:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="QtdeProduto" name="QtdeProduto" type="number" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required="">
+                    <input id="QtdeProduto" name="QtdeProduto" type="number" class="validate" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
                     <label for="QtdeProduto">Quantidade disponível:</label>
                 </div>
             </div>

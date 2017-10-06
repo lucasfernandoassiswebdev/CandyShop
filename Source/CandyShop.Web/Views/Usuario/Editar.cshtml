@@ -6,7 +6,11 @@
 
 <link rel="stylesheet" href="~/Content/Usuario/formCadastroUsuario.css" />
 
+<<<<<<< HEAD
 <script type="text/javascript" src="~/Js/Usuario/scriptsEditarUsuario.js"></script>
+=======
+<script type="text/javascript" src="../../Js/Usuario/scriptsEditarUsuario.js?d=@DateTime.Now.Ticks"></script>
+>>>>>>> 1f2e8d6e9d87128b02323057060db31628d51af8
 <script>
     $(document).ready(function () {
         $('select').material_select();
@@ -31,8 +35,11 @@
                 <div class="center">
                     <label for="fotoUsuario">
                         @{ string caminho = @Model.Cpf + ".jpg"; }
-                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensUsuarios"]/@caminho" alt="imagem não disponível :(" />
+                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
                     </label>
+                    <br/>
+                    <br/>
+                    <a class="btn" id="removerImagem"><i class="material-icons left">block</i>Remover</a>
                     <input id="fotoUsuario" type="file" class="file-path validate" style="display: none" accept="image/*">
                 </div>
             </div>
@@ -76,8 +83,8 @@
                 <div class="input-field col s6">
                     <select id="Ativo">
                         <option value="" disabled>Escolha uma opção</option>
-                        <option value="A" selected>Ativo</option>
-                        <option value="I">Inativo</option>
+                        <option value="A" @if (Convert.ToString(Model.Ativo) == "A") {<text>selected</text>} >Ativo</option>
+                        <option value="I" @if (Convert.ToString(Model.Ativo) == "I") {<text>selected</text>} >Inativo</option>
                     </select>
                     <label>Status do usuário</label>
                 </div>

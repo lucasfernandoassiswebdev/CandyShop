@@ -1,14 +1,30 @@
-﻿$('#fotoUsuario').change(function () {
+﻿//inicia os métodos que o materialize pede 
+//e desativa os botões de envio caso o formulário esteja inválido
+$(document).ready(function () {
+    $("input").characterCounter();
+    $(".tooltipped").tooltip({ delay: 50 });
+    $("select").material_select();
+
+    $("#Nome, #SaldoUsuario, #Password").on("keydown", function () {
+        validaBotao();
+    });
+
+    $("#Nome, #SaldoUsuario, #Password").on("blur", function () {
+        validaBotao();
+    });
+});
+
+$("#fotoUsuario").change(function () {
     //função que muda a foto do usuário na tela
     readURL(this);
 });
 
-$('.botaoVoltar').on('click', function () {
+$(".botaoVoltar").on("click", function () {
     //voltando a lista de usuários
     AjaxJsUsuario.listaUsuario();
 });
 
-$('.botaoEditar').on('click', function () {
+$(".botaoEditar").on("click", function () {
     var filesSelected = document.getElementById("fotoUsuario").files;
     if (filesSelected.length > 0)
         encodeImageFileAsURL(AjaxJsUsuario.concluirEdicaoUsuario);
@@ -16,44 +32,33 @@ $('.botaoEditar').on('click', function () {
         AjaxJsUsuario.concluirEdicaoUsuario();
 });
 
+$("#removerImagem").click(function () {
+    $("#imagem").attr("src", "../../Imagens/retirado.png");
+    $("#fotoUsuario").val("");
+});
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imagem').attr('src', e.target.result);
+            $("#imagem").attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
 
-//inicia os métodos que o materialize pede 
-//e desativa os botões de envio caso o formulário esteja inválido
-$(document).ready(function () {
-    $('input').characterCounter();
-    $('.tooltipped').tooltip({ delay: 50 });
-    $('select').material_select();
-
-    $('#Nome, #SaldoUsuario, #Password').on('keydown', function () {
-        validaBotao();
-    });
-
-    $('#Nome, #SaldoUsuario, #Password').on('blur', function () {
-        validaBotao();
-    });
-});
-
 function validaBotao() {
     //validando o campo de nome
-    var qtdeNome = $('#Nome').val().length;
+    var qtdeNome = $("#Nome").val().length;
     //validando o campo de senha
-    var qtdeSenha = $('#Password').val().length;
+    var qtdeSenha = $("#Password").val().length;
 
     //desabilitando o botão caso um dos dois esteja inválido
     if (qtdeNome > 50 || qtdeSenha > 12 || qtdeNome === 0 || qtdeSenha === 0) {
-        $('.botaoEditar').attr('disabled', 'disabled');
+        $(".botaoEditar").attr("disabled", "disabled");
     } else {
-        $('.botaoEditar').removeAttr('disabled');
+        $(".botaoEditar").removeAttr("disabled");
     }
 }
 

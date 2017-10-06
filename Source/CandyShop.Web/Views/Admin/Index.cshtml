@@ -58,6 +58,18 @@
             loja: '@Url.Action("NavBar", "Home")',
             main: '@Url.Action("Listar", "Produto")'
         });
+
+        $("#modalPesquisaUsuario").modal({
+            ready: function (modal, trigger) {
+                $("#nomeUsuario").focus();
+            }
+        });
+
+        $("#modalPesquisaProduto").modal({
+            ready: function (modal, trigger) {
+                $("#nomeProduto").focus();
+            }
+        })
  })
 </script>
 
@@ -83,7 +95,7 @@
         <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
         <h3 class="center pink-text">Nome do produto:</h3>
         <div>
-            <input type="text" id="nomeProduto" autocomplete="off" />
+            <input type="text" id="nomeProduto" autocomplete="off" style="text-align:center"/>
         </div>
     </div>
     <div class="modal-footer center">
@@ -93,7 +105,7 @@
 
 <ul id="slide-out" class="side-nav fixed brown darken-3">
     <li class="white-text">
-        <h4>Candy <font class="pink-text">Shop</font></h4>
+        <h4 class="center">Candy <font class="pink-text">Shop</font></h4>
     </li>
     <li class="divider"></li>
     <li><a class="dropdown-button white-text" href="#!"><i class="material-icons left white-text">account_box</i>ADMINISTRADOR</a></li>

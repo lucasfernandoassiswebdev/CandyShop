@@ -2,6 +2,7 @@
     $('select').material_select();
     $('input').characterCounter();
     $('.tooltipped').tooltip({ delay: 50 });
+    $("#removerImagem1, #removerImagem2, #removerImagem3").hide();
 });
 
 $('.botaoVoltar').on('click', function () {
@@ -64,42 +65,36 @@ function encodeImageFileAsURL(callback) {
     }
 }
 
-//funções que não deixam o usuário digitar "e" ou números negativos
-function FilterInput(event) {
-    var keyCode = ('which' in event) ? event.which : event.keyCode;
-    isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
-    return !isNotWanted;
-}
-
-function handlePaste(e) {
-    var clipboardData, pastedData;
-
-    clipboardData = e.clipboardData || window.clipboardData;
-    pastedData = clipboardData.getData('Text').toUpperCase();
-
-    if (pastedData.indexOf('E') > -1) {
-        e.stopPropagation();
-        e.preventDefault();
-    }
-
-    if (pastedData.indexOf('-') > -1) {
-        e.stopPropagation();
-        e.preventDefault();
-    }
-}
-
 //editando as imagens na tela
 $('#fotoProduto1').change(function () {
     //função que muda a foto do usuário na tela
     readURL(this);
+    $("#removerImagem1").show();
 });
 
 $('#fotoProduto2').change(function () {
     readURL2(this);
+    $("#removerImagem2").show();
 });
 
 $('#fotoProduto3').change(function () {
     readURL3(this);
+    $("#removerImagem3").show();
+});
+
+$("#removerImagem1").click(function () {
+    $("#imagem1").attr("src", "../../Imagens/retirado.png");
+    $("#fotoProduto1").val("");
+});
+
+$("#removerImagem2").click(function () {
+    $("#imagem2").attr("src", "../../Imagens/retirado.png");
+    $("#fotoProduto2").val("");
+});
+
+$("#removerImagem3").click(function () {
+    $("#imagem3").attr("src", "../../Imagens/retirado.png");
+    $("#fotoProduto3").val("");
 });
 
 function readURL(input) {
@@ -132,6 +127,30 @@ function readURL3(input) {
             $('#imagem3').attr('src', e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
+    }
+}
+
+//funções que não deixam o usuário digitar "e" ou números negativos
+function FilterInput(event) {
+    var keyCode = ('which' in event) ? event.which : event.keyCode;
+    isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
+    return !isNotWanted;
+}
+
+function handlePaste(e) {
+    var clipboardData, pastedData;
+
+    clipboardData = e.clipboardData || window.clipboardData;
+    pastedData = clipboardData.getData('Text').toUpperCase();
+
+    if (pastedData.indexOf('E') > -1) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    if (pastedData.indexOf('-') > -1) {
+        e.stopPropagation();
+        e.preventDefault();
     }
 }
 
