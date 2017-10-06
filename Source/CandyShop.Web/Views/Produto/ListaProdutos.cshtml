@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-<link rel="stylesheet" type="text/css" href="../../Content/Produto/indexProduto.css"/>
+<link rel="stylesheet" type="text/css" href="~/Content/Produto/indexProduto.css"/>
 
 <script>
     $(document).ready(function() {
@@ -50,9 +50,12 @@
                 <td>
                     <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsProduto.editarProduto(@item.IdProduto);"><i class="material-icons">edit</i></a>
                 </td>
-                <td>
-                    <a class="btn-floating btn-sm waves-effect waves-light pink lighten-1" onclick="AjaxJsProduto.desativarProduto(@item.IdProduto);"><i class="material-icons">remove_shopping_cart</i></a>
-                </td>
+                @if (!TempData["nomeLista"].ToString().Equals("inativos"))
+                {
+                    <td>
+                        <a class="btn-floating btn-sm waves-effect waves-light pink lighten-1" onclick="AjaxJsProduto.desativarProduto(@item.IdProduto);"><i class="material-icons">remove_shopping_cart</i></a>
+                    </td>    
+                }                
             </tr>
             }
     </table>

@@ -4,11 +4,11 @@
     Layout = null;
 }
 
-<link rel="stylesheet" type="text/css" href="../../Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
+<link rel="stylesheet" type="text/css" href="~/Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
 
-<script type="text/javascript" src="../../Js/Produto/scriptsCadastroProduto.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="~/Js/Produto/scriptsCadastroProduto.js?d=@DateTime.Now.Ticks"></script>
 <!--plugin para campos monetários-->
-<script type="text/javascript" src="../../Js/plugins/jquery.maskMoney.js"></script>
+<script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
 
 
 <div class="container">
@@ -23,8 +23,8 @@
                     </label>
                     <input id="fotoProduto1" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
 
-                    <label for="fotoProduto2" style="margin-right:50px">
-                        <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="../../Imagens/fotoProduto.png" alt="imagem não disponível :(" />
+                    <label for="fotoProduto2">
+                        <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="Imagens/fotoProduto.png" alt="imagem não disponível :("/>
                     </label>
                     <input id="fotoProduto2" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
 
@@ -37,7 +37,7 @@
             <!--botões de remover-->
             <div class="row center">
                 <a class="btn" id="removerImagem1" style="margin-right:50px"><i class="material-icons left">block</i>Remover</a>
-                <a class="btn" id="removerImagem2"><i class="material-icons left">block</i>Remover</a>
+                <a class="btn" id="removerImagem2" style="margin-right:50px"><i class="material-icons left">block</i>Remover</a>
                 <a class="btn" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
             </div>
             <div class="row">

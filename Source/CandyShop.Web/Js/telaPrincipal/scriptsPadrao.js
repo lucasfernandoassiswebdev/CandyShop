@@ -12,7 +12,7 @@ $(document).ready(function () {
         if (e.which === 13) {
             AjaxJsShop.listarProdutoPorNome($("#search").val());
         }
-    });
+    });    
 
     //limpando os inputs
     $(".modal-close").click(function () {
@@ -287,8 +287,10 @@ $(document).ready(function () {
             localStorage.removeItem("listaProdutos");
             listaProdutos = [];
         }
-    });
+    });  
 });
+
+
 
 //função que remove caracteres que não sejam numéricos
 function mNumbers(v) {

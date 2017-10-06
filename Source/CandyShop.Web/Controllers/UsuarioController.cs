@@ -30,7 +30,7 @@ namespace CandyShop.Web.Controllers
         [AdminFilterResult]
         public ActionResult Cadastrar()
         {
-            TempData["caminhoImagensUsuarios"] = "../../Imagens/Usuarios";
+            TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
             return View();
         }
 
@@ -42,7 +42,7 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro " + usuario.ContentAsString.First());
 
-            TempData["caminhoImagensUsuarios"] = "../../Imagens/Usuarios";
+            TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
             return View(usuario.Content);
         }
 
@@ -53,7 +53,7 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro " + usuario.ContentAsString.First());
 
-            TempData["caminhoImagensUsuarios"] = "../../Imagens/Usuarios";
+            TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
             return View(usuario.Content);
         }
 
@@ -64,7 +64,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro" + response.ContentAsString.First());
 
-            TempData["caminhoImagensUsuarios"] = "../../Imagens/Usuarios";
+            TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
             return View(response.Content);
         }
         #endregion
@@ -142,7 +142,7 @@ namespace CandyShop.Web.Controllers
 
                             //montando o nome e caminho de save da imagem
                             usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                            string caminho = $"~/Imagens/Usuarios/{usuario.Cpf}.jpg";
+                            string caminho = $"Imagens/Usuarios/{usuario.Cpf}.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                         }
@@ -181,7 +181,7 @@ namespace CandyShop.Web.Controllers
                             Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
                             usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                            string caminho = $"~/Imagens/Usuarios/{usuario.Cpf}.jpg";
+                            string caminho = $"Imagens/Usuarios/{usuario.Cpf}.jpg";
 
                             imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                         }
