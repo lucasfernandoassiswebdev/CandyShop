@@ -39,6 +39,8 @@ var AjaxJsCompra = (function ($) {
                     });
                 if (!message == "Você não está logado") {
                     localStorage.removeItem('listaProdutos');
+                } else {
+                    localStorage.removeItem('listaProdutos');
                 }
 
             })
