@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" href="../../Content/Usuario/formCadastroUsuario.css" />
 
-<script type="text/javascript" src="../../Js/Usuario/scriptsEditarUsuario.js"></script>
+<script type="text/javascript" src="../../Js/Usuario/scriptsEditarUsuario.js?d=@DateTime.Now.Ticks"></script>
 <script>
     $(document).ready(function () {
         $('select').material_select();
@@ -33,6 +33,9 @@
                         @{ string caminho = @Model.Cpf + ".jpg"; }
                         <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
                     </label>
+                    <br/>
+                    <br/>
+                    <a class="btn" id="removerImagem"><i class="material-icons left">block</i>Remover</a>
                     <input id="fotoUsuario" type="file" class="file-path validate" style="display: none" accept="image/*">
                 </div>
             </div>
