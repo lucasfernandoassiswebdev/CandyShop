@@ -37,7 +37,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
 
-            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
+            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             TempData["LimparCarrinho"] = false;
             return View("GridProdutos", response.Content);
         }
@@ -48,7 +48,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
-            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";                            
+            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";                            
             return View("GridProdutos", response.Content);
         }
 
@@ -58,7 +58,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
-            TempData["caminhoImagensProdutos"] = "../../Imagens/Produtos";
+            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             return View("GridProdutos", response.Content);
         }
 

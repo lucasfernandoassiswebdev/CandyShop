@@ -14,7 +14,7 @@ $(document).ready(function () {
             AjaxJsShop.listarProdutoPorNome(textoPesquisa);
             console.log(textoPesquisa);
         }
-    });
+    });    
 
     //limpando os inputs
     $('.modal-close').on('click', function () {
@@ -274,8 +274,10 @@ $(document).ready(function () {
             localStorage.removeItem("listaProdutos");
             listaProdutos = [];
         }
-    });
+    });  
 });
+
+
 
 //função que remove caracteres que não sejam numéricos
 function mNumbers(v) {
