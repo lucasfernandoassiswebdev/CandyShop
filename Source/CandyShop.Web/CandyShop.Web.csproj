@@ -163,6 +163,7 @@
     <Content Include="Content\Principal\Main.css" />
     <Content Include="Content\materialize.min.css" />
     <Content Include="Content\Principal\shop.css" />
+    <Content Include="Content\Usuario\IndexUsuario.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="fonts\roboto\Roboto-Bold.woff" />

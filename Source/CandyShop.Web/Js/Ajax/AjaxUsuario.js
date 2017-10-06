@@ -63,12 +63,12 @@
     };
     var logOff = function() {
         $.get(url.logOff).done(function(data) {
-            $('body').slideUp(function() {
+            $('body').slideUp(1000, function() {
                 if (localStorage.getItem('listaProdutos') != null) {
                     localStorage.removeItem('listaProdutos');
                 }
-                $('body').hide().html(data).slideDown(function() {
-                    Materialize.toast("LogOff feito com sucesso", 3000);
+                $('body').hide().html(data).slideDown(1000, function() {
+                    Materialize.toast("LogOff feito com sucesso", 4000);
                 });
             });
         }).fail(function(xhr) {

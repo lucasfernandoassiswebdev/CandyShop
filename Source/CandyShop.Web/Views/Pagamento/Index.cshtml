@@ -2,7 +2,7 @@
 
 @{ Layout = null; }
 
-<link rel="stylesheet" type="text/css" href="~/Content/Pagamento/indexPagamento.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/Pagamento/indexPagamento.css?d=@DateTime.Now.Ticks" />
 
 <script>
     $('.dropdown-button').dropdown({
@@ -16,8 +16,8 @@
     }
     );
 </script>
-
-<h4 class="center pink-text">@ViewBag.tituloPagina</h4>
+<div class="row">
+<h4 class="center">@ViewBag.tituloPagina</h4>
 
 @if (ViewBag.drop == 0)
 {
@@ -39,48 +39,50 @@
         </ul>
 
     </div>
-
 }
-<style>
-    #icone {
-        display: inline-block;
-        color: brown;
+
+    @if (!Model.Any())
+    {
+        <p align="center">Nenhum registro encontrado</p>
     }
-</style>
-<div id="tabela">
-    <table class="striped centered">
-        <thead>
-            <tr>
-                <th>Usuário</th>
-                <th>Data do Pagamento</th>
-                <th>Valor Pago</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    else
+    {
+        <div id="tabela">
+            <table class="striped centered">
+                <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataPagamento)
-                    </td>
-                    <td>
-                        R$ @Html.DisplayFor(modelItem => item.ValorPagamento)
-                    </td>
-                    @if (Session["TipoDeLogin"].ToString().Equals("Admin"))
-                    {
-                        <td>
-                            <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsPagamento.editarPagamento(@item.IdPagamento);"><i class="material-icons">edit</i></a>
-                        </td>   
-                    }                    
+                    <th>Usuário</th>
+                    <th>Data do Pagamento</th>
+                    <th>Valor Pago</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataPagamento)
+                        </td>
+                        <td>
+                            R$ @Html.DisplayFor(modelItem => item.ValorPagamento)
+                        </td>
+                        @if (Session["TipoDeLogin"].ToString().Equals("Admin"))
+                        {
+                            <td>
+                                <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsPagamento.editarPagamento(@item.IdPagamento);"><i class="material-icons">edit</i></a>
+                            </td>
+                        }
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
 <br />
+</div>
 @*<div align="center">
         <a class="waves-effect waves-light btn" onclick="A.listarPagamentos()"><i class="material-icons left">arrow_back</i>Voltar</a>
     </div>*@

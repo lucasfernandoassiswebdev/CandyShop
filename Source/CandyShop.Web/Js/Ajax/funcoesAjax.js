@@ -2,9 +2,9 @@
 function main(endereco) {
     //pega a view main e a carrega no div
     $.get(endereco).done(function (data) {
-        $("#DivGrid").slideUp(function () {
+        $("#DivGrid").slideUp(1000, function () {
             //desce  o divgrid  
-            $('#DivGrid').hide().html(data).slideDown();
+            $('#DivGrid').hide().html(data).fadeIn(1000);
         });
         //xhr é o código do erro, que é retornado caso o get não tenha sucesso
     }).fail(function (xhr) {

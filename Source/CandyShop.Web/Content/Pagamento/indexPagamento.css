@@ -5,6 +5,10 @@
 	 text-align: center;
  }
 
+ #tabela td {
+     padding: 2px !important;
+ }
+
  #filtro {
 	 text-align: center;     
  }
@@ -12,11 +16,6 @@
  #icone {
 	 display: inline-block;
 	 color: brown;
- }
-
-
- tr {
-	 color: black;
  }
 
  .btn-large {

@@ -76,7 +76,7 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro " + response.ContentAsString.First());
 
             TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
-            TempData["nomeLista"] = "todos";
+            TempData["nomeLista"] = "Produtos Ativos";
             return View("ListaProdutos", response.Content);            
         }
 
@@ -87,7 +87,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro {response.ContentAsString.First()}");
 
-            TempData["nomeLista"] = "inativos";
+            TempData["nomeLista"] = "Produtos Inativos";
 
             return View("ListaProdutos", response.Content);
         }
@@ -100,7 +100,7 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro: {response.Status}");
 
             TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
-            TempData["nomeLista"] = "nome";
+            TempData["nomeLista"] = "Produtos relacionados";
             return View("ListaProdutos", response.Content);            
         }
 
@@ -111,7 +111,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
-            TempData["nomeLista"] = "categoria";
+            TempData["nomeLista"] = "Produtos por Categoria";
             TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             return View("ListaProdutos", response.Content);
         }

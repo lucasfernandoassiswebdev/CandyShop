@@ -17,70 +17,73 @@
     );
 </script>
 
-<h4 class="center pink-text">@ViewBag.tituloPagina</h4>
+<h4 class="center ">@ViewBag.tituloPagina</h4>
+<div class="row">
 
-@if (ViewBag.drop == 0)
-{
-    <div id="filtro" class="row">
-        <a class='dropdown-button btn' href='#' data-activates='dropdownMes'><i class="material-icons left">date_range</i>Escolha o mês!</a>
-        <ul id='dropdownMes' class='dropdown-content'>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(1)">Janeiro</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(2)">Fevereiro</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(3)">Março</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(4)">Abril</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(5)">Maio</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(6)">Junho</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(7)">Julho</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(8)">Agosto</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(9)">Setembro</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(10)">Outubro</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(11)">Novembro</a></li>
-            <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(12)">Dezembro</a></li>
-        </ul>
-    </div>
-}
+    @if (!Model.Any())
+    {
+        <p align="center">Nenhum registro encontrado</p>
+    }
+    else
+    {
+        if (ViewBag.drop == 0)
+         {
+             <div id="filtro" class="row">
+                 <a class='dropdown-button btn' href='#' data-activates='dropdownMes'><i class="material-icons left">date_range</i>Escolha o mês!</a>
+                 <ul id='dropdownMes' class='dropdown-content'>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(1)">Janeiro</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(2)">Fevereiro</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(3)">Março</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(4)">Abril</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(5)">Maio</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(6)">Junho</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(7)">Julho</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(8)">Agosto</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(9)">Setembro</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(10)">Outubro</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(11)">Novembro</a></li>
+                     <li><a href="#!" onclick="AjaxJsCompra.listarCompraMes(12)">Dezembro</a></li>
+                 </ul>
+             </div>
+         }
 
-<div id ="tabela">    
-    <table class="striped centered">
-        <thead>
-        <tr>
-            <th>
-                Usuario
-            </th>
-            <th>
-                Data da Compra
-            </th>
-            <th>
-                Valor da Compra
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model)
-        {
-            <tr class="center">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataCompra)
-                </td>
-                <td>
-                    R$ @Html.DisplayFor(modelItem => item.ValorCompra)
-                </td>
-                <td>
-                    <a class="btn-floating btn waves-effect waves-light  light-blue darken-3" onclick="AjaxJsCompra.detalheCompra(@item.IdCompra)" style="margin-right: 15px"><i class="material-icons">info_outline</i></a>
-                    @*<a class="btn-floating btn waves-effect waves-light  yellow darken-3" onclick="AjaxJsCompra.editarCompra(@item.IdCompra);"><i class="material-icons">edit</i></a>*@
-                </td>                    
-            </tr>
-        }
-        </tbody>
+        <div id="tabela">
+            <table class="striped centered">
+                <thead>
+                <tr>
+                    <th>
+                        Usuario
+                    </th>
+                    <th>
+                        Data da Compra
+                    </th>
+                    <th>
+                        Valor da Compra
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="center">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataCompra)
+                        </td>
+                        <td>
+                            R$ @Html.DisplayFor(modelItem => item.ValorCompra)
+                        </td>
+                        <td>
+                            <a class="btn-floating btn waves-effect waves-light  light-blue darken-3" onclick="AjaxJsCompra.detalheCompra(@item.IdCompra)" ><i class="material-icons small">info_outline</i></a>
+                            @*<a class="btn-floating btn waves-effect waves-light  yellow darken-3" onclick="AjaxJsCompra.editarCompra(@item.IdCompra);"><i class="material-icons">edit</i></a>*@
+                        </td>
+                    </tr>
+                }
+                </tbody>
 
-    </table>
+            </table>
+        </div>       
+    }
 </div>
-
-<br/>
-<div align="center">
-    <a class="waves-effect waves-light btn" onclick="AjaxJsProduto.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
-</div>
-

@@ -79,7 +79,7 @@ namespace CandyShop.Web.Controllers
             {
                 return Content("Erro " + response.ContentAsString.First());
             }
-
+            TempData["nomeLista"] = "Usuários Ativos";
             return View("Index", response.Content);
         }
 
@@ -91,6 +91,7 @@ namespace CandyShop.Web.Controllers
             {
                 return Content("Erro " + response.ContentAsString.First());
             }
+            TempData["nomeLista"] = "Usuários em Dívida";
             return View("Index", response.Content);
         }
 
@@ -102,6 +103,7 @@ namespace CandyShop.Web.Controllers
             {
                 return Content("Erro " + response.ContentAsString.First());
             }
+            TempData["nomeLista"] = "Usuários Inativos";
             return View("Index", response.Content);
         }
 
@@ -111,6 +113,7 @@ namespace CandyShop.Web.Controllers
             var response = _appUsuario.ProcurarUsuario(nome);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
+            TempData["nomeLista"] = "Usuários Relacionados";
             return View("Index", response.Content);
         }
         #endregion

@@ -23,8 +23,7 @@ namespace CandyShop.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/materialize.css",
-                      "~/Content/Admin/historico.css",
+                      "~/Content/materialize.css",                      
                       "~/Content/Principal/shop.css"));
         }
     }

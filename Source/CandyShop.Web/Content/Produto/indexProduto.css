@@ -1,3 +1,17 @@
 ﻿ html {
-	 color: #444;
+	 color: black;
+ }
+
+
+ td, th {
+     padding: 3px 5px !important; 
+ }
+
+ .btn-floating {
+     margin: 0 3px;
+ }
+
+ h3 {
+     margin: 10px 0;
+     text-align: center;      
  }

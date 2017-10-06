@@ -1,9 +1,9 @@
 ﻿@media only screen and (max-width : 992px) {
-	header, main, footer, #DivGrid {
+	header, main, footer, #DivGrid{
 		padding-left: 0 !important;
 		padding-right: 0 !important;
 	}
-
+     
 	.container {
 		width: 90% !important;
 	}
@@ -47,7 +47,7 @@ html {
 	font-family: Arial;
 }
 
-header, main, footer, #DivGrid {
+header, main, footer {
 	padding-left: 430px;
 	padding-right: 70px;
 }
@@ -176,4 +176,8 @@ input {
 
 .modal .modal-footer {
 	background-color: #ffffff !important;
+}
+
+#DivGrid {
+    padding-left: 281px;
 }

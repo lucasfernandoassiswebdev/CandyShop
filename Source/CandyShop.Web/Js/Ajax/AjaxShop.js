@@ -36,8 +36,8 @@
             .done(function (res) {
                 $.get(url.padrao)
                     .done(function (data) {
-                        $('body').slideUp(function () {
-                            $('body').hide().html(data).slideDown(function () {
+                        $('body').slideUp(1000, function () {
+                            $('body').hide().html(data).slideDown(1000, function () {
                                 if (res !== "1") {
                                     Materialize.toast("Login feito com sucesso!", 4000);
                                     if (callback === "function")
@@ -51,7 +51,6 @@
                     }).fail(function (xhr) {
                         Materialize.toast(xhr.responseText, 4000);
                     });
-
             })
             .fail(function (xhr) {
                 Materialize.toast(xhr.responseText, 4000);
@@ -61,8 +60,8 @@
     var voltarInicio = function () {        
         $.get(url.padrao)
             .done(function (data) {
-                $('body').slideUp(function () {
-                    $('body').hide().html(data).slideDown();
+                $('body').slideUp(1000, function () {
+                    $('body').hide().html(data).slideDown(1000);
                 });
             }).fail(function (xhr) {
                 Materialize.toast(xhr.responseText, 4000);
