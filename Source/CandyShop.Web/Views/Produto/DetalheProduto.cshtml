@@ -10,65 +10,42 @@
     <h4 class="pink-text">Detalhes do Produto</h4>
     <hr />
     <div class="col s12">
-        <dl class="dl-horizontal">
-            @{ var nomeA = @Model.IdProduto + "_A.jpg";}
-            @{ var nomeB = @Model.IdProduto + "_B.jpg";}
-            @{ var nomeC = @Model.IdProduto + "_C.jpg";}
+        @{ var nomeA = @Model.IdProduto + "_A.jpg";}
+        @{ var nomeB = @Model.IdProduto + "_B.jpg";}
+        @{ var nomeC = @Model.IdProduto + "_C.jpg";}
 
-            <img src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" />
-            <img src="@TempData["caminhoImagensProdutos"]/@nomeB?d=@DateTime.Now.Ticks" />
-            <img src="@TempData["caminhoImagensProdutos"]/@nomeC?d=@DateTime.Now.Ticks" />
+        <img src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" />
+        <img src="@TempData["caminhoImagensProdutos"]/@nomeB?d=@DateTime.Now.Ticks" />
+        <img src="@TempData["caminhoImagensProdutos"]/@nomeC?d=@DateTime.Now.Ticks" />
 
-            <dt>
-                ID:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.IdProduto)
-            </dd>
-
-            <dt>
-                Nome:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.NomeProduto)
-            </dd>
-
-            <dt>
-                Preco:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PrecoProduto)
-            </dd>
-
-
-            <dt>
-                Categoria:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Categoria)
-            </dd>
-
-            <dt>
-                Qtde:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.QtdeProduto)
-            </dd>
-
-            <dt>
-                Status do Produto:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Ativo)
-            </dd>
-        </dl>
-
+        <table class="striped highlight">
+            <tbody>
+                <tr>
+                    <td>Id</td>
+                    <td>@Model.IdProduto</td>
+                </tr>
+                <tr>
+                    <td>Nome</td>
+                    <td>@Model.NomeProduto</td>
+                </tr>
+                <tr>
+                    <td>Preço</td>
+                    <td>@Model.PrecoProduto</td>
+                </tr>
+                <tr>
+                    <td>Categoria</td>
+                    <td>@Model.Categoria</td>
+                </tr>
+                <tr>
+                    <td>Quantidade em estoque</td>
+                    <td>@Model.QtdeProduto</td>
+                </tr>
+                <tr>
+                    <td>Ativo</td>
+                    <td>@Model.Ativo</td>
+                </tr>
+            </tbody>
+        </table>
         <a class="waves-effect waves-light btn" onclick="AjaxJsProduto.listaProduto()"><i class="material-icons left">arrow_back</i>Voltar</a>
     </div>
 </div>

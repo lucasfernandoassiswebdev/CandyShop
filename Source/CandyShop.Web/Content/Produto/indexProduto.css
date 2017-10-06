@@ -1,3 +1,7 @@
 ﻿ html {
 	 color: #444;
  }
+
+body {
+	overflow-y: auto;
+}

@@ -42,8 +42,8 @@
 	}
 }
 
-body, #DivGrid {
-	overflow-y: scroll;
+body {
+	overflow-y: auto;
 }
 
 html {
