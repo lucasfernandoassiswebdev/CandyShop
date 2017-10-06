@@ -71,21 +71,14 @@ img {
 .nav-wrapper input[type="search"]:focus {
 	position: fixed;
 	top: 0;
-	left: 0;
 }
 
 .input-field label {
 	max-height: 64px;
 }
 
-.nav-wrapper input[type="search"]:focus ~ .label-icon.active {
-	position: fixed;
-	left: 10px;
-}
-
 .nav-wrapper input[type="search"]:focus ~ .closed {
-	position: fixed;
-	right: 10px;
+	right: -450px;
 }
 
 nav .input-field label {
@@ -190,8 +183,8 @@ h3 {
 }
 
 #trocaSenha{
-    width: 35%;
-    top: 25% !important;
+	width: 35%;
+	top: 25% !important;
 }
 
 #modalLogin {
@@ -203,5 +196,9 @@ h3 {
 }
 
 #dropdownMenu {
-    width: 335px !important;
+	width: 335px !important;
+}
+
+#search {
+	width: 400px;
 }
