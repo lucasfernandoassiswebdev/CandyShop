@@ -35,15 +35,13 @@ $(document).ready(function () {
     var ilegais = /[\W_]/;
 
     $("#novaSenha").on("blur", function () {
-        if ($(this).val().length < 8 || $(this).val().length > 12) {
-            $("#senhaInvalida").errorMessage("Senha deve conter de 8 a 12 caracteres!", 5000);
+        if ($(this).val().length < 8 || $(this).val().length > 12) {            
+            Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
             $(this).focus();
         }
-        if (ilegais.test($(this).val())) {
-            $("#senhaInvalida").errorMessage("Digite apenas letras e numeros!", 5000);
+        if (ilegais.test($(this).val())) {            
+            Materialize.toast("Digite apenas letras e numeros!", 3000);
             $(this).focus();
-        } else {
-            $(this).attr("disabled", "disabled");
         }
     });
 
@@ -51,8 +49,8 @@ $(document).ready(function () {
         if ($(this).val() == $("#novaSenha").val()) {
             $("#TrocarSenha").removeAttr("disabled");
         } else {
-            $("#TrocarSenha").attr("disabled", "disabled");
-            $("#senhaConfirmadaInvalida").errorMessage("As senhas não conferem!", 5000);
+            $("#TrocarSenha").attr("disabled", "disabled");            
+            Materialize.toast("As senhas não conferem!", 5000);
         }
         if ($(this).val() == "") {
             $("#novaSenha").removeAttr("disabled");
@@ -186,17 +184,35 @@ $(document).ready(function () {
 
     //desabilita o botão de confirmar compra ao abrir o carrinho
     $("a[href='#modalCarrinho'], #modalCarrinho").click(function () {
-        if ($(".collection li").length > 0)
+        if ($(".collection li").length > 0) {
             $("#confirmarCompra").removeAttr("disabled");
-        else
+            $("#limpar").removeAttr("disabled");
+        }
+        else {
             $("#confirmarCompra").attr("disabled", "disabled");
+            $("#limpar").attr("disabled", "disabled");
+        }            
     });
 
-    //colocando foco nos inputs
+    //colocando foco no modal quantidade
     $("#modalQuantidade").modal({
         ready: function (modal, trigger) {
             $("#quantidade").focus();
         } 
+    });
+
+    //colocando foco no modal login
+    $("#modalLogin").modal({
+        ready: function (modal, trigger) {
+            $("#cpf").focus();
+        }
+    });
+
+    //colocando foco no modal trocaSenha
+    $("#trocaSenha").modal({
+        ready: function (modal, trigger) {
+            $("#novaSenha").focus();
+        }
     });
 
     //desabilitando botão quando houverem quantidades inválidas
