@@ -43,7 +43,7 @@
 }
 
 body, #DivGrid {
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 html {
