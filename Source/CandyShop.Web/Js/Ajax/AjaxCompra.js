@@ -37,7 +37,10 @@ var AjaxJsCompra = (function ($) {
                     }).fail(function (xhr) {
                         console.log(xhr.responseText);
                     });
-                localStorage.removeItem('listaProdutos');
+                if (!message == "Você não está logado") {
+                    localStorage.removeItem('listaProdutos');
+                }
+
             })
             .fail(function (xhr) {
                 console.log(xhr.responseText);
