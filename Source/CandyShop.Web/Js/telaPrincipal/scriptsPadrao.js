@@ -5,14 +5,13 @@
 
 var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id;
 
-
 $(document).ready(function () {
     //pesquisa por nome é feita quando se aperta a tecla "enter" na barra de pesquisa
     $("#search").keydown(function (e) {
         if (e.which === 13) {
             AjaxJsShop.listarProdutoPorNome($("#search").val());
         }
-    });    
+    });
 
     //limpando os inputs
     $(".modal-close").click(function () {
@@ -34,7 +33,7 @@ $(document).ready(function () {
     //verificando senhas e chamando ajax pra efetivar alteracoes    
     var ilegais = /[\W_]/;
 
-    $("#novaSenha").on("blur", function () {
+    $("#novaSenha").blur(function () {
         if ($(this).val().length < 8 || $(this).val().length > 12) {
             $("#senhaInvalida").errorMessage("Senha deve conter de 8 a 12 caracteres!", 5000);
             $(this).focus();
@@ -47,7 +46,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#confirmaNovaSenha").on("blur", function () {
+    $("#confirmaNovaSenha").blur(function () {
         if ($(this).val() == $("#novaSenha").val()) {
             $("#TrocarSenha").removeAttr("disabled");
         } else {
@@ -68,6 +67,7 @@ $(document).ready(function () {
 
     //adicionando os itens do localstorage no carrinho
     if (localStorage.getItem("listaProdutos") !== null) {
+        $(".collection h1").remove();
         var i = 1;
         JSON.parse(localStorage.getItem("listaProdutos")).forEach(function (produto) {
             $(".collection").append($("<li>", {
@@ -131,11 +131,16 @@ $(document).ready(function () {
             Quantidade: quantidade,
             Imagem: imagem
         }
+
         if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length)
             console.log("produto ja existe");
         else
             listaProdutos.push(produto);
 
+        //removendo a mensagem de carrinho vazio
+        $(".collection h1").remove();
+
+        //adicionando o novo item no carrinho
         $(".collection").append($("<li>",
             {
                 html: [
@@ -186,23 +191,30 @@ $(document).ready(function () {
 
     //desabilita o botão de confirmar compra ao abrir o carrinho
     $("a[href='#modalCarrinho'], #modalCarrinho").click(function () {
-        if ($(".collection li").length > 0)
+        if ($(".collection li").length > 0) {
             $("#confirmarCompra").removeAttr("disabled");
-        else
+            $(".collection h1").remove();
+        } else {
             $("#confirmarCompra").attr("disabled", "disabled");
+            if ($(".collection h1").length == 0)
+                $(".collection").append($("<h1>", {
+                    html: "Carrinho vazio",
+                    style: "margin-top:20px"
+                }));
+        }
     });
 
     //colocando foco nos inputs
     $("#modalQuantidade").modal({
         ready: function (modal, trigger) {
             $("#quantidade").focus();
-        } 
+        }
     });
 
     //desabilitando botão quando houverem quantidades inválidas
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
     //tecla pressionada
-    $("#quantidade").on("keyup", function () {
+    $("#quantidade").keyup(function () {
         quantidade = $("#quantidade").val();
         if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel) {
             $("#adicionaCarrinho").attr("disabled", "disabled");
@@ -233,7 +245,6 @@ $(document).ready(function () {
     $("#quantidade").on("paste", function () {
         quantidade = $("#quantidade").val();
         if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
-            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
             $("#adicionaCarrinho").attr("disabled", "disabled");
         } else {
             $("#adicionaCarrinho").removeAttr("disabled");
@@ -283,14 +294,20 @@ $(document).ready(function () {
     //limpando o carrinho
     $("#limpar").click(function () {
         $(".collection li").remove();
+
+        //adicionando a mensagem de carrinho vazio novamente
+        if ($(".collection h1").length == 0)
+            $(".collection").append($("<h1>", {
+                html: "Carrinho vazio",
+                style: "margin-top:20px"
+            }));
+
         if (localStorage.getItem("listaProdutos") != null) {
             localStorage.removeItem("listaProdutos");
             listaProdutos = [];
         }
-    });  
+    });
 });
-
-
 
 //função que remove caracteres que não sejam numéricos
 function mNumbers(v) {
