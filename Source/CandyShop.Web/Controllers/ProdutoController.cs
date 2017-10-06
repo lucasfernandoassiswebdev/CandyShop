@@ -151,6 +151,13 @@ namespace CandyShop.Web.Controllers
 
                     }
                 }
+                else {
+                    var filePath = Server.MapPath("../Imagens/Produtos/" + produto.IdProduto + "_A.jpg");
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                }
 
                 if (produto.ImagemB != null)
                 {
@@ -174,6 +181,14 @@ namespace CandyShop.Web.Controllers
 
                     }
                 }
+                else
+                {
+                    var filePath = Server.MapPath("../Imagens/Produtos/" + produto.IdProduto + "_B.jpg");
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                }
 
                 if (produto.ImagemC != null)
                 {
@@ -194,6 +209,14 @@ namespace CandyShop.Web.Controllers
                             cont++;
                         }
 
+                    }
+                }
+                else
+                {
+                    var filePath = Server.MapPath("../Imagens/Produtos/" + produto.IdProduto + "_C.jpg");
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
                     }
                 }
 
