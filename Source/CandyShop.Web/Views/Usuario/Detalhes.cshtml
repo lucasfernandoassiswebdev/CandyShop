@@ -10,44 +10,28 @@
     <h4 class="pink-text">Detalhes do usuário :</h4>
     <hr />
     <div class="col s12">
-        <dl class="dl-horizontal">
-            <dt>
-                @{ string caminho = @Model.Cpf + ".jpg";}
-                <img id="imagemUsuario" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks"/>
-            </dt>
-
-            <dt>
-                Nome
-            </dt>
-
-            <dd>
-                @Model.NomeUsuario
-            </dd>
-
-            <dt>
-                CPF
-            </dt>
-
-            <dd class="cpf">
-                @Model.Cpf
-            </dd>
-
-            <dt>
-                Saldo do usuário
-            </dt>
-
-            <dd>
-                R$ @Model.SaldoUsuario
-            </dd>
-            
-            <dt>
-                Status do Usuario
-            </dt>
-
-            <dd>
-                @Model.Ativo
-            </dd>
-        </dl>
+        @{ string caminho = @Model.Cpf + ".jpg";}
+        <img id="imagemUsuario" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks" />
+        <table class="striped highlight">
+            <tbody>
+                <tr>
+                    <td>Nome: </td>
+                    <td>@Model.NomeUsuario</td>
+                </tr>
+                <tr>
+                    <td>CPF: </td>
+                    <td>@Model.Cpf</td>
+                </tr>
+                <tr>
+                    <td>Saldo do usuário: </td>
+                    <td>@Model.SaldoUsuario</td>
+                </tr>
+                <tr>
+                    <td>Status do usuário: </td>
+                    <td>@Model.Ativo</td>
+                </tr>
+            </tbody>
+        </table>
 
         <a class="waves-effect waves-light btn" onclick="AjaxJsUsuario.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
     </div>
