@@ -42,6 +42,10 @@
 	}
 }
 
+body {
+	overflow-y: auto;
+}
+
 html {
 	color: black;
 	font-family: Arial;

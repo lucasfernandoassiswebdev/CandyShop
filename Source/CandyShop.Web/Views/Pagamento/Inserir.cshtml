@@ -27,17 +27,17 @@
 
 <script>
     $(document).ready(function () {
-        $('#valorPago').maskMoney({
-            prefix: 'R$ ',
+        $("#valorPago").maskMoney({
+            prefix: "R$ ",
             allowNegative: true,
-            thousands: '.',
-            decimal: ',',
+            thousands: ".",
+            decimal: ",",
             affixesStay: false
         });
     });
 
     function FilterInput(event) {
-        var keyCode = ('which' in event) ? event.which : event.keyCode;
+        var keyCode = ("which" in event) ? event.which : event.keyCode;
         isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
         return !isNotWanted;
     }
@@ -46,16 +46,40 @@
         var clipboardData, pastedData;
 
         clipboardData = e.clipboardData || window.clipboardData;
-        pastedData = clipboardData.getData('Text').toUpperCase();
+        pastedData = clipboardData.getData("Text").toUpperCase();
 
-        if (pastedData.indexOf('E') > -1) {
+        if (pastedData.indexOf("E") > -1) {
             e.stopPropagation();
             e.preventDefault();
         }
 
-        if (pastedData.indexOf('-') > -1) {
+        if (pastedData.indexOf("-") > -1) {
             e.stopPropagation();
             e.preventDefault();
         }
     }
+
+    $("#valorPago").keyup(function () {
+        var valor = $("#valorPago").val().length;
+        if (parseInt(valor) > 8 || $("#valorPago").val() == "R$ 0,00")
+            $("#confirmarPagamento").attr("disabled", "disabled");
+        else
+            $("#confirmarPagamento").removeAttr("disabled");
+    });
+
+    $("#valorPago").blur(function () {
+        var valor = $("#valorPago").val().length;
+        if (parseInt(valor) > 8 || $("#valorPago").val() == "R$ 0,00") 
+            $("#confirmarPagamento").attr("disabled", "disabled");
+        else  
+            $("#confirmarPagamento").removeAttr("disabled");
+    });
+
+    $("#valorPago").on("paste", function () {
+        var valor = $("#valorPago").val().length;
+        if (parseInt(valor) > 8 || $("#valorPago").val() == "R$ 0,00")
+            $("#confirmarPagamento").attr("disabled", "disabled");
+        else
+            $("#confirmarPagamento").removeAttr("disabled");
+    });
 </script>
