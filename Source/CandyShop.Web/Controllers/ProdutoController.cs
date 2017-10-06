@@ -22,7 +22,6 @@ namespace CandyShop.Web.Controllers
         }
 
         #region Telas
-
         [AdminFilterResult]
         public ActionResult ListaProdutos()
         {
@@ -67,7 +66,6 @@ namespace CandyShop.Web.Controllers
         #endregion
 
         #region Listas
-
         [AdminFilterResult]
         public ActionResult Listar()
         {
@@ -77,7 +75,7 @@ namespace CandyShop.Web.Controllers
 
             TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             TempData["nomeLista"] = "todos";
-            return View("ListaProdutos", response.Content);            
+            return View("ListaProdutos", response.Content);
         }
 
         [AdminFilterResult]
@@ -101,7 +99,7 @@ namespace CandyShop.Web.Controllers
 
             TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             TempData["nomeLista"] = "nome";
-            return View("ListaProdutos", response.Content);            
+            return View("ListaProdutos", response.Content);
         }
 
         [AdminFilterResult]
@@ -119,18 +117,15 @@ namespace CandyShop.Web.Controllers
         #endregion
 
         #region Execucoes
-
         [AdminFilterResult]
         [HttpPost]
         public ActionResult CadastrarProduto(ProdutoViewModel produto)
         {
             if (ModelState.IsValid)
             {
-
                 var response = _appProduto.InserirProduto(produto);
                 if (response.Status != HttpStatusCode.OK)
                     return Content(response.ContentAsString.ToString());
-
 
                 //salvando todas as imagens que o usuário inseriu
                 int cont = 0;
@@ -156,7 +151,8 @@ namespace CandyShop.Web.Controllers
 
                     }
                 }
-                else {
+                else
+                {
                     var filePath = Server.MapPath("Imagens/Produtos/" + produto.IdProduto + "_A.jpg");
                     if (System.IO.File.Exists(filePath))
                     {

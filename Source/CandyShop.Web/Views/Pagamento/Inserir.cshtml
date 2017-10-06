@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
+                <a id="confirmarPagamento" class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirPagamento()" disabled><i class="material-icons left">add_circle</i>Confirmar</a>
             </div>
         </form>
     </div>
@@ -27,17 +27,17 @@
 
 <script>
     $(document).ready(function () {
-        $('#valorPago').maskMoney({
-            prefix: 'R$ ',
+        $("#valorPago").maskMoney({
+            prefix: "R$ ",
             allowNegative: true,
-            thousands: '.',
-            decimal: ',',
+            thousands: ".",
+            decimal: ",",
             affixesStay: false
         });
     });
 
     function FilterInput(event) {
-        var keyCode = ('which' in event) ? event.which : event.keyCode;
+        var keyCode = ("which" in event) ? event.which : event.keyCode;
         isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
         return !isNotWanted;
     }
@@ -46,16 +46,32 @@
         var clipboardData, pastedData;
 
         clipboardData = e.clipboardData || window.clipboardData;
-        pastedData = clipboardData.getData('Text').toUpperCase();
+        pastedData = clipboardData.getData("Text").toUpperCase();
 
-        if (pastedData.indexOf('E') > -1) {
+        if (pastedData.indexOf("E") > -1) {
             e.stopPropagation();
             e.preventDefault();
         }
 
-        if (pastedData.indexOf('-') > -1) {
+        if (pastedData.indexOf("-") > -1) {
             e.stopPropagation();
             e.preventDefault();
         }
     }
+
+    $("#valorPago").keyup(function () {
+        var valor = $("#valorPago").val().length;
+        if (parseInt(valor) > 5 || parseInt(valor) == 0)
+            $("#confirmarPagamento").attr("disabled", "disabled");
+        else
+            $("#confirmarPagamento").removeAttr("disabled");
+    });
+
+    $("#valorPago").on("paste", function () {
+        var valor = $("#valorPago").val().length;
+        if (parseInt(valor) > 5 || parseInt(valor) == 0)
+            $("#confirmarPagamento").attr("disabled", "disabled");
+        else
+            $("#confirmarPagamento").removeAttr("disabled");
+    });
 </script>
