@@ -1,33 +1,8 @@
-﻿@media only screen and (max-width : 992px) {
-    .corpo {
-        padding-left: 0 !important;
-    }
-    dd {
-        margin-left: 31% !important;
-        margin-top: -5.1% !important;
-    }
-}
-.corpo, hr {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-dd {
-    margin-left: 42%;
-    margin-top: -7.4%;
-}
-
-dt {
-    color: black;
+﻿img {
+    max-height: 180px;
+    max-width: 180px;
 }
 
 h4 {
-    margin-left: -1%;
-}
-
-img {
-    max-height: 180px;
-    max-width: 180px;
+    font-weight:bold;
 }
