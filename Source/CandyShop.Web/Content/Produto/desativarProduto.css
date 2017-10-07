@@ -1,35 +1,9 @@
-﻿@media only screen and (max-width : 992px) {
-	.batata {
-		margin-left: -33% !important;
-	}
-}
-
-.corpo, hr {
-	width: 100%;
-	margin: 0 auto;
-	text-align: left;
-}
-
-.corpo {
-	margin-left: -14%;
-}
-
-dd {
-	margin-left: 23%;
-	margin-top: -3.5%;
-}
-
-dl {
-	color: black;
-	width: 700px;
-}
-
-.batata {
-	margin-left: -65%;
-}
-
-img {
+﻿img {
 	max-width: 150px;
 	max-height: 150px;
 	display: inline-block;
+}
+
+h4 {
+	font-weight:bold;
 }
