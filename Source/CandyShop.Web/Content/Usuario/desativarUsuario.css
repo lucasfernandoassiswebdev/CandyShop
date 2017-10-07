@@ -1,28 +1,8 @@
-﻿.corpo, hr {
-	width: 100%;
-	max-width: 400px;
-	margin: 0 auto;
-	text-align: left;
-}
-
-.corpo {
-	margin-left: -14%;
-}
-
-dd {
-	margin-left: 33%;
-	margin-top: -7%;
-}
-dl {
-	color: black; 
-}
-
-.batata {
-	margin-left: -1%;
-
-}
-
-img {
+﻿img {
 	max-height: 180px;
 	max-width: 180px;
+}
+
+h4 {
+	font-weight:bold;
 }

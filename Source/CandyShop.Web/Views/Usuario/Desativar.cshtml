@@ -4,57 +4,45 @@
     Layout = null;
 }
 
-<link rel="stylesheet" type="text/css" href="~/Content/Usuario/desativarUsuario.css?d=@DateTime.Now.Ticks"/>
+<link rel="stylesheet" type="text/css" href="~/Content/Usuario/desativarUsuario.css?d=@DateTime.Now.Ticks" />
 
-<div class="corpo left">
+<div class="center container">
     <div class="col s12">
-        <h5 class="batata pink-text">Tem certeza que deseja desativar este usuário?</h5>
-        <div class="left">
+        <h4 class="pink-text">Tem certeza que deseja desativar este usuário?</h4>
+        <div>
             <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @{ string caminho = @Model.Cpf + ".jpg";}
-                    <img id="imagemUsuario" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks"/>
-                </dt>
-
-                <dt>
-                    CPF:
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Cpf)
-                </dd>
-
-                <dt>
-                    Nome:
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.NomeUsuario)
-                </dd>
-
-                <dt>
-                    Saldo:
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.SaldoUsuario)
-                </dd>
-
-                <dt>
-                    Status:
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Ativo)
-                </dd>
-
-            </dl>
+            @{ string caminho = @Model.Cpf + ".jpg";}
+            <img id="imagemUsuario" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks" />
+           
+            <table class="striped highlight centered bordered" style="margin-bottom:50px">
+                <tbody>
+                    <tr>
+                        <td>Nome: </td>
+                        <td>@Model.NomeUsuario</td>
+                    </tr>
+                    <tr>
+                        <td>CPF: </td>
+                        <td class="cpf">@Model.Cpf</td>
+                    </tr>
+                    <tr>
+                        <td>Saldo do usuário: </td>
+                        <td>R$ @Model.SaldoUsuario</td>
+                    </tr>
+                    <tr>
+                        <td>Status do usuário: </td>
+                        <td>
+                            @if (Model.Ativo == "A")
+                            {<text>Ativo</text>}
+                            else
+                            {<text>Inativo</text>}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="row" , align="center">
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsUsuario.listaUsuario()"><i class="material-icons left">arrow_back</i>Voltar</a>
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsUsuario.desativarUsuarioConfirmado('@Model.Cpf')"><i class="material-icons left">delete</i>Excluir</a>
             </div>
-
         </div>
     </div>
 </div>
