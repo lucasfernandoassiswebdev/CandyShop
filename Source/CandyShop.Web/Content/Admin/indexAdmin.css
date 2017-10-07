@@ -3,7 +3,7 @@
 		padding-left: 0 !important;
 		padding-right: 0 !important;
 	}
-     
+	 
 	.container {
 		width: 90% !important;
 	}
@@ -48,7 +48,6 @@ body {
 
 html {
 	color: black;
-	font-family: Arial;
 }
 
 header, main, footer {
@@ -183,5 +182,5 @@ input {
 }
 
 #DivGrid {
-    padding-left: 281px;
+	padding-left: 290px;
 }

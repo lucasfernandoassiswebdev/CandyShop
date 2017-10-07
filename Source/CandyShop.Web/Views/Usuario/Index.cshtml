@@ -6,7 +6,6 @@
 
 <link rel="stylesheet" type="text/css" href="~/Content/Usuario/IndexUsuario.css?d=@DateTime.Now.Ticks"/>
 
-
 <script>
     $(document).ready(function () {
         $('.collapsible').collapsible();
@@ -24,6 +23,7 @@
         return v;
     }
 </script>
+
 <div class="row">
     <div><h3>@TempData["nomeLista"].ToString()</h3></div>
     @if (!Model.Any())
