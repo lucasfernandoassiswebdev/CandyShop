@@ -12,14 +12,14 @@
     });
 </script>
 <div class="row">
-    <div><h3>@TempData["nomeLista"].ToString()</h3></div>
+    <h3 class="center pink-text">@TempData["nomeLista"].ToString()</h3>
     @if (!Model.Any())
     {
         <p align="center">Nenhum registro encontrado</p>
     }
     else
     {
-        <div class="col s12 recuaTabela">
+        <div class="col s12 desapear">
             <table class="bordered highlight">
                 <tr>
                     <th>
