@@ -128,7 +128,7 @@ namespace CandyShop.Web.Controllers
             {
                 var response = _appUsuario.InserirUsuario(usuario);
                 if (response.Status != HttpStatusCode.OK)
-                    return Content($"Erro ao cadastrar usuario: {response.Status}");
+                    return Content($"{response.ContentAsString}");
 
                 if (usuario.Imagem != null)
                 {

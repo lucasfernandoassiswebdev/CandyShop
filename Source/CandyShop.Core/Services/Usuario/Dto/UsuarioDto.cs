@@ -18,12 +18,15 @@
                 notification.Add("Cpf Invalido");
             if (string.IsNullOrEmpty(NomeUsuario.Trim()) || NomeUsuario.Length > 50)
                 notification.Add("Nome do Usuario invalido ");
-            if (string.IsNullOrEmpty(SenhaUsuario.Trim()) || SenhaUsuario.Length > 12)
-                notification.Add("Senha invalida");
-            if (string.IsNullOrEmpty(Ativo))
-                notification.Add("Status do usuario nao pode ser nulo");          
-            if(string.IsNullOrEmpty(Classificacao.Trim()) || Classificacao.Length > 1)
-                notification.Add("Classificacao irregular");      
+            if(SenhaUsuario != null)
+                if (string.IsNullOrEmpty(SenhaUsuario.Trim()) || SenhaUsuario.Length > 12)
+                    notification.Add("Senha invalida");
+            if(Ativo != null)
+                if (string.IsNullOrEmpty(Ativo))
+                    notification.Add("Status do usuario nao pode ser nulo");
+            if(Classificacao != null)
+                if (string.IsNullOrEmpty(Classificacao.Trim()) || Classificacao.Length > 1)
+                    notification.Add("Classificacao irregular");      
 
             return !notification.HasNotification();
         }
