@@ -11,12 +11,12 @@
     var listaUsuario = function() {
         chamaPagina(url.listaUsuario);
     };
-    var editarUsuario = function(cpf) {
-        var usuario = { Cpf: cpf };
+    var editarUsuario = function(cpf, telaAnterior) {
+        var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
         chamaPaginaComIdentificador(url.editarUsuario, usuario);
     };
-    var detalheUsuario = function(cpf) {
-        var usuario = { Cpf: cpf };
+    var detalheUsuario = function (cpf, telaAnterior) {
+        var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
         chamaPaginaComIdentificador(url.detalheUsuario, usuario);
     };
     var concluirCadastroUsuario = function(imgBase64) {
@@ -41,10 +41,8 @@
         };
         concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };
-    var desativarUsuario = function(cpf) {
-        var usuario = {
-            Cpf: cpf
-        };
+    var desativarUsuario = function (cpf, telaAnterior) {
+        var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
         chamaPaginaComIdentificador(url.desativarUsuario, usuario);
     };
     var desativarUsuarioConfirmado = function(cpf) {

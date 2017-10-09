@@ -72,7 +72,6 @@
         })
  })
 </script>
-
 <link rel="stylesheet" type="text/css" href="../Content/Admin/indexAdmin.css?d=@DateTime.Now.Ticks">
 
 <!--modal de pesquisa de usuários-->
@@ -116,6 +115,19 @@
         <ul class="collapsible" data-collapsible="accordion">
             <li>
                 <div class="collapsible-header white-text">
+                    <i class="material-icons left">shopping_cart</i>PRODUTOS
+                </div>
+                <div class="collapsible-body">
+                    <ul class="brown-text">
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
+                        <li><a href="#modalPesquisaProduto" class="modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.listarInativos()"><i class="material-icons">list</i>Listar Inativos</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header white-text">
                     <i class="material-icons left">face</i>USUÁRIOS
                 </div>
                 <div class="collapsible-body">
@@ -125,20 +137,6 @@
                         <li><a class="modal-trigger" href="#modalPesquisaUsuario"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
                         <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
-                    </ul>
-                </div>
-            </li>
-
-            <li>
-                <div class="collapsible-header white-text">
-                    <i class="material-icons left">shopping_cart</i>PRODUTOS
-                </div>
-                <div class="collapsible-body">
-                    <ul class="brown-text">
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.listaProduto()"><i class="material-icons">list</i>Listar produtos</a></li>
-                        <li><a href="#modalPesquisaProduto" class="modal-trigger"><i class="material-icons">find_in_page</i>Encontrar produto</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.cadastrarProduto();"><i class="material-icons">add_shopping_cart</i>Inserir produto</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJsProduto.listarInativos()"><i class="material-icons">list</i>Listar Inativos</a></li>
                     </ul>
                 </div>
             </li>

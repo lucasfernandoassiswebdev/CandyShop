@@ -19,10 +19,6 @@ $("#fotoUsuario").change(function () {
     readURL(this);
 });
 
-$(".botaoVoltar").on("click", function () {
-    //voltando a lista de usuários
-    AjaxJsUsuario.listaUsuario();
-});
 
 $(".botaoEditar").on("click", function () {
     var filesSelected = document.getElementById("fotoUsuario").files;

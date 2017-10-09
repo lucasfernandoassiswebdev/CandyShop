@@ -24,12 +24,12 @@
         };
         concluirAcao(url.concluirCadastroProduto, produto, url.cadastrarProduto);
     };
-    var detalheProduto = function (id) {
-        var produto = { IdProduto: id };
+    var detalheProduto = function (id, telaAnterior) {
+        var produto = { IdProduto: id, telaAnterior: telaAnterior };
         chamaPaginaComIdentificador(url.detalheProduto, produto);
     };
-    var editarProduto = function (id) {
-        var produto = { IdProduto: id };
+    var editarProduto = function (id, telaAnterior) {
+        var produto = { IdProduto: id, telaAnterior: telaAnterior };
         chamaPaginaComIdentificador(url.editarProduto, produto);
     };
     var concluirEdicaoProduto = function (baseA, baseB, baseC) {
@@ -46,8 +46,8 @@
         };
         concluirAcaoEdicao(url.concluirEdicaoProduto, produto, url.listaProduto);
     };
-    var desativarProduto = function (id) {
-        var produto = { IdProduto: id };
+    var desativarProduto = function (id, telaAnterior) {
+        var produto = { IdProduto: id, telaAnterior: telaAnterior };
         chamaPaginaComIdentificador(url.desativarProduto, produto);
     };
     var desativarProdutoConfirmado = function (id) {
@@ -61,7 +61,6 @@
         var produto = { Nome: nome };
         chamaPaginaComIdentificador(url.listarProdutoPorNome, produto);
     };
-
     var listaCategoria = function(categoria) {
         chamaPaginaComIdentificador(url.listaCategoria, { categoria: categoria });
     }
