@@ -4,10 +4,6 @@
     $('.tooltipped').tooltip({ delay: 50 });
 });
 
-$('.botaoVoltar').on('click', function () {
-    AjaxJsProduto.listaProduto();
-});
-
 //cadastrando o produto
 $('.botaoEditar').on('click', function () {
     encodeImageFileAsURL(AjaxJsProduto.concluirEdicaoProduto);

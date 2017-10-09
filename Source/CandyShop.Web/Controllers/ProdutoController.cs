@@ -5,7 +5,6 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -35,31 +34,34 @@ namespace CandyShop.Web.Controllers
         }
 
         [AdminFilterResult]
-        public ActionResult DetalheProduto(int idProduto)
+        public ActionResult DetalheProduto(int idProduto, string telaAnterior)
         {
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString.First());
+                return Content("Erro" + response.ContentAsString);
+            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
+            ViewBag.telaAnterior = telaAnterior;
+            return View(response.Content);
+        }
+
+        [AdminFilterResult]
+        public ActionResult EditarProduto(int idProduto, string telaAnterior)
+        {
+            var response = _appProduto.DetalharProduto(idProduto);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro" + response.ContentAsString);
+            ViewBag.telaAnterior = telaAnterior;
             TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             return View(response.Content);
         }
 
         [AdminFilterResult]
-        public ActionResult EditarProduto(int idProduto)
+        public ActionResult DesativarProduto(int idProduto, string telaAnterior)
         {
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString.First());
-            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
-            return View(response.Content);
-        }
-
-        [AdminFilterResult]
-        public ActionResult DesativarProduto(int idProduto)
-        {
-            var response = _appProduto.DetalharProduto(idProduto);
-            if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString.First());
+                return Content("Erro" + response.ContentAsString);
+            ViewBag.telaAnterior = telaAnterior;
             TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             return View(response.Content);
         }
@@ -71,7 +73,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.ListarProdutos();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro " + response.ContentAsString);
 
             TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             TempData["nomeLista"] = "Produtos Ativos";
@@ -84,7 +86,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.ListarInativos();
             if (response.Status != HttpStatusCode.OK)
-                return Content($"Erro {response.ContentAsString.First()}");
+                return Content($"Erro {response.ContentAsString}");
 
             TempData["nomeLista"] = "Produtos Inativos";
 
@@ -103,17 +105,17 @@ namespace CandyShop.Web.Controllers
             return View("ListaProdutos", response.Content);
         }
 
-        [AdminFilterResult]
-        public ActionResult ListarCategoria(string categoria)
-        {
-            var response = _appProduto.ListarCategoria(categoria);
-            if (response.Status != HttpStatusCode.OK)
-                return Content($"Erro: {response.Status}");
+        //[AdminFilterResult]
+        //public ActionResult ListarCategoria(string categoria)
+        //{
+        //    var response = _appProduto.ListarCategoria(categoria);
+        //    if (response.Status != HttpStatusCode.OK)
+        //        return Content($"Erro: {response.Status}");
 
-            TempData["nomeLista"] = "Produtos por Categoria";
-            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
-            return View("ListaProdutos", response.Content);
-        }
+        //    TempData["nomeLista"] = "Produtos por Categoria";
+        //    TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
+        //    return View("ListaProdutos", response.Content);
+        //}
 
         #endregion
 

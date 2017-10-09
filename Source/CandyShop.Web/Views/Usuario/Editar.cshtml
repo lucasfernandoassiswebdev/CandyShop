@@ -2,6 +2,7 @@
 
 @{
     Layout = null;
+    string voltar;
 }
 
 <link rel="stylesheet" href="~/Content/Usuario/formCadastroUsuario.css" />
@@ -93,8 +94,20 @@
                     <label>Status do usuário</label>
                 </div>
             </div>
+            @if (ViewBag.telaAnterior.ToString().Equals("Usuários Ativos"))
+            {
+                voltar = "AjaxJsUsuario.listaUsuario()";
+            }
+            else if (ViewBag.telaAnterior.ToString().Equals("Usuários Inativos"))
+            {
+                voltar = "AjaxJsUsuario.listarUsuarioInativo()";
+            }
+            else
+            {
+                voltar = "AjaxJsUsuario.listarUsuarioEmDivida()";
+            }
             <div class="row center">
-                <a class="waves-effect waves-light btn-large botaoVoltar"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large botaoVoltar" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
                 <a class="waves-effect waves-light btn-large botaoEditar"><i class="material-icons left">build</i>Editar</a>
             </div>
         </form>

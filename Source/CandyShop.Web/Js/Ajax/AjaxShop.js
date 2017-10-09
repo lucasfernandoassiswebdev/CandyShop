@@ -36,7 +36,7 @@
             .done(function (res) {
                 $.get(url.padrao)
                     .done(function (data) {
-                        $('body').slideUp(1000, function () {
+                        $('body').slideUp("slow", function () {
                             $('body').hide().html(data).slideDown(1000, function () {
                                 if (res !== "1") {
                                     Materialize.toast("Login feito com sucesso!", 4000);

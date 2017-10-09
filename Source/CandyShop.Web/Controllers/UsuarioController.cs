@@ -35,35 +35,35 @@ namespace CandyShop.Web.Controllers
         }
 
         [AdminFilterResult]
-        public ActionResult Editar(string cpf)
+        public ActionResult Editar(string cpf, string telaAnterior)
         {
             var usuario = _appUsuario.SelecionarUsuario(cpf);
 
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro " + usuario.ContentAsString.First());
-
+            ViewBag.telaAnterior = telaAnterior;
             TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
             return View(usuario.Content);
         }
 
         [AdminFilterResult]
-        public ActionResult Desativar(string cpf)
+        public ActionResult Desativar(string cpf, string telaAnterior)
         {
             var usuario = _appUsuario.SelecionarUsuario(cpf);
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro " + usuario.ContentAsString.First());
-
+            ViewBag.telaAnterior = telaAnterior;
             TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
             return View(usuario.Content);
         }
 
         [AdminFilterResult]
-        public ActionResult Detalhes(string cpf)
+        public ActionResult Detalhes(string cpf, string telaAnterior)
         {
             var response = _appUsuario.SelecionarUsuario(cpf);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro" + response.ContentAsString.First());
-
+            ViewBag.telaAnterior = telaAnterior;
             TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
             return View(response.Content);
         }
@@ -165,8 +165,9 @@ namespace CandyShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = _appUsuario.EditarUsuario(usuario);
-
+                var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+                var response = _appUsuario.EditarUsuario(usuario);               
+                
                 if (response.Status != HttpStatusCode.OK)
                     return Content("Erro " + response.ContentAsString.First());
 
@@ -192,7 +193,6 @@ namespace CandyShop.Web.Controllers
                     }
                 }
                 else {
-                    var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
                     var filePath = Server.MapPath("Imagens/Usuarios/" + cpf + ".jpg");
                     if (System.IO.File.Exists(filePath))
                     {
@@ -200,8 +200,15 @@ namespace CandyShop.Web.Controllers
                     }
                 }
 
-                return Content("Edição concluída com sucesso!!");
+                if (Session["Login"].ToString().Equals(cpf))
+                {
+                    var res = _appUsuario.SelecionarUsuario(cpf);
+                    if (res.Status != HttpStatusCode.OK)
+                        return Content("Erro ao atualizar seu saldo");
+                    Session["saldoUsuario"] = res.Content.SaldoUsuario; 
+                }
 
+                return Content("Edição concluída com sucesso!!");            
             }
             return View("Editar");
         }
