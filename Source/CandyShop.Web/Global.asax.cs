@@ -15,7 +15,7 @@ namespace CandyShop.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DependencyResolver.SetResolver(
                 new SimpleInjectorDependencyResolver(SimpleInjectorContainer.Build())
-            );
+            );            
         }
     }
 }

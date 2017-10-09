@@ -183,8 +183,8 @@ function mcpf(v) {
 
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
-                {
-                    <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">book</i>Administrativo</a></li>
+                {                   
+                    <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
                     <li class="divider"></li>
                 }
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
@@ -220,7 +220,7 @@ function mcpf(v) {
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                    <li><a href="#!" onclick="AjaxJsShop.administracao()"><i class="material-icons">find_in_page</i>Administrativo</a></li>
+                    <li><i class="material-icons">book</i>@Html.ActionLink("Administração", "Index", "Admin")</li>
                     <li class="divider"></li>
                 }
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
