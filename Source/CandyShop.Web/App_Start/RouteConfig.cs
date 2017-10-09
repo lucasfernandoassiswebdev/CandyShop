@@ -10,10 +10,16 @@ namespace CandyShop.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
+                name: "Administracao",
+                url: "Administracao",
+                defaults: new { controller = "Admin", action = "Index" }
+            );
+            routes.MapRoute(
+                name: "CandyShop",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "NavBar", id = UrlParameter.Optional }
             );
+            
         }
     }
 }

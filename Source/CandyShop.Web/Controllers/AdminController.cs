@@ -8,7 +8,7 @@ namespace CandyShop.Web.Controllers
     {
         [AdminFilterResult]
         public ActionResult Index()
-        {
+        {            
             Session["TipoDeLogin"] = "Admin";
             return View();
         }
