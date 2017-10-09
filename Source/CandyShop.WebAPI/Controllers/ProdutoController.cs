@@ -33,6 +33,9 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Put(ProdutoDto produto)
         {
+            _produtoService.IsValid(produto);
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
             _produtoRepository.UpdateProduto(produto);
             return Ok();
         }
