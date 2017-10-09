@@ -21,9 +21,10 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Post(UsuarioDto usuario)
         {
+            _usuarioService.InserirUsuario(usuario);
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-            _usuarioRepository.InserirUsuario(usuario);
+
             return Ok();
         }
 

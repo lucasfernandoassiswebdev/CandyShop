@@ -37,7 +37,7 @@ namespace CandyShop.Core.Services.Produto
             var produtos = _produtoRepository.ListarProdutos();
             foreach (var item in produtos)
             {
-                if (item.NomeProduto.Equals(produto.NomeProduto))
+                if (item.NomeProduto.Equals(produto.NomeProduto) && item.IdProduto != produto.IdProduto)
                 {
                     _notification.Add("Produto já existente");
                     return;

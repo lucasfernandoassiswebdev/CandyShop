@@ -127,7 +127,7 @@ namespace CandyShop.Web.Controllers
             {
                 var response = _appUsuario.InserirUsuario(usuario);
                 if (response.Status != HttpStatusCode.OK)
-                    return Content($"Erro ao cadastrar usuario: {response.Status}");
+                    return Content($"{response.ContentAsString}");
 
                 if (usuario.Imagem != null)
                 {
@@ -166,8 +166,8 @@ namespace CandyShop.Web.Controllers
             if (ModelState.IsValid)
             {
                 var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                var response = _appUsuario.EditarUsuario(usuario);               
-                
+                var response = _appUsuario.EditarUsuario(usuario);
+
                 if (response.Status != HttpStatusCode.OK)
                     return Content("Erro " + response.ContentAsString.First());
 
@@ -192,7 +192,8 @@ namespace CandyShop.Web.Controllers
 
                     }
                 }
-                else {
+                else
+                {
                     var filePath = Server.MapPath("Imagens/Usuarios/" + cpf + ".jpg");
                     if (System.IO.File.Exists(filePath))
                     {
@@ -205,10 +206,10 @@ namespace CandyShop.Web.Controllers
                     var res = _appUsuario.SelecionarUsuario(cpf);
                     if (res.Status != HttpStatusCode.OK)
                         return Content("Erro ao atualizar seu saldo");
-                    Session["saldoUsuario"] = res.Content.SaldoUsuario; 
+                    Session["saldoUsuario"] = res.Content.SaldoUsuario;
                 }
 
-                return Content("Edição concluída com sucesso!!");            
+                return Content("Edição concluída com sucesso!!");
             }
             return View("Editar");
         }
@@ -217,16 +218,16 @@ namespace CandyShop.Web.Controllers
         public ActionResult TrocarSenha(TrocaSenhaViewModel senhas)
         {
             if (senhas.ConfirmaNovaSenha.Equals(senhas.NovaSenha))
-            {                                           
+            {
                 var usuario = new UsuarioViewModel
                 {
-                    Cpf = Session["Login"].ToString(),                        
-                    SenhaUsuario = senhas.NovaSenha 
+                    Cpf = Session["Login"].ToString(),
+                    SenhaUsuario = senhas.NovaSenha
                 };
                 var response = _appUsuario.TrocarSenha(usuario);
                 if (response.Status != HttpStatusCode.OK)
                     return Content($"Erro ao trocar a senha, {response.ContentAsString}");
-                return Content("Senha atualizada com sucesso");                                
+                return Content("Senha atualizada com sucesso");
             }
             return Content("Senhas não conferem");
         }
@@ -239,7 +240,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro {response.Status}");
             return Content("Usuario desativado com sucesso!");
-        }        
+        }
 
         [UserFilterResult]
         public ActionResult Deslogar()

@@ -10,6 +10,6 @@ namespace CandyShop.Web.Controllers
         {
             Session["TipoDeLogin"] = "Admin";
             return View();
-        }        
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace CandyShop.Web.Controllers
         [AdminFilterResult]
         public ActionResult Index()
         {
-            ViewBag.SaldoAtual = "Saldo atual da loja: R$" + _appUsuario.VerificaCreditoLoja().Content; 
+            ViewBag.SaldoAtual = "Saldo atual da loja: R$" + _appUsuario.VerificaCreditoLoja().Content;
             return View();
         }
     }

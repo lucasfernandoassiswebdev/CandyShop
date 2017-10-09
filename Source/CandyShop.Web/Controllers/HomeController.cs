@@ -22,7 +22,7 @@ namespace CandyShop.Web.Controllers
         {
             if (Session["Login"] == null)
                 Session["Login"] = "off";
-            Session["TipoDeLogin"] = "User";           
+            Session["TipoDeLogin"] = "User";
             return View();
         }
 
@@ -47,7 +47,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
-            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";                            
+            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             return View("GridProdutos", response.Content);
         }
 
@@ -85,9 +85,5 @@ namespace CandyShop.Web.Controllers
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
             return View("NavBar");
         }
-
-        
     }
-    
-
 }

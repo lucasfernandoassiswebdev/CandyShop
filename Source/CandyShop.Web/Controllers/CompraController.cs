@@ -58,7 +58,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appCompra.ListaCompraPorCpf(cpf);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString );
+                return Content("Erro " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -69,7 +69,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appCompra.ListarComprasSemana();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString );
+                return Content("Erro " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -80,7 +80,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 0;
             var response = _appCompra.ListarComprasMes(mes);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString  );
+                return Content("Erro " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -91,14 +91,14 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appCompra.ListarComprasDia();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString  );
+                return Content("Erro " + response.ContentAsString);
             return View("Index", response.Content);
         }
         #endregion
 
         #region execuções
 
-        [HttpPost]        
+        [HttpPost]
         public ActionResult Cadastrar(CompraViewModel compra)
         {
 
@@ -118,7 +118,7 @@ namespace CandyShop.Web.Controllers
 
                 var totalCompra = _appCompra.SelecionarCompra(response.Content);
                 if (totalCompra.Status != HttpStatusCode.OK)
-                    return Content("Erro ao atualizar saldo" + totalCompra.ContentAsString  );
+                    return Content("Erro ao atualizar saldo" + totalCompra.ContentAsString);
 
                 Session["saldoUsuario"] = Convert.ToDecimal(Session["saldoUsuario"].ToString()) - totalCompra.Content.ValorCompra;
                 TempData["LimparCarrinho"] = true;

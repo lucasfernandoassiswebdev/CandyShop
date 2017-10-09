@@ -1,18 +1,12 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http.Filters;
+﻿using System.Web.Mvc;
 
 namespace CandyShop.Web.Filters
 {
-    public class ExceptionFilter: ExceptionFilterAttribute
+    public class ExceptionFilter : HandleErrorAttribute
     {
-        public override void OnException(HttpActionExecutedContext context)
+        public override void OnException(ExceptionContext filterContext)
         {
-            if (context.Exception is NotImplementedException)
-            {
-                context.Response = new HttpResponseMessage(HttpStatusCode.NotImplemented);
-            }
+            base.OnException(filterContext);
         }
     }
 }
