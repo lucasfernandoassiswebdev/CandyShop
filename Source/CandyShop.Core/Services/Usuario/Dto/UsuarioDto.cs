@@ -11,7 +11,7 @@
 
 
         /* As linhas de codigo abaixo é onde fica todas as verificações de usuario como 
-            validar cpf senha  etc*/
+            validar cpf senha  etc */
         public bool IsValid(INotification notification)
         {
             if (!ValidaCpf(Cpf))

@@ -1,8 +1,6 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Core.Services.Usuario.Dto;
-using System;
-using System.Linq;
 using System.Net;
 using System.Web.Http;
 
@@ -14,176 +12,95 @@ namespace CandyShop.WebAPI.Controllers
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository,IUsuarioService usuarioService)
+        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService)
         {
             _notification = notification;
             _usuarioRepository = usuarioRepository;
             _usuarioService = usuarioService;
         }
 
-
         public IHttpActionResult Post(UsuarioDto usuario)
         {
-            try
-            {
-                if (_notification.HasNotification())
-                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-                _usuarioRepository.InserirUsuario(usuario);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
-            }
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+            
+            _usuarioService.InserirUsuario(usuario);
+            return Ok();
         }
 
         [HttpPost, Route("api/Usuario/login")]
         public IHttpActionResult PostLogin(UsuarioDto usuario)
         {
-            try
-            {
-                if (_notification.HasNotification())
-                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
-                usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
-                var user = _usuarioRepository.SelecionarUsuario(usuario.Cpf);
-                if (user != null)
-                {
-                    return Ok(_usuarioService.VerificaLogin(usuario));
-                }
-
-                return BadRequest();
-            }
-            catch (Exception e)
+            usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
+            var user = _usuarioRepository.SelecionarUsuario(usuario.Cpf);
+            if (user != null)
             {
-                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
+                return Ok(_usuarioService.VerificaLogin(usuario));
             }
+
+            return BadRequest();
         }
 
         public IHttpActionResult Get()
         {
-            try
-            {
-                return Ok(_usuarioRepository.ListarUsuario());
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
-            }
+            return Ok(_usuarioRepository.ListarUsuario());
         }
 
         [HttpGet, Route("api/Usuario/Devedores")] // Colocar quando controller tiver mais de um metodos GET
         public IHttpActionResult GetUsuariosDivida()
         {
-            try
-            {
-                return Ok(_usuarioRepository.ListarUsuarioDivida());
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
-            }
+            return Ok(_usuarioRepository.ListarUsuarioDivida());
         }
-            
 
         [HttpGet, Route("api/Usuario/inativos")] // Colocar quando controller tiver mais de um metodos GET
         public IHttpActionResult GetUsuariosInativos()
         {
-            try
-            {
-                return Ok(_usuarioRepository.ListarUsuarioInativo());
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
-            }
+            return Ok(_usuarioRepository.ListarUsuarioInativo());
         }
 
         [HttpGet, Route("api/usuario/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {
-            try
-            {
-                return Ok(_usuarioRepository.ListarUsuarioPorNome(nome));
-
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
-            }
+            return Ok(_usuarioRepository.ListarUsuarioPorNome(nome));
         }
 
         [HttpGet, Route("api/Usuario/saldo")]
         public IHttpActionResult GetSaldo()
         {
-            try
-            {
-                return Ok(_usuarioRepository.VerificaCreditoLoja());
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
-            }
+            return Ok(_usuarioRepository.VerificaCreditoLoja());
         }
 
         public IHttpActionResult Put(UsuarioDto usuario)
         {
-            try
-            {
-                if (_notification.HasNotification())
-                    return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
-                usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
-                _usuarioRepository.EditarUsuario(usuario);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return Content(HttpStatusCode.NotAcceptable, ex.Message.ToList());
-            }
+            usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
+            _usuarioRepository.EditarUsuario(usuario);
+            return Ok();
         }
 
         [HttpPut, Route("api/usuario/trocarSenha")]
         public IHttpActionResult PutSenha(UsuarioDto usuario)
         {
-            try
-            {
-                _usuarioRepository.TrocarSenha(usuario);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
-            }
-
+            _usuarioRepository.TrocarSenha(usuario);
+            return Ok();
         }
 
-        [HttpPut,Route("api/usuario/desativar/{cpf}")]
+        [HttpPut, Route("api/usuario/desativar/{cpf}")]
         public IHttpActionResult PutDesativar(UsuarioDto usuario)
         {
-            try
-            {
-                _usuarioRepository.DesativarUsuario(usuario.Cpf);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
-            }
-            
+            _usuarioRepository.DesativarUsuario(usuario.Cpf);
+            return Ok();
         }
 
         [HttpGet, Route("api/Usuario/{cpf}/Detalhes")]
         public IHttpActionResult GetWithCpf(string cpf)
         {
-            try
-            {
-                return Ok(_usuarioRepository.SelecionarUsuario(cpf));
-            }
-            catch (Exception e)
-            {
-                return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
-            }
+            return Ok(_usuarioRepository.SelecionarUsuario(cpf));
         }
     }
 }

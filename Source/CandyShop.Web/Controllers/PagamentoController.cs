@@ -1,10 +1,10 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using CandyShop.Web.Filters;
 using System;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using CandyShop.Web.Filters;
 
 namespace CandyShop.Web.Controllers
 {
@@ -123,8 +123,8 @@ namespace CandyShop.Web.Controllers
         }
         [AdminFilterResult]
         public ActionResult EditarPagamento(PagamentoViewModel pagamento)
-        {                        
-            var response = _appPagamento.EditarPagamento(pagamento);                        
+        {
+            var response = _appPagamento.EditarPagamento(pagamento);
 
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
@@ -137,9 +137,18 @@ namespace CandyShop.Web.Controllers
                 Session["saldoUsuario"] = user.Content.SaldoUsuario;
             }
 
-            return Content("Pagamento editado com sucesso!!");            
+            return Content("Pagamento editado com sucesso!!");
         }
-
         #endregion
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            Exception e = filterContext.Exception;
+            filterContext.ExceptionHandled = true;
+            filterContext.Result = new ViewResult()
+            {
+                ViewName = "Error: " + e.Message
+            };
+        }
     }
 }

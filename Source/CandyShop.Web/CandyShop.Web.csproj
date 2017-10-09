@@ -226,7 +226,6 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Produto\ListaProdutos.cshtml" />
-    <Content Include="Views\Pagamento\Detalhes.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Usuario\Cadastrar.cshtml" />
     <Content Include="Views\Produto\CadastrarProduto.cshtml" />
