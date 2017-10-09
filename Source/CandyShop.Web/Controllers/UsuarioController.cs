@@ -1,6 +1,7 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -155,16 +156,17 @@ namespace CandyShop.Web.Controllers
 
                 return Content("Usuário cadastrado com sucesso");
             }
-
-            return RedirectToAction("Index", "Admin");
+            return Content("Ops, ocorreu um erro ao editar usuário.");
         }
 
         [AdminFilterResult]
         [HttpPut]
         public ActionResult Editar(UsuarioViewModel usuario)
         {
-            if (ModelState.IsValid)
+            try
             {
+
+
                 var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
                 var response = _appUsuario.EditarUsuario(usuario);
 
@@ -173,7 +175,7 @@ namespace CandyShop.Web.Controllers
 
                 if (usuario.Imagem != null)
                 {
-                    string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
+                    string[] prefixos = {"data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64,"};
                     foreach (var prefixo in prefixos)
                     {
                         if (usuario.Imagem.StartsWith(prefixo))
@@ -182,7 +184,7 @@ namespace CandyShop.Web.Controllers
 
                             byte[] bytes = System.Convert.FromBase64String(usuario.Imagem);
 
-                            Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
+                            Image imagem = (Bitmap) ((new ImageConverter()).ConvertFrom(bytes));
 
                             usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
                             string caminho = $"Imagens/Usuarios/{usuario.Cpf}.jpg";
@@ -211,7 +213,10 @@ namespace CandyShop.Web.Controllers
 
                 return Content("Edição concluída com sucesso!!");
             }
-            return View("Editar");
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
         }
 
         [UserFilterResult]
