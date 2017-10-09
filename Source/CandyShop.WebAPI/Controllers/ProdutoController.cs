@@ -30,8 +30,7 @@ namespace CandyShop.WebAPI.Controllers
                 if (_notification.HasNotification())
                     return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
-                int sequencial;
-                var result = _produtoRepository.InserirProduto(produto, out sequencial);
+                var result = _produtoRepository.InserirProduto(produto, out int sequencial);
                 if (result == -1)
                     return Content(HttpStatusCode.BadRequest, "Falha ao inserir o produto");
                 return Ok(sequencial);
@@ -40,8 +39,8 @@ namespace CandyShop.WebAPI.Controllers
             {
                 return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
-            
-        }        
+
+        }
 
         public IHttpActionResult Put(ProdutoDto produto)
         {
@@ -97,7 +96,7 @@ namespace CandyShop.WebAPI.Controllers
                 return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
-        
+
         [HttpGet, Route("api/produto/selecionar/{idProduto}")]
         public IHttpActionResult GetId(int idProduto)
         {
@@ -110,7 +109,7 @@ namespace CandyShop.WebAPI.Controllers
                 return Content(HttpStatusCode.NotAcceptable, e.Message.ToList());
             }
         }
-        
+
         [HttpGet, Route("api/produto/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {

@@ -75,7 +75,7 @@ namespace CandyShop.Web.Controllers
 
             TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             TempData["nomeLista"] = "Produtos Ativos";
-            return View("ListaProdutos", response.Content);            
+            return View("ListaProdutos", response.Content);
 
         }
 
@@ -100,7 +100,7 @@ namespace CandyShop.Web.Controllers
 
             TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             TempData["nomeLista"] = "Produtos relacionados";
-            return View("ListaProdutos", response.Content);            
+            return View("ListaProdutos", response.Content);
         }
 
         [AdminFilterResult]
@@ -135,30 +135,25 @@ namespace CandyShop.Web.Controllers
                     string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
                     foreach (var prefixo in prefixos)
                     {
-                        if (produto.ImagemA.StartsWith(prefixo))
-                        {
-                            produto.ImagemA = produto.ImagemA.Substring(prefixo.Length);
+                        if (!produto.ImagemA.StartsWith(prefixo)) continue;
+                        produto.ImagemA = produto.ImagemA.Substring(prefixo.Length);
 
-                            byte[] bytes = Convert.FromBase64String(produto.ImagemA);
+                        byte[] bytes = Convert.FromBase64String(produto.ImagemA);
 
-                            Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
+                        Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
 
-                            string caminho = $"~/Imagens/Produtos/{response.Content}_A.jpg";
+                        string caminho = $"~/Imagens/Produtos/{response.Content}_A.jpg";
 
-                            imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
-                            cont++;
-                        }
-
+                        imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                        cont++;
                     }
                 }
                 else
                 {
                     var filePath = Server.MapPath("~/Imagens/Produtos/" + produto.IdProduto + "_A.jpg");
                     if (System.IO.File.Exists(filePath))
-                    {
                         System.IO.File.Delete(filePath);
-                    }
                 }
 
                 if (produto.ImagemB != null)
@@ -166,30 +161,26 @@ namespace CandyShop.Web.Controllers
                     string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
                     foreach (var prefixo in prefixos)
                     {
-                        if (produto.ImagemB.StartsWith(prefixo))
-                        {
-                            produto.ImagemB = produto.ImagemB.Substring(prefixo.Length);
+                        if (!produto.ImagemB.StartsWith(prefixo)) continue;
+                        produto.ImagemB = produto.ImagemB.Substring(prefixo.Length);
 
-                            byte[] bytes = Convert.FromBase64String(produto.ImagemB);
+                        byte[] bytes = Convert.FromBase64String(produto.ImagemB);
 
-                            Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
+                        Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
 
-                            string caminho = $"~/Imagens/Produtos/{response.Content}_B.jpg";
+                        string caminho = $"~/Imagens/Produtos/{response.Content}_B.jpg";
 
-                            imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
-                            cont++;
-                        }
-
+                        imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                        cont++;
                     }
                 }
                 else
                 {
                     var filePath = Server.MapPath("~/Imagens/Produtos/" + produto.IdProduto + "_B.jpg");
                     if (System.IO.File.Exists(filePath))
-                    {
                         System.IO.File.Delete(filePath);
-                    }
+
                 }
 
                 if (produto.ImagemC != null)
@@ -197,29 +188,24 @@ namespace CandyShop.Web.Controllers
                     string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
                     foreach (var prefixo in prefixos)
                     {
-                        if (produto.ImagemC.StartsWith(prefixo))
-                        {
-                            produto.ImagemC = produto.ImagemC.Substring(prefixo.Length);
+                        if (!produto.ImagemC.StartsWith(prefixo)) continue;
+                        produto.ImagemC = produto.ImagemC.Substring(prefixo.Length);
 
-                            byte[] bytes = Convert.FromBase64String(produto.ImagemC);
+                        byte[] bytes = Convert.FromBase64String(produto.ImagemC);
 
-                            Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
+                        Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
-                            string caminho = $"~/Imagens/Produtos/{response.Content}_C.jpg";
+                        string caminho = $"~/Imagens/Produtos/{response.Content}_C.jpg";
 
-                            imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
-                            cont++;
-                        }
-
+                        imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                        cont++;
                     }
                 }
                 else
                 {
                     var filePath = Server.MapPath("~/Imagens/Produtos/" + produto.IdProduto + "_C.jpg");
                     if (System.IO.File.Exists(filePath))
-                    {
                         System.IO.File.Delete(filePath);
-                    }
                 }
 
                 if (cont == 0)

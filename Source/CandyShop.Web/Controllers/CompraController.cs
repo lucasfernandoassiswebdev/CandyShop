@@ -2,7 +2,6 @@
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
 using System;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -47,7 +46,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 0;
             var response = _appCompra.ListaCompra();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -59,7 +58,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appCompra.ListaCompraPorCpf(cpf);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro " + response.ContentAsString );
             return View("Index", response.Content);
         }
 
@@ -70,7 +69,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appCompra.ListarComprasSemana();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro " + response.ContentAsString );
             return View("Index", response.Content);
         }
 
@@ -81,7 +80,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 0;
             var response = _appCompra.ListarComprasMes(mes);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro " + response.ContentAsString  );
             return View("Index", response.Content);
         }
 
@@ -92,7 +91,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appCompra.ListarComprasDia();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro " + response.ContentAsString  );
             return View("Index", response.Content);
         }
         #endregion
@@ -115,11 +114,11 @@ namespace CandyShop.Web.Controllers
                 var response = _appCompra.InserirCompra(compra);
 
                 if ((response.Status != HttpStatusCode.OK) || (response.Content < 1))
-                    return Content($"Os itens da compra não puderam ser registrados: {response.ContentAsString.First()}");
+                    return Content($"Os itens da compra não puderam ser registrados: {response.ContentAsString  }");
 
                 var totalCompra = _appCompra.SelecionarCompra(response.Content);
                 if (totalCompra.Status != HttpStatusCode.OK)
-                    return Content("Erro ao atualizar saldo" + totalCompra.ContentAsString.First());
+                    return Content("Erro ao atualizar saldo" + totalCompra.ContentAsString  );
 
                 Session["saldoUsuario"] = Convert.ToDecimal(Session["saldoUsuario"].ToString()) - totalCompra.Content.ValorCompra;
                 TempData["LimparCarrinho"] = true;
@@ -134,7 +133,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appCompra.SelecionarCompra(idCompra);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro ao detalhar compra", response.ContentAsString.First());
+                return Content("Erro ao detalhar compra", response.ContentAsString);
 
             return View(response.Content);
         }
@@ -145,7 +144,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appCompra.EditarCompra(Compra);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro ao editar a compra", response.ContentAsString.First());
+                return Content("Erro ao editar a compra", response.ContentAsString);
 
             ViewBag.tituloPagina = "Compras do ultimo mês";
             ViewBag.drop = 0;

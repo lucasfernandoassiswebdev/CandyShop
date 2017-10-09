@@ -1,5 +1,4 @@
 ﻿using CandyShop.Core.Services;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CandyShop.Core.Infra
@@ -7,17 +6,12 @@ namespace CandyShop.Core.Infra
     public class Notification : INotification
     {
         // Criando uma lista para guardar as notifications
-        private readonly List<string> _notifications;
+        private string _notifications;
         
-        public Notification()
-        {
-            _notifications = new List<string>();
-        }
-
         // Método pra adicionar uma notification
         public void Add(string notification)
         {
-            _notifications.Add(notification);
+            _notifications = notification;
         }
 
         /* 
@@ -29,7 +23,7 @@ namespace CandyShop.Core.Infra
         }
 
         // Pega a notification dentro da lista 
-        public IEnumerable<string> GetNotification()
+        public string GetNotification()
         {
             return _notifications;
         } 
