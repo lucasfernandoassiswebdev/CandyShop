@@ -34,11 +34,11 @@ $(document).ready(function () {
     var ilegais = /[\W_]/;
 
     $("#novaSenha").on("blur", function () {
-        if ($(this).val().length < 8 || $(this).val().length > 12) {            
+        if ($(this).val().length > 12) {
             Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
             $(this).focus();
         }
-        if (ilegais.test($(this).val())) {            
+        if (ilegais.test($(this).val())) {
             Materialize.toast("Digite apenas letras e numeros!", 3000);
             $(this).focus();
         }
@@ -48,7 +48,7 @@ $(document).ready(function () {
         if ($(this).val() == $("#novaSenha").val()) {
             $("#TrocarSenha").removeAttr("disabled");
         } else {
-            $("#TrocarSenha").attr("disabled", "disabled");            
+            $("#TrocarSenha").attr("disabled", "disabled");
             Materialize.toast("As senhas não conferem!", 5000);
         }
         if ($(this).val() == "") {
@@ -57,6 +57,10 @@ $(document).ready(function () {
     });
 
     $("#TrocarSenha").click(function () {
+        if ($('#novaSenha').val().length < 8) {
+            Materialize.toast("Senha deve conter de 8 a 12 caracteres", 3000);
+            return;
+        }
         AjaxJsUsuario.trocarSenha();
         $("#trocaSenha").modal("close");
         $("#novaSenha").removeAttr("disabled");
@@ -190,10 +194,10 @@ $(document).ready(function () {
     //desabilita o botão de confirmar compra ao abrir o carrinho
     $("a[href='#modalCarrinho'], #modalCarrinho").click(function () {
         if ($(".collection li").length > 0) {
-            $("#confirmarCompra").removeAttr("disabled");            
+            $("#confirmarCompra").removeAttr("disabled");
             $("#limpar").removeAttr("disabled");
         }
-        else {            
+        else {
             $("#confirmarCompra").attr("disabled", "disabled");
             $("#limpar").attr("disabled", "disabled");
             if ($(".collection h1").length == 0)
