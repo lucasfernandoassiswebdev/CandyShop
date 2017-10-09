@@ -12,21 +12,26 @@
 
         /* As linhas de codigo abaixo é onde fica todas as verificações de usuario como 
             validar cpf senha  etc */
-        public bool IsValid(INotification notification)
+        public bool VerificaInsercao(INotification notification)
         {
             if (!ValidaCpf(Cpf))
                 notification.Add("Cpf Invalido");
             if (string.IsNullOrEmpty(NomeUsuario.Trim()) || NomeUsuario.Length > 50)
                 notification.Add("Nome do Usuario invalido ");
-            if(SenhaUsuario != null)
-                if (string.IsNullOrEmpty(SenhaUsuario.Trim()) || SenhaUsuario.Length > 12)
-                    notification.Add("Senha invalida");
-            if(Ativo != null)
-                if (string.IsNullOrEmpty(Ativo))
-                    notification.Add("Status do usuario nao pode ser nulo");
-            if(Classificacao != null)
-                if (string.IsNullOrEmpty(Classificacao.Trim()) || Classificacao.Length > 1)
-                    notification.Add("Classificacao irregular");      
+            return !notification.HasNotification();
+        }
+        public bool VerificaEdicao(INotification notification)
+        {
+            if (!ValidaCpf(Cpf))
+                notification.Add("Cpf Invalido");
+            if (string.IsNullOrEmpty(NomeUsuario.Trim()) || NomeUsuario.Length > 50)
+                notification.Add("Nome do Usuario invalido ");
+            if (string.IsNullOrEmpty(SenhaUsuario.Trim()) || SenhaUsuario.Length > 12)
+                notification.Add("Senha invalida");
+            if (string.IsNullOrEmpty(Ativo))
+                notification.Add("Status do usuario nao pode ser nulo");
+            if (string.IsNullOrEmpty(Classificacao.Trim()) || Classificacao.Length > 1)
+                notification.Add("Classificacao irregular");
 
             return !notification.HasNotification();
         }

@@ -16,7 +16,7 @@ namespace CandyShop.Core.Services.Usuario
 
         public void InserirUsuario(UsuarioDto usuario)
         {
-            if (!usuario.IsValid(_notification))
+            if (!usuario.VerificaInsercao(_notification))
                 return;
 
             //verificando se não está sendo cadastrado um cpf repetido
@@ -33,7 +33,7 @@ namespace CandyShop.Core.Services.Usuario
 
         public void EditarUsuario(UsuarioDto usuario)
         {
-            if (!usuario.IsValid(_notification))
+            if (!usuario.VerificaEdicao(_notification))
                 return;
 
             //verificando se não está sendo cadastrado um cpf repetido
