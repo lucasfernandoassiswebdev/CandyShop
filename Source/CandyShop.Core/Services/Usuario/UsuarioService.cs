@@ -1,4 +1,5 @@
 ﻿using CandyShop.Core.Services.Usuario.Dto;
+using System.Linq;
 
 namespace CandyShop.Core.Services.Usuario
 {
@@ -6,7 +7,7 @@ namespace CandyShop.Core.Services.Usuario
     {
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
-        
+
         public UsuarioService(INotification notification, IUsuarioRepository usuarioRepository)
         {
             _notification = notification;
@@ -17,7 +18,15 @@ namespace CandyShop.Core.Services.Usuario
         {
             if (!usuario.IsValid(_notification))
                 return;
-            
+
+            //verificando se não está sendo cadastrado um cpf repetido
+            var usuarios = _usuarioRepository.ListarUsuario();
+            if (usuarios.Any(usuarioA => usuarioA.Cpf == usuario.Cpf))
+            {
+                _notification.Add("Este Cpf já existe!");
+                return;
+            }
+
             _usuarioRepository.InserirUsuario(usuario);
         }
 
@@ -28,13 +37,11 @@ namespace CandyShop.Core.Services.Usuario
 
             //verificando se não está sendo cadastrado um cpf repetido
             var usuarios = _usuarioRepository.ListarUsuario();
-            foreach (var usuarioA in usuarios)
+            if (usuarios.Any(usuarioA => usuarioA.Cpf == usuario.Cpf))
             {
-                if (usuarioA.Cpf == usuario.Cpf)
-                    _notification.Add("Este Cpf já existe!");
-            }
-            if (_notification.HasNotification())
+                _notification.Add("Este Cpf já existe!");
                 return;
+            }
 
             _usuarioRepository.EditarUsuario(usuario);
         }
@@ -44,6 +51,6 @@ namespace CandyShop.Core.Services.Usuario
             var retorno = _usuarioRepository.VerificaLogin(usuario) == 1 ? 1 : 0;
             return retorno;
         }
-       
+
     }
 }
