@@ -5,14 +5,21 @@
 }
 
 <link rel="stylesheet" href="~/Content/Usuario/formCadastroUsuario.css" />
-
 <script type="text/javascript" src="../../Js/Usuario/scriptsEditarUsuario.js?d=@DateTime.Now.Ticks"></script>
-
+<script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
 <script>
     $(document).ready(function () {
         $('select').material_select();
         $('.cpf').each(function () {
             $(this).val(mcpf($(this).val()));
+        });
+
+        $('#SaldoUsuario').maskMoney({
+            prefix: 'R$ ',
+            allowNegative: true,
+            thousands: '.',
+            decimal: ',',
+            affixesStay: false
         });
     });
 
@@ -68,7 +75,7 @@
                     <label class="active">Nome:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="SaldoUsuario" name="SaldoUsuario" type="number" class="validate" value="@Model.SaldoUsuario" required="">
+                    <input id="SaldoUsuario" name="SaldoUsuario" type="text" class="validate" value="@Model.SaldoUsuario" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
                     <label class="active">Saldo:</label>
                 </div>
             </div>
