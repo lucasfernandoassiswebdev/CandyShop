@@ -202,8 +202,10 @@ namespace CandyShop.Web.Controllers
 
                 if (Session["Login"].ToString().Equals(cpf))
                 {
-                    var saldo = _appUsuario.SelecionarUsuario(cpf).Content.SaldoUsuario;
-                    Session["saldoUsuario"] = saldo;
+                    var res = _appUsuario.SelecionarUsuario(cpf);
+                    if (res.Status != HttpStatusCode.OK)
+                        return Content("Erro ao atualizar seu saldo");
+                    Session["saldoUsuario"] = res.Content.SaldoUsuario; 
                 }
 
                 return Content("Edição concluída com sucesso!!");            
