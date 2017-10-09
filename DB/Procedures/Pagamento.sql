@@ -287,15 +287,15 @@ CREATE PROCEDURE [dbo].[CSSP_SelPagamento]
 	Objetivo..........: Selecionar um pagamento
 	Autor.............: SMN - Rafael Morais
  	Data..............: 07/07/2017
-	Ex................: EXEC [dbo].[CSSP_SelPagamento]
+	Ex................: EXEC [dbo].[CSSP_SelPagamento] @IdPagamento = 1
 
 	*/
 
 	BEGIN
 	
 		SELECT	p.IdPagamento,
-				u.Cpf as 'Cpf',
-				u.NomeUsuario as 'NomeUsuario',
+				u.Cpf,
+				u.NomeUsuario,
 				p.DataPagamento,
 				p.ValorPagamento
 			FROM [dbo].[Pagamento] p	WITH(NOLOCK)

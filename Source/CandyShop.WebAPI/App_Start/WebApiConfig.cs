@@ -1,4 +1,5 @@
-﻿using SimpleInjector.Integration.WebApi;
+﻿using CandyShop.WebAPI.Filtros;
+using SimpleInjector.Integration.WebApi;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 
@@ -16,6 +17,8 @@ namespace CandyShop.WebAPI
             config.Formatters.Add(new JsonMediaTypeFormatter());
 
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(SimpleInjectorContainer.Build());
+
+            config.Filters.Add(new ExceptionFilter());
         }
     }
 }

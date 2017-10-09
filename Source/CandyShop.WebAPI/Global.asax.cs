@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using CandyShop.WebAPI.Filtros;
+using System.Web;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI
@@ -8,6 +9,8 @@ namespace CandyShop.WebAPI
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configuration.Filters.Add(
+                new ExceptionFilter());
         }
     }
 }
