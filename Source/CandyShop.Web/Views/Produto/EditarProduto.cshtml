@@ -14,14 +14,14 @@
 <script>
     $(document).ready(function () {
         $('select').material_select();
-
         $('#PrecoProduto').maskMoney({
             prefix: 'R$ ',
-            allowNegative: true,
+            allowNegative: false,
             thousands: '.',
             decimal: ',',
             affixesStay: false
         });
+        $('#PrecoProduto').maskMoney('mask');
     });
 </script>
 
@@ -75,7 +75,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="PrecoProduto" type="text" type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" value="@Model.PrecoProduto">
+                    <input id="PrecoProduto" type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" value="@Model.PrecoProduto">
                     <label class="active" for="PrecoProduto">Preco do Produto:</label>
                 </div>
                 <div class="input-field col s6">

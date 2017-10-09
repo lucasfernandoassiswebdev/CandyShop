@@ -52,7 +52,7 @@ $(".botaoCadastro").click(function () {
 
 //mudando a imagem quando o usário retirar a atual
 $("#removerImagem").click(function () {
-    $("#imagem").attr("src", "../../Imagens/retirado.png");
+    $("#imagem").attr("src", "~/Imagens/retirado.png");
     $("#fotoUsuario").val("");
 });
 

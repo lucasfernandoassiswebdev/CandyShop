@@ -29,7 +29,7 @@ $(".botaoEditar").on("click", function () {
 });
 
 $("#removerImagem").click(function () {
-    $("#imagem").attr("src", "../../Imagens/retirado.png");
+    $("#imagem").attr("src", "~/Imagens/retirado.png");
     $("#fotoUsuario").val("");
 });
 

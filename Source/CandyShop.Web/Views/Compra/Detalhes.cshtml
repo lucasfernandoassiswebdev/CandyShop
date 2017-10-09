@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <td style="font-weight: bold">Valor total da compra:</td>
-                    <td>@Model.ValorCompra</td>
+                    <td>R$ @Html.DisplayFor(model => model.ValorCompra)</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">Itens:</td>
@@ -41,7 +41,7 @@
                         <td style="font-weight: bold">Quantidade</td>
                         <td>@item.QtdeCompra</td>
                         <td style="font-weight: bold">Preço item:</td>
-                        <td>@item.Produto.PrecoProduto</td>
+                        <td>R$ @item.Produto.PrecoProduto</td>
                     </tr>
                 }
             </tbody>

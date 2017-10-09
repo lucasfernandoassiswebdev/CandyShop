@@ -145,7 +145,7 @@ namespace CandyShop.Web.Controllers
                         Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
 
-                        string caminho = $"~/Imagens/Produtos/{response.Content}_A.jpg";
+                        string caminho = $"Imagens/Produtos/{response.Content}_A.jpg";
 
                         imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                         cont++;
@@ -153,7 +153,7 @@ namespace CandyShop.Web.Controllers
                 }
                 else
                 {
-                    var filePath = Server.MapPath("~/Imagens/Produtos/" + produto.IdProduto + "_A.jpg");
+                    var filePath = Server.MapPath("Imagens/Produtos/" + produto.IdProduto + "_A.jpg");
                     if (System.IO.File.Exists(filePath))
                         System.IO.File.Delete(filePath);
                 }
@@ -171,7 +171,7 @@ namespace CandyShop.Web.Controllers
                         Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
 
-                        string caminho = $"~/Imagens/Produtos/{response.Content}_B.jpg";
+                        string caminho = $"Imagens/Produtos/{response.Content}_B.jpg";
 
                         imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                         cont++;
@@ -179,7 +179,7 @@ namespace CandyShop.Web.Controllers
                 }
                 else
                 {
-                    var filePath = Server.MapPath("~/Imagens/Produtos/" + produto.IdProduto + "_B.jpg");
+                    var filePath = Server.MapPath("Imagens/Produtos/" + produto.IdProduto + "_B.jpg");
                     if (System.IO.File.Exists(filePath))
                         System.IO.File.Delete(filePath);
 
@@ -197,7 +197,7 @@ namespace CandyShop.Web.Controllers
 
                         Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
-                        string caminho = $"~/Imagens/Produtos/{response.Content}_C.jpg";
+                        string caminho = $"Imagens/Produtos/{response.Content}_C.jpg";
 
                         imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                         cont++;
@@ -205,7 +205,7 @@ namespace CandyShop.Web.Controllers
                 }
                 else
                 {
-                    var filePath = Server.MapPath("~/Imagens/Produtos/" + produto.IdProduto + "_C.jpg");
+                    var filePath = Server.MapPath("Imagens/Produtos/" + produto.IdProduto + "_C.jpg");
                     if (System.IO.File.Exists(filePath))
                         System.IO.File.Delete(filePath);
                 }
@@ -219,7 +219,7 @@ namespace CandyShop.Web.Controllers
 
                     Image imagem2 = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
-                    string caminho = $"~/Imagens/Produtos/{response.Content}_A.jpg";
+                    string caminho = $"Imagens/Produtos/{response.Content}_A.jpg";
 
                     imagem2.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                 }
@@ -325,7 +325,7 @@ namespace CandyShop.Web.Controllers
 
         private string ConvertTo64()
         {
-            using (Image image = Image.FromFile(Server.MapPath("~/Imagens/Produtos/sem-foto.png")))
+            using (Image image = Image.FromFile(Server.MapPath("Imagens/Produtos/sem-foto.png")))
             {
                 using (MemoryStream m = new MemoryStream())
                 {

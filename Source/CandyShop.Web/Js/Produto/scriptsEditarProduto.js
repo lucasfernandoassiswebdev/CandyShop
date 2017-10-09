@@ -100,17 +100,17 @@ $('#fotoProduto3').change(function () {
 });
 
 $("#removerImagem1").click(function () {
-    $("#imagem1").attr("src", "../../Imagens/retirado.png");
+    $("#imagem1").attr("src", "~/Imagens/retirado.png");
     $("#fotoProduto1").val("");
 });
 
 $("#removerImagem2").click(function () {
-    $("#imagem2").attr("src", "../../Imagens/retirado.png");
+    $("#imagem2").attr("src", "~/Imagens/retirado.png");
     $("#fotoProduto2").val("");
 });
 
 $("#removerImagem3").click(function () {
-    $("#imagem3").attr("src", "../../Imagens/retirado.png");
+    $("#imagem3").attr("src", "~/Imagens/retirado.png");
     $("#fotoProduto3").val("");
 });
 

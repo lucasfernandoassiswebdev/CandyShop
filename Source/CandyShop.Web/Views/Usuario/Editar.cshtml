@@ -6,7 +6,7 @@
 }
 
 <link rel="stylesheet" href="~/Content/Usuario/formCadastroUsuario.css" />
-<script type="text/javascript" src="../../Js/Usuario/scriptsEditarUsuario.js?d=@DateTime.Now.Ticks"></script>
+<script type="text/javascript" src="~/Js/Usuario/scriptsEditarUsuario.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
 <script>
     $(document).ready(function () {
@@ -17,11 +17,13 @@
 
         $('#SaldoUsuario').maskMoney({
             prefix: 'R$ ',
-            allowNegative: true,
+            allowNegative: false,
             thousands: '.',
             decimal: ',',
             affixesStay: false
         });
+
+        $('#SaldoUsuario').maskMoney('mask');
     });
 
     function mcpf(v) {

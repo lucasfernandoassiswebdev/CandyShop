@@ -6,11 +6,15 @@
 
 <link rel="stylesheet" type="text/css" href="~/Content/Produto/indexProduto.css?d=@DateTime.Now.Ticks" />
 
+<script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
 <script>
     $(document).ready(function () {
         $('.collapsible').collapsible();
+
+        $('.valorProduto').maskMoney('mask');
     });
 </script>
+
 <div class="row">
     <h3 class="center pink-text">@TempData["nomeLista"].ToString()</h3>
     @if (!Model.Any())
@@ -43,7 +47,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.NomeProduto)
                         </td>
-                        <td>
+                        <td class="valorProduto">
                             R$ @Html.DisplayFor(modelItem => item.PrecoProduto)
                         </td>
                         <td>
