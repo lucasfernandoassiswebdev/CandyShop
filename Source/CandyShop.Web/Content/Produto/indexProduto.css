@@ -1,9 +1,21 @@
-﻿.btn-floating {
+﻿ html {
+     color: black;
+ }
+
+
+ td, th {
+     padding: 3px 5px !important; 
+ }
+
+.btn-floating {
     margin: 0 3px;
 }
 
 h3 {
     font-weight:bold;
+    margin: 10px 0;
+    text-align: center;      
+
 }
 
 body {
