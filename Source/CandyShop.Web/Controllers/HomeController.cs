@@ -1,6 +1,7 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -86,7 +87,15 @@ namespace CandyShop.Web.Controllers
             return View("NavBar");
         }
 
-        
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            Exception e = filterContext.Exception;
+            filterContext.ExceptionHandled = true;
+            filterContext.Result = new ViewResult()
+            {
+                ViewName = "Error: " + e.Message
+            };
+        }
     }
     
 

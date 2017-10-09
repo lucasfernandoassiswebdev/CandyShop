@@ -23,7 +23,8 @@ namespace CandyShop.WebAPI.Controllers
         {
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-            _usuarioRepository.InserirUsuario(usuario);
+            
+            _usuarioService.InserirUsuario(usuario);
             return Ok();
         }
 

@@ -6,7 +6,7 @@ namespace CandyShop.Core.Services.Usuario
     {
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
-
+        
         public UsuarioService(INotification notification, IUsuarioRepository usuarioRepository)
         {
             _notification = notification;
@@ -24,6 +24,16 @@ namespace CandyShop.Core.Services.Usuario
         public void EditarUsuario(UsuarioDto usuario)
         {
             if (!usuario.IsValid(_notification))
+                return;
+
+            //verificando se não está sendo cadastrado um cpf repetido
+            var usuarios = _usuarioRepository.ListarUsuario();
+            foreach (var usuarioA in usuarios)
+            {
+                if (usuarioA.Cpf == usuario.Cpf)
+                    _notification.Add("Este Cpf já existe!");
+            }
+            if (_notification.HasNotification())
                 return;
 
             _usuarioRepository.EditarUsuario(usuario);
