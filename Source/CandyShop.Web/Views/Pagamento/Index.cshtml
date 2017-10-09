@@ -17,29 +17,29 @@
     );
 </script>
 <div class="row">
-<h4 class="center">@ViewBag.tituloPagina</h4>
+    <h4 class="center">@ViewBag.tituloPagina</h4>
 
-@if (ViewBag.drop == 0)
-{
-    <div id="filtro" class="row">
-        <a class='dropdown-button btn' href='#' data-activates='dropdownMes'><i class="left material-icons">date_range</i>Escolha o mês!</a>
-        <ul id='dropdownMes' class='dropdown-content'>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(1)">Janeiro</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(2)">Fevereiro</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(3)">Março</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(4)">Abril</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(5)">Maio</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(6)">Junho</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(7)">Julho</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(8)">Agosto</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(9)">Setembro</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(10)">Outubro</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(11)">Novembro</a></li>
-            <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(12)">Dezembro</a></li>
-        </ul>
+    @if (ViewBag.drop == 0)
+    {
+        <div id="filtro" class="row">
+            <a class='dropdown-button btn' href='#' data-activates='dropdownMes'><i class="left material-icons">date_range</i>Escolha o mês!</a>
+            <ul id='dropdownMes' class='dropdown-content'>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(1)">Janeiro</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(2)">Fevereiro</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(3)">Março</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(4)">Abril</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(5)">Maio</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(6)">Junho</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(7)">Julho</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(8)">Agosto</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(9)">Setembro</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(10)">Outubro</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(11)">Novembro</a></li>
+                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamentoMes(12)">Dezembro</a></li>
+            </ul>
 
-    </div>
-}
+        </div>
+    }
 
     @if (!Model.Any())
     {
@@ -50,39 +50,36 @@
         <div id="tabela">
             <table class="striped centered">
                 <thead>
-                <tr>
-                    <th>Usuário</th>
-                    <th>Data do Pagamento</th>
-                    <th>Valor Pago</th>
-                </tr>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Data do Pagamento</th>
+                        <th>Valor Pago</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model)
+                    @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DataPagamento)
-                        </td>
-                        <td>
-                            R$ @Html.DisplayFor(modelItem => item.ValorPagamento)
-                        </td>
-                        @if (Session["TipoDeLogin"].ToString().Equals("Admin"))
-                        {
+                        <tr>
                             <td>
-                                <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsPagamento.editarPagamento(@item.IdPagamento);"><i class="material-icons">edit</i></a>
+                                @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
                             </td>
-                        }
-                    </tr>
-                }
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataPagamento)
+                            </td>
+                            <td>
+                                R$ @Html.DisplayFor(modelItem => item.ValorPagamento)
+                            </td>
+                            @if (Session["TipoDeLogin"].ToString().Equals("Admin"))
+                            {
+                                <td>
+                                    <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsPagamento.editarPagamento(@item.IdPagamento);"><i class="material-icons">edit</i></a>
+                                </td>
+                            }
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     }
-<br />
+    <br />
 </div>
-@*<div align="center">
-        <a class="waves-effect waves-light btn" onclick="A.listarPagamentos()"><i class="material-icons left">arrow_back</i>Voltar</a>
-    </div>*@
