@@ -33,19 +33,19 @@
         <table class="striped highlight centered bordered" style="margin-bottom:50px">
             <tbody>
                 <tr>
-                    <td>Nome: </td>
+                    <td class="negrito">Nome: </td>
                     <td>@Model.NomeUsuario</td>
                 </tr>
                 <tr>
-                    <td>CPF: </td>
+                    <td class="negrito">CPF: </td>
                     <td class="cpf">@Model.Cpf</td>
                 </tr>
                 <tr>
-                    <td>Saldo do usuário: </td>
+                    <td class="negrito">Saldo do usuário: </td>
                     <td>R$ @Model.SaldoUsuario</td>
                 </tr>
                 <tr>
-                    <td>Status do usuário: </td>
+                    <td class="negrito">Status do usuário: </td>
                     <td>@if (Model.Ativo == "A") {<text>Ativo</text>}else {<text>Inativo</text>}</td>
                 </tr>
             </tbody>
