@@ -152,15 +152,5 @@ namespace CandyShop.Web.Controllers
             return View("Index", compras.Content);
         }
         #endregion
-
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            Exception e = filterContext.Exception;
-            filterContext.ExceptionHandled = true;
-            filterContext.Result = new ViewResult()
-            {
-                ViewName = "Error: " + e.Message
-            };
-        }
     }
 }

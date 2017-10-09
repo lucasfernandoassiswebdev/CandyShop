@@ -1,6 +1,5 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Web.Filters;
-using System;
 using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
@@ -17,18 +16,8 @@ namespace CandyShop.Web.Controllers
         [AdminFilterResult]
         public ActionResult Index()
         {
-            ViewBag.SaldoAtual = "Saldo atual da loja: R$" + _appUsuario.VerificaCreditoLoja().Content; 
+            ViewBag.SaldoAtual = "Saldo atual da loja: R$" + _appUsuario.VerificaCreditoLoja().Content;
             return View();
-        }
-
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            Exception e = filterContext.Exception;
-            filterContext.ExceptionHandled = true;
-            filterContext.Result = new ViewResult()
-            {
-                ViewName = "Error: " + e.Message
-            };
         }
     }
 }

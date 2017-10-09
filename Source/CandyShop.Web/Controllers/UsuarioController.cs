@@ -1,7 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
-using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -250,15 +249,5 @@ namespace CandyShop.Web.Controllers
             return RedirectToAction("NavBar", "Home");
         }
         #endregion
-
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            Exception e = filterContext.Exception;
-            filterContext.ExceptionHandled = true;
-            filterContext.Result = new ViewResult()
-            {
-                ViewName = "Error: " + e.Message
-            };
-        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using Newtonsoft.Json;
-using System;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -23,7 +22,7 @@ namespace CandyShop.Web.Controllers
         {
             if (Session["Login"] == null)
                 Session["Login"] = "off";
-            Session["TipoDeLogin"] = "User";           
+            Session["TipoDeLogin"] = "User";
             return View();
         }
 
@@ -48,7 +47,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
-            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";                            
+            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
             return View("GridProdutos", response.Content);
         }
 
@@ -86,17 +85,5 @@ namespace CandyShop.Web.Controllers
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
             return View("NavBar");
         }
-
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            Exception e = filterContext.Exception;
-            filterContext.ExceptionHandled = true;
-            filterContext.Result = new ViewResult()
-            {
-                ViewName = "Error: " + e.Message
-            };
-        }
     }
-    
-
 }
