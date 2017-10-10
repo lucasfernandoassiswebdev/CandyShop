@@ -1,4 +1,4 @@
-﻿var removerImagem = false
+﻿var removerImagem = false;
 //inicia os métodos que o materialize pede
 //e desativa os botões de envio caso o formulário esteja inválido
 $(document).ready(function () {

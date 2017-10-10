@@ -11,5 +11,8 @@
         public string ImagemA { get; set; }
         public string ImagemB { get; set; }
         public string ImagemC { get; set; }
+        public bool RemoverImagemA { get; set; }
+        public bool RemoverImagemB { get; set; }
+        public bool RemoverImagemC { get; set; }
     }
 }

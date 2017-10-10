@@ -32,18 +32,22 @@
         var produto = { IdProduto: id, telaAnterior: telaAnterior };
         chamaPaginaComIdentificador(url.editarProduto, produto);
     };
-    var concluirEdicaoProduto = function (baseA, baseB, baseC) {
+    var concluirEdicaoProduto = function (baseA, baseB, baseC, removerA, removerB, removerC) {
         var produto = {
             IdProduto: $('#IdProduto').val(),
             NomeProduto: $('#NomeProduto').val(),
-            PrecoProduto: $('#PrecoProduto').val(),
+            PrecoProduto: $('#PrecoProduto').val().replace("R$",""),
             QtdeProduto: $('#QtdeProduto').val(),
             Categoria: $('#Categoria').val(),
             Ativo: $('#Ativo').val(),
             ImagemA: baseA,
             ImagemB: baseB,
-            ImagemC: baseC
+            ImagemC: baseC,
+            RemoverImagemA: removerA,
+            RemoverImagemB: removerB,
+            RemoverImagemC: removerC
         };
+        console.log(produto.PrecoProduto);
         concluirAcaoEdicao(url.concluirEdicaoProduto, produto, url.listaProduto);
     };
     var desativarProduto = function (id, telaAnterior) {
