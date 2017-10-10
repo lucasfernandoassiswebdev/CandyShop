@@ -7,7 +7,7 @@ namespace CandyShop.Web.Helpers
     {
         public static string UrlContent(this HtmlHelper h, params object[] str)
         {
-            return $"~/{string.Join("/", str)}?d={DateTime.Now.Ticks}";
+            return new UrlHelper(h.ViewContext.RequestContext).Content($"~/{string.Join("/", str)}?d={DateTime.Now.Ticks}");
         }
     }
 }
