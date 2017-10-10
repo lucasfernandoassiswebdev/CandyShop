@@ -1,7 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
-using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -163,60 +162,51 @@ namespace CandyShop.Web.Controllers
         [HttpPut]
         public ActionResult Editar(UsuarioViewModel usuario)
         {
-            try
+            var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+            var response = _appUsuario.EditarUsuario(usuario);
+
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro " + response.ContentAsString.First());
+
+            if (usuario.Imagem != null)
             {
-
-
-                var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                var response = _appUsuario.EditarUsuario(usuario);
-
-                if (response.Status != HttpStatusCode.OK)
-                    return Content("Erro " + response.ContentAsString.First());
-
-                if (usuario.Imagem != null)
+                string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
+                foreach (var prefixo in prefixos)
                 {
-                    string[] prefixos = {"data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64,"};
-                    foreach (var prefixo in prefixos)
+                    if (usuario.Imagem.StartsWith(prefixo))
                     {
-                        if (usuario.Imagem.StartsWith(prefixo))
-                        {
-                            usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
+                        usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
 
-                            byte[] bytes = System.Convert.FromBase64String(usuario.Imagem);
+                        byte[] bytes = System.Convert.FromBase64String(usuario.Imagem);
 
-                            Image imagem = (Bitmap) ((new ImageConverter()).ConvertFrom(bytes));
+                        Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
-                            usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                            string caminho = $"Imagens/Usuarios/{usuario.Cpf}.jpg";
+                        usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+                        string caminho = $"Imagens/Usuarios/{usuario.Cpf}.jpg";
 
-                            imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
-                        }
-
+                        imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                     }
-                }
-                else
-                {
-                    var filePath = Server.MapPath("Imagens/Usuarios/" + cpf + ".jpg");
-                    if (System.IO.File.Exists(filePath))
-                    {
-                        System.IO.File.Delete(filePath);
-                    }
-                }
 
-                if (Session["Login"].ToString().Equals(cpf))
-                {
-                    var res = _appUsuario.SelecionarUsuario(cpf);
-                    if (res.Status != HttpStatusCode.OK)
-                        return Content("Erro ao atualizar seu saldo");
-                    Session["saldoUsuario"] = res.Content.SaldoUsuario;
                 }
-
-                return Content("Edição concluída com sucesso!!");
             }
-            catch (Exception ex)
+            else
             {
-                return Content(ex.Message);
+                var filePath = Server.MapPath("Imagens/Usuarios/" + cpf + ".jpg");
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
             }
+
+            if (Session["Login"].ToString().Equals(cpf))
+            {
+                var res = _appUsuario.SelecionarUsuario(cpf);
+                if (res.Status != HttpStatusCode.OK)
+                    return Content("Erro ao atualizar seu saldo");
+                Session["saldoUsuario"] = res.Content.SaldoUsuario;
+            }
+
+            return Content("Edição concluída com sucesso!!");
         }
 
         [UserFilterResult]
