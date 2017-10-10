@@ -1,19 +1,23 @@
 ﻿$(document).ready(function () {
-    $('select').material_select();
-    $('input').characterCounter();
-    $('.tooltipped').tooltip({ delay: 50 });
+    // Inicializando métodos jQuery framework js Materialize
+    $("select").material_select();
+    $("input").characterCounter();
+    $(".tooltipped").tooltip({ delay: 50 });
+    // Escondendo os botões de remover até que o usuário troque a imagem
     $("#removerImagem1, #removerImagem2, #removerImagem3").hide();
 });
 
-$('.botaoVoltar').on('click', function () {
+$(".botaoVoltar").on("click", function () {
+    // Chamando o método da função Ajax que foi definido na página inicial do Admin
     AjaxJsProduto.listaProduto();
 });
 
-//cadastrando o produto
-$('.botaoCadastro').on('click', function () {
+$(".botaoCadastro").on("click", function () {
     encodeImageFileAsURL(AjaxJsProduto.concluirCadastroProduto);
 });
 
+/* Função que transforma as imagens em base64 para serem posteriormente 
+   renomeadas e copiadas na aplicação */
 function encodeImageFileAsURL(callback) {
     var base64A, base64B, base64C;
     var imagem1 = document.getElementById("fotoProduto1").files;
@@ -62,22 +66,26 @@ function encodeImageFileAsURL(callback) {
             fileReaderC.readAsDataURL(fileToLoadC);
         } else
             callback(base64A, base64B, base64C);
+        /* Na linha acima, nós garantimos com o uso de callback que a função
+           de cadastro será executada apenas depois que as 3 imagens(ou quantas o
+           usuário tiver mandado) tiverem sido convertidas para base64*/
     }
 }
 
-//editando as imagens na tela
-$('#fotoProduto1').change(function () {
-    //função que muda a foto do usuário na tela
+// Editando as imagens na tela
+$("#fotoProduto1").change(function () {
+    // Função que muda a foto do usuário na tela
     readURL(this);
     $("#removerImagem1").show();
 });
 
-$('#fotoProduto2').change(function () {
+$("#fotoProduto2").change(function () {
     readURL2(this);
+    // Quando a imagem muda, o botão que possibilita removê-la é exibido na tela
     $("#removerImagem2").show();
 });
 
-$('#fotoProduto3').change(function () {
+$("#fotoProduto3").change(function () {
     readURL3(this);
     $("#removerImagem3").show();
 });
@@ -102,7 +110,7 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imagem1').attr('src', e.target.result);
+            $("#imagem1").attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -113,7 +121,7 @@ function readURL2(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imagem2').attr('src', e.target.result);
+            $("#imagem2").attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -124,31 +132,29 @@ function readURL3(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imagem3').attr('src', e.target.result);
+            $("#imagem3").attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
 
-//funções que não deixam o usuário digitar "e" ou números negativos
+// Funções que não deixam o usuário digitar "e" ou números negativos
 function FilterInput(event) {
-    var keyCode = ('which' in event) ? event.which : event.keyCode;
-    isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
+    var keyCode = ("which" in event) ? event.which : event.keyCode;
+    var isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
     return !isNotWanted;
 }
 
 function handlePaste(e) {
-    var clipboardData, pastedData;
+    var clipboardData = e.clipboardData || window.clipboardData;
+    var pastedData = clipboardData.getData("Text").toUpperCase();
 
-    clipboardData = e.clipboardData || window.clipboardData;
-    pastedData = clipboardData.getData('Text').toUpperCase();
-
-    if (pastedData.indexOf('E') > -1) {
+    if (pastedData.indexOf("E") > -1) {
         e.stopPropagation();
         e.preventDefault();
     }
 
-    if (pastedData.indexOf('-') > -1) {
+    if (pastedData.indexOf("-") > -1) {
         e.stopPropagation();
         e.preventDefault();
     }

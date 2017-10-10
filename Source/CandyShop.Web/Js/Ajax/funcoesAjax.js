@@ -1,18 +1,22 @@
-﻿//carrega a pagina de inicio
+﻿// Esse arquivo tem as funções genéricas encapsuladas que são usados nos outros arquivos
+// carrega a pagina de inicio
 function main(endereco) {
-    //pega a view main e a carrega no div
+    // pega os dados da view recebida e a carrega na DivGrid
     $.get(endereco).done(function (data) {
+        // é aplicado um efeito de "cortina" nesse carregamento
         $("#DivGrid").slideUp(1000, function () {
-            //desce  o divgrid  
+            // desce  a "cortina"  
             $('#DivGrid').hide().html(data).fadeIn(1000);
         });
-        //xhr é o código do erro, que é retornado caso o get não tenha sucesso
+        // xhr é o erro que é retornado caso o get não tenha sucesso
     }).fail(function (xhr) {
+        /* caso não tenha sido possível carregar a página, o erro
+           é exibido no console */
         console.log(xhr.responseText);
     });
 }
 
-//Função genérica para carregar o div, de acordo com o endereço passado
+//Função genérica para carregar a página de acordo com o endereço passado
 function chamaPagina(endereco) {    
     $.get(endereco).done(function (data) {        
         $('#DivGrid').slideUp(function () {            
@@ -34,6 +38,7 @@ function chamaPaginaComIdentificador(endereco, identificador) {
     });
 }
 
+// Função utilizada em métodos de insert por exemplo
 function concluirAcao(endereco, objeto, tela) {
     $.post(endereco, objeto)
         .done(function (message) {
@@ -45,6 +50,7 @@ function concluirAcao(endereco, objeto, tela) {
         });
 }
 
+// Função utilizado quando o controller usa o verbo HTTP PUT(Editar)
 function concluirAcaoEdicao(endereco, objeto, tela) {
     $.ajax({
         url: endereco,
