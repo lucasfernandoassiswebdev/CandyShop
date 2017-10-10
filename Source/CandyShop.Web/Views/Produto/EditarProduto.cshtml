@@ -39,27 +39,31 @@
                 @{ var nomeA = @Model.IdProduto + "_A.jpg";}
                 @{ var nomeB = @Model.IdProduto + "_B.jpg";}
                 @{ var nomeC = @Model.IdProduto + "_C.jpg";}
-                <div class="center">
-                    <label for="fotoProduto1">
-                        <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
-                    </label>
-                    <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                <div class="center" style="display: flex">
+                    <div>
+                        <label for="fotoProduto1">
+                            <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                        </label>
+                        <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                        <a class="btn" id="removerImagem1" style="margin-right:50px"><i class="material-icons left">block</i>Remover</a>
+                    </div>
 
-                    <label for="fotoProduto2">
-                        <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeB?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
-                    </label>
-                    <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                    <div>
+                        <label for="fotoProduto2">
+                            <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeB?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                        </label>
+                        <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                        <a class="btn" id="removerImagem2"><i class="material-icons left">block</i>Remover</a>
+                    </div>
 
-                    <label for="fotoProduto3">
-                        <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeC?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
-                    </label>
-                    <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                    <div>
+                        <label for="fotoProduto3">
+                            <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeC?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                        </label>
+                        <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                        <a class="btn" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
+                    </div>
                 </div>
-            </div>
-            <div class="row center">
-                <a class="btn" id="removerImagem1" style="margin-right:50px"><i class="material-icons left">block</i>Remover</a>
-                <a class="btn" id="removerImagem2"><i class="material-icons left">block</i>Remover</a>
-                <a class="btn" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
             </div>
             <div class="row">
                 <div class="input-field col s12">
@@ -79,7 +83,7 @@
                     <label class="active" for="PrecoProduto">Preco do Produto:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="QtdeProduto" name="QtdeProduto" type="text"  type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required value="@Model.QtdeProduto">
+                    <input id="QtdeProduto" name="QtdeProduto" type="text" type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required value="@Model.QtdeProduto">
                     <label class="active">Quantidade em estoque:</label>
                 </div>
             </div>
@@ -87,12 +91,12 @@
                 <div class="input-field col s6">
                     <select id="Categoria">
                         <option value="" disabled>Escolha uma opção</option>
-                        <option value="Doces" @if (Convert.ToString(Model.Categoria) == "Doces") {<text>selected</text>}>Doces</option>
-                        <option value="Balas" @if (Convert.ToString(Model.Categoria) == "Balas") {<text>selected</text>}>Balas</option>
-                        <option value="Bebidas" @if (Convert.ToString(Model.Categoria) == "Bebidas") {<text>selected</text>}>Bebidas</option>
-                        <option value="Amendoins" @if (Convert.ToString(Model.Categoria) == "Amendoins") {<text>selected</text>}>Amendoins</option>
-                        <option value="Chocolates" @if (Convert.ToString(Model.Categoria) == "Chocolates") {<text>selected</text>}>Chocolates</option>
-                        <option value="Salgadinhos" @if (Convert.ToString(Model.Categoria) == "Salgadinhos") {<text>selected</text>}>Salgadinhos</option>
+                        <option value="Doces" @if (Convert.ToString(Model.Categoria) == "Doces") { <text> selected</text>}>Doces</option>
+                        <option value="Balas" @if (Convert.ToString(Model.Categoria) == "Balas") { <text> selected</text>}>Balas</option>
+                        <option value="Bebidas" @if (Convert.ToString(Model.Categoria) == "Bebidas") { <text> selected</text>}>Bebidas</option>
+                        <option value="Amendoins" @if (Convert.ToString(Model.Categoria) == "Amendoins") { <text> selected</text>}>Amendoins</option>
+                        <option value="Chocolates" @if (Convert.ToString(Model.Categoria) == "Chocolates") { <text> selected</text>}>Chocolates</option>
+                        <option value="Salgadinhos" @if (Convert.ToString(Model.Categoria) == "Salgadinhos") { <text> selected</text>}>Salgadinhos</option>
                     </select>
                     <label>Categoria do produto</label>
                 </div>
