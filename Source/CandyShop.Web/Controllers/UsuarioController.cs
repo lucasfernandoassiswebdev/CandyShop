@@ -14,10 +14,12 @@ namespace CandyShop.Web.Controllers
     public class UsuarioController : Controller
     {
         private readonly IUsuarioApplication _appUsuario;
+        private readonly string _pathUsuario;
 
         public UsuarioController(IUsuarioApplication usuario)
         {
             _appUsuario = usuario;
+            _pathUsuario = "Imagens/Usuarios";
         }
 
         #region telas
@@ -30,7 +32,7 @@ namespace CandyShop.Web.Controllers
         [AdminFilterResult]
         public ActionResult Cadastrar()
         {
-            TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
+            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View();
         }
 
@@ -42,7 +44,7 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro " + usuario.ContentAsString.First());
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
+            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(usuario.Content);
         }
 
@@ -53,7 +55,7 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro " + usuario.ContentAsString.First());
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
+            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(usuario.Content);
         }
 
@@ -64,7 +66,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro" + response.ContentAsString.First());
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = "Imagens/Usuarios";
+            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(response.Content);
         }
         #endregion
@@ -141,7 +143,7 @@ namespace CandyShop.Web.Controllers
 
                     //montando o nome e caminho de save da imagem
                     usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                    string caminho = $"Imagens/Usuarios/{usuario.Cpf}.jpg";
+                    string caminho = $"{_pathUsuario}/{usuario.Cpf}.jpg";
 
                     imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                 }
@@ -172,7 +174,7 @@ namespace CandyShop.Web.Controllers
                         Image imagem = (Bitmap)new ImageConverter().ConvertFrom(bytes);
 
                         usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                        var caminho = $"~/Imagens/Usuarios/{usuario.Cpf}.jpg";
+                        var caminho = $"{_pathUsuario}/{usuario.Cpf}.jpg";
 
                         imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                     }
@@ -181,7 +183,7 @@ namespace CandyShop.Web.Controllers
             {
                 if (usuario.RemoverImagem)
                 {
-                    var filePath = Server.MapPath("~/Imagens/Usuarios/" + cpf + ".jpg");
+                    var filePath = Server.MapPath(_pathUsuario + cpf + ".jpg");
                     if (System.IO.File.Exists(filePath))
                         System.IO.File.Delete(filePath);
                 }

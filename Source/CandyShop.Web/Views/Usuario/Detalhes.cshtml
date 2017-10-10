@@ -1,4 +1,5 @@
-﻿@model CandyShop.Application.ViewModels.UsuarioViewModel
+﻿@using CandyShop.Web.Helpers
+@model CandyShop.Application.ViewModels.UsuarioViewModel
 
 @{
     Layout = null;
@@ -29,7 +30,7 @@
     <hr />
     <div>
         @{ string caminho = @Model.Cpf + ".jpg";}
-        <img id="imagemUsuario" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks" />
+        <img id="imagemUsuario" src="@Html.UrlContent(TempData["caminhoImagensUsuarios"], caminho)" />
         <table class="striped highlight centered bordered" style="margin-bottom:50px">
             <tbody>
                 <tr>
@@ -46,7 +47,7 @@
                 </tr>
                 <tr>
                     <td class="negrito">Status do usuário: </td>
-                    <td>@if (Model.Ativo == "A") {<text>Ativo</text>}else {<text>Inativo</text>}</td>
+                    <td>@(Model.Ativo == "A" ? "Ativo" : "Inativo")</td>
                 </tr>
             </tbody>
         </table>

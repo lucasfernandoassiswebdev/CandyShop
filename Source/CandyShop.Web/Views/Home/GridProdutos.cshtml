@@ -1,4 +1,5 @@
-﻿@model IEnumerable<CandyShop.Application.ViewModels.ProdutoViewModel>
+﻿@using CandyShop.Web.Helpers
+@model IEnumerable<CandyShop.Application.ViewModels.ProdutoViewModel>
 
 @{ Layout = null; }
 
@@ -19,7 +20,7 @@
             <div class="card">
                 <div class="card-image">
                     @{ string nomeA = produto.IdProduto + "_A.jpg";}
-                    <img src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks">
+                    <img src="@Html.UrlContent(TempData["caminhoImagensProdutos"], nomeA)">
                     <span class="card-title flow-text">@produto.NomeProduto</span>
                     <a href="#modalQuantidade" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light pink lighten-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="@if(produto.QtdeProduto == 0){<text>Produto indisponível no estoque</text>}else{<text>@produto.NomeProduto R$ @produto.PrecoProduto </text>}" data-Preco="@produto.PrecoProduto" data-Nome="@produto.NomeProduto" data-Id="@produto.IdProduto" data-Imagem="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" data-quantidadeDisponivel="@produto.QtdeProduto" @if (produto.QtdeProduto == 0) { <text> disabled </text>           }><i class="material-icons">add</i></a>
                 </div>
