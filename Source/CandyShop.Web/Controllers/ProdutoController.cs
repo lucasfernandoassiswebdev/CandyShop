@@ -138,12 +138,17 @@ namespace CandyShop.Web.Controllers
                     if (!produto.ImagemA.StartsWith(prefixo)) continue;
                     produto.ImagemA = produto.ImagemA.Substring(prefixo.Length);
 
-                    byte[] bytes = Convert.FromBase64String(produto.ImagemA);
+                    var bytes = Convert.FromBase64String(produto.ImagemA);
 
                     Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
+                    var path = "Imagens/Produtos";
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
 
-                    string caminho = $"Imagens/Produtos/{response.Content}_A.jpg";
+                    var caminho = $"{path}/{response.Content}_A.jpg";
 
                     imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                     cont++;
