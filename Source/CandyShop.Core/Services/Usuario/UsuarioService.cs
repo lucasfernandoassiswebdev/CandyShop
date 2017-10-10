@@ -1,5 +1,4 @@
-﻿using CandyShop.Core.Services.Usuario.Dto;
-using System.Linq;
+﻿using System.Linq;
 
 namespace CandyShop.Core.Services.Usuario
 {
@@ -14,7 +13,7 @@ namespace CandyShop.Core.Services.Usuario
             _usuarioRepository = usuarioRepository;
         }
 
-        public void InserirUsuario(UsuarioDto usuario)
+        public void InserirUsuario(Usuario usuario)
         {
             if (!usuario.VerificaInsercao(_notification))
                 return;
@@ -31,7 +30,7 @@ namespace CandyShop.Core.Services.Usuario
             _usuarioRepository.InserirUsuario(usuario);
         }
 
-        public void EditarUsuario(UsuarioDto usuario)
+        public void EditarUsuario(Usuario usuario)
         {
             if (!usuario.VerificaEdicao(_notification))
                 return;
@@ -48,7 +47,7 @@ namespace CandyShop.Core.Services.Usuario
             _usuarioRepository.EditarUsuario(usuario);
         }
 
-        public int VerificaLogin(UsuarioDto usuario)
+        public int VerificaLogin(Usuario usuario)
         {
             var retorno = _usuarioRepository.VerificaLogin(usuario) == 1 ? 1 : 0;
             return retorno;

@@ -1,6 +1,5 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Compra;
-using CandyShop.Core.Services.Compra.Dto;
 using CandyShop.Core.Services.CompraProduto;
 using System.Net;
 using System.Web.Http;
@@ -24,7 +23,7 @@ namespace CandyShop.WebAPI.Controllers
 
         //Método post para inserir uma compra, se der erro adiciona uma notification senão retorna Ok(200)
         [HttpPost]
-        public IHttpActionResult PostCompra(CompraDto compra)
+        public IHttpActionResult PostCompra(Compra compra)
         {
             var result = _appService.InserirCompra(compra);
             if (_notification.HasNotification())
@@ -33,7 +32,7 @@ namespace CandyShop.WebAPI.Controllers
         }
 
         [HttpPut]
-        public IHttpActionResult PutCompra(CompraDto compra)
+        public IHttpActionResult PutCompra(Compra compra)
         {
             _compraRepository.EditarCompra(compra);
             return Ok();

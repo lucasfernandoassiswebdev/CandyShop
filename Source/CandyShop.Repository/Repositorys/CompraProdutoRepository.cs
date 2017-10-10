@@ -1,6 +1,5 @@
 ﻿using CandyShop.Core.Services.CompraProduto;
-using CandyShop.Core.Services.CompraProduto.Dto;
-using CandyShop.Core.Services.Produto.Dto;
+using CandyShop.Core.Services.Produto;
 using CandyShop.Repository.Database;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
@@ -33,7 +32,7 @@ namespace CandyShop.Repository.Repositorys
            AddPaarmeter adiciona os parametros que são pedidos nas 
            procedures e para finalizar o método ExecuteNonQuery executa procedures 
            que não retornam valores */
-        public void EditarCompraProduto(CompraProdutoDto compraProduto)
+        public void EditarCompraProduto(CompraProduto compraProduto)
         {
             ExecuteProcedure(Procedures.CSSP_UpdCompraProduto);
             AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
@@ -43,7 +42,7 @@ namespace CandyShop.Repository.Repositorys
             ExecuteNonQuery();
         }
 
-        public void InserirCompraProduto(CompraProdutoDto compraProduto)
+        public void InserirCompraProduto(CompraProduto compraProduto)
         {
             ExecuteProcedure(Procedures.CSSP_InsCompraProduto);
             AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
@@ -58,17 +57,17 @@ namespace CandyShop.Repository.Repositorys
          lendo as linhas que foram retornadas pela procedure, são criados novos objetos
          e adicionados numa lista de objetos, quando o reader terminar de ser executado
          a lista de objetos é retornada */
-        public IEnumerable<CompraProdutoDto> ListarCompraProduto()
+        public IEnumerable<CompraProduto> ListarCompraProduto()
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraProduto);
-            var retorno = new List<CompraProdutoDto>();
+            var retorno = new List<CompraProduto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
-                    retorno.Add(new CompraProdutoDto()
+                    retorno.Add(new CompraProduto()
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),
-                        Produto = new ProdutoDto()
+                        Produto = new Produto()
                         {
                             IdProduto = reader.ReadAsInt("IdProduto"),
                             NomeProduto = reader.ReadAsString("NomeProduto"),
@@ -81,18 +80,18 @@ namespace CandyShop.Repository.Repositorys
             return retorno.Any() ? retorno : null;
         }
 
-        public IEnumerable<CompraProdutoDto> ListarCompraProdutoIdVenda(int idVenda)
+        public IEnumerable<CompraProduto> ListarCompraProdutoIdVenda(int idVenda)
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraProdutoIdVenda);
             AddParameter("@IdCompra", idVenda);
-            var retorno = new List<CompraProdutoDto>();
+            var retorno = new List<CompraProduto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
-                    retorno.Add(new CompraProdutoDto()
+                    retorno.Add(new CompraProduto()
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         QtdeCompra = reader.ReadAsInt("QtdeProduto"),
-                        Produto = new ProdutoDto
+                        Produto = new Produto
                         {
                             IdProduto =  reader.ReadAsInt("IdProduto"),
                             NomeProduto = reader.ReadAsString("NomeProduto"),
