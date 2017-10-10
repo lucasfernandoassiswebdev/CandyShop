@@ -1,11 +1,12 @@
-﻿$(document).ready(function () {
-    $('select').material_select();
-    $('input').characterCounter();
-    $('.tooltipped').tooltip({ delay: 50 });
+﻿var removerImagemA = false, removerImagemB = false, removerImagemC = false;
+$(document).ready(function () {
+    $("select").material_select();
+    $("input").characterCounter();
+    $(".tooltipped").tooltip({ delay: 50 });
 });
 
 //cadastrando o produto
-$('.botaoEditar').on('click', function () {
+$(".botaoEditar").on("click", function () {
     encodeImageFileAsURL(AjaxJsProduto.concluirEdicaoProduto);
 });
 
@@ -57,61 +58,65 @@ function encodeImageFileAsURL(callback) {
             };
             fileReaderC.readAsDataURL(fileToLoadC);
         } else
-            callback(base64A, base64B, base64C);
+            callback(base64A, base64B, base64C, removerImagemA, removerImagemB, removerImagemC);
     }
 }
 
 //funções que não deixam o usuário digitar "e" ou números negativos
 function FilterInput(event) {
-    var keyCode = ('which' in event) ? event.which : event.keyCode;
-    isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
+    var keyCode = ("which" in event) ? event.which : event.keyCode;
+    var isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
     return !isNotWanted;
 }
 
 function handlePaste(e) {
-    var clipboardData, pastedData;
+    var clipboardData = e.clipboardData || window.clipboardData;
+    var pastedData = clipboardData.getData("Text").toUpperCase();
 
-    clipboardData = e.clipboardData || window.clipboardData;
-    pastedData = clipboardData.getData('Text').toUpperCase();
-
-    if (pastedData.indexOf('E') > -1) {
+    if (pastedData.indexOf("E") > -1) {
         e.stopPropagation();
         e.preventDefault();
     }
 
-    if (pastedData.indexOf('-') > -1) {
+    if (pastedData.indexOf("-") > -1) {
         e.stopPropagation();
         e.preventDefault();
     }
 }
 
 //editando as imagens na tela
-$('#fotoProduto1').change(function () {
+$("#fotoProduto1").change(function () {
     //função que muda a foto do usuário na tela
     readURL(this);
+    removerImagemA = false;
 });
 
-$('#fotoProduto2').change(function () {
+$("#fotoProduto2").change(function () {
     readURL2(this);
+    removerImagemB = false;
 });
 
-$('#fotoProduto3').change(function () {
+$("#fotoProduto3").change(function () {
     readURL3(this);
+    removerImagemC = false;
 });
 
 $("#removerImagem1").click(function () {
     $("#imagem1").attr("src", "~/Imagens/retirado.png");
     $("#fotoProduto1").val("");
+    removerImagemA = true;
 });
 
 $("#removerImagem2").click(function () {
     $("#imagem2").attr("src", "~/Imagens/retirado.png");
     $("#fotoProduto2").val("");
+    removerImagemB = true;
 });
 
 $("#removerImagem3").click(function () {
     $("#imagem3").attr("src", "~/Imagens/retirado.png");
     $("#fotoProduto3").val("");
+    removerImagemC = true;
 });
 
 function readURL(input) {
@@ -119,7 +124,7 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imagem1').attr('src', e.target.result);
+            $("#imagem1").attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -130,7 +135,7 @@ function readURL2(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imagem2').attr('src', e.target.result);
+            $("#imagem2").attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -141,34 +146,12 @@ function readURL3(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imagem3').attr('src', e.target.result);
+            $("#imagem3").attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
 
-function FilterInput(event) {
-    var keyCode = ('which' in event) ? event.which : event.keyCode;
-    isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
-    return !isNotWanted;
-}
-
-function handlePaste(e) {
-    var clipboardData, pastedData;
-
-    clipboardData = e.clipboardData || window.clipboardData;
-    pastedData = clipboardData.getData('Text').toUpperCase();
-
-    if (pastedData.indexOf('E') > -1) {
-        e.stopPropagation();
-        e.preventDefault();
-    }
-
-    if (pastedData.indexOf('-') > -1) {
-        e.stopPropagation();
-        e.preventDefault();
-    }
-}
 
 
 

@@ -29,7 +29,7 @@
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
-    var concluirEdicaoUsuario = function(imgBase64) {
+    var concluirEdicaoUsuario = function(imgBase64,removerImagem) {
         var usuario = {
             Cpf: $('#Cpf').val(),
             NomeUsuario: $('#Nome').val(),
@@ -37,7 +37,8 @@
             SenhaUsuario: $('#Password').val(),
             Ativo: $('#Ativo').val(),
             Imagem: imgBase64,
-            Classificacao: $('#Classificacao').val()
+            Classificacao: $('#Classificacao').val(),
+            RemoverImagem: removerImagem
         };
         concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
     };
