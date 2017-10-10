@@ -72,54 +72,73 @@ $(document).ready(function () {
         $(".collection h1").remove();
         var i = 1;
         JSON.parse(localStorage.getItem("listaProdutos")).forEach(function (produto) {
-            $(".collection").append($("<li>", {
-                html: [
-                    $("<img>",
-                        {
-                            src: produto.Imagem,
-                            "class": "circle",
-                            style: "max-width:100px;margin-top:-1.1%"
-                        }),
-                    $("<span>",
-                        {
-                            html: produto.Nome,
-                            "class": "title",
-                            "data-Id": produto.Id
-                        }),
-                    $("<p>",
-                        {
-                            html: "Quantidade: " + produto.Quantidade,
-                            "data-Quantidade": produto.Quantidade
-                        }),
-                    $("<a>", {
-                        href: "#!",
-                        "class": "modal-trigger secondary-content",
-                        "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
-                        html: [
-                            $("<i>", {
-                                html: "delete",
-                                "class": "small material-icons",
-                                "id": i
-                            }).click(function () {
-                                //$("#modalQuantidade").data("index", $(this).closest("li").index());                                
-                                var li = $(this).closest("li");
-                                var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
-                                listaProdutos = listaProdutos.filter(function (item) {
-                                    return item.Id != li.find("[data-Id]").attr("data-Id");
-                                });
-                                localStorage.removeItem("listaProdutos");
-                                localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
-                                li.remove();
+            $(".collection").append($("<li>",
+                {
+                    html: [
+                        $("<img>",
+                            {
+                                src: produto.Imagem,
+                                "class": "circle",
+                                style: "max-width:100px;margin-top:-1.1%"
+                            }),
+                        $("<span>",
+                            {
+                                html: produto.Nome,
+                                "class": "title",
+                                "data-Id": produto.Id
+                            }),
+                        $("<p>",
+                            {
+                                html: "Quantidade: " + produto.Quantidade,
+                                "data-Quantidade": produto.Quantidade
+                            }),
+                        $("<a>",
+                            {
+                                href: "#!",
+                                "class": "modal-trigger secondary-content",
+                                "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
+                                html: [
+                                    $("<i>",
+                                        {
+                                            html: "delete",
+                                            "class": "small material-icons",
+                                            "id": i
+                                        }).click(function () {
+                                            //$("#modalQuantidade").data("index", $(this).closest("li").index());                                
+                                            var li = $(this).closest("li");
+                                            var listaProdutos = localStorage.getItem("listaProdutos")
+                                                ? JSON.parse(localStorage.listaProdutos)
+                                                : [];
+                                            listaProdutos = listaProdutos.filter(function (item) {
+                                                return item.Id != li.find("[data-Id]").attr("data-Id");
+                                            });
+                                            localStorage.removeItem("listaProdutos");
+                                            localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+                                            li.remove();
+                                        })
+                                ]
+                            }),
+                        $("<a>",
+                            {
+                                href: "#modalQuantidade",
+                                'class': "modal-trigger modal-close secondary-content",
+                                "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
+                                html: [
+                                    $("<i>",
+                                        {
+                                            html: "mode_edit",
+                                            "class": "material-icons"
+                                        }).on("click",
+                                        function () {
+                                            $("#modalQuantidade").data("index", $(this).closest("li").index());
+                                        })
+                                ]
                             })
-                        ]
-                    })
-                ],
-                "class": "collection-item avatar"
-            }));
+                    ]
+                }));
             i++;
         });
     }
-
     //adicionando os itens no carrinho
     $("#adicionaCarrinho").click(function () {
         $("#confirmarCompra").removeAttr("disabled");
