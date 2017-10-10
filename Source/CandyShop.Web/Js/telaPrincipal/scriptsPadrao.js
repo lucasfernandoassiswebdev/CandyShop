@@ -72,54 +72,57 @@ $(document).ready(function () {
         $(".collection h1").remove();
         var i = 1;
         JSON.parse(localStorage.getItem("listaProdutos")).forEach(function (produto) {
-            $(".collection").append($("<li>", {
-                html: [
-                    $("<img>",
-                        {
-                            src: produto.Imagem,
-                            "class": "circle",
-                            style: "max-width:100px;margin-top:-1.1%"
-                        }),
-                    $("<span>",
-                        {
-                            html: produto.Nome,
-                            "class": "title",
-                            "data-Id": produto.Id
-                        }),
-                    $("<p>",
-                        {
-                            html: "Quantidade: " + produto.Quantidade,
-                            "data-Quantidade": produto.Quantidade
-                        }),
-                    $("<a>", {
-                        href: "#!",
-                        "class": "modal-trigger secondary-content",
-                        "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
-                        html: [
-                            $("<i>", {
-                                html: "delete",
-                                "class": "small material-icons",
-                                "id": i
-                            }).click(function () {
-                                //$("#modalQuantidade").data("index", $(this).closest("li").index());                                
-                                var li = $(this).closest("li");
-                                var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
-                                listaProdutos = listaProdutos.filter(function (item) {
-                                    return item.Id != li.find("[data-Id]").attr("data-Id");
-                                });
-                                localStorage.removeItem("listaProdutos");
-                                localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
-                                li.remove();
+            $(".collection").append($("<li>",
+                {
+                    html: [
+                        $("<img>",
+                            {
+                                src: produto.Imagem,
+                                "class": "circle",
+                                style: "max-width:100px;margin-top:-1.1%"
+                            }),
+                        $("<span>",
+                            {
+                                html: produto.Nome,
+                                "class": "title",
+                                "data-Id": produto.Id
+                            }),
+                        $("<p>",
+                            {
+                                html: "Quantidade: " + produto.Quantidade,
+                                "data-Quantidade": produto.Quantidade
+                            }),
+                        $("<a>",
+                            {
+                                href: "#!",
+                                "class": "modal-trigger secondary-content",
+                                "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
+                                html: [
+                                    $("<i>",
+                                        {
+                                            html: "delete",
+                                            "class": "small material-icons",
+                                            "id": i
+                                        }).click(function () {
+                                            //$("#modalQuantidade").data("index", $(this).closest("li").index());                                
+                                            var li = $(this).closest("li");
+                                            var listaProdutos = localStorage.getItem("listaProdutos")
+                                                ? JSON.parse(localStorage.listaProdutos)
+                                                : [];
+                                            listaProdutos = listaProdutos.filter(function (item) {
+                                                return item.Id != li.find("[data-Id]").attr("data-Id");
+                                            });
+                                            localStorage.removeItem("listaProdutos");
+                                            localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+                                            li.remove();
+                                        })
+                                ]
                             })
-                        ]
-                    })
-                ],
-                "class": "collection-item avatar"
-            }));
+                    ]
+                }));
             i++;
         });
     }
-
     //adicionando os itens no carrinho
     $("#adicionaCarrinho").click(function () {
         $("#confirmarCompra").removeAttr("disabled");
@@ -134,7 +137,7 @@ $(document).ready(function () {
             Imagem: imagem
         }
 
-        if (listaProdutos.filter(function(v) { return v.Id == produto.Id }).length) {
+        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length) {
             Materialize.toast("Produto já esta no carrinho");
             return;
         }
