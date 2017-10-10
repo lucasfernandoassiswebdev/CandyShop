@@ -24,7 +24,7 @@
                     <a href="#modalQuantidade" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light pink lighten-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="@if(produto.QtdeProduto == 0){<text>Produto indisponível no estoque</text>}else{<text>@produto.NomeProduto R$ @produto.PrecoProduto </text>}" data-Preco="@produto.PrecoProduto" data-Nome="@produto.NomeProduto" data-Id="@produto.IdProduto" data-Imagem="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" data-quantidadeDisponivel="@produto.QtdeProduto" @if (produto.QtdeProduto == 0) { <text> disabled </text>           }><i class="material-icons">add</i></a>
                 </div>
                 <div class="card-content">
-                    <p>R$ @produto.PrecoProduto</p>
+                    <p>R$ @Html.DisplayFor(model => produto.PrecoProduto)</p>
                 </div>
             </div>
         </div>

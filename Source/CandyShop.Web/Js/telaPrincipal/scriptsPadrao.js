@@ -134,8 +134,10 @@ $(document).ready(function () {
             Imagem: imagem
         }
 
-        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length)
-            console.log("produto ja existe");
+        if (listaProdutos.filter(function(v) { return v.Id == produto.Id }).length) {
+            Materialize.toast("Produto já esta no carrinho");
+            return;
+        }
         else
             listaProdutos.push(produto);
 
