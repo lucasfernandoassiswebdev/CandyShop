@@ -128,7 +128,7 @@ namespace CandyShop.Web.Controllers
             {
                 var response = _appProduto.InserirProduto(produto);
                 if (response.Status != HttpStatusCode.OK)
-                    return Content(response.ContentAsString.ToString());
+                    return Content(response.ContentAsString);
 
                 //salvando todas as imagens que o usuário inseriu
                 int cont = 0;

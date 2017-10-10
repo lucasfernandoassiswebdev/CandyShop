@@ -21,7 +21,6 @@ namespace CandyShop.Web.Controllers
         }
 
         #region telas
-
         [AdminFilterResult]
         public ActionResult Index()
         {
@@ -77,9 +76,8 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.ListarUsuarios();
             if (response.Status != HttpStatusCode.OK)
-            {
                 return Content("Erro " + response.ContentAsString.First());
-            }
+
             TempData["nomeLista"] = "Usuários Ativos";
             return View("Index", response.Content);
         }
@@ -89,9 +87,8 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.ListarUsuariosEmDivida();
             if (response.Status != HttpStatusCode.OK)
-            {
                 return Content("Erro " + response.ContentAsString.First());
-            }
+
             TempData["nomeLista"] = "Usuários em Dívida";
             return View("Index", response.Content);
         }
@@ -101,9 +98,8 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.ListarInativos();
             if (response.Status != HttpStatusCode.OK)
-            {
                 return Content("Erro " + response.ContentAsString.First());
-            }
+
             TempData["nomeLista"] = "Usuários Inativos";
             return View("Index", response.Content);
         }
@@ -124,117 +120,94 @@ namespace CandyShop.Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(UsuarioViewModel usuario)
         {
-            if (ModelState.IsValid)
-            {
-                var response = _appUsuario.InserirUsuario(usuario);
-                if (response.Status != HttpStatusCode.OK)
-                    return Content($"{response.ContentAsString}");
+            if (!ModelState.IsValid) return Content("Ops, ocorreu um erro ao editar usuário.");
 
-                if (usuario.Imagem != null)
+            var response = _appUsuario.InserirUsuario(usuario);
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"{response.ContentAsString}");
+
+            if (usuario.Imagem == null) return Content("Usuário cadastrado com sucesso");
+
+            string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
+            foreach (var prefixo in prefixos)
+                if (usuario.Imagem.StartsWith(prefixo))
                 {
-                    string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
-                    foreach (var prefixo in prefixos)
-                    {
-                        if (usuario.Imagem.StartsWith(prefixo))
-                        {
-                            usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
+                    usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
 
-                            //transformando base64 em array de bytes
-                            byte[] bytes = System.Convert.FromBase64String(usuario.Imagem);
+                    //transformando base64 em array de bytes
+                    byte[] bytes = Convert.FromBase64String(usuario.Imagem);
 
-                            Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
+                    Image imagem = (Bitmap)new ImageConverter().ConvertFrom(bytes);
 
-                            //montando o nome e caminho de save da imagem
-                            usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                            string caminho = $"Imagens/Usuarios/{usuario.Cpf}.jpg";
+                    //montando o nome e caminho de save da imagem
+                    usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+                    string caminho = $"Imagens/Usuarios/{usuario.Cpf}.jpg";
 
-                            imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
-                        }
-
-                    }
+                    imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                 }
 
-                return Content("Usuário cadastrado com sucesso");
-            }
-            return Content("Ops, ocorreu um erro ao editar usuário.");
+            return Content("Usuário cadastrado com sucesso");
         }
 
         [AdminFilterResult]
         [HttpPut]
         public ActionResult Editar(UsuarioViewModel usuario)
         {
-            try
+            var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+            var response = _appUsuario.EditarUsuario(usuario);
+
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro " + response.ContentAsString.First());
+
+            if (usuario.Imagem != null)
             {
-
-
-                var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                var response = _appUsuario.EditarUsuario(usuario);
-
-                if (response.Status != HttpStatusCode.OK)
-                    return Content("Erro " + response.ContentAsString.First());
-
-                if (usuario.Imagem != null)
-                {
-                    string[] prefixos = {"data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64,"};
-                    foreach (var prefixo in prefixos)
+                string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
+                foreach (var prefixo in prefixos)
+                    if (usuario.Imagem.StartsWith(prefixo))
                     {
-                        if (usuario.Imagem.StartsWith(prefixo))
-                        {
-                            usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
+                        usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
 
-                            byte[] bytes = System.Convert.FromBase64String(usuario.Imagem);
+                        byte[] bytes = Convert.FromBase64String(usuario.Imagem);
 
-                            Image imagem = (Bitmap) ((new ImageConverter()).ConvertFrom(bytes));
+                        Image imagem = (Bitmap)new ImageConverter().ConvertFrom(bytes);
 
-                            usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                            string caminho = $"Imagens/Usuarios/{usuario.Cpf}.jpg";
+                        usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+                        var caminho = $"~/Imagens/Usuarios/{usuario.Cpf}.jpg";
 
-                            imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
-                        }
-
+                        imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                     }
-                }
-                else
+            }
+            else
+            {
+                if (usuario.RemoverImagem)
                 {
-                    var filePath = Server.MapPath("Imagens/Usuarios/" + cpf + ".jpg");
+                    var filePath = Server.MapPath("~/Imagens/Usuarios/" + cpf + ".jpg");
                     if (System.IO.File.Exists(filePath))
-                    {
                         System.IO.File.Delete(filePath);
-                    }
                 }
-
-                if (Session["Login"].ToString().Equals(cpf))
-                {
-                    var res = _appUsuario.SelecionarUsuario(cpf);
-                    if (res.Status != HttpStatusCode.OK)
-                        return Content("Erro ao atualizar seu saldo");
-                    Session["saldoUsuario"] = res.Content.SaldoUsuario;
-                }
-
-                return Content("Edição concluída com sucesso!!");
             }
-            catch (Exception ex)
-            {
-                return Content(ex.Message);
-            }
+
+            if (!Session["Login"].ToString().Equals(cpf)) return Content("Edição concluída com sucesso!!");
+
+            var res = _appUsuario.SelecionarUsuario(cpf);
+            if (res.Status != HttpStatusCode.OK)
+                return Content("Erro ao atualizar seu saldo");
+            Session["saldoUsuario"] = res.Content.SaldoUsuario;
+
+            return Content("Edição concluída com sucesso!!");
         }
 
         [UserFilterResult]
         public ActionResult TrocarSenha(TrocaSenhaViewModel senhas)
         {
-            if (senhas.ConfirmaNovaSenha.Equals(senhas.NovaSenha))
+            if (!senhas.ConfirmaNovaSenha.Equals(senhas.NovaSenha)) return Content("Senhas não conferem");
+            var usuario = new UsuarioViewModel
             {
-                var usuario = new UsuarioViewModel
-                {
-                    Cpf = Session["Login"].ToString(),
-                    SenhaUsuario = senhas.NovaSenha
-                };
-                var response = _appUsuario.TrocarSenha(usuario);
-                if (response.Status != HttpStatusCode.OK)
-                    return Content($"Erro ao trocar a senha, {response.ContentAsString}");
-                return Content("Senha atualizada com sucesso");
-            }
-            return Content("Senhas não conferem");
+                Cpf = Session["Login"].ToString(),
+                SenhaUsuario = senhas.NovaSenha
+            };
+            var response = _appUsuario.TrocarSenha(usuario);
+            return Content(response.Status != HttpStatusCode.OK ? $"Erro ao trocar a senha, {response.ContentAsString}" : "Senha atualizada com sucesso");
         }
 
         [AdminFilterResult]
@@ -242,9 +215,7 @@ namespace CandyShop.Web.Controllers
         public ActionResult DesativarUsuario(UsuarioViewModel usuario)
         {
             var response = _appUsuario.DesativarUsuario(usuario);
-            if (response.Status != HttpStatusCode.OK)
-                return Content($"Erro {response.Status}");
-            return Content("Usuario desativado com sucesso!");
+            return Content(response.Status != HttpStatusCode.OK ? $"Erro {response.Status}" : "Usuario desativado com sucesso!");
         }
 
         [UserFilterResult]
