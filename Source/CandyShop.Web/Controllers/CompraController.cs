@@ -104,7 +104,7 @@ namespace CandyShop.Web.Controllers
 
             if (Session["Login"].ToString() == "off")
             {
-                return Content("Você não está logado");
+                return Content("Efetue login e tente novamente. Você precisa estar logado para concluir sua compra");
             }
 
             if (ModelState.IsValid)
@@ -124,7 +124,7 @@ namespace CandyShop.Web.Controllers
                 TempData["LimparCarrinho"] = true;
                 return Content("Sua compra foi registrada com sucesso");
             }
-            return RedirectToAction("Index", "Home");
+            return Content("Ops... ocorreu um erro ao concluir sua compra.");
         }
 
         [HttpGet]
