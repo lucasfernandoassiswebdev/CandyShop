@@ -117,22 +117,6 @@ $(document).ready(function () {
                                             li.remove();
                                         })
                                 ]
-                            }),
-                        $("<a>",
-                            {
-                                href: "#modalQuantidade",
-                                'class': "modal-trigger modal-close secondary-content",
-                                "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
-                                html: [
-                                    $("<i>",
-                                        {
-                                            html: "mode_edit",
-                                            "class": "material-icons"
-                                        }).on("click",
-                                        function () {
-                                            $("#modalQuantidade").data("index", $(this).closest("li").index());
-                                        })
-                                ]
                             })
                     ]
                 }));
@@ -153,7 +137,7 @@ $(document).ready(function () {
             Imagem: imagem
         }
 
-        if (listaProdutos.filter(function(v) { return v.Id == produto.Id }).length) {
+        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length) {
             Materialize.toast("Produto já esta no carrinho");
             return;
         }
