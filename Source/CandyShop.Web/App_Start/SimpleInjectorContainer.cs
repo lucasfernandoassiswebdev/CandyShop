@@ -5,6 +5,8 @@ using SimpleInjector.Lifestyles;
 
 namespace CandyShop.Web
 {
+    /* Container do Simple Injector onde são mapeadas as dependências, comentários
+       mais detalhados sobre isso estão disponíveis no container da API */
     public class SimpleInjectorContainer
     {
         public static Container Build()

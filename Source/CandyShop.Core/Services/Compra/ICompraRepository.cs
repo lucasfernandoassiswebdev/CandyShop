@@ -1,24 +1,22 @@
-﻿using CandyShop.Core.Services.Compra.Dto;
-using CandyShop.Core.Services.CompraProduto.Dto;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CandyShop.Core.Services.Compra
 {
     public interface ICompraRepository
     {
-        int InserirCompra(CompraDto compra, out int sequencial);
-        void EditarCompra(CompraDto compra);
+        int InserirCompra(Compra compra, out int sequencial);
+        void EditarCompra(Compra compra);
         void DeletarCompra(int idCompra);        
         int SelecionarCompra(int idCompra);
-        CompraDto SelecionarDadosCompra(int idCompra);        
-        void EditaItens(CompraProdutoDto compraProduto);
+        Compra SelecionarDadosCompra(int idCompra);        
+        void EditaItens(CompraProduto.CompraProduto compraProduto);
         void DeletaItens(int idcompra, int idproduto);
-        IEnumerable<CompraDto> ListarCompra();
-        IEnumerable<CompraDto> ListarCompraPorNome(string nome);        
-        IEnumerable<CompraDto> ListarCompraPorCpf(string cpf);
-        IEnumerable<CompraDto> ListarCompraSemana();
-        IEnumerable<CompraDto> ListarCompraMes(int mes);
-        IEnumerable<CompraDto> ListarCompraDia();
+        IEnumerable<Compra> ListarCompra();
+        IEnumerable<Compra> ListarCompraPorNome(string nome);        
+        IEnumerable<Compra> ListarCompraPorCpf(string cpf);
+        IEnumerable<Compra> ListarCompraSemana();
+        IEnumerable<Compra> ListarCompraMes(int mes);
+        IEnumerable<Compra> ListarCompraDia();
         void CommitTransaction();
         void RollBackTransaction();
         void BeginTransaction();

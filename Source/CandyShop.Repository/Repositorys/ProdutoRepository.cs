@@ -1,5 +1,4 @@
 ﻿using CandyShop.Core.Services.Produto;
-using CandyShop.Core.Services.Produto.Dto;
 using CandyShop.Repository.Database;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisProdPorNome
         }
 
-        public int InserirProduto(ProdutoDto produto, out int sequencial)
+        public int InserirProduto(Produto produto, out int sequencial)
         {
             sequencial = 0;
             ExecuteProcedure(Procedures.CSSP_InsProduto);
@@ -53,7 +52,7 @@ namespace CandyShop.Repository.Repositorys
             ExecuteNonQuery();
         }
 
-        public void UpdateProduto(ProdutoDto produto)
+        public void UpdateProduto(Produto produto)
         {
             ExecuteProcedure(Procedures.CSSP_UpdProduto);
             AddParameter("@IdProduto", produto.IdProduto);
@@ -73,15 +72,15 @@ namespace CandyShop.Repository.Repositorys
                 return retornobd.Read();
         }
 
-        public ProdutoDto SelecionarDadosProduto(int idProduto)
+        public Produto SelecionarDadosProduto(int idProduto)
         {
             ExecuteProcedure(Procedures.CSSP_SelDadosProduto);
             AddParameter("@IdProduto", idProduto);
 
-            var retorno = new ProdutoDto();
+            var retorno = new Produto();
             using (var reader = ExecuteReader())
                 if (reader.Read())
-                    retorno = new ProdutoDto
+                    retorno = new Produto
                     {
                         IdProduto = reader.ReadAsInt("IdProduto"),
                         NomeProduto = reader.ReadAsString("NomeProduto"),
@@ -94,50 +93,50 @@ namespace CandyShop.Repository.Repositorys
             return retorno;
         }
 
-        public IEnumerable<ProdutoDto> ListarProdutos()
+        public IEnumerable<Produto> ListarProdutos()
         {
             ExecuteProcedure(Procedures.CSSP_LisProduto);
             return Listar();
         }        
 
-        public IEnumerable<ProdutoDto> ListarProdutosInativos()
+        public IEnumerable<Produto> ListarProdutosInativos()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoInativo);
             return Listar();
         }
 
-        public IEnumerable<ProdutoDto> ListarProdutosValorCrescente()
+        public IEnumerable<Produto> ListarProdutosValorCrescente()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoValorCres);
             return Listar();
         }
 
-        public IEnumerable<ProdutoDto> ListarProdutosValorDecrescente()
+        public IEnumerable<Produto> ListarProdutosValorDecrescente()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoValorDesc);
             return Listar();
         }
 
-        public IEnumerable<ProdutoDto> ListarProdutosAbaixoValor()
+        public IEnumerable<Produto> ListarProdutosAbaixoValor()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoAbaixoValor);
             return Listar();
         }
 
-        public IEnumerable<ProdutoDto> ListarProdutosAcimaValor()
+        public IEnumerable<Produto> ListarProdutosAcimaValor()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoAcimaValor);
             return Listar();
         }
 
-        public IEnumerable<ProdutoDto> ListarProdutosPorCategoria(string categoria)
+        public IEnumerable<Produto> ListarProdutosPorCategoria(string categoria)
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoCategoria);
             AddParameter("@Categoria", categoria);
             return Listar();
         }
 
-        public IEnumerable<ProdutoDto> ProcurarProdutoPorNome(string nome)
+        public IEnumerable<Produto> ProcurarProdutoPorNome(string nome)
         {
             ExecuteProcedure(Procedures.CSSP_LisProdPorNome);
             AddParameter("@NomeProduto", nome);
@@ -145,12 +144,12 @@ namespace CandyShop.Repository.Repositorys
             return Listar();
         }
 
-        private IEnumerable<ProdutoDto> Listar()
+        private IEnumerable<Produto> Listar()
         {
-            var retorno = new List<ProdutoDto>();
+            var retorno = new List<Produto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
-                    retorno.Add(new ProdutoDto
+                    retorno.Add(new Produto
                     {
                         IdProduto = reader.ReadAsInt("IdProduto"),
                         NomeProduto = reader.ReadAsString("NomeProduto"),

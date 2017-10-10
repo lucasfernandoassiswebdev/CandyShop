@@ -1,5 +1,4 @@
 ﻿using CandyShop.Core.Services.CompraProduto;
-using CandyShop.Core.Services.CompraProduto.Dto;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
@@ -24,7 +23,7 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_compraProdutoRepository.ListarCompraProdutoIdVenda(id));
         }
 
-        public IHttpActionResult Put(CompraProdutoDto compraProduto)
+        public IHttpActionResult Put(CompraProduto compraProduto)
         {
             _compraProdutoRepository.EditarCompraProduto(compraProduto);
             return Ok();

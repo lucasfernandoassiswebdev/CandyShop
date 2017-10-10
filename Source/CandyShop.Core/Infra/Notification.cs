@@ -14,9 +14,8 @@ namespace CandyShop.Core.Infra
             _notifications = notification;
         }
 
-        /* 
-          Verifica se há alguma notification na lista 
-          (É utilizado para verificações posteriores) */
+        /* Verifica se há alguma notification na lista 
+           (É utilizado para verificações posteriores) */
         public bool HasNotification()
         {
             return _notifications != null && _notifications.Any();

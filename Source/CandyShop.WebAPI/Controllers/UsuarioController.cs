@@ -1,6 +1,5 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Usuario;
-using CandyShop.Core.Services.Usuario.Dto;
 using System.Net;
 using System.Web.Http;
 
@@ -19,7 +18,7 @@ namespace CandyShop.WebAPI.Controllers
             _usuarioService = usuarioService;
         }
 
-        public IHttpActionResult Post(UsuarioDto usuario)
+        public IHttpActionResult Post(Usuario usuario)
         {
             _usuarioService.InserirUsuario(usuario);
             if (_notification.HasNotification())
@@ -29,7 +28,7 @@ namespace CandyShop.WebAPI.Controllers
         }
 
         [HttpPost, Route("api/Usuario/login")]
-        public IHttpActionResult PostLogin(UsuarioDto usuario)
+        public IHttpActionResult PostLogin(Usuario usuario)
         {
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
@@ -73,7 +72,7 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_usuarioRepository.VerificaCreditoLoja());
         }
 
-        public IHttpActionResult Put(UsuarioDto usuario)
+        public IHttpActionResult Put(Usuario usuario)
         {
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
@@ -84,14 +83,14 @@ namespace CandyShop.WebAPI.Controllers
         }
 
         [HttpPut, Route("api/usuario/trocarSenha")]
-        public IHttpActionResult PutSenha(UsuarioDto usuario)
+        public IHttpActionResult PutSenha(Usuario usuario)
         {
             _usuarioRepository.TrocarSenha(usuario);
             return Ok();
         }
 
         [HttpPut, Route("api/usuario/desativar/{cpf}")]
-        public IHttpActionResult PutDesativar(UsuarioDto usuario)
+        public IHttpActionResult PutDesativar(Usuario usuario)
         {
             _usuarioRepository.DesativarUsuario(usuario.Cpf);
             return Ok();

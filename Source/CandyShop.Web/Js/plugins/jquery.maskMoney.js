@@ -1,3 +1,4 @@
+// Plugin usado para aplicar máscaras monetárias nos campos de input
 (function ($) {
 	"use strict";
 	if (!$.browser) {

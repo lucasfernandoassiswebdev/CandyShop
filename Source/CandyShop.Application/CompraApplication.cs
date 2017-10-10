@@ -15,6 +15,10 @@ namespace CandyShop.Application
         {
             using (var client = new HttpClient())
             {
+                /* Aqui é definido o endereço da API, o verbo HTTP que será utilizado
+                   (nesse caso POST) e o tipo de retorno(nesse caso JSON), a linha de baixo
+                   define o tipo da resposta(nesse caso INT) e recebe o status dessa resposta
+                   (ok, bad request, internal server error, etc) */
                 var response = client.PostAsync(_enderecoApi, compra, new JsonMediaTypeFormatter()).Result;
                 return new Response<int>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
@@ -25,6 +29,9 @@ namespace CandyShop.Application
             using (var client = new HttpClient())
             {
                 var response = client.PutAsync(_enderecoApi, compra, new JsonMediaTypeFormatter()).Result;
+                /* Nessa código abaixo dizemos que se o status da resposta vier ok, queremos
+                   o conteúdo dessa resposta, se não, queremos o status que veio com ela
+                   (404 not fount, 500 internal server error, etc) */
                 return response.StatusCode != HttpStatusCode.OK
                     ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
                     : new Response<string>(response.StatusCode);
