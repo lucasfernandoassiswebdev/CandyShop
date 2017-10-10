@@ -47,6 +47,12 @@
                 $("#cpf").keydown();
             }
         });
+
+        $("#senha").keydown(function (e) {
+            if (e.which === 13) {
+                AjaxJsShop.verificaLogin();
+            }
+        });
 });
 
 function mcpf(v) {
