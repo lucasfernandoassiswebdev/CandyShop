@@ -39,7 +39,7 @@
                 @{ var nomeA = @Model.IdProduto + "_A.jpg";}
                 @{ var nomeB = @Model.IdProduto + "_B.jpg";}
                 @{ var nomeC = @Model.IdProduto + "_C.jpg";}
-<<<<<<< HEAD
+
                 <div class="center">
                     <div class="Imagens" style="display: flex">
                         <div>
@@ -68,34 +68,7 @@
                     </div>
                 </div>
             </div>
-=======
-                <div class="center" style="display: flex">
-                    <div>
-                        <label for="fotoProduto1">
-                            <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@Html.UrlContent(TempData["caminhoImagensProdutos"], nomeA)"alt="imagem não disponível :(" />
-                        </label>
-                        <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                        <a class="btn" id="removerImagem1" style="margin-right:50px"><i class="material-icons left">block</i>Remover</a>
-                    </div>
 
-                    <div>
-                        <label for="fotoProduto2">
-                            <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@Html.UrlContent(TempData["caminhoImagensProdutos"], nomeB)" alt="imagem não disponível :(" />
-                        </label>
-                        <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                        <a class="btn" id="removerImagem2"><i class="material-icons left">block</i>Remover</a>
-                    </div>
-                    <div>
-                        <label for="fotoProduto3">
-                            <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@Html.UrlContent(TempData["caminhoImagensProdutos"], nomeC)" alt="imagem não disponível :(" />
-                        </label>
-                        <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                        <a class="btn" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
-                    </div>
-                    </div>
-            </div>
-            
->>>>>>> 64d379fb243f8e40b56efc6ed4252e3ee1867b10
             <div class="row">
                 <div class="input-field col s12">
                     <input placeholder="Placeholder" id="IdProduto" name="IdProduto" type="text" class="validate" required="" value="@Model.IdProduto" disabled>
