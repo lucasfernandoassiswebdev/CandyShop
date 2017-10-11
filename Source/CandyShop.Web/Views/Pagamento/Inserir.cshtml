@@ -12,7 +12,7 @@
     <div class="row center">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s6 push-l3">
+                <div class="input-field col s6 push-l3 ajustes">
                     <input id="valorPago" name="valorPago" type="text" class="validate" required onkeydown="return FilterInput(event)" onpaste="handlePaste(event)">
                     <label for="valorPago">Valor:</label>
                 </div>
@@ -38,15 +38,13 @@
 
     function FilterInput(event) {
         var keyCode = ("which" in event) ? event.which : event.keyCode;
-        isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
+        var isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
         return !isNotWanted;
     }
 
     function handlePaste(e) {
-        var clipboardData, pastedData;
-
-        clipboardData = e.clipboardData || window.clipboardData;
-        pastedData = clipboardData.getData("Text").toUpperCase();
+        var clipboardData = e.clipboardData || window.clipboardData;
+        var pastedData = clipboardData.getData("Text").toUpperCase();
 
         if (pastedData.indexOf("E") > -1) {
             e.stopPropagation();
