@@ -242,7 +242,7 @@
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                    <li><i class="material-icons">book</i>@Html.ActionLink("Administração", "Index", "Admin")</li>
+                    <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
                     <li class="divider"></li>
                 }
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>

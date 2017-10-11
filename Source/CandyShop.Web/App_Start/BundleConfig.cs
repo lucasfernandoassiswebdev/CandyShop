@@ -1,4 +1,5 @@
-﻿using System.Web.Optimization;
+﻿using System;
+using System.Web.Optimization;
 
 namespace CandyShop.Web
 {
@@ -22,7 +23,7 @@ namespace CandyShop.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/materialize.css",                      
+                      $"~/Content/materialize.min.css?d={DateTime.Now.Ticks}",
                       "~/Content/Principal/shop.css"));
         }
     }

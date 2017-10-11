@@ -4297,7 +4297,7 @@ nav .input-field label.active i {
 
 @font-face {
     font-family: "Roboto";
-    src: local(Roboto Regular), url("fonts/roboto/Roboto-Regular.woff2") format("woff2"), url("fonts/roboto/Roboto-Regular.woff") format("woff");
+    src: local(Roboto Regular), url("../fonts/roboto/Roboto-Regular.woff2") format("woff2"), url("../fonts/roboto/Roboto-Regular.woff") format("woff");
     font-weight: 400
 }
 
