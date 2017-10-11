@@ -6,10 +6,12 @@
 var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id, totalCompra = 0;
 
 $(document).ready(function () {
-    // Pesquisa por nome de produto é feita quando se aperta a tecla "enter" na barra de pesquisa
-    $("#search").keydown(function (e) {
+
+    //pesquisa por nome é feita quando se aperta a tecla "enter" na barra de pesquisa
+    $(".input-field #search").keydown(function (e) {
         if (e.which === 13) {
-            AjaxJsShop.listarProdutoPorNome($("#search").val());
+            AjaxJsShop.listarProdutoPorNome($(this).val());
+            $(this).val("");
         }
     });
 
