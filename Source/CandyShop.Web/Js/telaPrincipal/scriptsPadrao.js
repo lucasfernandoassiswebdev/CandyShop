@@ -13,6 +13,11 @@ $(document).ready(function () {
         }
     });
 
+    // Fechando sideNav quando o usuário selecionar alguma opção
+    $(".closeMenu").on("click", function () {
+        $(".button-collapse").sideNav("hide");
+    });
+
     // Limpando os inputs
     $(".modal-close").not($("#editarQuantidade")).click(function () {
         $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha").val("");

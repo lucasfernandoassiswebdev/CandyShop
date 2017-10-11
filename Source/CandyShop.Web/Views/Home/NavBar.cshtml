@@ -235,18 +235,18 @@
 
             <ul class="side-nav" id="mobile-demo">
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
-                <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
-                <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
-                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
-                <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Historico de Compra</a></li>
-                <li><a href="#trocaSenha" class="modal-trigger"><i class="material-icons">lock_outline</i>Trocar senha</a></li>
+                <li><a class="dropdown-button modal-trigger closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
+                <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
+                <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+                <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Historico de Compra</a></li>
+                <li><a href="#trocaSenha" class="modal-trigger closeMenu"><i class="material-icons">lock_outline</i>Trocar senha</a></li>
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
                     <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
                     <li class="divider"></li>
                 }
-                <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
+                <li><a href="#!" class="closeMenu" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
         </div>
         <div class="nav-content white">
@@ -269,7 +269,7 @@ else
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
-                <li><a class="dropdown-button modal-trigger right" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
+                <li><a class="dropdown-button modal-trigger right closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
                 <li>
                     <a class="dropdown-button" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
@@ -286,8 +286,8 @@ else
                 </li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
-                <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
+                <li><a class="dropdown-button modal-trigger closeMenu" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
+                <li><a class="dropdown-button modal-trigger closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
             </ul>
         </div>
         <div class="nav-content white">
