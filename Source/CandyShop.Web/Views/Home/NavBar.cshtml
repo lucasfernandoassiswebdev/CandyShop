@@ -47,6 +47,28 @@
                 $("#cpf").keydown();
             }
         });
+
+        $("#senha").keydown(function (e) {
+            if (e.which === 13) {
+                AjaxJsShop.verificaLogin();
+            }
+        });
+
+        $("#quantidade").keydown(function (e) {
+            if (e.which === 13) {
+                $("#adicionaCarrinho").trigger("click");
+                $("#modalQuantidade").modal("close");
+                $("#modalCarrinho").modal("open");
+            }
+        });
+
+        $("#quantidadeEdit").keydown(function (e) {
+            if (e.which === 13) {
+                $("#editarQuantidade").trigger("click");
+                $("#modalEditarQuantidade").modal("close");
+                $("#modalCarrinho").modal("open");
+            }
+        });
 });
 
 function mcpf(v) {
@@ -67,10 +89,10 @@ function mcpf(v) {
         <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
         <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
         <p class="pink-text center identQuant"></p>
-        <form class="center">
+        <div class="center">
             <input type="number" id="quantidade" class="center identQuant" autocomplete="off" />
             <span class="QtdeInvalida" color="red"></span>
-        </form>
+        </div>
     </div>
     <div class="modal-footer identQuant">
         <a id="adicionaCarrinho" href="#modalCarrinho" class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
@@ -102,20 +124,20 @@ function mcpf(v) {
 </div>
 
 <!--modal de editar quantidade-->
-@*<div id="modalEditarQuantidade" class="modal" style="z-index: 99999999">
+<div id="modalEditarQuantidade" class="modal" style="z-index: 99999999">
         <div class="modal-content center">
             <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
             <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
             <p class="pink-text center identQuant"></p>
-            <form class="center">
+            <div class="center">
                 <input type="number" id="quantidadeEdit" class="center identQuant" autocomplete="off" />
                 <span class="QtdeInvalida" color="red"></span>
-            </form>
+            </div>
         </div>
         <div class="modal-footer identQuant">
             <a id="editarQuantidade" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
         </div>
-    </div>*@
+    </div>
 
 <!--modal do carrinho-->
 <div id="modalCarrinho" class="modal">

@@ -14,7 +14,7 @@ $(document).ready(function () {
     });
 
     //limpando os inputs
-    $(".modal-close").click(function () {
+    $(".modal-close").not($("#editarQuantidade")).click(function () {
         $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha").val("");
         $("#novaSenha").removeAttr("disabled");
     });
@@ -57,7 +57,7 @@ $(document).ready(function () {
     });
 
     $("#TrocarSenha").click(function () {
-        if ($('#novaSenha').val().length < 8) {
+        if ($("#novaSenha").val().length < 8) {
             Materialize.toast("Senha deve conter de 8 a 12 caracteres", 3000);
             return;
         }
@@ -94,7 +94,7 @@ $(document).ready(function () {
                     $("<a>", {
                         href: "#!",
                         "class": "modal-trigger secondary-content",
-                        "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
+                        style: "margin-top:10px",
                         html: [
                             $("<i>", {
                                 html: "delete",
@@ -105,11 +105,26 @@ $(document).ready(function () {
                                 var li = $(this).closest("li");
                                 var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
                                 listaProdutos = listaProdutos.filter(function (item) {
-                                    return item.Id != li.find("[data-Id]").attr("data-Id");
+                                    return item.Id !== li.find("[data-Id]").attr("data-Id");
                                 });
                                 localStorage.removeItem("listaProdutos");
                                 localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
                                 li.remove();
+                            })
+                        ]
+                    }),
+                    $("<a>", {
+                        href: "#modalEditarQuantidade",
+                        "class": "modal-trigger modal-close secondary-content",
+                        "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
+                        style: "margin-right:34px;margin-top:10px",
+                        html: [
+                            $("<i>", {
+                                html: "mode_edit",
+                                "class": "material-icons",
+                                style: "font-size:30px !important"
+                            }).on("click", function () {
+                                $("#modalEditarQuantidade").data("index", $(this).closest("li").index());
                             })
                         ]
                     })
@@ -134,8 +149,10 @@ $(document).ready(function () {
             Imagem: imagem
         }
 
-        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length)
-            console.log("produto ja existe");
+        if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length) {
+            Materialize.toast("Produto já esta no carrinho");
+            return;
+        }
         else
             listaProdutos.push(produto);
 
@@ -162,7 +179,7 @@ $(document).ready(function () {
                         {
                             href: "#!",
                             "class": "modal-trigger secondary-content",
-                            "data-quantidadeDisponivel": quantidadeDisponivel,
+                            style: "margin-top:10px",
                             html: [
                                 $("<i>",
                                     {
@@ -172,14 +189,29 @@ $(document).ready(function () {
                                         var li = $(this).closest("li");
                                         var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
                                         listaProdutos = listaProdutos.filter(function (item) {
-                                            return item.Id != li.find("[data-Id]").attr("data-Id");
+                                            return item.Id !== li.find("[data-Id]").attr("data-Id");
                                         });
                                         localStorage.removeItem("listaProdutos");
                                         localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
                                         li.remove();
                                     })
                             ]
-                        })
+                        }),
+                    $("<a>", {
+                        href: "#modalEditarQuantidade",
+                        "class": "modal-trigger modal-close secondary-content",
+                        "data-quantidadeDisponivel": quantidadeDisponivel,
+                        style: "margin-right:34px;margin-top:10px",
+                        html: [
+                            $("<i>", {
+                                html: "mode_edit",
+                                "class": "material-icons",
+                                style: "font-size:30px !important"
+                            }).on("click", function () {
+                                $("#modalEditarQuantidade").data("index", $(this).closest("li").index());
+                            })
+                        ]
+                    })
                 ],
                 "class": "collection-item avatar"
             }));
@@ -210,21 +242,21 @@ $(document).ready(function () {
 
     //colocando foco no modal quantidade
     $("#modalQuantidade").modal({
-        ready: function (modal, trigger) {
+        ready: function () {
             $("#quantidade").focus();
         }
     });
 
     //colocando foco no modal login
     $("#modalLogin").modal({
-        ready: function (modal, trigger) {
+        ready: function () {
             $("#cpf").focus();
         }
     });
 
     //colocando foco no modal trocaSenha
     $("#trocaSenha").modal({
-        ready: function (modal, trigger) {
+        ready: function () {
             $("#novaSenha").focus();
         }
     });
@@ -240,6 +272,7 @@ $(document).ready(function () {
             $("#adicionaCarrinho").removeAttr("disabled");
         }
     });
+
     //onclick dentro da modal
     $("#modalQuantidade").on("click", function () {
         quantidade = $("#quantidade").val();
@@ -269,36 +302,47 @@ $(document).ready(function () {
         }
     });
 
+    //editando a quantidade dos itens no carrinho
+    $("#editarQuantidade").click(function () {
+        $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
+            .text("Quantidade: " + $("#quantidadeEdit").val())
+            .attr("data-Quantidade", $("#quantidadeEdit").val());
+        $("#modalCarrinho").modal("open");
+
+        var produtos = JSON.parse(localStorage.getItem("listaProdutos"));
+        var produto = produtos[$("#modalEditarQuantidade").data("index")];
+        console.log(produto);
+        produto.Quantidade = $("#quantidadeEdit").val();
+        produtos[$("#modalEditarQuantidade").data("index")] = produto;
+        localStorage.removeItem("listaProdutos");
+        localStorage.setItem("listaProdutos", JSON.stringify(produtos));
+    });
     //desabilitando no modal de editar a quantidade
-    /*
-    $('#quantidadeEdit').on('blur', function () {
+    $("#quantidadeEdit").on("blur", function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
-            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#editarQuantidade').attr('disabled', 'disabled');
+        if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+            $("#editarQuantidade").attr("disabled", "disabled");
         } else {
-            $('#editarQuantidade').removeAttr('disabled');
+            $("#editarQuantidade").removeAttr("disabled");
         }
     });
-    $('#quantidadeEdit').keydown(function () {
+    $("#quantidadeEdit").keydown(function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
-            //$(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#editarQuantidade').attr('disabled', 'disabled');
+        if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+            $("#editarQuantidade").attr("disabled", "disabled");
         } else {
-            $('#editarQuantidade').removeAttr('disabled');
+            $("#editarQuantidade").removeAttr("disabled");
         }
     });
-    $('#quantidadeEdit').on('paste', function () {
+    $("#quantidadeEdit").on("paste", function () {
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == '' || quantidade == 'undefined' || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
+        if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             $(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $('#editarQuantidade').attr('disabled', 'disabled');
+            $("#editarQuantidade").attr("disabled", "disabled");
         } else {
-            $('#editarQuantidade').removeAttr('disabled');
+            $("#editarQuantidade").removeAttr("disabled");
         }
     });
-    */
 
     //tirando caracteres inválidos dos campos de quantidade
     $("#quantidade, #quantidadeEdit").keydown(function () {
