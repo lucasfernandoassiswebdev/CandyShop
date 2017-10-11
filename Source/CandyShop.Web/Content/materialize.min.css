@@ -4814,7 +4814,6 @@ small {
     #toast-container {
         min-width: 100%;
         bottom: 10%
-
     }
 }
 
@@ -4830,8 +4829,7 @@ small {
     #toast-container {
         top: 10%;
         right: 7%;
-        max-width: 86%;
-        bottom: 10%;
+        max-width: 86%;        
     }
 }
 
@@ -4880,7 +4878,7 @@ small {
 @media only screen and (max-width: 600px) {
     .toast {
         width: 100%;
-        border-radius: 0
+        border-radius: 0;        
     }
 }
 
