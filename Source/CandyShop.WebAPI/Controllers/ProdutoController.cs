@@ -1,6 +1,5 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Produto;
-using CandyShop.Core.Services.Produto.Dto;
 using System.Net;
 using System.Web.Http;
 
@@ -19,7 +18,7 @@ namespace CandyShop.WebAPI.Controllers
             _produtoService = produtoService;
         }
 
-        public IHttpActionResult Post(ProdutoDto produto)
+        public IHttpActionResult Post(Produto produto)
         {
             _produtoService.IsValid(produto);
             if (_notification.HasNotification())
@@ -31,7 +30,7 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(sequencial);
         }
 
-        public IHttpActionResult Put(ProdutoDto produto)
+        public IHttpActionResult Put(Produto produto)
         {
             _produtoService.IsValid(produto);
             if (_notification.HasNotification())

@@ -1,7 +1,7 @@
 ﻿@model CandyShop.Application.ViewModels.CompraViewModel
 
 @{
-    ViewBag.Title = "Padrao";
+    ViewBag.Title = "Candy Shop";
 }
 
 <script>
@@ -137,7 +137,7 @@ function mcpf(v) {
         <div class="modal-footer identQuant">
             <a id="editarQuantidade" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
         </div>
-    </div>
+</div>
 
 <!--modal do carrinho-->
 <div id="modalCarrinho" class="modal">
@@ -224,8 +224,7 @@ function mcpf(v) {
                         <div>
                             <div class="input-field">
                                 <input id="search" type="search" autocomplete="off">
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>                                
                             </div>
                         </div>
                     </div>
@@ -242,7 +241,7 @@ function mcpf(v) {
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                    <li><i class="material-icons">book</i>@Html.ActionLink("Administração", "Index", "Admin")</li>
+                    <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
                     <li class="divider"></li>
                 }
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
@@ -252,7 +251,6 @@ function mcpf(v) {
             <div class="pesquisaMobile">
                 <div class="input-field">
                     <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required autocomplete="off">
-                    <i class="material-icons black-text">close</i>
                 </div>
             </div>
         </div>
@@ -278,22 +276,20 @@ else
                             <div class="input-field">
                                 <input id="search" type="search" required autocomplete="off">
                                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons closed">close</i>
                             </div>
                         </div>
                     </div>
                 </li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
-                <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
+                <li><a class="modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
+                <li><a class="modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
             </ul>
         </div>
         <div class="nav-content white">
             <div class="pesquisaMobile">
                 <div class="input-field">
                     <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required autocomplete="off">
-                    <i class="material-icons black-text">close</i>
                 </div>
             </div>
         </div>

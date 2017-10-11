@@ -44,10 +44,10 @@
     <Compile Include="Infra\Notification.cs" />
     <Compile Include="Services\-Interfaces\INotification.cs" />
     <Compile Include="Services\CompraProduto\compraProdutoService.cs" />
-    <Compile Include="Services\CompraProduto\Dto\CompraProdutoDto.cs" />
+    <Compile Include="Services\CompraProduto\CompraProduto.cs" />
     <Compile Include="Services\CompraProduto\ICompraProdutoRepository.cs" />
     <Compile Include="Services\Compra\CompraService.cs" />
-    <Compile Include="Services\Compra\Dto\CompraDto.cs" />
+    <Compile Include="Services\Compra\Compra.cs" />
     <Compile Include="Services\Compra\ICompraRepository.cs" />
     <Compile Include="Services\Pagamento\IPagamentoRepository.cs" />
     <Compile Include="Services\Pagamento\IPagamentoService.cs" />
@@ -56,10 +56,10 @@
     <Compile Include="Services\Produto\IProdutoRepository.cs" />
     <Compile Include="Services\Produto\ProdutoService.cs" />
     <Compile Include="Services\Usuario\IUsuarioRepository.cs" />
-    <Compile Include="Services\Pagamento\Dto\PagamentoDto.cs" />
-    <Compile Include="Services\Produto\Dto\ProdutoDto.cs" />
+    <Compile Include="Services\Pagamento\Pagamento.cs" />
+    <Compile Include="Services\Produto\Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Usuario\Dto\UsuarioDto.cs" />
+    <Compile Include="Services\Usuario\Usuario.cs" />
     <Compile Include="Services\Usuario\IUsuarioService.cs" />
     <Compile Include="Services\Usuario\UsuarioService.cs" />
   </ItemGroup>

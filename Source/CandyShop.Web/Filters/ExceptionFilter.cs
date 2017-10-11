@@ -8,7 +8,7 @@ namespace CandyShop.Web.Filters
     {
         public override void OnException(ExceptionContext filterContext)
         {
-            string path = @"\\192.168.7.11\wwwroot\CSLog";
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"\CSLog";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);

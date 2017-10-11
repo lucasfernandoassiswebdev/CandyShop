@@ -1,4 +1,5 @@
-﻿@model  CandyShop.Application.ViewModels.UsuarioViewModel
+﻿@using CandyShop.Web.Helpers
+@model  CandyShop.Application.ViewModels.UsuarioViewModel
 
 @{
     Layout = null;
@@ -42,7 +43,7 @@
                 <div class="center">
                     <label for="fotoUsuario">
                         @{ string caminho = @Model.Cpf + ".jpg"; }
-                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@Html.UrlContent(TempData["caminhoImagensUsuarios"], caminho)" alt="imagem não disponível :(" />
                     </label>
                     <br/>
                     <br/>
@@ -91,6 +92,7 @@
                     <select id="Ativo">
                         <option value="" disabled>Escolha uma opção</option>
                         <option value="A" @if (Convert.ToString(Model.Ativo) == "A") {<text>selected</text>} >Ativo</option>
+                        <option value="A" @if (Convert.ToString(Model.Ativo) == "A") { <text> selected</text>}>Ativo</option>
                         <option value="I" @if (Convert.ToString(Model.Ativo) == "I") {<text>selected</text>} >Inativo</option>
                     </select>
                     <label>Status do usuário</label>

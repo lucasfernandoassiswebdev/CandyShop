@@ -1,5 +1,4 @@
 using CandyShop.Core.Services.Usuario;
-using CandyShop.Core.Services.Usuario.Dto;
 using CandyShop.Repository.Database;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
@@ -30,7 +29,7 @@ namespace CandyShop.Repository.Repositorys
             CSSP_UpdSenha
         }
 
-        public void InserirUsuario(UsuarioDto usuario)
+        public void InserirUsuario(Usuario usuario)
         {
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
             {
@@ -46,7 +45,7 @@ namespace CandyShop.Repository.Repositorys
             }
         }
 
-        public void EditarUsuario(UsuarioDto usuario)
+        public void EditarUsuario(Usuario usuario)
         {
             ExecuteProcedure(Procedures.CSSP_UpdUsuario);
             AddParameter("@Cpf", usuario.Cpf);
@@ -59,7 +58,7 @@ namespace CandyShop.Repository.Repositorys
             ExecuteNonQuery();
         }
 
-        public void TrocarSenha(UsuarioDto usuario)
+        public void TrocarSenha(Usuario usuario)
         {
             ExecuteProcedure(Procedures.CSSP_UpdSenha);
             AddParameter("@cpf", usuario.Cpf);
@@ -75,13 +74,13 @@ namespace CandyShop.Repository.Repositorys
             ExecuteNonQuery();
         }
 
-        public UsuarioDto SelecionarUsuario(string cpf)
+        public Usuario SelecionarUsuario(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_SelUsuario);
             AddParameter("@Cpf", cpf);
             using (var reader = ExecuteReader())
                 if (reader.Read())
-                    return new UsuarioDto()
+                    return new Usuario()
                     {
                         Cpf = reader.ReadAsString("Cpf"),
                         SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
@@ -93,32 +92,32 @@ namespace CandyShop.Repository.Repositorys
             return null;
         }
 
-        public IEnumerable<UsuarioDto> ListarUsuario()
+        public IEnumerable<Usuario> ListarUsuario()
         {
             ExecuteProcedure(Procedures.CSSP_LisUsuario);            
             return Listar();
         }
 
-        public IEnumerable<UsuarioDto> ListarUsuarioDivida()
+        public IEnumerable<Usuario> ListarUsuarioDivida()
         {
             ExecuteProcedure(Procedures.CSSP_SelUsuariosDivida);           
             return Listar();
         }
 
-        public IEnumerable<UsuarioDto> ListarUsuarioInativo()
+        public IEnumerable<Usuario> ListarUsuarioInativo()
         {
             ExecuteProcedure(Procedures.CSSP_ListarUsuariosInativos);            
             return Listar();
         }
 
-        public UsuarioDto SelecionarDadosUsuario(string cpf)
+        public Usuario SelecionarDadosUsuario(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_SelUsuario);
             AddParameter("@CpfUsuario", cpf);
-            var retorno = new UsuarioDto();
+            var retorno = new Usuario();
             using (var reader = ExecuteReader())
                 if (reader.Read())
-                    retorno = new UsuarioDto
+                    retorno = new Usuario
                     {
                         Cpf = reader.ReadAsString("Cpf"),
                         SenhaUsuario = reader.ReadAsString("SenhaUsuario"),
@@ -130,7 +129,7 @@ namespace CandyShop.Repository.Repositorys
             return retorno;
         }
 
-        public int VericaUsuarioIgual(UsuarioDto usuario)
+        public int VericaUsuarioIgual(Usuario usuario)
         {
             ExecuteProcedure(Procedures.CSSP_LisUsuarioIgual);
             AddParameter("@cpf", usuario.Cpf);
@@ -141,14 +140,14 @@ namespace CandyShop.Repository.Repositorys
             return 0;
         }
 
-        public IEnumerable<UsuarioDto> ListarUsuarioPorNome(string nome)
+        public IEnumerable<Usuario> ListarUsuarioPorNome(string nome)
         {
             ExecuteProcedure(Procedures.CSSP_LisUsuarioPorNome);
             AddParameter("@NomeUsuario", nome);
             return Listar();
         }
 
-        public int VerificaLogin(UsuarioDto usuario)
+        public int VerificaLogin(Usuario usuario)
         {
             ExecuteProcedure(Procedures.CSSP_VerificaLoginSenha);
             AddParameter("@Cpf", usuario.Cpf);
@@ -168,12 +167,12 @@ namespace CandyShop.Repository.Repositorys
             return 0;
         }
 
-        private IEnumerable<UsuarioDto> Listar()
+        private IEnumerable<Usuario> Listar()
         {
-            var retorno = new List<UsuarioDto>();
+            var retorno = new List<Usuario>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
-                    retorno.Add(new UsuarioDto
+                    retorno.Add(new Usuario
                     {
                         Cpf = reader.ReadAsString("Cpf"),
                         SenhaUsuario = reader.ReadAsString("SenhaUsuario"),

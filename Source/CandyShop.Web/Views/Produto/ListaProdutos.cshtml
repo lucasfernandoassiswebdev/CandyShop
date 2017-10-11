@@ -84,9 +84,9 @@
                             <br />
                             <span>Categoria: @produto.Categoria</span>
                             <br /><br />
-                            <a class="btn-floating btn-sm waves-effect waves-light light-blue darken-3" onclick="AjaxJsProduto.detalheProduto(@produto.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">info_outline</i></a>
-                            <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsProduto.editarProduto(@produto.IdProduto, '@TempData["nomeLista"].ToString()');"><i class="material-icons">edit</i></a>
-                            <a class="btn-floating btn-sm waves-effect waves-light pink lighten-1" onclick="AjaxJsProduto.desativarProduto(@produto.IdProduto, '@TempData["nomeLista"].ToString()');"><i class="material-icons">remove_shopping_cart</i></a>
+                            <a class="btn-floating btn-sm waves-effect waves-light light-blue darken-3" onclick="AjaxJsProduto.detalheProduto(@produto.IdProduto)"><i class="material-icons">info_outline</i></a>
+                            <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsProduto.editarProduto(@produto.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">edit</i></a>
+                            <a class="btn-floating btn-sm waves-effect waves-light pink lighten-1" onclick="AjaxJsProduto.desativarProduto(@produto.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">remove_shopping_cart</i></a>
                         </div>
                     </li>
                 }

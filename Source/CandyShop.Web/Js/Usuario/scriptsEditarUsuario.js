@@ -1,4 +1,5 @@
-﻿//inicia os métodos que o materialize pede 
+﻿var removerImagem = false;
+//inicia os métodos que o materialize pede
 //e desativa os botões de envio caso o formulário esteja inválido
 $(document).ready(function () {
     $("input").characterCounter();
@@ -17,20 +18,21 @@ $(document).ready(function () {
 $("#fotoUsuario").change(function () {
     //função que muda a foto do usuário na tela
     readURL(this);
+    removerImagem = false;
 });
-
 
 $(".botaoEditar").on("click", function () {
     var filesSelected = document.getElementById("fotoUsuario").files;
     if (filesSelected.length > 0)
         encodeImageFileAsURL(AjaxJsUsuario.concluirEdicaoUsuario);
     else
-        AjaxJsUsuario.concluirEdicaoUsuario();
+        AjaxJsUsuario.concluirEdicaoUsuario(null,removerImagem);
 });
 
 $("#removerImagem").click(function () {
-    $("#imagem").attr("src", "~/Imagens/retirado.png");
+    $("#imagem").attr("src", "Imagens/retirado.png");
     $("#fotoUsuario").val("");
+    removerImagem = true;
 });
 
 function readURL(input) {
@@ -51,11 +53,10 @@ function validaBotao() {
     var qtdeSenha = $("#Password").val().length;
 
     //desabilitando o botão caso um dos dois esteja inválido
-    if (qtdeNome > 50 || qtdeSenha > 12 || qtdeNome === 0 || qtdeSenha === 0) {
+    if (qtdeNome > 50 || qtdeSenha > 12 || qtdeNome === 0 || qtdeSenha === 0)
         $(".botaoEditar").attr("disabled", "disabled");
-    } else {
+    else
         $(".botaoEditar").removeAttr("disabled");
-    }
 }
 
 function encodeImageFileAsURL(callback) {
@@ -67,7 +68,7 @@ function encodeImageFileAsURL(callback) {
         fileReader.onload = function (fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
             if (typeof callback === "function") {
-                callback(srcData);
+                callback(srcData,removerImagem);
             }
         };
 
@@ -76,23 +77,21 @@ function encodeImageFileAsURL(callback) {
 }
 
 function FilterInput(event) {
-    var keyCode = ('which' in event) ? event.which : event.keyCode;
-    isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
+    var keyCode = ("which" in event) ? event.which : event.keyCode;
+    var isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
     return !isNotWanted;
 }
 
 function handlePaste(e) {
-    var clipboardData, pastedData;
+    var clipboardData = e.clipboardData || window.clipboardData;
+    var pastedData = clipboardData.getData("Text").toUpperCase();
 
-    clipboardData = e.clipboardData || window.clipboardData;
-    pastedData = clipboardData.getData('Text').toUpperCase();
-
-    if (pastedData.indexOf('E') > -1) {
+    if (pastedData.indexOf("E") > -1) {
         e.stopPropagation();
         e.preventDefault();
     }
 
-    if (pastedData.indexOf('-') > -1) {
+    if (pastedData.indexOf("-") > -1) {
         e.stopPropagation();
         e.preventDefault();
     }

@@ -146,6 +146,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CandyShopHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,15 @@
     <Content Include="fonts\roboto\Roboto-Thin.woff2" />
     <None Include="Properties\PublishProfiles\Homolog.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Imagens\fotoProduto.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagens\fotoUsuario.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagens\retirado.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Js\Ajax\AjaxCompra.js" />
     <Content Include="Js\Ajax\AjaxPagamento.js" />
     <Content Include="Js\Ajax\AjaxProduto.js" />
@@ -243,7 +253,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Imagens\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -11,11 +11,13 @@ namespace CandyShop.Web.Controllers
     {
         private readonly IProdutoApplication _appProduto;
         private readonly IUsuarioApplication _appUsuario;
+        private readonly string _pathProduto;
 
         public HomeController(IProdutoApplication produto, IUsuarioApplication usuario)
         {
             _appProduto = produto;
             _appUsuario = usuario;
+            _pathProduto = "Imagens/Produtos";
         }
 
         public ActionResult NavBar()
@@ -37,7 +39,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro " + response.ContentAsString.First());
 
-            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
+            TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
         }
 
@@ -47,7 +49,8 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
-            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
+            ViewBag.Produto = nome;
+            TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
         }
 
@@ -57,7 +60,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
-            TempData["caminhoImagensProdutos"] = "Imagens/Produtos";
+            TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
         }
 

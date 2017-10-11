@@ -1,11 +1,9 @@
-﻿using CandyShop.Core.Services.Usuario.Dto;
-
-namespace CandyShop.Core.Services.Usuario
+﻿namespace CandyShop.Core.Services.Usuario
 {
     public interface IUsuarioService
     {
-        void InserirUsuario(UsuarioDto usuario);
-        void EditarUsuario(UsuarioDto usuario);
-        int VerificaLogin(UsuarioDto usuario);
+        void InserirUsuario(Usuario usuario);
+        void EditarUsuario(Usuario usuario);
+        int VerificaLogin(Usuario usuario);
     }
 }

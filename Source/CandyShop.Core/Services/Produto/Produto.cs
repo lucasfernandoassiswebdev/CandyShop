@@ -1,6 +1,6 @@
-﻿namespace CandyShop.Core.Services.Produto.Dto
+﻿namespace CandyShop.Core.Services.Produto
 {
-    public class ProdutoDto
+    public class Produto
     {
         public int IdProduto { get; set; }
         public string NomeProduto { get; set; }

@@ -1,6 +1,6 @@
-﻿namespace CandyShop.Core.Services.Usuario.Dto
+﻿namespace CandyShop.Core.Services.Usuario
 {
-    public class UsuarioDto
+    public class Usuario
     {
         public string Cpf { get; set; }
         public string NomeUsuario { get; set; }

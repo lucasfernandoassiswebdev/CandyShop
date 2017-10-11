@@ -19,6 +19,7 @@ namespace CandyShop.Application
         private string Json { get; }
         public HttpStatusCode Status { get; }
 
+        // Essas linhas desserializam os objetos retornados da API(JSON -> objeto c#)
         public T Content => JsonConvert.DeserializeObject<T>(Json);
         public string ContentAsString => JsonConvert.DeserializeObject<string>(Json);
     }
