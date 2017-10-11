@@ -18,14 +18,7 @@
         $("#modalLogin").modal("close");
         $("#modalQuantidade").modal("close");
         $("#modalEditarQuantidade").modal("close");
-        $("#trocaSenha").modal("close");        
-    });
-
-    //editando a quantidade dos itens no carrinho
-    $("#editarQuantidade").click(function () {
-        $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
-            .text("Quantidade: " + $("#quantidadeEdit").val())
-            .attr("data-Quantidade", $("#quantidadeEdit").val());
+        $("#trocaSenha").modal("close");
     });
 });
 

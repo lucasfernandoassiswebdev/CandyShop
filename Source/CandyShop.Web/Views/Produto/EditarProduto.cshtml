@@ -7,7 +7,6 @@
 }
 
 <link rel="stylesheet" type="text/css" href="~/Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
-<link rel="stylesheet" type="text/css" href="~Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
 
 <script type="text/javascript" src="~/Js/Produto/scriptsEditarProduto.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="~Js/plugins/jquery.maskMoney.js"></script>
@@ -40,32 +39,36 @@
                 @{ var nomeA = @Model.IdProduto + "_A.jpg";}
                 @{ var nomeB = @Model.IdProduto + "_B.jpg";}
                 @{ var nomeC = @Model.IdProduto + "_C.jpg";}
-                <div class="center" style="display: flex">
-                    <div>
-                        <label for="fotoProduto1">
-                            <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@Html.UrlContent(TempData["caminhoImagensProdutos"], nomeA)"alt="imagem não disponível :(" />
-                        </label>
-                        <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                        <a class="btn" id="removerImagem1" style="margin-right:50px"><i class="material-icons left">block</i>Remover</a>
-                    </div>
 
-                    <div>
-                        <label for="fotoProduto2">
-                            <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@Html.UrlContent(TempData["caminhoImagensProdutos"], nomeB)" alt="imagem não disponível :(" />
-                        </label>
-                        <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                        <a class="btn" id="removerImagem2"><i class="material-icons left">block</i>Remover</a>
+                <div class="center">
+                    <div class="Imagens" style="display: flex">
+                        <div>
+                            <label for="fotoProduto1">
+                                <img id="imagem1" style="margin: 0 auto" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                            </label>
+                            <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                            <a class="btn botaoRemover" id="removerImagem1"><i class="material-icons left">block</i>Remover</a>
+                        </div>
+
+                        <div>
+                            <label for="fotoProduto2">
+                                <img id="imagem2" style="margin: 0 auto" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeB?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                            </label>
+                            <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                            <a class="btn botaoRemover" id="removerImagem2"><i class="material-icons left">block</i>Remover</a>
+                        </div>
+
+                        <div>
+                            <label for="fotoProduto3">
+                                <img id="imagem3" style="margin: 0 auto" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeC?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                            </label>
+                            <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                            <a class="btn botaoRemover" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
+                        </div>
                     </div>
-                    <div>
-                        <label for="fotoProduto3">
-                            <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@Html.UrlContent(TempData["caminhoImagensProdutos"], nomeC)" alt="imagem não disponível :(" />
-                        </label>
-                        <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                        <a class="btn" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
-                    </div>
-                    </div>
+                </div>
             </div>
-            
+
             <div class="row">
                 <div class="input-field col s12">
                     <input placeholder="Placeholder" id="IdProduto" name="IdProduto" type="text" class="validate" required="" value="@Model.IdProduto" disabled>
