@@ -4807,13 +4807,14 @@ small {
 #toast-container {
     display: block;
     position: fixed;
-    z-index: 10000
+    z-index: 10000;
 }
 
 @media only screen and (max-width: 600px) {
     #toast-container {
         min-width: 100%;
-        bottom: 0%
+        bottom: 10%
+
     }
 }
 
@@ -4829,7 +4830,8 @@ small {
     #toast-container {
         top: 10%;
         right: 7%;
-        max-width: 86%
+        max-width: 86%;
+        bottom: 10%;
     }
 }
 
