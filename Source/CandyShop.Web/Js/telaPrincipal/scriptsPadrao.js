@@ -197,6 +197,14 @@ $(document).ready(function () {
                                         localStorage.removeItem("listaProdutos");
                                         localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
                                         li.remove();
+
+                                        // Recalculando o total
+                                        totalCompra = 0;
+                                        listaProdutos.forEach(function (produto) {
+                                            var precoCorreto = produto.Preco.replace(",", ".");
+                                            totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
+                                        });
+                                        $("#totalCompra").text("R$ " + totalCompra);
                                     })
                             ]
                         }),
@@ -325,7 +333,7 @@ $(document).ready(function () {
         totalCompra = 0;
         produtos.forEach(function (produto) {
             var precoCorreto = produto.Preco.replace(",", ".");
-            totalCompra += precoCorreto;
+            totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
         });
         $("#totalCompra").text("R$ " + totalCompra);
     });
@@ -387,7 +395,7 @@ $(document).ready(function () {
     });
 
     // Exibindo a quantidade atualmente disponível quando o usuário vai editar o item
-    $("body").on("click",".iconeEditar",function () {
+    $("body").on("click", ".iconeEditar", function () {
         $("#quantidadeEdit").val("");
         // Exibindo a quantidade disponível em estoque no modal de edição do carrinho
         $("#estoqueEdit").html("Quantidade disponível : " + $(this).attr("data-quantidadedisponivel") + " itens no estoque");
