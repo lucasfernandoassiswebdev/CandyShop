@@ -3,7 +3,7 @@
 //e do nosso ego e auto-estima
 //(no fundo ele ainda tem coração, mas gosta de pinto)
 
-var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id;
+var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id, totalCompra = 0;
 
 $(document).ready(function () {
     //pesquisa por nome é feita quando se aperta a tecla "enter" na barra de pesquisa
@@ -132,7 +132,9 @@ $(document).ready(function () {
                 "class": "collection-item avatar"
             }));
             i++;
+            totalCompra += parseInt(produto.Quantidade) * parseFloat(produto.Preco);
         });
+        $("#totalCompra").text("R$ " + parseFloat(totalCompra));
     }
 
     //adicionando os itens no carrinho
@@ -146,7 +148,8 @@ $(document).ready(function () {
             Id: Id,
             Nome: nome,
             Quantidade: quantidade,
-            Imagem: imagem
+            Imagem: imagem,
+            Preco: preco
         }
 
         if (listaProdutos.filter(function (v) { return v.Id == produto.Id }).length) {
@@ -186,15 +189,15 @@ $(document).ready(function () {
                                         html: "delete",
                                         "class": "small material-icons"
                                     }).on("click", function () {
-                                    var li = $(this).closest("li");
-                                    var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
-                                    listaProdutos = listaProdutos.filter(function (item) {
-                                        return item.Id !== li.find("[data-Id]").attr("data-Id");
-                                    });
-                                    localStorage.removeItem("listaProdutos");
-                                    localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
-                                    li.remove();
-                                })
+                                        var li = $(this).closest("li");
+                                        var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
+                                        listaProdutos = listaProdutos.filter(function (item) {
+                                            return item.Id !== li.find("[data-Id]").attr("data-Id");
+                                        });
+                                        localStorage.removeItem("listaProdutos");
+                                        localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+                                        li.remove();
+                                    })
                             ]
                         }),
                     $("<a>", {
@@ -217,6 +220,12 @@ $(document).ready(function () {
             }));
         i++;
 
+        // Edita total compra
+        var precoConcertado = preco.replace(",",".");
+        totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
+        $("#totalCompra").text("R$ " + totalCompra);
+
+        // Adiciona item, remove localStorage e seta de novo com a lista atualizada
         quantidade = 0;
         $("#adicionaCarrinho").attr("disabled", "");
         localStorage.removeItem("listaProdutos");
@@ -292,6 +301,7 @@ $(document).ready(function () {
             $("#adicionaCarrinho").removeAttr("disabled");
         }
     });
+
     //texto colado no input
     $("#quantidade").on("paste", function () {
         quantidade = $("#quantidade").val();
@@ -311,12 +321,19 @@ $(document).ready(function () {
 
         var produtos = JSON.parse(localStorage.getItem("listaProdutos"));
         var produto = produtos[$("#modalEditarQuantidade").data("index")];
-        console.log(produto);
         produto.Quantidade = $("#quantidadeEdit").val();
         produtos[$("#modalEditarQuantidade").data("index")] = produto;
         localStorage.removeItem("listaProdutos");
         localStorage.setItem("listaProdutos", JSON.stringify(produtos));
+
+        totalCompra = 0;
+        produtos.forEach(function (produto) {
+            var precoCorreto = produto.Preco.replace(",", ".");
+            totalCompra += precoCorreto;
+        });
+        $("#totalCompra").text("R$ " + totalCompra);
     });
+
     //desabilitando no modal de editar a quantidade
     $("#quantidadeEdit").on("blur", function () {
         quantidade = $("#quantidadeEdit").val();
@@ -326,6 +343,7 @@ $(document).ready(function () {
             $("#editarQuantidade").removeAttr("disabled");
         }
     });
+
     $("#quantidadeEdit").keydown(function () {
         quantidade = $("#quantidadeEdit").val();
         if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
@@ -334,6 +352,7 @@ $(document).ready(function () {
             $("#editarQuantidade").removeAttr("disabled");
         }
     });
+
     $("#quantidadeEdit").on("paste", function () {
         quantidade = $("#quantidadeEdit").val();
         if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
@@ -368,6 +387,9 @@ $(document).ready(function () {
             localStorage.removeItem("listaProdutos");
             listaProdutos = [];
         }
+
+        totalCompra = 0;
+        $("#totalCompra").text("R$ " + totalCompra);
     });
 });
 
