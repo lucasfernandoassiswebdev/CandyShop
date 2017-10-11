@@ -215,8 +215,7 @@ function mcpf(v) {
                         <div>
                             <div class="input-field">
                                 <input id="search" type="search" autocomplete="off">
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>                                
                             </div>
                         </div>
                     </div>
@@ -233,7 +232,7 @@ function mcpf(v) {
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                    <li><i class="material-icons">book</i>@Html.ActionLink("Administração", "Index", "Admin")</li>
+                    <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
                     <li class="divider"></li>
                 }
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
@@ -243,7 +242,6 @@ function mcpf(v) {
             <div class="pesquisaMobile">
                 <div class="input-field">
                     <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required autocomplete="off">
-                    <i class="material-icons black-text">close</i>
                 </div>
             </div>
         </div>
@@ -269,7 +267,6 @@ else
                             <div class="input-field">
                                 <input id="search" type="search" required autocomplete="off">
                                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons closed">close</i>
                             </div>
                         </div>
                     </div>
@@ -284,7 +281,6 @@ else
             <div class="pesquisaMobile">
                 <div class="input-field">
                     <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required autocomplete="off">
-                    <i class="material-icons black-text">close</i>
                 </div>
             </div>
         </div>

@@ -7,12 +7,13 @@ var imagem, preco, nome, imagem, quantidade = 0, quantidadeDisponivel, Id;
 
 $(document).ready(function () {
     //pesquisa por nome é feita quando se aperta a tecla "enter" na barra de pesquisa
-    $("#search").keydown(function (e) {
+    $(".input-field #search").keydown(function (e) {        
         if (e.which === 13) {
-            AjaxJsShop.listarProdutoPorNome($("#search").val());
+            AjaxJsShop.listarProdutoPorNome($(this).val());
+            $(this).val("");
         }
     });
-
+   
     //limpando os inputs
     $(".modal-close").click(function () {
         $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha").val("");

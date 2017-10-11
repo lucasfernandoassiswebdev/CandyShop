@@ -32,7 +32,7 @@ var AjaxJsCompra = (function ($) {
                     .done(function (data) {
                         $('body').slideUp(function () {
                             $('body').hide().html(data).slideDown(function () {
-                                Materialize.toast(message, 3000);
+                                Materialize.toast(message, 10000);
                             });
                         });
                     }).fail(function (xhr) {
