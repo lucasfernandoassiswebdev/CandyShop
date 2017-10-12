@@ -55,7 +55,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#novaSenha").onpaste(function () {        
+    $("#novaSenha").on('paste', function () {        
         if ($(this).val().length > 12 || $(this).val().length <= 0) {
             Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
             $(this).focus();
