@@ -1,6 +1,5 @@
 ﻿using CandyShop.Application.ViewModels;
 using System.Collections.Generic;
-using System.Net.Http;
 
 namespace CandyShop.Application.Interfaces
 {
@@ -16,6 +15,6 @@ namespace CandyShop.Application.Interfaces
         Response<IEnumerable<UsuarioViewModel>> ListarInativos();
         Response<IEnumerable<UsuarioViewModel>> ProcurarUsuario(string nome);
         Response<decimal> VerificaCreditoLoja();
-        HttpResponseMessage VerificaLogin(UsuarioViewModel usuario);
+        Response<string> VerificaLogin(UsuarioViewModel usuario);
     }
 }

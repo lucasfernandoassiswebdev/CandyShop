@@ -35,10 +35,12 @@ namespace CandyShop.WebAPI.Controllers
 
             usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
             var user = _usuarioRepository.SelecionarUsuario(usuario.Cpf);
-            if (user != null)
-            {
+
+            if (user == null || user.Ativo == "I")
+                return Content(HttpStatusCode.BadRequest, "O usuário não existe ou foi desativado");
+
+            if (user.Ativo != "I")
                 return Ok(_usuarioService.VerificaLogin(usuario));
-            }
 
             return BadRequest();
         }
