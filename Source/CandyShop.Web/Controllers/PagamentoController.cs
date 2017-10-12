@@ -2,7 +2,6 @@
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
 using System;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -18,19 +17,12 @@ namespace CandyShop.Web.Controllers
             _appUsuario = usuario;
         }
 
-
         #region Telas
         [AdminFilterResult]
         public ActionResult Index()
         {
             return View();
-        }
-
-        [AdminFilterResult]
-        public ActionResult Detalhes()
-        {
-            return View();
-        }
+        }       
 
         [UserFilterResult]
         public ActionResult Inserir()
@@ -58,7 +50,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 0;
             var response = _appPagamento.ListarPagamentos();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -70,7 +62,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appPagamento.ListarPagamentos(cpf);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -81,7 +73,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appPagamento.ListarPagamentosSemana();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -92,7 +84,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 0;
             var response = _appPagamento.ListarPagamentos(mes);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -103,7 +95,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appPagamento.ListarPagamentosDia();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -123,7 +115,7 @@ namespace CandyShop.Web.Controllers
                     return Content("Erro ao atualizar saldo, " + response.ContentAsString);
                 Session["saldoUsuario"] = $"{res.Content.SaldoUsuario:C}";
             }
-            else return Content("Erro " + response.ContentAsString);
+            else return Content("Erro. " + response.ContentAsString);
             return Content("Pagamento realizado com sucesso!!");
         }
         [AdminFilterResult]
@@ -132,13 +124,13 @@ namespace CandyShop.Web.Controllers
             var response = _appPagamento.EditarPagamento(pagamento);
 
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
 
             if (Session["Login"].ToString().Equals(pagamento.Usuario.Cpf))
             {
                 var user = _appUsuario.SelecionarUsuario(pagamento.Usuario.Cpf);
                 if (user.Status != HttpStatusCode.OK)
-                    return Content("Erro ao atualizar seu próprio saldo");
+                    return Content("Erro ao atualizar seu saldo");
                 Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
             }
 

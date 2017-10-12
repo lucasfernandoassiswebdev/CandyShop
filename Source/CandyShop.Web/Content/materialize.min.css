@@ -5993,9 +5993,9 @@ input[type=tel]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=search]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid rgb(255, 0, 0);
-    -webkit-box-shadow: 0 1px 0 0 rgb(255, 0, 0);
-    box-shadow: 0 1px 0 0 rgb(255, 0, 0)
+    border-bottom: 1px solid brown;
+    -webkit-box-shadow: 0 1px 0 0 brown;
+    box-shadow: 0 1px 0 0 brown
 }
 
 input:not([type]):focus:not([readonly])+label,
@@ -7317,7 +7317,7 @@ input[type=range]:focus::-ms-fill-upper {
     float: left;
     height: 48px;
     line-height: 48px;
-    margin: 0 32px 0 0;
+    margin: 0 21px 0 -5px;
     width: 24px;
     color: black
 }

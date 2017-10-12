@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Web.Filters;
+using System.Net;
 using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
@@ -16,7 +17,11 @@ namespace CandyShop.Web.Controllers
         [AdminFilterResult]
         public ActionResult Index()
         {
-            ViewBag.SaldoAtual = "Saldo atual da loja: R$" + _appUsuario.VerificaCreditoLoja().Content;
+            var response = _appUsuario.VerificaCreditoLoja();
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro ao calcular saldo da lojinha. {response.ContentAsString}");
+
+            ViewBag.SaldoAtual = "Saldo atual da loja: R$" + response.Content;
             return View();
         }
     }

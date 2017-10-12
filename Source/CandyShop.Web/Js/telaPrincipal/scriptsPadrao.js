@@ -22,8 +22,9 @@ $(document).ready(function () {
 
     // Limpando os inputs
     $(".modal-close").not($("#editarQuantidade")).click(function () {
-        $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha").val("");
+        $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha, #cpf, #senha").val("");
         $("#novaSenha").removeAttr("disabled");
+        $("#logar").attr('disabled', 'disabled');
     });
 
     $(".tooltipped").tooltip({ delay: 50 });
@@ -277,7 +278,7 @@ $(document).ready(function () {
         ready: function () {
             $("#cpf").focus();
         }
-    });
+    });    
 
     // Colocando foco no modal trocaSenha
     $("#trocaSenha").modal({
@@ -285,6 +286,19 @@ $(document).ready(function () {
             $("#novaSenha").focus();
         }
     });
+
+    //desabilitar botao de login se campo de cpf estiver vazio
+    $("#senha").blur(function() {
+        if ($(this).val().length > 0 && $('#cpf').val().length > 0) {
+            $("#logar").removeAttr('disabled');
+        }
+    });
+    $("#cpf").blur(function () {
+        if ($(this).val().length > 0 && $('#senha').val().length > 0) {
+            $("#logar").removeAttr('disabled');
+        }
+    });
+
 
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
     $("#quantidade").keyup(function () {

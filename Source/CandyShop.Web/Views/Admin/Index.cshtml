@@ -16,7 +16,8 @@
             desativarUsuarioConfirmado: '@Url.Action("DesativarUsuario", "Usuario")',
             listarUsuarioInativo: '@Url.Action("ListarInativos", "Usuario")',
             listarUsuarioEmDivida: '@Url.Action("ListarUsuariosEmDivida", "Usuario")',
-            listarUsuarioPorNome: '@Url.Action("ProcurarUsuario", "Usuario")'
+            listarUsuarioPorNome: '@Url.Action("ProcurarUsuario", "Usuario")',
+            logOff: '@Url.Action("Deslogar", "Usuario")'
         });
 
         AjaxJsProduto.init({
@@ -107,7 +108,7 @@
         <a href='@Url.Action("NavBar", "Home")' title="Voltar para Loja" ><h4 class="center"  style="cursor: pointer;">Candy <font class="pink-text">Shop</font></h4></a>
     </li>
     <li class="divider"></li>
-    <li><a class="dropdown-button white-text" title="Você está na área administrativa" href="#!"><i class="material-icons left white-text">account_box</i>ADMINISTRADOR</a></li>
+    <li><a class="dropdown-button white-text" title="Você está na área administrativa" href="#!"><i class="material-icons left white-text adm">account_box</i>ADMINISTRADOR</a></li>
     <li>
         <div class="divider"></div>
     </li>
@@ -167,10 +168,11 @@
         </ul>
     </li>
     <li><a class="dropdown-button white-text closeMenu" href="#!" onclick="AjaxJsShop.mostraSaldo()"><i class="material-icons left white-text small">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a class="dropdown-button white-text active" title="Voltar para Loja" href='@Url.Action("NavBar", "Home")'><i class="material-icons left white-text small">power_settings_new</i>VOLTAR PARA LOJA</a></li>
+    
+    <li><div class="divider"></div></li>
+    <li><a class="dropdown-button white-text active" title="Voltar para Loja" href='@Url.Action("NavBar", "Home")'><i class="material-icons left white-text small">call_made</i>VOLTAR PARA LOJA</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="dropdown-button white-text active" title="Fazer logoff" href='#!' onclick="AjaxJsUsuario.logOff()"><i class="material-icons left white-text small">power_settings_new</i>SAIR</a></li>
 </ul>
 
 <a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse pink-text"  style="float: left; width: 40px; height: 40px; margin-top: 0px; margin-left: 5px; overflow: hidden;"><i class="material-icons" style ="font-size: 40px">menu</i></a>
