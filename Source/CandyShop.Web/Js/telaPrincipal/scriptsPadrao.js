@@ -29,6 +29,8 @@ $(document).ready(function () {
     $(".tooltipped").tooltip({ delay: 50 });
     $(".button-collapse").sideNav();
 
+    /* Quando o botão de adicionar um item no carrinho é pressionado, as variáveis que montarão
+       o objeto do produto são preenchidas */
     $("#DivGrid").on("click", ".btn-floating", function () {
         preco = $(this).attr("data-Preco");
         nome = $(this).attr("data-Nome");
@@ -56,7 +58,7 @@ $(document).ready(function () {
             $("#TrocarSenha").removeAttr("disabled");
         else {
             $("#TrocarSenha").attr("disabled", "disabled");
-            Materialize.toast("As senhas não conferem!", 5000);
+            Materialize.toast("As senhas não conferem!", 4000);
         }
         if ($(this).val() == "")
             $("#novaSenha").removeAttr("disabled");
@@ -99,7 +101,7 @@ $(document).ready(function () {
                         }),
                     $("<a>", {
                         href: "#!",
-                        "class": "modal-trigger secondary-content",
+                        "class": "secondary-content",
                         style: "margin-top:10px",
                         html: [
                             $("<i>", {
@@ -107,7 +109,6 @@ $(document).ready(function () {
                                 "class": "small material-icons",
                                 "id": i
                             }).click(function () {
-                                //$("#modalQuantidade").data("index", $(this).closest("li").index());                                
                                 var li = $(this).closest("li");
                                 var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
                                 listaProdutos = listaProdutos.filter(function (item) {
@@ -149,7 +150,7 @@ $(document).ready(function () {
         $("#confirmarCompra").removeAttr("disabled");
         var i = 1;
 
-        var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
+        var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.getItem("listaProdutos")) : [];
 
         var produto = {
             Id: Id,
@@ -161,7 +162,7 @@ $(document).ready(function () {
         };
 
         if (listaProdutos.filter(function (v) { return v.Id == produto.Id; }).length) {
-            Materialize.toast("Produto já esta no carrinho");
+            Materialize.toast("Produto já esta no carrinho", 2000);
             return;
         }
         else
@@ -188,7 +189,7 @@ $(document).ready(function () {
                     $("<a>",
                         {
                             href: "#!",
-                            "class": "modal-trigger secondary-content",
+                            "class": "secondary-content",
                             style: "margin-top:10px",
                             html: [
                                 $("<i>",
@@ -197,7 +198,7 @@ $(document).ready(function () {
                                         "class": "small material-icons"
                                     }).click(function () {
                                         var li = $(this).closest("li");
-                                        var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
+                                        var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.getItem("listaProdutos")) : [];
                                         listaProdutos = listaProdutos.filter(function (item) {
                                             return item.Id !== li.find("[data-Id]").attr("data-Id");
                                         });
@@ -236,6 +237,8 @@ $(document).ready(function () {
         i++;
 
         // Edita total compra
+        /* Como o valor vem na lista do localStorage com "," ao invés de ".", a a troca deve ser feita
+           para que a conversão para double funcione */
         var precoConcertado = preco.replace(",", ".");
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
         $("#totalCompra").text("R$ " + totalCompra);
@@ -287,15 +290,7 @@ $(document).ready(function () {
 
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
     $("#quantidade").keyup(function () {
-        quantidade = $("#quantidade").val();
-        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
-            $("#adicionaCarrinho").attr("disabled", "disabled");
-        else
-            $("#adicionaCarrinho").removeAttr("disabled");
-    });
-
-    // Onclick dentro da modal
-    $("#modalQuantidade").click(function () {
+        FilterInput(event);
         quantidade = $("#quantidade").val();
         if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
             $("#adicionaCarrinho").attr("disabled", "disabled");
@@ -315,7 +310,17 @@ $(document).ready(function () {
     // Texto colado no input
     $("#quantidade").on("paste", function () {
         quantidade = $("#quantidade").val();
+        handlePaste(event);
         if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel)
+            $("#adicionaCarrinho").attr("disabled", "disabled");
+        else
+            $("#adicionaCarrinho").removeAttr("disabled");
+    });
+
+    // Onclick dentro da modal
+    $("#modalQuantidade").click(function () {
+        quantidade = $("#quantidade").val();
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
             $("#adicionaCarrinho").attr("disabled", "disabled");
         else
             $("#adicionaCarrinho").removeAttr("disabled");
@@ -354,15 +359,18 @@ $(document).ready(function () {
             $("#editarQuantidade").removeAttr("disabled");
     });
 
-    $("#quantidadeEdit").keydown(function () {
+    $("#quantidadeEdit").keyup(function () {
+        FilterInput(event);
         quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel)
+        console.log(quantidade + ' quantidade disponível: ' + quantidadeDisponivel);
+        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
             $("#editarQuantidade").attr("disabled", "disabled");
         else
             $("#editarQuantidade").removeAttr("disabled");
     });
 
     $("#quantidadeEdit").on("paste", function () {
+        handlePaste(event);
         quantidade = $("#quantidadeEdit").val();
         if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
             $(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
@@ -392,7 +400,7 @@ $(document).ready(function () {
             }));
 
         // Se o localStorage existir ele será apagado aqui
-        if (localStorage.getItem("listaProdutos") != null) {
+        if (localStorage.getItem("listaProdutos") !== null) {
             localStorage.removeItem("listaProdutos");
         }
 
@@ -403,9 +411,41 @@ $(document).ready(function () {
 
     // Exibindo a quantidade atualmente disponível quando o usuário vai editar o item
     $("body").on("click", ".iconeEditar", function () {
+        quantidadeDisponivel = $(this).attr("data-quantidadedisponivel");
         $("#quantidadeEdit").val("");
         // Exibindo a quantidade disponível em estoque no modal de edição do carrinho
         $("#estoqueEdit").html("Quantidade disponível : " + $(this).attr("data-quantidadedisponivel") + " itens no estoque");
+    });
+
+    /* Função que é executada quando a tecla enter é pressionada no modal de quantidade 
+       validando se o valor digitado pode ser inserido no carrinho */
+    $("#quantidade").keydown(function (e) {
+        if (e.which === 13) {
+            mNumbers($("#quantidade").val());
+            var qtde = $("#quantidade").val();
+            if (parseInt(qtde) <= quantidadeDisponivel && qtde > 0) {
+                $("#adicionaCarrinho").trigger("click");
+                $("#modalQuantidade").modal("close");
+                $("#modalCarrinho").modal("open");
+            } else {
+                Materialize.toast("Quantidade indisponível para compra!", 2000);
+                return;
+            }
+        }
+    });
+
+    $("#quantidadeEdit").keydown(function (e) {
+        if (e.which === 13) {
+            mNumbers($("#quantidadeEdit").val());
+            var qtde = $("#quantidadeEdit").val();
+            if (qtde <= quantidadeDisponivel && qtde > 0) {
+                $("#modalEditarQuantidade").modal("close");
+                $("#editarQuantidade").trigger("click");
+            } else {
+                Materialize.toast("Quantidade indisponível para compra!", 2000);
+                return;
+            }
+        }
     });
 });
 
@@ -413,4 +453,30 @@ $(document).ready(function () {
 function mNumbers(v) {
     v = v.replace(/\D/g, "");
     $("#quantidade, #quantidadeEdit").val(v);
+}
+
+function FilterInput(event) {
+    var keyCode = ("which" in event) ? event.which : event.keyCode;
+    var isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109 || keyCode == 190);
+    return !isNotWanted;
+}
+
+function handlePaste(e) {
+    var clipboardData = e.clipboardData || window.clipboardData;
+    var pastedData = clipboardData.getData("Text").toUpperCase();
+
+    if (pastedData.indexOf("E") > -1) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    if (pastedData.indexOf("-") > -1) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    if (pastedData.indexOf(".") > -1) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
 }
