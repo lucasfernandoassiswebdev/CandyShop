@@ -5,12 +5,7 @@ $(document).ready(function () {
     $(".tooltipped").tooltip({ delay: 50 });
 });
 
-//cadastrando o produto
-$(".botaoEditar").on("click", function () {
-    encodeImageFileAsURL(AjaxJsProduto.concluirEdicaoProduto);
-});
-
-function encodeImageFileAsURL(callback) {
+function encodeImageFileAsURL(callback, tela) {
     var base64A, base64B, base64C;
     var imagem1 = document.getElementById("fotoProduto1").files;
     var imagem2 = document.getElementById("fotoProduto2").files;
@@ -52,13 +47,12 @@ function encodeImageFileAsURL(callback) {
             fileReaderC.onload = function (fileLoadedEvent) {
                 base64C = fileLoadedEvent.target.result;
                 if (typeof callback === "function") {
-                    console.log(base64A,base64B,base64C);
-                    callback(base64A, base64B, base64C);
+                    callback(base64A, base64B, base64C, removerImagemA, removerImagemB, removerImagemC, tela);
                 }
             };
             fileReaderC.readAsDataURL(fileToLoadC);
         } else
-            callback(base64A, base64B, base64C, removerImagemA, removerImagemB, removerImagemC);
+            callback(base64A, base64B, base64C, removerImagemA, removerImagemB, removerImagemC, tela);
     }
 }
 

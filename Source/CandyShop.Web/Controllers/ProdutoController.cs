@@ -53,6 +53,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro" + response.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
+            ViewBag.Tela = response.Content.Ativo;
             TempData["caminhoImagensProdutos"] = _pathProduto;
             return View(response.Content);
         }

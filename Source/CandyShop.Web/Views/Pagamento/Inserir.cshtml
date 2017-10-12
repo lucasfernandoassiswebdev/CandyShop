@@ -55,6 +55,11 @@
             e.stopPropagation();
             e.preventDefault();
         }
+
+        if (pastedData.indexOf("-") > -1) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
     }
 
     $("#valorPago").keyup(function () {

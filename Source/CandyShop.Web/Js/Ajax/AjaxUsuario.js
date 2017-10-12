@@ -29,7 +29,7 @@
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
-    var concluirEdicaoUsuario = function(imgBase64,removerImagem) {
+    var concluirEdicaoUsuario = function(imgBase64,removerImagem, tela) {
         var usuario = {
             Cpf: $('#Cpf').val(),
             NomeUsuario: $('#Nome').val(),
@@ -40,7 +40,7 @@
             Classificacao: $('#Classificacao').val(),
             RemoverImagem: removerImagem
         };
-        concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
+        concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, tela);
     };
     var desativarUsuario = function (cpf, telaAnterior) {
         var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
