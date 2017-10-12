@@ -72,7 +72,7 @@
                             @if (Session["TipoDeLogin"].ToString().Equals("Admin"))
                             {
                                 <td>
-                                    <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsPagamento.editarPagamento(@item.IdPagamento);"><i class="material-icons">edit</i></a>
+                                    <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" title="Editar" onclick="AjaxJsPagamento.editarPagamento(@item.IdPagamento);"><i class="material-icons">edit</i></a>
                                 </td>
                             }
                         </tr>

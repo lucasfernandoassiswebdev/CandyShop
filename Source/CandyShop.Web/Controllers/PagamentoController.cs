@@ -114,11 +114,16 @@ namespace CandyShop.Web.Controllers
         public ActionResult InserirPagamento(PagamentoViewModel pagamento)
         {
             pagamento.Usuario = new UsuarioViewModel { Cpf = Session["login"].ToString() };
-            Session["saldoUsuario"] = Convert.ToDecimal(Session["saldoUsuario"].ToString()) + pagamento.ValorPagamento;
 
             var response = _appPagamento.InserirPagamento(pagamento);
-            if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+            if (response.Status == HttpStatusCode.OK)
+            {
+                var res = _appUsuario.SelecionarUsuario(Session["login"].ToString());
+                if (response.Status != HttpStatusCode.OK)
+                    return Content("Erro ao atualizar saldo, " + response.ContentAsString);
+                Session["saldoUsuario"] = $"{res.Content.SaldoUsuario:C}";
+            }
+            else return Content("Erro " + response.ContentAsString);
             return Content("Pagamento realizado com sucesso!!");
         }
         [AdminFilterResult]
@@ -134,7 +139,7 @@ namespace CandyShop.Web.Controllers
                 var user = _appUsuario.SelecionarUsuario(pagamento.Usuario.Cpf);
                 if (user.Status != HttpStatusCode.OK)
                     return Content("Erro ao atualizar seu próprio saldo");
-                Session["saldoUsuario"] = user.Content.SaldoUsuario;
+                Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
             }
 
             return Content("Pagamento editado com sucesso!!");

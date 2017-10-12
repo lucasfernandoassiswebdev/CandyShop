@@ -10,7 +10,7 @@
 <div class="container ">
     <h2 class="center pink-text" style="font-weight: bold">Efetuar Pagamento</h2>
     <div class="row center">
-        <form class="col s12">
+        <div class="col s12">
             <div class="row">
                 <div class="input-field col s6 push-l3 ajustes">
                     <input id="valorPago" name="valorPago" type="text" class="validate" required onkeydown="return FilterInput(event)" onpaste="handlePaste(event)">
@@ -21,7 +21,7 @@
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons left">arrow_back</i>Voltar</a>
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 

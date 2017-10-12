@@ -100,14 +100,14 @@ $(document).ready(function () {
                     $("<a>", {
                         href: "#!",
                         "class": "modal-trigger secondary-content",
+                        title: "Remover item",
                         style: "margin-top:10px",
                         html: [
                             $("<i>", {
                                 html: "delete",
                                 "class": "small material-icons",
                                 "id": i
-                            }).click(function () {
-                                //$("#modalQuantidade").data("index", $(this).closest("li").index());                                
+                            }).click(function () {                            
                                 var li = $(this).closest("li");
                                 var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
                                 listaProdutos = listaProdutos.filter(function (item) {
@@ -122,6 +122,7 @@ $(document).ready(function () {
                     $("<a>", {
                         href: "#modalEditarQuantidade",
                         "class": "modal-trigger modal-close secondary-content iconeEditar",
+                        title: "Editar quantidade",
                         "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
                         style: "margin-right:34px;margin-top:10px",
                         html: [
@@ -141,7 +142,7 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseInt(produto.Quantidade) * parseFloat(precoCorreto);
         });
-        $("#totalCompra").text("R$ " + parseFloat(totalCompra));
+        $("#totalCompra").text("R$ " + parseFloat(totalCompra)).attr('title', 'Total da compra');
     }
 
     // Adicionando os itens no carrinho
@@ -238,7 +239,7 @@ $(document).ready(function () {
         // Edita total compra
         var precoConcertado = preco.replace(",", ".");
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
-        $("#totalCompra").text("R$ " + totalCompra);
+        $("#totalCompra").text("R$ " + totalCompra).attr('title', 'Total da compra');
 
         // Adiciona item, remove localStorage e seta de novo com a lista atualizada
         quantidade = 0;

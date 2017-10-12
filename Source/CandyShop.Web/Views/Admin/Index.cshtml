@@ -77,7 +77,7 @@
 <!--modal de pesquisa de usuários-->
 <div id="modalPesquisaUsuario" class="modal">
     <div class="modal-content">
-        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
         <h3 class="center pink-text">Nome do usuário</h3>
         <div>
             <input type="text" id="nomeUsuario" autocomplete="off" />
@@ -91,7 +91,7 @@
 <!--modal de pesquisa de produtos-->
 <div id="modalPesquisaProduto" class="modal">
     <div class="modal-content">
-        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
         <h3 class="center pink-text">Nome do produto:</h3>
         <div>
             <input type="text" id="nomeProduto" autocomplete="off" style="text-align:center"/>
@@ -104,10 +104,10 @@
 
 <ul id="slide-out" class="side-nav fixed brown darken-3">
     <li class="white-text">
-        <a href='@Url.Action("NavBar", "Home")'><h4 class="center" style="cursor: pointer;">Candy <font class="pink-text">Shop</font></h4></a>
+        <a href='@Url.Action("NavBar", "Home")' title="Voltar para Loja" ><h4 class="center"  style="cursor: pointer;">Candy <font class="pink-text">Shop</font></h4></a>
     </li>
     <li class="divider"></li>
-    <li><a class="dropdown-button white-text" href="#!"><i class="material-icons left white-text">account_box</i>ADMINISTRADOR</a></li>
+    <li><a class="dropdown-button white-text" title="Você está na área administrativa" href="#!"><i class="material-icons left white-text">account_box</i>ADMINISTRADOR</a></li>
     <li>
         <div class="divider"></div>
     </li>
@@ -170,7 +170,7 @@
     <li>
         <div class="divider"></div>
     </li>
-    <li><a class="dropdown-button white-text active" href='@Url.Action("NavBar", "Home")'><i class="material-icons left white-text small">power_settings_new</i>VOLTAR PARA LOJA</a></li>
+    <li><a class="dropdown-button white-text active" title="Voltar para Loja" href='@Url.Action("NavBar", "Home")'><i class="material-icons left white-text small">power_settings_new</i>VOLTAR PARA LOJA</a></li>
 </ul>
 
 <a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse pink-text"  style="float: left; width: 40px; height: 40px; margin-top: 0px; margin-left: 5px; overflow: hidden;"><i class="material-icons" style ="font-size: 40px">menu</i></a>

@@ -120,7 +120,7 @@ namespace CandyShop.Web.Controllers
                 if (totalCompra.Status != HttpStatusCode.OK)
                     return Content("Erro ao atualizar saldo" + totalCompra.ContentAsString);
 
-                Session["saldoUsuario"] = Convert.ToDecimal(Session["saldoUsuario"].ToString()) - totalCompra.Content.ValorCompra;
+                Session["saldoUsuario"] = $"{(Convert.ToDecimal(Session["saldoUsuario"].ToString()) - totalCompra.Content.ValorCompra):C)}";
                 TempData["LimparCarrinho"] = true;
                 return Content("Sua compra foi registrada com sucesso");
             }
