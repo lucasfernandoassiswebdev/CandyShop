@@ -39,7 +39,6 @@
             listarPagamentoSemana: '@Url.Action("ListarSemana", "Pagamento")',
             listarPagamentoMes: '@Url.Action("ListarMes", "Pagamento")',
             listarPagamentoDia: '@Url.Action("ListarDia", "Pagamento")',
-            detalhePagamento: '@Url.Action("Detalhes", "Pagamento")',
             editarPagamento: '@Url.Action("Editar", "Pagamento")',
             concluirEdicaoPagamento: '@Url.Action("EditarPagamento", "Pagamento")'
         });
@@ -60,6 +59,10 @@
             main: '@Url.Action("Listar", "Produto")'
         });
 
+        $(".modal").modal({
+            dismissible: false
+        });
+
         $("#modalPesquisaUsuario").modal({
             ready: function () {
                 $("#nomeUsuario").focus();
@@ -71,31 +74,41 @@
                 $("#nomeProduto").focus();
             }
         });
+
+        $("html,body").dblclick(function (e) {
+            if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") || $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant")) {
+                return false;
+            }
+
+            $("#modalPesquisaProduto").modal("close");
+            $("#modalPesquisaUsuario").modal("close");
+        });
     })
 </script>
+<script type="text/javascript" src="~/Js/telaPrincipal/scriptsMain.js"></script>
 <link rel="stylesheet" type="text/css" href="~/Content/Admin/indexAdmin.css?d=@DateTime.Now.Ticks">
 
 <!--modal de pesquisa de usuários-->
 <div id="modalPesquisaUsuario" class="modal">
     <div class="modal-content">
-        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
-        <h3 class="center pink-text">Nome do usuário</h3>
+        <font class="pink-text modal-close identQuant" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <h3 class="center pink-text identQuant">Nome do usuário</h3>
         <div>
-            <input type="text" id="nomeUsuario" autocomplete="off" />
+            <input type="text" class="identQuant" id="nomeUsuario" autocomplete="off" />
         </div>
     </div>
     <div class="modal-footer center">
-        <a href="#!" id="pesquisarUsuario" class="closeMenu btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
+        <a href="#!" id="pesquisarUsuario" class="identQuant closeMenu btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
     </div>
 </div>
 
 <!--modal de pesquisa de produtos-->
 <div id="modalPesquisaProduto" class="modal">
     <div class="modal-content">
-        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
-        <h3 class="center pink-text">Nome do produto:</h3>
+        <font class="pink-text modal-close identQuant" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <h3 class="center pink-text identQuant">Nome do produto:</h3>
         <div>
-            <input type="text" id="nomeProduto" autocomplete="off" style="text-align:center"/>
+            <input type="text" id="nomeProduto" class="identQuant" autocomplete="off" style="text-align:center"/>
         </div>
     </div>
     <div class="modal-footer center">
