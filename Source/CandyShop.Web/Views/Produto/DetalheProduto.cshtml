@@ -44,19 +44,12 @@
             </tr>
             <tr>
                 <td class="negrito">Ativo</td>
-@*                <td>@if (Model.Ativo == "A"){<text>Ativo</text>}else{<text>Inativo</text>}</td>*@
                 <td>@(Model.Ativo == "A" ? "Ativo" : "Inativo")</td>
             </tr>
             </tbody>
         </table>
-        
-        @if (ViewBag.telaAnterior.ToString().Equals("Produtos Ativos"))
-        {
-            voltar = "AjaxJsProduto.listaProduto()";
-        }
-        else
-        {
-            voltar = "AjaxJsProduto.listarInativos()";
+        @{
+            voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
         }
         <a class="waves-effect waves-light btn" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
     </div>

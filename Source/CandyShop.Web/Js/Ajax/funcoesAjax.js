@@ -1,26 +1,27 @@
 ﻿// Esse arquivo tem as funções genéricas encapsuladas que são usados nos outros arquivos
-// carrega a pagina de inicio
+// Carrega a pagina de inicio
 function main(endereco) {
-    // pega os dados da view recebida e a carrega na DivGrid
+    // Pega os dados da view recebida e a carrega na DivGrid
     $.get(endereco).done(function (data) {
-        // é aplicado um efeito de "cortina" nesse carregamento
+        // É aplicado um efeito de "cortina" nesse carregamento
         $("#DivGrid").slideUp(1000, function () {
-            // desce  a "cortina"  
-            $('#DivGrid').hide().html(data).fadeIn(1000);
+            // Desce  a "cortina"  
+            $("#DivGrid").hide().html(data).fadeIn(1000);
         });
-        // xhr é o erro que é retornado caso o get não tenha sucesso
+        // Xhr é o erro que é retornado caso o get não tenha sucesso
     }).fail(function (xhr) {
-        /* caso não tenha sido possível carregar a página, o erro
+        /* Caso não tenha sido possível carregar a página, o erro
            é exibido no console */
         console.log(xhr.responseText);
     });
 }
 
-//Função genérica para carregar a página de acordo com o endereço passado
-function chamaPagina(endereco) {    
+// Função genérica para carregar a página de acordo com o endereço passado
+function chamaPagina(endereco) {
+    console.log(endereco);
     $.get(endereco).done(function (data) {        
-        $('#DivGrid').slideUp(function () {            
-            $('#DivGrid').hide().html(data).slideDown(function() {                
+        $("#DivGrid").slideUp(function () {            
+            $("#DivGrid").hide().html(data).slideDown(function() {                
             });            
         });
     }).fail(function (xhr) {
@@ -30,8 +31,8 @@ function chamaPagina(endereco) {
 
 function chamaPaginaComIdentificador(endereco, identificador) {
     $.get(endereco, identificador).done(function (data) {
-        $('#DivGrid').slideUp(function () {
-            $('#DivGrid').hide().html(data).slideDown();
+        $("#DivGrid").slideUp(function () {
+            $("#DivGrid").hide().html(data).slideDown();
         });
     }).fail(function (xhr) {
         console.log(xhr.responseText);
@@ -54,7 +55,7 @@ function concluirAcao(endereco, objeto, tela) {
 function concluirAcaoEdicao(endereco, objeto, tela) {
     $.ajax({
         url: endereco,
-        type: 'PUT',
+        type: "PUT",
         data: objeto,
         success: function (message) {
             chamaPagina(tela);
