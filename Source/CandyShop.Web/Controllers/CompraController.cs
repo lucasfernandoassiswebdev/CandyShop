@@ -10,14 +10,12 @@ namespace CandyShop.Web.Controllers
     public class CompraController : Controller
     {
         private readonly ICompraApplication _appCompra;
-        private readonly ICompraProdutoApplication _appCompraProduto;
-        private readonly IProdutoApplication _appProdutos;
+        private readonly IUsuarioApplication _appUsuario;
 
-        public CompraController(ICompraApplication compra, ICompraProdutoApplication compraProduto, IProdutoApplication produtos)
+        public CompraController(ICompraApplication compra, IUsuarioApplication usuario)
         {
             _appCompra = compra;
-            _appCompraProduto = compraProduto;
-            _appProdutos = produtos;
+            _appUsuario = usuario;
         }
 
         [UserFilterResult]
@@ -104,11 +102,10 @@ namespace CandyShop.Web.Controllers
                 if ((response.Status != HttpStatusCode.OK) || (response.Content < 1))
                     return Content($"Os itens da compra não puderam ser registrados: {response.ContentAsString  }");
 
-                var totalCompra = _appCompra.SelecionarCompra(response.Content);
-                if (totalCompra.Status != HttpStatusCode.OK)
-                    return Content("Erro ao atualizar saldo. " + totalCompra.ContentAsString);
-
-                Session["saldoUsuario"] = $"{(Convert.ToDecimal(Session["saldoUsuario"].ToString()) - totalCompra.Content.ValorCompra):C)}";
+                var user = _appUsuario.SelecionarUsuario(Session["Login"].ToString());
+                if (user.Status != HttpStatusCode.OK)
+                    return Content($"Erro ao atualizar seu saldo, {user.ContentAsString}");
+                Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
                 TempData["LimparCarrinho"] = true;
                 return Content("Sua compra foi registrada com sucesso");
             }
