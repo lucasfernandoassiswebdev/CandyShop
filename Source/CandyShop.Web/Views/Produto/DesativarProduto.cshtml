@@ -33,7 +33,7 @@
             </tr>
             <tr>
                 <td class="negrito">Preço</td>
-                <td>R$ @Model.PrecoProduto</td>
+                <td>@string.Format("{0:C}", Model.PrecoProduto)</td>
             </tr>
             <tr>
                 <td class="negrito">Categoria</td>
@@ -52,13 +52,8 @@
             </tr>
             </tbody>
         </table>
-        @if (ViewBag.telaAnterior.ToString().Equals("Produtos Ativos"))
-        {
-            voltar = "AjaxJsProduto.listaProduto()";
-        }
-        else
-        {
-            voltar = "AjaxJsProduto.listarInativos()";
+        @{
+            voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
         }
         <div class="row">
             <a class="waves-effect waves-light btn-large" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>

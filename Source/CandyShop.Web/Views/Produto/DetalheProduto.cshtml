@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <td class="negrito">Preço</td>
-                <td>R$ @Html.DisplayFor(model => model.PrecoProduto)</td>
+                <td>@string.Format("{0:C}", Model.PrecoProduto)</td>
             </tr>
             <tr>
                 <td class="negrito">Categoria</td>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td class="negrito">Ativo</td>
-                <td>@(Model.Ativo == "A" ? "Ativo" : "Inativo")</td>
+                <td>@(Model.Ativo == "A" ? "Sim" : "Não")</td>
             </tr>
             </tbody>
         </table>
