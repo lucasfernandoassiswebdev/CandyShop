@@ -40,7 +40,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString);
+                return Content("Erro. " + response.ContentAsString);
             TempData["caminhoImagensProdutos"] = _pathProduto;
             ViewBag.telaAnterior = telaAnterior;
             return View(response.Content);
@@ -51,7 +51,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString);
+                return Content("Erro. " + response.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
             ViewBag.Tela = response.Content.Ativo;
             TempData["caminhoImagensProdutos"] = _pathProduto;
@@ -63,7 +63,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString);
+                return Content("Erro. " + response.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
             TempData["caminhoImagensProdutos"] = _pathProduto;
             return View(response.Content);
@@ -76,7 +76,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.ListarProdutos();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString);
+                return Content("Erro. " + response.ContentAsString);
 
             TempData["caminhoImagensProdutos"] = _pathProduto;
             TempData["nomeLista"] = "Produtos Ativos";
@@ -89,7 +89,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.ListarInativos();
             if (response.Status != HttpStatusCode.OK)
-                return Content($"Erro {response.ContentAsString}");
+                return Content($"Erro. {response.ContentAsString}");
 
             TempData["nomeLista"] = "Produtos Inativos";
 
@@ -129,7 +129,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.InserirProduto(produto);
             if (response.Status != HttpStatusCode.OK)
-                return Content(response.ContentAsString);
+                return Content($"Erro. {response.ContentAsString}");
 
             //salvando todas as imagens que o usuário inseriu
             int cont = 0;
@@ -237,7 +237,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.EditarProduto(produto);
             if (response.Status != HttpStatusCode.OK)
-                return Content(response.ContentAsString);
+                return Content($"Erro. {response.ContentAsString}");
 
             if (produto.ImagemA != null)
             {

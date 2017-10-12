@@ -1,7 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using Newtonsoft.Json;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -37,7 +36,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.ListarProdutos();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
 
             TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
@@ -47,7 +46,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.ProcurarProduto(nome);
             if (response.Status != HttpStatusCode.OK)
-                return Content($"Erro: {response.Status}");
+                return Content($"Erro: {response.ContentAsString}");
 
             ViewBag.Pesquisa = nome;
             TempData["caminhoImagensProdutos"] = _pathProduto;
@@ -58,7 +57,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appProduto.ListarCategoria(categoria);
             if (response.Status != HttpStatusCode.OK)
-                return Content($"Erro: {response.Status}");
+                return Content($"Erro: {response.Content}");
 
             ViewBag.Pesquisa = categoria;
             TempData["caminhoImagensProdutos"] = _pathProduto;
@@ -81,7 +80,7 @@ namespace CandyShop.Web.Controllers
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
             var user = _appUsuario.SelecionarUsuario(cpf);
             if (user.Status != HttpStatusCode.OK)
-                return Content("Erro ao resgatar dados");
+                return Content($"Erro ao resgatar dados. {user.ContentAsString}");
 
             Session["classificacao"] = user.Content.Classificacao;
             Session["nomeUsuario"] = user.Content.NomeUsuario;

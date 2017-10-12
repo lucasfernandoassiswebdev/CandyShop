@@ -1,7 +1,7 @@
 ﻿@model CandyShop.Application.ViewModels.CompraViewModel
 
 @{
-    ViewBag.Title = "Padrao";
+    ViewBag.Title = "CandyShop";
 }
 
 <script type="text/javascript" src="~/Js/telaPrincipal/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
@@ -166,7 +166,7 @@
         </form>
     </div>
     <div class="modal-footer identQuant">
-        <a href="#modalLogin" id="logar" class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" onclick="AjaxJsShop.verificaLogin()" style="font-weight: bold">Logar</a>
+        <a href="#modalLogin" id="logar" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" onclick="AjaxJsShop.verificaLogin()" style="font-weight: bold">Logar</a>
         <a href="#!" id="limpar" class="right modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Cancelar</a>
     </div>
 </div>

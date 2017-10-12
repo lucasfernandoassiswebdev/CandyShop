@@ -26,18 +26,6 @@ namespace CandyShop.Web.Controllers
             return View();
         }
 
-        [AdminFilterResult]
-        public ActionResult Editar(int idCompra)
-        {
-            var itens = _appCompraProduto.ListarProdutos(idCompra);
-            ViewBag.Produtos = _appProdutos.ListarProdutos().Content;
-            ViewBag.IdCompra = idCompra;
-            var compra = _appCompra.SelecionarCompra(idCompra);
-            ViewBag.Usuario = compra.Content.Usuario.Cpf;
-
-            return View(itens.Content);
-        }
-
         #region listas
         [AdminFilterResult]
         public ActionResult Listar()
@@ -46,7 +34,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 0;
             var response = _appCompra.ListaCompra();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString);
+                return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -58,7 +46,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appCompra.ListaCompraPorCpf(cpf);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString);
+                return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -69,7 +57,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appCompra.ListarComprasSemana();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString);
+                return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -80,7 +68,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 0;
             var response = _appCompra.ListarComprasMes(mes);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString);
+                return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
 
@@ -91,7 +79,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.drop = 1;
             var response = _appCompra.ListarComprasDia();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString);
+                return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
         #endregion
@@ -118,7 +106,7 @@ namespace CandyShop.Web.Controllers
 
                 var totalCompra = _appCompra.SelecionarCompra(response.Content);
                 if (totalCompra.Status != HttpStatusCode.OK)
-                    return Content("Erro ao atualizar saldo" + totalCompra.ContentAsString);
+                    return Content("Erro ao atualizar saldo. " + totalCompra.ContentAsString);
 
                 Session["saldoUsuario"] = $"{(Convert.ToDecimal(Session["saldoUsuario"].ToString()) - totalCompra.Content.ValorCompra):C)}";
                 TempData["LimparCarrinho"] = true;
@@ -133,7 +121,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appCompra.SelecionarCompra(idCompra);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro ao detalhar compra", response.ContentAsString);
+                return Content("Erro ao detalhar compra, ", response.ContentAsString);
 
             return View(response.Content);
         }
@@ -144,7 +132,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appCompra.EditarCompra(Compra);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro ao editar a compra", response.ContentAsString);
+                return Content("Erro ao editar a compra, ", response.ContentAsString);
 
             ViewBag.tituloPagina = "Compras do ultimo mês";
             ViewBag.drop = 0;

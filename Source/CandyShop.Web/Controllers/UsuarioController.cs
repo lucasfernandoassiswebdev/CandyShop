@@ -42,7 +42,7 @@ namespace CandyShop.Web.Controllers
             var usuario = _appUsuario.SelecionarUsuario(cpf);
 
             if (usuario.Status != HttpStatusCode.OK)
-                return Content("Erro " + usuario.ContentAsString.First());
+                return Content("Erro. " + usuario.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
             TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(usuario.Content);
@@ -53,7 +53,7 @@ namespace CandyShop.Web.Controllers
         {
             var usuario = _appUsuario.SelecionarUsuario(cpf);
             if (usuario.Status != HttpStatusCode.OK)
-                return Content("Erro " + usuario.ContentAsString.First());
+                return Content("Erro. " + usuario.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
             TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(usuario.Content);
@@ -64,7 +64,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.SelecionarUsuario(cpf);
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro" + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
             TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(response.Content);
@@ -78,7 +78,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.ListarUsuarios();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
 
             TempData["nomeLista"] = "Usuários Ativos";
             return View("Index", response.Content);
@@ -89,7 +89,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.ListarUsuariosEmDivida();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
 
             TempData["nomeLista"] = "Usuários em Dívida";
             return View("Index", response.Content);
@@ -100,7 +100,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.ListarInativos();
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
 
             TempData["nomeLista"] = "Usuários Inativos";
             return View("Index", response.Content);
@@ -159,7 +159,7 @@ namespace CandyShop.Web.Controllers
             var response = _appUsuario.EditarUsuario(usuario);
 
             if (response.Status != HttpStatusCode.OK)
-                return Content("Erro " + response.ContentAsString.First());
+                return Content("Erro. " + response.ContentAsString);
 
             if (usuario.Imagem != null)
             {

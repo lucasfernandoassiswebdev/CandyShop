@@ -13,7 +13,7 @@
         {
             if (pagamento.ValorPagamento <= 0)
             {
-                _notification.Add("Pagamento deve ser maior que zero!");
+                _notification.Add("Valor inválido!");
             }
         }
     }
