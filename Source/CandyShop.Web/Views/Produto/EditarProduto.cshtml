@@ -68,7 +68,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="input-field col s12">
                     <input placeholder="Placeholder" id="IdProduto" name="IdProduto" type="text" class="validate" required="" value="@Model.IdProduto" disabled>
@@ -95,33 +94,27 @@
                 <div class="input-field col s6">
                     <select id="Categoria">
                         <option value="" disabled>Escolha uma opção</option>
-                        <option value="Doces" @if (Convert.ToString(Model.Categoria) == "Doces") { <text> selected</text>}>Doces</option>
-                        <option value="Balas" @if (Convert.ToString(Model.Categoria) == "Balas") { <text> selected</text>}>Balas</option>
-                        <option value="Bebidas" @if (Convert.ToString(Model.Categoria) == "Bebidas") { <text> selected</text>}>Bebidas</option>
-                        <option value="Amendoins" @if (Convert.ToString(Model.Categoria) == "Amendoins") { <text> selected</text>}>Amendoins</option>
-                        <option value="Chocolates" @if (Convert.ToString(Model.Categoria) == "Chocolates") { <text> selected</text>}>Chocolates</option>
-                        <option value="Salgadinhos" @if (Convert.ToString(Model.Categoria) == "Salgadinhos") { <text> selected</text>}>Salgadinhos</option>
+                        <option value="Doces" @(Convert.ToString(Model.Categoria) == "Doces" ? "selected" : string.Empty)>Doces</option>
+                        <option value="Balas" @(Convert.ToString(Model.Categoria) == "Balas" ? "selected" : string.Empty)>Balas</option>
+                        <option value="Bebidas" @(Convert.ToString(Model.Categoria) == "Bebidas" ? "selected" : string.Empty)>Bebidas</option>
+                        <option value="Amendoins" @(Convert.ToString(Model.Categoria) == "Amendoins" ? "selected" : string.Empty)>Amendoins</option>
+                        <option value="Chocolates" @(Convert.ToString(Model.Categoria) == "Chocolates" ? "selected" : string.Empty)>Chocolates</option>
+                        <option value="Salgadinhos" @(Convert.ToString(Model.Categoria) == "Salgadinhos" ? "selected" : string.Empty)>Salgadinhos</option>
                     </select>
                     <label>Categoria do produto</label>
                 </div>
                 <div class="input-field col s6">
                     <select id="Ativo">
                         <option value="" disabled>Escolha uma opção</option>
-                        <option value="A" selected>Ativo</option>
-                        <option value="I">Inativo</option>
+                        <option value="A" @(Model.Ativo == "A" ? "selected" : string.Empty)>Ativo</option>
+                        <option value="I" @(Model.Ativo == "I" ? "selected" : string.Empty)>Inativo</option>
                     </select>
                     <label>Status do produto</label>
                 </div>
             </div>
-            @if (ViewBag.telaAnterior.ToString().Equals("Produtos Ativos"))
-            {
-                voltar = "AjaxJsProduto.listaProduto()";
+            @{
+                voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
             }
-            else
-            {
-                voltar = "AjaxJsProduto.listarInativos()";
-            }
-
             <div class="row" , align="center">
                 <a class="waves-effect waves-light btn-large botaoVoltar" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
                 <a class="waves-effect waves-light btn-large botaoEditar"><i class="material-icons left">edit</i>Editar</a>
@@ -129,6 +122,4 @@
         </form>
     </div>
 </div>
-
-
 
