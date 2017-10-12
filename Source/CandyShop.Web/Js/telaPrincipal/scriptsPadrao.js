@@ -44,7 +44,18 @@ $(document).ready(function () {
     // Verificando senhas e chamando ajax pra efetivar alteracoes    
     var ilegais = /[\W_]/;
 
-    $("#novaSenha").keyup(function () {
+    $("#novaSenha").keyup(function () {        
+        if ($(this).val().length > 12 || $(this).val().length <= 0) {
+            Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
+            $(this).focus();
+        }
+        if (ilegais.test($(this).val())) {
+            Materialize.toast("Digite apenas letras e numeros!", 3000);
+            $(this).focus();
+        }
+    });
+
+    $("#novaSenha").on('paste', function () {        
         if ($(this).val().length > 12 || $(this).val().length <= 0) {
             Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
             $(this).focus();
