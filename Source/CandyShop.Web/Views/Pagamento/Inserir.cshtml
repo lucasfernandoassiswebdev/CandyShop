@@ -64,8 +64,8 @@
     }
 
     $("#valorPago").keyup(function () {
-        var valor = $("#valorPago").val().length;
-        var pagamento = $("#valorPago").val();
+        var valor = $(this).val().length;
+        var pagamento = $(this).val();
         pagamento = pagamento.replace("R$", "").replace(",", ".");
         if (parseInt(valor) > 9 || parseInt(valor) <= 0 || parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null) {
             $("#confirmarPagamento").attr("disabled", "disabled");
@@ -76,22 +76,22 @@
     });
 
     $("#valorPago").blur(function () {
-        var valor = $("#valorPago").val().length;
-        var pagamento = $("#valorPago").val();
+        var valor = $(this).val().length;
+        var pagamento = $(this).val();
 
         pagamento = pagamento.replace("R$", "").replace(",", ".");
-        if (parseInt(valor) > 6 || $("#valorPago").val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
+        if (parseInt(valor) > 6 || $(this).val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
             $("#confirmarPagamento").attr("disabled", "disabled");
         } else
             $("#confirmarPagamento").removeAttr("disabled");
     });
 
     $("#valorPago").on("paste", function () {
-        var valor = $("#valorPago").val().length;
-        var pagamento = $("#valorPago").val();
+        var valor = $(this).val().length;
+        var pagamento = $(this).val();;
 
         pagamento = pagamento.replace("R$", "").replace(",", ".");
-        if (parseInt(valor) > 6 || $("#valorPago").val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
+        if (parseInt(valor) > 6 || $(this).val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
             $("#confirmarPagamento").attr("disabled", "disabled");
             Materialize.toast("Valor pagamento inválido", 2000);
         } else

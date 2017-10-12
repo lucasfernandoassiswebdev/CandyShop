@@ -38,8 +38,10 @@
             listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Home")'
         });
         //validando campo de CPF
-        $("#cpf").keydown(function () {
+        $("#cpf").keydown(function (e) {
             mcpf($("#cpf").val());
+            if (e.which === 13)
+                $("#senha").focus();
         });
 
         $("#cpf").on("blur", function () {
@@ -78,7 +80,7 @@
         <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
         <p class="pink-text center identQuant"></p>
         <div class="center">
-            <input type="number" id="quantidade" class="center identQuant" autocomplete="off" />
+            <input type="number" id="quantidade" class="center identQuant" autocomplete="off" maxlength="3" />
             <span class="QtdeInvalida" color="red"></span>
         </div>
     </div>
@@ -118,7 +120,7 @@
         <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
         <p id="estoqueEdit" class="pink-text center identQuant"></p>
         <div class="center">
-            <input type="number" id="quantidadeEdit" class="center identQuant" autocomplete="off" />
+            <input type="number" id="quantidadeEdit" class="center identQuant" autocomplete="off" maxlength="3"/>
             <span class="QtdeInvalida" color="red"></span>
         </div>
     </div>
@@ -151,13 +153,13 @@
         <form>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="cpf" type="text" class="validate identQuant">
+                    <input id="cpf" type="text" class="validate identQuant" maxlength="14">
                     <label for="cpf">CPF</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="senha" type="password" class="validate identQuant">
+                    <input id="senha" type="password" class="validate identQuant" maxlength="12">
                     <label for="senha">Senha</label>
                 </div>
             </div>

@@ -5,7 +5,7 @@
 
 <!--plugin para campos monetários-->
 <script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
-<script type="text/javascript" src="~/Js/Pagamento/scriptEditarPagamento.js"></script>
+<script type="text/javascript" src="~/Js/Pagamento/scriptEditarPagamento.js?d=@DateTime.Now.Ticks"></script>
 
 
 <div class="container">
@@ -17,115 +17,34 @@
                 </div>
             </div>
             <input type="hidden" id="IdPagamento" value="@Model.IdPagamento" />
-           
+
             <div class="row">
                 <div class="input-field col s6">
                     <input id="Cpf" name="Cpf" type="text" class="validate " required="" value="@Model.Usuario.Cpf" disabled>
-                    <label class ="active" for="Cpf">Cpf:</label>
+                    <label class="active" for="Cpf">Cpf:</label>
                 </div>
                 <div class="input-field col s6">
                     <input id="Nome" name="Nome" type="text" class="validate " required="" value="@Model.Usuario.NomeUsuario" disabled>
-                    <label class ="active" for="Nome">Nome:</label>
+                    <label class="active" for="Nome">Nome:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="valorPago" name="valorPago" type="text" class="validate " required onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" value="@Model.ValorPagamento">
-                    <label class ="active" for="valorPago">Valor:</label>
+                    <input id="valorPago" name="valorPago" maxlength="9" type="text" class="validate " required onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" value="@Model.ValorPagamento">
+                    <label class="active" for="valorPago">Valor:</label>
                 </div>
                 <div class="input-field col s6">
                     <input id="DataPagamento" name="DataPagamento" type="datetime" class="validate " required="" value="@Model.DataPagamento" disabled>
-                    <label class ="active" for="Nome">DataPagamento:</label>
+                    <label class="active" for="Nome">DataPagamento:</label>
                 </div>
             </div>
             <div class="row center">
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons left">arrow_back</i>Voltar</a>
                 <a id="confirmarPagamento" class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirEdicaoPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
             </div>
-            
+
         </form>
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        $('#valorPago').maskMoney({
-            prefix: 'R$ ',
-            allowNegative: true,
-            thousands: '.',
-            decimal: ',',
-            affixesStay: false
-        });
-
-        $('#valorPago').maskMoney('mask');
-
-        function FilterInput(event) {
-            var keyCode = ("which" in event) ? event.which : event.keyCode;
-            var isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
-            return !isNotWanted;
-        }
-
-        function handlePaste(e) {
-            var clipboardData = e.clipboardData || window.clipboardData;
-            var pastedData = clipboardData.getData("Text").toUpperCase();
-
-            if (pastedData.indexOf("E") > -1) {
-                e.stopPropagation();
-                e.preventDefault();
-            }
-
-            if (pastedData.indexOf("-") > -1) {
-                e.stopPropagation();
-                e.preventDefault();
-            }
-
-            if (pastedData.indexOf("-") > -1) {
-                e.stopPropagation();
-                e.preventDefault();
-            }
-        }
-
-        $("#valorPago").keyup(function () {
-            var valor = $("#valorPago").val().length;
-            var pagamento = $("#valorPago").val();
-            pagamento = pagamento.replace("R$", "").replace(",", ".");
-            if (parseInt(valor) > 9 || parseInt(valor) <= 0 || parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null) {
-                $("#confirmarPagamento").attr("disabled", "disabled");
-                Materialize.toast("Valor pagamento inválido", 3000);
-            }
-            else
-                $("#confirmarPagamento").removeAttr("disabled");
-        });
-
-        $("#valorPago").blur(function () {
-            var valor = $("#valorPago").val().length;
-            var pagamento = $("#valorPago").val();
-
-            pagamento = pagamento.replace("R$", "").replace(",", ".");
-            if (parseInt(valor) > 6 || $("#valorPago").val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
-                $("#confirmarPagamento").attr("disabled", "disabled");
-            } else
-                $("#confirmarPagamento").removeAttr("disabled");
-        });
-
-        $("#valorPago").on("paste", function () {
-            var valor = $("#valorPago").val().length;
-            var pagamento = $("#valorPago").val();
-
-            pagamento = pagamento.replace("R$", "").replace(",", ".");
-            if (parseInt(valor) > 6 || $("#valorPago").val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
-                $("#confirmarPagamento").attr("disabled", "disabled");
-                Materialize.toast("Valor pagamento inválido", 2000);
-            } else
-                $("#confirmarPagamento").removeAttr("disabled");
-        });
-
-        $("#valorPago").keydown(function (e) {
-            if (e.which === 13) {
-                AjaxJsPagamento.concluirEdicaoPagamento();
-            }
-        });
-    });
-</script>
 
 

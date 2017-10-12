@@ -45,13 +45,13 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="NomeProduto" name="Nome" type="text" class="validate" required data-length="40" autocomplete="off">
+                    <input id="NomeProduto" name="Nome" type="text" maxlength="40" class="validate" required data-length="40" autocomplete="off">
                     <label for="NomeProduto">Nome:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="PrecoProduto" name="PrecoProduto" type="text" class="validate" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
+                    <input id="PrecoProduto" name="PrecoProduto" maxlength="9" type="text" class="validate" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
                     <label for="PrecoProduto">Valor:</label>
                 </div>
                 <div class="input-field col s6">
@@ -80,18 +80,6 @@
         </form>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('#PrecoProduto').maskMoney({
-            prefix: 'R$ ',
-            allowNegative: false,
-            thousands: '.',
-            decimal: ',',
-            affixesStay: false
-        });
-    });
-</script>
 
 
 

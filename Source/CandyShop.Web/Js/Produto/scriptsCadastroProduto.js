@@ -5,15 +5,93 @@
     $(".tooltipped").tooltip({ delay: 50 });
     // Escondendo os botões de remover até que o usuário troque a imagem
     $("#removerImagem1, #removerImagem2, #removerImagem3").hide();
-});
 
-$(".botaoVoltar").on("click", function () {
-    // Chamando o método da função Ajax que foi definido na página inicial do Admin
-    AjaxJsProduto.listaProduto();
-});
+    $("#PrecoProduto").maskMoney({
+        prefix: "R$ ",
+        allowNegative: false,
+        thousands: ".",
+        decimal: ",",
+        affixesStay: false
+    });
 
-$(".botaoCadastro").on("click", function () {
-    encodeImageFileAsURL(AjaxJsProduto.concluirCadastroProduto);
+    $("#PrecoProduto").maskMoney("mask");
+
+    $("#PrecoProduto").keyup(function () {
+        var tamanhoCampo = $(this).val().length;
+        var valorInserido = $(this).val();
+        valorInserido = valorInserido.replace("R$", "").replace(",", ".");
+        if (parseInt(tamanhoCampo) > 9 || parseInt(tamanhoCampo) <= 0 || parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null) {
+            $(".botaoCadastro").attr("disabled", "disabled");
+            Materialize.toast("Valor inserido é inválido", 3000);
+        }
+        else
+            $(".botaoCadastro").removeAttr("disabled");
+    });
+
+    $("#PrecoProduto").blur(function () {
+        var tamanhoCampo = $(this).val().length;
+        var valorInserido = $(this).val();
+
+        valorInserido = valorInserido.replace("R$", "").replace(",", ".");
+        if (parseInt(tamanhoCampo) > 6 || (parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null)) {
+            $(".botaoCadastro").attr("disabled", "disabled");
+        } else
+            $(".botaoCadastro").removeAttr("disabled");
+    });
+
+    $("#PrecoProduto").on("paste", function () {
+        var tamanhoCampo = $(this).val().length;
+        var valorInserido = $(this).val();
+
+        valorInserido = valorInserido.replace("R$", "").replace(",", ".");
+        if (parseInt(tamanhoCampo) > 6 || (parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null)) {
+            $(".botaoCadastro").attr("disabled", "disabled");
+            Materialize.toast("Valor inserido é inválido", 2000);
+        } else
+            $(".botaoCadastro").removeAttr("disabled");
+    });
+
+    $(".botaoVoltar").on("click", function () {
+        // Chamando o método da função Ajax que foi definido na página inicial do Admin
+        AjaxJsProduto.listaProduto();
+    });
+
+    $(".botaoCadastro").on("click", function () {
+        encodeImageFileAsURL(AjaxJsProduto.concluirCadastroProduto);
+    });
+
+    // Editando as imagens na tela
+    $("#fotoProduto1").change(function () {
+        // Função que muda a foto do usuário na tela
+        readURL(this);
+        $("#removerImagem1").show();
+    });
+
+    $("#fotoProduto2").change(function () {
+        readURL2(this);
+        // Quando a imagem muda, o botão que possibilita removê-la é exibido na tela
+        $("#removerImagem2").show();
+    });
+
+    $("#fotoProduto3").change(function () {
+        readURL3(this);
+        $("#removerImagem3").show();
+    });
+
+    $("#removerImagem1").click(function () {
+        $("#imagem1").attr("src", "Imagens/retirado.png");
+        $("#fotoProduto1").val("");
+    });
+
+    $("#removerImagem2").click(function () {
+        $("#imagem2").attr("src", "Imagens/retirado.png");
+        $("#fotoProduto2").val("");
+    });
+
+    $("#removerImagem3").click(function () {
+        $("#imagem3").attr("src", "Imagens/retirado.png");
+        $("#fotoProduto3").val("");
+    });
 });
 
 /* Função que transforma as imagens em base64 para serem posteriormente 
@@ -71,39 +149,6 @@ function encodeImageFileAsURL(callback) {
            usuário tiver mandado) tiverem sido convertidas para base64*/
     }
 }
-
-// Editando as imagens na tela
-$("#fotoProduto1").change(function () {
-    // Função que muda a foto do usuário na tela
-    readURL(this);
-    $("#removerImagem1").show();
-});
-
-$("#fotoProduto2").change(function () {
-    readURL2(this);
-    // Quando a imagem muda, o botão que possibilita removê-la é exibido na tela
-    $("#removerImagem2").show();
-});
-
-$("#fotoProduto3").change(function () {
-    readURL3(this);
-    $("#removerImagem3").show();
-});
-
-$("#removerImagem1").click(function () {
-    $("#imagem1").attr("src", "Imagens/retirado.png");
-    $("#fotoProduto1").val("");
-});
-
-$("#removerImagem2").click(function () {
-    $("#imagem2").attr("src", "Imagens/retirado.png");
-    $("#fotoProduto2").val("");
-});
-
-$("#removerImagem3").click(function () {
-    $("#imagem3").attr("src", "Imagens/retirado.png");
-    $("#fotoProduto3").val("");
-});
 
 function readURL(input) {
     if (input.files && input.files[0]) {
