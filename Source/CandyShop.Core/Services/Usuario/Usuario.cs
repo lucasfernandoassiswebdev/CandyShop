@@ -26,7 +26,7 @@
                 notification.Add("Cpf Invalido");
             if (string.IsNullOrEmpty(NomeUsuario.Trim()) || NomeUsuario.Length > 50)
                 notification.Add("Nome do Usuario invalido ");
-            if (string.IsNullOrEmpty(SenhaUsuario.Trim()) || SenhaUsuario.Length > 12)
+            if (string.IsNullOrEmpty(SenhaUsuario.Trim()) || SenhaUsuario.Length > 12 || SenhaUsuario.Length < 6)
                 notification.Add("Senha invalida");
             if (string.IsNullOrEmpty(Ativo))
                 notification.Add("Status do usuario nao pode ser nulo");
