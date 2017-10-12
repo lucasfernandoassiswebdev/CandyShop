@@ -45,8 +45,8 @@
                         @{ string caminho = @Model.Cpf + ".jpg"; }
                         <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@Html.UrlContent(TempData["caminhoImagensUsuarios"], caminho)" alt="imagem não disponível :(" />
                     </label>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                     <a class="btn" id="removerImagem"><i class="material-icons left">block</i>Remover</a>
                     <input id="fotoUsuario" type="file" class="file-path validate" style="display: none" accept="image/*">
                 </div>
@@ -59,16 +59,8 @@
                 <div class="input-field col s6">
                     <select name="Classificacao" id="Classificacao">
                         <option value="" disabled>Tipo da conta</option>
-                        @if (Model.Classificacao == 'U'.ToString())
-                        {
-                            <option value="U" selected>Usuario</option>
-                            <option value="A">Administrador</option>
-                        }
-                        else
-                        {
-                            <option value="U">Usuario</option>
-                            <option value="A" selected>Administrador</option>
-                        }
+                        <option value="U" @(Model.Classificacao == "Usuario" ? "selected" : string.Empty)>Usuario</option>
+                        <option value="A" @(Model.Classificacao == "Administrador" ? "selected" : string.Empty)>Administrador</option>
                     </select>
                     <label>Tipo de Usuário:</label>
                 </div>
@@ -91,9 +83,8 @@
                 <div class="input-field col s6">
                     <select id="Ativo">
                         <option value="" disabled>Escolha uma opção</option>
-                        <option value="A" @if (Convert.ToString(Model.Ativo) == "A") {<text>selected</text>} >Ativo</option>
-                        <option value="A" @if (Convert.ToString(Model.Ativo) == "A") { <text> selected</text>}>Ativo</option>
-                        <option value="I" @if (Convert.ToString(Model.Ativo) == "I") {<text>selected</text>} >Inativo</option>
+                        <option value="A" @(Model.Ativo == "A" ? "selected" : string.Empty)>Ativo</option>
+                        <option value="I" @(Model.Ativo == "I" ? "selected" : string.Empty)>Inativo</option>
                     </select>
                     <label>Status do usuário</label>
                 </div>
@@ -111,8 +102,8 @@
                 voltar = "AjaxJsUsuario.listarUsuarioEmDivida()";
             }
             <div class="row center">
-                <a class="waves-effect waves-light btn-large botaoVoltar" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large botaoEditar"><i class="material-icons left">build</i>Editar</a>
+                <a class="waves-effect waves-light btn-large botaoVoltar" onclick="@voltar"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large" onclick="encodeImageFileAsURL(AjaxJsUsuario.concluirEdicaoUsuario,'@(ViewBag.telaAnterior == "Usuários Ativos" ? Url.Action("Listar","Usuario") : Url.Action("ListarInativos","Usuario"))')"><i class="material-icons left">build</i>Editar</a>
             </div>
         </form>
     </div>

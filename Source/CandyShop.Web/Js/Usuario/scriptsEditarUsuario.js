@@ -21,14 +21,6 @@ $("#fotoUsuario").change(function () {
     removerImagem = false;
 });
 
-$(".botaoEditar").on("click", function () {
-    var filesSelected = document.getElementById("fotoUsuario").files;
-    if (filesSelected.length > 0)
-        encodeImageFileAsURL(AjaxJsUsuario.concluirEdicaoUsuario);
-    else
-        AjaxJsUsuario.concluirEdicaoUsuario(null,removerImagem);
-});
-
 $("#removerImagem").click(function () {
     $("#imagem").attr("src", "Imagens/retirado.png");
     $("#fotoUsuario").val("");
@@ -59,7 +51,7 @@ function validaBotao() {
         $(".botaoEditar").removeAttr("disabled");
 }
 
-function encodeImageFileAsURL(callback) {
+function encodeImageFileAsURL(callback, tela) {
     var filesSelected = document.getElementById("fotoUsuario").files;
     if (filesSelected.length > 0) {
         var fileToLoad = filesSelected[0];
@@ -68,12 +60,12 @@ function encodeImageFileAsURL(callback) {
         fileReader.onload = function (fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
             if (typeof callback === "function") {
-                callback(srcData,removerImagem);
+                callback(srcData, removerImagem, tela);
             }
         };
-
         fileReader.readAsDataURL(fileToLoad);
-    }
+    } else
+        callback(null, removerImagem, tela);
 }
 
 function FilterInput(event) {

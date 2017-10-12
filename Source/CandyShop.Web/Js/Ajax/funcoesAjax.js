@@ -18,7 +18,6 @@ function main(endereco) {
 
 // Função genérica para carregar a página de acordo com o endereço passado
 function chamaPagina(endereco) {
-    console.log(endereco);
     $.get(endereco).done(function (data) {        
         $("#DivGrid").slideUp(function () {            
             $("#DivGrid").hide().html(data).slideDown(function() {                
