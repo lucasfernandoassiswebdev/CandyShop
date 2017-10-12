@@ -13,13 +13,13 @@
         <div class="col s12">
             <div class="row">
                 <div class="input-field col s6 push-l3 ajustes">
-                    <input id="valorPago" name="valorPago" type="text" class="validate" required onkeydown="return FilterInput(event)" onpaste="handlePaste(event)">
+                    <input id="valorPago" maxlength="9" name="valorPago" type="text" class="validate" required onkeydown="return FilterInput(event)" onpaste="handlePaste(event)">
                     <label for="valorPago">Valor:</label>
                 </div>
             </div>
             <div class="row">
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
+                <a id="confirmarPagamento" disabled class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
             </div>
         </div>
     </div>
@@ -34,6 +34,7 @@
             decimal: ",",
             affixesStay: false
         });
+        $("#valorPago").maskMoney("mask");
     });
 
     function FilterInput(event) {
@@ -63,26 +64,43 @@
     }
 
     $("#valorPago").keyup(function () {
-        var valor = $("#valorPago").val().length;
-        if (parseInt(valor) > 8 || $("#valorPago").val() == "R$ 0,00")
+        var valor = $(this).val().length;
+        var pagamento = $(this).val();
+        pagamento = pagamento.replace("R$", "").replace(",", ".");
+        if (parseInt(valor) > 9 || parseInt(valor) <= 0 || parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null) {
             $("#confirmarPagamento").attr("disabled", "disabled");
+            Materialize.toast("Valor pagamento inválido", 3000);
+        }
         else
             $("#confirmarPagamento").removeAttr("disabled");
     });
 
     $("#valorPago").blur(function () {
-        var valor = $("#valorPago").val().length;
-        if (parseInt(valor) > 8 || $("#valorPago").val() == "R$ 0,00") 
+        var valor = $(this).val().length;
+        var pagamento = $(this).val();
+
+        pagamento = pagamento.replace("R$", "").replace(",", ".");
+        if (parseInt(valor) > 6 || $(this).val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
             $("#confirmarPagamento").attr("disabled", "disabled");
-        else  
+        } else
             $("#confirmarPagamento").removeAttr("disabled");
     });
 
     $("#valorPago").on("paste", function () {
-        var valor = $("#valorPago").val().length;
-        if (parseInt(valor) > 8 || $("#valorPago").val() == "R$ 0,00")
+        var valor = $(this).val().length;
+        var pagamento = $(this).val();;
+
+        pagamento = pagamento.replace("R$", "").replace(",", ".");
+        if (parseInt(valor) > 6 || $(this).val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
             $("#confirmarPagamento").attr("disabled", "disabled");
-        else
+            Materialize.toast("Valor pagamento inválido", 2000);
+        } else
             $("#confirmarPagamento").removeAttr("disabled");
+    });
+
+    $("#valorPago").keydown(function (e) {
+        if (e.which === 13) {
+            AjaxJsPagamento.concluirPagamento();
+        }
     });
 </script>

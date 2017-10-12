@@ -80,11 +80,11 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="PrecoProduto" type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" value="@Model.PrecoProduto">
+                    <input id="PrecoProduto" type="text" maxlength="9" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" value="@Model.PrecoProduto">
                     <label class="active" for="PrecoProduto">Preco do Produto:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="QtdeProduto" name="QtdeProduto" type="text" type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required value="@Model.QtdeProduto">
+                    <input id="QtdeProduto" name="QtdeProduto" type="number" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required value="@Model.QtdeProduto">
                     <label class="active">Quantidade em estoque:</label>
                 </div>
             </div>
@@ -115,7 +115,7 @@
             }
             <div class="row" , align="center">
                 <a class="waves-effect waves-light btn-large botaoVoltar" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large" onclick="encodeImageFileAsURL(AjaxJsProduto.concluirEdicaoProduto,'@(ViewBag.Tela == "A" ? Url.Action("Listar","Produto") : Url.Action("ListarInativos", "Produto"))')"><i class="material-icons left">edit</i>Editar</a>
+                <a class="waves-effect waves-light btn-large botaoEditar" onclick="encodeImageFileAsURL(AjaxJsProduto.concluirEdicaoProduto,'@(ViewBag.Tela == "A" ? Url.Action("Listar","Produto") : Url.Action("ListarInativos", "Produto"))')"><i class="material-icons left">edit</i>Editar</a>
             </div>
         </form>
     </div>

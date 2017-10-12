@@ -4,6 +4,7 @@
     ViewBag.Title = "CandyShop";
 }
 
+<script type="text/javascript" src="~/Js/telaPrincipal/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
 <script>
     $(document).ready(function () {
         AjaxJsPagamento.init({
@@ -37,8 +38,10 @@
             listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Home")'
         });
         //validando campo de CPF
-        $("#cpf").keydown(function () {
+        $("#cpf").keydown(function (e) {
             mcpf($("#cpf").val());
+            if (e.which === 13)
+                $("#senha").focus();
         });
 
         $("#cpf").on("blur", function () {
@@ -49,26 +52,14 @@
         });
 
         $("#senha").keydown(function (e) {
-            if (e.which === 13) {
+            if (e.which === 13)
                 AjaxJsShop.verificaLogin();
-            }
         });
 
-        $("#quantidade").keydown(function (e) {
-            if (e.which === 13) {
-                $("#adicionaCarrinho").trigger("click");
-                $("#modalQuantidade").modal("close");
-                $("#modalCarrinho").modal("open");
-            }
-        });
-
-        $("#quantidadeEdit").keydown(function (e) {
-            if (e.which === 13) {
-                $("#editarQuantidade").trigger("click");
-                $("#modalEditarQuantidade").modal("close");
-                $("#modalCarrinho").modal("open");
-            }
-        });
+        $("#novaSenha").keydown(function (e) {
+            if (e.which === 13)
+                $("#confirmaNovaSenha").focus();
+        });;
     });
 
     function mcpf(v) {
@@ -81,7 +72,6 @@
 </script>
 
 <link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
-<script type="text/javascript" src="~/Js/telaPrincipal/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
 
 <!--modal de quantidade-->
 <div id="modalQuantidade" class="modal" style="z-index: 99999999">
@@ -90,7 +80,7 @@
         <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
         <p class="pink-text center identQuant"></p>
         <div class="center">
-            <input type="number" id="quantidade" class="center identQuant" autocomplete="off" />
+            <input type="number" id="quantidade" class="center identQuant" autocomplete="off" maxlength="3" />
             <span class="QtdeInvalida" color="red"></span>
         </div>
     </div>
@@ -126,11 +116,11 @@
 <!--modal de editar quantidade-->
 <div id="modalEditarQuantidade" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
-        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px;" >X</font>
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
         <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
         <p id="estoqueEdit" class="pink-text center identQuant"></p>
         <div class="center">
-            <input type="number" id="quantidadeEdit" class="center identQuant" autocomplete="off" />
+            <input type="number" id="quantidadeEdit" class="center identQuant" autocomplete="off" maxlength="3"/>
             <span class="QtdeInvalida" color="red"></span>
         </div>
     </div>
@@ -163,13 +153,13 @@
         <form>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="cpf" type="text" class="validate identQuant">
+                    <input id="cpf" type="text" class="validate identQuant" maxlength="14">
                     <label for="cpf">CPF</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="senha" type="password" class="validate identQuant">
+                    <input id="senha" type="password" class="validate identQuant" maxlength="12">
                     <label for="senha">Senha</label>
                 </div>
             </div>
@@ -196,7 +186,7 @@
     <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right"  title="Inicio" onclick="AjaxJsShop.voltarInicio();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
+            <a href="#!" class="brand-logo right" title="Inicio" onclick="AjaxJsShop.voltarInicio();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
             <!--barra de navegação-->
             <ul id="dropdownMenu" class="dropdown-content">
                 <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Efetuar Pagamentos</a></li>
@@ -276,7 +266,7 @@ else
                         <div>
                             <div class="input-field">
                                 <input id="search" type="search" title="Procurar um produto" required autocomplete="off">
-                                <label class="label-icon" for="search"><i class="material-icons" >search</i></label>
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                             </div>
                         </div>
                     </div>

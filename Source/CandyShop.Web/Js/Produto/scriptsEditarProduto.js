@@ -78,6 +78,41 @@ function handlePaste(e) {
     }
 }
 
+$("#PrecoProduto").keyup(function () {
+    var tamanhoCampo = $(this).val().length;
+    var valorInserido = $(this).val();
+    valorInserido = valorInserido.replace("R$", "").replace(",", ".");
+    if (parseInt(tamanhoCampo) > 9 || parseInt(tamanhoCampo) <= 0 || parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null) {
+        $(".botaoEditar").attr("disabled", "disabled");
+        Materialize.toast("Valor inserido é inválido", 3000);
+    }
+    else
+        $(".botaoEditar").removeAttr("disabled");
+});
+
+$("#PrecoProduto").blur(function () {
+    var tamanhoCampo = $(this).val().length;
+    var valorInserido = $(this).val();
+
+    valorInserido = valorInserido.replace("R$", "").replace(",", ".");
+    if (parseInt(tamanhoCampo) > 6 || (parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null)) {
+        $(".botaoEditar").attr("disabled", "disabled");
+    } else
+        $(".botaoEditar").removeAttr("disabled");
+});
+
+$("#PrecoProduto").on("paste", function () {
+    var tamanhoCampo = $(this).val().length;
+    var valorInserido = $(this).val();
+
+    valorInserido = valorInserido.replace("R$", "").replace(",", ".");
+    if (parseInt(tamanhoCampo) > 6 || (parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null)) {
+        $(".#botaoEditar").attr("disabled", "disabled");
+        Materialize.toast("Valor inserido é inválido", 2000);
+    } else
+        $(".botaoEditar").removeAttr("disabled");
+});
+
 //editando as imagens na tela
 $("#fotoProduto1").change(function () {
     //função que muda a foto do usuário na tela

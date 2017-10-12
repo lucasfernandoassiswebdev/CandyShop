@@ -9,7 +9,7 @@
     <h4 class="center pink-text">Detalhes da Compra</h4>
     <hr />
     <div class="col s12">
-        <table class="striped highlight centered bordered responsive-table" style="margin-bottom:50px">
+        <table class="striped centered bordered responsive-table" style="margin-bottom:50px">
             <tbody>
                 <tr>
                     <td style="font-weight: bold">Id compra:</td>
@@ -41,8 +41,9 @@
                         <td style="font-weight: bold">Quantidade</td>
                         <td>@item.QtdeCompra</td>
                         <td style="font-weight: bold">Preço item:</td>
-                        <td>R$ @item.Produto.PrecoProduto</td>
-                    </tr>
+                        <td>@string.Format("{0:C}", item.Produto.PrecoProduto)</td>
+
+                  </tr>
                 }
             </tbody>
         </table>
