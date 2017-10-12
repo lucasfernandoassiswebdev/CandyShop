@@ -5,7 +5,10 @@ namespace CandyShop.Web.Filters
     public class UserFilterResult : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
+        {            
+            if (filterContext.HttpContext.Session["Login"] == null)
+                filterContext.HttpContext.Session["Login"] = "off";
+
             var classificacao = filterContext.HttpContext.Session["classificacao"].ToString();
 
             if (!filterContext.HttpContext.Session["Login"].ToString().Equals("off"))
@@ -16,7 +19,7 @@ namespace CandyShop.Web.Filters
                     return;
                 }
             }
-            filterContext.Result = new RedirectResult("/Home/NavBar");            
+            filterContext.Result = new RedirectResult("/");            
         }
     }
 }

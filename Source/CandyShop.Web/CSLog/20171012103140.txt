@@ -1,0 +1,2 @@
+System.Web
+c:\Users\user\Desktop\CandyShop\Source\CandyShop.Web\Views\Compra\Detalhes.cshtml(44): error CS1056: Caractere '$' inesperado

@@ -101,14 +101,23 @@ $(document).ready(function () {
                         }),
                     $("<a>", {
                         href: "#!",
+<<<<<<< HEAD
                         "class": "secondary-content",
+=======
+                        "class": "modal-trigger secondary-content",
+                        title: "Remover item",
+>>>>>>> 3f34f043d470d0e4994735fbbd2be675e0ca62d4
                         style: "margin-top:10px",
                         html: [
                             $("<i>", {
                                 html: "delete",
                                 "class": "small material-icons",
                                 "id": i
+<<<<<<< HEAD
                             }).click(function () {
+=======
+                            }).click(function () {                            
+>>>>>>> 3f34f043d470d0e4994735fbbd2be675e0ca62d4
                                 var li = $(this).closest("li");
                                 var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.listaProdutos) : [];
                                 listaProdutos = listaProdutos.filter(function (item) {
@@ -123,6 +132,7 @@ $(document).ready(function () {
                     $("<a>", {
                         href: "#modalEditarQuantidade",
                         "class": "modal-trigger modal-close secondary-content iconeEditar",
+                        title: "Editar quantidade",
                         "data-quantidadeDisponivel": produto.QuantidadeDisponivel,
                         style: "margin-right:34px;margin-top:10px",
                         html: [
@@ -142,7 +152,7 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseInt(produto.Quantidade) * parseFloat(precoCorreto);
         });
-        $("#totalCompra").text("R$ " + parseFloat(totalCompra));
+        $("#totalCompra").text("R$ " + parseFloat(totalCompra)).attr('title', 'Total da compra');
     }
 
     // Adicionando os itens no carrinho
@@ -241,7 +251,7 @@ $(document).ready(function () {
            para que a conversão para double funcione */
         var precoConcertado = preco.replace(",", ".");
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
-        $("#totalCompra").text("R$ " + totalCompra);
+        $("#totalCompra").text("R$ " + totalCompra).attr('title', 'Total da compra');
 
         // Adiciona item, remove localStorage e seta de novo com a lista atualizada
         quantidade = 0;

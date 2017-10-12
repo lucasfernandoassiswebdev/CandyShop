@@ -49,7 +49,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
-            ViewBag.Produto = nome;
+            ViewBag.Pesquisa = nome;
             TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
         }
@@ -60,6 +60,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
+            ViewBag.Pesquisa = categoria;
             TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
         }
@@ -84,7 +85,7 @@ namespace CandyShop.Web.Controllers
 
             Session["classificacao"] = user.Content.Classificacao;
             Session["nomeUsuario"] = user.Content.NomeUsuario;
-            Session["saldoUsuario"] = user.Content.SaldoUsuario;
+            Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
             return View("NavBar");
         }

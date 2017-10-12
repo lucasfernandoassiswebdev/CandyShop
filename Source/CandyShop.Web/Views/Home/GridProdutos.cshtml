@@ -32,7 +32,7 @@
 <div class="row">
     @if (!Model.Any())
     {
-        <b><p align="center">Nenhum produto encontrado para '@ViewBag.Produto'</p></b>
+        <b><p align="center">Nenhum produto encontrado para '@ViewBag.Pesquisa'</p></b>
     }
     else
     {
@@ -47,7 +47,7 @@
                         <a href="#modalQuantidade" id="abreModal"
                            class="modal-trigger btn-floating halfway-fab waves-effect waves-light pink lighten-1 tooltipped adicionaItemCarrinho"
                            data-position="bottom" data-delay="50"
-                           data-tooltip="@(produto.QtdeProduto == 0 ? "Produto indisponível no estoque" + produto.NomeProduto : "R$ " + produto.PrecoProduto)"
+                           data-tooltip="@(produto.QtdeProduto == 0 ? "Produto indisponível no estoque" : "Inserir quantidade")"
                            data-Preco="@produto.PrecoProduto"
                            data-Nome="@produto.NomeProduto"
                            data-Id="@produto.IdProduto"
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-                                }
-                            }
+        }
+    }
 </div>
 

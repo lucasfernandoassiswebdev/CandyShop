@@ -19,7 +19,7 @@ namespace CandyShop.Web.Filters
                     return;
                 }
             }                
-            filterContext.Result = new RedirectResult("/Home/NavBar");
+            filterContext.Result = new RedirectResult("/");
         }
     }
 }
