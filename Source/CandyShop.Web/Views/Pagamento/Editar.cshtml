@@ -30,7 +30,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="valorPago" name="valorPago" type="text" class="validate " required="" value="@Model.ValorPagamento">
+                    <input id="valorPago" name="valorPago" type="text" class="validate " required onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" value="@Model.ValorPagamento">
                     <label class ="active" for="valorPago">Valor:</label>
                 </div>
                 <div class="input-field col s6">
@@ -40,7 +40,7 @@
             </div>
             <div class="row center">
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirEdicaoPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
+                <a id="confirmarPagamento" class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirEdicaoPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
             </div>
             
         </form>
@@ -58,6 +58,73 @@
         });
 
         $('#valorPago').maskMoney('mask');
+
+        function FilterInput(event) {
+            var keyCode = ("which" in event) ? event.which : event.keyCode;
+            var isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
+            return !isNotWanted;
+        }
+
+        function handlePaste(e) {
+            var clipboardData = e.clipboardData || window.clipboardData;
+            var pastedData = clipboardData.getData("Text").toUpperCase();
+
+            if (pastedData.indexOf("E") > -1) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+
+            if (pastedData.indexOf("-") > -1) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+
+            if (pastedData.indexOf("-") > -1) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        }
+
+        $("#valorPago").keyup(function () {
+            var valor = $("#valorPago").val().length;
+            var pagamento = $("#valorPago").val();
+            pagamento = pagamento.replace("R$", "").replace(",", ".");
+            if (parseInt(valor) > 9 || parseInt(valor) <= 0 || parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null) {
+                $("#confirmarPagamento").attr("disabled", "disabled");
+                Materialize.toast("Valor pagamento inválido", 3000);
+            }
+            else
+                $("#confirmarPagamento").removeAttr("disabled");
+        });
+
+        $("#valorPago").blur(function () {
+            var valor = $("#valorPago").val().length;
+            var pagamento = $("#valorPago").val();
+
+            pagamento = pagamento.replace("R$", "").replace(",", ".");
+            if (parseInt(valor) > 6 || $("#valorPago").val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
+                $("#confirmarPagamento").attr("disabled", "disabled");
+            } else
+                $("#confirmarPagamento").removeAttr("disabled");
+        });
+
+        $("#valorPago").on("paste", function () {
+            var valor = $("#valorPago").val().length;
+            var pagamento = $("#valorPago").val();
+
+            pagamento = pagamento.replace("R$", "").replace(",", ".");
+            if (parseInt(valor) > 6 || $("#valorPago").val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
+                $("#confirmarPagamento").attr("disabled", "disabled");
+                Materialize.toast("Valor pagamento inválido", 2000);
+            } else
+                $("#confirmarPagamento").removeAttr("disabled");
+        });
+
+        $("#valorPago").keydown(function (e) {
+            if (e.which === 13) {
+                AjaxJsPagamento.concluirEdicaoPagamento();
+            }
+        });
     });
 </script>
 
