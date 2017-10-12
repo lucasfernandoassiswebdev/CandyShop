@@ -27,13 +27,13 @@
         chamaPagina(url.inserirPagamento);
     };
     var concluirPagamento = function () {        
-        var pagamento = { ValorPagamento: $('#valorPago').val()};
+        var pagamento = { ValorPagamento: $("#valorPago").val()};
         $.post(url.concluirPagamento, pagamento)            
             .done(function (message) {
                 $.get(url.padrao)
                     .done(function (data) {
-                        $('body').slideUp(function () {
-                            $('body').hide().html(data).slideDown(function() {
+                        $("body").slideUp(function () {
+                            $("body").hide().html(data).slideDown(function() {
                                 Materialize.toast(message, 3000);
                             });
                         });
@@ -51,16 +51,16 @@
     }
 
     var concluirEdicaoPagamento = function() {
-        console.log($('#Cpf').val());
+        console.log($("#Cpf").val());
         var pagamento = {
-            IdPagamento: $('#IdPagamento').val(),
-            ValorPagamento: $('#valorPago').val(),
-            Usuario: { Cpf: $('#Cpf').val() } 
+            IdPagamento: $("#IdPagamento").val(),
+            ValorPagamento: $("#valorPago").val(),
+            Usuario: { Cpf: $("#Cpf").val() } 
         };
         $.post(url.concluirEdicaoPagamento, pagamento)
             .done(function(data) {
                 chamaPagina(url.listarPagamento);
-                Materialize.toast(data);
+                Materialize.toast(data,4000);
             }).fail(function(xhr) {
                 Materialize.toast(xhr.responseText, 4000);
             });
