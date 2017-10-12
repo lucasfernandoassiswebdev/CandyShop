@@ -67,7 +67,7 @@
                                 @Html.DisplayFor(modelItem => item.DataPagamento)
                             </td>
                             <td>
-                                R$ @Html.DisplayFor(modelItem => item.ValorPagamento)
+                                @string.Format("{0:C}", item.ValorPagamento)
                             </td>
                             @if (Session["TipoDeLogin"].ToString().Equals("Admin"))
                             {
