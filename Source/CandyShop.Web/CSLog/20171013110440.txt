@@ -1,0 +1,2 @@
+System.Drawing
+C:\Users\user\Desktop\CandyShop\Source\CandyShop.Web\Produto\Imagens\Produtos\sem-foto.png
