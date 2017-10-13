@@ -44,10 +44,10 @@
         });
 
         AjaxJsCompra.init({
-            historicoCompra: '@Url.Action("Listar", "Compra")',
             listarCompraSemana: '@Url.Action("ListarSemana", "Compra")',
             listarCompraMes: '@Url.Action("ListarMes", "Compra")',
             listarCompraDia: '@Url.Action("ListarDia", "Compra")',
+            listarCompra: '@Url.Action("Listar", "Compra")',
             detalheCompra: '@Url.Action("Detalhes", "Compra")',
             editarCompra: '@Url.Action("Editar","Compra")',
             concluirEdicaoCompra: '@Url.Action("Editar","Compra")'
@@ -174,7 +174,7 @@
                     <ul class="brown-text">
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompraDia();"><i class="material-icons">access_time</i>Hoje</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompraSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.historicoCompra();"><i class="material-icons">book</i>Ultimo mês</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompra();"><i class="material-icons">book</i>Ultimo mês</a></li>
                     </ul>
                 </div>
             </li>

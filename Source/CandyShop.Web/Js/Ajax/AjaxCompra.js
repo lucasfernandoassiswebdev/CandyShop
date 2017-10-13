@@ -48,6 +48,10 @@ var AjaxJsCompra = (function ($) {
     var historicoCompra = function () {
         chamaPagina(url.historicoCompra);
     };
+    var listarCompra = function () {
+        chamaPagina(url.listarCompra);
+    };
+
     var listarCompraMes = function (mes) {
         var parametro = { mes: mes };
         chamaPaginaComIdentificador(url.listarCompraMes, parametro);
@@ -58,8 +62,8 @@ var AjaxJsCompra = (function ($) {
     var listarCompraDia = function () {
         chamaPagina(url.listarCompraDia);
     };
-    var detalheCompra = function (idCompra) {
-        chamaPaginaComIdentificador(url.detalheCompra, { idCompra: idCompra });
+    var detalheCompra = function (idCompra, paginaAnterior) {
+        chamaPaginaComIdentificador(url.detalheCompra, { idCompra: idCompra, paginaAnterior: paginaAnterior });
     };
     var editarCompra = function (idCompra) {
         chamaPaginaComIdentificador(url.editarCompra, { IdCompra: idCompra });
@@ -90,6 +94,7 @@ var AjaxJsCompra = (function ($) {
         init: init,
         historicoCompra: historicoCompra,
         listarCompraSemana: listarCompraSemana,
+        listarCompra: listarCompra,
         listarCompraMes: listarCompraMes,
         listarCompraDia: listarCompraDia,
         inserirCompra: inserirCompra,

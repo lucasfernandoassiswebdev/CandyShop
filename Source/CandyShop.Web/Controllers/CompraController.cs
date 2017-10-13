@@ -1,6 +1,7 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
+using CandyShop.Web.Helpers;
 using System;
 using System.Net;
 using System.Web.Mvc;
@@ -114,12 +115,13 @@ namespace CandyShop.Web.Controllers
 
         [HttpGet]
         [UserFilterResult]
-        public ActionResult Detalhes(int idCompra)
+        public ActionResult Detalhes(int idCompra, string paginaAnterior)
         {
             var response = _appCompra.SelecionarCompra(idCompra);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro ao detalhar compra, ", response.ContentAsString);
-
+            var a = paginaAnterior.LastWord();
+            ViewBag.endereco = a.Count > 1 ? $"AjaxJsCompra.listarCompra{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})" : $"AjaxJsCompra.listarCompra{paginaAnterior.LastWord()[0]}()";
             return View(response.Content);
         }
 

@@ -38,8 +38,8 @@ namespace CandyShop.Web.Controllers
             if (result.Status != HttpStatusCode.OK)
                 return Content("Erro ao localizar produto");
             var a = paginaAnterior.LastWord();
-            ViewBag.endereco = a.Count > 1 ? $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})" : $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}()";
-            ViewBag.enderecoConclusao = a.Count > 1 ? $"listarPagamento{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})" : $"listarPagamento{paginaAnterior.LastWord()[0]}()";
+            ViewBag.endereco = a.Count > 1 ? $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})" : $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}";
+            ViewBag.enderecoConclusao = a.Count > 1 ? $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]},{paginaAnterior.LastWord()[1]}" : $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}";
             return View(result.Content);
         }
 

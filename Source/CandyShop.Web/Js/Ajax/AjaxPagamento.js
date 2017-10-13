@@ -50,7 +50,7 @@
         chamaPaginaComIdentificador(url.editarPagamento, { idPagamento: idPagamento, paginaAnterior: paginaAnterior});
     }
 
-    var concluirEdicaoPagamento = function(paginaAnterior) {
+    var concluirEdicaoPagamento = function(paginaAnterior, parameter) {
         var pagamento = {
             IdPagamento: $("#IdPagamento").val(),
             ValorPagamento: $("#valorPago").val().replace("R$ ", ""),
@@ -58,7 +58,11 @@
         };
         $.post(url.concluirEdicaoPagamento, pagamento)
             .done(function(data) {
-                if (paginaAnterior === "function") {
+                console.log(typeof paginaAnterior);
+                if (typeof paginaAnterior === "function") {
+                    if (parameter != null) {
+                        paginaAnterior(parameter);
+                    }
                     paginaAnterior();
                 }
                 Materialize.toast(data,4000);
