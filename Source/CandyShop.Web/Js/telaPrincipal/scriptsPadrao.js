@@ -78,6 +78,8 @@ $(document).ready(function () {
             return;
         }
         AjaxJsUsuario.trocarSenha();
+        $("#confirmaNovaSenha").val("");
+        $("#novaSenha").val("");
         $("#trocaSenha").modal("close");
         $("#novaSenha").removeAttr("disabled");
     });
@@ -89,6 +91,8 @@ $(document).ready(function () {
                 return;
             }
             AjaxJsUsuario.trocarSenha();
+            $("#confirmaNovaSenha").val("");
+            $("#novaSenha").val("");
             $("#trocaSenha").modal("close");
             $("#novaSenha").removeAttr("disabled");
         }
