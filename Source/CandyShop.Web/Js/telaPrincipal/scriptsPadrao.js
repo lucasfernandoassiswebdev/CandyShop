@@ -27,7 +27,6 @@ $(document).ready(function () {
         $("#novaSenha").removeAttr("disabled");
         $("#logar").attr("disabled", "disabled");
         $("#TrocarSenha").attr("disabled", "disabled");
-
     });
 
     /* Quando o botão de adicionar um item no carrinho é pressionado, as variáveis que montarão
