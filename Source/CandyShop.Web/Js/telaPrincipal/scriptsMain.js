@@ -3,10 +3,6 @@
     $(".button-collapse").sideNav();
     $("select").material_select();
     $(".caret").hide();
-    $(".modal").modal({
-        dismissible: false,
-        opacity: .3
-    });
 
     //fechando modals ao clicar 2 vezes fora
     $("html,body").dblclick(function (e) {

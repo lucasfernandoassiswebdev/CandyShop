@@ -24,7 +24,7 @@ $(document).ready(function () {
     $(".modal-close").not($("#editarQuantidade")).click(function () {
         $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha, #cpf, #senha").val("");
         $("#novaSenha").removeAttr("disabled");
-        $("#logar").attr('disabled', 'disabled');
+        $("#logar").attr("disabled", "disabled");
     });
 
     /* Quando o botão de adicionar um item no carrinho é pressionado, as variáveis que montarão
