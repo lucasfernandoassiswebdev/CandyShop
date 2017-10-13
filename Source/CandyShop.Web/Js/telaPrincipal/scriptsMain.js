@@ -7,13 +7,11 @@
         if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") || $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant")) {
             return false;
         }
-
-        $("#modalCarrinho").modal("close");
-        $("#modalQuantidade").modal("close");
-        $("#modalLogin").modal("close");
-        $("#modalQuantidade").modal("close");
-        $("#modalEditarQuantidade").modal("close");
-        $("#trocaSenha").modal("close");
+        $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha, #cpf, #senha").val("");
+        $("#novaSenha").removeAttr("disabled");
+        $("#logar, #TrocarSenha").attr("disabled", "disabled");
+        $("#modalCarrinho, #modalQuantidade, #modalLogin, #modalQuantidade, #modalEditarQuantidade, #trocaSenha").modal("close");
+       
     });
 });
 

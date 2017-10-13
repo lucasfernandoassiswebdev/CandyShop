@@ -93,7 +93,6 @@ $(document).ready(function () {
         }
         AjaxJsUsuario.trocarSenha();
         $("#trocaSenha").modal("close");
-        $("#novaSenha").removeAttr("disabled");
     });
 
     // Adicionando os itens do localstorage no carrinho
