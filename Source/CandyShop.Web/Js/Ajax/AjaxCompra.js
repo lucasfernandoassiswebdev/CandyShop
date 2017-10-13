@@ -11,27 +11,24 @@ var AjaxJsCompra = (function ($) {
     var inserirCompra = function () {
         var listaProdutos = [];
         var produto;
-        var produtos = $('.collection li');
+        var produtos = $(".collection li");
         var i = 1;
-        //var j = 0;
         $.each(produtos, function () {
             produto = {
-                Produto: { IdProduto: $('li:nth-child(' + i + ') span').attr('data-id') },
-                QtdeCompra: $('li:nth-child(' + i + ') p').attr('data-Quantidade')
+                Produto: { IdProduto: $("li:nth-child(" + i + ") span").attr("data-id") },
+                QtdeCompra: $("li:nth-child(" + i + ") p").attr("data-Quantidade")
             };
             listaProdutos.push(produto);
             i++;
-            //j++;
         });
-        console.log(listaProdutos);
         var compra = { Itens: listaProdutos };
 
         $.post(url.inserirCompra, compra)
             .done(function (message) {
                 $.get(url.navbar)
                     .done(function (data) {
-                        $('body').slideUp(function () {
-                            $('body').hide().html(data).slideDown(function () {
+                        $("body").slideUp(function () {
+                            $("body").hide().html(data).slideDown(function () {
                                 Materialize.toast(message, 4000);
                             });
                         });
@@ -39,7 +36,7 @@ var AjaxJsCompra = (function ($) {
                         console.log(xhr.responseText);
                     });
                 if (message === "Sua compra foi registrada com sucesso") {
-                    localStorage.removeItem('listaProdutos');
+                    localStorage.removeItem("listaProdutos");
                 }
 
             })
@@ -69,10 +66,10 @@ var AjaxJsCompra = (function ($) {
     };
     var concluirEdicaoCompra = function (idCompra, cpfUsuario) {
         var listaProdutos = [], i = 3;
-        $('select').each(function () {
+        $("select").each(function () {
             var itemCompra = {
                 Id: $(this).val(),
-                QtdeProduto: $('input:eq(' + i + ')').val()
+                QtdeProduto: $("input:eq(" + i + ")").val()
             };
             listaProdutos.push(itemCompra);
             i++;
@@ -80,7 +77,7 @@ var AjaxJsCompra = (function ($) {
 
         var compra = {
             IdCompra: idCompra,
-            DataCompra: $('input:eq(0)').val() + $('input:eq(1)').val(),
+            DataCompra: $("input:eq(0)").val() + $("input:eq(1)").val(),
             Usuario: {
                 Cpf: cpfUsuario
             },

@@ -47,9 +47,9 @@ namespace CandyShop.Core.Services.Usuario
             _usuarioRepository.EditarUsuario(usuario);
         }
 
-        public int VerificaLogin(Usuario usuario)
+        public string VerificaLogin(Usuario usuario)
         {
-            var retorno = _usuarioRepository.VerificaLogin(usuario) == 1 ? 1 : 0;
+            var retorno = _usuarioRepository.VerificaLogin(usuario) == 1 ? "Logado com sucesso!" : "Login ou senha incorretos";
             return retorno;
         }
 

@@ -1,6 +1,5 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
-using Newtonsoft.Json;
 using System.Net;
 using System.Web.Mvc;
 
@@ -68,15 +67,9 @@ namespace CandyShop.Web.Controllers
         public ActionResult Logar(UsuarioViewModel usuario)
         {
             var response = _appUsuario.VerificaLogin(usuario);
-            if (!response.IsSuccessStatusCode)
-                return Content("1"); //Content("CPF ou senha incorretos!");
+            if (response.Status != HttpStatusCode.OK)
+                return Content(response.Content); 
 
-            var model = JsonConvert.DeserializeObject<int>(response.Content.ReadAsStringAsync().Result);
-
-            if (model != 1)
-            {
-                return Content("1");
-            }
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
             var user = _appUsuario.SelecionarUsuario(cpf);
             if (user.Status != HttpStatusCode.OK)
@@ -86,7 +79,7 @@ namespace CandyShop.Web.Controllers
             Session["nomeUsuario"] = user.Content.NomeUsuario;
             Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
-            return View("NavBar");
+            return Content(response.Content);
         }
     }
 }
