@@ -81,7 +81,6 @@ $(document).ready(function () {
         $("#confirmaNovaSenha").val("");
         $("#novaSenha").val("");
         $("#trocaSenha").modal("close");
-        $("#novaSenha").removeAttr("disabled");
     });
 
     $("#confirmaNovaSenha").keydown(function (e) {
