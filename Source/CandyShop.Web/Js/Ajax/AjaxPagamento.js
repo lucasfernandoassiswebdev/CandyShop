@@ -46,11 +46,11 @@
             });        
     };
 
-    var editarPagamento = function(idPagamento) {
-        chamaPaginaComIdentificador(url.editarPagamento, { idPagamento: idPagamento });
+    var editarPagamento = function(idPagamento, paginaAnterior) {
+        chamaPaginaComIdentificador(url.editarPagamento, { idPagamento: idPagamento, paginaAnterior: paginaAnterior});
     }
 
-    var concluirEdicaoPagamento = function() {
+    var concluirEdicaoPagamento = function(paginaAnterior) {
         var pagamento = {
             IdPagamento: $("#IdPagamento").val(),
             ValorPagamento: $("#valorPago").val().replace("R$ ", ""),
@@ -58,7 +58,9 @@
         };
         $.post(url.concluirEdicaoPagamento, pagamento)
             .done(function(data) {
-                chamaPagina(url.listarPagamento);
+                if (paginaAnterior === "function") {
+                    paginaAnterior();
+                }
                 Materialize.toast(data,4000);
             }).fail(function(xhr) {
                 Materialize.toast(xhr.responseText, 4000);
@@ -69,12 +71,12 @@
         init: init,
         //pagamento
         listarPagamento: listarPagamento,
-        listarPagamentoSemana: listarPagamentoSemana,
         detalhePagamento: detalhePagamento,
         inserirPagamento: inserirPagamento,
         concluirPagamento: concluirPagamento,
-        listarPagamentoMes: listarPagamentoMes,
         listarPagamentoDia: listarPagamentoDia,
+        listarPagamentoSemana: listarPagamentoSemana,
+        listarPagamentoMes: listarPagamentoMes,
         editarPagamento: editarPagamento,
         concluirEdicaoPagamento: concluirEdicaoPagamento
     }

@@ -39,8 +39,8 @@
                 </div>
             </div>
             <div class="row center">
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a id="confirmarPagamento" class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirEdicaoPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
+                <a class="waves-effect waves-light btn-large" onclick="@ViewBag.endereco"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a id="confirmarPagamento" class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirEdicaoPagamento(@ViewBag.enderecoConclusao)"><i class="material-icons left">add_circle</i>Confirmar</a>
             </div>
         </form>
     </div>

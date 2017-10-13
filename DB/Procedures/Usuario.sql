@@ -1,4 +1,4 @@
-USE CandyShop
+
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
@@ -112,7 +112,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdSe
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_UpdSenha]
-	@senha varchar(8),
+	@senha varchar(12),
 	@cpf varchar(11)
 	AS
 	/*

@@ -1,6 +1,7 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
+using CandyShop.Web.Helpers;
 using System;
 using System.Net;
 using System.Web.Mvc;
@@ -22,7 +23,7 @@ namespace CandyShop.Web.Controllers
         public ActionResult Index()
         {
             return View();
-        }       
+        }
 
         [UserFilterResult]
         public ActionResult Inserir()
@@ -31,11 +32,14 @@ namespace CandyShop.Web.Controllers
         }
 
         [AdminFilterResult]
-        public ActionResult Editar(int idPagamento)
+        public ActionResult Editar(int idPagamento, string paginaAnterior)
         {
             var result = _appPagamento.SelecionarPagamento(idPagamento);
             if (result.Status != HttpStatusCode.OK)
                 return Content("Erro ao localizar produto");
+            var a = paginaAnterior.LastWord();
+            ViewBag.endereco = a.Count > 1 ? $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})" : $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}()";
+            ViewBag.enderecoConclusao = a.Count > 1 ? $"listarPagamento{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})" : $"listarPagamento{paginaAnterior.LastWord()[0]}()";
             return View(result.Content);
         }
 
