@@ -30,19 +30,12 @@ namespace CandyShop.WebAPI.Controllers
         [HttpPost, Route("api/Usuario/login")]
         public IHttpActionResult PostLogin(Usuario usuario)
         {
-            if (_notification.HasNotification())
-                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-
             usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
             var user = _usuarioRepository.SelecionarUsuario(usuario.Cpf);
-
             if (user == null || user.Ativo == "I")
                 return Content(HttpStatusCode.BadRequest, "O usuário não existe ou foi desativado");
 
-            if (user.Ativo != "I")
-                return Ok(_usuarioService.VerificaLogin(usuario));
-
-            return BadRequest();
+            return _usuarioService.VerificaLogin(usuario) != 0 ? Content(HttpStatusCode.OK, "Logado com sucesso") : Content(HttpStatusCode.BadRequest, "Login ou senha incorretos");
         }
 
         public IHttpActionResult Get()
@@ -53,13 +46,13 @@ namespace CandyShop.WebAPI.Controllers
         /* Quando mais de um método com o mesmo verbo HTTP(no caso o GET) é necessário, 
            são definidas rotas como no exemplo abaixo, essas rotas determinarão qual dos 
            métodos da API será chamado */
-        [HttpGet, Route("api/Usuario/Devedores")] 
+        [HttpGet, Route("api/Usuario/Devedores")]
         public IHttpActionResult GetUsuariosDivida()
         {
             return Ok(_usuarioRepository.ListarUsuarioDivida());
         }
 
-        [HttpGet, Route("api/Usuario/inativos")] 
+        [HttpGet, Route("api/Usuario/inativos")]
         public IHttpActionResult GetUsuariosInativos()
         {
             return Ok(_usuarioRepository.ListarUsuarioInativo());

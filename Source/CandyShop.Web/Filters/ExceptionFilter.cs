@@ -13,7 +13,7 @@ namespace CandyShop.Web.Filters
             {
                 Directory.CreateDirectory(path);
                 var arquivo = path + $@"\{DateTime.Now:yyyyMMddHHmmss}.txt";
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(arquivo))
+                using (StreamWriter file = new StreamWriter(arquivo))
                 {
                     var texto = filterContext.Exception.Source + Environment.NewLine + filterContext.Exception.Message;
                     file.WriteLine(texto);
@@ -22,7 +22,7 @@ namespace CandyShop.Web.Filters
             else
             {
                 var arquivo = path + $@"\{DateTime.Now:yyyyMMddHHmmss}.txt";
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(arquivo))
+                using (StreamWriter file = new StreamWriter(arquivo))
                 {
                     var texto = filterContext.Exception.Source + Environment.NewLine + filterContext.Exception.Message;
                     file.WriteLine(texto);
