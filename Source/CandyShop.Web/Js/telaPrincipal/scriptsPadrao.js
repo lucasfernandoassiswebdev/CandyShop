@@ -81,7 +81,6 @@ $(document).ready(function () {
         if ($(this).val() == $("#novaSenha").val())
             $("#TrocarSenha").removeAttr("disabled");
         else {
-            $("#TrocarSenha").attr("disabled", "disabled");
             Materialize.toast("As senhas não conferem!", 4000);
         }
         if ($(this).val() == "")
@@ -96,7 +95,6 @@ $(document).ready(function () {
         AjaxJsUsuario.trocarSenha();
         $("#trocaSenha").modal("close");
         $("#novaSenha").removeAttr("disabled");
-        $(this).Attr("disabled", "disabled");
     });
 
     // Adicionando os itens do localstorage no carrinho
