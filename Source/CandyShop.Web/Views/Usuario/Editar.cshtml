@@ -30,7 +30,6 @@
             var tamanhoCampo = $(this).val().length;
             var valorInserido = $(this).val();
             valorInserido = valorInserido.replace("R$", "").replace(",", ".");
-            console.log('tamanho do campo: ' + tamanhoCampo + ' valor inserido: ' + valorInserido);
             if (parseInt(tamanhoCampo) > 9 || parseInt(tamanhoCampo) <= 0 || parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null) {
                 $(".botaoEditar").attr("disabled", "disabled");
                 Materialize.toast("Valor inserido é inválido", 3000);

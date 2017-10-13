@@ -21,7 +21,6 @@ var AjaxJsCompra = (function ($) {
             listaProdutos.push(produto);
             i++;
         });
-        console.log(listaProdutos);
         var compra = { Itens: listaProdutos };
 
         $.post(url.inserirCompra, compra)

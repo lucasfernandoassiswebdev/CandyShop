@@ -34,7 +34,6 @@
         var usuario = { Cpf: $("#cpf").val(), SenhaUsuario: $("#senha").val() };
         $.post(url.verificaLogin, usuario)
             .done(function (res) {
-                console.log(res);
                 $.get(url.padrao)
                     .done(function (data) {
                         $("body").slideUp("slow", function () {

@@ -7,8 +7,7 @@ var imagem, preco, nome, imagem, quantidade = 0,
     quantidadeDisponivel, Id, totalCompra = 0;
 
 $(document).ready(function () {
-
-    //pesquisa por nome é feita quando se aperta a tecla "enter" na barra de pesquisa
+    //pesquisa por nome de produto é feita quando se aperta a tecla "enter" na barra de pesquisa
     $(".input-field #search").keydown(function (e) {
         if (e.which === 13) {
             AjaxJsShop.listarProdutoPorNome($(this).val());
@@ -28,9 +27,6 @@ $(document).ready(function () {
         $("#logar").attr('disabled', 'disabled');
     });
 
-    $(".tooltipped").tooltip({ delay: 50 });
-    $(".button-collapse").sideNav();
-
     /* Quando o botão de adicionar um item no carrinho é pressionado, as variáveis que montarão
        o objeto do produto são preenchidas */
     $("#DivGrid").on("click", ".btn-floating", function () {
@@ -44,7 +40,7 @@ $(document).ready(function () {
     // Verificando senhas e chamando ajax pra efetivar alteracoes    
     var ilegais = /[\W_]/;
 
-    $("#novaSenha").keyup(function () {        
+    $("#novaSenha").keyup(function () {
         if ($(this).val().length > 12 || $(this).val().length <= 0) {
             Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
             $(this).focus();
@@ -55,7 +51,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#novaSenha").on('paste', function () {        
+    $("#novaSenha").on("paste", function () {
         if ($(this).val().length > 12 || $(this).val().length <= 0) {
             Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
             $(this).focus();
@@ -254,8 +250,8 @@ $(document).ready(function () {
         }));
         i++;
 
-        // Edita total compra
-        /* Como o valor vem na lista do localStorage com "," ao invés de ".", a a troca deve ser feita
+        /* Edita total compra
+           Como o valor vem na lista do localStorage com "," ao invés de ".", a a troca deve ser feita
            para que a conversão para double funcione */
         var precoConcertado = preco.replace(",", ".");
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
@@ -287,6 +283,7 @@ $(document).ready(function () {
     // Colocando foco no modal quantidade
     $("#modalQuantidade").modal({
         ready: function () {
+            alert("batata");
             $("#quantidade").focus();
         }
     });
@@ -296,7 +293,7 @@ $(document).ready(function () {
         ready: function () {
             $("#cpf").focus();
         }
-    });    
+    });
 
     // Colocando foco no modal trocaSenha
     $("#trocaSenha").modal({
@@ -306,17 +303,17 @@ $(document).ready(function () {
     });
 
     //desabilitar botao de login se campo de cpf estiver vazio
-    $("#senha").blur(function() {
+    $("#senha").blur(function () {
         if ($(this).val().length > 0 && $('#cpf').val().length > 0) {
             $("#logar").removeAttr('disabled');
         }
     });
+
     $("#cpf").blur(function () {
         if ($(this).val().length > 0 && $('#senha').val().length > 0) {
             $("#logar").removeAttr('disabled');
         }
     });
-
 
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
     $("#quantidade").keyup(function () {
@@ -328,7 +325,7 @@ $(document).ready(function () {
             $("#adicionaCarrinho").removeAttr("disabled");
     });
 
-    $("#quantidade, #quantidadeEdit").keydown(function(e) {
+    $("#quantidade, #quantidadeEdit").keydown(function (e) {
         var tamanho = $(this).val().length;
         if (tamanho > 2 && e.which !== 8) {
             e.preventDefault();
@@ -399,7 +396,6 @@ $(document).ready(function () {
     $("#quantidadeEdit").keyup(function () {
         FilterInput(event);
         quantidade = $("#quantidadeEdit").val();
-        console.log(quantidade + ' quantidade disponível: ' + quantidadeDisponivel);
         if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
             $("#editarQuantidade").attr("disabled", "disabled");
         else
@@ -484,6 +480,30 @@ $(document).ready(function () {
             }
         }
     });
+
+    //validando campo de CPF
+    $("#cpf").keydown(function (e) {
+        mcpf($("#cpf").val());
+        if (e.which == 13)
+            $("#senha").focus();
+    });
+
+    $("#cpf").on("blur", function () {
+        if ($("#cpf").val().length > 14) {
+            $("#cpf").val($("#cpf").val().substr(0, 13));
+            $("#cpf").keydown();
+        }
+    });
+
+    $("#senha").keydown(function (e) {
+        if (e.which == 13)
+            AjaxJsShop.verificaLogin();
+    });
+
+    $("#novaSenha").keydown(function (e) {
+        if (e.which == 13)
+            $("#confirmaNovaSenha").focus();
+    });
 });
 
 // Função que remove caracteres que não sejam numéricos
@@ -516,4 +536,12 @@ function handlePaste(e) {
         e.stopPropagation();
         e.preventDefault();
     }
+}
+
+function mcpf(v) {
+    v = v.replace(/\D/g, "");
+    v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    $("#cpf").val(v);
 }

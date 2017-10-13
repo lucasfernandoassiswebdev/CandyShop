@@ -51,7 +51,6 @@
     }
 
     var concluirEdicaoPagamento = function() {
-        console.log($("#Cpf").val());
         var pagamento = {
             IdPagamento: $("#IdPagamento").val(),
             ValorPagamento: $("#valorPago").val(),

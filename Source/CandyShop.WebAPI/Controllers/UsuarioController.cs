@@ -50,13 +50,16 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_usuarioRepository.ListarUsuario());
         }
 
-        [HttpGet, Route("api/Usuario/Devedores")] // Colocar quando controller tiver mais de um metodos GET
+        /* Quando mais de um método com o mesmo verbo HTTP(no caso o GET) é necessário, 
+           são definidas rotas como no exemplo abaixo, essas rotas determinarão qual dos 
+           métodos da API será chamado */
+        [HttpGet, Route("api/Usuario/Devedores")] 
         public IHttpActionResult GetUsuariosDivida()
         {
             return Ok(_usuarioRepository.ListarUsuarioDivida());
         }
 
-        [HttpGet, Route("api/Usuario/inativos")] // Colocar quando controller tiver mais de um metodos GET
+        [HttpGet, Route("api/Usuario/inativos")] 
         public IHttpActionResult GetUsuariosInativos()
         {
             return Ok(_usuarioRepository.ListarUsuarioInativo());
