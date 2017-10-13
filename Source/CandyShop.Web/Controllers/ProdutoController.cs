@@ -107,19 +107,6 @@ namespace CandyShop.Web.Controllers
             TempData["nomeLista"] = "Produtos relacionados";
             return View("ListaProdutos", response.Content);
         }
-
-        //[AdminFilterResult]
-        //public ActionResult ListarCategoria(string categoria)
-        //{
-        //    var response = _appProduto.ListarCategoria(categoria);
-        //    if (response.Status != HttpStatusCode.OK)
-        //        return Content($"Erro: {response.Status}");
-
-        //    TempData["nomeLista"] = "Produtos por Categoria";
-        //    TempData["caminhoImagensProdutos"] = _pathProduto;
-        //    return View("ListaProdutos", response.Content);
-        //}
-
         #endregion
 
         #region Execucoes
@@ -132,7 +119,7 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro. {response.ContentAsString}");
 
             //salvando todas as imagens que o usuário inseriu
-            int cont = 0;
+            var cont = 0;
             if (produto.ImagemA != null)
             {
                 string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
@@ -144,11 +131,10 @@ namespace CandyShop.Web.Controllers
                     var bytes = Convert.FromBase64String(produto.ImagemA);
 
                     Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
-                    
+
                     if (!Directory.Exists(_pathProduto))
-                    {
                         Directory.CreateDirectory(_pathProduto);
-                    }
+
 
                     var caminho = $"{_pathProduto}/{response.Content}_A.jpg";
 
@@ -171,12 +157,12 @@ namespace CandyShop.Web.Controllers
                     if (!produto.ImagemB.StartsWith(prefixo)) continue;
                     produto.ImagemB = produto.ImagemB.Substring(prefixo.Length);
 
-                    byte[] bytes = Convert.FromBase64String(produto.ImagemB);
+                    var bytes = Convert.FromBase64String(produto.ImagemB);
 
                     Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
 
-                    string caminho = $"{_pathProduto}/{response.Content}_B.jpg";
+                    var caminho = $"{_pathProduto}/{response.Content}_B.jpg";
 
                     imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                     cont++;
@@ -198,11 +184,11 @@ namespace CandyShop.Web.Controllers
                     if (!produto.ImagemC.StartsWith(prefixo)) continue;
                     produto.ImagemC = produto.ImagemC.Substring(prefixo.Length);
 
-                    byte[] bytes = Convert.FromBase64String(produto.ImagemC);
+                    var bytes = Convert.FromBase64String(produto.ImagemC);
 
                     Image imagem = (Bitmap)((new ImageConverter()).ConvertFrom(bytes));
 
-                    string caminho = $"{_pathProduto}/{response.Content}_C.jpg";
+                    var caminho = $"{_pathProduto}/{response.Content}_C.jpg";
 
                     imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                     cont++;
@@ -215,7 +201,7 @@ namespace CandyShop.Web.Controllers
                     System.IO.File.Delete(filePath);
             }
 
-            if (cont != 0) return Content("Produto cadastrado com sucesso!!");
+            if (cont != 0 && produto.ImagemA == null) return Content("Produto cadastrado com sucesso!!");
             {
                 //pegando a imagem na aplicação e transformando em base 64
                 var imagem = ConvertTo64();
@@ -275,7 +261,7 @@ namespace CandyShop.Web.Controllers
                     }
             }
 
-            if (produto.ImagemC != null) 
+            if (produto.ImagemC != null)
             {
                 string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
                 foreach (var prefixo in prefixos)
@@ -322,9 +308,7 @@ namespace CandyShop.Web.Controllers
         public ActionResult DesativarProdutoConfirmado(ProdutoViewModel produto)
         {
             var response = _appProduto.DesativarProduto(produto);
-            if (response.Status != HttpStatusCode.OK)
-                return Content($"Erro: {response.Status}");
-            return Content("Produto desativado com sucesso!");
+            return Content(response.Status != HttpStatusCode.OK ? $"Erro: {response.Status}" : "Produto desativado com sucesso!");
         }
         #endregion
 
@@ -335,10 +319,10 @@ namespace CandyShop.Web.Controllers
                 using (MemoryStream m = new MemoryStream())
                 {
                     image.Save(m, image.RawFormat);
-                    byte[] imageBytes = m.ToArray();
+                    var imageBytes = m.ToArray();
 
                     // Convert byte[] to Base64 String
-                    string base64String = Convert.ToBase64String(imageBytes);
+                    var base64String = Convert.ToBase64String(imageBytes);
                     return base64String;
                 }
             }
