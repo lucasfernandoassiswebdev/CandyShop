@@ -10,8 +10,8 @@
         public string Classificacao { get; set; }
 
 
-        /* As linhas de codigo abaixo é onde fica todas as verificações de usuario como 
-            validar cpf senha  etc */
+        /* As linhas de codigo abaixo é onde ficam todas as verificações de usuario como 
+            validar cpf, senha, tamanho dos campos  etc */
         public bool VerificaInsercao(INotification notification)
         {
             if (!ValidaCpf(Cpf))
@@ -20,6 +20,7 @@
                 notification.Add("Nome do Usuario invalido ");
             return !notification.HasNotification();
         }
+
         public bool VerificaEdicao(INotification notification)
         {
             if (!ValidaCpf(Cpf))
@@ -38,7 +39,7 @@
 
         //Função de calculo para verificar se o cpf é valido
 
-        private bool ValidaCpf(string cpf)
+        private static bool ValidaCpf(string cpf)
         {
             var mt1 = new[] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             var mt2 = new[] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
