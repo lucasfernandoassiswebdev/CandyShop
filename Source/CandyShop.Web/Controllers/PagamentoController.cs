@@ -118,6 +118,7 @@ namespace CandyShop.Web.Controllers
             else return Content("Erro. " + response.ContentAsString);
             return Content("Pagamento realizado com sucesso!!");
         }
+
         [AdminFilterResult]
         public ActionResult EditarPagamento(PagamentoViewModel pagamento)
         {
@@ -126,13 +127,12 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
-            if (Session["Login"].ToString().Equals(pagamento.Usuario.Cpf))
-            {
-                var user = _appUsuario.SelecionarUsuario(pagamento.Usuario.Cpf);
-                if (user.Status != HttpStatusCode.OK)
-                    return Content("Erro ao atualizar seu saldo");
-                Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
-            }
+            if (!Session["Login"].ToString().Equals(pagamento.Usuario.Cpf))
+                return Content("Pagamento editado com sucesso!!");
+            var user = _appUsuario.SelecionarUsuario(pagamento.Usuario.Cpf);
+            if (user.Status != HttpStatusCode.OK)
+                return Content("Erro ao atualizar seu saldo");
+            Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
 
             return Content("Pagamento editado com sucesso!!");
         }

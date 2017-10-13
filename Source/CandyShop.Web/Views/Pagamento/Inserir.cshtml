@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a id="confirmarPagamento" disabled class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
+                <a id="confirmarPagamento" disabled class="waves-effect waves-light btn-large"><i class="material-icons left">add_circle</i>Confirmar</a>
             </div>
         </div>
     </div>
@@ -102,5 +102,9 @@
         if (e.which === 13) {
             AjaxJsPagamento.concluirPagamento();
         }
+    });
+
+    $("#confirmarPagamento").click(function () {
+        AjaxJsPagamento.concluirPagamento();
     });
 </script>

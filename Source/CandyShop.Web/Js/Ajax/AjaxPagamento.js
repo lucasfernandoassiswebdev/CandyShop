@@ -26,8 +26,8 @@
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
-    var concluirPagamento = function () {        
-        var pagamento = { ValorPagamento: $("#valorPago").val()};
+    var concluirPagamento = function () {
+        var pagamento = {ValorPagamento: $("#valorPago").val().replace("R$ ","")}
         $.post(url.concluirPagamento, pagamento)            
             .done(function (message) {
                 $.get(url.padrao)
@@ -53,7 +53,7 @@
     var concluirEdicaoPagamento = function() {
         var pagamento = {
             IdPagamento: $("#IdPagamento").val(),
-            ValorPagamento: $("#valorPago").val(),
+            ValorPagamento: $("#valorPago").val().replace("R$ ", ""),
             Usuario: { Cpf: $("#Cpf").val() } 
         };
         $.post(url.concluirEdicaoPagamento, pagamento)

@@ -3,20 +3,28 @@
     $("input").characterCounter();
     $(".tooltipped").tooltip({ delay: 50 });
 
-    $('#valorPago').maskMoney({
-        prefix: 'R$ ',
+    $("#valorPago").keydown(function (e) {
+        var tamanho = $(this).val().length;
+        if (tamanho > 9 && e.which !== 8) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    $("#valorPago").maskMoney({
+        prefix: "R$ ",
         allowNegative: true,
-        thousands: '.',
-        decimal: ',',
+        thousands: ".",
+        decimal: ",",
         affixesStay: false
     });
 
-    $('#valorPago').maskMoney('mask');
+    $("#valorPago").maskMoney("mask");
 
     $("#valorPago").keyup(function () {
         var valor = $(this).val().length;
-        var pagamento = $(this).val();
-        pagamento = pagamento.replace("R$", "").replace(",", ".");
+        var pagamento = $(this).val().replace("R$","").replace(",",".");
+
         if (parseInt(valor) > 9 || parseInt(valor) <= 0 || parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null) {
             $("#confirmarPagamento").attr("disabled", "disabled");
             Materialize.toast("Valor pagamento inválido", 3000);
@@ -26,10 +34,11 @@
     });
 
     $("#valorPago").blur(function () {
+        $("#valorPago").maskMoney("mask");
+
         var valor = $(this).val().length;
         var pagamento = $(this).val();
 
-        pagamento = pagamento.replace("R$", "").replace(",", ".");
         if (parseInt(valor) > 9 || parseInt(valor) <= 0 || parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null) {
             $("#confirmarPagamento").attr("disabled", "disabled");
         } else
@@ -40,7 +49,6 @@
         var valor = $(this).val().length;
         var pagamento = $(this).val();
 
-        pagamento = pagamento.replace("R$", "").replace(",", ".");
         if (parseInt(valor) > 9 || parseInt(valor) <= 0 || parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null) {
             $("#confirmarPagamento").attr("disabled", "disabled");
             Materialize.toast("Valor pagamento inválido", 2000);

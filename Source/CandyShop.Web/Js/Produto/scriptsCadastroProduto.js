@@ -194,12 +194,17 @@ function handlePaste(e) {
     var clipboardData = e.clipboardData || window.clipboardData;
     var pastedData = clipboardData.getData("Text").toUpperCase();
 
-    if (pastedData.indexOf("E") > -1) {
+    if (pastedData.indexOf("e") > -1) {
         e.stopPropagation();
         e.preventDefault();
     }
 
     if (pastedData.indexOf("-") > -1) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    if (pastedData.indexOf(".") > -1) {
         e.stopPropagation();
         e.preventDefault();
     }
