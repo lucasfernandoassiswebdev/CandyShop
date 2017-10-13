@@ -37,9 +37,21 @@
         $("#valorPago").maskMoney("mask");
 
         var valor = $(this).val().length;
-        var pagamento = $(this).val();
+        var pagamento = $(this).val().replace("R$", "").replace(",", ".");
 
         if (parseInt(valor) > 9 || parseInt(valor) <= 0 || parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null) {
+            $("#confirmarPagamento").attr("disabled", "disabled");
+        }
+        else
+            $("#confirmarPagamento").removeAttr("disabled");
+    });
+
+    $("#valorPago").focus(function () {
+        var valor = $(this).val().length;
+        var pagamento = $(this).val();
+
+        pagamento = pagamento.replace("R$", "").replace(",", ".");
+        if (parseInt(valor) > 9 || $(this).val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
             $("#confirmarPagamento").attr("disabled", "disabled");
         } else
             $("#confirmarPagamento").removeAttr("disabled");

@@ -69,7 +69,6 @@
             var pagamento = $(this).val();
 
             pagamento = pagamento.replace("R$", "").replace(",", ".");
-            console.log(valor + ' valor inserido: ' + pagamento);
             if (parseInt(valor) > 9 || $(this).val() == "" || (parseFloat(pagamento) > 999 || parseFloat(pagamento) <= 0 || pagamento == null)) {
                 $("#confirmarPagamento").attr("disabled", "disabled");
             } else
