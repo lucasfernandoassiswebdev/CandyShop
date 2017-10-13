@@ -311,17 +311,38 @@ $(document).ready(function () {
         }
     });
 
+    // Limpando input senha
+    $("a[href='#modalLogin']:eq(1)").click(function () {
+        $("#senha").val("");
+    });
+
     //desabilitar botao de login se campo de cpf estiver vazio
     $("#senha").blur(function () {
-        if ($(this).val().length > 0 && $('#cpf').val().length > 0) {
-            $("#logar").removeAttr('disabled');
-        }
+        if ($(this).val().length > 5 && $("#cpf").val().length > 13) 
+            $("#logar").removeAttr("disabled");
+        else
+            $("#logar").attr("disabled","disabled");
+    });
+
+    $("#senha").keyup(function () {
+        if ($(this).val().length > 5 && $("#cpf").val().length > 13) 
+            $("#logar").removeAttr("disabled");
+        else
+            $("#logar").attr("disabled", "disabled");
     });
 
     $("#cpf").blur(function () {
-        if ($(this).val().length > 0 && $('#senha').val().length > 0) {
-            $("#logar").removeAttr('disabled');
-        }
+        if ($(this).val().length > 13 && $("#senha").val().length > 5) 
+            $("#logar").removeAttr("disabled");
+        else
+            $("#logar").attr("disabled", "disabled");
+    });
+
+    $("#cpf").keyup(function () {
+        if ($(this).val().length > 13 && $("#senha").val().length > 5) 
+            $("#logar").removeAttr("disabled");
+        else
+            $("#logar").attr("disabled", "disabled");
     });
 
     var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
@@ -500,7 +521,6 @@ $(document).ready(function () {
     $("#cpf").on("blur", function () {
         if ($("#cpf").val().length > 14) {
             $("#cpf").val($("#cpf").val().substr(0, 13));
-            $("#cpf").keydown();
         }
     });
 
