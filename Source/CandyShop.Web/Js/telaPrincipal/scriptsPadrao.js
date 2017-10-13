@@ -15,6 +15,7 @@ $(document).ready(function () {
         }
     });
 
+
     // Fechando sideNav quando o usuário selecionar alguma opção
     $(".closeMenu").on("click", function () {
         $(".button-collapse").sideNav("hide");
@@ -25,6 +26,7 @@ $(document).ready(function () {
         $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha, #cpf, #senha").val("");
         $("#novaSenha").removeAttr("disabled");
         $("#logar").attr("disabled", "disabled");
+        $("#TrocarSenha").attr("disabled", "disabled");
     });
 
     /* Quando o botão de adicionar um item no carrinho é pressionado, as variáveis que montarão
@@ -280,25 +282,33 @@ $(document).ready(function () {
         }
     });
 
-    // Colocando foco no modal quantidade
-    $("#modalQuantidade").modal({
-        ready: function () {
-            alert("batata");
-            $("#quantidade").focus();
-        }
-    });
-
-    // Colocando foco no modal login
     $("#modalLogin").modal({
+        dismissible: false,
         ready: function () {
             $("#cpf").focus();
         }
     });
 
+    // Colocando foco no modal quantidade
+    $("#modalQuantidade").modal({
+        dismissible: false,
+        ready: function () {
+            $("#quantidade").focus();
+        }
+    });
+
     // Colocando foco no modal trocaSenha
     $("#trocaSenha").modal({
+        dismissible: false,
         ready: function () {
             $("#novaSenha").focus();
+        }
+    });
+
+    $("#modalEditarQuantidade").modal({
+        dismissible: false,
+        ready: function () {
+            $("#quantidadeEdit").focus();
         }
     });
 
@@ -545,3 +555,4 @@ function mcpf(v) {
     v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     $("#cpf").val(v);
 }
+
