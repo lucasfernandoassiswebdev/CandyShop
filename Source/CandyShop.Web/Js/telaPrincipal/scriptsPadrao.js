@@ -15,7 +15,6 @@ $(document).ready(function () {
         }
     });
 
-
     // Fechando sideNav quando o usuário selecionar alguma opção
     $(".closeMenu").on("click", function () {
         $(".button-collapse").sideNav("hide");
@@ -42,48 +41,35 @@ $(document).ready(function () {
     // Verificando senhas e chamando ajax pra efetivar alteracoes    
     var ilegais = /[\W_]/;
 
-    $("#novaSenha").keyup(function () {
-        if ($(this).val().length > 12 || $(this).val().length <= 0) {
-            Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
-            $(this).focus();
-        }
-        if (ilegais.test($(this).val())) {
-            Materialize.toast("Digite apenas letras e numeros!", 3000);
-            $(this).focus();
-        }
-    });
-
     $("#novaSenha").on("paste", function () {
-        if ($(this).val().length > 12 || $(this).val().length <= 0) {
+        if ($(this).val().length > 12 || $(this).val().length <= 0 || ilegais.test($(this).val())) {
             Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
-            $(this).focus();
-        }
-        if (ilegais.test($(this).val())) {
-            Materialize.toast("Digite apenas letras e numeros!", 3000);
             $(this).focus();
         }
     });
 
     $("#novaSenha").blur(function () {
-        if ($(this).val().length > 12 || $(this).val().length <= 0) {
+        if ($(this).val().length > 12 || $(this).val().length <= 0 || ilegais.test($(this).val())) {
             Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
-            $(this).focus();
-        }
-        if (ilegais.test($(this).val())) {
-            Materialize.toast("Digite apenas letras e numeros!", 3000);
             $(this).focus();
         }
     });
 
     // Verificando se as senhas batem
     $("#confirmaNovaSenha").blur(function () {
-        if ($(this).val() == $("#novaSenha").val())
+        if ($(this).val() == $("#novaSenha").val() || $(this).val() == "")
             $("#TrocarSenha").removeAttr("disabled");
         else {
             Materialize.toast("As senhas não conferem!", 4000);
         }
-        if ($(this).val() == "")
-            $("#novaSenha").removeAttr("disabled");
+    });
+
+    $("#confirmaNovaSenha").keyup(function () {
+        if ($(this).val() == $("#novaSenha").val() || $(this).val() == "")
+            $("#TrocarSenha").removeAttr("disabled");
+        else {
+            $("#TrocarSenha").attr("disabled", "disabled");
+        }
     });
 
     $("#TrocarSenha").click(function () {
@@ -92,7 +78,23 @@ $(document).ready(function () {
             return;
         }
         AjaxJsUsuario.trocarSenha();
+        $("#confirmaNovaSenha").val("");
+        $("#novaSenha").val("");
         $("#trocaSenha").modal("close");
+    });
+
+    $("#confirmaNovaSenha").keydown(function (e) {
+        if (e.which == 13) {
+            if ($("#novaSenha").val().length < 8) {
+                Materialize.toast("Senha deve conter de 8 a 12 caracteres", 3000);
+                return;
+            }
+            AjaxJsUsuario.trocarSenha();
+            $("#confirmaNovaSenha").val("");
+            $("#novaSenha").val("");
+            $("#trocaSenha").modal("close");
+            $("#novaSenha").removeAttr("disabled");
+        }
     });
 
     // Adicionando os itens do localstorage no carrinho
