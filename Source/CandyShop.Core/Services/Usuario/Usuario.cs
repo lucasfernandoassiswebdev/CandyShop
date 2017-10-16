@@ -8,7 +8,8 @@
         public decimal SaldoUsuario { get; set; }
         public string Ativo { get; set; }
         public string Classificacao { get; set; }
-
+        public string Imagem { get; set; }
+        public bool RemoverImagem { get; set; }
 
         /* As linhas de codigo abaixo é onde ficam todas as verificações de usuario como 
             validar cpf, senha, tamanho dos campos  etc */
@@ -53,7 +54,7 @@
                 cpf == "99999999999")
                 return false;
 
-                if (cpf.Length != 11)
+            if (cpf.Length != 11)
                 return false;
 
             var tempCpf = cpf.Substring(0, 9);

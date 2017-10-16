@@ -78,7 +78,7 @@
                 <div class="center">
                     <label for="fotoUsuario">
                         @{ string caminho = @Model.Cpf + ".jpg"; }
-                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@Html.UrlContent(TempData["caminhoImagensUsuarios"], caminho)" alt="imagem não disponível :(" />
+                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src=@Model.Imagem alt="imagem não disponível :(" />
                     </label>
                     <br />
                     <br />

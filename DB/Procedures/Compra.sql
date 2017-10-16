@@ -288,7 +288,6 @@ CREATE PROCEDURE [dbo].[CSSP_SelCompra]
 	END
 GO
 
-
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelDadosCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelDadosCompra]
 GO
@@ -303,15 +302,15 @@ CREATE PROCEDURE [dbo].[CSSP_SelDadosCompra]
 	Objetivo..........: Selecionar dados de uma compra específica
 	Autor.............: SMN - Rafael Morais
  	Data..............: 28/09/2017
-	Ex................: EXEC [dbo].[CSSP_SelDadosCompra] 10
-
+	Ex................: EXEC [dbo].[CSSP_SelDadosCompra] 21
 	*/
 	BEGIN	
 		SELECT  c.IdCompra,
 				c.UsuarioCompra,
 				c.DataCompra,
 				c.ValorCompra,
-				u.NomeUsuario as 'NomeUsuario'
+				u.NomeUsuario,
+				u.Classificacao 
 			FROM [dbo].[Compra] c WITH(NOLOCK)
 				INNER JOIN [dbo].[Usuario] u 
 					ON c.UsuarioCompra = u.Cpf

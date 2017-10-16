@@ -1,5 +1,6 @@
 ﻿namespace CandyShop.Application.ViewModels
 {
+
     public class UsuarioViewModel
     {
         public string Cpf { get; set; }
