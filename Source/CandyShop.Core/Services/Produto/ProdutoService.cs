@@ -1,5 +1,7 @@
 ﻿
 
+using System.Linq;
+
 namespace CandyShop.Core.Services.Produto
 {
     public class ProdutoService : IProdutoService
@@ -35,13 +37,9 @@ namespace CandyShop.Core.Services.Produto
 
             //verificando se já existe um produto com o mesmo nome
             var produtos = _produtoRepository.ListarProdutos();
-            foreach (var item in produtos)
-                if (item.NomeProduto.Equals(produto.NomeProduto) && item.IdProduto != produto.IdProduto)
-                {
-                    _notification.Add("Produto já existente");
-                    return;
-                }
-
+            if (!produtos.Any(item => item.NomeProduto.Equals(produto.NomeProduto) &&
+                                      item.IdProduto != produto.IdProduto)) return;
+            _notification.Add("Produto já existente");
         }
     }
 }

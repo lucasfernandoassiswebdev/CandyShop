@@ -142,12 +142,6 @@ namespace CandyShop.Web.Controllers
                     cont++;
                 }
             }
-            else
-            {
-                var filePath = Server.MapPath(_pathProduto + "/" + produto.IdProduto + "_A.jpg");
-                if (System.IO.File.Exists(filePath))
-                    System.IO.File.Delete(filePath);
-            }
 
             if (produto.ImagemB != null)
             {
@@ -168,13 +162,6 @@ namespace CandyShop.Web.Controllers
                     cont++;
                 }
             }
-            else
-            {
-                var filePath = Server.MapPath(_pathProduto + "/" + produto.IdProduto + "_B.jpg");
-                if (System.IO.File.Exists(filePath))
-                    System.IO.File.Delete(filePath);
-
-            }
 
             if (produto.ImagemC != null)
             {
@@ -193,12 +180,6 @@ namespace CandyShop.Web.Controllers
                     imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
                     cont++;
                 }
-            }
-            else
-            {
-                var filePath = Server.MapPath($"{_pathProduto}/{produto.IdProduto}_C.jpg");
-                if (System.IO.File.Exists(filePath))
-                    System.IO.File.Delete(filePath);
             }
 
             if (cont != 0 && produto.ImagemA == null) return Content("Produto cadastrado com sucesso!!");
@@ -314,9 +295,9 @@ namespace CandyShop.Web.Controllers
 
         private string ConvertTo64()
         {
-            using (Image image = Image.FromFile(Server.MapPath($"{_pathProduto}/sem-foto.png")))
+            using (var image = Image.FromFile(Server.MapPath($"{_pathProduto}/sem-foto.png")))
             {
-                using (MemoryStream m = new MemoryStream())
+                using (var m = new MemoryStream())
                 {
                     image.Save(m, image.RawFormat);
                     var imageBytes = m.ToArray();
