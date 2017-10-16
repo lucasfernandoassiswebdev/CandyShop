@@ -50,26 +50,31 @@ $(document).ready(function () {
 
     $("#novaSenha").blur(function () {
         if ($(this).val().length > 12 || $(this).val().length <= 0 || ilegais.test($(this).val())) {
-            Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
             $(this).focus();
         }
     });
 
     // Verificando se as senhas batem
     $("#confirmaNovaSenha").blur(function () {
-        if ($(this).val() == $("#novaSenha").val() || $(this).val() == "")
+        if ($(this).val() == $("#novaSenha").val() && $(this).val() !== "" && $("#confirmaNovaSenha").val() !== "")
             $("#TrocarSenha").removeAttr("disabled");
-        else {
-            Materialize.toast("As senhas não conferem!", 4000);
-        }
+        else 
+            $("#TrocarSenha").attr("disabled","disabled");
     });
 
     $("#confirmaNovaSenha").keyup(function () {
-        if ($(this).val() == $("#novaSenha").val() || $(this).val() == "")
+        if ($(this).val() == $("#novaSenha").val() && $(this).val() !== "" && $("#confirmaNovaSenha").val() !== "")
             $("#TrocarSenha").removeAttr("disabled");
         else {
             $("#TrocarSenha").attr("disabled", "disabled");
         }
+    });
+
+    $("#novaSenha").keyup(function () {
+        if ($(this).val() == $("#confirmaNovaSenha").val() && $(this).val() !== "" && $("#confirmaNovaSenha").val() !== "")
+            $("#TrocarSenha").removeAttr("disabled");
+        else 
+            $("#TrocarSenha").attr("disabled", "disabled");
     });
 
     $("#TrocarSenha").click(function () {
@@ -87,6 +92,8 @@ $(document).ready(function () {
         if (e.which == 13) {
             if ($("#novaSenha").val().length < 8) {
                 Materialize.toast("Senha deve conter de 8 a 12 caracteres", 3000);
+                $("#trocaSenha").modal("open");
+                $("#confirmaNovaSenha").focus();
                 return;
             }
             AjaxJsUsuario.trocarSenha();
