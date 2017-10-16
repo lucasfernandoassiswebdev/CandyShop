@@ -11,12 +11,12 @@ namespace CandyShop.Application
     {
         private readonly string _enderecoApi = $"{ApiConfig.enderecoApi}/produto";        
 
-        public Response<int> InserirProduto(ProdutoViewModel produto)
+        public Response<string> InserirProduto(ProdutoViewModel produto)
         {
             using (var client = new HttpClient())
             {
                 var response = client.PostAsync(_enderecoApi, produto, new JsonMediaTypeFormatter()).Result;
-                return new Response<int>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 

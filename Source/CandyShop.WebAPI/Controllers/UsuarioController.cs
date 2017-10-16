@@ -9,8 +9,8 @@ namespace CandyShop.WebAPI.Controllers
 {
     public class UsuarioController : ApiController
     {
-        private readonly string _enderecoImagens = $"{ImagensConfig.enderecoImagens}\\Usuarios";
-        private readonly string _getEnderecoImagens = $"{ImagensConfig.getEnderecoImagens}\\Usuarios";
+        private readonly string _enderecoImagens = $"{ImagensConfig.EnderecoImagens}\\Usuarios";
+        private readonly string _getEnderecoImagens = $"{ImagensConfig.GetEnderecoImagens}/Usuarios";
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
@@ -160,7 +160,7 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetWithCpf(string cpf)
         {
             var usuario = _usuarioRepository.SelecionarUsuario(cpf);
-            usuario.Imagem = _getEnderecoImagens + "\\" +  cpf + ".jpg";
+            usuario.Imagem = _getEnderecoImagens + "/" +  cpf + ".jpg";
             return Ok(usuario);
         }
     }
