@@ -325,28 +325,28 @@ $(document).ready(function () {
 
     //desabilitar botao de login se campo de cpf estiver vazio
     $("#senha").blur(function () {
-        if ($(this).val().length > 5 && $("#cpf").val().length > 13) 
+        if ($(this).val().length > 0 && $("#cpf").val().length > 13) 
             $("#logar").removeAttr("disabled");
         else
             $("#logar").attr("disabled","disabled");
     });
 
     $("#senha").keyup(function () {
-        if ($(this).val().length > 5 && $("#cpf").val().length > 13) 
+        if ($(this).val().length > 0 && $("#cpf").val().length > 13) 
             $("#logar").removeAttr("disabled");
         else
             $("#logar").attr("disabled", "disabled");
     });
 
     $("#cpf").blur(function () {
-        if ($(this).val().length > 13 && $("#senha").val().length > 5) 
+        if ($(this).val().length > 13 && $("#senha").val().length > 0) 
             $("#logar").removeAttr("disabled");
         else
             $("#logar").attr("disabled", "disabled");
     });
 
     $("#cpf").keyup(function () {
-        if ($(this).val().length > 13 && $("#senha").val().length > 5) 
+        if ($(this).val().length > 13 && $("#senha").val().length > 0) 
             $("#logar").removeAttr("disabled");
         else
             $("#logar").attr("disabled", "disabled");
