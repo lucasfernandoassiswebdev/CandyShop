@@ -14,11 +14,12 @@ namespace CandyShop.Web.Controllers
     {
         private readonly IUsuarioApplication _appUsuario;
         private readonly string _pathUsuario;
-
+        private readonly string _pathUsuarioSemTio;
         public UsuarioController(IUsuarioApplication usuario)
         {
             _appUsuario = usuario;
-            _pathUsuario = "Imagens/Usuarios";
+            _pathUsuario = "~/Imagens/Usuarios";
+            _pathUsuarioSemTio = "Imagens/Usuarios";
         }
 
         #region telas
@@ -31,7 +32,7 @@ namespace CandyShop.Web.Controllers
         [AdminFilterResult]
         public ActionResult Cadastrar()
         {
-            TempData["caminhoImagensUsuarios"] = _pathUsuario;
+            TempData["caminhoImagensUsuarios"] = _pathUsuarioSemTio;
             return View();
         }
 
@@ -43,7 +44,7 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro. " + usuario.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = _pathUsuario;
+            TempData["caminhoImagensUsuarios"] = _pathUsuarioSemTio;
             return View(usuario.Content);
         }
 
@@ -54,7 +55,7 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro. " + usuario.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = _pathUsuario;
+            TempData["caminhoImagensUsuarios"] = _pathUsuarioSemTio;
             return View(usuario.Content);
         }
 
@@ -65,7 +66,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = _pathUsuario;
+            TempData["caminhoImagensUsuarios"] = _pathUsuarioSemTio;
             return View(response.Content);
         }
         #endregion
