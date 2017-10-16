@@ -12,7 +12,7 @@ namespace CandyShop.Repository.Repositorys
     {
         public CompraRepository(Conexao conexao) : base(conexao)
         {
-            
+
         }
 
         private enum Procedures
@@ -72,22 +72,21 @@ namespace CandyShop.Repository.Repositorys
         {
             ExecuteProcedure(Procedures.CSSP_SelDadosCompra);
             AddParameter("@IdCompra", idCompra);
-            var retorno = new Compra();
             using (var reader = ExecuteReader())
                 if (reader.Read())
-                    retorno = new Compra
+                    return new Compra
                     {
                         IdCompra = reader.ReadAsInt("IdCompra"),
                         DataCompra = reader.ReadAsDateTime("DataCompra"),
                         ValorCompra = reader.ReadAsDecimal("ValorCompra"),
                         Usuario = new Usuario()
                         {
-                            NomeUsuario = reader.ReadAsString("NomeUsuario")
+                            NomeUsuario = reader.ReadAsString("NomeUsuario"),
+                            Classificacao = reader.ReadAsString("Classificacao")
                         }
                     };
 
-            return retorno;
-
+            return null;
         }
 
         public void EditaItens(CompraProduto compraProduto)

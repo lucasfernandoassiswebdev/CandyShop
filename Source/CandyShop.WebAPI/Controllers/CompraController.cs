@@ -57,7 +57,7 @@ namespace CandyShop.WebAPI.Controllers
 
         // Definindo rotas na API
         [HttpGet, Route("api/compra/selecionarcompra/{idCompra}")]
-        public IHttpActionResult GetUmaCompra(int idCompra)
+        public IHttpActionResult GetCompraPorId(int idCompra)
         {
             var compra = _compraRepository.SelecionarDadosCompra(idCompra);
             compra.Itens = _compraProdutoRepository.ListarCompraProdutoIdVenda(idCompra);
