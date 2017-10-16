@@ -1,12 +1,8 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
-using System;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Net;
 using System.Web.Mvc;
-using Image = System.Drawing.Image;
 
 namespace CandyShop.Web.Controllers
 {
@@ -18,8 +14,7 @@ namespace CandyShop.Web.Controllers
         public UsuarioController(IUsuarioApplication usuario)
         {
             _appUsuario = usuario;
-            _pathUsuario = "~/Imagens/Usuarios";
-            _pathUsuarioSemTio = "Imagens/Usuarios";
+            _pathUsuario = "http://189.112.203.1:45000/candyShop/usuarios";
         }
 
         #region telas
@@ -32,7 +27,7 @@ namespace CandyShop.Web.Controllers
         [AdminFilterResult]
         public ActionResult Cadastrar()
         {
-            TempData["caminhoImagensUsuarios"] = _pathUsuarioSemTio;
+            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View();
         }
 
@@ -44,7 +39,7 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro. " + usuario.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = _pathUsuarioSemTio;
+            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(usuario.Content);
         }
 
@@ -55,7 +50,7 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro. " + usuario.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = _pathUsuarioSemTio;
+            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(usuario.Content);
         }
 
@@ -66,7 +61,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = _pathUsuarioSemTio;
+            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(response.Content);
         }
         #endregion
@@ -125,30 +120,8 @@ namespace CandyShop.Web.Controllers
             if (!ModelState.IsValid) return Content("Ops, ocorreu um erro ao editar usuário.");
 
             var response = _appUsuario.InserirUsuario(usuario);
-            if (response.Status != HttpStatusCode.OK)
-                return Content($"{response.ContentAsString}");
 
-            if (usuario.Imagem == null) return Content("Usuário cadastrado com sucesso");
-
-            string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
-            foreach (var prefixo in prefixos)
-                if (usuario.Imagem.StartsWith(prefixo))
-                {
-                    usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
-
-                    //transformando base64 em array de bytes
-                    var bytes = Convert.FromBase64String(usuario.Imagem);
-
-                    Image imagem = (Bitmap)new ImageConverter().ConvertFrom(bytes);
-
-                    //montando o nome e caminho de save da imagem
-                    usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                    var caminho = $"{_pathUsuario}/{usuario.Cpf}.jpg";
-
-                    imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
-                }
-
-            return Content("Usuário cadastrado com sucesso");
+            return Content(response.Status != HttpStatusCode.OK ? $"{response.ContentAsString}" : "Usuário cadastrado com sucesso");
         }
 
         [AdminFilterResult]
@@ -160,34 +133,6 @@ namespace CandyShop.Web.Controllers
 
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
-
-            if (usuario.Imagem != null)
-            {
-                string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
-                foreach (var prefixo in prefixos)
-                    if (usuario.Imagem.StartsWith(prefixo))
-                    {
-                        usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
-
-                        byte[] bytes = Convert.FromBase64String(usuario.Imagem);
-
-                        Image imagem = (Bitmap)new ImageConverter().ConvertFrom(bytes);
-
-                        usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                        var caminho = $"{_pathUsuario}/{usuario.Cpf}.jpg";
-
-                        imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
-                    }
-            }
-            else
-            {
-                if (usuario.RemoverImagem)
-                {
-                    var filePath = Server.MapPath(_pathUsuario + cpf + ".jpg");
-                    if (System.IO.File.Exists(filePath))
-                        System.IO.File.Delete(filePath);
-                }
-            }
 
             if (!Session["Login"].ToString().Equals(cpf)) return Content("Edição concluída com sucesso!!");
 

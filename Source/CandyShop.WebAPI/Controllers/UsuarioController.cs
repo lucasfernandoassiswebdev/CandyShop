@@ -1,5 +1,7 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Usuario;
+using System;
+using System.IO;
 using System.Net;
 using System.Web.Http;
 
@@ -7,6 +9,8 @@ namespace CandyShop.WebAPI.Controllers
 {
     public class UsuarioController : ApiController
     {
+        private readonly string _enderecoImagens = $"{ImagensConfig.enderecoImagens}\\Usuarios";
+        private readonly string _getEnderecoImagens = $"{ImagensConfig.getEnderecoImagens}\\Usuarios";
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
@@ -21,9 +25,34 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult Post(Usuario usuario)
         {
             _usuarioService.InserirUsuario(usuario);
+
+
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
+            try
+            {
+                string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
+                if (usuario.Imagem == null) return Ok();
+                foreach (var prefixo in prefixos)
+                    if (usuario.Imagem.StartsWith(prefixo))
+                    {
+                        usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
+
+                        //transformando base64 em array de bytes
+                        var bytes = Convert.FromBase64String(usuario.Imagem);
+
+                        //montando o nome e caminho de save da imagem
+                        usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+                        var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
+
+                        File.WriteAllBytes(caminho, bytes);
+                    }
+            }
+            catch
+            {
+                return Content(HttpStatusCode.OK, "Erro ao inserir imagem de usuário");
+            }
             return Ok();
         }
 
@@ -72,11 +101,44 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Put(Usuario usuario)
         {
+            usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
+            _usuarioService.EditarUsuario(usuario);
+
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
-            usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
-            _usuarioRepository.EditarUsuario(usuario);
+            try
+            {
+                if (usuario.Imagem != null)
+                {
+                    string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
+                    foreach (var prefixo in prefixos)
+                        if (usuario.Imagem.StartsWith(prefixo))
+                        {
+                            usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
+
+                            //transformando base64 em array de bytes
+                            var bytes = Convert.FromBase64String(usuario.Imagem);
+
+                            //montando o nome e caminho de save da imagem
+                            usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+                            var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
+
+                            File.WriteAllBytes(caminho, bytes);
+                        }
+                }
+                else
+                {
+                    if (!usuario.RemoverImagem) return Ok();
+                    var filePath = System.Web.Hosting.HostingEnvironment.MapPath(_enderecoImagens + usuario.Cpf + ".jpg");
+                    if (File.Exists(filePath))
+                        File.Delete(filePath);
+                }
+            }
+            catch
+            {
+                return Content(HttpStatusCode.OK, "Erro ao inserir imagem de usuário");
+            }
             return Ok();
         }
 
@@ -97,7 +159,9 @@ namespace CandyShop.WebAPI.Controllers
         [HttpGet, Route("api/Usuario/{cpf}/Detalhes")]
         public IHttpActionResult GetWithCpf(string cpf)
         {
-            return Ok(_usuarioRepository.SelecionarUsuario(cpf));
+            var usuario = _usuarioRepository.SelecionarUsuario(cpf);
+            usuario.Imagem = _getEnderecoImagens + "\\" +  cpf + ".jpg";
+            return Ok(usuario);
         }
     }
 }
