@@ -27,7 +27,8 @@
         chamaPagina(url.inserirPagamento);
     };
     var concluirPagamento = function () {
-        var pagamento = {ValorPagamento: $("#valorPago").val().replace("R$ ","")}
+        var pagamento = { ValorPagamento: $("#valorPago").val().replace("R$ ", "") };
+        console.log(pagamento);
         $.post(url.concluirPagamento, pagamento)            
             .done(function (message) {
                 $.get(url.padrao)

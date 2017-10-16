@@ -29,17 +29,18 @@
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
-    var concluirEdicaoUsuario = function(imgBase64,removerImagem, tela) {
+    var concluirEdicaoUsuario = function(imgBase64,removerImagem, tela) {                
         var usuario = {
             Cpf: $('#Cpf').val(),
             NomeUsuario: $('#Nome').val(),
-            SaldoUsuario: $('#SaldoUsuario').val(),
+            SaldoUsuario: $('#SaldoUsuario').val().replace("R$ ", "").replace(".", ""),
             SenhaUsuario: $('#Password').val(),
             Ativo: $('#Ativo').val(),
             Imagem: imgBase64,
             Classificacao: $('#Classificacao').val(),
             RemoverImagem: removerImagem
         };
+        console.log(usuario);
         concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, tela);
     };
     var desativarUsuario = function (cpf, telaAnterior) {

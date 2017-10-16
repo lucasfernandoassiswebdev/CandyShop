@@ -94,8 +94,8 @@
                 <div class="input-field col s6">
                     <select name="Classificacao" id="Classificacao">
                         <option value="" disabled>Tipo da conta</option>
-                        <option value="U" @(Model.Classificacao == "Usuario" ? "selected" : string.Empty)>Usuario</option>
-                        <option value="A" @(Model.Classificacao == "Administrador" ? "selected" : string.Empty)>Administrador</option>
+                        <option value="U" @(Model.Classificacao == "U" ? "selected" : string.Empty)>Usuario</option>
+                        <option value="A" @(Model.Classificacao == "A" ? "selected" : string.Empty)>Administrador</option>
                     </select>
                     <label>Tipo de Usuário:</label>
                 </div>
