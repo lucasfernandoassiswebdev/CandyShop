@@ -11,7 +11,6 @@
         $("#novaSenha").removeAttr("disabled");
         $("#logar, #TrocarSenha").attr("disabled", "disabled");
         $("#modalCarrinho, #modalQuantidade, #modalLogin, #modalQuantidade, #modalEditarQuantidade, #trocaSenha").modal("close");
-       
     });
 });
 

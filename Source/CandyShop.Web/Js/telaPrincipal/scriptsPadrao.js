@@ -305,10 +305,10 @@ $(document).ready(function () {
     // Colocando foco no modal quantidade
     $("#modalQuantidade").modal({
         dismissible: false,
-        ready: function () {
-            $("#quantidade").focus();
-        }
+        ready: function () {$("#quantidade").focus();}
     });
+
+    $("#modalCarrinho").modal({dismissible: false});
 
     // Colocando foco no modal trocaSenha
     $("#trocaSenha").modal({
@@ -369,13 +369,14 @@ $(document).ready(function () {
             $("#adicionaCarrinho").removeAttr("disabled");
     });
 
-    //$("#quantidade, #quantidadeEdit").keydown(function (e) {
-    //    var tamanho = $(this).val().length;
-    //    if (tamanho > 2 && e.which !== 8) {
-    //        e.preventDefault();
-    //        return false;
-    //    }
-    //});
+    $("#quantidade, #quantidadeEdit").keydown(function (e) {
+        var tamanho = $(this).val().length;
+        if (tamanho > 2 && e.which !== 8) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
     // Foco saindo do input
     $("#quantidade").blur(function () {
         quantidade = $("#quantidade").val();
