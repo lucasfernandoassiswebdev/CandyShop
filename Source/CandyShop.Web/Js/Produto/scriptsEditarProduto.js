@@ -59,7 +59,7 @@ function encodeImageFileAsURL(callback, tela) {
 //funções que não deixam o usuário digitar "e" ou números negativos
 function FilterInput(event) {
     var keyCode = ("which" in event) ? event.which : event.keyCode;
-    var isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
+    var isNotWanted = (keyCode == 69 || keyCode == 189 || keyCode == 109 || keyCode == 190);
     return !isNotWanted;
 }
 
@@ -73,6 +73,11 @@ function handlePaste(e) {
     }
 
     if (pastedData.indexOf("-") > -1) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    if (pastedData.indexOf(".") > -1) {
         e.stopPropagation();
         e.preventDefault();
     }
@@ -111,6 +116,25 @@ $("#PrecoProduto").on("paste", function () {
         Materialize.toast("Valor inserido é inválido", 2000);
     } else
         $(".botaoEditar").removeAttr("disabled");
+});
+
+$("#QtdeProduto").keydown(function (e) {
+    var tamanhoCampo = $(this).val().length;
+    var valorCampo = parseInt($(this).val());
+    
+    if (tamanhoCampo > 2 && e.which !== 8) {
+        $(".botaoEditar").attr("disabled", "disabled");
+        e.preventDefault();
+        return false;
+    }
+
+    if (tamanhoCampo > 3 || tamanhoCampo <= 0 || parseFloat(valorCampo) > 999
+        || parseFloat(valorCampo) <= 0 || valorCampo == "" || $("#PrecoProduto").val().length > 9
+        || $("#PrecoProduto").val() == "R$ 0,00" || parseFloat($("#PrecoProduto").val()) >= 999
+        || parseFloat($("#PrecoProduto").val()) == 0 || $(this).val() == "")
+        $(".botaoCadastro").attr("disabled", "disabled");
+    else
+        $(".botaoCadastro").removeAttr("disabled");
 });
 
 //editando as imagens na tela
