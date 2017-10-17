@@ -29,8 +29,7 @@
         <h4 class="pink-text">Tem certeza que deseja desativar este usuário?</h4>
         <div>
             <hr />
-            @{ string caminho = @Model.Cpf + ".jpg";}
-            <img id="imagemUsuario" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks" />
+            <img id="imagemUsuario" src="@Model.Imagem?d=@DateTime.Now.Ticks"/>
            
             <table class="striped highlight centered bordered" style="margin-bottom:50px">
                 <tbody>

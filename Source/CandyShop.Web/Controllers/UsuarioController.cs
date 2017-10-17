@@ -10,11 +10,11 @@ namespace CandyShop.Web.Controllers
     {
         private readonly IUsuarioApplication _appUsuario;
         private readonly string _pathUsuario;
-        private readonly string _pathUsuarioSemTio;
+        
         public UsuarioController(IUsuarioApplication usuario)
         {
             _appUsuario = usuario;
-            _pathUsuario = "http://189.112.203.1:45000/candyShop/usuarios";
+            _pathUsuario = ImagensConfig.EnderecoImagens;
         }
 
         #region telas
@@ -27,7 +27,6 @@ namespace CandyShop.Web.Controllers
         [AdminFilterResult]
         public ActionResult Cadastrar()
         {
-            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View();
         }
 
@@ -39,7 +38,6 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro. " + usuario.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(usuario.Content);
         }
 
@@ -50,7 +48,6 @@ namespace CandyShop.Web.Controllers
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro. " + usuario.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(usuario.Content);
         }
 
@@ -61,7 +58,6 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensUsuarios"] = _pathUsuario;
             return View(response.Content);
         }
         #endregion
