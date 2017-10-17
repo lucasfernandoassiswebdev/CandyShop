@@ -131,19 +131,19 @@ $("#fotoProduto3").change(function () {
 });
 
 $("#removerImagem1").click(function () {
-    $("#imagem1").attr("src", "Imagens/retirado.png");
+    $("#imagem1").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
     $("#fotoProduto1").val("");
     removerImagemA = true;
 });
 
 $("#removerImagem2").click(function () {
-    $("#imagem2").attr("src", "Imagens/retirado.png");
+    $("#imagem2").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
     $("#fotoProduto2").val("");
     removerImagemB = true;
 });
 
 $("#removerImagem3").click(function () {
-    $("#imagem3").attr("src", "Imagens/retirado.png");
+    $("#imagem3").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
     $("#fotoProduto3").val("");
     removerImagemC = true;
 });

@@ -15,7 +15,7 @@ namespace CandyShop.Web.Controllers
         public ProdutoController(IProdutoApplication produto)
         {
             _appProduto = produto;
-            _pathProduto = "Imagens/Produtos";
+            _pathProduto = ImagensConfig.EnderecoImagens;
         }
 
         #region Telas
@@ -28,6 +28,7 @@ namespace CandyShop.Web.Controllers
         [AdminFilterResult]
         public ActionResult CadastrarProduto()
         {
+            ViewBag.ImagemPadrao = _pathProduto;
             return View();
         }
 
