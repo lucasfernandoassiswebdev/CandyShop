@@ -20,14 +20,17 @@
     // Fazendo as validações no campo de nome
     $("#NomeProduto").keydown(function (e) {
         var tamanhoCampo = $(this).val().length;
-        console.log($("#QtdeProduto").val());
+        console.log($("#PrecoProduto").val());
+        console.log(parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")));
         if (e.which == 13)
             $("#PrecoProduto").focus();
         else
             if (tamanhoCampo <= 0 || tamanhoCampo > 40 ||
-                $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length == 0 ||
-                $("#QtdeProduto").val() > 999 || $("#QtdeProduto").val() <= 0 ||
-                parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0)
+                $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
+                parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+                parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+                parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
+                parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0)
                 $(".botaoCadastro").attr("disabled", "disabled");
             else
                 $(".botaoCadastro").removeAttr("disabled");
@@ -37,9 +40,11 @@
         var tamanhoCampo = $(this).val().length;
 
         if (tamanhoCampo <= 0 || tamanhoCampo > 40 ||
-            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length == 0 ||
-            $("#QtdeProduto").val() > 999 || $("#QtdeProduto").val() <= 0 ||
-            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0)
+            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
+            parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
+            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0)
             $(".botaoCadastro").attr("disabled", "disabled");
         else
             $(".botaoCadastro").removeAttr("disabled");
@@ -49,9 +54,11 @@
         var tamanhoCampo = $(this).val().length;
 
         if (tamanhoCampo <= 0 || tamanhoCampo > 40 ||
-            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length == 0 ||
-            $("#QtdeProduto").val() > 999 || $("#QtdeProduto").val() <= 0 ||
-            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0)
+            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
+            parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
+            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0)
             $(".botaoCadastro").attr("disabled", "disabled");
         else
             $(".botaoCadastro").removeAttr("disabled");
@@ -61,14 +68,29 @@
         var tamanhoCampo = $(this).val().length;
 
         if (tamanhoCampo <= 0 || tamanhoCampo > 40 ||
-            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length == 0 ||
-            $("#QtdeProduto").val() > 999 || $("#QtdeProduto").val() <= 0 ||
-            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0)
+            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
+            parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
+            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0)
             $(".botaoCadastro").attr("disabled", "disabled");
         else
             $(".botaoCadastro").removeAttr("disabled");
     });
 
+    $("#NomeProduto").focus(function () {
+        var tamanhoCampo = $(this).val().length;
+
+        if (tamanhoCampo <= 0 || tamanhoCampo > 40 ||
+            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
+            parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
+            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0)
+            $(".botaoCadastro").attr("disabled", "disabled");
+        else
+            $(".botaoCadastro").removeAttr("disabled");
+    });
     // Fazendo as validações no campo de preço
     $("#PrecoProduto").keyup(function () {
         var valorCampo = $(this).val().replace("R$", "").replace(",", ".");
@@ -143,7 +165,7 @@
     $("#QtdeProduto").keydown(function (e) {
         var tamanhoCampo = $(this).val().length;
         var valorCampo = parseInt($(this).val());
-        console.log(valorCampo);
+
         if (tamanhoCampo > 2 && e.which !== 8) {
             $(".botaoCadastro").attr("disabled", "disabled");
             e.preventDefault();
@@ -195,7 +217,7 @@
 
     $("#QtdeProduto").focus(function () {
         var valorCampo = parseInt($(this).val());
-        
+
         if (valorCampo >= 999) {
             $(".botaoCadastro").attr("disabled", "disabled");
         }
@@ -360,7 +382,7 @@ function readURL3(input) {
 // Funções que não deixam o usuário digitar "e" ou números negativos
 function FilterInput(event) {
     var keyCode = ("which" in event) ? event.which : event.keyCode;
-    var isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
+    var isNotWanted = (keyCode == 69 || keyCode == 189 || keyCode == 109 || keyCode == 190);
     return !isNotWanted;
 }
 

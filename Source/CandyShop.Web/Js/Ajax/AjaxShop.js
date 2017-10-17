@@ -38,7 +38,7 @@
                     .done(function (data) {
                         $("body").slideUp("slow", function () {
                             $("body").hide().html(data).slideDown(1000, function () {
-                                Materialize.toast(res, 4000);
+                                Materialize.toast(res, 20000);
                             });
                         });
                     }).fail(function (xhr) {
