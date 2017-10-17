@@ -89,15 +89,7 @@ $("#NomeProduto").keydown(function (e) {
         $("#PrecoProduto").focus();
     else
         validaBotao();
-});
-
-$("#NomeProduto").keyup(validaBotao);
-
-$("#NomeProduto").blur(validaBotao);
-
-$("#NomeProduto").on("paste",validaBotao);
-
-$("#NomeProduto").focus(validaBotao);
+}).keyup(validaBotao).blur(validaBotao).on("paste",validaBotao).focus(validaBotao);
 
 // Validações no campo de preço
 $("#PrecoProduto").keydown(function (e) {
@@ -105,15 +97,7 @@ $("#PrecoProduto").keydown(function (e) {
         $("#QtdeProduto").focus();
     else
         validaBotao();
-});
-
-$("#PrecoProduto").keyup(validaBotao);
-
-$("#PrecoProduto").blur(validaBotao);
-
-$("#PrecoProduto").on("paste", validaBotao);
-
-$("#PrecoProduto").focus(validaBotao);
+}).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
 //Validações no campo de quantidade
 $("#QtdeProduto").keydown(function (e) {
@@ -125,15 +109,7 @@ $("#QtdeProduto").keydown(function (e) {
     }
 
     validaBotao();
-});
-
-$("#QtdeProduto").keyup(validaBotao);
-
-$("#QtdeProduto").blur(validaBotao);
-
-$("#QtdeProduto").on("paste", validaBotao);
-
-$("#QtdeProduto").focus(validaBotao);
+}).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
 //editando as imagens na tela
 $("#fotoProduto1").change(function () {
@@ -208,10 +184,12 @@ function validaBotao() {
         $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
         parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
         parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-        $("#QtdeProduto").val().length == 0 || parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
+        parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
         parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0 ||
-        $("#PrecoProduto").val() == "")
+        $("#PrecoProduto").val() == "R$ 0,00" || $("#PrecoProduto").val() == "")
         $(".botaoEditar").attr("disabled", "disabled");
+    else
+        $(".botaoEditar").removeAttr("disabled");
 }
 
 

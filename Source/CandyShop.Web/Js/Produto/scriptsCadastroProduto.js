@@ -27,9 +27,12 @@
 
     // Fazendo as validações no campo de preço
     $("#PrecoProduto").keyup(validaBotao).keydown(function (e) {
-        if (e.which == 13)
-            $("#QtdeProduto").focus();
-        else
+        var tamanhoCampo = $(this).val().length;
+        if (tamanhoCampo > 2 && e.which !== 8 && e.which !== 46 && e.which !== 38 && e.which !== 37 && e.which !== 40 && e.which !== 39) {
+            $(".botaoCadastro").attr("disabled", "disabled");
+            e.preventDefault();
+            return false;
+        }
             validaBotao();
     }).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
