@@ -9,12 +9,10 @@ namespace CandyShop.Web.Controllers
     public class UsuarioController : Controller
     {
         private readonly IUsuarioApplication _appUsuario;
-        private readonly string _pathUsuario;
-        
+
         public UsuarioController(IUsuarioApplication usuario)
         {
             _appUsuario = usuario;
-            _pathUsuario = ImagensConfig.EnderecoImagens;
         }
 
         #region telas
@@ -113,11 +111,16 @@ namespace CandyShop.Web.Controllers
         [HttpPost]
         public ActionResult Cadastrar(UsuarioViewModel usuario)
         {
+            if (usuario.Cpf == null || usuario.NomeUsuario == null)
+                return Content("Os campos de CPF e Nome são obrigatórios para o cadastro!");
+
             if (!ModelState.IsValid) return Content("Ops, ocorreu um erro ao editar usuário.");
 
             var response = _appUsuario.InserirUsuario(usuario);
 
-            return Content(response.Status != HttpStatusCode.OK ? $"{response.ContentAsString}" : "Usuário cadastrado com sucesso");
+            return Content(response.Status != HttpStatusCode.OK
+                ? $"{response.ContentAsString}"
+                : response.Content);
         }
 
         [AdminFilterResult]
@@ -135,8 +138,8 @@ namespace CandyShop.Web.Controllers
             var res = _appUsuario.SelecionarUsuario(cpf);
             if (res.Status != HttpStatusCode.OK)
                 return Content("Erro ao atualizar seu saldo");
-            Session["saldoUsuario"] = res.Content.SaldoUsuario;
 
+            Session["saldoUsuario"] = res.Content.SaldoUsuario;
             return Content("Edição concluída com sucesso!!");
         }
 

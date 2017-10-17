@@ -16,7 +16,7 @@ namespace CandyShop.Application
             using (var client = new HttpClient())
             {
                 var response = client.PostAsync(_enderecoApi, usuario, new JsonMediaTypeFormatter()).Result;
-                return response.StatusCode != HttpStatusCode.OK ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) : new Response<string>(response.StatusCode);
+                return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
@@ -25,8 +25,8 @@ namespace CandyShop.Application
             using (var client = new HttpClient())
             {
                 var response = client.PutAsync(_enderecoApi, usuario, new JsonMediaTypeFormatter()).Result;
-                return response.StatusCode != HttpStatusCode.OK 
-                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) 
+                return response.StatusCode != HttpStatusCode.OK
+                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
                     : new Response<string>(response.StatusCode);
             }
         }
@@ -102,7 +102,7 @@ namespace CandyShop.Application
         {
             using (var client = new HttpClient())
             {
-                var response = client.PostAsync($"{_enderecoApi}/login",usuario, new JsonMediaTypeFormatter()).Result;
+                var response = client.PostAsync($"{_enderecoApi}/login", usuario, new JsonMediaTypeFormatter()).Result;
                 return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }

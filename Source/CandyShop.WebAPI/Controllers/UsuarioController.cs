@@ -30,6 +30,7 @@ namespace CandyShop.WebAPI.Controllers
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
+            if (usuario.Imagem == null) return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
             try
             {
                 string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
@@ -53,7 +54,8 @@ namespace CandyShop.WebAPI.Controllers
             {
                 return Content(HttpStatusCode.OK, "Erro ao inserir imagem de usuário");
             }
-            return Ok();
+
+            return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
         }
 
         [HttpPost, Route("api/Usuario/login")]
@@ -160,7 +162,7 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetWithCpf(string cpf)
         {
             var usuario = _usuarioRepository.SelecionarUsuario(cpf);
-            usuario.Imagem = _getEnderecoImagens + "/" +  cpf + ".jpg";
+            usuario.Imagem = _getEnderecoImagens + "/" + cpf + ".jpg";
             return Ok(usuario);
         }
     }
