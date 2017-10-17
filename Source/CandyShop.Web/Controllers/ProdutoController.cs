@@ -182,7 +182,7 @@ namespace CandyShop.Web.Controllers
                         }
                 }
             }
-            catch (Exception exception)
+            catch
             {
                 return Content("Erro ao salvar imagem");
             }
