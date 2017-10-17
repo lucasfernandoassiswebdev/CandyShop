@@ -1,0 +1,2 @@
+System.Drawing
+Erro genérico de GDI+.

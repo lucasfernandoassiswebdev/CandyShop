@@ -11,7 +11,6 @@ namespace CandyShop.WebAPI.Controllers
     public class ProdutoController : ApiController
     {
         private readonly string _enderecoImagens = $"{ImagensConfig.EnderecoImagens}\\Produtos";
-        private readonly string _getEnderecoImagens = $"{ImagensConfig.GetEnderecoImagens}/Produtos";
         private readonly INotification _notification;
         private readonly IProdutoRepository _produtoRepository;
         private readonly IProdutoService _produtoService;

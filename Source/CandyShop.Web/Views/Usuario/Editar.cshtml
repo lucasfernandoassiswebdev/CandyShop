@@ -1,5 +1,4 @@
-﻿@using CandyShop.Web.Helpers
-@model  CandyShop.Application.ViewModels.UsuarioViewModel
+﻿@model  CandyShop.Application.ViewModels.UsuarioViewModel
 
 @{
     Layout = null;
@@ -9,67 +8,6 @@
 <link rel="stylesheet" href="~/Content/Usuario/formCadastroUsuario.css" />
 <script type="text/javascript" src="~/Js/Usuario/scriptsEditarUsuario.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
-<script>
-    $(document).ready(function () {
-        $('select').material_select();
-        $('.cpf').each(function () {
-            $(this).val(mcpf($(this).val()));
-        });
-
-        $('#SaldoUsuario').maskMoney({
-            prefix: 'R$ ',
-            allowNegative: false,
-            thousands: '.',
-            decimal: ',',
-            affixesStay: false
-        });
-
-        $('#SaldoUsuario').maskMoney('mask');
-
-        $("#SaldoUsuario").keyup(function () {
-            var tamanhoCampo = $(this).val().length;
-            var valorInserido = $(this).val();
-            valorInserido = valorInserido.replace("R$", "").replace(",", ".");
-            if (parseInt(tamanhoCampo) > 9 || parseInt(tamanhoCampo) <= 0 || parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null) {
-                $(".botaoEditar").attr("disabled", "disabled");
-                Materialize.toast("Valor inserido é inválido", 3000);
-            }
-            else
-                $(".botaoEditar").removeAttr("disabled");
-        });
-
-        $("#SaldoUsuario").blur(function () {
-            var tamanhoCampo = $(this).val().length;
-            var valorInserido = $(this).val();
-
-            valorInserido = valorInserido.replace("R$", "").replace(",", ".");
-            if (parseInt(tamanhoCampo) > 6 || (parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null)) {
-                $(".botaoEditar").attr("disabled", "disabled");
-            } else
-                $(".botaoEditar").removeAttr("disabled");
-        });
-
-        $("#SaldoUsuario").on("paste", function () {
-            var tamanhoCampo = $(this).val().length;
-            var valorInserido = $(this).val();
-
-            valorInserido = valorInserido.replace("R$", "").replace(",", ".");
-            if (parseInt(tamanhoCampo) > 6 || (parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null)) {
-                $(".botaoEditar").attr("disabled", "disabled");
-                Materialize.toast("Valor inserido é inválido", 2000);
-            } else
-                $(".botaoEditar").removeAttr("disabled");
-        });
-    });
-
-    function mcpf(v) {
-        v = v.replace(/\D/g, "");
-        v = v.replace(/(\d{3})(\d)/, "$1.$2");
-        v = v.replace(/(\d{3})(\d)/, "$1.$2");
-        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-        return v;
-    }
-</script>
 
 <div class="container">
     <div class="row">

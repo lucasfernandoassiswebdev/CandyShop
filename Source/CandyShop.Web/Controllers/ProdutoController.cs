@@ -119,7 +119,96 @@ namespace CandyShop.Web.Controllers
         public ActionResult EditarProduto(ProdutoViewModel produto)
         {
             var response = _appProduto.EditarProduto(produto);
+<<<<<<< HEAD
             return Content(response.Status != HttpStatusCode.OK ? $"Erro. {response.ContentAsString}" : "Produto editado com sucesso!");
+=======
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro. {response.ContentAsString}");
+            try
+            {
+
+
+                if (produto.ImagemA != null)
+                {
+                    string[] prefixos = {"data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64,"};
+                    foreach (var prefixo in prefixos)
+                    {
+                        if (!produto.ImagemA.StartsWith(prefixo)) continue;
+                        produto.ImagemA = produto.ImagemA.Substring(prefixo.Length);
+
+                        var bytes = Convert.FromBase64String(produto.ImagemA);
+
+                        Image imagem = (Bitmap) new ImageConverter().ConvertFrom(bytes);
+
+                        var caminho = $"{_pathProduto}/{produto.IdProduto}_A.jpg";
+
+                        imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                    }
+                }
+
+                if (produto.ImagemB != null)
+                {
+                    string[] prefixos = {"data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64,"};
+                    foreach (var prefixo in prefixos)
+                        if (produto.ImagemB.StartsWith(prefixo))
+                        {
+                            produto.ImagemB = produto.ImagemB.Substring(prefixo.Length);
+
+                            var bytes = Convert.FromBase64String(produto.ImagemB);
+
+                            Image imagem = (Bitmap) new ImageConverter().ConvertFrom(bytes);
+
+                            var caminho = $"{_pathProduto}/{produto.IdProduto}_B.jpg";
+
+                            imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                        }
+                }
+
+                if (produto.ImagemC != null)
+                {
+                    string[] prefixos = {"data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64,"};
+                    foreach (var prefixo in prefixos)
+                        if (produto.ImagemC.StartsWith(prefixo))
+                        {
+                            produto.ImagemC = produto.ImagemC.Substring(prefixo.Length);
+
+                            var bytes = Convert.FromBase64String(produto.ImagemC);
+
+                            Image imagem = (Bitmap) new ImageConverter().ConvertFrom(bytes);
+
+                            var caminho = $"{_pathProduto}/{produto.IdProduto}_C.jpg";
+
+                            imagem.Save(Server.MapPath(caminho), ImageFormat.Jpeg);
+                        }
+                }
+            }
+            catch
+            {
+                return Content("Erro ao salvar imagem");
+            }
+            if (produto.RemoverImagemA)
+            {
+                var filePath = Server.MapPath($"{_pathProduto}/{produto.IdProduto}_A.jpg");
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+            }
+
+            if (produto.RemoverImagemB)
+            {
+                var filePath = Server.MapPath($"{_pathProduto}/{produto.IdProduto}_B.jpg");
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+            }
+
+            if (produto.RemoverImagemC) return Content("Produto editado com sucesso!");
+            {
+                var filePath = Server.MapPath($"{_pathProduto}/{produto.IdProduto}_C.jpg");
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+            }
+
+            return Content("Produto editado com sucesso!");
+>>>>>>> de71d2efbddd18cd0f3e07dfe822389972818292
         }
 
         [AdminFilterResult]

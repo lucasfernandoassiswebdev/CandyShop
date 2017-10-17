@@ -30,7 +30,7 @@
     <hr />
     <div>
         @{ string caminho = @Model.Cpf + ".jpg";}
-        <img id="imagemUsuario" src="@Html.UrlContent(TempData["caminhoImagensUsuarios"], caminho)" />
+        <img id="imagemUsuario" src="@Model.Imagem" />
         <table class="striped centered bordered" style="margin-bottom:50px">
             <tbody>
                 <tr>
