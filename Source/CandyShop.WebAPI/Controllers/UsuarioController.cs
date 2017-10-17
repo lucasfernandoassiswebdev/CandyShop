@@ -1,6 +1,7 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Usuario;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Web.Http;
@@ -25,33 +26,82 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult Post(Usuario usuario)
         {
             _usuarioService.InserirUsuario(usuario);
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
+            try
+            {
+                if (usuario.Imagem != null)
+                {
+
+                    string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
+                    if (usuario.Imagem == null) return Ok();
+                    foreach (var prefixo in prefixos)
+                        if (usuario.Imagem.StartsWith(prefixo))
+                        {
+                            usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
+
+                            //transformando base64 em array de bytes
+                            var bytes = Convert.FromBase64String(usuario.Imagem);
+
+                            //montando o nome e caminho de save da imagem
+                            usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+                            var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
+
+                            File.WriteAllBytes(caminho, bytes);
+                        }
+                }else InserirPadrao(usuario.Cpf);
+            }
+            catch
+            {
+                return Content(HttpStatusCode.NotModified, "Usuario inserido com sucesso, porém houve um erro ao inserir sua imagem");
+            }
+            return Ok();
+        }
+
+        public IHttpActionResult Put(Usuario usuario)
+        {
+            usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
+            _usuarioService.EditarUsuario(usuario);
 
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
             try
             {
-                string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
-                if (usuario.Imagem == null) return Ok();
-                foreach (var prefixo in prefixos)
-                    if (usuario.Imagem.StartsWith(prefixo))
+                if (usuario.Imagem != null)
+                {
+                    string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
+                    foreach (var prefixo in prefixos)
+                        if (usuario.Imagem.StartsWith(prefixo))
+                        {
+                            usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
+
+                            //transformando base64 em array de bytes
+                            var bytes = Convert.FromBase64String(usuario.Imagem);
+
+                            //montando o nome e caminho de save da imagem
+                            usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
+                            var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
+
+                            File.WriteAllBytes(caminho, bytes);
+                        }
+                }
+                else InserirPadrao(usuario.Cpf);
+
+                if (usuario.RemoverImagem)
+                {
+                    var filePath = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
+                    if (File.Exists(filePath))
                     {
-                        usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
-
-                        //transformando base64 em array de bytes
-                        var bytes = Convert.FromBase64String(usuario.Imagem);
-
-                        //montando o nome e caminho de save da imagem
-                        usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                        var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
-
-                        File.WriteAllBytes(caminho, bytes);
+                        File.Delete(filePath);
+                        InserirPadrao(usuario.Cpf);
                     }
+                }
             }
             catch
             {
-                return Content(HttpStatusCode.OK, "Erro ao inserir imagem de usuário");
+                return Content(HttpStatusCode.NotModified, "Usuario editado com sucesso, porém houve um erro ao editar sua imagem");
             }
             return Ok();
         }
@@ -99,48 +149,7 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_usuarioRepository.VerificaCreditoLoja());
         }
 
-        public IHttpActionResult Put(Usuario usuario)
-        {
-            usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
-            _usuarioService.EditarUsuario(usuario);
-
-            if (_notification.HasNotification())
-                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-
-            try
-            {
-                if (usuario.Imagem != null)
-                {
-                    string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
-                    foreach (var prefixo in prefixos)
-                        if (usuario.Imagem.StartsWith(prefixo))
-                        {
-                            usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
-
-                            //transformando base64 em array de bytes
-                            var bytes = Convert.FromBase64String(usuario.Imagem);
-
-                            //montando o nome e caminho de save da imagem
-                            usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                            var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
-
-                            File.WriteAllBytes(caminho, bytes);
-                        }
-                }
-                else
-                {
-                    if (!usuario.RemoverImagem) return Ok();
-                    var filePath = System.Web.Hosting.HostingEnvironment.MapPath(_enderecoImagens + usuario.Cpf + ".jpg");
-                    if (File.Exists(filePath))
-                        File.Delete(filePath);
-                }
-            }
-            catch
-            {
-                return Content(HttpStatusCode.OK, "Erro ao inserir imagem de usuário");
-            }
-            return Ok();
-        }
+        
 
         [HttpPut, Route("api/usuario/trocarSenha")]
         public IHttpActionResult PutSenha(Usuario usuario)
@@ -160,8 +169,34 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetWithCpf(string cpf)
         {
             var usuario = _usuarioRepository.SelecionarUsuario(cpf);
-            usuario.Imagem = _getEnderecoImagens + "/" +  cpf + ".jpg";
+            usuario.Imagem = _getEnderecoImagens + "/" + cpf + ".jpg";
             return Ok(usuario);
+        }
+
+        private void InserirPadrao(string nome)
+        {
+            //pegando a imagem na aplicação e transformando em base 64
+            var imagem = ConvertTo64();
+            //transformando em array de bytes e salvando com o cpf do usuário
+            var bytes = Convert.FromBase64String(imagem);
+            var caminho = $"{_enderecoImagens}/{nome}.jpg";
+            File.WriteAllBytes(caminho, bytes);
+        }
+
+        private string ConvertTo64()
+        {
+            using (var image = Image.FromFile($"{_enderecoImagens}/sem-foto.png"))
+            {
+                using (var m = new MemoryStream())
+                {
+                    image.Save(m, image.RawFormat);
+                    var imageBytes = m.ToArray();
+
+                    // Convert byte[] to Base64 String
+                    var base64String = Convert.ToBase64String(imageBytes);
+                    return base64String;
+                }
+            }
         }
     }
 }

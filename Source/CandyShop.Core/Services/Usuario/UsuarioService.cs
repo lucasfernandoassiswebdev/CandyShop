@@ -34,16 +34,6 @@ namespace CandyShop.Core.Services.Usuario
         {
             if (!usuario.VerificaEdicao(_notification))
                 return;
-
-            //verificando se não está sendo cadastrado um cpf repetido
-            var usuarios = _usuarioRepository.ListarUsuario();
-            var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-            if (usuarios.Any(usuarioA => usuarioA.Cpf == cpf))
-            {
-                _notification.Add("Este Cpf já existe!");
-                return;
-            }
-
             _usuarioRepository.EditarUsuario(usuario);
         }
 
