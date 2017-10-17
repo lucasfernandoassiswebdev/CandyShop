@@ -1,5 +1,6 @@
 ﻿using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.Produto;
+using CandyShop.Core.Services.Usuario;
 using System;
 
 namespace CandyShop.Core.Services.Compra
@@ -12,13 +13,15 @@ namespace CandyShop.Core.Services.Compra
         private readonly ICompraProdutoRepository _compraProdutoRepository;
         private readonly INotification _notification;
         private readonly IProdutoRepository _produtoRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public CompraService(ICompraRepository compraRepositorio, ICompraProdutoRepository compraProdutoRepository, INotification notification, IProdutoRepository produtoRepository)
+        public CompraService(ICompraRepository compraRepositorio, ICompraProdutoRepository compraProdutoRepository, INotification notification, IProdutoRepository produtoRepository, IUsuarioRepository usuarioRepository)
         {
             _compraRepository = compraRepositorio;
             _compraProdutoRepository = compraProdutoRepository;
             _notification = notification;
             _produtoRepository = produtoRepository;
+            _usuarioRepository = usuarioRepository;
         }
 
         public int InserirCompra(Compra compra)
@@ -59,6 +62,14 @@ namespace CandyShop.Core.Services.Compra
 
                     item.IdCompra = valor;
                     _compraProdutoRepository.InserirCompraProduto(item);
+                }
+
+                var user = _usuarioRepository.SelecionarUsuario(compra.Usuario.Cpf);
+                if (user.SaldoUsuario < -100)
+                {
+                    _compraRepository.RollBackTransaction();
+                    _notification.Add("Você está excedendo a dívida máxima, pague a lojinha!");
+                    return 0;
                 }
 
                 _compraRepository.CommitTransaction();
