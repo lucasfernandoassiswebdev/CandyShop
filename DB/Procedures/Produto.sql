@@ -1,5 +1,4 @@
-USE CandyShop
-GO
+
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsProduto]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_InsProduto]
@@ -224,6 +223,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoInativo]
 				Categoria
 			 FROM Produto WITH(NOLOCK)
 			 WHERE Ativo = 'I'
+			 ORDER BY NomeProduto
 	END
 GO
 
@@ -353,6 +353,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProdutoCategoria]
 		SELECT * 
 			FROM Produto
 			WHERE Categoria like @Categoria AND Ativo = 'A'
+			ORDER BY NomeProduto
 	END
 GO
 

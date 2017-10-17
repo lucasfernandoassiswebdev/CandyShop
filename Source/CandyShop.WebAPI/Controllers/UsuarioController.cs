@@ -171,7 +171,7 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetWithCpf(string cpf)
         {
             var usuario = _usuarioRepository.SelecionarUsuario(cpf);
-            usuario.Imagem = _getEnderecoImagens + "/" + cpf + ".jpg";
+            usuario.Imagem = $"{_getEnderecoImagens}/{cpf}.jpg?={DateTime.Now.Ticks}";
             return Ok(usuario);
         }
 

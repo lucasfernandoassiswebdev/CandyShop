@@ -216,6 +216,8 @@ CREATE PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 				Classificacao
 				FROM [dbo].[Usuario]
 				WHERE Ativo = 'I'
+				ORDER BY NomeUsuario
+
 	END
 GO
 				
@@ -246,6 +248,8 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 				Classificacao
 			FROM [dbo].[Usuario]
 			WHERE SaldoUsuario < 0 AND Ativo = 'A'
+			ORDER BY NomeUsuario
+
 	END
 GO
 

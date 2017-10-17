@@ -188,9 +188,9 @@ namespace CandyShop.WebAPI.Controllers
             var produtos = _produtoRepository.ListarProdutos();
             foreach (var produto in produtos)
             {
-                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg ";
-                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg ";
-                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg ";
+                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg?={DateTime.Now.Ticks}";
+                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg?={DateTime.Now.Ticks}";
+                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg?={DateTime.Now.Ticks}";
             }
             return Ok(produtos);
         }
@@ -205,9 +205,9 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetId(int idProduto)
         {
             var produto = _produtoRepository.SelecionarDadosProduto(idProduto);
-            produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg ";
-            produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg ";
-            produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg ";
+            produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg?={DateTime.Now.Ticks}";
+            produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg?={DateTime.Now.Ticks}";
+            produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg?={DateTime.Now.Ticks}";
             return Ok(produto);
         }
 
@@ -217,9 +217,9 @@ namespace CandyShop.WebAPI.Controllers
             var produtos = _produtoRepository.ProcurarProdutoPorNome(nome);
             foreach (var produto in produtos)
             {
-                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg ";
-                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg ";
-                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg ";
+                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg?={DateTime.Now.Ticks}";
+                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg?={DateTime.Now.Ticks}";
+                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg?={DateTime.Now.Ticks}";
             }
             return Ok(produtos);
         }
@@ -230,9 +230,9 @@ namespace CandyShop.WebAPI.Controllers
             var produtos = _produtoRepository.ListarProdutosPorCategoria(categoria);
             foreach (var produto in produtos)
             {
-                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg ";
-                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg ";
-                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg ";
+                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg?={DateTime.Now.Ticks}";
+                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg?={DateTime.Now.Ticks}";
+                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg?={DateTime.Now.Ticks}";
             }
             return Ok(produtos);
         }
