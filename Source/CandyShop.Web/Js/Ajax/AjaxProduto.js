@@ -36,7 +36,7 @@
         var produto = {
             IdProduto: $('#IdProduto').val(),
             NomeProduto: $('#NomeProduto').val(),
-            PrecoProduto: $('#PrecoProduto').val().replace("R$", ""),
+            PrecoProduto: $('#PrecoProduto').val().replace("R$", "").replace(".", ""),
             QtdeProduto: $('#QtdeProduto').val(),
             Categoria: $('#Categoria').val(),
             Ativo: $('#Ativo').val(),
