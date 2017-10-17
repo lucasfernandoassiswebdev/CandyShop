@@ -25,9 +25,14 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Post(Produto produto)
         {
+            if (produto.NomeProduto == null)
+                return Content(HttpStatusCode.BadRequest,"Todas as informações do formulário devem ser preenchidas!");
+
+            //Verificando se o produto é válido antes de inserir 
             _produtoService.IsValid(produto);
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+
             int sequencial;
             var result = _produtoRepository.InserirProduto(produto, out sequencial);
             if (result == -1)
@@ -38,7 +43,6 @@ namespace CandyShop.WebAPI.Controllers
             try
             {
                 if (produto.ImagemA != null)
-                {
                     foreach (var prefixo in prefixos)
                     {
                         if (!produto.ImagemA.StartsWith(prefixo)) continue;
@@ -48,10 +52,9 @@ namespace CandyShop.WebAPI.Controllers
                         var caminho = $"{_enderecoImagens}/{sequencial}_A.jpg";
                         File.WriteAllBytes(caminho, bytes);
                     }
-                }else InserirPadrao($"{sequencial}_A");
+                else InserirPadrao($"{sequencial}_A");
 
                 if (produto.ImagemB != null)
-                {
                     foreach (var prefixo in prefixos)
                     {
                         if (!produto.ImagemB.StartsWith(prefixo)) continue;
@@ -61,10 +64,9 @@ namespace CandyShop.WebAPI.Controllers
                         var caminho = $"{_enderecoImagens}/{sequencial}_B.jpg";
                         File.WriteAllBytes(caminho, bytes);
                     }
-                }else InserirPadrao($"{sequencial}_B");
+                else InserirPadrao($"{sequencial}_B");
 
                 if (produto.ImagemC != null)
-                {
                     foreach (var prefixo in prefixos)
                     {
                         if (!produto.ImagemC.StartsWith(prefixo)) continue;
@@ -74,13 +76,13 @@ namespace CandyShop.WebAPI.Controllers
                         var caminho = $"{_enderecoImagens}/{sequencial}_C.jpg";
                         File.WriteAllBytes(caminho, bytes);
                     }
-                }else InserirPadrao($"{sequencial}_C");
+                else InserirPadrao($"{sequencial}_C");
             }
             catch
             {
-                return Content(HttpStatusCode.NotModified, "Erro ao inserir imagens");
+                return Content(HttpStatusCode.OK, "Erro ao inserir imagens");
             }
-            return Ok();
+            return Content(HttpStatusCode.OK,"Produto inserido com sucesso");
         }
 
         public IHttpActionResult Put(Produto produto)
@@ -93,7 +95,6 @@ namespace CandyShop.WebAPI.Controllers
             try
             {
                 if (produto.ImagemA != null)
-                {
                     foreach (var prefixo in prefixos)
                     {
                         if (!produto.ImagemA.StartsWith(prefixo)) continue;
@@ -101,14 +102,13 @@ namespace CandyShop.WebAPI.Controllers
 
                         var bytes = Convert.FromBase64String(produto.ImagemA);
                         var caminho = $"{_enderecoImagens}\\{produto.IdProduto}_A.jpg";
-                        if(File.Exists(caminho))
+                        if (File.Exists(caminho))
                             File.Delete(caminho);
                         File.WriteAllBytes(caminho, bytes);
                     }
-                }else InserirPadrao($"{produto.IdProduto}_A");
+                else InserirPadrao($"{produto.IdProduto}_A");
 
                 if (produto.ImagemB != null)
-                {
                     foreach (var prefixo in prefixos)
                         if (produto.ImagemB.StartsWith(prefixo))
                         {
@@ -120,10 +120,9 @@ namespace CandyShop.WebAPI.Controllers
                                 File.Delete(caminho);
                             File.WriteAllBytes(caminho, bytes);
                         }
-                }else InserirPadrao($"{produto.IdProduto}_B");
+                        else InserirPadrao($"{produto.IdProduto}_B");
 
                 if (produto.ImagemC != null)
-                {
                     foreach (var prefixo in prefixos)
                         if (produto.ImagemC.StartsWith(prefixo))
                         {
@@ -135,7 +134,7 @@ namespace CandyShop.WebAPI.Controllers
                                 File.Delete(caminho);
                             File.WriteAllBytes(caminho, bytes);
                         }
-                }else InserirPadrao($"{produto.IdProduto}_C");                                              
+                        else InserirPadrao($"{produto.IdProduto}_C");
 
                 if (produto.RemoverImagemA)
                 {
@@ -215,7 +214,7 @@ namespace CandyShop.WebAPI.Controllers
         [HttpGet, Route("api/produto/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {
-            var produtos =  _produtoRepository.ProcurarProdutoPorNome(nome);
+            var produtos = _produtoRepository.ProcurarProdutoPorNome(nome);
             foreach (var produto in produtos)
             {
                 produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg ";

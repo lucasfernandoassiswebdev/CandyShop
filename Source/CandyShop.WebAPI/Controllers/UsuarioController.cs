@@ -67,6 +67,7 @@ namespace CandyShop.WebAPI.Controllers
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
+            if (usuario.Imagem == null) return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
             try
             {
                 if (usuario.Imagem != null)
@@ -103,7 +104,8 @@ namespace CandyShop.WebAPI.Controllers
             {
                 return Content(HttpStatusCode.NotModified, "Usuario editado com sucesso, porém houve um erro ao editar sua imagem");
             }
-            return Ok();
+
+            return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
         }
 
         [HttpPost, Route("api/Usuario/login")]

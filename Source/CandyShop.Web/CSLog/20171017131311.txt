@@ -1,0 +1,3 @@
+System.Web.Mvc
+O dicionário de parâmetros contém uma entrada nula para o parâmetro 'idProduto' de tipo que não permite valor anulável 'System.Int32' para o método 'System.Web.Mvc.ActionResult EditarProduto(Int32, System.String)' em 'CandyShop.Web.Controllers.ProdutoController'. Um parâmetro opcional deve ser um tipo de referência, um tipo que permite valor anulável ou declarado como opcional.
+Nome do parâmetro: parameters

@@ -31,7 +31,7 @@ $(document).ready(function () {
     });
 
     $("#removerImagem").click(function () {
-        $("#imagem").attr("src", "Imagens/retirado.png");
+        $("#imagem").attr("src", "http://189.112.203.1:45000/candyShop//retirado.png");
         $("#fotoUsuario").val("");
         removerImagem = true;
     });
