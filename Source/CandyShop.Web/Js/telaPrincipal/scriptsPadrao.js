@@ -144,6 +144,13 @@ $(document).ready(function () {
                                 localStorage.removeItem("listaProdutos");
                                 localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
                                 li.remove();
+                                // Recalculando o total
+                                totalCompra = 0;
+                                listaProdutos.forEach(function (produto) {
+                                    var precoCorreto = produto.Preco.replace(",", ".");
+                                    totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
+                                });
+                                $("#totalCompra").text("R$ " + totalCompra);
                             })
                         ]
                     }),
@@ -362,13 +369,13 @@ $(document).ready(function () {
             $("#adicionaCarrinho").removeAttr("disabled");
     });
 
-    $("#quantidade, #quantidadeEdit").keydown(function (e) {
-        var tamanho = $(this).val().length;
-        if (tamanho > 2 && e.which !== 8) {
-            e.preventDefault();
-            return false;
-        }
-    });
+    //$("#quantidade, #quantidadeEdit").keydown(function (e) {
+    //    var tamanho = $(this).val().length;
+    //    if (tamanho > 2 && e.which !== 8) {
+    //        e.preventDefault();
+    //        return false;
+    //    }
+    //});
     // Foco saindo do input
     $("#quantidade").blur(function () {
         quantidade = $("#quantidade").val();

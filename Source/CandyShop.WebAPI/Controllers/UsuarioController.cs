@@ -9,8 +9,13 @@ namespace CandyShop.WebAPI.Controllers
 {
     public class UsuarioController : ApiController
     {
+<<<<<<< HEAD
         private readonly string _enderecoImagens = $"{ImagensConfig.enderecoImagens}\\Usuarios";
         private readonly string _getEnderecoImagens = $"{ImagensConfig.getEnderecoImagens}/Usuarios";
+=======
+        private readonly string _enderecoImagens = $"{ImagensConfig.EnderecoImagens}\\Usuarios";
+        private readonly string _getEnderecoImagens = $"{ImagensConfig.GetEnderecoImagens}/Usuarios";
+>>>>>>> 011da15f7a2a17bc4476d1d2468164da528f39ed
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;

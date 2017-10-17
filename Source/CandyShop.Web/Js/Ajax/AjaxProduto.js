@@ -15,7 +15,7 @@
     var concluirCadastroProduto = function (baseA, baseB, baseC) {
         var produto = {
             NomeProduto: $('#NomeProduto').val(),
-            PrecoProduto: $('#PrecoProduto').val(),
+            PrecoProduto: $('#PrecoProduto').val().replace("R$ ", "").replace(".", ""),
             QtdeProduto: $('#QtdeProduto').val(),
             Categoria: $('#Categoria').val(),
             ImagemA: baseA,
