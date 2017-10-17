@@ -4,7 +4,6 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Web.Hosting;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
@@ -35,60 +34,52 @@ namespace CandyShop.WebAPI.Controllers
                 return Content(HttpStatusCode.BadRequest, "Falha ao inserir o produto");
 
             //salvando todas as imagens que o usuário inseriu
-            var cont = 0;
             string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
-            if (produto.ImagemA != null)
+            try
             {
-                
-                foreach (var prefixo in prefixos)
+                if (produto.ImagemA != null)
                 {
-                    if (!produto.ImagemA.StartsWith(prefixo)) continue;
-                    produto.ImagemA = produto.ImagemA.Substring(prefixo.Length);
+                    foreach (var prefixo in prefixos)
+                    {
+                        if (!produto.ImagemA.StartsWith(prefixo)) continue;
+                        produto.ImagemA = produto.ImagemA.Substring(prefixo.Length);
 
-                    var bytes = Convert.FromBase64String(produto.ImagemA);                        
-                    var caminho = $"{_enderecoImagens}/{sequencial}_A.jpg";
-                    File.WriteAllBytes(caminho, bytes);
-                    cont++;
-                }
-            }
+                        var bytes = Convert.FromBase64String(produto.ImagemA);
+                        var caminho = $"{_enderecoImagens}/{sequencial}_A.jpg";
+                        File.WriteAllBytes(caminho, bytes);
+                    }
+                }else InserirPadrao($"{sequencial}_A");
 
-            if (produto.ImagemB != null)
-            {
-                foreach (var prefixo in prefixos)
+                if (produto.ImagemB != null)
                 {
-                    if (!produto.ImagemB.StartsWith(prefixo)) continue;
-                    produto.ImagemB = produto.ImagemB.Substring(prefixo.Length);
+                    foreach (var prefixo in prefixos)
+                    {
+                        if (!produto.ImagemB.StartsWith(prefixo)) continue;
+                        produto.ImagemB = produto.ImagemB.Substring(prefixo.Length);
 
-                    var bytes = Convert.FromBase64String(produto.ImagemB);
-                    var caminho = $"{_enderecoImagens}/{sequencial}_B.jpg";
-                    File.WriteAllBytes(caminho, bytes);
-                    cont++;
-                }
-            }
+                        var bytes = Convert.FromBase64String(produto.ImagemB);
+                        var caminho = $"{_enderecoImagens}/{sequencial}_B.jpg";
+                        File.WriteAllBytes(caminho, bytes);
+                    }
+                }else InserirPadrao($"{sequencial}_B");
 
-            if (produto.ImagemC != null)
-            {
-                foreach (var prefixo in prefixos)
+                if (produto.ImagemC != null)
                 {
-                    if (!produto.ImagemC.StartsWith(prefixo)) continue;
-                    produto.ImagemC = produto.ImagemC.Substring(prefixo.Length);
+                    foreach (var prefixo in prefixos)
+                    {
+                        if (!produto.ImagemC.StartsWith(prefixo)) continue;
+                        produto.ImagemC = produto.ImagemC.Substring(prefixo.Length);
 
-                    var bytes = Convert.FromBase64String(produto.ImagemC);
-                    var caminho = $"{_enderecoImagens}/{sequencial}_C.jpg";
-                    File.WriteAllBytes(caminho, bytes);
-                    cont++;
-                }
+                        var bytes = Convert.FromBase64String(produto.ImagemC);
+                        var caminho = $"{_enderecoImagens}/{sequencial}_C.jpg";
+                        File.WriteAllBytes(caminho, bytes);
+                    }
+                }else InserirPadrao($"{sequencial}_C");
             }
-
-            if (cont != 0 && produto.ImagemA == null) return Ok();
+            catch
             {
-                //pegando a imagem na aplicação e transformando em base 64
-                var imagem = ConvertTo64();
-                //transformando em array de bytes e salvando com o cpf do usuário
-                var bytes = Convert.FromBase64String(imagem);
-                var caminho = $"{_enderecoImagens}/{sequencial}_A.jpg";
-                File.WriteAllBytes(caminho, bytes);
-            }            
+                return Content(HttpStatusCode.NotModified, "Erro ao inserir imagens");
+            }
             return Ok();
         }
 
@@ -98,6 +89,89 @@ namespace CandyShop.WebAPI.Controllers
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
             _produtoRepository.UpdateProduto(produto);
+            string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
+            try
+            {
+                if (produto.ImagemA != null)
+                {
+                    foreach (var prefixo in prefixos)
+                    {
+                        if (!produto.ImagemA.StartsWith(prefixo)) continue;
+                        produto.ImagemA = produto.ImagemA.Substring(prefixo.Length);
+
+                        var bytes = Convert.FromBase64String(produto.ImagemA);
+                        var caminho = $"{_enderecoImagens}\\{produto.IdProduto}_A.jpg";
+                        if(File.Exists(caminho))
+                            File.Delete(caminho);
+                        File.WriteAllBytes(caminho, bytes);
+                    }
+                }else InserirPadrao($"{produto.IdProduto}_A");
+
+                if (produto.ImagemB != null)
+                {
+                    foreach (var prefixo in prefixos)
+                        if (produto.ImagemB.StartsWith(prefixo))
+                        {
+                            produto.ImagemB = produto.ImagemB.Substring(prefixo.Length);
+
+                            var bytes = Convert.FromBase64String(produto.ImagemB);
+                            var caminho = $"{_enderecoImagens}\\{produto.IdProduto}_B.jpg";
+                            if (File.Exists(caminho))
+                                File.Delete(caminho);
+                            File.WriteAllBytes(caminho, bytes);
+                        }
+                }else InserirPadrao($"{produto.IdProduto}_B");
+
+                if (produto.ImagemC != null)
+                {
+                    foreach (var prefixo in prefixos)
+                        if (produto.ImagemC.StartsWith(prefixo))
+                        {
+                            produto.ImagemC = produto.ImagemC.Substring(prefixo.Length);
+
+                            var bytes = Convert.FromBase64String(produto.ImagemC);
+                            var caminho = $"{_enderecoImagens}\\{produto.IdProduto}_C.jpg";
+                            if (File.Exists(caminho))
+                                File.Delete(caminho);
+                            File.WriteAllBytes(caminho, bytes);
+                        }
+                }else InserirPadrao($"{produto.IdProduto}_C");                                              
+
+                if (produto.RemoverImagemA)
+                {
+                    var filePath = $"{_enderecoImagens}\\{produto.IdProduto}_A.jpg";
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                        InserirPadrao($"{produto.IdProduto}_A");
+                    }
+                }
+
+                if (produto.RemoverImagemB)
+                {
+                    var filePath = $"{_enderecoImagens}\\{produto.IdProduto}_B.jpg";
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                        InserirPadrao($"{produto.IdProduto}_B");
+                    }
+                }
+
+                if (produto.RemoverImagemC)
+                {
+                    var filePath = $"{_enderecoImagens}\\{produto.IdProduto}_C.jpg";
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                        InserirPadrao($"{produto.IdProduto}_C");
+                    }
+                }
+            }
+            catch
+            {
+                return Content(HttpStatusCode.NotModified, "Erro ao editar imagens");
+            }
+
             return Ok();
         }
 
@@ -112,7 +186,14 @@ namespace CandyShop.WebAPI.Controllers
         #region GETS
         public IHttpActionResult Get()
         {
-            return Ok(_produtoRepository.ListarProdutos());
+            var produtos = _produtoRepository.ListarProdutos();
+            foreach (var produto in produtos)
+            {
+                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg ";
+                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg ";
+                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg ";
+            }
+            return Ok(produtos);
         }
 
         [HttpGet, Route("api/produto/inativos")]
@@ -124,25 +205,53 @@ namespace CandyShop.WebAPI.Controllers
         [HttpGet, Route("api/produto/selecionar/{idProduto}")]
         public IHttpActionResult GetId(int idProduto)
         {
-            return Ok(_produtoRepository.SelecionarDadosProduto(idProduto));
+            var produto = _produtoRepository.SelecionarDadosProduto(idProduto);
+            produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg ";
+            produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg ";
+            produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg ";
+            return Ok(produto);
         }
 
         [HttpGet, Route("api/produto/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {
-            return Ok(_produtoRepository.ProcurarProdutoPorNome(nome));
+            var produtos =  _produtoRepository.ProcurarProdutoPorNome(nome);
+            foreach (var produto in produtos)
+            {
+                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg ";
+                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg ";
+                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg ";
+            }
+            return Ok(produtos);
         }
 
         [HttpGet, Route("api/produto/categoria/{categoria}")]
         public IHttpActionResult GetCategoria(string categoria)
         {
-            return Ok(_produtoRepository.ListarProdutosPorCategoria(categoria));
+            var produtos = _produtoRepository.ListarProdutosPorCategoria(categoria);
+            foreach (var produto in produtos)
+            {
+                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg ";
+                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg ";
+                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg ";
+            }
+            return Ok(produtos);
         }
         #endregion
 
+        private void InserirPadrao(string nome)
+        {
+            //pegando a imagem na aplicação e transformando em base 64
+            var imagem = ConvertTo64();
+            //transformando em array de bytes e salvando com o cpf do usuário
+            var bytes = Convert.FromBase64String(imagem);
+            var caminho = $"{_enderecoImagens}/{nome}.jpg";
+            File.WriteAllBytes(caminho, bytes);
+        }
+
         private string ConvertTo64()
         {
-            using (var image = Image.FromFile(HostingEnvironment.MapPath($"{_enderecoImagens}/sem-foto.png")))
+            using (var image = Image.FromFile($"{_enderecoImagens}/sem-foto.png"))
             {
                 using (var m = new MemoryStream())
                 {
