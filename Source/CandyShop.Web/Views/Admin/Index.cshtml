@@ -64,12 +64,14 @@
         });
 
         $("#modalPesquisaUsuario").modal({
+            dismissible: false,
             ready: function () {
                 $("#nomeUsuario").focus();
             }
         });
 
         $("#modalPesquisaProduto").modal({
+            dismissible: false,
             ready: function () {
                 $("#nomeProduto").focus();
             }
