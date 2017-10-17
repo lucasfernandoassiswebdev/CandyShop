@@ -4,7 +4,7 @@
 namespace CandyShop.Web.Filters
 {
     public class AdminFilterResult : UserFilterResult
-    {        
+    {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (filterContext.HttpContext.Session["Login"] == null)
@@ -18,8 +18,8 @@ namespace CandyShop.Web.Filters
                     base.OnActionExecuting(filterContext);
                     return;
                 }
-            }                
-            filterContext.Result = new RedirectResult("/candyShop");
+            }
+            filterContext.Result = new RedirectResult("/Home");
         }
     }
 }

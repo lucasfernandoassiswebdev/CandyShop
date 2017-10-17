@@ -6,29 +6,24 @@ using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
-    public class UsuarioController : Controller
+    [AdminFilterResult]
+    public class UsuarioController : UsuarioComumController
     {
         private readonly IUsuarioApplication _appUsuario;
 
-        public UsuarioController(IUsuarioApplication usuario)
+        public UsuarioController(IUsuarioApplication usuario) : base(usuario)
         {
             _appUsuario = usuario;
         }
 
-        #region telas
-        [AdminFilterResult]
         public ActionResult Index()
         {
             return View();
         }
-
-        [AdminFilterResult]
         public ActionResult Cadastrar()
         {
             return View();
         }
-
-        [AdminFilterResult]
         public ActionResult Editar(string cpf, string telaAnterior)
         {
             var usuario = _appUsuario.SelecionarUsuario(cpf);
@@ -38,8 +33,6 @@ namespace CandyShop.Web.Controllers
             ViewBag.telaAnterior = telaAnterior;
             return View(usuario.Content);
         }
-
-        [AdminFilterResult]
         public ActionResult Desativar(string cpf, string telaAnterior)
         {
             var usuario = _appUsuario.SelecionarUsuario(cpf);
@@ -48,8 +41,6 @@ namespace CandyShop.Web.Controllers
             ViewBag.telaAnterior = telaAnterior;
             return View(usuario.Content);
         }
-
-        [AdminFilterResult]
         public ActionResult Detalhes(string cpf, string telaAnterior)
         {
             var response = _appUsuario.SelecionarUsuario(cpf);
@@ -58,11 +49,7 @@ namespace CandyShop.Web.Controllers
             ViewBag.telaAnterior = telaAnterior;
             return View(response.Content);
         }
-        #endregion
 
-        #region listas
-
-        [AdminFilterResult]
         public ActionResult Listar()
         {
             var response = _appUsuario.ListarUsuarios();
@@ -72,8 +59,6 @@ namespace CandyShop.Web.Controllers
             TempData["nomeLista"] = "Usuários Ativos";
             return View("Index", response.Content);
         }
-
-        [AdminFilterResult]
         public ActionResult ListarUsuariosEmDivida()
         {
             var response = _appUsuario.ListarUsuariosEmDivida();
@@ -83,8 +68,6 @@ namespace CandyShop.Web.Controllers
             TempData["nomeLista"] = "Usuários em Dívida";
             return View("Index", response.Content);
         }
-
-        [AdminFilterResult]
         public ActionResult ListarInativos()
         {
             var response = _appUsuario.ListarInativos();
@@ -95,7 +78,6 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
-        [AdminFilterResult]
         public ActionResult ProcurarUsuario(string nome)
         {
             var response = _appUsuario.ProcurarUsuario(nome);
@@ -104,11 +86,7 @@ namespace CandyShop.Web.Controllers
             TempData["nomeLista"] = "Usuários Relacionados";
             return View("Index", response.Content);
         }
-        #endregion
 
-        #region EXECUCOES
-        [AdminFilterResult]
-        [HttpPost]
         public ActionResult Cadastrar(UsuarioViewModel usuario)
         {
             if (usuario.Cpf == null || usuario.NomeUsuario == null)
@@ -122,9 +100,6 @@ namespace CandyShop.Web.Controllers
                 ? $"{response.ContentAsString}"
                 : response.Content);
         }
-
-        [AdminFilterResult]
-        [HttpPut]
         public ActionResult Editar(UsuarioViewModel usuario)
         {
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
@@ -142,34 +117,10 @@ namespace CandyShop.Web.Controllers
             Session["saldoUsuario"] = res.Content.SaldoUsuario;
             return Content("Edição concluída com sucesso!!");
         }
-
-        [UserFilterResult]
-        public ActionResult TrocarSenha(TrocaSenhaViewModel senhas)
-        {
-            if (!senhas.ConfirmaNovaSenha.Equals(senhas.NovaSenha)) return Content("Senhas não conferem");
-            var usuario = new UsuarioViewModel
-            {
-                Cpf = Session["Login"].ToString(),
-                SenhaUsuario = senhas.NovaSenha
-            };
-            var response = _appUsuario.TrocarSenha(usuario);
-            return Content(response.Status != HttpStatusCode.OK ? $"Erro ao trocar a senha, {response.ContentAsString}" : "Senha atualizada com sucesso");
-        }
-
-        [AdminFilterResult]
-        [HttpPut]
         public ActionResult DesativarUsuario(UsuarioViewModel usuario)
         {
             var response = _appUsuario.DesativarUsuario(usuario);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro {response.Status}" : "Usuario desativado com sucesso!");
         }
-
-        [UserFilterResult]
-        public ActionResult Deslogar()
-        {
-            Session.Clear();
-            return RedirectToAction("NavBar", "Home");
-        }
-        #endregion
     }
 }
