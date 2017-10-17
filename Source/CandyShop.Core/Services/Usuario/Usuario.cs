@@ -24,8 +24,6 @@
 
         public bool VerificaEdicao(INotification notification)
         {
-            if (!ValidaCpf(Cpf))
-                notification.Add("Cpf Invalido");
             if (string.IsNullOrEmpty(NomeUsuario.Trim()) || NomeUsuario.Length > 50)
                 notification.Add("Nome do Usuario invalido ");
             if (string.IsNullOrEmpty(SenhaUsuario.Trim()) || SenhaUsuario.Length > 12 || SenhaUsuario.Length < 6)
