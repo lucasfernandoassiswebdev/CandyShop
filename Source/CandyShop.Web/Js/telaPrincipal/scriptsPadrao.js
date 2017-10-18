@@ -148,7 +148,7 @@ $(document).ready(function () {
     // Adicionando os itens no carrinho
     $("#adicionaCarrinho").click(function () {
         var value = $("#quantidade").val().trim();
-        if (!value || !/^[\d]+$/g.test(value) || value.length > 3 || value > quantidadeDisponivel) {
+        if (!value || !/^[\d]+$/g.test(value) || value.length > 3 || value > quantidadeDisponivel || value == 0) {
             Materialize.toast("Quantidade inválida ou indisponível para compra!", 2000);
             return;
         }
@@ -302,6 +302,16 @@ $(document).ready(function () {
 
     // Editando a quantidade dos itens no carrinho
     $("#editarQuantidade").click(function () {
+        mNumbers($("#quantidadeEdit").val());
+        var qtde = parseInt($("#quantidadeEdit").val());
+        if (qtde <= quantidadeDisponivel && qtde > 0)
+            $("#modalEditarQuantidade").modal("close");
+        else {
+
+            Materialize.toast("Quantidade indisponível para compra!", 2000);
+            return;
+        }
+
         $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
             .text("Quantidade: " + $("#quantidadeEdit").val())
             .attr("data-Quantidade", $("#quantidadeEdit").val());
@@ -327,13 +337,10 @@ $(document).ready(function () {
     // Desabilitando no modal de editar a quantidade
     $("#quantidadeEdit").blur(verificaEditQuantidade)
         .keydown(function (e) {
-            FilterInput(event); verificaEditQuantidade();
-            var tamanho = $(this).val().length;
-            if (tamanho > 2 && e.which !== 8 && e.which !== 46 && e.which !== 38 && e.which !== 39 && e.which !== 40 && e.which !== 37) {
-                e.preventDefault();
-                return false;
-            }
+            if (e.which === 13)
+                $("#editarQuantidade").trigger("click");
         })
+        .keyup(verificaEditQuantidade)
         .on("paste", function () { handlePaste(event); verificaEditQuantidade(); });
 
     // Removendo caracteres inválidos dos campos de quantidade
@@ -376,19 +383,7 @@ $(document).ready(function () {
             $("#adicionaCarrinho").trigger("click");
     });
 
-    $("#quantidadeEdit").keydown(function (e) {
-        if (e.which === 13) {
-            mNumbers($("#quantidadeEdit").val());
-            var qtde = parseInt($("#quantidadeEdit").val());
-            if (qtde <= quantidadeDisponivel && qtde > 0) {
-                $("#modalEditarQuantidade").modal("close");
-                $("#editarQuantidade").trigger("click");
-            } else {
-                Materialize.toast("Quantidade indisponível para compra!", 2000);
-                return;
-            }
-        }
-    });
+    $("#quantidadeEdit");
 
     //validando campo de CPF
     $("#cpf").keydown(function (e) {
@@ -457,7 +452,7 @@ function mcpf(v) {
 
 function verificaEditQuantidade() {
     quantidade = $("#quantidadeEdit").val();
-    if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel)
+    if (parseInt(quantidade) <= 0 || quantidade == "" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
         $("#editarQuantidade").attr("disabled", "disabled");
     else
         $("#editarQuantidade").removeAttr("disabled");
