@@ -54,7 +54,7 @@ function concluirAcao(endereco, objeto, tela) {
 function concluirAcaoEdicao(endereco, objeto, tela) {
     $.ajax({
         url: endereco,
-        type: "PUT",
+        type: "POST",
         data: objeto,
         success: function (message) {
             chamaPagina(tela);

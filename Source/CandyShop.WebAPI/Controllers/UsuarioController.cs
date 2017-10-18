@@ -33,7 +33,6 @@ namespace CandyShop.WebAPI.Controllers
             {
                 if (usuario.Imagem != null)
                 {
-
                     string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
                     if (usuario.Imagem == null) return Ok();
                     foreach (var prefixo in prefixos)
@@ -67,7 +66,6 @@ namespace CandyShop.WebAPI.Controllers
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
-            if (usuario.Imagem == null) return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
             try
             {
                 if (usuario.Imagem != null)
@@ -77,34 +75,25 @@ namespace CandyShop.WebAPI.Controllers
                         if (usuario.Imagem.StartsWith(prefixo))
                         {
                             usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
-
                             //transformando base64 em array de bytes
                             var bytes = Convert.FromBase64String(usuario.Imagem);
-
                             //montando o nome e caminho de save da imagem
-                            usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
                             var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
-
                             File.WriteAllBytes(caminho, bytes);
                         }
-                }
-                else InserirPadrao(usuario.Cpf);
-
-                if (usuario.RemoverImagem)
-                {
-                    var filePath = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
-                    if (File.Exists(filePath))
-                    {
-                        File.Delete(filePath);
-                        InserirPadrao(usuario.Cpf);
-                    }
                 }
             }
             catch
             {
                 return Content(HttpStatusCode.NotModified, "Usuario editado com sucesso, porém houve um erro ao editar sua imagem");
             }
-
+            if (usuario.RemoverImagem) // não inverter esse if com o recharper, ele só faz merda
+            {
+                var filePath = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
+                if (!File.Exists(filePath)) return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
+                File.Delete(filePath);
+                InserirPadrao(usuario.Cpf);
+            }
             return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
         }
 
