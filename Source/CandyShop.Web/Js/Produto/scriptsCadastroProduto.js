@@ -12,159 +12,33 @@
         allowNegative: false,
         thousands: ".",
         decimal: ",",
-        affixesStay: false
+        affixesStay: true
     });
 
     $("#PrecoProduto").maskMoney("mask");
 
     // Fazendo as validações no campo de nome
     $("#NomeProduto").keydown(function (e) {
-        var tamanhoCampo = $(this).val().length;
-        console.log($("#PrecoProduto").val());
-        console.log(parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")));
         if (e.which == 13)
             $("#PrecoProduto").focus();
         else
-            if (tamanhoCampo <= 0 || tamanhoCampo > 40 ||
-                $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
-                parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-                parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-                parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
-                parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0)
-                $(".botaoCadastro").attr("disabled", "disabled");
-            else
-                $(".botaoCadastro").removeAttr("disabled");
-    });
+            validaBotao();
+    }).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
-    $("#NomeProduto").keyup(function () {
-        var tamanhoCampo = $(this).val().length;
-
-        if (tamanhoCampo <= 0 || tamanhoCampo > 40 ||
-            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
-            parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
-            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0)
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
-
-    $("#NomeProduto").blur(function () {
-        var tamanhoCampo = $(this).val().length;
-
-        if (tamanhoCampo <= 0 || tamanhoCampo > 40 ||
-            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
-            parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
-            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0)
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
-
-    $("#NomeProduto").on("paste", function () {
-        var tamanhoCampo = $(this).val().length;
-
-        if (tamanhoCampo <= 0 || tamanhoCampo > 40 ||
-            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
-            parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
-            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0)
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
-
-    $("#NomeProduto").focus(function () {
-        var tamanhoCampo = $(this).val().length;
-
-        if (tamanhoCampo <= 0 || tamanhoCampo > 40 ||
-            $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
-            parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-            parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
-            parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0)
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
     // Fazendo as validações no campo de preço
-    $("#PrecoProduto").keyup(function () {
-        var valorCampo = $(this).val().replace("R$", "").replace(",", ".");
-        if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40
-            || $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length == 0
-            || $("#QtdeProduto").val() > 999 || $("#QtdeProduto").val() <= 0
-            || parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0
-            || valorCampo >= 999 || valorCampo <= 0)
+    $("#PrecoProduto").keyup(validaBotao).keydown(function (e) {
+        var tamanhoCampo = $(this).val().length;
+        if (tamanhoCampo > 2 && e.which !== 8 && e.which !== 46 && e.which !== 38 && e.which !== 37 && e.which !== 40 && e.which !== 39) {
             $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
+            e.preventDefault();
+            return false;
+        }
+            validaBotao();
+    }).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
-    $("#PrecoProduto").keydown(function (e) {
-        var valorCampo = $(this).val().replace("R$", "").replace(",", ".");
-
-        if (e.which == 13)
-            $("#QtdeProduto").focus();
-        else
-            // Verificando se os outros campos estão válidos para liberar o botão
-            if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40
-                || $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length == 0
-                || $("#QtdeProduto").val() > 999 || $("#QtdeProduto").val() <= 0
-                || parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0
-                || valorCampo >= 999 || valorCampo <= 0)
-                $(".botaoCadastro").attr("disabled", "disabled");
-            else
-                $(".botaoCadastro").removeAttr("disabled");
-    });
-
-    $("#PrecoProduto").blur(function () {
-        $(this).maskMoney("mask");
-        var valorCampo = $(this).val().replace("R$", "").replace(",", ".");
-
-        if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40
-            || $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length == 0
-            || $("#QtdeProduto").val() > 999 || $("#QtdeProduto").val() <= 0
-            || parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0
-            || valorCampo >= 999 || valorCampo <= 0)
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
-
-    $("#PrecoProduto").on("paste", function () {
-        var valorCampo = $(this).val().replace("R$", "").replace(",", ".");
-
-        if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40
-            || $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length == 0
-            || $("#QtdeProduto").val() > 999 || $("#QtdeProduto").val() <= 0
-            || parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0
-            || valorCampo >= 999 || valorCampo <= 0)
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
-
-    $("#PrecoProduto").focus(function () {
-        $(this).maskMoney("mask");
-        var valorCampo = $(this).val().replace("R$", "").replace(",", ".");
-
-        if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40
-            || $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length == 0
-            || $("#QtdeProduto").val() > 999 || $("#QtdeProduto").val() <= 0
-            || parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0
-            || valorCampo >= 999 || valorCampo <= 0)
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
     // Fazendo as validações no campo de quantidade do produto 
     $("#QtdeProduto").keydown(function (e) {
         var tamanhoCampo = $(this).val().length;
-        var valorCampo = parseInt($(this).val());
 
         if (tamanhoCampo > 2 && e.which !== 8) {
             $(".botaoCadastro").attr("disabled", "disabled");
@@ -174,77 +48,9 @@
 
         if (e.which == 13)
             $(".penis").focus();
-
-        if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40
-            || $("#PrecoProduto").val().length > 9 || $("#PrecoProduto").val() == "R$ 0,00"
-            || valorCampo >= 999 || valorCampo == 0 || $(this).val() == "")
-            $(".botaoCadastro").attr("disabled", "disabled");
         else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
-
-    $("#QtdeProduto").keyup(function () {
-        var valorCampo = parseInt($(this).val());
-
-        if (parseInt($(this).val()) >= 999) {
-            $(".botaoCadastro").attr("disabled", "disabled");
-            Materialize.toast("Valor inserido é inválido", 3000);
-        }
-
-        if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40
-            || $("#PrecoProduto").val().length > 9 || $("#PrecoProduto").val() == "R$ 0,00"
-            || valorCampo >= 999 || valorCampo == 0 || $(this).val() == "")
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
-
-    $("#QtdeProduto").blur(function () {
-        var valorCampo = parseInt($(this).val());
-
-        if (parseInt($(this).val()) >= 999) {
-            $(".botaoCadastro").attr("disabled", "disabled");
-            Materialize.toast("Valor inserido é inválido", 3000);
-        }
-
-        if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40
-            || $("#PrecoProduto").val().length > 9 || $("#PrecoProduto").val() == "R$ 0,00"
-            || valorCampo >= 999 || valorCampo == 0 || $(this).val() == "")
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
-
-    $("#QtdeProduto").focus(function () {
-        var valorCampo = parseInt($(this).val());
-
-        if (valorCampo >= 999) {
-            $(".botaoCadastro").attr("disabled", "disabled");
-        }
-
-        if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40
-            || $("#PrecoProduto").val().length > 9 || $("#PrecoProduto").val() == "R$ 0,00"
-            || valorCampo >= 999 || valorCampo == 0 || $(this).val == "" || $(this).val() == "")
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
-
-    $("#QtdeProduto").on("paste", function () {
-        var valorCampo = parseInt($(this).val());
-
-        if (parseInt($(this).val()) >= 999) {
-            $(".botaoCadastro").attr("disabled", "disabled");
-            Materialize.toast("Valor inserido é inválido", 3000);
-        }
-
-        if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40
-            || $("#PrecoProduto").val().length > 9 || $("#PrecoProduto").val() == "R$ 0,00"
-            || valorCampo >= 999 || valorCampo == 0 || $(this).val() == "")
-            $(".botaoCadastro").attr("disabled", "disabled");
-        else
-            $(".botaoCadastro").removeAttr("disabled");
-    });
+            validaBotao();
+    }).keyup(validaBotao).blur(validaBotao).focus(validaBotao).on("paste", validaBotao);
 
     // Finalizando o cadastro
     $(".botaoCadastro").on("click", function () {
@@ -404,6 +210,20 @@ function handlePaste(e) {
         e.stopPropagation();
         e.preventDefault();
     }
+}
+
+function validaBotao() {
+    $("#PrecoProduto").maskMoney("mask");
+    if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40 ||
+        $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
+        parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+        parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+        parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
+        parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0 ||
+        $("#PrecoProduto").val() == "R$ 0,00" || $("#PrecoProduto").val() == "")
+        $(".botaoCadastro").attr("disabled", "disabled");
+    else
+        $(".botaoCadastro").removeAttr("disabled");
 }
 
 

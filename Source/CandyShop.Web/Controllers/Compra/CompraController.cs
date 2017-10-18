@@ -1,32 +1,24 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
-using CandyShop.Web.Helpers;
 using System;
 using System.Net;
 using System.Web.Mvc;
 
-namespace CandyShop.Web.Controllers
+namespace CandyShop.Web.Controllers.Compra
 {
-    public class CompraController : Controller
+    [AdminFilterResult]
+    public class CompraController : CompraUserComumController
     {
         private readonly ICompraApplication _appCompra;
         private readonly IUsuarioApplication _appUsuario;
 
-        public CompraController(ICompraApplication compra, IUsuarioApplication usuario)
+        public CompraController(ICompraApplication compra, IUsuarioApplication usuario) : base(compra)
         {
             _appCompra = compra;
             _appUsuario = usuario;
         }
 
-        [UserFilterResult]
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        #region listas
-        [AdminFilterResult]
         public ActionResult Listar()
         {
             ViewBag.tituloPagina = "Compras do ultimo mês";
@@ -36,8 +28,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [UserFilterResult]
         public ActionResult ListarCpf()
         {
             ViewBag.tituloPagina = "Minhas Compras";
@@ -48,8 +38,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [AdminFilterResult]
         public ActionResult ListarSemana()
         {
             ViewBag.tituloPagina = "Compras da ultima semana";
@@ -59,8 +47,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [AdminFilterResult]
         public ActionResult ListarMes(int mes)
         {
             ViewBag.tituloPagina = $"Compra do mês {mes}";
@@ -70,8 +56,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [AdminFilterResult]
         public ActionResult ListarDia()
         {
             ViewBag.tituloPagina = $"Compras do dia {DateTime.Now.ToShortDateString()}";
@@ -81,52 +65,29 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-        #endregion
-
-        #region execuções
-
-        [HttpPost]
         public ActionResult Cadastrar(CompraViewModel compra)
         {
 
             if (Session["Login"].ToString() == "off")
-            {
                 return Content("Efetue login e tente novamente. Você precisa estar logado para concluir sua compra");
-            }
 
-            if (ModelState.IsValid)
-            {
-                compra.Usuario = new UsuarioViewModel { Cpf = Session["Login"].ToString() };
+            if (!ModelState.IsValid) return Content("Ops... ocorreu um erro ao concluir sua compra.");
+            compra.Usuario = new UsuarioViewModel { Cpf = Session["Login"].ToString() };
 
-                var response = _appCompra.InserirCompra(compra);
+            var response = _appCompra.InserirCompra(compra);
 
-                if ((response.Status != HttpStatusCode.OK) || (response.Content < 1))
-                    return Content($"Os itens da compra não puderam ser registrados: {response.ContentAsString  }");
+            if ((response.Status != HttpStatusCode.OK) || (response.Content < 1))
+                return Content($"Os itens da compra não puderam ser registrados: {response.ContentAsString  }");
 
-                var user = _appUsuario.SelecionarUsuario(Session["Login"].ToString());
-                if (user.Status != HttpStatusCode.OK)
-                    return Content($"Erro ao atualizar seu saldo, {user.ContentAsString}");
-                Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
-                TempData["LimparCarrinho"] = true;
-                return Content("Sua compra foi registrada com sucesso");
-            }
-            return Content("Ops... ocorreu um erro ao concluir sua compra.");
+            var user = _appUsuario.SelecionarUsuario(Session["Login"].ToString());
+            if (user.Status != HttpStatusCode.OK)
+                return Content($"Erro ao atualizar seu saldo, {user.ContentAsString}");
+            Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
+            TempData["LimparCarrinho"] = true;
+            return Content("Sua compra foi registrada com sucesso");
         }
 
-        [HttpGet]
-        [UserFilterResult]
-        public ActionResult Detalhes(int idCompra, string paginaAnterior)
-        {
-            var response = _appCompra.SelecionarCompra(idCompra);
-            if (response.Status != HttpStatusCode.OK)
-                return Content("Erro ao detalhar compra, ", response.ContentAsString);
-            var a = paginaAnterior.LastWord();
-            ViewBag.endereco = Session["TipoDeLogin"].ToString().Equals("User") ?  "AjaxJsShop.voltarInicio()" : a.Count > 1 ? $"AjaxJsCompra.listarCompra{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})" : $"AjaxJsCompra.listarCompra{paginaAnterior.LastWord()[0]}()";
-            return View(response.Content);
-        }
-
-        [HttpPut]
-        [AdminFilterResult]
+        [HttpPost]
         public ActionResult Editar(CompraViewModel Compra)
         {
             var response = _appCompra.EditarCompra(Compra);
@@ -138,6 +99,5 @@ namespace CandyShop.Web.Controllers
             var compras = _appCompra.ListaCompra();
             return View("Index", compras.Content);
         }
-        #endregion
     }
 }

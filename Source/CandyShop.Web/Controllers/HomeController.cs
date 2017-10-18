@@ -25,7 +25,6 @@ namespace CandyShop.Web.Controllers
             Session["TipoDeLogin"] = "User";
             return View();
         }
-
         public ActionResult GridProdutos()
         {
             return View();
@@ -40,7 +39,6 @@ namespace CandyShop.Web.Controllers
             TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
         }
-
         public ActionResult ProcurarProduto(string nome)
         {
             var response = _appProduto.ProcurarProduto(nome);
@@ -51,7 +49,6 @@ namespace CandyShop.Web.Controllers
             TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
         }
-
         public ActionResult ListarCategoria(string categoria)
         {
             var response = _appProduto.ListarCategoria(categoria);
@@ -68,7 +65,7 @@ namespace CandyShop.Web.Controllers
         {
             var response = _appUsuario.VerificaLogin(usuario);
             if (response.Status != HttpStatusCode.OK)
-                return Content(response.Content); 
+                return Content(response.Content);
 
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
             var user = _appUsuario.SelecionarUsuario(cpf);

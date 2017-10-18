@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using CandyShop.Web.Controllers.Pagamento;
 using CandyShop.Web.Filters;
 using CandyShop.Web.Helpers;
 using System;
@@ -8,30 +9,22 @@ using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
-    public class PagamentoController : Controller
+    [AdminFilterResult]
+    public class PagamentoController : PagamentoUserComumController
     {
         private readonly IPagamentoApplication _appPagamento;
         private readonly IUsuarioApplication _appUsuario;
-        public PagamentoController(IPagamentoApplication pagamento, IUsuarioApplication usuario)
+
+        public PagamentoController(IPagamentoApplication pagamento, IUsuarioApplication usuario) : base(pagamento, usuario)
         {
             _appPagamento = pagamento;
             _appUsuario = usuario;
         }
 
-        #region Telas
-        [AdminFilterResult]
         public ActionResult Index()
         {
             return View();
         }
-
-        [UserFilterResult]
-        public ActionResult Inserir()
-        {
-            return View();
-        }
-
-        [AdminFilterResult]
         public ActionResult Editar(int idPagamento, string paginaAnterior)
         {
             var result = _appPagamento.SelecionarPagamento(idPagamento);
@@ -43,11 +36,6 @@ namespace CandyShop.Web.Controllers
             return View(result.Content);
         }
 
-        #endregion
-
-        #region Listas
-
-        [AdminFilterResult]
         public ActionResult Listar()
         {
             ViewBag.tituloPagina = "Pagamentos do ultimo mês";
@@ -57,20 +45,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [UserFilterResult]
-        public ActionResult ListarCpf()
-        {
-            ViewBag.tituloPagina = "Meus pagamentos";
-            var cpf = Session["login"].ToString();
-            ViewBag.drop = 1;
-            var response = _appPagamento.ListarPagamentos(cpf);
-            if (response.Status != HttpStatusCode.OK)
-                return Content("Erro. " + response.ContentAsString);
-            return View("Index", response.Content);
-        }
-
-        [AdminFilterResult]
         public ActionResult ListarSemana()
         {
             ViewBag.tituloPagina = $"Pagamentos da ultima semana";
@@ -80,8 +54,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [AdminFilterResult]
         public ActionResult ListarMes(int mes)
         {
             ViewBag.tituloPagina = $"Pagamento do mês {mes}";
@@ -91,8 +63,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [AdminFilterResult]
         public ActionResult ListarDia()
         {
             ViewBag.tituloPagina = $"Pagamentos do dia {DateTime.Now.ToShortDateString()}";
@@ -103,27 +73,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
-        #endregion
-
-        #region Acoes
-        [UserFilterResult]
-        public ActionResult InserirPagamento(PagamentoViewModel pagamento)
-        {
-            pagamento.Usuario = new UsuarioViewModel { Cpf = Session["login"].ToString() };
-
-            var response = _appPagamento.InserirPagamento(pagamento);
-            if (response.Status == HttpStatusCode.OK)
-            {
-                var res = _appUsuario.SelecionarUsuario(Session["login"].ToString());
-                if (response.Status != HttpStatusCode.OK)
-                    return Content("Erro ao atualizar saldo, " + response.ContentAsString);
-                Session["saldoUsuario"] = $"{res.Content.SaldoUsuario:C}";
-            }
-            else return Content("Erro. " + response.ContentAsString);
-            return Content("Pagamento realizado com sucesso!!");
-        }
-
-        [AdminFilterResult]
+        [HttpPost]
         public ActionResult EditarPagamento(PagamentoViewModel pagamento)
         {
             var response = _appPagamento.EditarPagamento(pagamento);
@@ -140,6 +90,5 @@ namespace CandyShop.Web.Controllers
 
             return Content("Pagamento editado com sucesso!!");
         }
-        #endregion
     }
 }

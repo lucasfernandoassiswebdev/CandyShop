@@ -1,7 +1,6 @@
 ﻿using CandyShop.Core.Services.Compra;
 using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.Usuario;
-using CandyShop.Repository.Database;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
 using System.Data;

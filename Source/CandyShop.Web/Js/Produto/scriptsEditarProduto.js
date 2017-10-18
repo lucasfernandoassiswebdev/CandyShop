@@ -56,7 +56,7 @@ function encodeImageFileAsURL(callback, tela) {
     }
 }
 
-//funções que não deixam o usuário digitar "e" ou números negativos
+// Funções que não deixam o usuário digitar "e" ou números negativos
 function FilterInput(event) {
     var keyCode = ("which" in event) ? event.which : event.keyCode;
     var isNotWanted = (keyCode == 69 || keyCode == 189 || keyCode == 109 || keyCode == 190);
@@ -83,59 +83,33 @@ function handlePaste(e) {
     }
 }
 
-$("#PrecoProduto").keyup(function () {
-    var tamanhoCampo = $(this).val().length;
-    var valorInserido = $(this).val();
-    valorInserido = valorInserido.replace("R$", "").replace(",", ".");
-    if (parseInt(tamanhoCampo) > 9 || parseInt(tamanhoCampo) <= 0 || parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null) {
-        $(".botaoEditar").attr("disabled", "disabled");
-        Materialize.toast("Valor inserido é inválido", 3000);
-    }
+// Validações no campo de nome
+$("#NomeProduto").keydown(function (e) {
+    if (e.which == 13)
+        $("#PrecoProduto").focus();
     else
-        $(".botaoEditar").removeAttr("disabled");
-});
+        validaBotao();
+}).keyup(validaBotao).blur(validaBotao).on("paste",validaBotao).focus(validaBotao);
 
-$("#PrecoProduto").blur(function () {
-    var tamanhoCampo = $(this).val().length;
-    var valorInserido = $(this).val();
+// Validações no campo de preço
+$("#PrecoProduto").keydown(function (e) {
+    if (e.which == 13)
+        $("#QtdeProduto").focus();
+    else
+        validaBotao();
+}).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
-    valorInserido = valorInserido.replace("R$", "").replace(",", ".");
-    if (parseInt(tamanhoCampo) > 6 || (parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null)) {
-        $(".botaoEditar").attr("disabled", "disabled");
-    } else
-        $(".botaoEditar").removeAttr("disabled");
-});
-
-$("#PrecoProduto").on("paste", function () {
-    var tamanhoCampo = $(this).val().length;
-    var valorInserido = $(this).val();
-
-    valorInserido = valorInserido.replace("R$", "").replace(",", ".");
-    if (parseInt(tamanhoCampo) > 6 || (parseFloat(valorInserido) > 999 || parseFloat(valorInserido) <= 0 || valorInserido == null)) {
-        $(".#botaoEditar").attr("disabled", "disabled");
-        Materialize.toast("Valor inserido é inválido", 2000);
-    } else
-        $(".botaoEditar").removeAttr("disabled");
-});
-
+//Validações no campo de quantidade
 $("#QtdeProduto").keydown(function (e) {
     var tamanhoCampo = $(this).val().length;
-    var valorCampo = parseInt($(this).val());
-    
-    if (tamanhoCampo > 2 && e.which !== 8) {
+    if (tamanhoCampo > 2 && e.which !== 8 && e.which !== 46 && e.which !== 38 && e.which !== 37 && e.which !== 40 && e.which !== 39) {
         $(".botaoEditar").attr("disabled", "disabled");
         e.preventDefault();
         return false;
     }
 
-    if (tamanhoCampo > 3 || tamanhoCampo <= 0 || parseFloat(valorCampo) > 999
-        || parseFloat(valorCampo) <= 0 || valorCampo == "" || $("#PrecoProduto").val().length > 9
-        || $("#PrecoProduto").val() == "R$ 0,00" || parseFloat($("#PrecoProduto").val()) >= 999
-        || parseFloat($("#PrecoProduto").val()) == 0 || $(this).val() == "")
-        $(".botaoCadastro").attr("disabled", "disabled");
-    else
-        $(".botaoCadastro").removeAttr("disabled");
-});
+    validaBotao();
+}).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
 //editando as imagens na tela
 $("#fotoProduto1").change(function () {
@@ -203,6 +177,19 @@ function readURL3(input) {
         };
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+function validaBotao() {
+    if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40 ||
+        $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
+        parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+        parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
+        parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
+        parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0 ||
+        $("#PrecoProduto").val() == "R$ 0,00" || $("#PrecoProduto").val() == "")
+        $(".botaoEditar").attr("disabled", "disabled");
+    else
+        $(".botaoEditar").removeAttr("disabled");
 }
 
 

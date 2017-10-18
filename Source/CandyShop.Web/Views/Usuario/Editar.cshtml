@@ -75,7 +75,7 @@
             }
             <div class="row center">
                 <a class="waves-effect waves-light btn-large botaoVoltar" onclick="@voltar"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large botaoEditar" onclick="encodeImageFileAsURL(AjaxJsUsuario.concluirEdicaoUsuario,'@(ViewBag.telaAnterior == "Usuários Ativos" ? Url.Action("Listar","Usuario") : Url.Action("ListarInativos","Usuario"))')"><i class="material-icons left">build</i>Editar</a>
+                <a class="waves-effect waves-light btn-large botaoEditar" onclick="encodeImageFileAsURL(AjaxJsUsuario.concluirEdicaoUsuario, '@(ViewBag.telaAnterior == "Usuários Ativos" ? Url.Action("Listar","Usuario") : Url.Action("ListarInativos","Usuario"))')"><i class="material-icons left">build</i>Editar</a>
             </div>
         </form>
     </div>

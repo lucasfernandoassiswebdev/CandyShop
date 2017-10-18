@@ -59,30 +59,17 @@
             main: '@Url.Action("Listar", "Produto")'
         });
 
-        $(".modal").modal({
-            dismissible: false
-        });
-
-        $("#modalPesquisaUsuario").modal({
-            ready: function () {
-                $("#nomeUsuario").focus();
-            }
-        });
-
-        $("#modalPesquisaProduto").modal({
-            ready: function () {
-                $("#nomeProduto").focus();
-            }
-        });
+        $("#modalPesquisaUsuario").modal({dismissible: false, ready: adicionaFoco("#nomeUsuario")});
+        $("#modalPesquisaProduto").modal({dismissible: false, ready: adicionaFoco("#nomeProduto")});
 
         $("html,body").dblclick(function (e) {
-            if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") || $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant")) {
+            if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") || $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant"))
                 return false;
-            }
 
-            $("#modalPesquisaProduto").modal("close");
-            $("#modalPesquisaUsuario").modal("close");
+            $("#modalPesquisaProduto, #modalPesquisaUsuario").modal("close");
         });
+
+        function adicionaFoco(input) {$(input).focus();}
     })
 </script>
 <script type="text/javascript" src="~/Js/telaPrincipal/scriptsMain.js"></script>
@@ -108,7 +95,7 @@
         <font class="pink-text modal-close identQuant" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
         <h3 class="center pink-text identQuant">Nome do produto:</h3>
         <div>
-            <input type="text" id="nomeProduto" class="identQuant" autocomplete="off" style="text-align:center"/>
+            <input type="text" id="nomeProduto" class="identQuant" autocomplete="off" style="text-align:center" />
         </div>
     </div>
     <div class="modal-footer center">
@@ -118,7 +105,7 @@
 
 <ul id="slide-out" class="side-nav fixed brown darken-3">
     <li class="white-text">
-        <a href='@Url.Action("NavBar", "Home")' title="Voltar para Loja" ><h4 class="center" style="cursor: pointer;">Candy <font class="white-text">Shop</font></h4></a>
+        <a href='@Url.Action("NavBar", "Home")' title="Voltar para Loja"><h4 class="center" style="cursor: pointer;">Candy <font class="white-text">Shop</font></h4></a>
     </li>
     <li class="divider"></li>
     <li><a class="dropdown-button white-text" title="Você está na área administrativa" href="#!"><i class="material-icons left white-text adm">account_box</i>ADMINISTRADOR</a></li>
@@ -181,13 +168,13 @@
         </ul>
     </li>
     <li><a class="dropdown-button white-text closeMenu" href="#!" onclick="AjaxJsShop.mostraSaldo()"><i class="material-icons left white-text small">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
-    
+
     <li><div class="divider"></div></li>
     <li><a class="dropdown-button white-text active" title="Voltar para Loja" href='@Url.Action("NavBar", "Home")'><i class="material-icons left white-text small">call_made</i>VOLTAR PARA LOJA</a></li>
     <li><div class="divider"></div></li>
     <li><a class="dropdown-button white-text active" title="Fazer logoff" href='#!' onclick="AjaxJsUsuario.logOff()"><i class="material-icons left white-text small">power_settings_new</i>SAIR</a></li>
 </ul>
 
-<a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse pink-text"  style="width: 40px; height: 40px; margin-top: 0px; margin-left: 5px; overflow: hidden;"><i class="material-icons" style ="font-size: 40px">menu</i></a>
+<a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse pink-text" style="width: 40px; height: 40px; margin-top: 0px; margin-left: 5px; overflow: hidden;"><i class="material-icons" style="font-size: 40px">menu</i></a>
 
 <div id="DivGrid"></div>

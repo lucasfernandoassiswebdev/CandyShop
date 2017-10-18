@@ -1,6 +1,5 @@
 ﻿using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.Produto;
-using CandyShop.Repository.Database;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
 using System.Linq;
