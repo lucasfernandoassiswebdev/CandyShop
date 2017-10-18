@@ -8,28 +8,26 @@
 
     // Colocando a máscara no campo de valor de produto
     $("#PrecoProduto").maskMoney({
-        prefix: "R$ ",
-        allowNegative: false,
-        thousands: ".",
-        decimal: ",",
-        affixesStay: true
-    })
+            prefix: "R$ ",
+            allowNegative: false,
+            thousands: ".",
+            decimal: ",",
+            affixesStay: true
+        })
         .maskMoney("mask").keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao)
         .keydown(function (e) {
             var tamanhoCampo = $(this).val().length;
-            if (tamanhoCampo > 2 &&
-                e.which !== 8 &&
-                e.which !== 46 &&
-                e.which !== 38 &&
-                e.which !== 37 &&
-                e.which !== 40 &&
-                e.which !== 39) {
+            if (e.which == 13)
+                $("#QtdeProduto").focus();
+            else if (tamanhoCampo > 8 && e.which !== 8 && e.which !== 46 && e.which !== 38 && e.which == 116 &&
+                e.which !== 37 && e.which !== 40 && e.which !== 39 && e.which !== 9 && e.which !== 13) {
                 $(".botaoCadastro").attr("disabled", "disabled");
                 e.preventDefault();
                 return false;
             }
             validaBotao();
         });
+
     // Fazendo as validações no campo de nome
     $("#NomeProduto").keydown(function (e) {
         if (e.which == 13)
@@ -165,9 +163,9 @@ function handlePaste(e) {
 function validaBotao() {
     if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40 ||
         $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
-        parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-        parseInt($("#QtdeProduto").val()) >= 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
-        parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
+        parseInt($("#QtdeProduto").val()) > 999.99 || parseInt($("#QtdeProduto").val()) <= 0 ||
+        parseInt($("#QtdeProduto").val()) >= 999.99 || parseInt($("#QtdeProduto").val()) <= 0 ||
+        parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999.99 ||
         parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0 ||
         $("#PrecoProduto").val() == "R$ 0,00" || $("#PrecoProduto").val() == "")
         $(".botaoCadastro").attr("disabled", "disabled");
