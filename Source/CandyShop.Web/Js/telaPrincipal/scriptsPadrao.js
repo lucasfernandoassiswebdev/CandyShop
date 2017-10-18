@@ -19,7 +19,7 @@ $(document).ready(function () {
     $(".closeMenu").click(function () { $(".button-collapse").sideNav("hide"); });
 
     // Limpando os inputs
-    $(".modal-close").not($("#editarQuantidade")).click(function () {
+    $(".modal-close:not(#editarQuantidade, #adicionaCarrinho)").click(function () {
         $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha, #cpf, #senha").val("");
         $("#novaSenha").removeAttr("disabled");
         $("#logar").attr("disabled", "disabled");
@@ -33,7 +33,7 @@ $(document).ready(function () {
         nome = $(this).attr("data-Nome");
         imagem = $(this).attr("data-Imagem");
         Id = $(this).attr("data-Id");
-        quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
+        quantidadeDisponivel = $(this).attr("data-quantidadedisponivel");
     });
 
     $("#novaSenha").on("paste", validaNovaSenha).blur(validaNovaSenha);
@@ -115,7 +115,7 @@ $(document).ready(function () {
                                     var precoCorreto = produto.Preco.replace(",", ".");
                                     totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
                                 });
-                                $("#totalCompra").text("R$ " + totalCompra);
+                                $("#totalCompra").text("Total da compra: R$ " + totalCompra);
                             })
                         ]
                     }),
@@ -142,12 +142,17 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseInt(produto.Quantidade) * parseFloat(precoCorreto);
         });
-        $("#totalCompra").text("R$ " + parseFloat(totalCompra)).attr('title', 'Total da compra');
+        $("#totalCompra").text("Total da compra: R$ " + parseFloat(totalCompra)).attr('title', 'Total da compra');
     }
 
     // Adicionando os itens no carrinho
     $("#adicionaCarrinho").click(function () {
-        $("#confirmarCompra").removeAttr("disabled");
+        var value = $("#quantidade").val().trim();
+        if (!value || !/^[\d]+$/g.test(value) || value.length > 3 || value > quantidadeDisponivel) {
+            Materialize.toast("Quantidade inválida ou indisponível para compra!", 2000);
+            return;
+        }
+
         var i = 1;
 
         var listaProdutos = localStorage.getItem("listaProdutos") ? JSON.parse(localStorage.getItem("listaProdutos")) : [];
@@ -206,7 +211,7 @@ $(document).ready(function () {
                                 var precoCorreto = produto.Preco.replace(",", ".");
                                 totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
                             });
-                            $("#totalCompra").text("R$ " + totalCompra);
+                            $("#totalCompra").text("Total da compra: R$ " + totalCompra);
                         })
                     ]
                 }),
@@ -235,13 +240,15 @@ $(document).ready(function () {
            para que a conversão para double funcione */
         var precoConcertado = preco.replace(",", ".");
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
-        $("#totalCompra").text("R$ " + totalCompra).attr("title", "Total da compra");
+        $("#totalCompra").text("Total da compra: R$ " + totalCompra).attr("title", "Total da compra");
 
         // Adiciona item, remove localStorage e seta de novo com a lista atualizada
         quantidade = 0;
-        $("#adicionaCarrinho").attr("disabled", "");
         localStorage.removeItem("listaProdutos");
         localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+
+        $("#modalQuantidade").modal("close");
+        $("#modalCarrinho").modal("open");
     });
 
     // Desabilita o botão de confirmar compra ao abrir o carrinho
@@ -287,14 +294,6 @@ $(document).ready(function () {
 
     $("#senha, #cpf").keyup(verificaSenha).blur(verificaSenha).focus(verificaSenha);
 
-    $("#quantidade, #quantidadeEdit").keydown(function (e) {
-        var tamanho = $(this).val().length;
-        if (tamanho > 2 && e.which !== 8 && e.which !== 46 && e.which !== 38 && e.which !== 39 && e.which !== 40 && e.which !== 37) {
-            e.preventDefault();
-            return false;
-        }
-    });
-
     // Foco saindo do input
     $("#quantidade").blur(verificaQuantidade).on("paste", verificaQuantidade).keyup(verificaQuantidade);
 
@@ -322,12 +321,19 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
         });
-        $("#totalCompra").text("R$ " + totalCompra);
+        $("#totalCompra").text("Total da compra: R$ " + totalCompra);
     });
 
     // Desabilitando no modal de editar a quantidade
     $("#quantidadeEdit").blur(verificaEditQuantidade)
-        .keyup(function () { FilterInput(event); verificaEditQuantidade(); })
+        .keydown(function (e) {
+            FilterInput(event); verificaEditQuantidade();
+            var tamanho = $(this).val().length;
+            if (tamanho > 2 && e.which !== 8 && e.which !== 46 && e.which !== 38 && e.which !== 39 && e.which !== 40 && e.which !== 37) {
+                e.preventDefault();
+                return false;
+            }
+        })
         .on("paste", function () { handlePaste(event); verificaEditQuantidade(); });
 
     // Removendo caracteres inválidos dos campos de quantidade
@@ -352,7 +358,7 @@ $(document).ready(function () {
 
         // Atualizando informações na tela
         totalCompra = 0;
-        $("#totalCompra").text("R$ " + totalCompra);
+        $("#totalCompra").text("Total da compra: R$ " + totalCompra);
     });
 
     // Exibindo a quantidade atualmente disponível quando o usuário vai editar o item
@@ -365,19 +371,9 @@ $(document).ready(function () {
 
     /* Função que é executada quando a tecla enter é pressionada no modal de quantidade 
        validando se o valor digitado pode ser inserido no carrinho */
-    $("#quantidade").keydown(function (e) {
-        if (e.which === 13) {
-            mNumbers($("#quantidade").val());
-            var qtde = parseInt($("#quantidade").val());
-            if (qtde <= quantidadeDisponivel && qtde > 0) {
-                $("#adicionaCarrinho").trigger("click");
-                $("#modalQuantidade").modal("close");
-                $("#modalCarrinho").modal("open");
-            } else {
-                Materialize.toast("Quantidade indisponível para compra!", 2000);
-                return;
-            }
-        }
+    $("#quantidade").keyup(function (e) {
+        if (e.keyCode === 13)
+            $("#adicionaCarrinho").trigger("click");
     });
 
     $("#quantidadeEdit").keydown(function (e) {

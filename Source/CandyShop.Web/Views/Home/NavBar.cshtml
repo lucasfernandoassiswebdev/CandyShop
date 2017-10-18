@@ -23,7 +23,7 @@
         });
 
         AjaxJsCompra.init({
-            inserirCompra: '@Url.Action("Cadastrar","Compra")',
+            inserirCompra: '@Url.Action("Cadastrar","Home")',
             historicoCompra: '@Url.Action("ListarCpf", "Compra")',
             detalheCompra: '@Url.Action("Detalhes", "Compra")',
             navbar: '@Url.Action("NavBar", "Home")'
@@ -48,7 +48,7 @@
         <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
         <p class="pink-text center identQuant"></p>
         <div class="center">
-            <input type="text" id="quantidade" class="center identQuant" autocomplete="off" maxlength="3" />
+            <input type="number" id="quantidade" class="center identQuant" autocomplete="off" />
             <span class="QtdeInvalida" color="red"></span>
         </div>
     </div>

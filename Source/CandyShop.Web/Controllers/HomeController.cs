@@ -9,13 +9,15 @@ namespace CandyShop.Web.Controllers
     {
         private readonly IProdutoApplication _appProduto;
         private readonly IUsuarioApplication _appUsuario;
+        private readonly ICompraApplication _appCompra;
         private readonly string _pathProduto;
 
-        public HomeController(IProdutoApplication produto, IUsuarioApplication usuario)
+        public HomeController(IProdutoApplication produto, IUsuarioApplication usuario, ICompraApplication compra)
         {
             _appProduto = produto;
             _appUsuario = usuario;
             _pathProduto = "Imagens/Produtos";
+            _appCompra = compra;
         }
 
         public ActionResult NavBar()
@@ -77,6 +79,28 @@ namespace CandyShop.Web.Controllers
             Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
             return Content(response.Content);
+        }
+        [HttpPost]
+        public ActionResult Cadastrar(CompraViewModel compra)
+        {
+
+            if (Session["Login"].ToString() == "off")
+                return Content("Efetue login e tente novamente. Você precisa estar logado para concluir sua compra");
+
+            if (!ModelState.IsValid) return Content("Ops... ocorreu um erro ao concluir sua compra.");
+            compra.Usuario = new UsuarioViewModel { Cpf = Session["Login"].ToString() };
+
+            var response = _appCompra.InserirCompra(compra);
+
+            if ((response.Status != HttpStatusCode.OK) || (response.Content < 1))
+                return Content($"Os itens da compra não puderam ser registrados: {response.ContentAsString  }");
+
+            var user = _appUsuario.SelecionarUsuario(Session["Login"].ToString());
+            if (user.Status != HttpStatusCode.OK)
+                return Content($"Erro ao atualizar seu saldo, {user.ContentAsString}");
+            Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
+            TempData["LimparCarrinho"] = true;
+            return Content("Sua compra foi registrada com sucesso");
         }
     }
 }
