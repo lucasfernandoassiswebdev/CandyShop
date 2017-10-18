@@ -28,13 +28,13 @@ $(document).ready(function () {
 
     /* Quando o botão de adicionar um item no carrinho é pressionado, as variáveis que montarão
        o objeto do produto são preenchidas */
-    $("#DivGrid").on("click",".btn-floating",function () {
-            preco = $(this).attr("data-Preco");
-            nome = $(this).attr("data-Nome");
-            imagem = $(this).attr("data-Imagem");
-            Id = $(this).attr("data-Id");
-            quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
-        });
+    $("#DivGrid").on("click", ".btn-floating", function () {
+        preco = $(this).attr("data-Preco");
+        nome = $(this).attr("data-Nome");
+        imagem = $(this).attr("data-Imagem");
+        Id = $(this).attr("data-Id");
+        quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
+    });
 
     $("#novaSenha").on("paste", validaNovaSenha).blur(validaNovaSenha);
 
@@ -166,6 +166,7 @@ $(document).ready(function () {
             return;
         } else
             listaProdutos.push(produto);
+
         // Removendo a mensagem de carrinho vazio
         $(".collection h1").remove();
 

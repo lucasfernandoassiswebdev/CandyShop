@@ -69,6 +69,7 @@
                            data-tooltip="@(produto.QtdeProduto == 0 ? "Produto indisponível no estoque" : "Inserir quantidade")"
                            data-Preco="@produto.PrecoProduto"
                            data-Nome="@produto.NomeProduto"
+                           data-Imagem="@produto.ImagemA"
                            data-Id="@produto.IdProduto"
                            data-quantidadeDisponivel="@produto.QtdeProduto"
                            @(produto.QtdeProduto == 0 ? "disabled" : string.Empty)>
