@@ -8,9 +8,7 @@ $(document).ready(function () {
     $("#cpf").keyup(function () {
         mcpf($("#cpf").val());
         validaBotao();
-    });
-
-    $("#cpf").on("blur", function () {
+    }).on("blur", function () {
         mcpf($("#cpf").val());
         //retirando caracteres a mais do campo
         if ($("#cpf").val().length > 14) {
@@ -20,13 +18,7 @@ $(document).ready(function () {
         validaBotao();
     });
 
-    $("#Nome").keydown(function () {
-        validaBotao();
-    });
-
-    $("#Nome").on("blur", function () {
-        validaBotao();
-    });
+    $("#Nome").keydown(validaBotao).on("blur", validaBotao);
 
     //esconde o botão que retira a imagem
     $("#removerImagem").hide();
@@ -40,10 +32,8 @@ $("#fotoUsuario").change(function () {
     $("#removerImagem").show();
 });
 
-$(".botaoVoltar").click(function () {
-    //voltando a lista de usuários
-    AjaxJsUsuario.listaUsuario();
-});
+//voltando a lista de usuários
+$(".botaoVoltar").click(AjaxJsUsuario.listaUsuario);
 
 $(".botaoCadastro").click(function () {
     //convertendo a imagem para base64

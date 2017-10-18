@@ -16,9 +16,7 @@ $(document).ready(function () {
     });
 
     // Fechando sideNav quando o usuário selecionar alguma opção
-    $(".closeMenu").on("click", function () {
-        $(".button-collapse").sideNav("hide");
-    });
+    $(".closeMenu").click(function () { $(".button-collapse").sideNav("hide"); });
 
     // Limpando os inputs
     $(".modal-close").not($("#editarQuantidade")).click(function () {
@@ -38,44 +36,10 @@ $(document).ready(function () {
         quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
     });
 
-    // Verificando senhas e chamando ajax pra efetivar alteracoes    
-    var ilegais = /[\W_]/;
-
-    $("#novaSenha").on("paste", function () {
-        if ($(this).val().length > 12 || $(this).val().length <= 0 || ilegais.test($(this).val())) {
-            Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
-            $(this).focus();
-        }
-    });
-
-    $("#novaSenha").blur(function () {
-        if ($(this).val().length > 12 || $(this).val().length <= 0 || ilegais.test($(this).val())) {
-            $(this).focus();
-        }
-    });
+    $("#novaSenha").on("paste", validaNovaSenha()).blur(validaNovaSenha());
 
     // Verificando se as senhas batem
-    $("#confirmaNovaSenha").blur(function () {
-        if ($(this).val() == $("#novaSenha").val() && $(this).val() !== "" && $("#confirmaNovaSenha").val() !== "")
-            $("#TrocarSenha").removeAttr("disabled");
-        else 
-            $("#TrocarSenha").attr("disabled","disabled");
-    });
-
-    $("#confirmaNovaSenha").keyup(function () {
-        if ($(this).val() == $("#novaSenha").val() && $(this).val() !== "" && $("#confirmaNovaSenha").val() !== "")
-            $("#TrocarSenha").removeAttr("disabled");
-        else {
-            $("#TrocarSenha").attr("disabled", "disabled");
-        }
-    });
-
-    $("#novaSenha").keyup(function () {
-        if ($(this).val() == $("#confirmaNovaSenha").val() && $(this).val() !== "" && $("#confirmaNovaSenha").val() !== "")
-            $("#TrocarSenha").removeAttr("disabled");
-        else 
-            $("#TrocarSenha").attr("disabled", "disabled");
-    });
+    $("#confirmaNovaSenha, #novaSenha").blur(verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha")).keyup(verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha"));
 
     $("#TrocarSenha").click(function () {
         if ($("#novaSenha").val().length < 8) {
@@ -83,9 +47,7 @@ $(document).ready(function () {
             return;
         }
         AjaxJsUsuario.trocarSenha();
-        $("#confirmaNovaSenha").val("");
-        $("#novaSenha").val("");
-        $("#trocaSenha").modal("close");
+        limpaInputFechaModal();
     });
 
     $("#confirmaNovaSenha").keydown(function (e) {
@@ -97,9 +59,7 @@ $(document).ready(function () {
                 return;
             }
             AjaxJsUsuario.trocarSenha();
-            $("#confirmaNovaSenha").val("");
-            $("#novaSenha").val("");
-            $("#trocaSenha").modal("close");
+            limpaInputFechaModal();
             $("#novaSenha").removeAttr("disabled");
         }
     });
@@ -295,35 +255,17 @@ $(document).ready(function () {
         }
     });
 
-    $("#modalLogin").modal({
-        dismissible: false,
-        ready: function () {
-            $("#cpf").focus();
-        }
-    });
+    $("#modalLogin").modal({ dismissible: false, ready: function () { $("#cpf").focus(); } });
 
     // Colocando foco no modal quantidade
-    $("#modalQuantidade").modal({
-        dismissible: false,
-        ready: function () {$("#quantidade").focus();}
-    });
+    $("#modalQuantidade").modal({ dismissible: false, ready: function () { $("#quantidade").focus(); } });
 
-    $("#modalCarrinho").modal({dismissible: false});
+    $("#modalCarrinho").modal({ dismissible: false });
 
     // Colocando foco no modal trocaSenha
-    $("#trocaSenha").modal({
-        dismissible: false,
-        ready: function () {
-            $("#novaSenha").focus();
-        }
-    });
+    $("#trocaSenha").modal({ dismissible: false, ready: function () { $("#novaSenha").focus(); } });
 
-    $("#modalEditarQuantidade").modal({
-        dismissible: false,
-        ready: function () {
-            $("#quantidadeEdit").focus();
-        }
-    });
+    $("#modalEditarQuantidade").modal({ dismissible: false, ready: function () { $("#quantidadeEdit").focus(); } });
 
     // Limpando input senha
     $("a[href='#modalLogin']:eq(1)").click(function () {
@@ -332,78 +274,27 @@ $(document).ready(function () {
 
     //desabilitar botao de login se campo de cpf estiver vazio
     $("#senha").blur(function () {
-        if ($(this).val().length > 0 && $("#cpf").val().length > 13) 
-            $("#logar").removeAttr("disabled");
-        else
-            $("#logar").attr("disabled","disabled");
-    });
-
-    $("#senha").keyup(function () {
-        if ($(this).val().length > 0 && $("#cpf").val().length > 13) 
+        if ($(this).val().length > 0 && $("#cpf").val().length > 13)
             $("#logar").removeAttr("disabled");
         else
             $("#logar").attr("disabled", "disabled");
     });
 
-    $("#cpf").blur(function () {
-        if ($(this).val().length > 13 && $("#senha").val().length > 0) 
-            $("#logar").removeAttr("disabled");
-        else
-            $("#logar").attr("disabled", "disabled");
-    });
-
-    $("#cpf").keyup(function () {
-        if ($(this).val().length > 13 && $("#senha").val().length > 0) 
-            $("#logar").removeAttr("disabled");
-        else
-            $("#logar").attr("disabled", "disabled");
-    });
-
-    var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
-    $("#quantidade").keyup(function () {
-        FilterInput(event);
-        quantidade = $("#quantidade").val();
-        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
-            $("#adicionaCarrinho").attr("disabled", "disabled");
-        else
-            $("#adicionaCarrinho").removeAttr("disabled");
-    });
+    $("#senha, #cpf").keyup(verificaSenha).blur(verificaSenha).focus(verificaSenha);
 
     $("#quantidade, #quantidadeEdit").keydown(function (e) {
         var tamanho = $(this).val().length;
-        if (tamanho > 2 && e.which !== 8) {
+        if (tamanho > 2 && e.which !== 8 && e.which !== 46 && e.which !== 38 && e.which !== 39 && e.which !== 40 && e.which !== 37) {
             e.preventDefault();
             return false;
         }
     });
 
     // Foco saindo do input
-    $("#quantidade").blur(function () {
-        quantidade = $("#quantidade").val();
-        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
-            $("#adicionaCarrinho").attr("disabled", "disabled");
-        else
-            $("#adicionaCarrinho").removeAttr("disabled");
-    });
-
-    // Texto colado no input
-    $("#quantidade").on("paste", function () {
-        quantidade = $("#quantidade").val();
-        handlePaste(event);
-        if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel)
-            $("#adicionaCarrinho").attr("disabled", "disabled");
-        else
-            $("#adicionaCarrinho").removeAttr("disabled");
-    });
+    $("#quantidade").blur(verificaQuantidade).on("paste", verificaQuantidade).keyup(verificaQuantidade());
 
     // Onclick dentro da modal
-    $("#modalQuantidade").click(function () {
-        quantidade = $("#quantidade").val();
-        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
-            $("#adicionaCarrinho").attr("disabled", "disabled");
-        else
-            $("#adicionaCarrinho").removeAttr("disabled");
-    });
+    $("#modalQuantidade").click(verificaQuantidade);
 
     // Editando a quantidade dos itens no carrinho
     $("#editarQuantidade").click(function () {
@@ -430,41 +321,13 @@ $(document).ready(function () {
     });
 
     // Desabilitando no modal de editar a quantidade
-    $("#quantidadeEdit").blur(function () {
-        quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel)
-            $("#editarQuantidade").attr("disabled", "disabled");
-        else
-            $("#editarQuantidade").removeAttr("disabled");
-    });
-
-    $("#quantidadeEdit").keyup(function () {
-        FilterInput(event);
-        quantidade = $("#quantidadeEdit").val();
-        if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
-            $("#editarQuantidade").attr("disabled", "disabled");
-        else
-            $("#editarQuantidade").removeAttr("disabled");
-    });
-
-    $("#quantidadeEdit").on("paste", function () {
-        handlePaste(event);
-        quantidade = $("#quantidadeEdit").val();
-        if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel) {
-            $(".QtdeInvalida").errorMessage("Quantidade deve ser maior que zero!", 5000);
-            $("#editarQuantidade").attr("disabled", "disabled");
-        } else
-            $("#editarQuantidade").removeAttr("disabled");
-    });
+    $("#quantidadeEdit").blur(verificaEditQuantidade)
+        .keyup(function () { FilterInput(event); verificaEditQuantidade(); })
+        .on("paste", function () { handlePaste(event); verificaEditQuantidade(); });
 
     // Removendo caracteres inválidos dos campos de quantidade
-    $("#quantidade, #quantidadeEdit").keydown(function () {
-        mNumbers($(this).val());
-    });
-
-    $("#quantidade, #quantidadeEdit").on("paste", function () {
-        mNumbers($(this).val());
-    });
+    $("#quantidade, #quantidadeEdit").keydown(function () { mNumbers($(this).val()); })
+        .on("paste", function () { mNumbers($(this).val()); });
 
     // Limpando o carrinho
     $("#limpar").click(function () {
@@ -500,8 +363,8 @@ $(document).ready(function () {
     $("#quantidade").keydown(function (e) {
         if (e.which === 13) {
             mNumbers($("#quantidade").val());
-            var qtde = $("#quantidade").val();
-            if (parseInt(qtde) <= quantidadeDisponivel && qtde > 0) {
+            var qtde = parseInt($("#quantidade").val());
+            if (qtde <= quantidadeDisponivel && qtde > 0) {
                 $("#adicionaCarrinho").trigger("click");
                 $("#modalQuantidade").modal("close");
                 $("#modalCarrinho").modal("open");
@@ -515,7 +378,7 @@ $(document).ready(function () {
     $("#quantidadeEdit").keydown(function (e) {
         if (e.which === 13) {
             mNumbers($("#quantidadeEdit").val());
-            var qtde = $("#quantidadeEdit").val();
+            var qtde = parseInt($("#quantidadeEdit").val());
             if (qtde <= quantidadeDisponivel && qtde > 0) {
                 $("#modalEditarQuantidade").modal("close");
                 $("#editarQuantidade").trigger("click");
@@ -531,9 +394,8 @@ $(document).ready(function () {
         mcpf($("#cpf").val());
         if (e.which == 13)
             $("#senha").focus();
-    });
-
-    $("#cpf").on("blur", function () {
+    }).on("blur", function () {
+        mcpf($("#cpf").val());
         if ($("#cpf").val().length > 14) {
             $("#cpf").val($("#cpf").val().substr(0, 13));
         }
@@ -550,6 +412,8 @@ $(document).ready(function () {
     });
 });
 
+var ilegais = /[\W_]/;
+var verifyInt = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
 // Função que remove caracteres que não sejam numéricos
 function mNumbers(v) {
     v = v.replace(/\D/g, "");
@@ -590,3 +454,45 @@ function mcpf(v) {
     $("#cpf").val(v);
 }
 
+function verificaEditQuantidade() {
+    quantidade = $("#quantidadeEdit").val();
+    if (quantidade <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || quantidade > quantidadeDisponivel)
+        $("#editarQuantidade").attr("disabled", "disabled");
+    else
+        $("#editarQuantidade").removeAttr("disabled");
+}
+
+function validaNovaSenha() {
+    if ($("#novaSenha").val().length > 12 || $("#novaSenha").val().length <= 0 || ilegais.test($("#novaSenha").val())) {
+        Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
+        $("#novaSenha").focus();
+    }
+}
+
+function limpaInputFechaModal() {
+    $("#confirmaNovaSenha").val("");
+    $("#novaSenha").val("");
+    $("#trocaSenha").modal("close");
+}
+
+function verificaSenhasIguais(inputAtual, comparacao) {
+    if ($(inputAtual).val() == $(comparacao).val() && $(this).val() !== "" && $(comparacao).val() !== "")
+        $("#TrocarSenha").removeAttr("disabled");
+    else
+        $("#TrocarSenha").attr("disabled", "disabled");
+}
+
+function verificaQuantidade() {
+    quantidade = $("#quantidade").val();
+    if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
+        $("#adicionaCarrinho").attr("disabled", "disabled");
+    else
+        $("#adicionaCarrinho").removeAttr("disabled");
+}
+
+function verificaSenha() {
+    if ($("#senha").val().length > 0 && $("#cpf").val().length > 13)
+        $("#logar").removeAttr("disabled");
+    else
+        $("#logar").attr("disabled", "disabled");
+}

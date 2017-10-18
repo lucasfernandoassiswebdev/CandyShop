@@ -1,8 +1,28 @@
 ﻿var removerImagemA = false, removerImagemB = false, removerImagemC = false;
+
 $(document).ready(function () {
     $("select").material_select();
     $("input").characterCounter();
     $(".tooltipped").tooltip({ delay: 50 });
+
+    // Removendo as imagens dos inputs
+    $("#removerImagem1").click(removerImagem("#imagem1", "#fotoProduto1", removerImagemA));
+    $("#removerImagem2").click(removerImagem("#imagem2", "#fotoProduto2", removerImagemA));
+    $("#removerImagem3").click(removerImagem("#imagem3", "#fotoProduto3", removerImagemA));
+
+    //Mudando as imagens na tela
+    $("#fotoProduto1").change(mudaFotoTela(removerImagemA));
+    $("#fotoProduto2").change(mudaFotoTela(removerImagemB));
+    $("#fotoProduto3").change(mudaFotoTela(removerImagemC));
+
+    $("#PrecoProduto").maskMoney({
+        prefix: "R$ ",
+        allowNegative: false,
+        thousands: ".",
+        decimal: ",",
+        affixesStay: true
+    }).maskMoney("mask");
+
 });
 
 function encodeImageFileAsURL(callback, tela) {
@@ -11,49 +31,37 @@ function encodeImageFileAsURL(callback, tela) {
     var imagem2 = document.getElementById("fotoProduto2").files;
     var imagem3 = document.getElementById("fotoProduto3").files;
 
-    if (imagem1.length > 0) {
-        var fileToLoad = imagem1[0];
-        var fileReader = new FileReader();
-
-        fileReader.onload = function (fileLoadedEvent) {
-            base64A = fileLoadedEvent.target.result;
-            verificaSegundaImagem();
-        };
-
-        fileReader.readAsDataURL(fileToLoad);
-    } else
+    if (imagem1.length > 0)
+        fazVerificacao(imagem1, base64A, verificaSegundaImagem);
+    else
         verificaSegundaImagem();
 
     function verificaSegundaImagem() {
-        if (imagem2.length > 0) {
-            var fileToLoadB = imagem2[0];
-            var fileReaderB = new FileReader();
-
-            fileReaderB.onload = function (fileLoadedEvent) {
-                base64B = fileLoadedEvent.target.result;
-                verificaTerceiraImagem();
-            };
-
-            fileReaderB.readAsDataURL(fileToLoadB);
-        } else
+        if (imagem2.length > 0)
+            fazVerificacao(imagem2, base64B, verificaTerceiraImagem);
+        else
             verificaTerceiraImagem();
     }
 
     function verificaTerceiraImagem() {
         if (imagem3.length > 0) {
-            var fileToLoadC = imagem3[0];
-            var fileReaderC = new FileReader();
-
-            fileReaderC.onload = function (fileLoadedEvent) {
-                base64C = fileLoadedEvent.target.result;
-                if (typeof callback === "function") {
-                    callback(base64A, base64B, base64C, removerImagemA, removerImagemB, removerImagemC, tela);
-                }
-            };
-            fileReaderC.readAsDataURL(fileToLoadC);
+            fazVerificacao(imagem3, base64C, null);
+            callback(base64A, base64B, base64C, removerImagemA, removerImagemB, removerImagemC, tela);
         } else
             callback(base64A, base64B, base64C, removerImagemA, removerImagemB, removerImagemC, tela);
     }
+}
+
+function fazVerificacao(imagem, base64, funcao) {
+    var fileToLoad = imagem[0];
+    var fileReader = new FileReader();
+
+    fileReader.onload = function (fileLoadedEvent) {
+        base64 = fileLoadedEvent.target.result;
+        if (typeof funcao === "function")
+            funcao();
+    };
+    fileReader.readAsDataURL(fileToLoad);
 }
 
 // Funções que não deixam o usuário digitar "e" ou números negativos
@@ -89,7 +97,7 @@ $("#NomeProduto").keydown(function (e) {
         $("#PrecoProduto").focus();
     else
         validaBotao();
-}).keyup(validaBotao).blur(validaBotao).on("paste",validaBotao).focus(validaBotao);
+}).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
 // Validações no campo de preço
 $("#PrecoProduto").keydown(function (e) {
@@ -111,40 +119,16 @@ $("#QtdeProduto").keydown(function (e) {
     validaBotao();
 }).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
-//editando as imagens na tela
-$("#fotoProduto1").change(function () {
-    //função que muda a foto do usuário na tela
+function mudaFotoTela(remover) {
     readURL(this);
-    removerImagemA = false;
-});
+    remover = false;
+}
 
-$("#fotoProduto2").change(function () {
-    readURL2(this);
-    removerImagemB = false;
-});
-
-$("#fotoProduto3").change(function () {
-    readURL3(this);
-    removerImagemC = false;
-});
-
-$("#removerImagem1").click(function () {
-    $("#imagem1").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
-    $("#fotoProduto1").val("");
-    removerImagemA = true;
-});
-
-$("#removerImagem2").click(function () {
-    $("#imagem2").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
-    $("#fotoProduto2").val("");
-    removerImagemB = true;
-});
-
-$("#removerImagem3").click(function () {
-    $("#imagem3").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
-    $("#fotoProduto3").val("");
-    removerImagemC = true;
-});
+function removerImagem(imagem, inputFoto, remover) {
+    $(imagem).attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
+    $(inputFoto).val("");
+    remover = true;
+}
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -152,28 +136,6 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $("#imagem1").attr("src", e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function readURL2(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $("#imagem2").attr("src", e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function readURL3(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $("#imagem3").attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
