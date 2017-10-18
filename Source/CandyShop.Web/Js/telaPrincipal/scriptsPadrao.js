@@ -28,18 +28,23 @@ $(document).ready(function () {
 
     /* Quando o botão de adicionar um item no carrinho é pressionado, as variáveis que montarão
        o objeto do produto são preenchidas */
-    $("#DivGrid").on("click", ".btn-floating", function () {
-        preco = $(this).attr("data-Preco");
-        nome = $(this).attr("data-Nome");
-        imagem = $(this).attr("data-Imagem");
-        Id = $(this).attr("data-Id");
-        quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
-    });
+    $("#DivGrid").on("click",".btn-floating",function () {
+            preco = $(this).attr("data-Preco");
+            nome = $(this).attr("data-Nome");
+            imagem = $(this).attr("data-Imagem");
+            Id = $(this).attr("data-Id");
+            quantidadeDisponivel = $(this).attr("data-quantidadeDisponivel");
+        });
 
-    $("#novaSenha").on("paste", validaNovaSenha()).blur(validaNovaSenha());
+    $("#novaSenha").on("paste", validaNovaSenha).blur(validaNovaSenha);
 
     // Verificando se as senhas batem
-    $("#confirmaNovaSenha, #novaSenha").blur(verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha")).keyup(verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha"));
+    $("#confirmaNovaSenha, #novaSenha").blur(function () {
+        verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
+    })
+        .keyup(function () {
+            verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
+        });
 
     $("#TrocarSenha").click(function () {
         if ($("#novaSenha").val().length < 8) {
@@ -161,7 +166,6 @@ $(document).ready(function () {
             return;
         } else
             listaProdutos.push(produto);
-
         // Removendo a mensagem de carrinho vazio
         $(".collection h1").remove();
 
@@ -230,7 +234,7 @@ $(document).ready(function () {
            para que a conversão para double funcione */
         var precoConcertado = preco.replace(",", ".");
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
-        $("#totalCompra").text("R$ " + totalCompra).attr('title', 'Total da compra');
+        $("#totalCompra").text("R$ " + totalCompra).attr("title", "Total da compra");
 
         // Adiciona item, remove localStorage e seta de novo com a lista atualizada
         quantidade = 0;
@@ -291,7 +295,7 @@ $(document).ready(function () {
     });
 
     // Foco saindo do input
-    $("#quantidade").blur(verificaQuantidade).on("paste", verificaQuantidade).keyup(verificaQuantidade());
+    $("#quantidade").blur(verificaQuantidade).on("paste", verificaQuantidade).keyup(verificaQuantidade);
 
     // Onclick dentro da modal
     $("#modalQuantidade").click(verificaQuantidade);
