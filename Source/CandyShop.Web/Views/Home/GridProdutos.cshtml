@@ -1,7 +1,10 @@
 ﻿@using CandyShop.Web.Helpers
 @model IEnumerable<CandyShop.Application.ViewModels.ProdutoViewModel>
 
-@{ Layout = null; }
+@{
+    Layout = null;
+    int i;
+}
 
 <style>
     img {
@@ -14,16 +17,31 @@
 </style>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.tooltipped').tooltip({ delay: 50 });
         // Exibindo quantidade em estoque nos modals de quantidade
         // Exibindo qtde em estoque antes de adicionar o item no carrinho
-        $(".adicionaItemCarrinho").click(function () {
+        $(".adicionaItemCarrinho").click(function() {
             // Limpando os inputs
             $("#quantidade").val("");
             // Mostrando a quantidade de produto dispónível em estoque
             var quantidadeDisponivel = $(this).attr('data-quantidadeDisponivel');
             $('#modalQuantidade div p').html("Quantidade disponível em estoque: " + quantidadeDisponivel);
+        });
+        
+        $('.image').mouseover(function () {
+            var imagem = $(this);
+            imagem.data["lista"] = imagem.attr('data-imagem').split(',');            
+            var i = 1;
+            imagem.data["intervalo"] = setInterval(function () {                    
+                imagem.attr('src', imagem.data["lista"][i]);
+                i === 2 ? i = 0 : i++;
+                console.log(imagem.data["lista"][i]);
+                },
+                1000);
+        }).mouseout(function () {
+            clearInterval($(this).data["intervalo"]);
+            $(this).attr('src', $(this).data["lista"][0]);
         });
     });
 </script>
@@ -41,8 +59,9 @@
             <div class="col s12 m4 l2">
                 <div class="card">
                     <div class="card-image">
-                        
-                        <img src="@produto.ImagemA">
+                        <div id="imagens">
+                            <img class="image" data-Imagem="@produto.ImagemA,@produto.ImagemB,@produto.ImagemC" src="@produto.ImagemA">
+                        </div>
                         <span class="card-title flow-text">@produto.NomeProduto</span>
                         <a href="#modalQuantidade" id="abreModal"
                            class="modal-trigger btn-floating halfway-fab waves-effect waves-light pink lighten-1 tooltipped adicionaItemCarrinho"
@@ -51,7 +70,6 @@
                            data-Preco="@produto.PrecoProduto"
                            data-Nome="@produto.NomeProduto"
                            data-Id="@produto.IdProduto"
-                           data-Imagem="@produto.ImagemA"
                            data-quantidadeDisponivel="@produto.QtdeProduto"
                            @(produto.QtdeProduto == 0 ? "disabled" : string.Empty)>
                             <i class="material-icons">add</i>
