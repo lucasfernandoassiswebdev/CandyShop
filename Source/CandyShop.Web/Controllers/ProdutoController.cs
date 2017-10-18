@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
+    [AdminFilterResult]
     public class ProdutoController : Controller
     {
         private readonly IProdutoApplication _appProduto;
@@ -18,21 +19,20 @@ namespace CandyShop.Web.Controllers
             _pathProduto = ImagensConfig.EnderecoImagens;
         }
 
-        #region Telas
-        [AdminFilterResult]
+        [HttpGet]
         public ActionResult ListaProdutos()
         {
             return View();
         }
 
-        [AdminFilterResult]
+        [HttpPost]
         public ActionResult CadastrarProduto()
         {
             ViewBag.ImagemPadrao = _pathProduto;
             return View();
         }
 
-        [AdminFilterResult]
+        [HttpGet]
         public ActionResult DetalheProduto(int idProduto, string telaAnterior)
         {
             var response = _appProduto.DetalharProduto(idProduto);
@@ -43,7 +43,6 @@ namespace CandyShop.Web.Controllers
             return View(response.Content);
         }
 
-        [AdminFilterResult]
         public ActionResult EditarProduto(int idProduto, string telaAnterior)
         {
             var response = _appProduto.DetalharProduto(idProduto);
@@ -55,7 +54,6 @@ namespace CandyShop.Web.Controllers
             return View(response.Content);
         }
 
-        [AdminFilterResult]
         public ActionResult DesativarProduto(int idProduto, string telaAnterior)
         {
             var response = _appProduto.DetalharProduto(idProduto);
@@ -65,10 +63,8 @@ namespace CandyShop.Web.Controllers
             TempData["caminhoImagensProdutos"] = _pathProduto;
             return View(response.Content);
         }
-        #endregion
 
-        #region Listas
-        [AdminFilterResult]
+        [HttpGet]
         public ActionResult Listar()
         {
             var response = _appProduto.ListarProdutos();
@@ -81,7 +77,7 @@ namespace CandyShop.Web.Controllers
 
         }
 
-        [AdminFilterResult]
+        [HttpGet]
         public ActionResult ListarInativos()
         {
             var response = _appProduto.ListarInativos();
@@ -93,7 +89,7 @@ namespace CandyShop.Web.Controllers
             return View("ListaProdutos", response.Content);
         }
 
-        [AdminFilterResult]
+        [HttpGet]
         public ActionResult ProcurarProduto(string nome)
         {
             var response = _appProduto.ProcurarProduto(nome);
@@ -104,10 +100,7 @@ namespace CandyShop.Web.Controllers
             TempData["nomeLista"] = "Produtos relacionados";
             return View("ListaProdutos", response.Content);
         }
-        #endregion
 
-        #region Execucoes
-        [AdminFilterResult]
         [HttpPost]
         public ActionResult CadastrarProduto(ProdutoViewModel produto)
         {
@@ -115,23 +108,17 @@ namespace CandyShop.Web.Controllers
             return Content(response.Status != HttpStatusCode.OK ? $"Erro. {response.ContentAsString}" : response.Content);
         }
 
-        [AdminFilterResult]
-        [HttpPut]
         public ActionResult EditarProduto(ProdutoViewModel produto)
         {
             var response = _appProduto.EditarProduto(produto);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro. {response.ContentAsString}" : "Produto editado com sucesso!");
         }
 
-        [AdminFilterResult]
-        [HttpPut]
         public ActionResult DesativarProdutoConfirmado(ProdutoViewModel produto)
         {
             var response = _appProduto.DesativarProduto(produto);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro: {response.Status}" : "Produto desativado com sucesso!");
         }
-        #endregion
-
     }
 }
 

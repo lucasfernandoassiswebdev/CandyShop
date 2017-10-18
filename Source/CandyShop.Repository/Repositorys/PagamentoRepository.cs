@@ -1,6 +1,5 @@
 ﻿using CandyShop.Core.Services.Pagamento;
 using CandyShop.Core.Services.Usuario;
-using CandyShop.Repository.Database;
 using CandyShop.Repository.DataBase;
 using System;
 using System.Collections.Generic;

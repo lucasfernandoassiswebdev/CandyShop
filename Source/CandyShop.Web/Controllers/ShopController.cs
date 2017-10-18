@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 namespace CandyShop.Web.Controllers
 {
+    [AdminFilterResult]
     public class ShopController : Controller
     {
         private readonly IUsuarioApplication _appUsuario;
@@ -14,7 +15,6 @@ namespace CandyShop.Web.Controllers
             _appUsuario = usuario;
         }
 
-        [AdminFilterResult]
         public ActionResult Index()
         {
             var response = _appUsuario.VerificaCreditoLoja();

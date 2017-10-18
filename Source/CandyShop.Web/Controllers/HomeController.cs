@@ -31,6 +31,7 @@ namespace CandyShop.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             var response = _appProduto.ListarProdutos();
@@ -41,6 +42,7 @@ namespace CandyShop.Web.Controllers
             return View("GridProdutos", response.Content);
         }
 
+        [HttpGet]
         public ActionResult ProcurarProduto(string nome)
         {
             var response = _appProduto.ProcurarProduto(nome);
@@ -52,6 +54,7 @@ namespace CandyShop.Web.Controllers
             return View("GridProdutos", response.Content);
         }
 
+        [HttpGet]
         public ActionResult ListarCategoria(string categoria)
         {
             var response = _appProduto.ListarCategoria(categoria);
