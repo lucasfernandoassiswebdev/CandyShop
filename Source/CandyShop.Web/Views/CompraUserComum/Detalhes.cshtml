@@ -1,0 +1,54 @@
+﻿@model CandyShop.Application.ViewModels.CompraViewModel
+
+@{
+    Layout = null;
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Compra/detalhesCompra.css?d=@DateTime.Now.Ticks" />
+
+<div class="center container">
+    <h4 class="center pink-text">Detalhes da Compra</h4>
+    <hr />
+    <div class="col s12">
+        <table class="striped centered bordered responsive-table" style="margin-bottom:50px">
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold">Id compra:</td>
+                    <td>@Model.IdCompra</td>
+                </tr>
+                @if (Session["login"].ToString() == "off")
+                {
+                    <tr>
+                        <td style="font-weight: bold">Usuario:</td>
+                        <td>@Model.Usuario.NomeUsuario</td>
+                    </tr>
+                }
+                <tr>
+                    <td style="font-weight: bold">Data da compra:</td>
+                    <td>@Model.DataCompra</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">Valor total da compra:</td>
+                    <td>R$ @Html.DisplayFor(model => model.ValorCompra)</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">Itens:</td>
+                </tr>
+                @foreach (var item in Model.Itens)
+                {
+                    <tr>
+                        <td style="font-weight: bold">Produto:</td>
+                        <td>@item.Produto.NomeProduto</td>
+                        <td style="font-weight: bold">Quantidade</td>
+                        <td>@item.QtdeCompra</td>
+                        <td style="font-weight: bold">Preço item:</td>
+                        <td>@string.Format("{0:C}", item.Produto.PrecoProduto)</td>
+
+                  </tr>
+                }
+            </tbody>
+        </table>
+        <div class="center">
+            <a class="waves-effect waves-light btn" onclick="@ViewBag.endereco"><i class="material-icons left">arrow_back</i>Voltar</a>
+        </div>
+    </div>
+</div>
