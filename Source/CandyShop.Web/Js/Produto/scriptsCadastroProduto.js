@@ -13,10 +13,23 @@
         thousands: ".",
         decimal: ",",
         affixesStay: true
-    });
-
-    $("#PrecoProduto").maskMoney("mask");
-
+    })
+        .maskMoney("mask").keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao)
+        .keydown(function (e) {
+            var tamanhoCampo = $(this).val().length;
+            if (tamanhoCampo > 2 &&
+                e.which !== 8 &&
+                e.which !== 46 &&
+                e.which !== 38 &&
+                e.which !== 37 &&
+                e.which !== 40 &&
+                e.which !== 39) {
+                $(".botaoCadastro").attr("disabled", "disabled");
+                e.preventDefault();
+                return false;
+            }
+            validaBotao();
+        });
     // Fazendo as validações no campo de nome
     $("#NomeProduto").keydown(function (e) {
         if (e.which == 13)
@@ -25,18 +38,7 @@
             validaBotao();
     }).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
-    // Fazendo as validações no campo de preço
-    $("#PrecoProduto").keyup(validaBotao).keydown(function (e) {
-        var tamanhoCampo = $(this).val().length;
-        if (tamanhoCampo > 2 && e.which !== 8 && e.which !== 46 && e.which !== 38 && e.which !== 37 && e.which !== 40 && e.which !== 39) {
-            $(".botaoCadastro").attr("disabled", "disabled");
-            e.preventDefault();
-            return false;
-        }
-            validaBotao();
-    }).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
-
-    // Fazendo as validações no campo de quantidade do produto 
+    // Fazendo as validações no campo de quantidade do produto
     $("#QtdeProduto").keydown(function (e) {
         var tamanhoCampo = $(this).val().length;
 
@@ -53,48 +55,31 @@
     }).keyup(validaBotao).blur(validaBotao).focus(validaBotao).on("paste", validaBotao);
 
     // Finalizando o cadastro
-    $(".botaoCadastro").on("click", function () {
-        encodeImageFileAsURL(AjaxJsProduto.concluirCadastroProduto);
-    });
+    $(".botaoCadastro").click(function () { encodeImageFileAsURL(AjaxJsProduto.concluirCadastroProduto); });
 
-    $(".botaoVoltar").on("click", function () {
-        // Chamando o método da função Ajax que foi definido na página inicial do Admin
-        AjaxJsProduto.listaProduto();
-    });
+    // Chamando o método da função Ajax que foi definido na página inicial do Admin
+    $(".botaoVoltar").click(AjaxJsProduto.listaProduto);
 
     // Editando as imagens na tela
-    $("#fotoProduto1").change(function () {
-        // Função que muda a foto do usuário na tela
-        readURL(this);
-        $("#removerImagem1").show();
-    });
+    $("#fotoProduto1").change(function () { mudaImagem("#removerImagem1", "#imagem1"); });
+    $("#fotoProduto2").change(function () { mudaImagem("#removerImagem2", "#imagem2"); });
+    $("#fotoProduto3").change(function () { mudaImagem("#removerImagem3", "#imagem3"); });
 
-    $("#fotoProduto2").change(function () {
-        readURL2(this);
-        // Quando a imagem muda, o botão que possibilita removê-la é exibido na tela
-        $("#removerImagem2").show();
-    });
-
-    $("#fotoProduto3").change(function () {
-        readURL3(this);
-        $("#removerImagem3").show();
-    });
-
-    $("#removerImagem1").click(function () {
-        $("#imagem1").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
-        $("#fotoProduto1").val("");
-    });
-
-    $("#removerImagem2").click(function () {
-        $("#imagem2").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
-        $("#fotoProduto2").val("");
-    });
-
-    $("#removerImagem3").click(function () {
-        $("#imagem3").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
-        $("#fotoProduto3").val("");
-    });
+    // Removendo as imagens da tela
+    $("#removerImagem1").click(function () { removeImagem("#imagem1", "#fotoProduto1"); });
+    $("#removerImagem2").click(function () { removeImagem("#imagem2", "#fotoProduto2"); });
+    $("#removerImagem3").click(function () { removeImagem("#imagem3", "#fotoProduto3"); });
 });
+
+function mudaImagem(imagemMostrar, imagem) {
+    $(imagemMostrar).show();
+    readURL(this, imagem);
+}
+
+function removeImagem(imagem, input) {
+    $(imagem).attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
+    $(input).val("");
+}
 
 /* Função que transforma as imagens em base64 para serem posteriormente 
    renomeadas e copiadas na aplicação */
@@ -104,47 +89,22 @@ function encodeImageFileAsURL(callback) {
     var imagem2 = document.getElementById("fotoProduto2").files;
     var imagem3 = document.getElementById("fotoProduto3").files;
 
-    if (imagem1.length > 0) {
-        var fileToLoad = imagem1[0];
-        var fileReader = new FileReader();
-
-        fileReader.onload = function (fileLoadedEvent) {
-            base64A = fileLoadedEvent.target.result;
-            verificaSegundaImagem();
-        };
-
-        fileReader.readAsDataURL(fileToLoad);
-    } else
+    if (imagem1.length > 0)
+        verificaImagem(imagem1, verificaSegundaImagem, base64A);
+    else
         verificaSegundaImagem();
 
     function verificaSegundaImagem() {
-        if (imagem2.length > 0) {
-            var fileToLoadB = imagem2[0];
-            var fileReaderB = new FileReader();
-
-            fileReaderB.onload = function (fileLoadedEvent) {
-                base64B = fileLoadedEvent.target.result;
-                verificaTerceiraImagem();
-            };
-
-            fileReaderB.readAsDataURL(fileToLoadB);
-        } else
+        if (imagem2.length > 0)
+            verificaImagem(imagem2, verificaTerceiraImagem, base64B);
+        else
             verificaTerceiraImagem();
     }
 
     function verificaTerceiraImagem() {
-        if (imagem3.length > 0) {
-            var fileToLoadC = imagem3[0];
-            var fileReaderC = new FileReader();
-
-            fileReaderC.onload = function (fileLoadedEvent) {
-                base64C = fileLoadedEvent.target.result;
-                if (typeof callback === "function") {
-                    callback(base64A, base64B, base64C);
-                }
-            };
-            fileReaderC.readAsDataURL(fileToLoadC);
-        } else
+        if (imagem3.length > 0)
+            verificaImagem(imagem3, callback, base64C);
+        else
             callback(base64A, base64B, base64C);
         /* Na linha acima, nós garantimos com o uso de callback que a função
            de cadastro será executada apenas depois que as 3 imagens(ou quantas o
@@ -152,34 +112,24 @@ function encodeImageFileAsURL(callback) {
     }
 }
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+function verificaImagem(imagem, funcao, base64) {
+    var fileToLoad = imagem[0];
+    var fileReader = new FileReader();
 
-        reader.onload = function (e) {
-            $("#imagem1").attr("src", e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
+    fileReader.onload = function (fileLoadedEvent) {
+        base64 = fileLoadedEvent.target.result;
+        if (typeof funcao === "function")
+            funcao();
+    };
+    fileReader.readAsDataURL(fileToLoad);
 }
 
-function readURL2(input) {
+function readURL(input, imagem) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $("#imagem2").attr("src", e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function readURL3(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $("#imagem3").attr("src", e.target.result);
+            $(imagem).attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -213,7 +163,6 @@ function handlePaste(e) {
 }
 
 function validaBotao() {
-    $("#PrecoProduto").maskMoney("mask");
     if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40 ||
         $("#QtdeProduto").val().length > 3 || $("#QtdeProduto").val().length <= 0 ||
         parseInt($("#QtdeProduto").val()) > 999 || parseInt($("#QtdeProduto").val()) <= 0 ||
