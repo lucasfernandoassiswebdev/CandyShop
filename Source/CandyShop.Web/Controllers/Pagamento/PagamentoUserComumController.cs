@@ -18,7 +18,6 @@ namespace CandyShop.Web.Controllers.Pagamento
             _appUsuario = usuario;
         }
 
-        
         public ActionResult Inserir()
         {
             return View("../Pagamento/Inserir");
@@ -34,7 +33,8 @@ namespace CandyShop.Web.Controllers.Pagamento
                 return Content("Erro. " + response.ContentAsString);
             return View("../Pagamento/Index", response.Content);
         }
-        
+
+        [HttpPost]
         public ActionResult InserirPagamento(PagamentoViewModel pagamento)
         {
             pagamento.Usuario = new UsuarioViewModel { Cpf = Session["login"].ToString() };

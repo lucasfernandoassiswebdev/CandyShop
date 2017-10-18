@@ -77,7 +77,6 @@ namespace CandyShop.Web.Controllers.Usuario
             TempData["nomeLista"] = "Usuários Inativos";
             return View("Index", response.Content);
         }
-
         public ActionResult ProcurarUsuario(string nome)
         {
             var response = _appUsuario.ProcurarUsuario(nome);
@@ -87,6 +86,7 @@ namespace CandyShop.Web.Controllers.Usuario
             return View("Index", response.Content);
         }
 
+        [HttpPost]
         public ActionResult Cadastrar(UsuarioViewModel usuario)
         {
             if (usuario.Cpf == null || usuario.NomeUsuario == null)
@@ -100,6 +100,7 @@ namespace CandyShop.Web.Controllers.Usuario
                 ? $"{response.ContentAsString}"
                 : response.Content);
         }
+        [HttpPost]
         public ActionResult Editar(UsuarioViewModel usuario)
         {
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
@@ -117,6 +118,7 @@ namespace CandyShop.Web.Controllers.Usuario
             Session["saldoUsuario"] = res.Content.SaldoUsuario;
             return Content("Edição concluída com sucesso!!");
         }
+        [HttpPost]
         public ActionResult DesativarUsuario(UsuarioViewModel usuario)
         {
             var response = _appUsuario.DesativarUsuario(usuario);

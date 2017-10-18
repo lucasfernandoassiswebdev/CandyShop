@@ -19,20 +19,11 @@ namespace CandyShop.Web.Controllers
             _pathProduto = ImagensConfig.EnderecoImagens;
         }
 
-        [HttpGet]
-        public ActionResult ListaProdutos()
-        {
-            return View();
-        }
-
-        [HttpPost]
         public ActionResult CadastrarProduto()
         {
             ViewBag.ImagemPadrao = _pathProduto;
             return View();
         }
-
-        [HttpGet]
         public ActionResult DetalheProduto(int idProduto, string telaAnterior)
         {
             var response = _appProduto.DetalharProduto(idProduto);
@@ -42,7 +33,6 @@ namespace CandyShop.Web.Controllers
             ViewBag.telaAnterior = telaAnterior;
             return View(response.Content);
         }
-
         public ActionResult EditarProduto(int idProduto, string telaAnterior)
         {
             var response = _appProduto.DetalharProduto(idProduto);
@@ -53,7 +43,6 @@ namespace CandyShop.Web.Controllers
             TempData["caminhoImagensProdutos"] = _pathProduto;
             return View(response.Content);
         }
-
         public ActionResult DesativarProduto(int idProduto, string telaAnterior)
         {
             var response = _appProduto.DetalharProduto(idProduto);
@@ -64,7 +53,10 @@ namespace CandyShop.Web.Controllers
             return View(response.Content);
         }
 
-        [HttpGet]
+        public ActionResult ListaProdutos()
+        {
+            return View();
+        }
         public ActionResult Listar()
         {
             var response = _appProduto.ListarProdutos();
@@ -76,8 +68,6 @@ namespace CandyShop.Web.Controllers
             return View("ListaProdutos", response.Content);
 
         }
-
-        [HttpGet]
         public ActionResult ListarInativos()
         {
             var response = _appProduto.ListarInativos();
@@ -88,8 +78,6 @@ namespace CandyShop.Web.Controllers
 
             return View("ListaProdutos", response.Content);
         }
-
-        [HttpGet]
         public ActionResult ProcurarProduto(string nome)
         {
             var response = _appProduto.ProcurarProduto(nome);
@@ -107,13 +95,13 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.InserirProduto(produto);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro. {response.ContentAsString}" : response.Content);
         }
-
+        [HttpPost]
         public ActionResult EditarProduto(ProdutoViewModel produto)
         {
             var response = _appProduto.EditarProduto(produto);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro. {response.ContentAsString}" : "Produto editado com sucesso!");
         }
-
+        [HttpPost]
         public ActionResult DesativarProdutoConfirmado(ProdutoViewModel produto)
         {
             var response = _appProduto.DesativarProduto(produto);

@@ -19,7 +19,6 @@ namespace CandyShop.Web.Controllers.Compra
             _appUsuario = usuario;
         }
 
-        [HttpGet]
         public ActionResult Listar()
         {
             ViewBag.tituloPagina = "Compras do ultimo mês";
@@ -29,8 +28,6 @@ namespace CandyShop.Web.Controllers.Compra
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [HttpGet]
         public ActionResult ListarCpf()
         {
             ViewBag.tituloPagina = "Minhas Compras";
@@ -41,8 +38,6 @@ namespace CandyShop.Web.Controllers.Compra
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [HttpGet]
         public ActionResult ListarSemana()
         {
             ViewBag.tituloPagina = "Compras da ultima semana";
@@ -52,8 +47,6 @@ namespace CandyShop.Web.Controllers.Compra
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [HttpGet]
         public ActionResult ListarMes(int mes)
         {
             ViewBag.tituloPagina = $"Compra do mês {mes}";
@@ -63,8 +56,6 @@ namespace CandyShop.Web.Controllers.Compra
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [HttpGet]
         public ActionResult ListarDia()
         {
             ViewBag.tituloPagina = $"Compras do dia {DateTime.Now.ToShortDateString()}";
@@ -74,8 +65,6 @@ namespace CandyShop.Web.Controllers.Compra
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
-        [HttpPost]
         public ActionResult Cadastrar(CompraViewModel compra)
         {
 
@@ -98,6 +87,7 @@ namespace CandyShop.Web.Controllers.Compra
             return Content("Sua compra foi registrada com sucesso");
         }
 
+        [HttpPost]
         public ActionResult Editar(CompraViewModel Compra)
         {
             var response = _appCompra.EditarCompra(Compra);

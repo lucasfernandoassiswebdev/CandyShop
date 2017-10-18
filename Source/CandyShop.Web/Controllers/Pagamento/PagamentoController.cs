@@ -15,7 +15,7 @@ namespace CandyShop.Web.Controllers
         private readonly IPagamentoApplication _appPagamento;
         private readonly IUsuarioApplication _appUsuario;
 
-        public PagamentoController(IPagamentoApplication pagamento, IUsuarioApplication usuario):base(pagamento,usuario)
+        public PagamentoController(IPagamentoApplication pagamento, IUsuarioApplication usuario) : base(pagamento, usuario)
         {
             _appPagamento = pagamento;
             _appUsuario = usuario;
@@ -25,7 +25,6 @@ namespace CandyShop.Web.Controllers
         {
             return View();
         }
-
         public ActionResult Editar(int idPagamento, string paginaAnterior)
         {
             var result = _appPagamento.SelecionarPagamento(idPagamento);
@@ -46,7 +45,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
         public ActionResult ListarSemana()
         {
             ViewBag.tituloPagina = $"Pagamentos da ultima semana";
@@ -56,7 +54,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
         public ActionResult ListarMes(int mes)
         {
             ViewBag.tituloPagina = $"Pagamento do mês {mes}";
@@ -66,7 +63,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
         public ActionResult ListarDia()
         {
             ViewBag.tituloPagina = $"Pagamentos do dia {DateTime.Now.ToShortDateString()}";
@@ -77,6 +73,7 @@ namespace CandyShop.Web.Controllers
             return View("Index", response.Content);
         }
 
+        [HttpPost]
         public ActionResult EditarPagamento(PagamentoViewModel pagamento)
         {
             var response = _appPagamento.EditarPagamento(pagamento);

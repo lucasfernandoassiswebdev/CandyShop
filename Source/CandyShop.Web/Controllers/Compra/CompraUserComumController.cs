@@ -21,7 +21,6 @@ namespace CandyShop.Web.Controllers.Compra
             return View("../Compra/Index");
         }
 
-        [HttpGet]
         public ActionResult Detalhes(int idCompra, string paginaAnterior)
         {
             var response = _appCompra.SelecionarCompra(idCompra);

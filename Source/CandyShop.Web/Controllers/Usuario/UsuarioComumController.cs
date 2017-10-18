@@ -22,6 +22,7 @@ namespace CandyShop.Web.Controllers.Usuario
             return RedirectToAction("NavBar", "Home");
         }
 
+        [HttpPost]
         public ActionResult TrocarSenha(TrocaSenhaViewModel senhas)
         {
             if (!senhas.ConfirmaNovaSenha.Equals(senhas.NovaSenha)) return Content("Senhas não conferem");
