@@ -18,11 +18,10 @@ $(document).ready(function () {
     $("#PrecoProduto").maskMoney({
         prefix: "R$ ",
         allowNegative: false,
-        thousands: ".",
+        thousands: "",
         decimal: ",",
         affixesStay: true
     }).maskMoney("mask");
-
 });
 
 function encodeImageFileAsURL(callback, tela) {
@@ -109,13 +108,7 @@ $("#PrecoProduto").keydown(function (e) {
 
 //Validações no campo de quantidade
 $("#QtdeProduto").keydown(function (e) {
-    var tamanhoCampo = $(this).val().length;
-    if (tamanhoCampo > 2 && e.which !== 8 && e.which !== 46 && e.which !== 38 && e.which !== 37 && e.which !== 40 && e.which !== 39) {
-        $(".botaoEditar").attr("disabled", "disabled");
-        e.preventDefault();
-        return false;
-    }
-
+    replaceLetters($(this).val(), "#QtdeProduto");
     validaBotao();
 }).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
@@ -154,6 +147,10 @@ function validaBotao() {
         $(".botaoEditar").removeAttr("disabled");
 }
 
+function replaceLetters(value, input) {
+    value = value.replace(/\D/g, "");
+    $(input).val(value);
+}
 
 
 
