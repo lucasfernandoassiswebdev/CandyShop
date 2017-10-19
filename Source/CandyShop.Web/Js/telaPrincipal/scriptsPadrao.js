@@ -47,8 +47,8 @@ $(document).ready(function () {
         });
 
     $("#TrocarSenha").click(function () {
-        if ($("#novaSenha").val().length < 8) {
-            Materialize.toast("Senha deve conter de 8 a 12 caracteres", 3000);
+        if ($("#novaSenha").val().length < 6) {
+            Materialize.toast("Senha deve conter de 6 a 12 caracteres", 3000);
             return;
         }
         AjaxJsUsuario.trocarSenha();
@@ -57,8 +57,8 @@ $(document).ready(function () {
 
     $("#confirmaNovaSenha").keydown(function (e) {
         if (e.which == 13) {
-            if ($("#novaSenha").val().length < 8) {
-                Materialize.toast("Senha deve conter de 8 a 12 caracteres", 3000);
+            if ($("#novaSenha").val().length < 6) {
+                Materialize.toast("Senha deve conter de 6 a 12 caracteres", 3000);
                 $("#trocaSenha").modal("open");
                 $("#confirmaNovaSenha").focus();
                 return;
@@ -471,7 +471,7 @@ function limpaInputFechaModal() {
 }
 
 function verificaSenhasIguais(inputAtual, comparacao) {
-    if ($(inputAtual).val() == $(comparacao).val() && $(this).val() !== "" && $(comparacao).val() !== "")
+    if ($(inputAtual).val() == $(comparacao).val() && $(inputAtual).val() !== "" && $(comparacao).val() !== "")
         $("#TrocarSenha").removeAttr("disabled");
     else
         $("#TrocarSenha").attr("disabled", "disabled");
