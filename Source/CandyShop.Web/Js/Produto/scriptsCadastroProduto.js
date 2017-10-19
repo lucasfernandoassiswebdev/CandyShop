@@ -8,12 +8,12 @@
 
     // Colocando a máscara no campo de valor de produto
     $("#PrecoProduto").maskMoney({
-            prefix: "R$ ",
-            allowNegative: false,
-            thousands: ".",
-            decimal: ",",
-            affixesStay: true
-        })
+        prefix: "R$ ",
+        allowNegative: false,
+        thousands: ".",
+        decimal: ",",
+        affixesStay: true
+    })
         .maskMoney("mask").keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao)
         .keydown(function (e) {
             var tamanhoCampo = $(this).val().length;
@@ -59,9 +59,9 @@
     $(".botaoVoltar").click(AjaxJsProduto.listaProduto);
 
     // Editando as imagens na tela
-    $("#fotoProduto1").change(function () { mudaImagem("#removerImagem1", "#imagem1"); });
-    $("#fotoProduto2").change(function () { mudaImagem("#removerImagem2", "#imagem2"); });
-    $("#fotoProduto3").change(function () { mudaImagem("#removerImagem3", "#imagem3"); });
+    $("#fotoProduto1").change(function () { mudaImagem("#removerImagem1", "#imagem1", this); });
+    $("#fotoProduto2").change(function () { mudaImagem("#removerImagem2", "#imagem2", this); });
+    $("#fotoProduto3").change(function () { mudaImagem("#removerImagem3", "#imagem3", this); });
 
     // Removendo as imagens da tela
     $("#removerImagem1").click(function () { removeImagem("#imagem1", "#fotoProduto1"); });
@@ -69,9 +69,9 @@
     $("#removerImagem3").click(function () { removeImagem("#imagem3", "#fotoProduto3"); });
 });
 
-function mudaImagem(imagemMostrar, imagem) {
-    $(imagemMostrar).show();
-    readURL(this, imagem);
+function mudaImagem(botaoRemover, imagem, input) {
+    $(botaoRemover).show();
+    readURL(input, imagem);
 }
 
 function removeImagem(imagem, input) {
