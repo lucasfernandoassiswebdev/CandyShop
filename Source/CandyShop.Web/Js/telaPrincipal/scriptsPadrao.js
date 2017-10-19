@@ -148,7 +148,6 @@ $(document).ready(function () {
     // Adicionando os itens no carrinho
     $("#adicionaCarrinho").click(function () {
         var value = $("#quantidade").val().trim().replace(/\b0+/g, "");
-        console.log(value);
         if (!value || !/^[\d]+$/g.test(value) || parseInt(value) > parseInt(quantidadeDisponivel) || parseInt(value) == 0) {
             Materialize.toast("Quantidade inválida ou indisponível para compra!", 2000);
             return;
@@ -305,7 +304,6 @@ $(document).ready(function () {
     $("#editarQuantidade").click(function () {
         mNumbers($("#quantidadeEdit").val());
         var qtde = parseInt($("#quantidadeEdit").val().replace(/\b0+/g, ""));
-        console.log(qtde);
         if (qtde <= quantidadeDisponivel && qtde > 0)
             $("#modalEditarQuantidade").modal("close");
         else {
