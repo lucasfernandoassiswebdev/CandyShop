@@ -147,8 +147,9 @@ $(document).ready(function () {
 
     // Adicionando os itens no carrinho
     $("#adicionaCarrinho").click(function () {
-        var value = $("#quantidade").val().trim();
-        if (!value || !/^[\d]+$/g.test(value) || value.length > 3 || value > quantidadeDisponivel || value == 0) {
+        var value = $("#quantidade").val().trim().replace(/\b0+/g, "");
+        console.log(value);
+        if (!value || !/^[\d]+$/g.test(value) || parseInt(value) > parseInt(quantidadeDisponivel) || parseInt(value) == 0) {
             Materialize.toast("Quantidade inválida ou indisponível para compra!", 2000);
             return;
         }
@@ -303,24 +304,23 @@ $(document).ready(function () {
     // Editando a quantidade dos itens no carrinho
     $("#editarQuantidade").click(function () {
         mNumbers($("#quantidadeEdit").val());
-        var qtde = parseInt($("#quantidadeEdit").val());
+        var qtde = parseInt($("#quantidadeEdit").val().replace(/\b0+/g, ""));
+        console.log(qtde);
         if (qtde <= quantidadeDisponivel && qtde > 0)
             $("#modalEditarQuantidade").modal("close");
         else {
-
             Materialize.toast("Quantidade indisponível para compra!", 2000);
             return;
         }
 
         $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
-            .text("Quantidade: " + $("#quantidadeEdit").val())
-            .attr("data-Quantidade", $("#quantidadeEdit").val());
+            .text("Quantidade: " + qtde).attr("data-Quantidade", qtde);
         $("#modalCarrinho").modal("open");
 
         // Atualizando a quantidade no localStorage
         var produtos = JSON.parse(localStorage.getItem("listaProdutos"));
         var produto = produtos[$("#modalEditarQuantidade").data("index")];
-        produto.Quantidade = $("#quantidadeEdit").val();
+        produto.Quantidade = $("#quantidadeEdit").val().replace(/\b0+/g, "");
         produtos[$("#modalEditarQuantidade").data("index")] = produto;
         localStorage.removeItem("listaProdutos");
         localStorage.setItem("listaProdutos", JSON.stringify(produtos));
@@ -390,7 +390,7 @@ $(document).ready(function () {
         mcpf($("#cpf").val());
         if (e.which == 13)
             $("#senha").focus();
-    }).on("blur", function () {
+    }).blur(function () {
         mcpf($("#cpf").val());
         if ($("#cpf").val().length > 14) {
             $("#cpf").val($("#cpf").val().substr(0, 13));
@@ -451,7 +451,8 @@ function mcpf(v) {
 }
 
 function verificaEditQuantidade() {
-    quantidade = $("#quantidadeEdit").val();
+    quantidade = $("#quantidadeEdit").val().replace(/\b0+/g, "");
+    
     if (parseInt(quantidade) <= 0 || quantidade == "" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
         $("#editarQuantidade").attr("disabled", "disabled");
     else
@@ -479,7 +480,7 @@ function verificaSenhasIguais(inputAtual, comparacao) {
 }
 
 function verificaQuantidade() {
-    quantidade = $("#quantidade").val();
+    quantidade = $("#quantidade").val().replace(/\b0+/g, "");
     if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
         $("#adicionaCarrinho").attr("disabled", "disabled");
     else
