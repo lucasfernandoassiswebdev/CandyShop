@@ -1,6 +1,9 @@
 ﻿var base64A, base64B, base64C;
 
 $(document).ready(function () {
+    base64A = null;
+    base64B = null;
+    base64C = null;
     // Inicializando métodos jQuery framework js Materialize
     $("select").material_select();
     $("input").characterCounter();
@@ -10,11 +13,11 @@ $(document).ready(function () {
 
     // Colocando a máscara no campo de valor de produto
     $("#PrecoProduto").maskMoney({
-        prefix: "R$ ",
-        allowNegative: false,
-        thousands: "",
-        decimal: ",",
-        affixesStay: true
+            prefix: "R$ ",
+            allowNegative: false,
+            thousands: "",
+            decimal: ",",
+            affixesStay: true
     })
         .maskMoney("mask").keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao)
         .keydown(function (e) {
@@ -22,7 +25,7 @@ $(document).ready(function () {
                 $("#QtdeProduto").focus();
             else
                 validaBotao();
-        });
+    });
 
     // Fazendo as validações no campo de nome
     $("#NomeProduto").keydown(function (e) {
@@ -90,18 +93,17 @@ function encodeImageFileAsURL(callback) {
             forBase64(imagem2, 1, verificaUltimaImagem);
         else
             verificaUltimaImagem();
-    }
+}
 
     function verificaUltimaImagem() {
         if (imagem3.length > 0)
             forBase64(imagem3, 2, callback);
         else
             callback(base64A, base64B, base64C);
-    }
+}
 }
 
 function forBase64(imagem, base, callback) {
-    console.log(base);
     var fileToLoad = imagem[0];
     var fileReader = new FileReader();
     fileReader.onload = function (fileLoadedEvent) {
@@ -113,14 +115,14 @@ function forBase64(imagem, base, callback) {
             base64C = fileLoadedEvent.target.result;
 
         executaFuncao();
-    }
+}
 
     fileReader.readAsDataURL(fileToLoad);
 
     function executaFuncao() {
-        if (typeof callback === "function") 
+        if (typeof callback === "function")
             callback(base64A, base64B, base64C);
-    }
+}
 }
 
 function readURL(input, imagem) {
@@ -129,9 +131,9 @@ function readURL(input, imagem) {
 
         reader.onload = function (e) {
             $(imagem).attr("src", e.target.result);
-        };
+    };
         reader.readAsDataURL(input.files[0]);
-    }
+}
 }
 
 // Funções que não deixam o usuário digitar "e" ou números negativos
@@ -148,17 +150,17 @@ function handlePaste(e) {
     if (pastedData.indexOf("e") > -1) {
         e.stopPropagation();
         e.preventDefault();
-    }
+}
 
     if (pastedData.indexOf("-") > -1) {
         e.stopPropagation();
         e.preventDefault();
-    }
+}
 
     if (pastedData.indexOf(".") > -1) {
         e.stopPropagation();
         e.preventDefault();
-    }
+}
 }
 
 function validaBotao() {

@@ -47,7 +47,7 @@
             RemoverImagemB: removerB,
             RemoverImagemC: removerC
         };
-        concluirAcaoEdicao(url.concluirEdicaoProduto, produto, pagina);
+        concluirAcaoEdicaoeEspecifico(url.concluirEdicaoProduto, produto, pagina);
     };
     var desativarProduto = function (id, telaAnterior) {
         var produto = { IdProduto: id, telaAnterior: telaAnterior };
@@ -85,3 +85,16 @@
     };
 
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.
+
+function concluirAcaoEdicaoeEspecifico(endereco, objeto, tela) {
+    $.ajax({
+        url: endereco,
+        type: "POST",
+        data: objeto,
+        success: function (message) {
+            chamaPagina(tela);
+            Materialize.toast(message, 4000);
+        }
+    });
+}
+

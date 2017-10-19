@@ -1,19 +1,22 @@
-﻿var removerImagemA = false, removerImagemB = false, removerImagemC = false;
-
+﻿var removerImagemA = false, removerImagemB = false, removerImagemC = false, cont = 0;
+var base64A, base64B, base64C;
 $(document).ready(function () {
+    base64A = null;
+    base64B = null;
+    base64C = null;
     $("select").material_select();
     $("input").characterCounter();
     $(".tooltipped").tooltip({ delay: 50 });
 
     // Removendo as imagens dos inputs
-    $("#removerImagem1").click(function () { removerImagem("#imagem1", "#fotoProduto1", removerImagemA) });
-    $("#removerImagem2").click(function () { removerImagem("#imagem2", "#fotoProduto2", removerImagemA) });
-    $("#removerImagem3").click(function () { removerImagem("#imagem3", "#fotoProduto3", removerImagemA) });
+    $("#removerImagem1").click(function () { removerImagem("#imagem1", "#fotoProduto1", 0) });
+    $("#removerImagem2").click(function () { removerImagem("#imagem2", "#fotoProduto2", 1) });
+    $("#removerImagem3").click(function () { removerImagem("#imagem3", "#fotoProduto3", 2) });
 
     //Mudando as imagens na tela
-    $("#fotoProduto1").change(function () { mudaFotoTela(removerImagemA, this, "#imagem1") });
-    $("#fotoProduto2").change(function () { mudaFotoTela(removerImagemB, this, "#imagem2") });
-    $("#fotoProduto3").change(function () { mudaFotoTela(removerImagemC, this, "#imagem3") });
+    $("#fotoProduto1").change(function () { mudaFotoTela(0, this, "#imagem1") });
+    $("#fotoProduto2").change(function () { mudaFotoTela(1, this, "#imagem2") });
+    $("#fotoProduto3").change(function () { mudaFotoTela(2, this, "#imagem3") });
 
     $("#PrecoProduto").maskMoney({
         prefix: "R$ ",
@@ -25,42 +28,69 @@ $(document).ready(function () {
 });
 
 function encodeImageFileAsURL(callback, tela) {
-    var base64A, base64B, base64C;
     var imagem1 = document.getElementById("fotoProduto1").files;
     var imagem2 = document.getElementById("fotoProduto2").files;
     var imagem3 = document.getElementById("fotoProduto3").files;
 
     if (imagem1.length > 0)
-        fazVerificacao(imagem1, base64A, verificaSegundaImagem);
-    else
+        fazVerificacao(imagem1, 0, verificaSegundaImagem);
+    else {
+        cont++;
         verificaSegundaImagem();
+    }
 
     function verificaSegundaImagem() {
         if (imagem2.length > 0)
-            fazVerificacao(imagem2, base64B, verificaTerceiraImagem);
-        else
+            fazVerificacao(imagem2, 1, verificaTerceiraImagem);
+        else {
+            cont++;
             verificaTerceiraImagem();
+        }
     }
 
     function verificaTerceiraImagem() {
-        if (imagem3.length > 0) {
-            fazVerificacao(imagem3, base64C, null);
+        if (imagem3.length > 0)
+            fazVerificacao(imagem3, 2, callback, tela);
+        else {
             callback(base64A, base64B, base64C, removerImagemA, removerImagemB, removerImagemC, tela);
-        } else
-            callback(base64A, base64B, base64C, removerImagemA, removerImagemB, removerImagemC, tela);
+            resetaBases();
+        }
     }
 }
 
-function fazVerificacao(imagem, base64, funcao) {
+function fazVerificacao(imagem, base, funcao, tela) {
     var fileToLoad = imagem[0];
     var fileReader = new FileReader();
+    cont++;
 
     fileReader.onload = function (fileLoadedEvent) {
-        base64 = fileLoadedEvent.target.result;
-        if (typeof funcao === "function")
-            funcao();
+        if (base == 0)
+            base64A = fileLoadedEvent.target.result;
+        else if (base == 1)
+            base64B = fileLoadedEvent.target.result;
+        else
+            base64C = fileLoadedEvent.target.result;
+
+        executaFuncao(verifica);
     };
     fileReader.readAsDataURL(fileToLoad);
+    function executaFuncao(callback) {
+        if (typeof funcao === "function")
+            funcao(base64A, base64B, base64C, removerImagemA, removerImagemB, removerImagemC, tela);
+
+        if (typeof callback === "function")
+            callback();
+    }
+
+    function verifica() {
+        if (cont == 3)
+            resetaBases();
+    }
+}
+
+function resetaBases() {
+   
+    cont >= 3;
 }
 
 // Funções que não deixam o usuário digitar "e" ou números negativos
@@ -114,13 +144,23 @@ $("#QtdeProduto").keydown(function (e) {
 
 function mudaFotoTela(remover, input, imagem) {
     readURL(input, imagem);
-    remover = false;
+    if (remover == 0)
+        removerImagemA = false;
+    else if (remover == 1)
+        removerImagemB = false;
+    else
+        removerImagemC = false;
 }
 
 function removerImagem(imagem, inputFoto, remover) {
     $(imagem).attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
     $(inputFoto).val("");
-    remover = true;
+    if (remover == 0)
+        removerImagemA = true;
+    else if (remover == 1)
+        removerImagemB = true;
+    else
+        removerImagemC = true;
 }
 
 function readURL(input, imagem) {

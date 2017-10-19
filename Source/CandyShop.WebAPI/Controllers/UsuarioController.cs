@@ -1,8 +1,6 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Usuario;
 using System;
-using System.Drawing;
-using System.IO;
 using System.Net;
 using System.Web.Http;
 
@@ -25,6 +23,7 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Post(Usuario usuario)
         {
+            usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
             _usuarioService.InserirUsuario(usuario);
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
@@ -53,7 +52,7 @@ namespace CandyShop.WebAPI.Controllers
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
-            var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
+            var caminho = $"{_enderecoImagens}\\{usuario.Cpf}";
             try
             {
                 usuario.Imagem?.InserirImagem(caminho);
