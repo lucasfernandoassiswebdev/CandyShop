@@ -28,13 +28,18 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-
         public IHttpActionResult Put(Pagamento pagamento)
         {
             _pagamentoService.ValidarPagamento(pagamento);
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
             _pagamentoRepository.EditarPagamento(pagamento);
+            return Ok();
+        }
+
+        public IHttpActionResult Delete(int idpagamento)
+        {
+            _pagamentoRepository.DeletarPagamento(idpagamento);
             return Ok();
         }
 
@@ -85,10 +90,6 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_pagamentoRepository.ListarPagamentoDia(dia));
         }
 
-        public IHttpActionResult Delete(int idpagamento)
-        {
-            _pagamentoRepository.DeletarPagamento(idpagamento);
-            return Ok();
-        }
+        
     }
 }

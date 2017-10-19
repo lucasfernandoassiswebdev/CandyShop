@@ -29,33 +29,20 @@ namespace CandyShop.WebAPI.Controllers
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
+            var caminho = $"{_enderecoImagens}\\{usuario.Cpf}";
             try
             {
                 if (usuario.Imagem != null)
                 {
-                    string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
-                    if (usuario.Imagem == null) return Ok();
-                    foreach (var prefixo in prefixos)
-                        if (usuario.Imagem.StartsWith(prefixo))
-                        {
-                            usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
-
-                            //transformando base64 em array de bytes
-                            var bytes = Convert.FromBase64String(usuario.Imagem);
-
-                            //montando o nome e caminho de save da imagem
-                            usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-                            var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
-
-                            File.WriteAllBytes(caminho, bytes);
-                        }
-                }else InserirPadrao(usuario.Cpf);
+                    usuario.Imagem.InserirImagem(caminho);
+                }
+                else caminho.InserirPadrao();                
             }
             catch
             {
-                return Content(HttpStatusCode.NotModified, "Usuario inserido com sucesso, porém houve um erro ao inserir sua imagem");
+                return Content(HttpStatusCode.NotModified, "Usuario inserido, porém houve um erro ao inserir sua imagem");
             }
-            return Ok();
+            return Content(HttpStatusCode.OK, "Usuario inserido com sucesso");
         }
 
         public IHttpActionResult Put(Usuario usuario)
@@ -66,34 +53,18 @@ namespace CandyShop.WebAPI.Controllers
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
 
+            var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
             try
             {
-                if (usuario.Imagem != null)
-                {
-                    string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
-                    foreach (var prefixo in prefixos)
-                        if (usuario.Imagem.StartsWith(prefixo))
-                        {
-                            usuario.Imagem = usuario.Imagem.Substring(prefixo.Length);
-                            //transformando base64 em array de bytes
-                            var bytes = Convert.FromBase64String(usuario.Imagem);
-                            //montando o nome e caminho de save da imagem
-                            var caminho = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
-                            File.WriteAllBytes(caminho, bytes);
-                        }
-                }
+                usuario.Imagem?.InserirImagem(caminho);
+                if(usuario.RemoverImagem)
+                    caminho.RemoverImagem();
             }
             catch
             {
-                return Content(HttpStatusCode.NotModified, "Usuario editado com sucesso, porém houve um erro ao editar sua imagem");
+                return Content(HttpStatusCode.NotModified, "Usuario editado, porém houve um erro ao editar sua imagem");
             }
-            if (usuario.RemoverImagem) // não inverter esse if com o recharper, ele só faz merda
-            {
-                var filePath = $"{_enderecoImagens}\\{usuario.Cpf}.jpg";
-                if (!File.Exists(filePath)) return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
-                File.Delete(filePath);
-                InserirPadrao(usuario.Cpf);
-            }
+            
             return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
         }
 
@@ -162,32 +133,6 @@ namespace CandyShop.WebAPI.Controllers
             var usuario = _usuarioRepository.SelecionarUsuario(cpf);
             usuario.Imagem = $"{_getEnderecoImagens}/{cpf}.jpg?={DateTime.Now.Ticks}";
             return Ok(usuario);
-        }
-
-        private void InserirPadrao(string nome)
-        {
-            //pegando a imagem na aplicação e transformando em base 64
-            var imagem = ConvertTo64();
-            //transformando em array de bytes e salvando com o cpf do usuário
-            var bytes = Convert.FromBase64String(imagem);
-            var caminho = $"{_enderecoImagens}/{nome}.jpg";
-            File.WriteAllBytes(caminho, bytes);
-        }
-
-        private string ConvertTo64()
-        {
-            using (var image = Image.FromFile($"{_enderecoImagens}/sem-foto.png"))
-            {
-                using (var m = new MemoryStream())
-                {
-                    image.Save(m, image.RawFormat);
-                    var imageBytes = m.ToArray();
-
-                    // Convert byte[] to Base64 String
-                    var base64String = Convert.ToBase64String(imageBytes);
-                    return base64String;
-                }
-            }
-        }
+        }        
     }
 }

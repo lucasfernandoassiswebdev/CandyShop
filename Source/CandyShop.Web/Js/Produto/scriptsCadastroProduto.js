@@ -59,7 +59,7 @@
     $(".botaoVoltar").click(AjaxJsProduto.listaProduto);
 
     // Editando as imagens na tela
-    $("#fotoProduto1").change(function () { mudaImagem("#removerImagem1", "#imagem1"); });
+    $("#fotoProduto1").change(function () { mudaImagem($(this), "#removerImagem1", "#imagem1"); });
     $("#fotoProduto2").change(function () { mudaImagem("#removerImagem2", "#imagem2"); });
     $("#fotoProduto3").change(function () { mudaImagem("#removerImagem3", "#imagem3"); });
 
@@ -69,9 +69,9 @@
     $("#removerImagem3").click(function () { removeImagem("#imagem3", "#fotoProduto3"); });
 });
 
-function mudaImagem(imagemMostrar, imagem) {
+function mudaImagem(input, imagemMostrar, imagem) {
     $(imagemMostrar).show();
-    readURL(this, imagem);
+    readURL(input, imagem);
 }
 
 function removeImagem(imagem, input) {
@@ -125,7 +125,6 @@ function verificaImagem(imagem, funcao, base64) {
 function readURL(input, imagem) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-
         reader.onload = function (e) {
             $(imagem).attr("src", e.target.result);
         };
