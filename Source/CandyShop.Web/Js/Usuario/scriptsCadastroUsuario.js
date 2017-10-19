@@ -22,28 +22,28 @@ $(document).ready(function () {
 
     //esconde o botão que retira a imagem
     $("#removerImagem").hide();
-});
 
-$("#fotoUsuario").change(function () {
-    //função que muda a foto do usuário na tela
-    readURL(this);
+    $("#fotoUsuario").change(function () {
+        //função que muda a foto do usuário na tela
+        readURL(this);
 
-    //mostrando o botão que retira a imagem
-    $("#removerImagem").show();
-});
+        //mostrando o botão que retira a imagem
+        $("#removerImagem").show();
+    });
 
-//voltando a lista de usuários
-$(".botaoVoltar").click(AjaxJsUsuario.listaUsuario);
+    //voltando a lista de usuários
+    $(".botaoVoltar").click(AjaxJsUsuario.listaUsuario);
 
-$(".botaoCadastro").click(function () {
-    //convertendo a imagem para base64
-    encodeImageFileAsURL(AjaxJsUsuario.concluirCadastroUsuario);
-});
+    $(".botaoCadastro").click(function () {
+        //convertendo a imagem para base64
+        encodeImageFileAsURL(AjaxJsUsuario.concluirCadastroUsuario);
+    });
 
-//mudando a imagem quando o usário retirar a atual
-$("#removerImagem").click(function () {
-    $("#imagem").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
-    $("#fotoUsuario").val("");
+    //mudando a imagem quando o usário retirar a atual
+    $("#removerImagem").click(function () {
+        $("#imagem").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
+        $("#fotoUsuario").val("");
+    });
 });
 
 function readURL(input) {
