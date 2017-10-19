@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿var base64A, base64B, base64C;
+
+$(document).ready(function () {
     // Inicializando métodos jQuery framework js Materialize
     $("select").material_select();
     $("input").characterCounter();
@@ -50,12 +52,9 @@
     $(".botaoVoltar").click(AjaxJsProduto.listaProduto);
 
     // Editando as imagens na tela
-
-
     $("#fotoProduto1").change(function () { mudaImagem("#removerImagem1", "#imagem1", this); });
     $("#fotoProduto2").change(function () { mudaImagem("#removerImagem2", "#imagem2", this); });
     $("#fotoProduto3").change(function () { mudaImagem("#removerImagem3", "#imagem3", this); });
-
 
     // Removendo as imagens da tela
     $("#removerImagem1").click(function () { removeImagem("#imagem1", "#fotoProduto1"); });
@@ -63,9 +62,8 @@
     $("#removerImagem3").click(function () { removeImagem("#imagem3", "#fotoProduto3"); });
 });
 
-
-function mudaImagem(input, imagemMostrar, imagem) {
-    $(imagemMostrar).show();
+function mudaImagem(botaoRemover, imagem, input) {
+    $(botaoRemover).show();
     readURL(input, imagem);
 }
 
@@ -76,50 +74,59 @@ function removeImagem(imagem, input) {
 
 /* Função que transforma as imagens em base64 para serem posteriormente 
    renomeadas e copiadas na aplicação */
+
 function encodeImageFileAsURL(callback) {
-    var base64A, base64B, base64C;
     var imagem1 = document.getElementById("fotoProduto1").files;
     var imagem2 = document.getElementById("fotoProduto2").files;
     var imagem3 = document.getElementById("fotoProduto3").files;
 
     if (imagem1.length > 0)
-        verificaImagem(imagem1, verificaSegundaImagem, base64A);
+        forBase64(imagem1, 0, verificaSegundaImagem);
     else
         verificaSegundaImagem();
 
     function verificaSegundaImagem() {
         if (imagem2.length > 0)
-            verificaImagem(imagem2, verificaTerceiraImagem, base64B);
+            forBase64(imagem2, 1, verificaUltimaImagem);
         else
-            verificaTerceiraImagem();
+            verificaUltimaImagem();
     }
 
-    function verificaTerceiraImagem() {
+    function verificaUltimaImagem() {
         if (imagem3.length > 0)
-            verificaImagem(imagem3, callback, base64C);
+            forBase64(imagem3, 2, callback);
         else
             callback(base64A, base64B, base64C);
-        /* Na linha acima, nós garantimos com o uso de callback que a função
-           de cadastro será executada apenas depois que as 3 imagens(ou quantas o
-           usuário tiver mandado) tiverem sido convertidas para base64*/
     }
 }
 
-function verificaImagem(imagem, funcao, base64) {
+function forBase64(imagem, base, callback) {
+    console.log(base);
     var fileToLoad = imagem[0];
     var fileReader = new FileReader();
-
     fileReader.onload = function (fileLoadedEvent) {
-        base64 = fileLoadedEvent.target.result;
-        if (typeof funcao === "function")
-            funcao();
-    };
+        if (base == 0)
+            base64A = fileLoadedEvent.target.result;
+        else if (base == 1)
+            base64B = fileLoadedEvent.target.result;
+        else
+            base64C = fileLoadedEvent.target.result;
+
+        executaFuncao();
+    }
+
     fileReader.readAsDataURL(fileToLoad);
+
+    function executaFuncao() {
+        if (typeof callback === "function") 
+            callback(base64A, base64B, base64C);
+    }
 }
 
 function readURL(input, imagem) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
+
         reader.onload = function (e) {
             $(imagem).attr("src", e.target.result);
         };
