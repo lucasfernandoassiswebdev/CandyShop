@@ -6,14 +6,14 @@ $(document).ready(function () {
     $(".tooltipped").tooltip({ delay: 50 });
 
     // Removendo as imagens dos inputs
-    $("#removerImagem1").click(removerImagem("#imagem1", "#fotoProduto1", removerImagemA));
-    $("#removerImagem2").click(removerImagem("#imagem2", "#fotoProduto2", removerImagemA));
-    $("#removerImagem3").click(removerImagem("#imagem3", "#fotoProduto3", removerImagemA));
+    $("#removerImagem1").click(function () { removerImagem("#imagem1", "#fotoProduto1", removerImagemA) });
+    $("#removerImagem2").click(function () { removerImagem("#imagem2", "#fotoProduto2", removerImagemA) });
+    $("#removerImagem3").click(function () { removerImagem("#imagem3", "#fotoProduto3", removerImagemA) });
 
     //Mudando as imagens na tela
-    $("#fotoProduto1").change(mudaFotoTela(removerImagemA));
-    $("#fotoProduto2").change(mudaFotoTela(removerImagemB));
-    $("#fotoProduto3").change(mudaFotoTela(removerImagemC));
+    $("#fotoProduto1").change(function () { mudaFotoTela(removerImagemA, this, "#imagem1") });
+    $("#fotoProduto2").change(function () { mudaFotoTela(removerImagemB, this, "#imagem2") });
+    $("#fotoProduto3").change(function () { mudaFotoTela(removerImagemC, this, "#imagem3") });
 
     $("#PrecoProduto").maskMoney({
         prefix: "R$ ",
@@ -119,8 +119,8 @@ $("#QtdeProduto").keydown(function (e) {
     validaBotao();
 }).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
 
-function mudaFotoTela(remover) {
-    readURL(this);
+function mudaFotoTela(remover, input, imagem) {
+    readURL(input, imagem);
     remover = false;
 }
 
@@ -130,12 +130,12 @@ function removerImagem(imagem, inputFoto, remover) {
     remover = true;
 }
 
-function readURL(input) {
+function readURL(input, imagem) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $("#imagem1").attr("src", e.target.result);
+            $(imagem).attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
