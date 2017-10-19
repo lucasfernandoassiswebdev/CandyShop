@@ -164,6 +164,7 @@ function handlePaste(e) {
 }
 
 function validaBotao() {
+    replaceLetters($("#QtdeProduto").val());
     // Verificando se o valor digitado é válido
     if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40 ||
         $("#QtdeProduto").val().length <= 0 || parseInt($("#QtdeProduto").val()) > 999.99 ||

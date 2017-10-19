@@ -57,8 +57,8 @@
                             @Html.DisplayFor(modelItem => item.Categoria)
                         </td>
                         <td style="width: 185px">
-                            <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" title="Editar" onclick="AjaxJsProduto.editarProduto(@item.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">edit</i></a>
                             <a class="btn-floating btn-sm waves-effect waves-light  light-blue darken-3" title="Detalhes" onclick="AjaxJsProduto.detalheProduto(@item.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">info_outline</i></a>
+                            <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" title="Editar" onclick="AjaxJsProduto.editarProduto(@item.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">edit</i></a>
                             @if (!TempData["nomeLista"].ToString().Equals("Produtos Inativos"))
                             {
                                 <a class="btn-floating btn-sm waves-effect waves-light pink lighten-1" title="Desativar" onclick="AjaxJsProduto.desativarProduto(@item.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">remove_shopping_cart</i></a>

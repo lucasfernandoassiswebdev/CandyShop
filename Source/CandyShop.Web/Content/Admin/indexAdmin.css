@@ -165,7 +165,8 @@ input {
 	background-color: #e781a3;
 }
 
-#modalPesquisaUsuario, #modalPesquisaProduto, #modalPesquisaUsuario .btn, #modalPesquisaProduto .btn {
+#modalPesquisaUsuario, #modalPesquisaProduto, #
+ .btn, #modalPesquisaProduto .btn {
 	width: 39%;
 	background-color: white;
 }

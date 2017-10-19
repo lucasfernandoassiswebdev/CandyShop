@@ -59,18 +59,45 @@
             main: '@Url.Action("Listar", "Produto")'
         });
 
-        $("#modalPesquisaUsuario").modal({dismissible: false, ready: adicionaFoco("#nomeUsuario")});
-        $("#modalPesquisaProduto").modal({dismissible: false, ready: adicionaFoco("#nomeProduto")});
+        $("#modalPesquisaUsuario").modal({ dismissible: false, ready: function () { adicionaFoco("#nomeUsuario") } });
+        $("#modalPesquisaProduto").modal({ dismissible: false, ready: function () { adicionaFoco("#nomeProduto") } });
 
         $("html,body").dblclick(function (e) {
-            if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") || $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant"))
+            if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") ||
+                $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant"))
                 return false;
 
             $("#modalPesquisaProduto, #modalPesquisaUsuario").modal("close");
         });
 
-        function adicionaFoco(input) {$(input).focus();}
-    })
+        $("#nomeUsuario").keydown(function (e) {
+            if (e.which === 13)
+                closeModalsClearInputs("#modalPesquisaUsuario", "#nomeUsuario", AjaxJsUsuario.listarUsuarioPorNome);
+        });
+
+        $("#pesquisarUsuario").click(function () {
+            closeModalsClearInputs("#modalPesquisaUsuario", "#nomeUsuario", AjaxJsUsuario.listarUsuarioPorNome);
+        });
+
+        $("#nomeProduto").keydown(function (e) {
+            if (e.which === 13)
+                closeModalsClearInputs("#modalPesquisaProduto", "#nomeProduto", AjaxJsProduto.listarProdutoPorNome);
+        });
+
+        $("#pesquisarProduto").click(function () {
+            closeModalsClearInputs("#modalPesquisaProduto", "#nomeProduto", AjaxJsProduto.listarProdutoPorNome);
+        });
+    });
+
+    function adicionaFoco(input) { console.log(input); $(input).focus(); }
+
+    function closeModalsClearInputs(modal, input, funcao) {
+        if (typeof funcao === "function")
+            funcao($(input).val());
+
+        $(modal).modal("close");
+        $(input).val("");
+    }
 </script>
 <script type="text/javascript" src="~/Js/telaPrincipal/scriptsMain.js"></script>
 <link rel="stylesheet" type="text/css" href="~/Content/Admin/indexAdmin.css?d=@DateTime.Now.Ticks">
