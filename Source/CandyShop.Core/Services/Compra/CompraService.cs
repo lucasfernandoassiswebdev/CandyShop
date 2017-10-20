@@ -1,7 +1,6 @@
 ﻿using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Usuario;
-using System;
 
 namespace CandyShop.Core.Services.Compra
 {
@@ -75,7 +74,7 @@ namespace CandyShop.Core.Services.Compra
                 _compraRepository.CommitTransaction();
                 return valor;
             }
-            catch (Exception e)
+            catch
             {
                 // Em caso de exception(erro) o roolback é realizado
                 _compraRepository.RollBackTransaction();
