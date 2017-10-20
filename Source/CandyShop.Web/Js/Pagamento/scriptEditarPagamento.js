@@ -29,7 +29,7 @@
         var valor = $("#valorPago").val().length;
         var pagamento = $("#valorPago").val().replace("R$", "").replace(",", ".");
 
-        if (parseInt(valor) > 9 || parseInt(valor) <= 0 || parseFloat(pagamento) > 999.99 || parseFloat(pagamento) <= 0 || pagamento == null) {
+        if (parseInt(valor) > 9 || parseInt(valor) <= 0 || parseFloat(pagamento) > 999.99 || parseFloat(pagamento) < 0 || pagamento == null) {
             $("#confirmarPagamento").attr("disabled", "disabled");
             Materialize.toast("Valor pagamento inválido", 3000);
         }

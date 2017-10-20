@@ -27,6 +27,7 @@ namespace CandyShop.Web.Controllers
         }
         public ActionResult Editar(int idPagamento, string paginaAnterior)
         {
+
             var result = _appPagamento.SelecionarPagamento(idPagamento);
             if (result.Status != HttpStatusCode.OK)
                 return Content("Erro ao localizar produto");
@@ -75,7 +76,7 @@ namespace CandyShop.Web.Controllers
 
         [HttpPost]
         public ActionResult EditarPagamento(PagamentoViewModel pagamento)
-        {
+        {            
             var response = _appPagamento.EditarPagamento(pagamento);
 
             if (response.Status != HttpStatusCode.OK)
