@@ -24,7 +24,7 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult Post(Produto produto)
         {
             if (produto.NomeProduto == null)
-                return Content(HttpStatusCode.BadRequest,"Todas as informações do formulário devem ser preenchidas!");
+                return Content(HttpStatusCode.BadRequest, "Todas as informações do formulário devem ser preenchidas!");
 
             //Verificando se o produto é válido antes de inserir 
             _produtoService.IsValid(produto);
@@ -48,7 +48,7 @@ namespace CandyShop.WebAPI.Controllers
                     produto.ImagemB.InserirImagem($"{caminho}_B");
                 else $"{caminho}_B".InserirPadrao();
 
-                if(produto.ImagemC != null)
+                if (produto.ImagemC != null)
                     produto.ImagemC.InserirImagem($"{caminho}_C");
                 else $"{caminho}_C".InserirPadrao();
             }
@@ -56,7 +56,7 @@ namespace CandyShop.WebAPI.Controllers
             {
                 return Content(HttpStatusCode.OK, "Produto inserido, porem ocorreu um erro ao inserir imagens");
             }
-            return Content(HttpStatusCode.OK,"Produto inserido com sucesso");
+            return Content(HttpStatusCode.OK, "Produto inserido com sucesso");
         }
 
         public IHttpActionResult Put(Produto produto)
@@ -98,7 +98,6 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-        #region GETS
         public IHttpActionResult Get()
         {
             var produtos = _produtoRepository.ListarProdutos();
@@ -153,8 +152,5 @@ namespace CandyShop.WebAPI.Controllers
             }
             return Ok(produtos);
         }
-        #endregion
-
-        
     }
 }
