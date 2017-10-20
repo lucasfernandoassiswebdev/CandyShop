@@ -1,5 +1,4 @@
 ﻿using CandyShop.Core.Services.Compra;
-using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
@@ -17,12 +16,8 @@ namespace CandyShop.Repository.Repositorys
         private enum Procedures
         {
             CSSP_InsCompra,
-            CSSP_UpdCompra,
             CSSP_LisCompra,
-            CSSP_DelCompra,
             CSSP_SelCompra,
-            CSSP_UpdCompraProduto,
-            CSSP_DelCompraProduto,
             CSSP_LisCompraNomeUsuario,
             CSSP_LisCompraSemana,
             CSSP_LisCompraDia,
@@ -40,24 +35,6 @@ namespace CandyShop.Repository.Repositorys
             sequencial = int.Parse(GetParameterOutput("@sequencial"));
             return retorno;
         }
-
-        public void EditarCompra(Compra compra)
-        {
-            ExecuteProcedure(Procedures.CSSP_UpdCompra);
-            AddParameter("@UsuarioCompra", compra.Usuario);
-            AddParameter("@IdCompra", compra.IdCompra);
-            AddParameter("@DataCompra", compra.DataCompra);
-
-            ExecuteNonQuery();
-        }
-
-        public void DeletarCompra(int idCompra)
-        {
-            ExecuteProcedure(Procedures.CSSP_DelCompra);
-            AddParameter("@IdCompra", idCompra);
-            ExecuteNonQuery();
-        }
-
         public int SelecionarCompra(int idCompra)
         {
             ExecuteProcedure(Procedures.CSSP_SelCompra);
@@ -66,6 +43,7 @@ namespace CandyShop.Repository.Repositorys
                     return 1;
             return 0;
         }
+
 
         public Compra SelecionarDadosCompra(int idCompra)
         {
@@ -87,63 +65,39 @@ namespace CandyShop.Repository.Repositorys
 
             return null;
         }
-
-        public void EditaItens(CompraProduto compraProduto)
-        {
-            ExecuteProcedure(Procedures.CSSP_UpdCompraProduto);
-            AddParameter("@IdCompra", compraProduto.IdCompra);
-            AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
-            AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
-            ExecuteNonQuery();
-        }
-
-        public void DeletaItens(int idcompra, int idproduto)
-        {
-            ExecuteProcedure(Procedures.CSSP_DelCompraProduto);
-            AddParameter("@IdCompra", idcompra);
-            AddParameter("@IdProduto", idproduto);
-            ExecuteNonQuery();
-        }
-
         public IEnumerable<Compra> ListarCompra()
         {
             ExecuteProcedure(Procedures.CSSP_LisCompra);
             return Listar();
         }
-
         public IEnumerable<Compra> ListarCompraMes(int mes)
         {
             ExecuteProcedure(Procedures.CSSP_LisCompra);
             AddParameter("@mes", mes);
             return Listar();
         }
-
         public IEnumerable<Compra> ListarCompraPorCpf(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_LisCpfCompra);
             AddParameter("@Cpf", cpf);
             return Listar();
         }
-
         public IEnumerable<Compra> ListarCompraPorNome(string nome)
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraNomeUsuario);
             AddParameter("@Nome", nome);
             return Listar();
         }
-
         public IEnumerable<Compra> ListarCompraSemana()
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraSemana);
             return Listar();
         }
-
         public IEnumerable<Compra> ListarCompraDia()
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraDia);
             return Listar();
         }
-
         private IEnumerable<Compra> Listar()
         {
             var retorno = new List<Compra>();

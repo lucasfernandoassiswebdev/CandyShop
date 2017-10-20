@@ -18,7 +18,6 @@ namespace CandyShop.Web
             container.Register <IProdutoApplication, ProdutoApplication> ();
             container.Register <IPagamentoApplication, PagamentoApplication>();
             container.Register <ICompraApplication, CompraApplication>();
-            container.Register <ICompraProdutoApplication, CompraProdutoApplication>();
 
             container.Verify();
             return container;
