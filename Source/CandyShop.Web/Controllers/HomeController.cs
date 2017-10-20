@@ -75,7 +75,7 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro ao resgatar dados. {user.ContentAsString}");
 
             Session["classificacao"] = user.Content.Classificacao;
-            Session["nomeUsuario"] = user.Content.NomeUsuario;
+            Session["nomeUsuario"] = user.Content.NomeUsuario.Split(null)[0];
             Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
             return Content(response.Content);
