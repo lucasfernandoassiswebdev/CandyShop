@@ -16,7 +16,7 @@ h1 {
 	height: 100%;
 	position: fixed;
 	background: rgba(0,0,0,0.2) ;
-	z-index: 9;
+	z-index: 1004;
 }
 
 @keyframes lds-eclipse {
