@@ -11,7 +11,7 @@
 
         public void ValidarPagamento(Pagamento pagamento)
         {
-            if (pagamento.ValorPagamento <= 0)
+            if (pagamento.ValorPagamento < 0)
             {
                 _notification.Add("Valor inválido!");
             }

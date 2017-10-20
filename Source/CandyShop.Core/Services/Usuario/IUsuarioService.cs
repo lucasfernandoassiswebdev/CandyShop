@@ -5,5 +5,6 @@
         void InserirUsuario(Usuario usuario);
         void EditarUsuario(Usuario usuario);
         int VerificaLogin(Usuario usuario);
+        void VerificaSenha(string novaSenha);
     }
 }

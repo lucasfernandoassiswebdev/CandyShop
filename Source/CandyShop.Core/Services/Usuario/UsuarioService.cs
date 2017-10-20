@@ -42,5 +42,10 @@ namespace CandyShop.Core.Services.Usuario
             return _usuarioRepository.VerificaLogin(usuario) == 1 ? 1 : 0;
         }
 
+        public void VerificaSenha(string novaSenha)
+        {
+            if(novaSenha == null)
+                _notification.Add("A senha não pode estar vazia!");
+        }
     }
 }

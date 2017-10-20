@@ -23,6 +23,9 @@ namespace CandyShop.WebAPI.Controllers
 
         public IHttpActionResult Post(Usuario usuario)
         {
+            if (usuario.Cpf == null)
+                return Content(HttpStatusCode.BadRequest,"Os campos de CPF e Nome são obrigatórios para o cadastro!");
+
             usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
             _usuarioService.InserirUsuario(usuario);
             if (_notification.HasNotification())
@@ -44,8 +47,23 @@ namespace CandyShop.WebAPI.Controllers
             return Content(HttpStatusCode.OK, "Usuario inserido com sucesso");
         }
 
+        [HttpPost, Route("api/Usuario/login")]
+        public IHttpActionResult PostLogin(Usuario usuario)
+        {
+            usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
+            var user = _usuarioRepository.SelecionarUsuario(usuario.Cpf);
+            if (user == null || user.Ativo == "I")
+                return Content(HttpStatusCode.BadRequest, "O usuário não existe ou foi desativado");
+
+            return _usuarioService.VerificaLogin(usuario) != 0 ? Content(HttpStatusCode.OK, "Logado com sucesso") : Content(HttpStatusCode.BadRequest, "Login ou senha incorretos");
+        }
+
+
         public IHttpActionResult Put(Usuario usuario)
         {
+            if (usuario.Cpf == null)
+                return Content(HttpStatusCode.BadRequest, "Os campos de CPF e Nome são obrigatórios para o cadastro!");
+
             usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
             _usuarioService.EditarUsuario(usuario);
 
@@ -67,25 +85,32 @@ namespace CandyShop.WebAPI.Controllers
             return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
         }
 
-        [HttpPost, Route("api/Usuario/login")]
-        public IHttpActionResult PostLogin(Usuario usuario)
+        [HttpPut, Route("api/usuario/trocarSenha")]
+        public IHttpActionResult PutSenha(Usuario usuario)
         {
-            usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
-            var user = _usuarioRepository.SelecionarUsuario(usuario.Cpf);
-            if (user == null || user.Ativo == "I")
-                return Content(HttpStatusCode.BadRequest, "O usuário não existe ou foi desativado");
-
-            return _usuarioService.VerificaLogin(usuario) != 0 ? Content(HttpStatusCode.OK, "Logado com sucesso") : Content(HttpStatusCode.BadRequest, "Login ou senha incorretos");
+            _usuarioService.VerificaSenha(usuario.SenhaUsuario);
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+            _usuarioRepository.TrocarSenha(usuario);
+            return Ok();
         }
+
+        [HttpPut, Route("api/usuario/desativar/{cpf}")]
+        public IHttpActionResult PutDesativar(Usuario usuario)
+        {
+            _usuarioRepository.DesativarUsuario(usuario.Cpf);
+            return Ok();
+        }
+
+
+        /* Quando mais de um método com o mesmo verbo HTTP(no caso o GET) é necessário, 
+           são definidas rotas como no exemplo abaixo, essas rotas determinarão qual dos 
+           métodos da API será chamado */
 
         public IHttpActionResult Get()
         {
             return Ok(_usuarioRepository.ListarUsuario());
         }
-
-        /* Quando mais de um método com o mesmo verbo HTTP(no caso o GET) é necessário, 
-           são definidas rotas como no exemplo abaixo, essas rotas determinarão qual dos 
-           métodos da API será chamado */
         [HttpGet, Route("api/Usuario/Devedores")]
         public IHttpActionResult GetUsuariosDivida()
         {
@@ -109,23 +134,7 @@ namespace CandyShop.WebAPI.Controllers
         {
             return Ok(_usuarioRepository.VerificaCreditoLoja());
         }
-
         
-
-        [HttpPut, Route("api/usuario/trocarSenha")]
-        public IHttpActionResult PutSenha(Usuario usuario)
-        {
-            _usuarioRepository.TrocarSenha(usuario);
-            return Ok();
-        }
-
-        [HttpPut, Route("api/usuario/desativar/{cpf}")]
-        public IHttpActionResult PutDesativar(Usuario usuario)
-        {
-            _usuarioRepository.DesativarUsuario(usuario.Cpf);
-            return Ok();
-        }
-
         [HttpGet, Route("api/Usuario/{cpf}/Detalhes")]
         public IHttpActionResult GetWithCpf(string cpf)
         {

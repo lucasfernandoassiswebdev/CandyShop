@@ -37,11 +37,6 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-        public IHttpActionResult Delete(int idpagamento)
-        {
-            _pagamentoRepository.DeletarPagamento(idpagamento);
-            return Ok();
-        }
 
         public IHttpActionResult Get()
         {
@@ -83,13 +78,5 @@ namespace CandyShop.WebAPI.Controllers
         {
             return Ok(_pagamentoRepository.ListarPagamentoDia());
         }
-
-        [Route("api/pagamento/dia/{dia}")]
-        public IHttpActionResult GetDia(DateTime dia)
-        {
-            return Ok(_pagamentoRepository.ListarPagamentoDia(dia));
-        }
-
-        
     }
 }

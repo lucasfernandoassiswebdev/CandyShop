@@ -11,8 +11,7 @@ namespace CandyShop.Application
     public class PagamentoApplication : IPagamentoApplication
     {
         private readonly string _enderecoApi = $"{ApiConfig.enderecoApi}/pagamento";
-
-        #region gets
+       
 
         public Response<IEnumerable<PagamentoViewModel>> ListarPagamentos()
         {
@@ -77,7 +76,6 @@ namespace CandyShop.Application
             }
         }
 
-        #endregion
 
         public Response<string> InserirPagamento(PagamentoViewModel pagamento)
         {

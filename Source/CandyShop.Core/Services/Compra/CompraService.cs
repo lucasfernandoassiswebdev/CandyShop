@@ -79,7 +79,7 @@ namespace CandyShop.Core.Services.Compra
             {
                 // Em caso de exception(erro) o roolback é realizado
                 _compraRepository.RollBackTransaction();
-                _notification.Add("Erro ao inserir compra " + e.Message);
+                _notification.Add("Erro ao inserir compra");
                 return 0;
             }
         }

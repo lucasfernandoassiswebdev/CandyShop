@@ -22,11 +22,5 @@ namespace CandyShop.WebAPI.Controllers
         {
             return Ok(_compraProdutoRepository.ListarCompraProdutoIdVenda(id));
         }
-
-        public IHttpActionResult Put(CompraProduto compraProduto)
-        {
-            _compraProdutoRepository.EditarCompraProduto(compraProduto);
-            return Ok();
-        }
     }
 }

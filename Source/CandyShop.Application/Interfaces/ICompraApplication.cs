@@ -6,7 +6,6 @@ namespace CandyShop.Application.Interfaces
     public interface ICompraApplication
     {
         Response<int> InserirCompra(CompraViewModel compra);
-        Response<string> EditarCompra(CompraViewModel compra);
         Response<CompraViewModel> SelecionarCompra(int idcompra);
         Response<IEnumerable<CompraViewModel>> ListaCompra();
         Response<IEnumerable<CompraViewModel>> ListaCompraPorCpf(string cpf);                
@@ -14,6 +13,5 @@ namespace CandyShop.Application.Interfaces
         Response<IEnumerable<CompraViewModel>> ListarComprasSemana();
         Response<IEnumerable<CompraViewModel>> ListarComprasMes(int mes);
         Response<IEnumerable<CompraViewModel>> ListarComprasDia();
-        Response<int> VerificarUltimaCompra();
     }
 }

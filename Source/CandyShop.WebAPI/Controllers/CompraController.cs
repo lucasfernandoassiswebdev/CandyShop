@@ -38,15 +38,6 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(result);
         }
 
-        // Verbo http PUT é usado nas operações de UPDATE no banco de dados 
-        [HttpPut]
-        public IHttpActionResult PutCompra(Compra compra)
-        {
-            _compraRepository.EditarCompra(compra);
-            return Ok();
-        }
-
-        #region Gets
         /* Verbos http GET servem para operações no banco que retornam algo (SELECT) ,
            note que nesses verbos o resultado é retornado dentro do método Ok()*/
         [HttpGet]
@@ -81,6 +72,7 @@ namespace CandyShop.WebAPI.Controllers
         {
             return Ok(_compraRepository.ListarCompraMes(mes));
         }
+
         [HttpGet, Route("api/compra/dia")]
         public IHttpActionResult GetDia()
         {
@@ -92,6 +84,5 @@ namespace CandyShop.WebAPI.Controllers
         {
             return Ok(_compraRepository.ListarCompraPorNome(nomeUsuario));
         }
-        #endregion
     }
 }

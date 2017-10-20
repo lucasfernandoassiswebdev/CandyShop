@@ -37,7 +37,6 @@
         }
 
         //Função de calculo para verificar se o cpf é valido
-
         private static bool ValidaCpf(string cpf)
         {
             var mt1 = new[] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
