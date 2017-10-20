@@ -11,7 +11,6 @@ namespace CandyShop.Repository.Repositorys
         {
 
         }
-
         private enum Procedures
         {
             CSSP_InsProduto,
@@ -43,14 +42,12 @@ namespace CandyShop.Repository.Repositorys
             sequencial = int.Parse(GetParameterOutput("@sequencial"));
             return retorno;
         }
-
         public void DesativarProduto(int idProduto)
         {
             ExecuteProcedure(Procedures.CSSP_DesProduto);
             AddParameter("@IdProduto", idProduto);
             ExecuteNonQuery();
         }
-
         public void UpdateProduto(Produto produto)
         {
             ExecuteProcedure(Procedures.CSSP_UpdProduto);
@@ -63,6 +60,7 @@ namespace CandyShop.Repository.Repositorys
             ExecuteNonQuery();
         }
 
+
         public bool SelecionarProduto(string nomeproduto)
         {
             ExecuteProcedure(Procedures.CSSP_SelProduto);
@@ -70,7 +68,6 @@ namespace CandyShop.Repository.Repositorys
             using (var retornobd = ExecuteReader())
                 return retornobd.Read();
         }
-
         public Produto SelecionarDadosProduto(int idProduto)
         {
             ExecuteProcedure(Procedures.CSSP_SelDadosProduto);
@@ -91,50 +88,42 @@ namespace CandyShop.Repository.Repositorys
 
             return retorno;
         }
-
         public IEnumerable<Produto> ListarProdutos()
         {
             ExecuteProcedure(Procedures.CSSP_LisProduto);
             return Listar();
         }        
-
         public IEnumerable<Produto> ListarProdutosInativos()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoInativo);
             return Listar();
         }
-
         public IEnumerable<Produto> ListarProdutosValorCrescente()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoValorCres);
             return Listar();
         }
-
         public IEnumerable<Produto> ListarProdutosValorDecrescente()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoValorDesc);
             return Listar();
         }
-
         public IEnumerable<Produto> ListarProdutosAbaixoValor()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoAbaixoValor);
             return Listar();
         }
-
         public IEnumerable<Produto> ListarProdutosAcimaValor()
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoAcimaValor);
             return Listar();
         }
-
         public IEnumerable<Produto> ListarProdutosPorCategoria(string categoria)
         {
             ExecuteProcedure(Procedures.CSSP_LisProdutoCategoria);
             AddParameter("@Categoria", categoria);
             return Listar();
         }
-
         public IEnumerable<Produto> ProcurarProdutoPorNome(string nome)
         {
             ExecuteProcedure(Procedures.CSSP_LisProdPorNome);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CandyShop.Core.Services.Pagamento
 {
@@ -15,7 +14,6 @@ namespace CandyShop.Core.Services.Pagamento
         bool SelecionarPagamento(int idPagamento);
         Pagamento SelecionarDadosPagamento(int idPagamento);
         IEnumerable<Pagamento> ListarPagamentoDia();
-        IEnumerable<Pagamento> ListarPagamentoDia(DateTime data);
         IEnumerable<Pagamento> ListarPagamentos(int mes);
     }
 }

@@ -16,14 +16,11 @@ namespace CandyShop.Repository.Repositorys
         {
 
         }
-
-        //Cria uma lista com as procedures do banco pra serem usadas 
         private enum Procedures
         {
             CSSP_LisCompraProduto,
             CSSP_LisCompraProdutoIdVenda,
             CSSP_InsCompraProduto,
-            CSSP_UpdCompraProduto
         }
 
         /* O método ExecuteProcedure é o metodo encapsulado para montar os
@@ -31,16 +28,6 @@ namespace CandyShop.Repository.Repositorys
            AddPaarmeter adiciona os parametros que são pedidos nas 
            procedures e para finalizar o método ExecuteNonQuery executa procedures 
            que não retornam valores */
-        public void EditarCompraProduto(CompraProduto compraProduto)
-        {
-            ExecuteProcedure(Procedures.CSSP_UpdCompraProduto);
-            AddParameter("@IdProduto", compraProduto.Produto.IdProduto);
-            AddParameter("@IdCompra", compraProduto.IdCompra);
-            AddParameter("@QtdeProduto", compraProduto.QtdeCompra);
-
-            ExecuteNonQuery();
-        }
-
         public void InserirCompraProduto(CompraProduto compraProduto)
         {
             ExecuteProcedure(Procedures.CSSP_InsCompraProduto);
@@ -78,7 +65,6 @@ namespace CandyShop.Repository.Repositorys
             //verificando se a lista de objetos não veio nula e a retornando caso sim
             return retorno.Any() ? retorno : null;
         }
-
         public IEnumerable<CompraProduto> ListarCompraProdutoIdVenda(int idVenda)
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraProdutoIdVenda);
