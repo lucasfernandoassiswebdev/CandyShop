@@ -40,7 +40,6 @@
             Classificacao: $('#Classificacao').val(),
             RemoverImagem: removerImagem
         };
-        console.log(usuario);
         concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, tela);
     };
     var desativarUsuario = function (cpf, telaAnterior) {

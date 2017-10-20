@@ -28,7 +28,6 @@
     };
     var concluirPagamento = function () {
         var pagamento = { ValorPagamento: $("#valorPago").val().replace("R$ ", "") };
-        console.log(pagamento);
         $.post(url.concluirPagamento, pagamento)            
             .done(function (message) {
                 $.get(url.padrao)
@@ -59,7 +58,6 @@
         };
         $.post(url.concluirEdicaoPagamento, pagamento)
             .done(function(data) {
-                console.log(typeof paginaAnterior);
                 if (typeof paginaAnterior === "function") {
                     if (parameter != null) {
                         paginaAnterior(parameter);
