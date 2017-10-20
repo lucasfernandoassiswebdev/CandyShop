@@ -21,7 +21,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro ao calcular saldo da lojinha. {response.ContentAsString}");
 
-            ViewBag.SaldoAtual = "Saldo atual da loja: R$" + response.Content;
+            ViewBag.SaldoAtual = $"Saldo atual da loja: {response.Content:C}";
             return View();
         }
     }

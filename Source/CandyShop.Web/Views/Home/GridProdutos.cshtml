@@ -17,28 +17,26 @@
 </style>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.tooltipped').tooltip({ delay: 50 });
         // Exibindo quantidade em estoque nos modals de quantidade
         // Exibindo qtde em estoque antes de adicionar o item no carrinho
-        $(".adicionaItemCarrinho").click(function() {
+        $(".adicionaItemCarrinho").click(function () {
             // Limpando os inputs
             $("#quantidade").val("");
             // Mostrando a quantidade de produto dispónível em estoque
             var quantidadeDisponivel = $(this).attr('data-quantidadeDisponivel');
             $('#modalQuantidade div p').html("Quantidade disponível em estoque: " + quantidadeDisponivel);
         });
-        
+
         $('.image').mouseover(function () {
             var imagem = $(this);
-            imagem.data["lista"] = imagem.attr('data-imagem').split(',');            
+            imagem.data["lista"] = imagem.attr('data-imagem').split(',');
             var i = 1;
-            imagem.data["intervalo"] = setInterval(function () {                    
+            imagem.data["intervalo"] = setInterval(function () {
                 imagem.attr('src', imagem.data["lista"][i]);
                 i === 2 ? i = 0 : i++;
-                console.log(imagem.data["lista"][i]);
-                },
-                1000);
+            }, 1000);
         }).mouseout(function () {
             clearInterval($(this).data["intervalo"]);
             $(this).attr('src', $(this).data["lista"][0]);
