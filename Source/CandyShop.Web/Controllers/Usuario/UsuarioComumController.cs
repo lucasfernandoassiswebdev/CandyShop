@@ -25,7 +25,12 @@ namespace CandyShop.Web.Controllers.Usuario
         [HttpPost]
         public ActionResult TrocarSenha(TrocaSenhaViewModel senhas)
         {
-            if (!senhas.ConfirmaNovaSenha.Equals(senhas.NovaSenha)) return Content("Senhas não conferem");
+            if(senhas.NovaSenha == null || senhas.ConfirmaNovaSenha == null)
+                return Content("Campos não podem ser vazios!!!!");
+
+            if (!senhas.ConfirmaNovaSenha.Equals(senhas.NovaSenha))
+                return Content("Senhas não conferem");
+
             var usuario = new UsuarioViewModel
             {
                 Cpf = Session["Login"].ToString(),

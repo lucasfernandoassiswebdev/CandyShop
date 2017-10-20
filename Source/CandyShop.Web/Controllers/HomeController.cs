@@ -65,6 +65,8 @@ namespace CandyShop.Web.Controllers
         [HttpPost]
         public ActionResult Logar(UsuarioViewModel usuario)
         {
+            if (usuario.Cpf == null || usuario.SenhaUsuario == null)
+                return Content("Login e senha devem estar corretamente preenchidos!");
             var response = _appUsuario.VerificaLogin(usuario);
             if (response.Status != HttpStatusCode.OK)
                 return Content(response.Content);
