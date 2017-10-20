@@ -1,6 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
-using CandyShop.Web.Filters;
+using CandyShop.Web.Helpers;
 using System.Net;
 using System.Web.Mvc;
 
@@ -37,6 +37,9 @@ namespace CandyShop.Web.Controllers.Pagamento
         [HttpPost]
         public ActionResult InserirPagamento(PagamentoViewModel pagamento)
         {
+            if (pagamento.ValorPagamento < 0)
+                return Content("O valor do pagamento não deve ser negativo!");
+
             pagamento.Usuario = new UsuarioViewModel { Cpf = Session["login"].ToString() };
 
             var response = _appPagamento.InserirPagamento(pagamento);
@@ -48,6 +51,7 @@ namespace CandyShop.Web.Controllers.Pagamento
                 Session["saldoUsuario"] = $"{res.Content.SaldoUsuario:C}";
             }
             else return Content("Erro. " + response.ContentAsString);
+
             return Content("Pagamento realizado com sucesso!!");
         }
     }

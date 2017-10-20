@@ -144,7 +144,7 @@
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />
-    <Compile Include="Filters\UserFilterResult.cs" />
+    <Compile Include="Helpers\UserFilterResult.cs" />
     <Compile Include="Controllers\Usuario\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

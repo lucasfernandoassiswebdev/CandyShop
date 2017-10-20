@@ -10,13 +10,12 @@ namespace CandyShop.Web.Controllers
         private readonly IProdutoApplication _appProduto;
         private readonly IUsuarioApplication _appUsuario;
         private readonly ICompraApplication _appCompra;
-        private readonly string _pathProduto;
+        
 
         public HomeController(IProdutoApplication produto, IUsuarioApplication usuario, ICompraApplication compra)
         {
             _appProduto = produto;
             _appUsuario = usuario;
-            _pathProduto = "Imagens/Produtos";
             _appCompra = compra;
         }
 
@@ -38,7 +37,6 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
-            TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
         }
         public ActionResult ProcurarProduto(string nome)
@@ -48,7 +46,6 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro: {response.ContentAsString}");
 
             ViewBag.Pesquisa = nome;
-            TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
         }
         public ActionResult ListarCategoria(string categoria)
@@ -58,7 +55,6 @@ namespace CandyShop.Web.Controllers
                 return Content($"Erro: {response.Content}");
 
             ViewBag.Pesquisa = categoria;
-            TempData["caminhoImagensProdutos"] = _pathProduto;
             return View("GridProdutos", response.Content);
         }
 

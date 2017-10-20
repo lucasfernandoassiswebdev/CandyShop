@@ -1,5 +1,4 @@
 ﻿using CandyShop.Application.Interfaces;
-using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
 using System;
 using System.Net;
@@ -11,7 +10,7 @@ namespace CandyShop.Web.Controllers.Compra
     public class CompraController : CompraUserComumController
     {
         private readonly ICompraApplication _appCompra;
-        
+
         public CompraController(ICompraApplication compra, IUsuarioApplication usuario) : base(compra)
         {
             _appCompra = compra;
@@ -62,19 +61,6 @@ namespace CandyShop.Web.Controllers.Compra
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
-        }
-        
-        [HttpPost]
-        public ActionResult Editar(CompraViewModel Compra)
-        {
-            var response = _appCompra.EditarCompra(Compra);
-            if (response.Status != HttpStatusCode.OK)
-                return Content("Erro ao editar a compra, ", response.ContentAsString);
-
-            ViewBag.tituloPagina = "Compras do ultimo mês";
-            ViewBag.drop = 0;
-            var compras = _appCompra.ListaCompra();
-            return View("Index", compras.Content);
         }
     }
 }

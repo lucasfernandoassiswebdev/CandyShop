@@ -1,6 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
-using CandyShop.Web.Filters;
+using CandyShop.Web.Helpers;
 using System.Net;
 using System.Web.Mvc;
 

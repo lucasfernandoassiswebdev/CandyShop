@@ -3,7 +3,6 @@
 
 @{
     Layout = null;
-    string voltar;
 }
 
 <link rel="stylesheet" type="text/css" href="~/Content/Produto/detalheProduto.css?d=@DateTime.Now.Ticks" />
@@ -46,7 +45,7 @@
             </tbody>
         </table>
         @{
-            voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
+            var voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
         }
         <a class="waves-effect waves-light btn" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
     </div>

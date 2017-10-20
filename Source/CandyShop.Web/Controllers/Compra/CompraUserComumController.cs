@@ -27,8 +27,10 @@ namespace CandyShop.Web.Controllers.Compra
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro ao detalhar compra, ", response.ContentAsString);
             var a = paginaAnterior.LastWord();
-            ViewBag.endereco = Session["TipoDeLogin"].ToString().Equals("User") ? "AjaxJsShop.voltarInicio()" : a.Count > 1 ? $"AjaxJsCompra.listarCompra{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})" : $"AjaxJsCompra.listarCompra{paginaAnterior.LastWord()[0]}()";
-            return View("../../Views/CompraUserComum/Detalhes",response.Content);
+            ViewBag.endereco = Session["TipoDeLogin"].ToString().Equals("User") ? "AjaxJsShop.voltarInicio()" : a.Count > 1 
+                ? $"AjaxJsCompra.listarCompra{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})"
+                : $"AjaxJsCompra.listarCompra{paginaAnterior.LastWord()[0]}()";
+            return View("../../Views/CompraUserComum/Detalhes", response.Content);
         }
     }
 }

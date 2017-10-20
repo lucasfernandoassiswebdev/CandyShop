@@ -29,7 +29,6 @@ namespace CandyShop.Web.Controllers
             var response = _appProduto.DetalharProduto(idProduto);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
-            TempData["caminhoImagensProdutos"] = _pathProduto;
             ViewBag.telaAnterior = telaAnterior;
             return View(response.Content);
         }
@@ -40,7 +39,6 @@ namespace CandyShop.Web.Controllers
                 return Content("Erro. " + response.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
             ViewBag.Tela = response.Content.Ativo;
-            TempData["caminhoImagensProdutos"] = _pathProduto;
             return View(response.Content);
         }
         public ActionResult DesativarProduto(int idProduto, string telaAnterior)
@@ -49,7 +47,6 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
-            TempData["caminhoImagensProdutos"] = _pathProduto;
             return View(response.Content);
         }
 
@@ -63,7 +60,6 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
-            TempData["caminhoImagensProdutos"] = _pathProduto;
             TempData["nomeLista"] = "Produtos Ativos";
             return View("ListaProdutos", response.Content);
 
@@ -84,7 +80,6 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
 
-            TempData["caminhoImagensProdutos"] = _pathProduto;
             TempData["nomeLista"] = "Produtos relacionados";
             return View("ListaProdutos", response.Content);
         }

@@ -103,7 +103,7 @@ namespace CandyShop.Web.Controllers.Usuario
         [HttpPost]
         public ActionResult Editar(UsuarioViewModel usuario)
         {
-            if (usuario.Cpf == null || usuario.NomeUsuario == null || usuario.Classificacao == null || 
+            if (usuario.Cpf == null || usuario.NomeUsuario == null || usuario.Classificacao == null ||
                 usuario.Ativo == null || usuario.SenhaUsuario == null)
                 return Content("Preencha todos os campos");
 

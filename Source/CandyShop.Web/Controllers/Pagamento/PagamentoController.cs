@@ -1,13 +1,12 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
-using CandyShop.Web.Controllers.Pagamento;
 using CandyShop.Web.Filters;
 using CandyShop.Web.Helpers;
 using System;
 using System.Net;
 using System.Web.Mvc;
 
-namespace CandyShop.Web.Controllers
+namespace CandyShop.Web.Controllers.Pagamento
 {
     [AdminFilterResult]
     public class PagamentoController : PagamentoUserComumController
@@ -32,8 +31,10 @@ namespace CandyShop.Web.Controllers
             if (result.Status != HttpStatusCode.OK)
                 return Content("Erro ao localizar produto");
             var a = paginaAnterior.LastWord();
-            ViewBag.endereco = a.Count > 1 ? $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})" : $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}";
-            ViewBag.enderecoConclusao = a.Count > 1 ? $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]},{paginaAnterior.LastWord()[1]}" : $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}";
+            ViewBag.endereco = a.Count > 1 ? $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}({paginaAnterior.LastWord()[1]})"
+                : $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}";
+            ViewBag.enderecoConclusao = a.Count > 1 ? $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]},{paginaAnterior.LastWord()[1]}"
+                : $"AjaxJsPagamento.listarPagamento{paginaAnterior.LastWord()[0]}";
             return View(result.Content);
         }
 
@@ -48,7 +49,7 @@ namespace CandyShop.Web.Controllers
         }
         public ActionResult ListarSemana()
         {
-            ViewBag.tituloPagina = $"Pagamentos da ultima semana";
+            ViewBag.tituloPagina = "Pagamentos da ultima semana";
             ViewBag.drop = 1;
             var response = _appPagamento.ListarPagamentosSemana();
             if (response.Status != HttpStatusCode.OK)
@@ -76,7 +77,10 @@ namespace CandyShop.Web.Controllers
 
         [HttpPost]
         public ActionResult EditarPagamento(PagamentoViewModel pagamento)
-        {            
+        {
+            if (pagamento.ValorPagamento < 0)
+                return Content("O valor do pagamento não deve ser negativo!");
+
             var response = _appPagamento.EditarPagamento(pagamento);
 
             if (response.Status != HttpStatusCode.OK)
