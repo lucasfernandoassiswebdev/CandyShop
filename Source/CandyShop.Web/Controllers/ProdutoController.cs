@@ -92,12 +92,20 @@ namespace CandyShop.Web.Controllers
         [HttpPost]
         public ActionResult CadastrarProduto(ProdutoViewModel produto)
         {
+            if (produto.NomeProduto == null || produto.QtdeProduto == 0 ||
+                produto.Categoria == null || produto.PrecoProduto == 0)
+                return Content("Os campos não podem estar vazios ou zerados");
+
             var response = _appProduto.InserirProduto(produto);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro. {response.ContentAsString}" : response.Content);
         }
         [HttpPost]
         public ActionResult EditarProduto(ProdutoViewModel produto)
         {
+            if (produto.NomeProduto == null || produto.QtdeProduto == 0 ||
+                produto.Categoria == null || produto.PrecoProduto == 0 || produto.Ativo == null)
+                return Content("Os campos não podem estar vazios ou zerados");
+
             var response = _appProduto.EditarProduto(produto);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro. {response.ContentAsString}" : "Produto editado com sucesso!");
         }
