@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using CandyShop.Application.Interfaces;
+using CandyShop.Application.ViewModels;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
-using CandyShop.Application.Interfaces;
-using CandyShop.Application.ViewModels;
 
 namespace CandyShop.Application.Applications
 {
     public class UsuarioApplication : IUsuarioApplication
     {
         private readonly string _enderecoApi = $"{ApiConfig.enderecoApi}/Usuario";
+        private readonly  string _enderecoApiUnauthorized = $"{ApiConfig.enderecoApi}/UsuarioUnauthorized";
 
         public Response<string> InserirUsuario(UsuarioViewModel usuario)
         {
@@ -73,7 +74,7 @@ namespace CandyShop.Application.Applications
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync($"{_enderecoApi}/{cpf}/Detalhes").Result;
+                var response = client.GetAsync($"{_enderecoApiUnauthorized}/{cpf}/Detalhes").Result;
                 return new Response<UsuarioViewModel>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
@@ -102,7 +103,7 @@ namespace CandyShop.Application.Applications
         {
             using (var client = new HttpClient())
             {
-                var response = client.PostAsync($"{_enderecoApi}/login", usuario, new JsonMediaTypeFormatter()).Result;
+                var response = client.PostAsync($"{_enderecoApiUnauthorized}/login", usuario, new JsonMediaTypeFormatter()).Result;
                 return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
