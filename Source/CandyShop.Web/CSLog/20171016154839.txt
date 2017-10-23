@@ -1,0 +1,2 @@
+System.Web
+'http:/189.112.203.1:45000/candyShop/usuarios/45261164753.jpg' não é um caminho virtual válido.

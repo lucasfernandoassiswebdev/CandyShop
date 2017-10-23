@@ -2,31 +2,15 @@
 
 @{
     Layout = null;
-    string voltar;
 }
 
 <link rel="stylesheet" type="text/css" href="~/Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
-<link rel="stylesheet" type="text/css" href="~Content/Produto/formCadastroProduto.css?d=@DateTime.Now.Ticks" />
 
 <script type="text/javascript" src="~/Js/Produto/scriptsEditarProduto.js?d=@DateTime.Now.Ticks"></script>
-<script type="text/javascript" src="~Js/plugins/jquery.maskMoney.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('select').material_select();
-        $('#PrecoProduto').maskMoney({
-            prefix: 'R$ ',
-            allowNegative: false,
-            thousands: '.',
-            decimal: ',',
-            affixesStay: false
-        });
-        $('#PrecoProduto').maskMoney('mask');
-    });
-</script>
+<script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
 
 <div class="container">
-    <div class="row ajuste">
+    <div class="row">
         <form class="col s12">
             <div class="row">
                 <div class="center">
@@ -35,31 +19,34 @@
             </div>
             <!--fotos-->
             <div class="row">
-                <!--pegando o caminho das fotos-->
-                @{ var nomeA = @Model.IdProduto + "_A.jpg";}
-                @{ var nomeB = @Model.IdProduto + "_B.jpg";}
-                @{ var nomeC = @Model.IdProduto + "_C.jpg";}
+
                 <div class="center">
-                    <label for="fotoProduto1">
-                        <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
-                    </label>
-                    <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                    <div class="Imagens" style="display: flex">
+                        <div>
+                            <label for="fotoProduto1">
+                                <img id="imagem1" style="margin: 0 auto; display: block; margin-right: 38px" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@Model.ImagemA" alt="imagem não disponível :(" />
+                            </label>
+                            <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                            <a class="btn botaoRemover" id="removerImagem1" style="margin-right: 30px; margin-top:5px"><i class="material-icons left">block</i>Remover</a>
+                        </div>
 
-                    <label for="fotoProduto2">
-                        <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeB?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
-                    </label>
-                    <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                        <div>
+                            <label for="fotoProduto2">
+                                <img id="imagem2" style="margin: 0 auto;display: block; margin-right: 38px" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@Model.ImagemB" alt="imagem não disponível :(" />
+                            </label>
+                            <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                            <a class="btn botaoRemover" id="removerImagem2" style="margin-right: 30px; margin-top:5px"><i class="material-icons left">block</i>Remover</a>
+                        </div>
 
-                    <label for="fotoProduto3">
-                        <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensProdutos"]/@nomeC?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
-                    </label>
-                    <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                        <div>
+                            <label for="fotoProduto3">
+                                <img id="imagem3" style="margin: 0 auto;display: block; margin-right: 38px" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@Model.ImagemC" alt="imagem não disponível :(" />
+                            </label>
+                            <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                            <a class="btn botaoRemover" id="removerImagem3" style="margin-right: 30px; margin-top:5px"><i class="material-icons left">block</i>Remover</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row center">
-                <a class="btn" id="removerImagem1" style="margin-right:50px"><i class="material-icons left">block</i>Remover</a>
-                <a class="btn" id="removerImagem2"><i class="material-icons left">block</i>Remover</a>
-                <a class="btn" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
             </div>
             <div class="row">
                 <div class="input-field col s12">
@@ -69,17 +56,17 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="Placeholder" id="NomeProduto" name="Nome" type="text" class="validate" required data-length="40" autocomplete="off" value="@Model.NomeProduto">
+                    <input placeholder="Placeholder" id="NomeProduto" name="Nome" type="text" class="validate" maxlength="40" required data-length="40" autocomplete="off" value="@Model.NomeProduto">
                     <label class="active">Nome:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="PrecoProduto" type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" value="@Model.PrecoProduto">
+                    <input id="PrecoProduto" type="text" maxlength="9" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" value="@Model.PrecoProduto" required>
                     <label class="active" for="PrecoProduto">Preco do Produto:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="QtdeProduto" name="QtdeProduto" type="text"  type="text" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required value="@Model.QtdeProduto">
+                    <input id="QtdeProduto" name="QtdeProduto" type="number" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required value="@Model.QtdeProduto">
                     <label class="active">Quantidade em estoque:</label>
                 </div>
             </div>
@@ -87,40 +74,32 @@
                 <div class="input-field col s6">
                     <select id="Categoria">
                         <option value="" disabled>Escolha uma opção</option>
-                        <option value="Doces" @if (Convert.ToString(Model.Categoria) == "Doces") {<text>selected</text>}>Doces</option>
-                        <option value="Balas" @if (Convert.ToString(Model.Categoria) == "Balas") {<text>selected</text>}>Balas</option>
-                        <option value="Bebidas" @if (Convert.ToString(Model.Categoria) == "Bebidas") {<text>selected</text>}>Bebidas</option>
-                        <option value="Amendoins" @if (Convert.ToString(Model.Categoria) == "Amendoins") {<text>selected</text>}>Amendoins</option>
-                        <option value="Chocolates" @if (Convert.ToString(Model.Categoria) == "Chocolates") {<text>selected</text>}>Chocolates</option>
-                        <option value="Salgadinhos" @if (Convert.ToString(Model.Categoria) == "Salgadinhos") {<text>selected</text>}>Salgadinhos</option>
+                        <option value="Doces" @(Convert.ToString(Model.Categoria) == "Doces" ? "selected" : string.Empty)>Doces</option>
+                        <option value="Balas" @(Convert.ToString(Model.Categoria) == "Balas" ? "selected" : string.Empty)>Balas</option>
+                        <option value="Bebidas" @(Convert.ToString(Model.Categoria) == "Bebidas" ? "selected" : string.Empty)>Bebidas</option>
+                        <option value="Amendoins" @(Convert.ToString(Model.Categoria) == "Amendoins" ? "selected" : string.Empty)>Amendoins</option>
+                        <option value="Chocolates" @(Convert.ToString(Model.Categoria) == "Chocolates" ? "selected" : string.Empty)>Chocolates</option>
+                        <option value="Salgadinhos" @(Convert.ToString(Model.Categoria) == "Salgadinhos" ? "selected" : string.Empty)>Salgadinhos</option>
                     </select>
                     <label>Categoria do produto</label>
                 </div>
                 <div class="input-field col s6">
                     <select id="Ativo">
                         <option value="" disabled>Escolha uma opção</option>
-                        <option value="A" selected>Ativo</option>
-                        <option value="I">Inativo</option>
+                        <option value="A" @(Model.Ativo == "A" ? "selected" : string.Empty)>Ativo</option>
+                        <option value="I" @(Model.Ativo == "I" ? "selected" : string.Empty)>Inativo</option>
                     </select>
                     <label>Status do produto</label>
                 </div>
             </div>
-            @if (ViewBag.telaAnterior.ToString().Equals("Produtos Ativos"))
-            {
-                voltar = "AjaxJsProduto.listaProduto()";
+            @{
+                var voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
             }
-            else
-            {
-                voltar = "AjaxJsProduto.listarInativos()";
-            }
-
             <div class="row" , align="center">
                 <a class="waves-effect waves-light btn-large botaoVoltar" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large botaoEditar"><i class="material-icons left">edit</i>Editar</a>
+                <a class="waves-effect waves-light btn-large botaoEditar" onclick="encodeImageFileAsURL(AjaxJsProduto.concluirEdicaoProduto,'@(ViewBag.Tela == "A" ? Url.Action("Listar","Produto") : Url.Action("ListarInativos", "Produto"))')"><i class="material-icons left">edit</i>Editar</a>
             </div>
         </form>
     </div>
 </div>
-
-
 

@@ -26,14 +26,14 @@
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
-    var concluirPagamento = function () {        
-        var pagamento = { ValorPagamento: $('#valorPago').val()};
+    var concluirPagamento = function () {
+        var pagamento = { ValorPagamento: $("#valorPago").val().replace("R$ ", "") };
         $.post(url.concluirPagamento, pagamento)            
             .done(function (message) {
                 $.get(url.padrao)
                     .done(function (data) {
-                        $('body').slideUp(function () {
-                            $('body').hide().html(data).slideDown(function() {
+                        $("body").slideUp(function () {
+                            $("body").hide().html(data).slideDown(function() {
                                 Materialize.toast(message, 3000);
                             });
                         });
@@ -46,21 +46,25 @@
             });        
     };
 
-    var editarPagamento = function(idPagamento) {
-        chamaPaginaComIdentificador(url.editarPagamento, { idPagamento: idPagamento });
+    var editarPagamento = function(idPagamento, paginaAnterior) {
+        chamaPaginaComIdentificador(url.editarPagamento, { idPagamento: idPagamento, paginaAnterior: paginaAnterior});
     }
 
-    var concluirEdicaoPagamento = function() {
-        console.log($('#Cpf').val());
+    var concluirEdicaoPagamento = function(paginaAnterior, parameter) {
         var pagamento = {
-            IdPagamento: $('#IdPagamento').val(),
-            ValorPagamento: $('#valorPago').val(),
-            Usuario: { Cpf: $('#Cpf').val() } 
+            IdPagamento: $("#IdPagamento").val(),
+            ValorPagamento: $("#valorPago").val().replace("R$ ", ""),
+            Usuario: { Cpf: $("#Cpf").val() } 
         };
         $.post(url.concluirEdicaoPagamento, pagamento)
             .done(function(data) {
-                chamaPagina(url.listarPagamento);
-                Materialize.toast(data);
+                if (typeof paginaAnterior === "function") {
+                    if (parameter != null) {
+                        paginaAnterior(parameter);
+                    }
+                    paginaAnterior();
+                }
+                Materialize.toast(data,4000);
             }).fail(function(xhr) {
                 Materialize.toast(xhr.responseText, 4000);
             });
@@ -70,12 +74,12 @@
         init: init,
         //pagamento
         listarPagamento: listarPagamento,
-        listarPagamentoSemana: listarPagamentoSemana,
         detalhePagamento: detalhePagamento,
         inserirPagamento: inserirPagamento,
         concluirPagamento: concluirPagamento,
-        listarPagamentoMes: listarPagamentoMes,
         listarPagamentoDia: listarPagamentoDia,
+        listarPagamentoSemana: listarPagamentoSemana,
+        listarPagamentoMes: listarPagamentoMes,
         editarPagamento: editarPagamento,
         concluirEdicaoPagamento: concluirEdicaoPagamento
     }

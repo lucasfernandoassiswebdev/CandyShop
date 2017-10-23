@@ -1,0 +1,2 @@
+System.Net.Http
+Um URI de solicitação inválido foi fornecida. O URI de solicitação deve ser um URI absoluto ou o BaseAddress deve ser definido.

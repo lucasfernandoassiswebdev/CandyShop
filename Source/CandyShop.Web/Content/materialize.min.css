@@ -4285,31 +4285,31 @@ nav .input-field label.active i {
 
 @font-face {
     font-family: "Roboto";
-    src: local(Roboto Thin), url("~/fonts/roboto/Roboto-Thin.woff2") format("woff2"), url("~/fonts/roboto/Roboto-Thin.woff") format("woff");
+    src: local(Roboto Thin), url("fonts/roboto/Roboto-Thin.woff2") format("woff2"), url("fonts/roboto/Roboto-Thin.woff") format("woff");
     font-weight: 100
 }
 
 @font-face {
     font-family: "Roboto";
-    src: local(Roboto Light), url("~/fonts/roboto/Roboto-Light.woff2") format("woff2"), url("~/fonts/roboto/Roboto-Light.woff") format("woff");
+    src: local(Roboto Light), url("fonts/roboto/Roboto-Light.woff2") format("woff2"), url("fonts/roboto/Roboto-Light.woff") format("woff");
     font-weight: 300
 }
 
 @font-face {
     font-family: "Roboto";
-    src: local(Roboto Regular), url("~/fonts/roboto/Roboto-Regular.woff2") format("woff2"), url("~/fonts/roboto/Roboto-Regular.woff") format("woff");
+    src: local(Roboto Regular), url("fonts/roboto/Roboto-Regular.woff2") format("woff2"), url("fonts/roboto/Roboto-Regular.woff") format("woff");
     font-weight: 400
 }
 
 @font-face {
     font-family: "Roboto";
-    src: local(Roboto Medium), url("~/fonts/roboto/Roboto-Medium.woff2") format("woff2"), url("~/fonts/roboto/Roboto-Medium.woff") format("woff");
+    src: local(Roboto Medium), url("fonts/roboto/Roboto-Medium.woff2") format("woff2"), url("fonts/roboto/Roboto-Medium.woff") format("woff");
     font-weight: 500
 }
 
 @font-face {
     font-family: "Roboto";
-    src: local(Roboto Bold), url("~/fonts/roboto/Roboto-Bold.woff2") format("woff2"), url("~/fonts/roboto/Roboto-Bold.woff") format("woff");
+    src: local(Roboto Bold), url("fonts/roboto/Roboto-Bold.woff2") format("woff2"), url("fonts/roboto/Roboto-Bold.woff") format("woff");
     font-weight: 700
 }
 
@@ -4807,7 +4807,7 @@ small {
 #toast-container {
     display: block;
     position: fixed;
-    z-index: 10000
+    z-index: 10000;
 }
 
 @media only screen and (max-width: 600px) {
@@ -4820,7 +4820,7 @@ small {
 @media only screen and (min-width: 601px) and (max-width: 992px) {
     #toast-container {
         left: 5%;
-        bottom: 7%;
+        bottom: 0%;
         max-width: 90%
     }
 }
@@ -4829,7 +4829,7 @@ small {
     #toast-container {
         top: 10%;
         right: 7%;
-        max-width: 86%
+        max-width: 86%;
     }
 }
 
@@ -4878,7 +4878,7 @@ small {
 @media only screen and (max-width: 600px) {
     .toast {
         width: 100%;
-        border-radius: 0
+        border-radius: 0;
     }
 }
 
@@ -5993,9 +5993,9 @@ input[type=tel]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=search]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid rgb(255, 0, 0);
-    -webkit-box-shadow: 0 1px 0 0 rgb(255, 0, 0);
-    box-shadow: 0 1px 0 0 rgb(255, 0, 0)
+    border-bottom: 1px solid brown;
+    -webkit-box-shadow: 0 1px 0 0 brown;
+    box-shadow: 0 1px 0 0 brown
 }
 
 input:not([type]):focus:not([readonly])+label,
@@ -7317,7 +7317,7 @@ input[type=range]:focus::-ms-fill-upper {
     float: left;
     height: 48px;
     line-height: 48px;
-    margin: 0 32px 0 0;
+    margin: 0 21px 0 -5px;
     width: 24px;
     color: black
 }

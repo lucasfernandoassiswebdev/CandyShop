@@ -10,43 +10,48 @@
 <div class="container ">
     <h2 class="center pink-text" style="font-weight: bold">Efetuar Pagamento</h2>
     <div class="row center">
-        <form class="col s12">
+        <div class="col s12">
             <div class="row">
-                <div class="input-field col s6 push-l3">
-                    <input id="valorPago" name="valorPago" type="text" class="validate" required onkeydown="return FilterInput(event)" onpaste="handlePaste(event)">
+                <div class="input-field col s6 push-l3 ajustes">
+                    <input id="valorPago" maxlength="9" name="valorPago" type="text" class="validate" required onkeydown="return FilterInput(event)" onpaste="handlePaste(event)">
                     <label for="valorPago">Valor:</label>
                 </div>
             </div>
             <div class="row">
                 <a class="waves-effect waves-light btn-large" onclick="AjaxJsShop.voltarInicio()"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJsPagamento.concluirPagamento()"><i class="material-icons left">add_circle</i>Confirmar</a>
+                <a id="confirmarPagamento" disabled class="waves-effect waves-light btn-large"><i class="material-icons left">add_circle</i>Confirmar</a>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
 <script>
     $(document).ready(function () {
+        $("#confirmarPagamento").click(AjaxJsPagamento.concluirPagamento);
+
         $("#valorPago").maskMoney({
             prefix: "R$ ",
-            allowNegative: true,
+            allowNegative: false,
             thousands: ".",
             decimal: ",",
-            affixesStay: false
-        });
+            affixesStay: true
+        }).maskMoney("mask")
+            .keyup(validaBotao).blur(validaBotao).focus(validaBotao).on("paste", validaBotao)
+            .keydown(function (e) {
+                if (e.which === 13)
+                    AjaxJsPagamento.concluirPagamento();
+            });
     });
 
     function FilterInput(event) {
         var keyCode = ("which" in event) ? event.which : event.keyCode;
-        isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
+        var isNotWanted = (keyCode === 69 || keyCode === 189 || keyCode === 109);
         return !isNotWanted;
     }
 
     function handlePaste(e) {
-        var clipboardData, pastedData;
-
-        clipboardData = e.clipboardData || window.clipboardData;
-        pastedData = clipboardData.getData("Text").toUpperCase();
+        var clipboardData = e.clipboardData || window.clipboardData;
+        var pastedData = clipboardData.getData("Text").toUpperCase();
 
         if (pastedData.indexOf("E") > -1) {
             e.stopPropagation();
@@ -57,29 +62,20 @@
             e.stopPropagation();
             e.preventDefault();
         }
+
+        if (pastedData.indexOf("-") > -1) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
     }
 
-    $("#valorPago").keyup(function () {
+    function validaBotao() {
         var valor = $("#valorPago").val().length;
-        if (parseInt(valor) > 8 || $("#valorPago").val() == "R$ 0,00")
+        var pagamento = $("#valorPago").val();;
+        pagamento = pagamento.replace("R$", "").replace(",", ".");
+        if (valor > 9 || pagamento == "" || parseFloat(pagamento) > 999.99 || parseFloat(pagamento) <= 0)
             $("#confirmarPagamento").attr("disabled", "disabled");
         else
             $("#confirmarPagamento").removeAttr("disabled");
-    });
-
-    $("#valorPago").blur(function () {
-        var valor = $("#valorPago").val().length;
-        if (parseInt(valor) > 8 || $("#valorPago").val() == "R$ 0,00") 
-            $("#confirmarPagamento").attr("disabled", "disabled");
-        else  
-            $("#confirmarPagamento").removeAttr("disabled");
-    });
-
-    $("#valorPago").on("paste", function () {
-        var valor = $("#valorPago").val().length;
-        if (parseInt(valor) > 8 || $("#valorPago").val() == "R$ 0,00")
-            $("#confirmarPagamento").attr("disabled", "disabled");
-        else
-            $("#confirmarPagamento").removeAttr("disabled");
-    });
+    }
 </script>

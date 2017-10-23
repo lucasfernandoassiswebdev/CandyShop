@@ -1,9 +1,6 @@
 ﻿using CandyShop.Core.Services.Pagamento;
-using CandyShop.Core.Services.Pagamento.Dto;
-using CandyShop.Core.Services.Usuario.Dto;
-using CandyShop.Repository.Database;
+using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository.DataBase;
-using System;
 using System.Collections.Generic;
 
 namespace CandyShop.Repository.Repositorys
@@ -26,15 +23,14 @@ namespace CandyShop.Repository.Repositorys
             CSSP_ListarPagamentoDia
         }
 
-        public void InserirPagamento(PagamentoDto pagamento)
+        public void InserirPagamento(Pagamento pagamento)
         {
             ExecuteProcedure(Procedures.CSSP_InsPagamento);
             AddParameter("@Cpf", pagamento.Usuario.Cpf);
             AddParameter("@ValorPagamento", pagamento.ValorPagamento);
             ExecuteNonQuery();
         }
-
-        public void EditarPagamento(PagamentoDto pagamento)
+        public void EditarPagamento(Pagamento pagamento)
         {
             ExecuteProcedure(Procedures.CSSP_UpdPagamento);
             AddParameter("@IdPagamento", pagamento.IdPagamento);            
@@ -42,7 +38,6 @@ namespace CandyShop.Repository.Repositorys
 
             ExecuteNonQuery();
         }
-
         public void DeletarPagamento(int idPagamento)
         {
             ExecuteProcedure(Procedures.CSSP_DelPagamento);
@@ -57,20 +52,19 @@ namespace CandyShop.Repository.Repositorys
             using (var retorno = ExecuteReader())
                 return retorno.Read();
         }
-
-        public PagamentoDto SelecionarDadosPagamento(int idPagamento)
+        public Pagamento SelecionarDadosPagamento(int idPagamento)
         {
             ExecuteProcedure(Procedures.CSSP_SelPagamento);
             AddParameter("@IdPagamento", idPagamento);
-            PagamentoDto retorno = new PagamentoDto();
+            Pagamento retorno = new Pagamento();
             using (var reader = ExecuteReader())
                 if (reader.Read())
-                    retorno = new PagamentoDto
+                    retorno = new Pagamento
                     {
                         IdPagamento = reader.ReadAsInt("IdPagamento"),
                         DataPagamento = reader.ReadAsDateTime("DataPagamento"),                        
                         ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
-                        Usuario = new UsuarioDto
+                        Usuario = new Usuario
                         {
                             Cpf = reader.ReadAsString("Cpf"),
                             NomeUsuario = reader.ReadAsString("NomeUsuario")
@@ -78,66 +72,53 @@ namespace CandyShop.Repository.Repositorys
                     };
             return retorno;
         }        
-
-        public IEnumerable<PagamentoDto> ListarPagamentos()
+        public IEnumerable<Pagamento> ListarPagamentos()
         {
             ExecuteProcedure(Procedures.CSSP_LisPagamento);
             return Listar();
         }
-
-        public IEnumerable<PagamentoDto> ListarPagamentos(int mes)
+        public IEnumerable<Pagamento> ListarPagamentos(int mes)
         {
             ExecuteProcedure(Procedures.CSSP_LisPagamento);
             AddParameter("@cpf", null);
             AddParameter("@mes", mes);
             return Listar();
         }
-
-        public IEnumerable<PagamentoDto> ListarPagamentos(string cpf)
+        public IEnumerable<Pagamento> ListarPagamentos(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_LisPagamento);
             AddParameter("@cpf", cpf);
             return Listar();
         }
-
-        public IEnumerable<PagamentoDto> ListarPagamentoSemana()
+        public IEnumerable<Pagamento> ListarPagamentoSemana()
         {
             ExecuteProcedure(Procedures.CSSP_LisPagamentoSemana);
             return Listar();
         }
-        
-        public IEnumerable<PagamentoDto> ListarPagamentoSemana(string cpf)
+        public IEnumerable<Pagamento> ListarPagamentoSemana(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_LisPagamentoSemana);
             AddParameter("cpf", cpf);
             return Listar();
         }
-
-        public IEnumerable<PagamentoDto> ListarPagamentoDia()
+        public IEnumerable<Pagamento> ListarPagamentoDia()
         {
             ExecuteProcedure(Procedures.CSSP_ListarPagamentoDia);
             return Listar();
         }
 
-        public IEnumerable<PagamentoDto> ListarPagamentoDia(DateTime data)
+        private IEnumerable<Pagamento> Listar()
         {
-            ExecuteProcedure(Procedures.CSSP_ListarPagamentoDia);
-            AddParameter("@data", data);
-            return Listar();
-        }
-
-        private IEnumerable<PagamentoDto> Listar()
-        {
-            var retorno = new List<PagamentoDto>();
+            var retorno = new List<Pagamento>();
             using (var reader = ExecuteReader())
                 while (reader.Read())
                 {
-                    retorno.Add(new PagamentoDto
+                    retorno.Add(new Pagamento
                     {
                         DataPagamento = reader.ReadAsDateTime("DataPagamento"),
                         IdPagamento = reader.ReadAsInt("IdPagamento"),
                         ValorPagamento = reader.ReadAsDecimal("ValorPagamento"),
-                        Usuario = new UsuarioDto()
+                        Usuario = new Usuario()
                         {
                             Cpf = reader.ReadAsString("Cpf"),
                             NomeUsuario = reader.ReadAsString("NomeUsuario")

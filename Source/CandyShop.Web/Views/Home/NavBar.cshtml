@@ -1,7 +1,7 @@
 ﻿@model CandyShop.Application.ViewModels.CompraViewModel
 
 @{
-    ViewBag.Title = "Padrao";
+    ViewBag.Title = "CandyShop";
 }
 
 <script>
@@ -18,12 +18,12 @@
         });
 
         AjaxJsUsuario.init({
-            logOff: '@Url.Action("Deslogar", "Usuario")',
-            trocarSenha: '@Url.Action("TrocarSenha", "Usuario")'
+            logOff: '@Url.Action("Deslogar", "UsuarioComum")',
+            trocarSenha: '@Url.Action("TrocarSenha", "UsuarioComum")'
         });
 
         AjaxJsCompra.init({
-            inserirCompra: '@Url.Action("Cadastrar","Compra")',
+            inserirCompra: '@Url.Action("Cadastrar","Home")',
             historicoCompra: '@Url.Action("ListarCpf", "Compra")',
             detalheCompra: '@Url.Action("Detalhes", "Compra")',
             navbar: '@Url.Action("NavBar", "Home")'
@@ -36,61 +36,41 @@
             listaCategoria: '@Url.Action("ListarCategoria", "Home")',
             listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Home")'
         });
-        //validando campo de CPF
-        $("#cpf").keydown(function () {
-            mcpf($("#cpf").val());
-        });
-
-        $("#cpf").on("blur", function () {
-            if ($("#cpf").val().length > 14) {
-                $("#cpf").val($("#cpf").val().substr(0, 13));
-                $("#cpf").keydown();
-            }
-        });
-});
-
-function mcpf(v) {
-        v = v.replace(/\D/g, "");
-        v = v.replace(/(\d{3})(\d)/, "$1.$2");
-        v = v.replace(/(\d{3})(\d)/, "$1.$2");
-        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-        $("#cpf").val(v);
-    }
+    });
 </script>
 
 <link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
-<script type="text/javascript" src="~/Js/telaPrincipal/scriptsPadrao.js?d=@DateTime.Now.Ticks"></script>
 
 <!--modal de quantidade-->
 <div id="modalQuantidade" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
-        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
         <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
         <p class="pink-text center identQuant"></p>
-        <form class="center">
+        <div class="center">
             <input type="number" id="quantidade" class="center identQuant" autocomplete="off" />
             <span class="QtdeInvalida" color="red"></span>
-        </form>
+        </div>
     </div>
     <div class="modal-footer identQuant">
-        <a id="adicionaCarrinho" href="#modalCarrinho" class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
+        <a id="adicionaCarrinho" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
     </div>
 </div>
 
 <!--modal de Trocar a senha-->
 <div id="trocaSenha" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
-        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
         <h3 class="pink-text lighten-1 identQuant">Troca de Senha</h3>
         <p class="pink-text center identQuant"></p>
         <form class="center">
             <div class="input-field col s12">
-                <input type="password" id="novaSenha" class="center identQuant" autocomplete="off" />
+                <input type="password" id="novaSenha" class="center identQuant" maxlength="12" autocomplete="off" />
                 <span id="senhaInvalida" color="red"></span>
                 <label for="novaSenha">Nova Senha: </label>
             </div>
             <div class="input-field col s12">
-                <input type="password" id="confirmaNovaSenha" class="center identQuant" autocomplete="off" />
+                <input type="password" id="confirmaNovaSenha" class="center identQuant" maxlength="12" autocomplete="off" />
                 <span id="senhaConfirmadaInvalida" color="red"></span>
                 <label for="confirmaNovaSenha">Confirmar: </label>
             </div>
@@ -102,32 +82,33 @@ function mcpf(v) {
 </div>
 
 <!--modal de editar quantidade-->
-@*<div id="modalEditarQuantidade" class="modal" style="z-index: 99999999">
+<div id="modalEditarQuantidade" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
-        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
         <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
-        <p class="pink-text center identQuant"></p>
-        <form class="center">
-            <input type="number" id="quantidadeEdit" class="center identQuant" autocomplete="off" />
+        <p id="estoqueEdit" class="pink-text center identQuant"></p>
+        <div class="center">
+            <input type="number" id="quantidadeEdit" class="center identQuant" autocomplete="off" maxlength="3" />
             <span class="QtdeInvalida" color="red"></span>
-        </form>
+        </div>
     </div>
     <div class="modal-footer identQuant">
         <a id="editarQuantidade" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
     </div>
-</div>*@
+</div>
 
 <!--modal do carrinho-->
 <div id="modalCarrinho" class="modal">
     <div class="modal-content center">
-        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
         <h3 class="pink-text identQuant" style="font-weight: bold">Carrinho</h3>
         <div class="collection identQuant">
             <h1 class="center" style="margin-top:20px">Carrinho vazio</h1>
         </div>
     </div>
     <div class="modal-footer identQuant">
-        <a href="#!" id="confirmarCompra" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold" onclick="AjaxJsCompra.inserirCompra()">Confirmar compra</a>
+        <p id="totalCompra" class="pik-text left identQuant" style="font-weight: bold;margin-left:18px">Total da compra R$ 0,00</p>
+        <a  id="confirmarCompra" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold" onclick="AjaxJsCompra.inserirCompra()">Confirmar compra</a>
         <a href="#!" id="limpar" class="modal-close right modal-action waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Limpar</a>
     </div>
 </div>
@@ -135,25 +116,25 @@ function mcpf(v) {
 <!--modal de Login-->
 <div id="modalLogin" class="modal">
     <div class="modal-content center identQuant">
-        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
         <h2 class="pink-text identQuant" style="font-weight: bold">Login</h2>
         <form>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="cpf" type="text" class="validate identQuant">
+                    <input id="cpf" type="text" class="validate identQuant" maxlength="14" autocomplete="off">
                     <label for="cpf">CPF</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="senha" type="password" class="validate identQuant">
+                    <input id="senha" type="password" class="validate identQuant" maxlength="12" autocomplete="off">
                     <label for="senha">Senha</label>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer identQuant">
-        <a href="#modalLogin" id="logar" class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" onclick="AjaxJsShop.verificaLogin()" style="font-weight: bold">Logar</a>
+        <a href="#modalLogin" id="logar" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" onclick="AjaxJsShop.verificaLogin()" style="font-weight: bold">Logar</a>
         <a href="#!" id="limpar" class="right modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Cancelar</a>
     </div>
 </div>
@@ -173,17 +154,17 @@ function mcpf(v) {
     <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
+            <a href="#!" class="brand-logo right" title="Inicio" onclick="AjaxJsShop.voltarInicio();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
             <!--barra de navegação-->
             <ul id="dropdownMenu" class="dropdown-content">
-                <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Efetuar Pagamentos</a></li>                
+                <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Efetuar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico de Compra</a></li>
                 <li><a href="#trocaSenha" class="modal-trigger"><i class="material-icons">lock_outline</i>Trocar senha</a></li>
 
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
-                {                   
+                {
                     <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
                     <li class="divider"></li>
                 }
@@ -192,18 +173,17 @@ function mcpf(v) {
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdownMenu">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
-                <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
+                <li><a class="dropdown-button" title="Saldo atual: @Session["saldoUsuario"]" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] @Session["saldoUsuario"] </a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Seu Carrinho</a></li>
                 <li>
-                    <a class="dropdown-button" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
+                    <a class="dropdown-button" title="Pesquisar por categoria" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
                 <li>
                     <div class="hide-on-med-and-down">
                         <div>
                             <div class="input-field">
-                                <input id="search" type="search" autocomplete="off">
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
+                                <input id="search" type="search" title="Procurar um produto" autocomplete="off">
+                                <label class="label-icon" for="search"><i class="material-icons" title="Filtrar">search</i></label>
                             </div>
                         </div>
                     </div>
@@ -212,25 +192,24 @@ function mcpf(v) {
 
             <ul class="side-nav" id="mobile-demo">
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
-                <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
-                <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>                
-                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
-                <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Historico de Compra</a></li>
-                <li><a href="#trocaSenha" class="modal-trigger"><i class="material-icons">lock_outline</i>Trocar senha</a></li>
+                <li><a class="dropdown-button modal-trigger closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
+                <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
+                <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+                <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Historico de Compra</a></li>
+                <li><a href="#trocaSenha" class="modal-trigger closeMenu"><i class="material-icons">lock_outline</i>Trocar senha</a></li>
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                    <li><i class="material-icons">book</i>@Html.ActionLink("Administração", "Index", "Admin")</li>
+                    <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
                     <li class="divider"></li>
                 }
-                <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
+                <li><a href="#!" class="closeMenu" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
         </div>
         <div class="nav-content white">
             <div class="pesquisaMobile">
                 <div class="input-field">
                     <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required autocomplete="off">
-                    <i class="material-icons black-text">close</i>
                 </div>
             </div>
         </div>
@@ -241,42 +220,35 @@ else
     <nav class="brown darken-2 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            
-            <a href="#!" class="brand-logo right" onclick="AjaxJsShop.voltarInicio(); " style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
-           
+
+            <a href="#!" class="brand-logo right" title="Inicio" onclick="AjaxJsShop.voltarInicio(); " style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
+
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
-                <li><a class="dropdown-button modal-trigger right" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
+                <li><a class="dropdown-button modal-trigger right closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
                 <li>
-                    <a class="dropdown-button" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
+                    <a class="dropdown-button" title="Pesquisar por categoria" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
                 <li>
                     <div class="col s6 hide-on-med-and-down">
                         <div>
                             <div class="input-field">
-                                <input id="search" type="search" required autocomplete="off">
+                                <input id="search" type="search" title="Procurar um produto" required autocomplete="off">
                                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons closed">close</i>
                             </div>
                         </div>
                     </div>
                 </li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>Nome do usuario R$ 0,00</a></li>
-                <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
-                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
-                <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
-                <li><a href="#!" onclick="AjaxJsPagamento.historicoCompra()"><i class="material-icons">find_in_page</i>Historico de Compra</a></li>
-                <li class="divider"></li>
-                <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
+                <li><a class="dropdown-button modal-trigger closeMenu" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
+                <li><a class="dropdown-button modal-trigger closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
             </ul>
         </div>
         <div class="nav-content white">
             <div class="pesquisaMobile">
                 <div class="input-field">
                     <input id="search" class="black-text" type="search" placeholder="Filtre sua busca aqui" required autocomplete="off">
-                    <i class="material-icons black-text">close</i>
                 </div>
             </div>
         </div>

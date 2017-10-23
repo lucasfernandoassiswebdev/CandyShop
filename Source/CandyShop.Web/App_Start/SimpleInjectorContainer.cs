@@ -1,10 +1,13 @@
 ﻿using CandyShop.Application;
+using CandyShop.Application.Applications;
 using CandyShop.Application.Interfaces;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 
 namespace CandyShop.Web
 {
+    /* Container do Simple Injector onde são mapeadas as dependências, comentários
+       mais detalhados sobre isso estão disponíveis no container da API */
     public class SimpleInjectorContainer
     {
         public static Container Build()
@@ -16,7 +19,6 @@ namespace CandyShop.Web
             container.Register <IProdutoApplication, ProdutoApplication> ();
             container.Register <IPagamentoApplication, PagamentoApplication>();
             container.Register <ICompraApplication, CompraApplication>();
-            container.Register <ICompraProdutoApplication, CompraProdutoApplication>();
 
             container.Verify();
             return container;

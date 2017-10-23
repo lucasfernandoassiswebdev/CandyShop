@@ -10,49 +10,51 @@
 <!--plugin para campos monetários-->
 <script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
 
-
 <div class="container">
     <div class="row">
         <form class="col s12">
-            <h2 class="center pink-text" style="font-weight: bold;margin-top:-2%">Cadastrar Produto</h2>
+            <h2 class="center pink-text" style="font-weight: bold">Cadastrar Produto</h2>
             <!--fotos-->
             <div class="row">
                 <div class="center">
-                    <label for="fotoProduto1" style="margin-right:50px">
-                        <img id="imagem1" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="Imagens/fotoProduto.png" alt="imagem não disponível :(" />
-                    </label>
-                    <input id="fotoProduto1" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
-
-                    <label for="fotoProduto2" style="margin-right:50px">
-                        <img id="imagem2" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="Imagens/fotoProduto.png" alt="imagem não disponível :("/>
-                    </label>
-                    <input id="fotoProduto2" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
-
-                    <label for="fotoProduto3">
-                        <img id="imagem3" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="Imagens/fotoProduto.png" alt="imagem não disponível :(" />
-                    </label>
-                    <input id="fotoProduto3" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
+                    <div class="Imagens" style="display: flex">
+                        <div>
+                            <label for="fotoProduto1">
+                                <img id="imagem1" style="margin: 0 auto; display: block; margin-right: 30px; margin-bottom: 5px" class="imagemFoto center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@ViewBag.ImagemPadrao/fotoProduto.png" alt="imagem não disponível :(" />
+                            </label>
+                            <input id="fotoProduto1" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
+                            <a class="btn botaoRemover" id="removerImagem1" style="margin-right: 20px"><i class="material-icons left">block</i>Remover</a>
+                        </div>
+                        <div>
+                            <label for="fotoProduto2">
+                                <img id="imagem2" style="margin: 0 auto; display: block; margin-right: 30px; margin-bottom: 5px" class="imagemFoto center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@ViewBag.ImagemPadrao/fotoProduto.png" alt="imagem não disponível :(" />
+                            </label>
+                            <input id="fotoProduto2" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
+                            <a class="btn botaoRemover" id="removerImagem2" style="margin-right: 20px"><i class="material-icons left">block</i>Remover</a>
+                        </div>
+                        <div>
+                            <label for="fotoProduto3">
+                                <img id="imagem3" style="margin: 0 auto; display: block; margin-bottom: 5px" class="imagemFoto center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@ViewBag.ImagemPadrao/fotoProduto.png" alt="imagem não disponível :(" />
+                            </label>
+                            <input id="fotoProduto3" type="file" placeholder="foto do produto" class="file-path validate" style="display: none" accept="image/*">
+                            <a class="btn botaoRemover" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!--botões de remover-->
-            <div class="row center">
-                <a class="btn" id="removerImagem1" style="margin-right:50px"><i class="material-icons left">block</i>Remover</a>
-                <a class="btn" id="removerImagem2" style="margin-right:50px"><i class="material-icons left">block</i>Remover</a>
-                <a class="btn" id="removerImagem3"><i class="material-icons left">block</i>Remover</a>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="NomeProduto" name="Nome" type="text" class="validate" required data-length="40" autocomplete="off">
+                    <input id="NomeProduto" name="Nome" type="text" maxlength="40" class="validate" required data-length="40" autocomplete="off">
                     <label for="NomeProduto">Nome:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="PrecoProduto" name="PrecoProduto" type="text" class="validate" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
+                    <input id="PrecoProduto" name="PrecoProduto" type="text" maxlength="9" class="validate" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
                     <label for="PrecoProduto">Valor:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="QtdeProduto" name="QtdeProduto" type="number" class="validate" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
+                    <input id="QtdeProduto" name="QtdeProduto" type="text" class="validate" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
                     <label for="QtdeProduto">Quantidade disponível:</label>
                 </div>
             </div>
@@ -72,23 +74,11 @@
             </div>
             <div class="row" , align="center">
                 <a class="waves-effect waves-light btn-large botaoVoltar"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large botaoCadastro"><i class="material-icons left">add_circle</i>Cadastrar</a>
+                <a class="waves-effect waves-light btn-large botaoCadastro" disabled><i class="material-icons left">add_circle</i>Cadastrar</a>
             </div>
         </form>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('#PrecoProduto').maskMoney({
-            prefix: 'R$ ',
-            allowNegative: false,
-            thousands: '.',
-            decimal: ',',
-            affixesStay: false
-        });
-    });
-</script>
 
 
 

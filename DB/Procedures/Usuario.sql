@@ -1,4 +1,4 @@
-USE CandyShop
+
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_InsUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
@@ -7,7 +7,6 @@ GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	@NomeUsuario varchar(50),
-	@SenhaUsuario varchar(12) = 'password',
 	@SaldoUsuario decimal(18,2) = 0,
 	@CpfUsuario varchar(14),
 	@Ativo varchar(1) = 'A',
@@ -30,7 +29,7 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	
 	BEGIN
 		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario,Ativo, Classificacao)
-			VALUES (@CpfUsuario,@NomeUsuario,@SenhaUsuario,@SaldoUsuario,@Ativo, @Classificacao)		
+			VALUES (@CpfUsuario,@NomeUsuario,@CpfUsuario,@SaldoUsuario,@Ativo, @Classificacao)		
 			
 				IF @@ERROR <> 0
 					RETURN 1
@@ -112,7 +111,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdSe
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_UpdSenha]
-	@senha varchar(8),
+	@senha varchar(12),
 	@cpf varchar(11)
 	AS
 	/*
@@ -216,6 +215,8 @@ CREATE PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 				Classificacao
 				FROM [dbo].[Usuario]
 				WHERE Ativo = 'I'
+				ORDER BY NomeUsuario
+
 	END
 GO
 				
@@ -246,6 +247,8 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 				Classificacao
 			FROM [dbo].[Usuario]
 			WHERE SaldoUsuario < 0 AND Ativo = 'A'
+			ORDER BY NomeUsuario
+
 	END
 GO
 

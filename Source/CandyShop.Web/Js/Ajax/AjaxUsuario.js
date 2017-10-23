@@ -22,24 +22,25 @@
     var concluirCadastroUsuario = function(imgBase64) {
         //montantando o objeto que vai chegar no controller
         var usuario = {
-            Cpf: $('#cpf').val(),
-            NomeUsuario: $('#Nome').val(),
+            Cpf: $("#cpf").val(),
+            NomeUsuario: $("#Nome").val(),
             Imagem: imgBase64,
-            Classificacao: $('#Classificacao').val()
+            Classificacao: $("#Classificacao").val()
         };
         concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
     };
-    var concluirEdicaoUsuario = function(imgBase64) {
+    var concluirEdicaoUsuario = function(imgBase64,removerImagem, tela) {                
         var usuario = {
-            Cpf: $('#Cpf').val(),
-            NomeUsuario: $('#Nome').val(),
-            SaldoUsuario: $('#SaldoUsuario').val(),
-            SenhaUsuario: $('#Password').val(),
-            Ativo: $('#Ativo').val(),
+            Cpf: $("#Cpf").val(),
+            NomeUsuario: $("#Nome").val(),
+            SaldoUsuario: $("#SaldoUsuario").val().replace("R$ ", "").replace(".", ""),
+            SenhaUsuario: $("#Password").val(),
+            Ativo: $("#Ativo").val(),
             Imagem: imgBase64,
-            Classificacao: $('#Classificacao').val()
+            Classificacao: $("#Classificacao").val(),
+            RemoverImagem: removerImagem
         };
-        concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, url.listaUsuario);
+        concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, tela);
     };
     var desativarUsuario = function (cpf, telaAnterior) {
         var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
@@ -56,16 +57,16 @@
         chamaPagina(url.listarUsuarioEmDivida);
     };
     var listarUsuarioPorNome = function() {
-        var usuario = { Nome: $('#nomeUsuario').val() };
+        var usuario = { Nome: $("#nomeUsuario").val() };
         chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
     };
     var logOff = function() {
         $.get(url.logOff).done(function(data) {
-            $('body').slideUp(1000, function() {
-                if (localStorage.getItem('listaProdutos') != null) {
-                    localStorage.removeItem('listaProdutos');
+            $("body").slideUp(1000, function() {
+                if (localStorage.getItem("listaProdutos") != null) {
+                    localStorage.removeItem("listaProdutos");
                 }
-                $('body').hide().html(data).slideDown(1000, function() {
+                $("body").hide().html(data).slideDown(1000, function() {
                     Materialize.toast("LogOff feito com sucesso", 4000);
                 });
             });
@@ -74,7 +75,8 @@
         });
     };
     var trocarSenha = function () {
-        var senhas = { NovaSenha: $('#novaSenha').val(), ConfirmaNovaSenha: $('#confirmaNovaSenha').val() };        
+        var senhas = { NovaSenha: $("#novaSenha").val(), ConfirmaNovaSenha: $("#confirmaNovaSenha").val() };
+        console.log(senhas.ConfirmaNovaSenha);
         $.post(url.trocarSenha, senhas)
             .done(function (message) {                
                 Materialize.toast(message, 4000);                

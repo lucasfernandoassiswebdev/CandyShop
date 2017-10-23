@@ -1,12 +1,11 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Pagamento;
-using CandyShop.Core.Services.Pagamento.Dto;
-using System;
 using System.Net;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
 {
+    [Authorize]
     public class PagamentoController : ApiController
     {
         private readonly IPagamentoRepository _pagamentoRepository;
@@ -20,7 +19,7 @@ namespace CandyShop.WebAPI.Controllers
             _pagamentoService = pagamentoService;
         }
 
-        public IHttpActionResult Post(PagamentoDto pagamento)
+        public IHttpActionResult Post(Pagamento pagamento)
         {
             _pagamentoService.ValidarPagamento(pagamento);
             if (_notification.HasNotification())
@@ -29,8 +28,7 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-
-        public IHttpActionResult Put(PagamentoDto pagamento)
+        public IHttpActionResult Put(Pagamento pagamento)
         {
             _pagamentoService.ValidarPagamento(pagamento);
             if (_notification.HasNotification())
@@ -38,6 +36,7 @@ namespace CandyShop.WebAPI.Controllers
             _pagamentoRepository.EditarPagamento(pagamento);
             return Ok();
         }
+
 
         public IHttpActionResult Get()
         {
@@ -78,18 +77,6 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetDia()
         {
             return Ok(_pagamentoRepository.ListarPagamentoDia());
-        }
-
-        [Route("api/pagamento/dia/{dia}")]
-        public IHttpActionResult GetDia(DateTime dia)
-        {
-            return Ok(_pagamentoRepository.ListarPagamentoDia(dia));
-        }
-
-        public IHttpActionResult Delete(int idpagamento)
-        {
-            _pagamentoRepository.DeletarPagamento(idpagamento);
-            return Ok();
         }
     }
 }

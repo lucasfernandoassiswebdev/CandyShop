@@ -1,4 +1,6 @@
-﻿using CandyShop.Core.Services.Produto.Dto;
+﻿
+
+using System.Linq;
 
 namespace CandyShop.Core.Services.Produto
 {
@@ -11,9 +13,9 @@ namespace CandyShop.Core.Services.Produto
         {
             _notification = notification;
             _produtoRepository = produtoRepository;
-        }        
+        }
         // Método IsValid on são feitas todas as verificaçoes de produto
-        public void IsValid(ProdutoDto produto)
+        public void IsValid(Produto produto)
         {
             if (string.IsNullOrEmpty(produto.NomeProduto.Trim()) || produto.NomeProduto.Length > 40)
             {
@@ -27,22 +29,17 @@ namespace CandyShop.Core.Services.Produto
                 return;
             }
 
-            if (string.IsNullOrEmpty(produto.QtdeProduto.ToString()))
+            if (produto.QtdeProduto < 0)
             {
-                _notification.Add("Quantidade do produto nao pode ser nula");
+                _notification.Add("Quantidade do produto nao pode ser menor que zero!");
                 return;
             }
 
             //verificando se já existe um produto com o mesmo nome
             var produtos = _produtoRepository.ListarProdutos();
-            foreach (var item in produtos)
-            {
-                if (item.NomeProduto.Equals(produto.NomeProduto) && item.IdProduto != produto.IdProduto)
-                {
-                    _notification.Add("Produto já existente");
-                    return;
-                }                
-            }
+            if (!produtos.Any(item => item.NomeProduto.Equals(produto.NomeProduto) &&
+                                      item.IdProduto != produto.IdProduto)) return;
+            _notification.Add("Produto já existente");
         }
     }
 }

@@ -3,7 +3,7 @@
 
     // Lista de objetos que guarda o nome e o endereco da pagina, sã carregados na pagina padrao
     var init = function (config) {
-        url = config;        
+        url = config;
     };
 
     var listaProduto = function () {
@@ -15,7 +15,7 @@
     var concluirCadastroProduto = function (baseA, baseB, baseC) {
         var produto = {
             NomeProduto: $('#NomeProduto').val(),
-            PrecoProduto: $('#PrecoProduto').val(),
+            PrecoProduto: $('#PrecoProduto').val().replace("R$ ", "").replace(".", ""),
             QtdeProduto: $('#QtdeProduto').val(),
             Categoria: $('#Categoria').val(),
             ImagemA: baseA,
@@ -32,19 +32,22 @@
         var produto = { IdProduto: id, telaAnterior: telaAnterior };
         chamaPaginaComIdentificador(url.editarProduto, produto);
     };
-    var concluirEdicaoProduto = function (baseA, baseB, baseC) {
+    var concluirEdicaoProduto = function (baseA, baseB, baseC, removerA, removerB, removerC, pagina) {
         var produto = {
             IdProduto: $('#IdProduto').val(),
             NomeProduto: $('#NomeProduto').val(),
-            PrecoProduto: $('#PrecoProduto').val(),
+            PrecoProduto: $('#PrecoProduto').val().replace("R$", "").replace(".", ""),
             QtdeProduto: $('#QtdeProduto').val(),
             Categoria: $('#Categoria').val(),
             Ativo: $('#Ativo').val(),
             ImagemA: baseA,
             ImagemB: baseB,
-            ImagemC: baseC
+            ImagemC: baseC,
+            RemoverImagemA: removerA,
+            RemoverImagemB: removerB,
+            RemoverImagemC: removerC
         };
-        concluirAcaoEdicao(url.concluirEdicaoProduto, produto, url.listaProduto);
+        concluirAcaoEdicaoeEspecifico(url.concluirEdicaoProduto, produto, pagina);
     };
     var desativarProduto = function (id, telaAnterior) {
         var produto = { IdProduto: id, telaAnterior: telaAnterior };
@@ -57,14 +60,14 @@
     var listarInativos = function () {
         chamaPagina(url.listarInativos);
     };
-    var listarProdutoPorNome = function (nome) {        
+    var listarProdutoPorNome = function (nome) {
         var produto = { Nome: nome };
         chamaPaginaComIdentificador(url.listarProdutoPorNome, produto);
     };
-    var listaCategoria = function(categoria) {
+    var listaCategoria = function (categoria) {
         chamaPaginaComIdentificador(url.listaCategoria, { categoria: categoria });
     }
-    
+
     //retorna links para acessar as paginas.
     return {
         init: init,
@@ -82,3 +85,16 @@
     };
 
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.
+
+function concluirAcaoEdicaoeEspecifico(endereco, objeto, tela) {
+    $.ajax({
+        url: endereco,
+        type: "POST",
+        data: objeto,
+        success: function (message) {
+            chamaPagina(tela);
+            Materialize.toast(message, 4000);
+        }
+    });
+}
+

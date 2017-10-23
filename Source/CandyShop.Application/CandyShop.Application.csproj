@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -51,18 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiConfig.cs" />
-    <Compile Include="CompraApplication.cs" />
-    <Compile Include="CompraProdutoApplication.cs" />
+    <Compile Include="Applications\CompraApplication.cs" />
     <Compile Include="Interfaces\ICompraApplication.cs" />
-    <Compile Include="Interfaces\ICompraProdutoApplication.cs" />
     <Compile Include="Interfaces\IPagamentoApplication.cs" />
     <Compile Include="Interfaces\IProdutoApplication.cs" />
     <Compile Include="Interfaces\IUsuarioApplication.cs" />
-    <Compile Include="PagamentoApplication.cs" />
-    <Compile Include="ProdutoApplication.cs" />
+    <Compile Include="Applications\PagamentoApplication.cs" />
+    <Compile Include="Applications\ProdutoApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
-    <Compile Include="UsuarioApplication.cs" />
+    <Compile Include="Applications\UsuarioApplication.cs" />
     <Compile Include="ViewModels\CompraViewModel.cs" />
     <Compile Include="ViewModels\CompraProdutoViewModel.cs" />
     <Compile Include="ViewModels\PagamentoViewModel.cs" />

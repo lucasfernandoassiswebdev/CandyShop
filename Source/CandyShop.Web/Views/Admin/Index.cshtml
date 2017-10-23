@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Administração";
 }
 
 <script>
@@ -16,7 +16,8 @@
             desativarUsuarioConfirmado: '@Url.Action("DesativarUsuario", "Usuario")',
             listarUsuarioInativo: '@Url.Action("ListarInativos", "Usuario")',
             listarUsuarioEmDivida: '@Url.Action("ListarUsuariosEmDivida", "Usuario")',
-            listarUsuarioPorNome: '@Url.Action("ProcurarUsuario", "Usuario")'
+            listarUsuarioPorNome: '@Url.Action("ProcurarUsuario", "Usuario")',
+            logOff: '@Url.Action("Deslogar", "Usuario")'
         });
 
         AjaxJsProduto.init({
@@ -38,19 +39,16 @@
             listarPagamentoSemana: '@Url.Action("ListarSemana", "Pagamento")',
             listarPagamentoMes: '@Url.Action("ListarMes", "Pagamento")',
             listarPagamentoDia: '@Url.Action("ListarDia", "Pagamento")',
-            detalhePagamento: '@Url.Action("Detalhes", "Pagamento")',
             editarPagamento: '@Url.Action("Editar", "Pagamento")',
             concluirEdicaoPagamento: '@Url.Action("EditarPagamento", "Pagamento")'
         });
 
         AjaxJsCompra.init({
-            historicoCompra: '@Url.Action("Listar", "Compra")',
             listarCompraSemana: '@Url.Action("ListarSemana", "Compra")',
             listarCompraMes: '@Url.Action("ListarMes", "Compra")',
             listarCompraDia: '@Url.Action("ListarDia", "Compra")',
+            listarCompra: '@Url.Action("Listar", "Compra")',
             detalheCompra: '@Url.Action("Detalhes", "Compra")',
-            editarCompra: '@Url.Action("Editar","Compra")',
-            concluirEdicaoCompra: '@Url.Action("Editar","Compra")'
         });
 
         AjaxJsShop.init({
@@ -59,42 +57,70 @@
             main: '@Url.Action("Listar", "Produto")'
         });
 
-        $("#modalPesquisaUsuario").modal({
-            ready: function (modal, trigger) {
-                $("#nomeUsuario").focus();
-            }
+        $("#modalPesquisaUsuario").modal({ dismissible: false, ready: function () { adicionaFoco("#nomeUsuario") } });
+        $("#modalPesquisaProduto").modal({ dismissible: false, ready: function () { adicionaFoco("#nomeProduto") } });
+
+        $("html,body").dblclick(function (e) {
+            if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") ||
+                $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant"))
+                return false;
+
+            $("#modalPesquisaProduto, #modalPesquisaUsuario").modal("close");
         });
 
-        $("#modalPesquisaProduto").modal({
-            ready: function (modal, trigger) {
-                $("#nomeProduto").focus();
-            }
-        })
- })
+        $("#nomeUsuario").keydown(function (e) {
+            if (e.which === 13)
+                closeModalsClearInputs("#modalPesquisaUsuario", "#nomeUsuario", AjaxJsUsuario.listarUsuarioPorNome);
+        });
+
+        $("#pesquisarUsuario").click(function () {
+            closeModalsClearInputs("#modalPesquisaUsuario", "#nomeUsuario", AjaxJsUsuario.listarUsuarioPorNome);
+        });
+
+        $("#nomeProduto").keydown(function (e) {
+            if (e.which === 13)
+                closeModalsClearInputs("#modalPesquisaProduto", "#nomeProduto", AjaxJsProduto.listarProdutoPorNome);
+        });
+
+        $("#pesquisarProduto").click(function () {
+            closeModalsClearInputs("#modalPesquisaProduto", "#nomeProduto", AjaxJsProduto.listarProdutoPorNome);
+        });
+    });
+
+    function adicionaFoco(input) { console.log(input); $(input).focus(); }
+
+    function closeModalsClearInputs(modal, input, funcao) {
+        if (typeof funcao === "function")
+            funcao($(input).val());
+
+        $(modal).modal("close");
+        $(input).val("");
+    }
 </script>
+<script type="text/javascript" src="~/Js/telaPrincipal/scriptsMain.js"></script>
 <link rel="stylesheet" type="text/css" href="~/Content/Admin/indexAdmin.css?d=@DateTime.Now.Ticks">
 
 <!--modal de pesquisa de usuários-->
 <div id="modalPesquisaUsuario" class="modal">
     <div class="modal-content">
-        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
-        <h3 class="center pink-text">Nome do usuário</h3>
+        <font class="pink-text modal-close identQuant" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
+        <h3 class="center pink-text identQuant">Nome do usuário</h3>
         <div>
-            <input type="text" id="nomeUsuario" autocomplete="off" />
+            <input type="text" class="identQuant" id="nomeUsuario" autocomplete="off" />
         </div>
     </div>
     <div class="modal-footer center">
-        <a href="#!" id="pesquisarUsuario" class="closeMenu btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
+        <a href="#!" id="pesquisarUsuario" class="identQuant closeMenu btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
     </div>
 </div>
 
 <!--modal de pesquisa de produtos-->
 <div id="modalPesquisaProduto" class="modal">
     <div class="modal-content">
-        <font class="pink-text modal-close" style="font-weight: bold; position: absolute; right: 20px; top: 5px;">X</font>
-        <h3 class="center pink-text">Nome do produto:</h3>
+        <font class="pink-text modal-close identQuant" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
+        <h3 class="center pink-text identQuant">Nome do produto:</h3>
         <div>
-            <input type="text" id="nomeProduto" autocomplete="off" style="text-align:center"/>
+            <input type="text" id="nomeProduto" class="identQuant" autocomplete="off" style="text-align:center" />
         </div>
     </div>
     <div class="modal-footer center">
@@ -104,13 +130,9 @@
 
 <ul id="slide-out" class="side-nav fixed brown darken-3">
     <li class="white-text">
-        <h4 class="center" onclick="AjaxJsShop.loja()" style="cursor: pointer;">Candy <font class="pink-text">Shop</font></h4>
+        <a href='@Url.Action("NavBar", "Home")' title="Voltar para Loja"><h4 class="center" style="cursor: pointer;">Candy <font class="white-text">Shop</font></h4></a>
     </li>
-    <li class="divider"></li>
-    <li><a class="dropdown-button white-text" href="#!"><i class="material-icons left white-text">account_box</i>ADMINISTRADOR</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
+    <li><br/></li>
     <li>
         <ul class="collapsible" data-collapsible="accordion">
             <li>
@@ -160,20 +182,19 @@
                     <ul class="brown-text">
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompraDia();"><i class="material-icons">access_time</i>Hoje</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompraSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.historicoCompra();"><i class="material-icons">book</i>Ultimo mês</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompra();"><i class="material-icons">book</i>Ultimo mês</a></li>
                     </ul>
                 </div>
             </li>
         </ul>
     </li>
     <li><a class="dropdown-button white-text closeMenu" href="#!" onclick="AjaxJsShop.mostraSaldo()"><i class="material-icons left white-text small">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a class="dropdown-button white-text" href='@Url.Action("NavBar", "Home")'><i class="material-icons left white-text small">power_settings_new</i>VOLTAR PARA LOJA </a></li>
+    <li><br /></li>
+
+    <li><a class="dropdown-button white-text active" title="Voltar para Loja" href='@Url.Action("NavBar", "Home")'><i class="material-icons left white-text small">call_made</i>VOLTAR PARA LOJA</a></li>
+    <li><a class="dropdown-button white-text active" title="Fazer logoff" href='#!' onclick="AjaxJsUsuario.logOff()"><i class="material-icons left white-text small">power_settings_new</i>SAIR</a></li>
 </ul>
 
-<a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse pink-text"><i class="material-icons">menu</i></a>
+<a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse pink-text" style="width: 40px; height: 40px; margin-top: 0px; margin-left: 5px; overflow: hidden;"><i class="material-icons" style="font-size: 40px">menu</i></a>
 
-<div id="DivGrid">    
-</div>
+<div id="DivGrid"></div>

@@ -1,8 +1,8 @@
-﻿@model CandyShop.Application.ViewModels.ProdutoViewModel
+﻿@using CandyShop.Web.Helpers
+@model CandyShop.Application.ViewModels.ProdutoViewModel
 
 @{
     Layout = null;
-    string voltar;
 }
 
 <link rel="stylesheet" type="text/css" href="~/Content/Produto/detalheProduto.css?d=@DateTime.Now.Ticks" />
@@ -11,15 +11,12 @@
     <h4 class="pink-text">Detalhes do Produto</h4>
     <hr />
     <div class="col s12">
-        @{ var nomeA = @Model.IdProduto + "_A.jpg";}
-        @{ var nomeB = @Model.IdProduto + "_B.jpg";}
-        @{ var nomeC = @Model.IdProduto + "_C.jpg";}
+        
+        <img src="@Model.ImagemA" />
+        <img src="@Model.ImagemB" />
+        <img src="@Model.ImagemC" />        
 
-        <img src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" />
-        <img src="@TempData["caminhoImagensProdutos"]/@nomeB?d=@DateTime.Now.Ticks" />
-        <img src="@TempData["caminhoImagensProdutos"]/@nomeC?d=@DateTime.Now.Ticks" />
-
-        <table class="striped highlight centered bordered" style="margin-bottom:50px">
+        <table class="striped centered bordered" style="margin-bottom:50px">
             <tbody>
             <tr>
                 <td class="negrito">Id</td>
@@ -31,7 +28,7 @@
             </tr>
             <tr>
                 <td class="negrito">Preço</td>
-                <td>R$ @Html.DisplayFor(model => model.PrecoProduto)</td>
+                <td>@string.Format("{0:C}", Model.PrecoProduto)</td>
             </tr>
             <tr>
                 <td class="negrito">Categoria</td>
@@ -43,18 +40,12 @@
             </tr>
             <tr>
                 <td class="negrito">Ativo</td>
-                <td>@if (Model.Ativo == "A"){<text>Ativo</text>}else{<text>Inativo</text>}</td>
+                <td>@(Model.Ativo == "A" ? "Sim" : "Não")</td>
             </tr>
             </tbody>
         </table>
-        
-        @if (ViewBag.telaAnterior.ToString().Equals("Produtos Ativos"))
-        {
-            voltar = "AjaxJsProduto.listaProduto()";
-        }
-        else
-        {
-            voltar = "AjaxJsProduto.listarInativos()";
+        @{
+            var voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
         }
         <a class="waves-effect waves-light btn" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
     </div>

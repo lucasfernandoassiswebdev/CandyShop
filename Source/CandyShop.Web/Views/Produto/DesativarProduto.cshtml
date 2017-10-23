@@ -13,13 +13,9 @@
         <p>Tem certeza que deseja desativar este produto?</p>
         <hr />
 
-        @{ var nomeA = @Model.IdProduto + "_A.jpg";}
-        @{ var nomeB = @Model.IdProduto + "_B.jpg";}
-        @{ var nomeC = @Model.IdProduto + "_C.jpg";}
-
-        <img src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" />
-        <img src="@TempData["caminhoImagensProdutos"]/@nomeB?d=@DateTime.Now.Ticks" />
-        <img src="@TempData["caminhoImagensProdutos"]/@nomeC?d=@DateTime.Now.Ticks" />
+        <img src="@Model.ImagemA" />
+        <img src="@Model.ImagemB" />
+        <img src="@Model.ImagemC" />
 
         <table class="striped highlight centered bordered" style="margin-bottom:50px">
             <tbody>
@@ -33,7 +29,7 @@
             </tr>
             <tr>
                 <td class="negrito">Preço</td>
-                <td>R$ @Model.PrecoProduto</td>
+                <td>@string.Format("{0:C}", Model.PrecoProduto)</td>
             </tr>
             <tr>
                 <td class="negrito">Categoria</td>
@@ -52,17 +48,12 @@
             </tr>
             </tbody>
         </table>
-        @if (ViewBag.telaAnterior.ToString().Equals("Produtos Ativos"))
-        {
-            voltar = "AjaxJsProduto.listaProduto()";
-        }
-        else
-        {
-            voltar = "AjaxJsProduto.listarInativos()";
+        @{
+            voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
         }
         <div class="row">
             <a class="waves-effect waves-light btn-large" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
-            <a class="waves-effect waves-light btn-large" onclick="AjaxJsProduto.desativarProdutoConfirmado(@Model.IdProduto)"><i class="material-icons left">delete</i>Excluir</a>
+            <a class="waves-effect waves-light btn-large" onclick="AjaxJsProduto.desativarProdutoConfirmado(@Model.IdProduto)"><i class="material-icons left">delete</i>Desativar</a>
         </div>
     </div>
 </div>

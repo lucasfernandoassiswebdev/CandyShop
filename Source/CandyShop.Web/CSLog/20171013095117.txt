@@ -1,0 +1,2 @@
+Newtonsoft.Json
+Could not convert string to integer: Logado com sucesso!. Path '', line 1, position 21.

@@ -1,186 +1,206 @@
 ﻿@media only screen and (max-width : 992px) {
-    header, main, footer, #DivGrid {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
+	header, main, footer, #DivGrid {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
 
-    .container {
-        width: 90% !important;
-    }
+	.container {
+		width: 90% !important;
+	}
 
-    .waves-effect {
-        margin-bottom: 10px;
-    }
+	.waves-effect {
+		margin-bottom: 10px;
+	}
 
-    .row .col.s6 {
-        width: 100%;
-    }
+	.row .col.s6 {
+		width: 100%;
+	}
 
-    .alinhamento {
-        margin-left: 42% !important;
-    }
+	.alinhamento {
+		margin-left: 42% !important;
+	}
 
-    .desapear {
-        display: none;
-    }
+	.desapear {
+		display: none;
+	}
 
-    .gridCelular {
-        display: block !important;
-    }
+	.gridCelular {
+		display: block !important;
+	}
 
-    .recuaTabela {
-        margin-left: 0 !important;
-    }
+	.recuaTabela {
+		margin-left: 0 !important;
+	}
 
-    .modal {
-        width: 90% !important;
-        margin-left: 5% !important;
-    }
+	.modal {
+		width: 90% !important;
+		margin-left: 5% !important;
+	}
 
-    .corpo {
-        margin-left: 2% !important;
-    }
+	.corpo {
+		margin-left: 2% !important;
+	}
+
+	.Imagens {
+		display: block !important;
+	}
+
+	.imagemFoto {
+		display: block !important;
+		margin: 0 auto;
+		margin-top: 10px;
+	}
+
+	.botaoRemover {
+		margin-top: 5px;
+	}
+
+	
+   
 }
 
 body {
-    overflow-y: auto !important;
+	overflow-y: auto !important;
 }
 
 html {
-    color: black;
+	color: black;
 }
 
 header, main, footer {
-    padding-left: 430px;
-    padding-right: 70px;
+	padding-left: 430px;
+	padding-right: 70px;
 }
 
 .btn-large {
-    background-color: #e781a3;
+	background-color: #e781a3;
 }
 
 .btn-floating {
-    background-color: #cd2626;
+	background-color: #cd2626;
 }
 
 .gridCelular {
-    display: none;
+	display: none;
 }
 
 .side-nav .divider {
-    margin: 0 0 0 0;
+	margin: 0 0 0 0;
 }
 
 .side-nav li > a {
-    padding: 0 19px;
-    color: #e91e63;
+	padding: 0 19px;
+	color: #ec407a;
 }
 
 .side-nav .collapsible-body li a, .side-nav.fixed .collapsible-body li a {
-    padding: 0 26.5px 0 58px;
+	padding: 0 26.5px 0 58px;
 }
 
 .divider {
-    background-color: white;
+	background-color: white;
 }
 
 .recuaTabela {
-    margin-left: -10%;
+	margin-left: -10%;
 }
 
 h4 {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .side-nav li > a:hover {
-    background-color: rgba(0,0,0,0.05)
+	background-color: rgba(0,0,0,0.05)
 }
 
 .modal .modal-footer {
-    text-align: center;
+	text-align: center;
 }
 
 .modal {
-    overflow-x: hidden;
+	overflow-x: hidden;
 }
 
 #nomeUsuario {
-    text-align: center;
+	text-align: center;
 }
 
 .btn:hover, .btn:hover i {
-    color: white !important;
+	color: white !important;
 }
 
 .vinho {
-    background-color: #CD2626;
+	background-color: #CD2626;
 }
 
 input {
-    color: black;
+	color: black;
 }
 
 .brown {
-    background-color: #3E2723 !important;
+	background-color: #3E2723 !important;
 }
 
 .orange {
-    background-color: #424242 !important;
+	background-color: #424242 !important;
 }
 
 .side-nav li > a > i, .side-nav li > a > [class^="mdi-"], .side-nav li > a li > a > [class*="mdi-"], .side-nav li > a > i.material-icons {
-    color: #e91e63;
+	color: #e91e63;
 }
 
 .pink-text, .dropdown-content li > a, .dropdown-content li > span {
-    color: #ec407a !important;
+	color: #ec407a !important;
 }
 
 .material-icons {
-    font-size: 25px
+	font-size: 25px
 }
 
 .btn:hover, .btn-large:hover {
-    background-color: rgb(236,64,122) !important;
+	background-color: rgb(236,64,122) !important;
 }
 
 .btn {
-    background-color: #e781a3;
+	background-color: #e781a3;
 }
 
-#modalPesquisaUsuario, #modalPesquisaProduto, #modalPesquisaUsuario .btn, #modalPesquisaProduto .btn {
-    width: 39%;
-    background-color: white;
+#modalPesquisaUsuario, #modalPesquisaProduto, #
+ .btn, #modalPesquisaProduto .btn {
+	width: 39%;
+	background-color: white;
 }
 
 .picker__date-display {
-    background-color: #ec407a !important;
+	background-color: #ec407a !important;
 }
 
 .picker__close, .picker__today, .picker__clear {
-    color: #ec407a !important;
+	color: #ec407a !important;
 }
 
 .picker__clear {
-    color: #ec407a !important;
+	color: #ec407a !important;
 }
 
 .clockpicker-canvas line {
-    stroke: #ec407a !important;
+	stroke: #ec407a !important;
 }
 
 .clockpicker-canvas-bg {
-    fill: #ec407a !important;
+	fill: #ec407a !important;
 }
 
 .clockpicker-canvas-bearing {
-    fill: #ec407a !important;
+	fill: #ec407a !important;
 }
 
 .modal .modal-footer {
-    background-color: #ffffff !important;
+	background-color: #ffffff !important;
 }
 
 #DivGrid {
-    padding-left: 290px;
+	padding-left: 290px;
 }
+
+

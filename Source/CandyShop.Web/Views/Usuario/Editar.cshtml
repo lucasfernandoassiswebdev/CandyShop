@@ -8,32 +8,6 @@
 <link rel="stylesheet" href="~/Content/Usuario/formCadastroUsuario.css" />
 <script type="text/javascript" src="~/Js/Usuario/scriptsEditarUsuario.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
-<script>
-    $(document).ready(function () {
-        $('select').material_select();
-        $('.cpf').each(function () {
-            $(this).val(mcpf($(this).val()));
-        });
-
-        $('#SaldoUsuario').maskMoney({
-            prefix: 'R$ ',
-            allowNegative: false,
-            thousands: '.',
-            decimal: ',',
-            affixesStay: false
-        });
-
-        $('#SaldoUsuario').maskMoney('mask');
-    });
-
-    function mcpf(v) {
-        v = v.replace(/\D/g, "");
-        v = v.replace(/(\d{3})(\d)/, "$1.$2");
-        v = v.replace(/(\d{3})(\d)/, "$1.$2");
-        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-        return v;
-    }
-</script>
 
 <div class="container">
     <div class="row">
@@ -41,11 +15,10 @@
             <div class="row">
                 <div class="center">
                     <label for="fotoUsuario">
-                        @{ string caminho = @Model.Cpf + ".jpg"; }
-                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks" alt="imagem não disponível :(" />
+                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src=@Model.Imagem alt="imagem não disponível :(" />
                     </label>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                     <a class="btn" id="removerImagem"><i class="material-icons left">block</i>Remover</a>
                     <input id="fotoUsuario" type="file" class="file-path validate" style="display: none" accept="image/*">
                 </div>
@@ -58,40 +31,32 @@
                 <div class="input-field col s6">
                     <select name="Classificacao" id="Classificacao">
                         <option value="" disabled>Tipo da conta</option>
-                        @if (Model.Classificacao == 'U'.ToString())
-                        {
-                            <option value="U" selected>Usuario</option>
-                            <option value="A">Administrador</option>
-                        }
-                        else
-                        {
-                            <option value="U">Usuario</option>
-                            <option value="A" selected>Administrador</option>
-                        }
+                        <option value="U" @(Model.Classificacao == "U" ? "selected" : string.Empty)>Usuario</option>
+                        <option value="A" @(Model.Classificacao == "A" ? "selected" : string.Empty)>Administrador</option>
                     </select>
                     <label>Tipo de Usuário:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="Nome" name="Nome" type="text" class="validate" required data-length="50" autocomplete="off" value="@Model.NomeUsuario" />
+                    <input id="Nome" name="Nome" type="text" class="validate" maxlength="50" required data-length="50" autocomplete="off" value="@Model.NomeUsuario" />
                     <label class="active">Nome:</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="SaldoUsuario" name="SaldoUsuario" type="text" class="validate" value="@Model.SaldoUsuario" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
+                    <input id="SaldoUsuario" name="SaldoUsuario" maxlength="9" type="text" class="validate" value="@Model.SaldoUsuario" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
                     <label class="active">Saldo:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="Password" name="Password" type="password" required data-length="12" autocomplete="off" class="validate" value="@Model.SenhaUsuario" />
+                    <input id="Password" name="Password" type="password" maxlength="12" required data-length="12" autocomplete="off" class="validate" value="@Model.SenhaUsuario" />
                     <label class="active">Password:</label>
                 </div>
                 <div class="input-field col s6">
                     <select id="Ativo">
                         <option value="" disabled>Escolha uma opção</option>
-                        <option value="A" @if (Convert.ToString(Model.Ativo) == "A") {<text>selected</text>} >Ativo</option>
-                        <option value="I" @if (Convert.ToString(Model.Ativo) == "I") {<text>selected</text>} >Inativo</option>
+                        <option value="A" @(Model.Ativo == "A" ? "selected" : string.Empty)>Ativo</option>
+                        <option value="I" @(Model.Ativo == "I" ? "selected" : string.Empty)>Inativo</option>
                     </select>
                     <label>Status do usuário</label>
                 </div>
@@ -109,8 +74,8 @@
                 voltar = "AjaxJsUsuario.listarUsuarioEmDivida()";
             }
             <div class="row center">
-                <a class="waves-effect waves-light btn-large botaoVoltar" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large botaoEditar"><i class="material-icons left">build</i>Editar</a>
+                <a class="waves-effect waves-light btn-large botaoVoltar" onclick="@voltar"><i class="material-icons left">arrow_back</i>Voltar</a>
+                <a class="waves-effect waves-light btn-large botaoEditar" onclick="encodeImageFileAsURL(AjaxJsUsuario.concluirEdicaoUsuario, '@(ViewBag.telaAnterior == "Usuários Ativos" ? Url.Action("Listar","Usuario") : Url.Action("ListarInativos","Usuario"))')"><i class="material-icons left">build</i>Editar</a>
             </div>
         </form>
     </div>

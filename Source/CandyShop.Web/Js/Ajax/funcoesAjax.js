@@ -1,22 +1,26 @@
-﻿//carrega a pagina de inicio
+﻿// Esse arquivo tem as funções genéricas encapsuladas que são usados nos outros arquivos
+// Carrega a pagina de inicio
 function main(endereco) {
-    //pega a view main e a carrega no div
+    // Pega os dados da view recebida e a carrega na DivGrid
     $.get(endereco).done(function (data) {
+        // É aplicado um efeito de "cortina" nesse carregamento
         $("#DivGrid").slideUp(1000, function () {
-            //desce  o divgrid  
-            $('#DivGrid').hide().html(data).fadeIn(1000);
+            // Desce  a "cortina"  
+            $("#DivGrid").hide().html(data).fadeIn(1000);
         });
-        //xhr é o código do erro, que é retornado caso o get não tenha sucesso
+        // Xhr é o erro que é retornado caso o get não tenha sucesso
     }).fail(function (xhr) {
+        /* Caso não tenha sido possível carregar a página, o erro
+           é exibido no console */
         console.log(xhr.responseText);
     });
 }
 
-//Função genérica para carregar o div, de acordo com o endereço passado
-function chamaPagina(endereco) {    
+// Função genérica para carregar a página de acordo com o endereço passado
+function chamaPagina(endereco) {
     $.get(endereco).done(function (data) {        
-        $('#DivGrid').slideUp(function () {            
-            $('#DivGrid').hide().html(data).slideDown(function() {                
+        $("#DivGrid").slideUp(function () {            
+            $("#DivGrid").hide().html(data).slideDown(function() {                
             });            
         });
     }).fail(function (xhr) {
@@ -26,14 +30,15 @@ function chamaPagina(endereco) {
 
 function chamaPaginaComIdentificador(endereco, identificador) {
     $.get(endereco, identificador).done(function (data) {
-        $('#DivGrid').slideUp(function () {
-            $('#DivGrid').hide().html(data).slideDown();
+        $("#DivGrid").slideUp(function () {
+            $("#DivGrid").hide().html(data).slideDown();
         });
     }).fail(function (xhr) {
         console.log(xhr.responseText);
     });
 }
 
+// Função utilizada em métodos de insert por exemplo
 function concluirAcao(endereco, objeto, tela) {
     $.post(endereco, objeto)
         .done(function (message) {
@@ -45,10 +50,11 @@ function concluirAcao(endereco, objeto, tela) {
         });
 }
 
+// Função utilizado quando o controller usa o verbo HTTP PUT(Editar)
 function concluirAcaoEdicao(endereco, objeto, tela) {
     $.ajax({
         url: endereco,
-        type: 'PUT',
+        type: "POST",
         data: objeto,
         success: function (message) {
             chamaPagina(tela);

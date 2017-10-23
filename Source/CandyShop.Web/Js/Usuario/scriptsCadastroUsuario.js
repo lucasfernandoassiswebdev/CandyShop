@@ -5,12 +5,10 @@ $(document).ready(function () {
     $(".tooltipped").tooltip({ delay: 50 });
     $("select").material_select();
 
-    $("#cpf").keydown(function () {
+    $("#cpf").keyup(function () {
         mcpf($("#cpf").val());
         validaBotao();
-    });
-
-    $("#cpf").on("blur", function () {
+    }).on("blur", function () {
         mcpf($("#cpf").val());
         //retirando caracteres a mais do campo
         if ($("#cpf").val().length > 14) {
@@ -20,40 +18,32 @@ $(document).ready(function () {
         validaBotao();
     });
 
-    $("#Nome").keydown(function () {
-        validaBotao();
-    });
-
-    $("#Nome").on("blur", function () {
-        validaBotao();
-    });
+    $("#Nome").keydown(validaBotao).on("blur", validaBotao);
 
     //esconde o botão que retira a imagem
     $("#removerImagem").hide();
-});
 
-$("#fotoUsuario").change(function () {
-    //função que muda a foto do usuário na tela
-    readURL(this);
+    $("#fotoUsuario").change(function () {
+        //função que muda a foto do usuário na tela
+        readURL(this);
 
-    //mostrando o botão que retira a imagem
-    $("#removerImagem").show();
-});
+        //mostrando o botão que retira a imagem
+        $("#removerImagem").show();
+    });
 
-$(".botaoVoltar").click(function () {
     //voltando a lista de usuários
-    AjaxJsUsuario.listaUsuario();
-});
+    $(".botaoVoltar").click(AjaxJsUsuario.listaUsuario);
 
-$(".botaoCadastro").click(function () {
-    //convertendo a imagem para base64
-    encodeImageFileAsURL(AjaxJsUsuario.concluirCadastroUsuario);
-});
+    $(".botaoCadastro").click(function () {
+        //convertendo a imagem para base64
+        encodeImageFileAsURL(AjaxJsUsuario.concluirCadastroUsuario);
+    });
 
-//mudando a imagem quando o usário retirar a atual
-$("#removerImagem").click(function () {
-    $("#imagem").attr("src", "~/Imagens/retirado.png");
-    $("#fotoUsuario").val("");
+    //mudando a imagem quando o usário retirar a atual
+    $("#removerImagem").click(function () {
+        $("#imagem").attr("src", "http://189.112.203.1:45000/candyShop/retirado.png");
+        $("#fotoUsuario").val("");
+    });
 });
 
 function readURL(input) {
@@ -76,26 +66,29 @@ function mcpf(v) {
     $("#cpf").val(v);
 }
 
-function TestaCPF(strCPF) {
-    var Soma;
-    var Resto;
-    Soma = 0;
-    if (strCPF === "00000000000")
+function TestaCPF(strCpf) {
+    var soma;
+    var resto;
+    soma = 0;
+    if (strCpf == "00000000000" || strCpf == "11111111111" || strCpf == "22222222222" ||
+        strCpf == "33333333333" || strCpf == "44444444444" || strCpf == "55555555555" ||
+        strCpf == "66666666666" || strCpf == "77777777777" || strCpf == "88888888888" ||
+        strCpf == "99999999999")
         return false;
     for (i = 1; i <= 9; i++)
-        Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-    Resto = (Soma * 10) % 11;
-    if ((Resto === 10) || (Resto === 11))
-        Resto = 0;
-    if (Resto !== parseInt(strCPF.substring(9, 10)))
+        soma = soma + parseInt(strCpf.substring(i - 1, i)) * (11 - i);
+    resto = (soma * 10) % 11;
+    if ((resto == 10) || (resto == 11))
+        resto = 0;
+    if (resto !== parseInt(strCpf.substring(9, 10)))
         return false;
-    Soma = 0;
+    soma = 0;
     for (i = 1; i <= 10; i++)
-        Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-    Resto = (Soma * 10) % 11;
-    if ((Resto === 10) || (Resto === 11))
-        Resto = 0;
-    if (Resto !== parseInt(strCPF.substring(10, 11)))
+        soma = soma + parseInt(strCpf.substring(i - 1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
+    if ((resto == 10) || (resto == 11))
+        resto = 0;
+    if (resto !== parseInt(strCpf.substring(10, 11)))
         return false;
     return true;
 }
@@ -123,10 +116,9 @@ function encodeImageFileAsURL(callback) {
         var fileReader = new FileReader();
 
         fileReader.onload = function (fileLoadedEvent) {
-            var srcData = fileLoadedEvent.target.result; // <--- data: base64
-            if (typeof callback === "function") {
+            var srcData = fileLoadedEvent.target.result;
+            if (typeof callback === "function")
                 callback(srcData);
-            }
         };
 
         fileReader.readAsDataURL(fileToLoad);

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 
-namespace CandyShop.Repository.Database
+namespace CandyShop.Repository.DataBase
 {
     public static class SQLExtension
     {    

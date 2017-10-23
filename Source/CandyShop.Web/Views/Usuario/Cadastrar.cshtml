@@ -15,7 +15,10 @@
                     <h2 class="center pink-text" style="font-weight: bold">Cadastrar usuário</h2>
                     <div>
                         <label for="fotoUsuario">
-                            <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="Imagens/fotoUsuario.ico" alt="imagem não disponível :(" />
+                            @{
+                                var caminho = ImagensConfig.EnderecoImagens;
+                            }
+                            <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src="@caminho/fotoUsuario.ico" alt="imagem não disponível :("/>
                         </label>
                         <br/>
                         <br/>
@@ -25,11 +28,11 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="Nome" name="NomeUsuario" type="text" class="validate" required data-length="50" autocomplete="off">
+                        <input id="Nome" name="NomeUsuario" maxlength="50" type="text" class="validate" required data-length="50" autocomplete="off">
                         <label for="Nome">Nome do usuário:</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="cpf" name="CPF" type="text" class="validate" required="">
+                        <input id="cpf" name="CPF" type="text" class="validate" maxlength="14" required>
                         <label for="cpf">CPF do usuário:</label>
                     </div>
                 </div>
@@ -45,7 +48,7 @@
                 </div>
                 <div class="row center">
                     <a class="waves-effect waves-light btn-large botaoVoltar"><i class="material-icons left">arrow_back</i>Voltar</a>
-                    <a class="waves-effect waves-light btn-large botaoCadastro"><i class="material-icons left">add_circle</i>Cadastrar</a>
+                    <a class="waves-effect waves-light btn-large botaoCadastro" disabled><i class="material-icons left">add_circle</i>Cadastrar</a>
                 </div>
             </div>
         </form>

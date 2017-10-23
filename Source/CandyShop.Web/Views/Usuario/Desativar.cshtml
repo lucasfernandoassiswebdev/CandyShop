@@ -29,8 +29,7 @@
         <h4 class="pink-text">Tem certeza que deseja desativar este usuário?</h4>
         <div>
             <hr />
-            @{ string caminho = @Model.Cpf + ".jpg";}
-            <img id="imagemUsuario" src="@TempData["caminhoImagensUsuarios"]/@caminho?d=@DateTime.Now.Ticks" />
+            <img id="imagemUsuario" src="@Model.Imagem?d=@DateTime.Now.Ticks"/>
            
             <table class="striped highlight centered bordered" style="margin-bottom:50px">
                 <tbody>
@@ -44,7 +43,7 @@
                 </tr>
                 <tr>
                     <td class="negrito">Saldo do usuário: </td>
-                    <td>R$ @Model.SaldoUsuario</td>
+                    <td>@string.Format("{0:C}", Model.SaldoUsuario)</td>
                 </tr>
                 <tr>
                     <td class="negrito">Status do usuário: </td>
@@ -71,7 +70,7 @@
             }
             <div class="row" , align="center">
                 <a class="waves-effect waves-light btn-large" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large" onclick="AjaxJsUsuario.desativarUsuarioConfirmado('@Model.Cpf')"><i class="material-icons left">delete</i>Excluir</a>
+                <a class="waves-effect waves-light btn-large" onclick="AjaxJsUsuario.desativarUsuarioConfirmado('@Model.Cpf')"><i class="material-icons left">delete</i>Desativar</a>
             </div>
         </div>
     </div>

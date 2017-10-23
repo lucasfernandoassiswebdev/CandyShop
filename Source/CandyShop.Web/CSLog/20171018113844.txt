@@ -1,0 +1,2 @@
+Anonymously Hosted DynamicMethods Assembly
+Não é possível fazer associação em tempo de execução em uma referência nula

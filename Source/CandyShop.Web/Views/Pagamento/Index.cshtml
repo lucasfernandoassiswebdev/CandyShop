@@ -67,12 +67,12 @@
                                 @Html.DisplayFor(modelItem => item.DataPagamento)
                             </td>
                             <td>
-                                R$ @Html.DisplayFor(modelItem => item.ValorPagamento)
+                                @string.Format("{0:C}", item.ValorPagamento)
                             </td>
                             @if (Session["TipoDeLogin"].ToString().Equals("Admin"))
                             {
                                 <td>
-                                    <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsPagamento.editarPagamento(@item.IdPagamento);"><i class="material-icons">edit</i></a>
+                                    <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" title="Editar" onclick="AjaxJsPagamento.editarPagamento(@item.IdPagamento, '@ViewBag.tituloPagina');"><i class="material-icons">edit</i></a>
                                 </td>
                             }
                         </tr>

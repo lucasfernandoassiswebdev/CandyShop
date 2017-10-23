@@ -76,7 +76,7 @@
                             R$ @Html.DisplayFor(modelItem => item.ValorCompra)
                         </td>
                         <td>
-                            <a class="btn-floating btn waves-effect waves-light  light-blue darken-3" onclick="AjaxJsCompra.detalheCompra(@item.IdCompra)" ><i class="material-icons small">info_outline</i></a>
+                            <a class="btn-floating btn waves-effect waves-light light-blue darken-3" title="Detalhes" onclick="AjaxJsCompra.detalheCompra(@item.IdCompra, '@ViewBag.tituloPagina')" ><i class="material-icons small">info_outline</i></a>
                             @*<a class="btn-floating btn waves-effect waves-light  yellow darken-3" onclick="AjaxJsCompra.editarCompra(@item.IdCompra);"><i class="material-icons">edit</i></a>*@
                         </td>
                     </tr>

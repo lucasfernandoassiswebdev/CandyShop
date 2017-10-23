@@ -1,6 +1,4 @@
-﻿using CandyShop.Core.Services.Pagamento.Dto;
-
-namespace CandyShop.Core.Services.Pagamento
+﻿namespace CandyShop.Core.Services.Pagamento
 {
     public class PagamentoService : IPagamentoService
     {
@@ -11,11 +9,11 @@ namespace CandyShop.Core.Services.Pagamento
             _notification = notification;
         }
 
-        public void ValidarPagamento(PagamentoDto pagamento)
+        public void ValidarPagamento(Pagamento pagamento)
         {
-            if (pagamento.ValorPagamento <= 0)
+            if (pagamento.ValorPagamento < 0)
             {
-                _notification.Add("Pagamento deve ser maior que zero!");
+                _notification.Add("Valor inválido!");
             }
         }
     }

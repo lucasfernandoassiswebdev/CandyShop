@@ -1,6 +1,10 @@
-﻿@model IEnumerable<CandyShop.Application.ViewModels.ProdutoViewModel>
+﻿@using CandyShop.Web.Helpers
+@model IEnumerable<CandyShop.Application.ViewModels.ProdutoViewModel>
 
-@{ Layout = null; }
+@{
+    Layout = null;
+    int i;
+}
 
 <style>
     img {
@@ -12,39 +16,70 @@
     }
 </style>
 
-<div class="row">
-    @foreach (var produto in Model)
-    {
-        <div class="col s12 m4 l2">
-            <div class="card">
-                <div class="card-image">
-                    @{ string nomeA = produto.IdProduto + "_A.jpg";}
-                    <img src="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks">
-                    <span class="card-title flow-text">@produto.NomeProduto</span>
-                    <a href="#modalQuantidade" id="abreModal" class="modal-trigger btn-floating halfway-fab waves-effect waves-light pink lighten-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="@if(produto.QtdeProduto == 0){<text>Produto indisponível no estoque</text>}else{<text>@produto.NomeProduto R$ @produto.PrecoProduto </text>}" data-Preco="@produto.PrecoProduto" data-Nome="@produto.NomeProduto" data-Id="@produto.IdProduto" data-Imagem="@TempData["caminhoImagensProdutos"]/@nomeA?d=@DateTime.Now.Ticks" data-quantidadeDisponivel="@produto.QtdeProduto" @if (produto.QtdeProduto == 0) { <text> disabled </text>           }><i class="material-icons">add</i></a>
-                </div>
-                <div class="card-content">
-                    <p>R$ @produto.PrecoProduto</p>
-                </div>
-            </div>
-        </div>
-     }
-</div>
-
-
 <script>
     $(document).ready(function () {
         $('.tooltipped').tooltip({ delay: 50 });
-        $('.btn-floating, #modalEditarQuantidade').click(function () {
-            //limpando os inputs
-            $('#quantidade, #quantidadeEdit').val('');
-            //mostrando a quantidade de produto dispónível em estoque
+        // Exibindo quantidade em estoque nos modals de quantidade
+        // Exibindo qtde em estoque antes de adicionar o item no carrinho
+        $(".adicionaItemCarrinho").click(function () {
+            // Limpando os inputs
+            $("#quantidade").val("");
+            // Mostrando a quantidade de produto dispónível em estoque
             var quantidadeDisponivel = $(this).attr('data-quantidadeDisponivel');
             $('#modalQuantidade div p').html("Quantidade disponível em estoque: " + quantidadeDisponivel);
-            //exibindo a quantidade disponível em estoque no modal de edição do carrinho
-            $(".secondary-content").click(function () {
-                $("#modalEditarQuantidade div p").html("Quantidade disponível em estoque: " + $(this).attr("data-quantidadedisponivel"));
-            });
+        });
+
+        $('.image').mouseover(function () {
+            var imagem = $(this);
+            imagem.data["lista"] = imagem.attr('data-imagem').split(',');
+            var i = 1;
+            imagem.data["intervalo"] = setInterval(function () {
+                imagem.attr('src', imagem.data["lista"][i]);
+                i === 2 ? i = 0 : i++;
+            }, 1000);
+        }).mouseout(function () {
+            clearInterval($(this).data["intervalo"]);
+            $(this).attr('src', $(this).data["lista"][0]);
         });
     });
 </script>
+<script type="text/javascript" src="~/Js/telaPrincipal/scriptsMain.js"></script>
+
+<div class="row">
+    @if (!Model.Any())
+    {
+        <b><p align="center">Nenhum produto encontrado para '@ViewBag.Pesquisa'</p></b>
+    }
+    else
+    {
+        foreach (var produto in Model)
+        {
+            <div class="col s12 m4 l2">
+                <div class="card">
+                    <div class="card-image">
+                        <div id="imagens">
+                            <img class="image" data-Imagem="@produto.ImagemA,@produto.ImagemB,@produto.ImagemC" src="@produto.ImagemA">
+                        </div>
+                        <span class="card-title flow-text">@produto.NomeProduto</span>
+                        <a href="#modalQuantidade" id="abreModal"
+                           class="modal-trigger btn-floating halfway-fab waves-effect waves-light pink lighten-1 tooltipped adicionaItemCarrinho"
+                           data-position="bottom" data-delay="50"
+                           data-tooltip="@(produto.QtdeProduto == 0 ? "Produto indisponível no estoque" : "Inserir quantidade")"
+                           data-Preco="@produto.PrecoProduto"
+                           data-Nome="@produto.NomeProduto"
+                           data-Imagem="@produto.ImagemA"
+                           data-Id="@produto.IdProduto"
+                           data-quantidadeDisponivel="@produto.QtdeProduto"
+                           @(produto.QtdeProduto == 0 ? "disabled" : string.Empty)>
+                            <i class="material-icons">add</i>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <p>@Html.DisplayFor(model => produto.Categoria)</p>
+                        <p>R$ @Html.DisplayFor(model => produto.PrecoProduto)</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

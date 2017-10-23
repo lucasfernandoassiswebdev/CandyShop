@@ -16,8 +16,8 @@ namespace CandyShop.Web
             );
             routes.MapRoute(
                 name: "CandyShop",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "NavBar", id = UrlParameter.Optional }
+                url: "{controller}/{action}/",
+                defaults: new { controller = "Home", action = "NavBar"}
             );
             
         }

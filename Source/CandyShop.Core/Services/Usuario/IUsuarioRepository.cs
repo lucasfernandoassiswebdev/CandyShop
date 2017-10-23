@@ -1,22 +1,20 @@
-﻿using CandyShop.Core.Services.Usuario.Dto;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CandyShop.Core.Services.Usuario
 {
     public interface IUsuarioRepository
     {
-        void InserirUsuario(UsuarioDto usuario);
-        void EditarUsuario(UsuarioDto usuario);
+        void InserirUsuario(Usuario usuario);
+        void EditarUsuario(Usuario usuario);
         void DesativarUsuario(string cpf);
-        void TrocarSenha(UsuarioDto usuario);
-        int VericaUsuarioIgual(UsuarioDto usuario);
-        UsuarioDto SelecionarUsuario(string cpf);
-        IEnumerable<UsuarioDto> ListarUsuario();
-        IEnumerable<UsuarioDto> ListarUsuarioInativo();
-        IEnumerable<UsuarioDto> ListarUsuarioDivida();
-        IEnumerable<UsuarioDto> ListarUsuarioPorNome(string nome);
-        UsuarioDto SelecionarDadosUsuario(string cpf);
-        int VerificaLogin(UsuarioDto usuario);
+        void TrocarSenha(Usuario usuario);
+        int VericaUsuarioIgual(Usuario usuario);
+        Usuario SelecionarUsuario(string cpf);
+        IEnumerable<Usuario> ListarUsuario();
+        IEnumerable<Usuario> ListarUsuarioInativo();
+        IEnumerable<Usuario> ListarUsuarioDivida();
+        IEnumerable<Usuario> ListarUsuarioPorNome(string nome);
+        int VerificaLogin(Usuario usuario);
         decimal VerificaCreditoLoja();
     }
 }
