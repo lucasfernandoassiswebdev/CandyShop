@@ -14,6 +14,7 @@ namespace CandyShop.WebAPI.Providers
         {
             _usuarioRepository = repository;
         }
+
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             context.Validated();

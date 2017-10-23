@@ -1,4 +1,5 @@
-﻿using CandyShop.Core.Services.Usuario;
+﻿using CandyShop.Repository.DataBase;
+using CandyShop.Repository.Repositorys;
 using CandyShop.WebAPI;
 using CandyShop.WebAPI.Filtros;
 using CandyShop.WebAPI.Providers;
@@ -18,13 +19,6 @@ namespace CandyShop.WebAPI
 {
     public class Startup
     {
-        private readonly IUsuarioRepository _usuarioRepository;
-
-        public Startup(IUsuarioRepository repository)
-        {
-            _usuarioRepository = repository;
-        }
-
         public void Configuration(IAppBuilder app)
         {
             var config = new HttpConfiguration();
@@ -47,8 +41,6 @@ namespace CandyShop.WebAPI
                em que ocorrer */
             config.Filters.Add(new ExceptionFilter());
 
-            config.MapHttpAttributeRoutes();
-
             // Aplicando as configurações do cors
             ConfigureCors(app);
 
@@ -58,26 +50,20 @@ namespace CandyShop.WebAPI
             AtivandoAcessTolens(app);
 
             // Ativando configuração WebApi
-            app.Use(config);
-
-            var opcoesConfiguracaoToken = new OAuthAuthorizationServerOptions()
-            {
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromHours(2),
-                Provider = new ProviderDeTokensDeAcesso(_usuarioRepository)
-            };
+            app.UseWebApi(config);
         }
 
         private static void AtivandoAcessTolens(IAppBuilder app)
         {
+            var conexao = new Conexao();
+            var repositorio = new UsuarioRepository(conexao);
             // Configurando o fornecimento de tokens
             var opcoesConfiguracaoToken = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/token"),
+                TokenEndpointPath = new PathString("/Token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new ProviderDeTokensDeAcesso(_usuarioRepository)
+                Provider = new ProviderDeTokensDeAcesso(repositorio)
             };
 
             // Ativando o uso de acess tokens 
