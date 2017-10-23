@@ -15,6 +15,7 @@ $(document).ready(function() {
     });
 
     $("#Nome, #SaldoUsuario, #Password").keydown(validaBotao).blur(validaBotao).focus(validaBotao);
+    $("#SaldoUsuario").keyup(validaCampos).on("paste", validaCampos);
 
     $("#fotoUsuario").change(function() {
         //função que muda a foto do usuário na tela
@@ -33,32 +34,21 @@ $(document).ready(function() {
         allowNegative: true,
         thousands: ".",
         decimal: ",",
-        affixesStay: true
+        affixesStay: true,
+        //clearMaskOnLostFocus: false
     }).maskMoney("mask");
-
-    $("#SaldoUsuario").keyup(validaCampos).blur(validaCampos).on("paste", validaCampos);
 });
 
 function validaCampos() {
         var tamanhoCampo = $("#SaldoUsuario").val().length;
         var valorInserido = $("#SaldoUsuario").val();
-        valorInserido = valorInserido.replace("R$", "").replace(",", ".");
-        if (tamanhoCampo > 9 || tamanhoCampo <= 0 || parseFloat(valorInserido) > 999 || parseFloat(valorInserido) == 0 || valorInserido == "") {
+        valorInserido = valorInserido.replace("R$ ", "").replace(",", ".");
+        console.log(valorInserido);
+        if (tamanhoCampo > 9 || tamanhoCampo < 0 || parseFloat(valorInserido) > 999.99 || parseFloat(valorInserido) < 0 || valorInserido == "") {
             $(".botaoEditar").attr("disabled", "disabled");
         }
         else
             $(".botaoEditar").removeAttr("disabled");
-    }
-
-function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $("#imagem").attr("src", e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
     }
 
 function validaBotao() {
@@ -68,11 +58,22 @@ function validaBotao() {
         var qtdeSenha = $("#Password").val().length;
 
         //desabilitando o botão caso um dos dois esteja inválido
-        if (qtdeNome > 50 || qtdeNome <= 0 || qtdeSenha > 12 || qtdeSenha <= 0 || qtdeSenha < 7)
+        if (qtdeNome > 50 || qtdeNome <= 0 || qtdeSenha > 12 || qtdeSenha < 7)
             $(".botaoEditar").attr("disabled", "disabled");
         else
             $(".botaoEditar").removeAttr("disabled");
     }
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $("#imagem").attr("src", e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 
 function encodeImageFileAsURL(callback, tela) {
         var filesSelected = document.getElementById("fotoUsuario").files;

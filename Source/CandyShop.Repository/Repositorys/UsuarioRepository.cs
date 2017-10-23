@@ -32,7 +32,6 @@ namespace CandyShop.Repository.Repositorys
             {
                 ExecuteProcedure(Procedures.CSSP_InsUsuario);
                 AddParameter("@NomeUsuario", usuario.NomeUsuario);
-                AddParameter("@SenhaUsuario", usuario.SenhaUsuario);
                 AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
                 AddParameter("@CpfUsuario", cpf);
                 AddParameter("@Ativo", usuario.Ativo);

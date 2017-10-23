@@ -29,9 +29,9 @@ namespace CandyShop.Core.Services.Produto
                 return;
             }
 
-            if (string.IsNullOrEmpty(produto.QtdeProduto.ToString()) || produto.QtdeProduto <= 0)
+            if (produto.QtdeProduto < 0)
             {
-                _notification.Add("Quantidade do produto nao pode ser nula");
+                _notification.Add("Quantidade do produto nao pode ser menor que zero!");
                 return;
             }
 
