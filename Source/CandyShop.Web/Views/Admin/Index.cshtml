@@ -49,8 +49,6 @@
             listarCompraDia: '@Url.Action("ListarDia", "Compra")',
             listarCompra: '@Url.Action("Listar", "Compra")',
             detalheCompra: '@Url.Action("Detalhes", "Compra")',
-            editarCompra: '@Url.Action("Editar","Compra")',
-            concluirEdicaoCompra: '@Url.Action("Editar","Compra")'
         });
 
         AjaxJsShop.init({
@@ -134,11 +132,7 @@
     <li class="white-text">
         <a href='@Url.Action("NavBar", "Home")' title="Voltar para Loja"><h4 class="center" style="cursor: pointer;">Candy <font class="white-text">Shop</font></h4></a>
     </li>
-    <li class="divider"></li>
-    <li><a class="dropdown-button white-text" title="Você está na área administrativa" href="#!"><i class="material-icons left white-text adm">account_box</i>ADMINISTRADOR</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
+    <li><br/></li>
     <li>
         <ul class="collapsible" data-collapsible="accordion">
             <li>
@@ -195,10 +189,9 @@
         </ul>
     </li>
     <li><a class="dropdown-button white-text closeMenu" href="#!" onclick="AjaxJsShop.mostraSaldo()"><i class="material-icons left white-text small">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
+    <li><br /></li>
 
-    <li><div class="divider"></div></li>
     <li><a class="dropdown-button white-text active" title="Voltar para Loja" href='@Url.Action("NavBar", "Home")'><i class="material-icons left white-text small">call_made</i>VOLTAR PARA LOJA</a></li>
-    <li><div class="divider"></div></li>
     <li><a class="dropdown-button white-text active" title="Fazer logoff" href='#!' onclick="AjaxJsUsuario.logOff()"><i class="material-icons left white-text small">power_settings_new</i>SAIR</a></li>
 </ul>
 

@@ -7,7 +7,6 @@ GO
 
 CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	@NomeUsuario varchar(50),
-	@SenhaUsuario varchar(12) = 'password',
 	@SaldoUsuario decimal(18,2) = 0,
 	@CpfUsuario varchar(14),
 	@Ativo varchar(1) = 'A',
@@ -30,7 +29,7 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	
 	BEGIN
 		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario,Ativo, Classificacao)
-			VALUES (@CpfUsuario,@NomeUsuario,@SenhaUsuario,@SaldoUsuario,@Ativo, @Classificacao)		
+			VALUES (@CpfUsuario,@NomeUsuario,@CpfUsuario,@SaldoUsuario,@Ativo, @Classificacao)		
 			
 				IF @@ERROR <> 0
 					RETURN 1

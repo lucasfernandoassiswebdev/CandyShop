@@ -175,10 +175,10 @@ function readURL(input, imagem) {
 }
 
 function validaBotao() {
+    console.log();
     if ($("#NomeProduto").val().length <= 0 || $("#NomeProduto").val().length > 40 ||
-        $("#QtdeProduto").val().length <= 0 || parseInt($("#QtdeProduto").val()) > 999
-        || parseInt($("#QtdeProduto").val()) <= 0 || parseInt($("#QtdeProduto").val()) >= 999
-        || parseInt($("#QtdeProduto").val()) <= 0 ||
+        $("#QtdeProduto").val().length < 0 || parseInt($("#QtdeProduto").val()) > 999
+        || parseInt($("#QtdeProduto").val()) < 0 || parseInt($("#QtdeProduto").val()) >= 999 ||
         parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) > 999 ||
         parseFloat($("#PrecoProduto").val().replace("R$", "").replace(",", ".")) <= 0 ||
         $("#PrecoProduto").val() == "R$ 0,00" || $("#PrecoProduto").val() == "")
