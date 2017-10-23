@@ -38,11 +38,18 @@ namespace CandyShop.Core.Services.Compra
 
                 foreach (var item in compra.Itens)
                 {
+                    if (compra.Usuario.Ativo != "A" )
+                    {
+                        _notification.Add("O Usuario esta inativo impossivel realizar a compra");
+                        return 0;
+                    }
+
                     if (item.QtdeCompra <= 0)
                     {
                         _notification.Add("Quantidade do produto nao pode ser zero ou menor");
                         return 0;
                     }
+
 
                     VerificaEstoque(item);
                     if (_notification.HasNotification())

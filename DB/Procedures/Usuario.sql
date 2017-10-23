@@ -352,9 +352,3 @@ CREATE PROCEDURE [dbo].[CSSP_VerificaSaldoLoja]
 			WHERE Ativo = 'A'
 	END
 GO
-
-
-
-
-				
-
