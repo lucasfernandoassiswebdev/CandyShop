@@ -5,6 +5,7 @@ using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers.Produto
 {
+    [Authorize]
     public class ProdutoController : ProdutoUnauthorizedController
     {
         private readonly string _enderecoImagens = $"{ImagensConfig.EnderecoImagens}\\Produtos";
