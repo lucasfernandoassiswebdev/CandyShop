@@ -10,12 +10,12 @@ namespace CandyShop.WebAPI.Controllers.Usuario
     public class UsuarioController : UsuarioUnauthorizedController
     {
         private readonly string _enderecoImagens = $"{ImagensConfig.EnderecoImagens}\\Usuarios";
-        private readonly string _getEnderecoImagens = $"{ImagensConfig.GetEnderecoImagens}/Usuarios";
+        
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService):base(usuarioService,usuarioRepository)
+        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService) : base(usuarioService, usuarioRepository)
         {
             _notification = notification;
             _usuarioRepository = usuarioRepository;
@@ -92,7 +92,6 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         /* Quando mais de um método com o mesmo verbo HTTP(no caso o GET) é necessário, 
             são definidas rotas como no exemplo abaixo, essas rotas determinarão qual dos 
             métodos da API será chamado */
-        
         public IHttpActionResult Get()
         {
             return Ok(_usuarioRepository.ListarUsuario());
@@ -116,13 +115,6 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         public IHttpActionResult GetSaldo()
         {
             return Ok(_usuarioRepository.VerificaCreditoLoja());
-        }
-        [HttpGet, Route("api/Usuario/{cpf}/Detalhes")]
-        public IHttpActionResult GetWithCpf(string cpf)
-        {
-            var usuario = _usuarioRepository.SelecionarUsuario(cpf);
-            usuario.Imagem = $"{_getEnderecoImagens}/{cpf}.jpg?={DateTime.Now.Ticks}";
-            return Ok(usuario);
         }
     }
 }
