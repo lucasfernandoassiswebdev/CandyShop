@@ -6,6 +6,7 @@ using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
 {
+    [Authorize]
     public class CompraController : ApiController
     {
         // Interfaces que serão instânciadas pelo simple injector

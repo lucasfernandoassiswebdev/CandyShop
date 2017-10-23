@@ -1,4 +1,5 @@
 ﻿using CandyShop.Application;
+using CandyShop.Application.Applications;
 using CandyShop.Application.Interfaces;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;

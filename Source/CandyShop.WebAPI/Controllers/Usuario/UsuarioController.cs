@@ -4,9 +4,10 @@ using System;
 using System.Net;
 using System.Web.Http;
 
-namespace CandyShop.WebAPI.Controllers
-{
-    public class UsuarioController : ApiController
+namespace CandyShop.WebAPI.Controllers.Usuario
+{   // Esse atributo diz a classe que suas actions exigem algum tipo de autenticação
+    [Authorize]
+    public class UsuarioController : UsuarioUnauthorizedController
     {
         private readonly string _enderecoImagens = $"{ImagensConfig.EnderecoImagens}\\Usuarios";
         private readonly string _getEnderecoImagens = $"{ImagensConfig.GetEnderecoImagens}/Usuarios";
@@ -14,17 +15,17 @@ namespace CandyShop.WebAPI.Controllers
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService)
+        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService):base(usuarioService,usuarioRepository)
         {
             _notification = notification;
             _usuarioRepository = usuarioRepository;
             _usuarioService = usuarioService;
         }
 
-        public IHttpActionResult Post(Usuario usuario)
+        public IHttpActionResult Post(Core.Services.Usuario.Usuario usuario)
         {
             if (usuario.Cpf == null)
-                return Content(HttpStatusCode.BadRequest,"Os campos de CPF e Nome são obrigatórios para o cadastro!");
+                return Content(HttpStatusCode.BadRequest, "Os campos de CPF e Nome são obrigatórios para o cadastro!");
 
             usuario.Cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
             _usuarioService.InserirUsuario(usuario);
@@ -38,7 +39,7 @@ namespace CandyShop.WebAPI.Controllers
                 {
                     usuario.Imagem.InserirImagem(caminho);
                 }
-                else caminho.InserirPadrao();                
+                else caminho.InserirPadrao();
             }
             catch
             {
@@ -47,19 +48,7 @@ namespace CandyShop.WebAPI.Controllers
             return Content(HttpStatusCode.OK, "Usuario inserido com sucesso");
         }
 
-        [HttpPost, Route("api/Usuario/login")]
-        public IHttpActionResult PostLogin(Usuario usuario)
-        {
-            usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
-            var user = _usuarioRepository.SelecionarUsuario(usuario.Cpf);
-            if (user == null || user.Ativo == "I")
-                return Content(HttpStatusCode.BadRequest, "O usuário não existe ou foi desativado");
-
-            return _usuarioService.VerificaLogin(usuario) != 0 ? Content(HttpStatusCode.OK, "Logado com sucesso") : Content(HttpStatusCode.BadRequest, "Login ou senha incorretos");
-        }
-
-
-        public IHttpActionResult Put(Usuario usuario)
+        public IHttpActionResult Put(Core.Services.Usuario.Usuario usuario)
         {
             if (usuario.Cpf == null)
                 return Content(HttpStatusCode.BadRequest, "Os campos de CPF e Nome são obrigatórios para o cadastro!");
@@ -74,19 +63,18 @@ namespace CandyShop.WebAPI.Controllers
             try
             {
                 usuario.Imagem?.InserirImagem(caminho);
-                if(usuario.RemoverImagem)
+                if (usuario.RemoverImagem)
                     caminho.RemoverImagem();
             }
             catch
             {
                 return Content(HttpStatusCode.NotModified, "Usuario editado, porém houve um erro ao editar sua imagem");
             }
-            
+
             return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
         }
-
         [HttpPut, Route("api/usuario/trocarSenha")]
-        public IHttpActionResult PutSenha(Usuario usuario)
+        public IHttpActionResult PutSenha(Core.Services.Usuario.Usuario usuario)
         {
             _usuarioService.VerificaSenha(usuario.SenhaUsuario);
             if (_notification.HasNotification())
@@ -94,19 +82,17 @@ namespace CandyShop.WebAPI.Controllers
             _usuarioRepository.TrocarSenha(usuario);
             return Ok();
         }
-
         [HttpPut, Route("api/usuario/desativar/{cpf}")]
-        public IHttpActionResult PutDesativar(Usuario usuario)
+        public IHttpActionResult PutDesativar(Core.Services.Usuario.Usuario usuario)
         {
             _usuarioRepository.DesativarUsuario(usuario.Cpf);
             return Ok();
         }
 
-
         /* Quando mais de um método com o mesmo verbo HTTP(no caso o GET) é necessário, 
-           são definidas rotas como no exemplo abaixo, essas rotas determinarão qual dos 
-           métodos da API será chamado */
-
+            são definidas rotas como no exemplo abaixo, essas rotas determinarão qual dos 
+            métodos da API será chamado */
+        
         public IHttpActionResult Get()
         {
             return Ok(_usuarioRepository.ListarUsuario());
@@ -116,31 +102,27 @@ namespace CandyShop.WebAPI.Controllers
         {
             return Ok(_usuarioRepository.ListarUsuarioDivida());
         }
-
         [HttpGet, Route("api/Usuario/inativos")]
         public IHttpActionResult GetUsuariosInativos()
         {
             return Ok(_usuarioRepository.ListarUsuarioInativo());
         }
-
         [HttpGet, Route("api/usuario/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {
             return Ok(_usuarioRepository.ListarUsuarioPorNome(nome));
         }
-
         [HttpGet, Route("api/Usuario/saldo")]
         public IHttpActionResult GetSaldo()
         {
             return Ok(_usuarioRepository.VerificaCreditoLoja());
         }
-        
         [HttpGet, Route("api/Usuario/{cpf}/Detalhes")]
         public IHttpActionResult GetWithCpf(string cpf)
         {
             var usuario = _usuarioRepository.SelecionarUsuario(cpf);
             usuario.Imagem = $"{_getEnderecoImagens}/{cpf}.jpg?={DateTime.Now.Ticks}";
             return Ok(usuario);
-        }        
+        }
     }
 }

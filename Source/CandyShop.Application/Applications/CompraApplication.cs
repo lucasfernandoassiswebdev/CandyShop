@@ -1,10 +1,10 @@
-﻿using CandyShop.Application.Interfaces;
-using CandyShop.Application.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using CandyShop.Application.Interfaces;
+using CandyShop.Application.ViewModels;
 
-namespace CandyShop.Application
+namespace CandyShop.Application.Applications
 {
     public class CompraApplication : ICompraApplication
     {

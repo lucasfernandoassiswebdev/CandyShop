@@ -1,11 +1,11 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Pagamento;
-using System;
 using System.Net;
 using System.Web.Http;
 
 namespace CandyShop.WebAPI.Controllers
 {
+    [Authorize]
     public class PagamentoController : ApiController
     {
         private readonly IPagamentoRepository _pagamentoRepository;

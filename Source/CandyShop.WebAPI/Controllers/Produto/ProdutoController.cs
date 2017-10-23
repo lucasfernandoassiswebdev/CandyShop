@@ -1,27 +1,27 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Produto;
-using System;
 using System.Net;
 using System.Web.Http;
 
-namespace CandyShop.WebAPI.Controllers
+namespace CandyShop.WebAPI.Controllers.Produto
 {
-    public class ProdutoController : ApiController
+    [Authorize]
+    public class ProdutoController : ProdutoUnauthorizedController
     {
         private readonly string _enderecoImagens = $"{ImagensConfig.EnderecoImagens}\\Produtos";
-        private readonly string _getEnderecoImagens = $"{ImagensConfig.GetEnderecoImagens}/Produtos";
+
         private readonly INotification _notification;
         private readonly IProdutoRepository _produtoRepository;
         private readonly IProdutoService _produtoService;
 
-        public ProdutoController(INotification notification, IProdutoRepository produtoRepository, IProdutoService produtoService)
+        public ProdutoController(INotification notification, IProdutoRepository produtoRepository, IProdutoService produtoService) : base(produtoRepository)
         {
             _notification = notification;
             _produtoRepository = produtoRepository;
             _produtoService = produtoService;
         }
 
-        public IHttpActionResult Post(Produto produto)
+        public IHttpActionResult Post(Core.Services.Produto.Produto produto)
         {
             if (produto.NomeProduto == null)
                 return Content(HttpStatusCode.BadRequest, "Todas as informações do formulário devem ser preenchidas!");
@@ -59,7 +59,8 @@ namespace CandyShop.WebAPI.Controllers
             return Content(HttpStatusCode.OK, "Produto inserido com sucesso");
         }
 
-        public IHttpActionResult Put(Produto produto)
+        [HttpPut]
+        public IHttpActionResult Put(Core.Services.Produto.Produto produto)
         {
             _produtoService.IsValid(produto);
             if (_notification.HasNotification())
@@ -89,7 +90,6 @@ namespace CandyShop.WebAPI.Controllers
             }
             return Ok();
         }
-
         [HttpPut]
         [Route("api/produto/desativar/{idProduto}")]
         public IHttpActionResult PutDesativar(int idproduto)
@@ -98,59 +98,10 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-        public IHttpActionResult Get()
-        {
-            var produtos = _produtoRepository.ListarProdutos();
-            foreach (var produto in produtos)
-            {
-                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg?={DateTime.Now.Ticks}";
-                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg?={DateTime.Now.Ticks}";
-                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg?={DateTime.Now.Ticks}";
-            }
-            return Ok(produtos);
-        }
-
         [HttpGet, Route("api/produto/inativos")]
         public IHttpActionResult GetInativos()
         {
             return Ok(_produtoRepository.ListarProdutosInativos());
-        }
-
-        [HttpGet, Route("api/produto/selecionar/{idProduto}")]
-        public IHttpActionResult GetId(int idProduto)
-        {
-            var produto = _produtoRepository.SelecionarDadosProduto(idProduto);
-
-            produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg?={DateTime.Now.Ticks}";
-            produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg?={DateTime.Now.Ticks}";
-            produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg?={DateTime.Now.Ticks}";
-            return Ok(produto);
-        }
-
-        [HttpGet, Route("api/produto/procurar/{nome}")]
-        public IHttpActionResult GetPorNome(string nome)
-        {
-            var produtos = _produtoRepository.ProcurarProdutoPorNome(nome);
-            foreach (var produto in produtos)
-            {
-                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg?={DateTime.Now.Ticks}";
-                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg?={DateTime.Now.Ticks}";
-                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg?={DateTime.Now.Ticks}";
-            }
-            return Ok(produtos);
-        }
-
-        [HttpGet, Route("api/produto/categoria/{categoria}")]
-        public IHttpActionResult GetCategoria(string categoria)
-        {
-            var produtos = _produtoRepository.ListarProdutosPorCategoria(categoria);
-            foreach (var produto in produtos)
-            {
-                produto.ImagemA = $"{_getEnderecoImagens}/{produto.IdProduto}_A.jpg?={DateTime.Now.Ticks}";
-                produto.ImagemB = $"{_getEnderecoImagens}/{produto.IdProduto}_B.jpg?={DateTime.Now.Ticks}";
-                produto.ImagemC = $"{_getEnderecoImagens}/{produto.IdProduto}_C.jpg?={DateTime.Now.Ticks}";
-            }
-            return Ok(produtos);
         }
     }
 }
