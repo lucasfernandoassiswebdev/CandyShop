@@ -43,10 +43,11 @@ namespace CandyShop.Application.Applications
             }
         }
 
-        public Response<IEnumerable<UsuarioViewModel>> ListarUsuarios()
+        public Response<IEnumerable<UsuarioViewModel>> ListarUsuarios(string token)
         {
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
                 var response = client.GetAsync(_enderecoApi).Result;
                 return new Response<IEnumerable<UsuarioViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }

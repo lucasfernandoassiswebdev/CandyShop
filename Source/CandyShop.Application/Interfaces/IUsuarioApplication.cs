@@ -5,7 +5,7 @@ namespace CandyShop.Application.Interfaces
 {
     public interface IUsuarioApplication
     {
-        Response<IEnumerable<UsuarioViewModel>> ListarUsuarios();
+        Response<IEnumerable<UsuarioViewModel>> ListarUsuarios(string token);
         Response<IEnumerable<UsuarioViewModel>> ListarUsuariosEmDivida();
         Response<string> InserirUsuario(UsuarioViewModel usuario);
         Response<string> EditarUsuario(UsuarioViewModel usuario);

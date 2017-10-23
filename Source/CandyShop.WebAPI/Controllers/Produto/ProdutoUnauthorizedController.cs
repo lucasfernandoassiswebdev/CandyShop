@@ -26,7 +26,7 @@ namespace CandyShop.WebAPI.Controllers.Produto
             return Ok(produtos);
         }
 
-        [HttpGet, Route("api/produto/selecionar/{idProduto}")]
+        [HttpGet, Route("api/ProdutoUnauthorized/selecionar/{idProduto}")]
         public IHttpActionResult GetId(int idProduto)
         {
             var produto = _produtoRepository.SelecionarDadosProduto(idProduto);
@@ -37,7 +37,7 @@ namespace CandyShop.WebAPI.Controllers.Produto
             return Ok(produto);
         }
 
-        [HttpGet, Route("api/produto/procurar/{nome}")]
+        [HttpGet, Route("api/ProdutoUnauthorized/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {
             var produtos = _produtoRepository.ProcurarProdutoPorNome(nome);
@@ -50,7 +50,7 @@ namespace CandyShop.WebAPI.Controllers.Produto
             return Ok(produtos);
         }
 
-        [HttpGet, Route("api/produto/categoria/{categoria}")]
+        [HttpGet, Route("api/ProdutoUnauthorized/categoria/{categoria}")]
         public IHttpActionResult GetCategoria(string categoria)
         {
             var produtos = _produtoRepository.ListarProdutosPorCategoria(categoria);

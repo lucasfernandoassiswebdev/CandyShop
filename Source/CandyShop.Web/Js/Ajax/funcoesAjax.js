@@ -20,8 +20,7 @@ function main(endereco) {
 function chamaPagina(endereco) {
     $.get(endereco).done(function (data) {        
         $("#DivGrid").slideUp(function () {            
-            $("#DivGrid").hide().html(data).slideDown(function() {                
-            });            
+            $("#DivGrid").hide().html(data).slideDown();            
         });
     }).fail(function (xhr) {
         console.log(xhr.responseText);

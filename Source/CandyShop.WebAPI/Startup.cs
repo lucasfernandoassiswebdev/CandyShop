@@ -47,13 +47,13 @@ namespace CandyShop.WebAPI
             // Ativando cors
             app.UseCors(CorsOptions.AllowAll);
 
-            AtivandoAcessTolens(app);
+            AtivandoAcessTokens(app);
 
             // Ativando configuração WebApi
             app.UseWebApi(config);
         }
 
-        private static void AtivandoAcessTolens(IAppBuilder app)
+        private static void AtivandoAcessTokens(IAppBuilder app)
         {
             var conexao = new Conexao();
             var repositorio = new UsuarioRepository(conexao);

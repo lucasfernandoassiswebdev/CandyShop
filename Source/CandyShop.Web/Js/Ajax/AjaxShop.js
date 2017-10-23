@@ -69,7 +69,7 @@
 
                         $("body").slideUp("slow", function () {
                             $("body").hide().html(data).slideDown(1000, function () {
-                                Materialize.toast(res.replace("Logado com sucesso",""), 3000);
+                                Materialize.toast(res.substr(0,18), 3000);
                             });
                         });
                     }).fail(function (xhr) {
