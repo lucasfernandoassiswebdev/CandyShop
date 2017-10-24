@@ -13,14 +13,16 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
-
-        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService) : base(usuarioService, usuarioRepository)
+        private readonly  Imagens _imagens;
+        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService, Imagens imagens) : base(usuarioService, usuarioRepository)
         {
             _notification = notification;
             _usuarioRepository = usuarioRepository;
             _usuarioService = usuarioService;
+            _imagens = imagens;
         }
 
+        [HttpPost,Route("api/Usuario")]
         public IHttpActionResult Post(Core.Services.Usuario.Usuario usuario)
         {
             if (usuario.Cpf == null)
@@ -35,10 +37,8 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             try
             {
                 if (usuario.Imagem != null)
-                {
-                    usuario.Imagem.InserirImagem(caminho);
-                }
-                else caminho.InserirPadrao();
+                    _imagens.InserirImagem(usuario.Imagem,caminho);
+                else _imagens.InserirPadrao(caminho);
             }
             catch
             {
@@ -61,9 +61,10 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             var caminho = $"{_enderecoImagens}\\{usuario.Cpf}";
             try
             {
-                usuario.Imagem?.InserirImagem(caminho);
+                if(usuario.Imagem != null)
+                    _imagens.InserirImagem(usuario.Imagem, caminho);
                 if (usuario.RemoverImagem)
-                    caminho.RemoverImagem();
+                    _imagens.RemoverImagem(caminho);
             }
             catch
             {

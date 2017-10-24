@@ -1,4 +1,5 @@
-﻿var AjaxJsUsuario = (function ($) {
+﻿var obj;
+var AjaxJsUsuario = (function ($) {
     var url = {};
 
     var init = function (config) {
@@ -6,7 +7,7 @@
     };
 
     var cadastroUsuario = function () {
-        chamaPagina(url.cadastroUsuario);
+        chamaPaginaUsuarios(url.cadastroUsuario);
     };
     var listaUsuario = function () {
         chamaPaginaUsuarios(url.listaUsuario);
@@ -27,7 +28,8 @@
             Imagem: imgBase64,
             Classificacao: $("#Classificacao").val()
         };
-        concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
+        atualizaToken();
+        concluirAcao(url.concluirCadastroUsuario, { usuario: usuario, token:obj.access_token }, url.cadastroUsuario);
     };
     var concluirEdicaoUsuario = function (imgBase64, removerImagem, tela) {
         var usuario = {
@@ -106,7 +108,7 @@
 
 
 function chamaPaginaUsuarios(endereco) {
-    var obj = JSON.parse(localStorage.getItem("tokenCandyShop"));
+    atualizaToken();
     $.ajax({
         url: endereco,
         type: "GET",
@@ -123,4 +125,11 @@ function chamaPaginaUsuarios(endereco) {
             console.log(xhr.responseText);
         }
     });
+}
+
+
+function atualizaToken() {
+    obj = localStorage.getItem("tokenCandyShop") ? JSON.parse(localStorage.getItem("tokenCandyShop")) : [];
+    if (obj == [])
+        Materialize.modal("Há algo de errado com suas validações",2000);
 }

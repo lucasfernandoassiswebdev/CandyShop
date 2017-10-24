@@ -20,6 +20,7 @@ namespace CandyShop.Web.Controllers.Usuario
         {
             return View();
         }
+
         public ActionResult Cadastrar()
         {
             return View();
@@ -59,27 +60,27 @@ namespace CandyShop.Web.Controllers.Usuario
             TempData["nomeLista"] = "Usuários Ativos";
             return View("Index", response.Content);
         }
-        public ActionResult ListarUsuariosEmDivida()
+        public ActionResult ListarUsuariosEmDivida(string token)
         {
-            var response = _appUsuario.ListarUsuariosEmDivida();
+            var response = _appUsuario.ListarUsuariosEmDivida(token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
             TempData["nomeLista"] = "Usuários em Dívida";
             return View("Index", response.Content);
         }
-        public ActionResult ListarInativos()
+        public ActionResult ListarInativos(string token)
         {
-            var response = _appUsuario.ListarInativos();
+            var response = _appUsuario.ListarInativos(token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
             TempData["nomeLista"] = "Usuários Inativos";
             return View("Index", response.Content);
         }
-        public ActionResult ProcurarUsuario(string nome)
+        public ActionResult ProcurarUsuario(string nome, string token)
         {
-            var response = _appUsuario.ProcurarUsuario(nome);
+            var response = _appUsuario.ProcurarUsuario(nome, token);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro: {response.Status}");
             TempData["nomeLista"] = "Usuários Relacionados";
@@ -87,28 +88,28 @@ namespace CandyShop.Web.Controllers.Usuario
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(UsuarioViewModel usuario)
+        public ActionResult Cadastrar(UsuarioViewModel usuario, string token)
         {
             if (usuario.Cpf == null || usuario.NomeUsuario == null)
                 return Content("Os campos de CPF e Nome são obrigatórios para o cadastro!");
 
             if (!ModelState.IsValid) return Content("Ops, ocorreu um erro ao editar usuário.");
 
-            var response = _appUsuario.InserirUsuario(usuario);
+            var response = _appUsuario.InserirUsuario(usuario,token);
 
-            return Content(response.Status != HttpStatusCode.OK
+            return Content(response.Status != HttpStatusCode.OK || response.Status != HttpStatusCode.NotModified
                 ? $"{response.ContentAsString}"
                 : response.Content);
         }
         [HttpPost]
-        public ActionResult Editar(UsuarioViewModel usuario)
+        public ActionResult Editar(UsuarioViewModel usuario, string token)
         {
             if (usuario.Cpf == null || usuario.NomeUsuario == null || usuario.Classificacao == null ||
                 usuario.Ativo == null || usuario.SenhaUsuario == null)
                 return Content("Preencha todos os campos");
 
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
-            var response = _appUsuario.EditarUsuario(usuario);
+            var response = _appUsuario.EditarUsuario(usuario, token);
 
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
@@ -123,9 +124,9 @@ namespace CandyShop.Web.Controllers.Usuario
             return Content("Edição concluída com sucesso!!");
         }
         [HttpPost]
-        public ActionResult DesativarUsuario(UsuarioViewModel usuario)
+        public ActionResult DesativarUsuario(UsuarioViewModel usuario, string token)
         {
-            var response = _appUsuario.DesativarUsuario(usuario);
+            var response = _appUsuario.DesativarUsuario(usuario,token);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro {response.Status}" : "Usuario desativado com sucesso!");
         }
     }
