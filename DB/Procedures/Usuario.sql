@@ -56,17 +56,17 @@ CREATE PROCEDURE [dbo].[CSSP_DesUsuario]
 	*/
 
 	BEGIN
-		DECLARE @NUMADM INT
+		DECLARE @NUMADM INT = 0
 		IF (SELECT Classificacao 
 				FROM [dbo].[Usuario]
 				WHERE Cpf = @Cpf) like 'A'
 		BEGIN
 			SET @NUMADM = (SELECT COUNT(Classificacao) as Num 
 				FROM [dbo].[Usuario] 
-				WHERE Classificacao = 'A')
+				WHERE Classificacao = 'A' AND Ativo = 'A')
 		END
 
-		IF @NUMADM = NULL OR @NUMADM > 1
+		IF @NUMADM <> 1
 		BEGIN
 			UPDATE [dbo].[Usuario] 
 				SET Ativo = 'I'
@@ -76,7 +76,9 @@ CREATE PROCEDURE [dbo].[CSSP_DesUsuario]
 			RETURN 0
 		END
 		ELSE 
+		BEGIN
 			RETURN 1
+		END
 	END
 GO
 		

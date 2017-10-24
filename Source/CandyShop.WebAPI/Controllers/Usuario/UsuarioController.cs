@@ -84,8 +84,10 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         [HttpPut, Route("api/Usuario/desativar/{cpf}")]
         public IHttpActionResult PutDesativar(Core.Services.Usuario.Usuario usuario)
         {
-            _usuarioRepository.DesativarUsuario(usuario.Cpf);
+            if(_usuarioRepository.DesativarUsuario(usuario.Cpf) == 1)
+                return Content(HttpStatusCode.NotAcceptable, "Quantidade de minima de administradores atingida");
             return Ok();
+
         }
 
         /* Quando mais de um método com o mesmo verbo HTTP(no caso o GET) é necessário, 

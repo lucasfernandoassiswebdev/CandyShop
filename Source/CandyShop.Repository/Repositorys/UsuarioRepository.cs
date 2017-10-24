@@ -1,6 +1,7 @@
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
+using System.Data;
 
 namespace CandyShop.Repository.Repositorys
 {
@@ -59,12 +60,12 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@senha", usuario.SenhaUsuario);
             ExecuteNonQuery();
         }
-        public void DesativarUsuario(string cpf)
+        public int DesativarUsuario(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_DesUsuario);
             AddParameter("@Cpf", cpf);
-
-            ExecuteNonQuery();
+            var retorno = ExecuteNonQueryWithReturn();
+            return retorno;
         }
 
         public Usuario SelecionarUsuario(string cpf)
