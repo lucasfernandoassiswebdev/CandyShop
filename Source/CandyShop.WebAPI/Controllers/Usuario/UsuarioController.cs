@@ -47,6 +47,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             return Content(HttpStatusCode.OK, "Usuario inserido com sucesso");
         }
 
+        [HttpPut,Route("api/Usuario")]
         public IHttpActionResult Put(Core.Services.Usuario.Usuario usuario)
         {
             if (usuario.Cpf == null)

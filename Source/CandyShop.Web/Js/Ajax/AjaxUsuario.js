@@ -29,7 +29,7 @@ var AjaxJsUsuario = (function ($) {
             Classificacao: $("#Classificacao").val()
         };
         atualizaToken();
-        concluirAcao(url.concluirCadastroUsuario, { usuario: usuario, token:obj.access_token }, url.cadastroUsuario);
+        concluirAcao(url.concluirCadastroUsuario, { usuario: usuario, token: obj.access_token }, url.cadastroUsuario);
     };
     var concluirEdicaoUsuario = function (imgBase64, removerImagem, tela) {
         var usuario = {
@@ -42,7 +42,8 @@ var AjaxJsUsuario = (function ($) {
             Classificacao: $("#Classificacao").val(),
             RemoverImagem: removerImagem
         };
-        concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, tela);
+        atualizaToken();
+        concluirAcaoEdicaoUsuario(url.concluirEdicaoUsuario, { usuario: usuario, token: obj.access_token }, tela);
     };
     var desativarUsuario = function (cpf, telaAnterior) {
         var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
@@ -114,10 +115,12 @@ function chamaPaginaUsuarios(endereco) {
         type: "GET",
         data: {
             token: obj.access_token
-         },
+        },
         success: function (dataSucess) {
             $("#DivGrid").slideUp(function () {
-                $("#DivGrid").hide().html(dataSucess).slideDown();
+                $("#DivGrid").hide().html(dataSucess).slideDown(function() {
+                    Materialize.toast(dataSucess.data,3000);
+                });
             });
         },
         error: function (xhr) {
@@ -127,9 +130,20 @@ function chamaPaginaUsuarios(endereco) {
     });
 }
 
+function concluirAcaoEdicaoUsuario(endereco, objeto, tela) {
+    $.ajax({
+        url: endereco,
+        type: "POST",
+        data: objeto,
+        success: function (message) {
+            chamaPaginaUsuarios(tela);
+            Materialize.toast(message, 4000);
+        }
+    });
+}
 
 function atualizaToken() {
     obj = localStorage.getItem("tokenCandyShop") ? JSON.parse(localStorage.getItem("tokenCandyShop")) : [];
     if (obj == [])
-        Materialize.modal("Há algo de errado com suas validações",2000);
+        Materialize.modal("Há algo de errado com suas validações", 2000);
 }

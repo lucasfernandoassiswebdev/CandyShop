@@ -111,7 +111,7 @@ namespace CandyShop.Web.Controllers.Usuario
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");
             var response = _appUsuario.EditarUsuario(usuario, token);
 
-            if (response.Status != HttpStatusCode.OK)
+            if (response.Status != HttpStatusCode.OK && response.Status != HttpStatusCode.NotModified)
                 return Content("Erro. " + response.ContentAsString);
 
             if (!Session["Login"].ToString().Equals(cpf)) return Content("Edição concluída com sucesso!!");
