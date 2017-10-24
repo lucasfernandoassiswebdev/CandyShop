@@ -1,55 +1,54 @@
 ﻿/* Arquivos Ajax são usados para fazer as requisições nos controllers web,
    as functions definidas aqui montam os objetos necessários, chamam os controllers
    e carregam as páginas necessárias */
-
+var obj;
 var AjaxJsCompra = (function ($) {
     var url = {};
 
     var init = function (config) {
         url = config;
     };
-    var inserirCompra = function () {
+    var inserirCompra = function() {
         var listaProdutos = [];
         var produto;
         var produtos = $(".collection li");
         var i = 1;
-        $.each(produtos, function () {
-            produto = {
-                Produto: { IdProduto: $("li:nth-child(" + i + ") span").attr("data-id") },
-                QtdeCompra: $("li:nth-child(" + i + ") p").attr("data-Quantidade")
-            };
-            listaProdutos.push(produto);
-            i++;
-        });
+        $.each(produtos,
+            function() {
+                produto = {
+                    Produto: { IdProduto: $("li:nth-child(" + i + ") span").attr("data-id") },
+                    QtdeCompra: $("li:nth-child(" + i + ") p").attr("data-Quantidade")
+                };
+                listaProdutos.push(produto);
+                i++;
+            });
         var compra = { Itens: listaProdutos };
-
-        $.post(url.inserirCompra, compra)
-            .done(function (message) {
+        atualizaToken();
+        $.post(url.inserirCompra, { compra: compra, token: obj.access_token })
+            .done(function(message) {
                 $.get(url.navbar)
-                    .done(function (data) {
-                        $("body").slideUp(function () {
-                            $("body").hide().html(data).slideDown(function () {
+                    .done(function(data) {
+                        $("body").slideUp(function() {
+                            $("body").hide().html(data).slideDown(function() {
                                 Materialize.toast(message, 4000);
                             });
                         });
-                    }).fail(function (xhr) {
+                    }).fail(function(xhr) {
                         console.log(xhr.responseText);
                     });
-                if (message === "Sua compra foi registrada com sucesso") {
+                if (message === "Sua compra foi registrada com sucesso") 
                     localStorage.removeItem("listaProdutos");
-                }
-
             })
-            .fail(function (xhr) {
+            .fail(function(xhr) {
                 console.log(xhr.responseText);
             });
-    }
+    };
 
     var historicoCompra = function () {
-        chamaPagina(url.historicoCompra);
+        chamaPaginaCompra(url.historicoCompra, "body");
     };
     var listarCompra = function () {
-        chamaPagina(url.listarCompra);
+        chamaPaginaCompra(url.listarCompra, "#DivGrid");
     };
 
     var listarCompraMes = function (mes) {
@@ -57,39 +56,16 @@ var AjaxJsCompra = (function ($) {
         chamaPaginaComIdentificador(url.listarCompraMes, parametro);
     };
     var listarCompraSemana = function () {
-        chamaPagina(url.listarCompraSemana);
+        chamaPaginaCompra(url.listarCompraSemana, "#DivGrid");
     };
     var listarCompraDia = function () {
-        chamaPagina(url.listarCompraDia);
+        chamaPaginaCompra(url.listarCompraDia, "#DivGrid");
     };
     var detalheCompra = function (idCompra, paginaAnterior) {
-        chamaPaginaComIdentificador(url.detalheCompra, { idCompra: idCompra, paginaAnterior: paginaAnterior });
+        atualizaToken();
+        chamaPaginaComIdentificador(url.detalheCompra, { idCompra: idCompra, paginaAnterior: paginaAnterior, token: obj.access_token});
     };
-    var editarCompra = function (idCompra) {
-        chamaPaginaComIdentificador(url.editarCompra, { IdCompra: idCompra });
-    };
-    var concluirEdicaoCompra = function (idCompra, cpfUsuario) {
-        var listaProdutos = [], i = 3;
-        $("select").each(function () {
-            var itemCompra = {
-                Id: $(this).val(),
-                QtdeProduto: $("input:eq(" + i + ")").val()
-            };
-            listaProdutos.push(itemCompra);
-            i++;
-        });
-
-        var compra = {
-            IdCompra: idCompra,
-            DataCompra: $("input:eq(0)").val() + $("input:eq(1)").val(),
-            Usuario: {
-                Cpf: cpfUsuario
-            },
-            Itens: listaProdutos
-        };
-        concluirAcaoEdicao(url.editarCompra, compra, url.listarCompraMes);
-    };
-
+    
     return {
         init: init,
         historicoCompra: historicoCompra,
@@ -98,8 +74,34 @@ var AjaxJsCompra = (function ($) {
         listarCompraMes: listarCompraMes,
         listarCompraDia: listarCompraDia,
         inserirCompra: inserirCompra,
-        detalheCompra: detalheCompra,
-        editarCompra: editarCompra,
-        concluirEdicaoCompra: concluirEdicaoCompra
+        detalheCompra: detalheCompra
     };
 })(jQuery);
+
+function atualizaToken() {
+    obj = localStorage.getItem("tokenCandyShop") ? JSON.parse(localStorage.getItem("tokenCandyShop")) : [];
+    if (obj == [])
+        Materialize.modal("Há algo de errado com suas validações", 2000);
+}
+
+function chamaPaginaCompra(endereco, div) {
+    atualizaToken();
+    $.ajax({
+        url: endereco,
+        type: "GET",
+        data: {
+            token: obj.access_token
+        },
+        success: function (dataSucess) {
+            $(div).slideUp(function () {
+                $(div).hide().html(dataSucess).slideDown(function () {
+                    Materialize.toast(dataSucess.data, 3000);
+                });
+            });
+        },
+        error: function (xhr) {
+            Materialize.toast("Você não está autorizado, contate os administradores", 3000);
+            console.log(xhr.responseText);
+        }
+    });
+}

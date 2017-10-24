@@ -16,48 +16,48 @@ namespace CandyShop.Web.Controllers.Compra
             _appCompra = compra;
         }
 
-        public ActionResult Listar()
+        public ActionResult Listar(string token)
         {
             ViewBag.tituloPagina = "Compras do ultimo mês";
             ViewBag.drop = 0;
-            var response = _appCompra.ListaCompra();
+            var response = _appCompra.ListaCompra(token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-        public ActionResult ListarCpf()
+        public ActionResult ListarCpf(string token)
         {
             ViewBag.tituloPagina = "Minhas Compras";
             var cpf = Session["login"].ToString();
             ViewBag.drop = 1;
-            var response = _appCompra.ListaCompraPorCpf(cpf);
+            var response = _appCompra.ListaCompraPorCpf(cpf,token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-        public ActionResult ListarSemana()
+        public ActionResult ListarSemana(string token)
         {
             ViewBag.tituloPagina = "Compras da ultima semana";
             ViewBag.drop = 1;
-            var response = _appCompra.ListarComprasSemana();
+            var response = _appCompra.ListarComprasSemana(token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-        public ActionResult ListarMes(int mes)
+        public ActionResult ListarMes(int mes,string token)
         {
             ViewBag.tituloPagina = $"Compra do mês {mes}";
             ViewBag.drop = 0;
-            var response = _appCompra.ListarComprasMes(mes);
+            var response = _appCompra.ListarComprasMes(mes,token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-        public ActionResult ListarDia()
+        public ActionResult ListarDia(string token)
         {
             ViewBag.tituloPagina = $"Compras do dia {DateTime.Now.ToShortDateString()}";
             ViewBag.drop = 1;
-            var response = _appCompra.ListarComprasDia();
+            var response = _appCompra.ListarComprasDia(token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
