@@ -32,8 +32,9 @@ var AjaxJsPagamento = (function ($) {
         concluirAcaoPagamento(url.concluirPagamento, {pagamento: pagamento, token: obj.access_token}, url.padrao, "body");
     };
 
-    var editarPagamento = function(idPagamento, paginaAnterior) {
-        chamaPaginaComIdentificador(url.editarPagamento, { idPagamento: idPagamento, paginaAnterior: paginaAnterior });
+    var editarPagamento = function (idPagamento, paginaAnterior) {
+        atualizaToken();
+        chamaPaginaComIdentificador(url.editarPagamento, { idPagamento: idPagamento, paginaAnterior: paginaAnterior, token: obj.access_token });
     };
     var concluirEdicaoPagamento = function(paginaAnterior, parameter) {
         var pagamento = {
@@ -41,7 +42,8 @@ var AjaxJsPagamento = (function ($) {
             ValorPagamento: $("#valorPago").val().replace("R$ ", ""),
             Usuario: { Cpf: $("#Cpf").val() } 
         };
-        $.post(url.concluirEdicaoPagamento, pagamento)
+        atualizaToken();
+        $.post(url.concluirEdicaoPagamento, { pagamento: pagamento, token: obj.access_token })
             .done(function(data) {
                 if (typeof paginaAnterior === "function") {
                     if (parameter != null) {

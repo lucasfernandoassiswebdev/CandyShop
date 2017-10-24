@@ -82,6 +82,7 @@ namespace CandyShop.Application.Applications
         {
             using (var client = new HttpClient())
             {
+                AtualizaToken(token,client);
                 var response = client.GetAsync($"{_enderecoApi}/id/{idPagamento}").Result;
                 return new Response<PagamentoViewModel>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
