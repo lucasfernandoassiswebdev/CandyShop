@@ -47,11 +47,13 @@ var AjaxJsUsuario = (function ($) {
     };
     var desativarUsuario = function (cpf, telaAnterior) {
         var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
+        atualizaToken();
         chamaPaginaComIdentificador(url.desativarUsuario, usuario);
     };
     var desativarUsuarioConfirmado = function (cpf) {
         var usuario = { Cpf: cpf };
-        concluirAcaoEdicao(url.desativarUsuarioConfirmado, usuario, url.listarUsuarioInativo);
+        atualizaToken();
+        concluirAcaoEdicao(url.desativarUsuarioConfirmado, { usuario: usuario, token: obj.access_token }, url.listarUsuarioInativo);
     };
     var listarUsuarioInativo = function () {
         chamaPagina(url.listarUsuarioInativo);
