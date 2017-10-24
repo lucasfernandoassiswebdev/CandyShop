@@ -64,9 +64,9 @@ namespace CandyShop.Web.Controllers
             return View("ListaProdutos", response.Content);
 
         }
-        public ActionResult ListarInativos()
+        public ActionResult ListarInativos(string token)
         {
-            var response = _appProduto.ListarInativos();
+            var response = _appProduto.ListarInativos(token);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro. {response.ContentAsString}");
 
@@ -85,29 +85,29 @@ namespace CandyShop.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult CadastrarProduto(ProdutoViewModel produto)
+        public ActionResult CadastrarProduto(ProdutoViewModel produto, string token)
         {
             if (produto.NomeProduto == null || produto.QtdeProduto == 0 ||
                 produto.Categoria == null || produto.PrecoProduto == 0)
                 return Content("Os campos não podem estar vazios ou zerados");
 
-            var response = _appProduto.InserirProduto(produto);
+            var response = _appProduto.InserirProduto(produto,token);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro. {response.ContentAsString}" : response.Content);
         }
         [HttpPost]
-        public ActionResult EditarProduto(ProdutoViewModel produto)
+        public ActionResult EditarProduto(ProdutoViewModel produto, string token)
         {
             if (produto.NomeProduto == null || produto.QtdeProduto < 0 ||
                 produto.Categoria == null || produto.PrecoProduto == 0 || produto.Ativo == null)
                 return Content("Os campos não podem estar vazios ou zerados");
 
-            var response = _appProduto.EditarProduto(produto);
+            var response = _appProduto.EditarProduto(produto,token);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro. {response.ContentAsString}" : "Produto editado com sucesso!");
         }
         [HttpPost]
-        public ActionResult DesativarProdutoConfirmado(ProdutoViewModel produto)
+        public ActionResult DesativarProdutoConfirmado(ProdutoViewModel produto, string token)
         {
-            var response = _appProduto.DesativarProduto(produto);
+            var response = _appProduto.DesativarProduto(produto,token);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro: {response.Status}" : "Produto desativado com sucesso!");
         }
     }

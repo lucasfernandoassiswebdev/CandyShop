@@ -6,11 +6,11 @@ namespace CandyShop.Application.Interfaces
     public interface IProdutoApplication
     {
         Response<IEnumerable<ProdutoViewModel>> ListarProdutos();
-        Response<string> InserirProduto(ProdutoViewModel produto);
+        Response<string> InserirProduto(ProdutoViewModel produto, string token);
         Response<ProdutoViewModel> DetalharProduto(int idProduto);
-        Response<string> EditarProduto(ProdutoViewModel produto);
-        Response<string> DesativarProduto(ProdutoViewModel produto);
-        Response<IEnumerable<ProdutoViewModel>> ListarInativos();
+        Response<string> EditarProduto(ProdutoViewModel produto, string token);
+        Response<string> DesativarProduto(ProdutoViewModel produto, string token);
+        Response<IEnumerable<ProdutoViewModel>> ListarInativos(string token);
         Response<IEnumerable<ProdutoViewModel>> ProcurarProduto(string nome);
         Response<IEnumerable<ProdutoViewModel>> ListarCategoria(string categoria);
     }
