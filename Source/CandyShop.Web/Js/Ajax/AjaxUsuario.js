@@ -1,4 +1,5 @@
-﻿var AjaxJsUsuario = (function ($) {
+﻿var obj;
+var AjaxJsUsuario = (function ($) {
     var url = {};
 
     var init = function (config) {
@@ -6,7 +7,7 @@
     };
 
     var cadastroUsuario = function () {
-        chamaPagina(url.cadastroUsuario);
+        chamaPaginaUsuarios(url.cadastroUsuario);
     };
     var listaUsuario = function () {
         chamaPaginaUsuarios(url.listaUsuario);
@@ -27,7 +28,8 @@
             Imagem: imgBase64,
             Classificacao: $("#Classificacao").val()
         };
-        concluirAcao(url.concluirCadastroUsuario, usuario, url.cadastroUsuario);
+        atualizaToken();
+        concluirAcao(url.concluirCadastroUsuario, { usuario: usuario, token: obj.access_token }, url.cadastroUsuario);
     };
     var concluirEdicaoUsuario = function (imgBase64, removerImagem, tela) {
         var usuario = {
@@ -40,7 +42,8 @@
             Classificacao: $("#Classificacao").val(),
             RemoverImagem: removerImagem
         };
-        concluirAcaoEdicao(url.concluirEdicaoUsuario, usuario, tela);
+        atualizaToken();
+        concluirAcaoEdicaoUsuario(url.concluirEdicaoUsuario, { usuario: usuario, token: obj.access_token }, tela);
     };
     var desativarUsuario = function (cpf, telaAnterior) {
         var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
@@ -106,16 +109,18 @@
 
 
 function chamaPaginaUsuarios(endereco) {
-    var obj = JSON.parse(localStorage.getItem("tokenCandyShop"));
+    atualizaToken();
     $.ajax({
         url: endereco,
         type: "GET",
         data: {
             token: obj.access_token
-         },
+        },
         success: function (dataSucess) {
             $("#DivGrid").slideUp(function () {
-                $("#DivGrid").hide().html(dataSucess).slideDown();
+                $("#DivGrid").hide().html(dataSucess).slideDown(function() {
+                    Materialize.toast(dataSucess.data,3000);
+                });
             });
         },
         error: function (xhr) {
@@ -123,4 +128,22 @@ function chamaPaginaUsuarios(endereco) {
             console.log(xhr.responseText);
         }
     });
+}
+
+function concluirAcaoEdicaoUsuario(endereco, objeto, tela) {
+    $.ajax({
+        url: endereco,
+        type: "POST",
+        data: objeto,
+        success: function (message) {
+            chamaPaginaUsuarios(tela);
+            Materialize.toast(message, 4000);
+        }
+    });
+}
+
+function atualizaToken() {
+    obj = localStorage.getItem("tokenCandyShop") ? JSON.parse(localStorage.getItem("tokenCandyShop")) : [];
+    if (obj == [])
+        Materialize.modal("Há algo de errado com suas validações", 2000);
 }

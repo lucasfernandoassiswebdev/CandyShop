@@ -13,12 +13,13 @@ namespace CandyShop.WebAPI.Controllers.Produto
         private readonly INotification _notification;
         private readonly IProdutoRepository _produtoRepository;
         private readonly IProdutoService _produtoService;
-
-        public ProdutoController(INotification notification, IProdutoRepository produtoRepository, IProdutoService produtoService) : base(produtoRepository)
+        private readonly Imagens _imagens;
+        public ProdutoController(INotification notification, IProdutoRepository produtoRepository, IProdutoService produtoService, Imagens imagens) : base(produtoRepository)
         {
             _notification = notification;
             _produtoRepository = produtoRepository;
             _produtoService = produtoService;
+            _imagens = imagens;
         }
 
         public IHttpActionResult Post(Core.Services.Produto.Produto produto)
@@ -41,16 +42,16 @@ namespace CandyShop.WebAPI.Controllers.Produto
             try
             {
                 if (produto.ImagemA != null)
-                    produto.ImagemA.InserirImagem($"{caminho}_A");
-                else $"{caminho}_A".InserirPadrao();
+                    _imagens.InserirImagem(produto.ImagemA, $"{caminho}_A");
+                else _imagens.InserirPadrao($"{caminho}_A");
 
                 if (produto.ImagemB != null)
-                    produto.ImagemB.InserirImagem($"{caminho}_B");
-                else $"{caminho}_B".InserirPadrao();
+                    _imagens.InserirImagem(produto.ImagemB, $"{caminho}_B");
+                else _imagens.InserirPadrao($"{caminho}_B");
 
                 if (produto.ImagemC != null)
-                    produto.ImagemC.InserirImagem($"{caminho}_C");
-                else $"{caminho}_C".InserirPadrao();
+                    _imagens.InserirImagem(produto.ImagemC, $"{caminho}_C");
+                else _imagens.InserirPadrao($"{caminho}_C");
             }
             catch
             {
@@ -70,19 +71,19 @@ namespace CandyShop.WebAPI.Controllers.Produto
             var caminho = $"{_enderecoImagens}\\{produto.IdProduto}";
             try
             {
-                produto.ImagemA?.InserirImagem($"{caminho}_A");
-                produto.ImagemB?.InserirImagem($"{caminho}_B");
-                produto.ImagemC?.InserirImagem($"{caminho}_C");
-
+                if (produto.ImagemA != null)
+                    _imagens.InserirImagem(produto.ImagemA, $"{caminho}_A");
+                if (produto.ImagemB != null)
+                    _imagens.InserirImagem(produto.ImagemB, $"{caminho}_A");
+                if (produto.ImagemC != null)
+                    _imagens.InserirImagem(produto.ImagemC, $"{caminho}_A");
 
                 if (produto.RemoverImagemA)
-                    $"{caminho}_A".RemoverImagem();
-
+                    _imagens.RemoverImagem($"{caminho}_A");
                 if (produto.RemoverImagemB)
-                    $"{caminho}_B".RemoverImagem();
-
+                    _imagens.RemoverImagem($"{caminho}_B");
                 if (produto.RemoverImagemC)
-                    $"{caminho}_C".RemoverImagem();
+                    _imagens.RemoverImagem($"{caminho}_C");
             }
             catch
             {

@@ -57,8 +57,10 @@ CREATE PROCEDURE [dbo].[CSSP_DesProduto]
 
 	BEGIN
 	UPDATE [dbo].[Produto]
-		SET Ativo = 'I'
+		SET Ativo = 'I',
+			QtdeProduto = 0
 		WHERE IdProduto = @IdProduto
+				
 		IF @@ERROR <> 0
 					RETURN 1
 		RETURN 0		

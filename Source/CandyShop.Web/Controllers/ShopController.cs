@@ -15,9 +15,9 @@ namespace CandyShop.Web.Controllers
             _appUsuario = usuario;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string token)
         {
-            var response = _appUsuario.VerificaCreditoLoja();
+            var response = _appUsuario.VerificaCreditoLoja(token);
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Erro ao calcular saldo da lojinha. {response.ContentAsString}");
 

@@ -3,6 +3,7 @@ using CandyShop.Application.ViewModels;
 using CandyShop.Web.Helpers;
 using System.Net;
 using System.Web.Mvc;
+using CandyShop.Web.Filters;
 
 namespace CandyShop.Web.Controllers.Usuario
 {
@@ -23,7 +24,7 @@ namespace CandyShop.Web.Controllers.Usuario
         }
 
         [HttpPost]
-        public ActionResult TrocarSenha(TrocaSenhaViewModel senhas)
+        public ActionResult TrocarSenha(TrocaSenhaViewModel senhas, string token)
         {
             if(senhas.NovaSenha == null || senhas.ConfirmaNovaSenha == null)
                 return Content("Campos não podem ser vazios!!!!");
@@ -36,7 +37,7 @@ namespace CandyShop.Web.Controllers.Usuario
                 Cpf = Session["Login"].ToString(),
                 SenhaUsuario = senhas.NovaSenha
             };
-            var response = _appUsuario.TrocarSenha(usuario);
+            var response = _appUsuario.TrocarSenha(usuario, token);
             return Content(response.Status != HttpStatusCode.OK
                 ? $"Erro ao trocar a senha, {response.ContentAsString}"
                 : "Senha atualizada com sucesso");

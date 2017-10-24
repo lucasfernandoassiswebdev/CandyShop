@@ -10,36 +10,47 @@ namespace CandyShop.Application.Applications
     public class UsuarioApplication : IUsuarioApplication
     {
         private readonly string _enderecoApi = $"{ApiConfig.enderecoApi}/Usuario";
-        private readonly  string _enderecoApiUnauthorized = $"{ApiConfig.enderecoApi}/UsuarioUnauthorized";
+        private readonly string _enderecoApiUnauthorized = $"{ApiConfig.enderecoApi}/UsuarioUnauthorized";
 
-        public Response<string> InserirUsuario(UsuarioViewModel usuario)
+        public Response<string> InserirUsuario(UsuarioViewModel usuario, string token)
         {
             using (var client = new HttpClient())
             {
+                AtualizaToken(token, client);
                 var response = client.PostAsync(_enderecoApi, usuario, new JsonMediaTypeFormatter()).Result;
                 return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<string> EditarUsuario(UsuarioViewModel usuario)
+        public Response<string> EditarUsuario(UsuarioViewModel usuario, string token)
         {
             using (var client = new HttpClient())
             {
+                AtualizaToken(token, client);
                 var response = client.PutAsync(_enderecoApi, usuario, new JsonMediaTypeFormatter()).Result;
                 return response.StatusCode != HttpStatusCode.OK
                     ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
                     : new Response<string>(response.StatusCode);
             }
         }
-
-        public Response<string> TrocarSenha(UsuarioViewModel usuario)
+        public Response<string> TrocarSenha(UsuarioViewModel usuario, string token)
         {
             using (var client = new HttpClient())
             {
+                AtualizaToken(token, client);
                 var response = client.PutAsync($"{_enderecoApi}/trocarSenha", usuario, new JsonMediaTypeFormatter()).Result;
                 return response.StatusCode != HttpStatusCode.OK
                     ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
                     : new Response<string>(response.StatusCode);
+            }
+        }
+        public Response<string> DesativarUsuario(UsuarioViewModel usuario, string token)
+        {
+            using (var client = new HttpClient())
+            {
+                AtualizaToken(token, client);
+                var response = client.PutAsync($"{_enderecoApi}/desativar/{usuario.Cpf}", usuario, new JsonMediaTypeFormatter()).Result;
+                return response.StatusCode != HttpStatusCode.OK ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode) : new Response<string>(response.StatusCode);
             }
         }
 
@@ -47,30 +58,29 @@ namespace CandyShop.Application.Applications
         {
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                AtualizaToken(token, client);
                 var response = client.GetAsync(_enderecoApi).Result;
                 return new Response<IEnumerable<UsuarioViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-
-        public Response<IEnumerable<UsuarioViewModel>> ListarUsuariosEmDivida()
+        public Response<IEnumerable<UsuarioViewModel>> ListarUsuariosEmDivida(string token)
         {
             using (var client = new HttpClient())
             {
+                AtualizaToken(token, client);
                 var response = client.GetAsync($"{_enderecoApi}/Devedores").Result;
                 return new Response<IEnumerable<UsuarioViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-
-        public Response<IEnumerable<UsuarioViewModel>> ListarInativos()
+        public Response<IEnumerable<UsuarioViewModel>> ListarInativos(string token)
         {
             using (var client = new HttpClient())
             {
+                AtualizaToken(token, client);
                 var response = client.GetAsync($"{_enderecoApi}/inativos").Result;
                 return new Response<IEnumerable<UsuarioViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-
         public Response<UsuarioViewModel> SelecionarUsuario(string cpf)
         {
             using (var client = new HttpClient())
@@ -79,27 +89,15 @@ namespace CandyShop.Application.Applications
                 return new Response<UsuarioViewModel>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-
-        public Response<string> DesativarUsuario(UsuarioViewModel usuario)
+        public Response<IEnumerable<UsuarioViewModel>> ProcurarUsuario(string nome, string token)
         {
             using (var client = new HttpClient())
             {
-                var response = client.PutAsync($"{_enderecoApi}/desativar/{usuario.Cpf}", usuario, new JsonMediaTypeFormatter()).Result;
-                if (response.StatusCode != HttpStatusCode.OK)
-                    return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
-                return new Response<string>(response.StatusCode);
-            }
-        }
-
-        public Response<IEnumerable<UsuarioViewModel>> ProcurarUsuario(string nome)
-        {
-            using (var cliente = new HttpClient())
-            {
-                var response = cliente.GetAsync($"{_enderecoApi}/procurar/{nome}").Result;
+                AtualizaToken(token, client);
+                var response = client.GetAsync($"{_enderecoApi}/procurar/{nome}").Result;
                 return new Response<IEnumerable<UsuarioViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-
         public Response<string> VerificaLogin(UsuarioViewModel usuario)
         {
             using (var client = new HttpClient())
@@ -108,17 +106,20 @@ namespace CandyShop.Application.Applications
                 return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-
-        public Response<decimal> VerificaCreditoLoja()
+        public Response<decimal> VerificaCreditoLoja(string token)
         {
             using (var client = new HttpClient())
             {
+                AtualizaToken(token, client);
                 var response = client.GetAsync($"{_enderecoApi}/saldo").Result;
-                if (response.StatusCode != HttpStatusCode.OK)
-                    return new Response<decimal>(response.StatusCode);
-
-                return new Response<decimal>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+                return response.StatusCode != HttpStatusCode.OK ? new Response<decimal>(response.StatusCode) : new Response<decimal>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
+        }
+
+        private static void AtualizaToken(string token, HttpClient client)
+        {
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
         }
     }
 }
+

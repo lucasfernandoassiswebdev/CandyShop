@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace CandyShop.Web.Helpers
+namespace CandyShop.Web.Filters
 {
     public class UserFilterResult : ActionFilterAttribute
     {
