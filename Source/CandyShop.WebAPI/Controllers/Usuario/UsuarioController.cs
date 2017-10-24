@@ -1,6 +1,5 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Usuario;
-using System;
 using System.Net;
 using System.Web.Http;
 
@@ -10,12 +9,12 @@ namespace CandyShop.WebAPI.Controllers.Usuario
     public class UsuarioController : UsuarioUnauthorizedController
     {
         private readonly string _enderecoImagens = $"{ImagensConfig.EnderecoImagens}\\Usuarios";
-        private readonly string _getEnderecoImagens = $"{ImagensConfig.GetEnderecoImagens}/Usuarios";
+
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService):base(usuarioService,usuarioRepository)
+        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService) : base(usuarioService, usuarioRepository)
         {
             _notification = notification;
             _usuarioRepository = usuarioRepository;
@@ -73,7 +72,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
 
             return Content(HttpStatusCode.OK, "Usuário cadastrado com sucesso");
         }
-        [HttpPut, Route("api/usuario/trocarSenha")]
+        [HttpPut, Route("api/Usuario/trocarSenha")]
         public IHttpActionResult PutSenha(Core.Services.Usuario.Usuario usuario)
         {
             _usuarioService.VerificaSenha(usuario.SenhaUsuario);
@@ -82,7 +81,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             _usuarioRepository.TrocarSenha(usuario);
             return Ok();
         }
-        [HttpPut, Route("api/usuario/desativar/{cpf}")]
+        [HttpPut, Route("api/Usuario/desativar/{cpf}")]
         public IHttpActionResult PutDesativar(Core.Services.Usuario.Usuario usuario)
         {
             _usuarioRepository.DesativarUsuario(usuario.Cpf);
@@ -92,10 +91,10 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         /* Quando mais de um método com o mesmo verbo HTTP(no caso o GET) é necessário, 
             são definidas rotas como no exemplo abaixo, essas rotas determinarão qual dos 
             métodos da API será chamado */
-        
+        [Route("api/Usuario")]
         public IHttpActionResult Get()
         {
-            return Ok(_usuarioRepository.ListarUsuario());
+            return Content(HttpStatusCode.OK, _usuarioRepository.ListarUsuario());
         }
         [HttpGet, Route("api/Usuario/Devedores")]
         public IHttpActionResult GetUsuariosDivida()
@@ -116,13 +115,6 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         public IHttpActionResult GetSaldo()
         {
             return Ok(_usuarioRepository.VerificaCreditoLoja());
-        }
-        [HttpGet, Route("api/Usuario/{cpf}/Detalhes")]
-        public IHttpActionResult GetWithCpf(string cpf)
-        {
-            var usuario = _usuarioRepository.SelecionarUsuario(cpf);
-            usuario.Imagem = $"{_getEnderecoImagens}/{cpf}.jpg?={DateTime.Now.Ticks}";
-            return Ok(usuario);
         }
     }
 }

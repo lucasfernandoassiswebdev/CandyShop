@@ -76,9 +76,9 @@ namespace CandyShop.Web.Controllers
             Session["nomeUsuario"] = user.Content.NomeUsuario.Split(null)[0];
             Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
-            return Content(response.Content);
+            return Content(response.Content + Session["Login"]);
         }
-        [HttpPost]
+        [HttpPost][Authorize]
         public ActionResult Cadastrar(CompraViewModel compra)
         {
 

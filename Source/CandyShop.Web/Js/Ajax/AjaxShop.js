@@ -36,9 +36,40 @@
             .done(function (res) {
                 $.get(url.padrao)
                     .done(function (data) {
+                        var texto = /Logado com sucesso/;
+                        if (texto.test(res)) {
+                            var cpf = res.replace("Logado com sucesso", "");
+
+                            var informacoesAutorizacao = {
+                                grant_type: "password",
+                                username: cpf,
+                                password: "password"
+                            };
+                            var queryString = jQuery.param(informacoesAutorizacao);
+
+                            $.ajax({
+                                type: "POST",
+                                url: "http://localhost:4000/Token",
+                                data: queryString,
+                                dataType: "text",
+                                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                                xhrFields: {
+                                    withCredentials: true
+                                },
+                                success: function (result) {
+                                    var token = result;
+                                    localStorage.setItem("tokenCandyShop", token);
+                                },
+                                error: function (req, status, error) {
+                                    Materialize.toast(error, 3000);
+                                }
+                            });
+                        } else
+                            res = "Você não tem acesso aos recursos do sistema, contate os administradores";
+
                         $("body").slideUp("slow", function () {
                             $("body").hide().html(data).slideDown(1000, function () {
-                                Materialize.toast(res, 20000);
+                                Materialize.toast(res.substr(0,18), 3000);
                             });
                         });
                     }).fail(function (xhr) {
@@ -74,8 +105,6 @@
     var listaCategoria = function (categoria) {
         chamaPaginaComIdentificador(url.listaCategoria, { categoria: categoria });
     };
-
-    //função que vai carregar o corpo inteiro da pagina    
 
     return {
         init: init,

@@ -50,9 +50,9 @@ namespace CandyShop.Web.Controllers.Usuario
             return View(response.Content);
         }
 
-        public ActionResult Listar()
+        public ActionResult Listar(string token)
         {
-            var response = _appUsuario.ListarUsuarios();
+            var response = _appUsuario.ListarUsuarios(token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
