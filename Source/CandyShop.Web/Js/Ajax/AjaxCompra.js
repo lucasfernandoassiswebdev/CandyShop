@@ -41,6 +41,7 @@ var AjaxJsCompra = (function ($) {
             })
             .fail(function(xhr) {
                 console.log(xhr.responseText);
+                Materialize.toast("Algo deu errado, recarregue a página ou contate um administrador",2000);
             });
     };
 
