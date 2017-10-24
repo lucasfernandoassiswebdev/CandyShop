@@ -49,6 +49,10 @@
                     <td class="negrito">Status do usuário: </td>
                     <td>@(Model.Ativo == "A" ? "Ativo" : "Inativo")</td>
                 </tr>
+                <tr>
+                    <td class="negrito">Tipo de usuário: </td>
+                    <td>@(Model.Classificacao == "A" ? "Administrador" : "Usuário")</td>
+                </tr>
             </tbody>
         </table>
         @if (ViewBag.telaAnterior.ToString().Equals("Usuários Ativos"))

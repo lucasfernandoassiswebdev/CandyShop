@@ -3,6 +3,7 @@ using CandyShop.Application.ViewModels;
 using CandyShop.Web.Helpers;
 using System.Net;
 using System.Web.Mvc;
+using CandyShop.Web.Filters;
 
 namespace CandyShop.Web.Controllers.Pagamento
 {

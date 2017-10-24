@@ -44,7 +44,6 @@ namespace CandyShop.Repository.Repositorys
             return 0;
         }
 
-
         public Compra SelecionarDadosCompra(int idCompra)
         {
             ExecuteProcedure(Procedures.CSSP_SelDadosCompra);

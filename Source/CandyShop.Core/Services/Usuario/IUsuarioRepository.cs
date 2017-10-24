@@ -6,7 +6,7 @@ namespace CandyShop.Core.Services.Usuario
     {
         void InserirUsuario(Usuario usuario);
         void EditarUsuario(Usuario usuario);
-        void DesativarUsuario(string cpf);
+        int DesativarUsuario(string cpf);
         void TrocarSenha(Usuario usuario);
         int VericaUsuarioIgual(Usuario usuario);
         Usuario SelecionarUsuario(string cpf);
