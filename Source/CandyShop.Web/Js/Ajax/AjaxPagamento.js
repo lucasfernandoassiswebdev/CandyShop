@@ -1,4 +1,5 @@
-﻿var AjaxJsPagamento = (function ($) {
+﻿var obj;
+var AjaxJsPagamento = (function ($) {
     var url = {};
 
     var init = function (config) {
@@ -9,7 +10,7 @@
         chamaPagina(url.detalhePagamento);
     };
     var listarPagamento = function () {
-        chamaPagina(url.listarPagamento);
+        chamaPaginaPagamento(url.listarPagamento,"#DivGrid");
     };
     var listarPagamentoMes = function (mes) {
         var parametro = { mes: mes };
@@ -18,38 +19,21 @@
     var listarPagamentoSemana = function () {
         chamaPagina(url.listarPagamentoSemana);
     };
-
     var listarPagamentoDia = function () {
         chamaPagina(url.listarPagamentoDia);
     };
-
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
     var concluirPagamento = function () {
         var pagamento = { ValorPagamento: $("#valorPago").val().replace("R$ ", "") };
-        $.post(url.concluirPagamento, pagamento)            
-            .done(function (message) {
-                $.get(url.padrao)
-                    .done(function (data) {
-                        $("body").slideUp(function () {
-                            $("body").hide().html(data).slideDown(function() {
-                                Materialize.toast(message, 3000);
-                            });
-                        });
-                    }).fail(function (xhr) {
-                        console.log(xhr.responseText);
-                    });                
-            })
-            .fail(function (xhr) {
-                console.log(xhr.responseText);
-            });        
+        atualizaToken();
+        concluirAcaoPagamento(url.concluirPagamento, {pagamento: pagamento, token: obj.access_token}, url.padrao, "body");
     };
 
     var editarPagamento = function(idPagamento, paginaAnterior) {
-        chamaPaginaComIdentificador(url.editarPagamento, { idPagamento: idPagamento, paginaAnterior: paginaAnterior});
-    }
-
+        chamaPaginaComIdentificador(url.editarPagamento, { idPagamento: idPagamento, paginaAnterior: paginaAnterior });
+    };
     var concluirEdicaoPagamento = function(paginaAnterior, parameter) {
         var pagamento = {
             IdPagamento: $("#IdPagamento").val(),
@@ -82,5 +66,47 @@
         listarPagamentoMes: listarPagamentoMes,
         editarPagamento: editarPagamento,
         concluirEdicaoPagamento: concluirEdicaoPagamento
-    }
+    };
 })(jQuery);
+
+function chamaPaginaPagamento(endereco, div) {
+    console.log(div);
+    atualizaToken();
+    $.ajax({
+        url: endereco,
+        type: "GET",
+        data: {
+            token: obj.access_token
+        },
+        success: function (dataSucess) {
+            $(div).slideUp(function () {
+                $(div).hide().html(dataSucess).slideDown(function () {
+                    Materialize.toast(dataSucess.data, 3000);
+                });
+            });
+        },
+        error: function (xhr) {
+            Materialize.toast("Você não está autorizado, contate os administradores", 3000);
+            console.log(xhr.responseText);
+        }
+    });
+}
+
+function concluirAcaoPagamento(endereco, objeto, tela, div) {
+    $.post(endereco, objeto)
+        .done(function (message) {
+            chamaPaginaPagamento(tela,div);
+            Materialize.toast(message, 4000);
+        })
+        .fail(function (xhr) {
+            console.log(xhr.responseText);
+        });
+}
+
+function atualizaToken() {
+    obj = localStorage.getItem("tokenCandyShop") ? JSON.parse(localStorage.getItem("tokenCandyShop")) : [];
+    if (obj == [])
+        Materialize.modal("Há algo de errado com suas validações", 2000);
+}
+
+

@@ -37,42 +37,35 @@ namespace CandyShop.WebAPI.Controllers
             return Ok();
         }
 
-
         public IHttpActionResult Get()
         {
             return Ok(_pagamentoRepository.ListarPagamentos());
         }
-
         [Route("api/pagamento/id/{idPagamento}")]
         public IHttpActionResult GetEspecifico(int idPagamento)
         {
             return Ok(_pagamentoRepository.SelecionarDadosPagamento(idPagamento));
         }
-
         [Route("api/pagamento/{cpf}")]
         public IHttpActionResult GetCpf(string cpf)
         {
             return Ok(_pagamentoRepository.ListarPagamentos(cpf));
         }
-
         [Route("api/pagamento/mes/{mes}")]
         public IHttpActionResult GetMes(int mes)
         {
             return Ok(_pagamentoRepository.ListarPagamentos(mes));
         }
-
         [Route("api/pagamento/semana")]
         public IHttpActionResult GetSemana()
         {
             return Ok(_pagamentoRepository.ListarPagamentoSemana());
         }
-
         [Route("api/pagamento/semana/{cpf}")]
         public IHttpActionResult GetSemanaCpf(string cpf)
         {
             return Ok(_pagamentoRepository.ListarPagamentoSemana(cpf));
         }
-
         [Route("api/pagamento/dia")]
         public IHttpActionResult GetDia()
         {
