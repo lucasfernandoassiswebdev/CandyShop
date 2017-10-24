@@ -56,13 +56,27 @@ CREATE PROCEDURE [dbo].[CSSP_DesUsuario]
 	*/
 
 	BEGIN
-		UPDATE [dbo].[Usuario] 
-			SET Ativo = 'I'
-			WHERE Cpf = @Cpf
-			IF @@ERROR <> 0
-				RETURN 1
+		DECLARE @NUMADM INT
+		IF (SELECT Classificacao 
+				FROM [dbo].[Usuario]
+				WHERE Cpf = @Cpf) like 'A'
+		BEGIN
+			SET @NUMADM = (SELECT COUNT(Classificacao) as Num 
+				FROM [dbo].[Usuario] 
+				WHERE Classificacao = 'A')
+		END
 
-		RETURN 0
+		IF @NUMADM = NULL OR @NUMADM > 1
+		BEGIN
+			UPDATE [dbo].[Usuario] 
+				SET Ativo = 'I'
+				WHERE Cpf = @Cpf
+				IF @@ERROR <> 0
+					RETURN 1
+			RETURN 0
+		END
+		ELSE 
+			RETURN 1
 	END
 GO
 		
