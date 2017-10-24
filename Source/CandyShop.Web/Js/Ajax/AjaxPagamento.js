@@ -7,20 +7,21 @@ var AjaxJsPagamento = (function ($) {
     };
 
     var detalhePagamento = function () {
-        chamaPagina(url.detalhePagamento);
+        chamaPaginaPagamento(url.detalhePagamento,"#DivGrid");
     };
     var listarPagamento = function () {
         chamaPaginaPagamento(url.listarPagamento,"#DivGrid");
     };
     var listarPagamentoMes = function (mes) {
         var parametro = { mes: mes };
-        chamaPaginaComIdentificador(url.listarPagamentoMes, parametro);
+        atualizaToken();
+        chamaPaginaComIdentificador(url.listarPagamentoMes, { parametro: parametro, token: obj.access_token});
     };
     var listarPagamentoSemana = function () {
-        chamaPagina(url.listarPagamentoSemana);
+        chamaPaginaPagamento(url.listarPagamentoSemana,"#DivGrid");
     };
     var listarPagamentoDia = function () {
-        chamaPagina(url.listarPagamentoDia);
+        chamaPaginaPagamento(url.listarPagamentoDia,"#DivGrid");
     };
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
@@ -70,7 +71,6 @@ var AjaxJsPagamento = (function ($) {
 })(jQuery);
 
 function chamaPaginaPagamento(endereco, div) {
-    console.log(div);
     atualizaToken();
     $.ajax({
         url: endereco,
