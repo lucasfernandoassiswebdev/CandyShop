@@ -59,7 +59,7 @@ var AjaxJsUsuario = (function ($) {
         chamaPaginaUsuarios(url.listarUsuarioInativo);
     };
     var listarUsuarioEmDivida = function () {
-        chamaPagina(url.listarUsuarioEmDivida);
+        chamaPaginaUsuarios(url.listarUsuarioEmDivida);
     };
     var listarUsuarioPorNome = function () {
         var usuario = { Nome: $("#nomeUsuario").val() };
