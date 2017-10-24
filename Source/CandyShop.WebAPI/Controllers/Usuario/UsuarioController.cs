@@ -13,7 +13,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
-        private readonly  Imagens _imagens;
+        private readonly Imagens _imagens;
         public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService, Imagens imagens) : base(usuarioService, usuarioRepository)
         {
             _notification = notification;
@@ -22,7 +22,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             _imagens = imagens;
         }
 
-        [HttpPost,Route("api/Usuario")]
+        [HttpPost, Route("api/Usuario")]
         public IHttpActionResult Post(Core.Services.Usuario.Usuario usuario)
         {
             if (usuario.Cpf == null)
@@ -37,7 +37,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             try
             {
                 if (usuario.Imagem != null)
-                    _imagens.InserirImagem(usuario.Imagem,caminho);
+                    _imagens.InserirImagem(usuario.Imagem, caminho);
                 else _imagens.InserirPadrao(caminho);
             }
             catch
@@ -47,7 +47,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             return Content(HttpStatusCode.OK, "Usuario inserido com sucesso");
         }
 
-        [HttpPut,Route("api/Usuario")]
+        [HttpPut, Route("api/Usuario")]
         public IHttpActionResult Put(Core.Services.Usuario.Usuario usuario)
         {
             if (usuario.Cpf == null)
@@ -62,7 +62,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             var caminho = $"{_enderecoImagens}\\{usuario.Cpf}";
             try
             {
-                if(usuario.Imagem != null)
+                if (usuario.Imagem != null)
                     _imagens.InserirImagem(usuario.Imagem, caminho);
                 if (usuario.RemoverImagem)
                     _imagens.RemoverImagem(caminho);
@@ -86,10 +86,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         [HttpPut, Route("api/Usuario/desativar/{cpf}")]
         public IHttpActionResult PutDesativar(Core.Services.Usuario.Usuario usuario)
         {
-            if(_usuarioRepository.DesativarUsuario(usuario.Cpf) == 1)
-                return Content(HttpStatusCode.NotAcceptable, "Quantidade de minima de administradores atingida");
-            return Ok();
-
+            return _usuarioRepository.DesativarUsuario(usuario.Cpf) == 1 ? Content(HttpStatusCode.NotAcceptable, "Quantidade de minima de administradores atingida") : Content(HttpStatusCode.OK, "Usuario desativado com sucesso");
         }
 
         /* Quando mais de um método com o mesmo verbo HTTP(no caso o GET) é necessário, 

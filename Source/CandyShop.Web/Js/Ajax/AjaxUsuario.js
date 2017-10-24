@@ -53,10 +53,10 @@ var AjaxJsUsuario = (function ($) {
     var desativarUsuarioConfirmado = function (cpf) {
         var usuario = { Cpf: cpf };
         atualizaToken();
-        concluirAcaoEdicao(url.desativarUsuarioConfirmado, { usuario: usuario, token: obj.access_token }, url.listarUsuarioInativo);
+        concluirAcaoEdicaoUsuario(url.desativarUsuarioConfirmado, { usuario: usuario, token: obj.access_token }, url.listarUsuarioInativo);
     };
     var listarUsuarioInativo = function () {
-        chamaPagina(url.listarUsuarioInativo);
+        chamaPaginaUsuarios(url.listarUsuarioInativo);
     };
     var listarUsuarioEmDivida = function () {
         chamaPagina(url.listarUsuarioEmDivida);
