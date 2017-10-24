@@ -4,11 +4,11 @@ using System.IO;
 
 namespace CandyShop.WebAPI
 {
-    public static class Imagens
+    public class Imagens
     {
         private static readonly string EnderecoImagens = $"{ImagensConfig.EnderecoImagens}";
 
-        public static void InserirImagem(this string imagem, string nomeImagem)
+        public void InserirImagem(string imagem, string nomeImagem)
         {
             string[] prefixos = { "data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64," };
             foreach (var prefixo in prefixos)
@@ -23,18 +23,18 @@ namespace CandyShop.WebAPI
             }
         }
 
-        public static void RemoverImagem(this string filePath)
+        public void RemoverImagem(string filePath)
         {
             var caminho = $"{EnderecoImagens}\\{filePath}.jpg";
             if (File.Exists(caminho))
             {
                 File.Delete(caminho);
-                filePath.InserirPadrao();
+                InserirPadrao(filePath);
             }
-            filePath.InserirPadrao();
+            InserirPadrao(filePath);
         }
 
-        public static void InserirPadrao(this string endereco)
+        public void InserirPadrao(string endereco)
         {
             //pegando a imagem na aplicação e transformando em base 64
             var imagem = ConvertTo64();

@@ -37,6 +37,7 @@ namespace CandyShop.WebAPI
             container.Register<ICompraRepository, CompraRepository>();
             container.Register<ICompraProdutoRepository, CompraProdutoRepository>();
             container.Register<Conexao>(Lifestyle.Scoped);
+            container.Register<Imagens>();
 
             container.Verify();
             return container;
