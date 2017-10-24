@@ -1,7 +1,6 @@
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
-using System.Data;
 
 namespace CandyShop.Repository.Repositorys
 {
