@@ -59,7 +59,7 @@ function validaBotao() {
     valorInserido = valorInserido.replace("R$ ", "").replace(",", ".");
     //desabilitando o botão caso um dos dois esteja inválido
     if (qtdeNome > 50 || qtdeNome <= 0 || qtdeSenha > 12 || qtdeSenha < 6 || tamanhoCampo > 9 ||
-        tamanhoCampo < 0 || parseFloat(valorInserido) > 999.99 || parseFloat(valorInserido) < 0)
+        tamanhoCampo < 0 || parseFloat(valorInserido) > 999.99)
         $(".botaoEditar").attr("disabled", "disabled");
     else
         $(".botaoEditar").removeAttr("disabled");
