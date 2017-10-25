@@ -78,7 +78,7 @@ namespace CandyShop.Web.Controllers
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
             return Content(response.Content + Session["Login"]);
         }
-        [HttpPost][Authorize]
+        [HttpPost]
         public ActionResult Cadastrar(CompraViewModel compra,string token)
         {
 
@@ -90,7 +90,7 @@ namespace CandyShop.Web.Controllers
 
             var response = _appCompra.InserirCompra(compra,token);
 
-            if ((response.Status != HttpStatusCode.OK) || (response.Content < 1))
+            if (response.Status != HttpStatusCode.OK)
                 return Content($"Os itens da compra não puderam ser registrados: {response.ContentAsString  }");
 
             var user = _appUsuario.SelecionarUsuario(Session["Login"].ToString());

@@ -33,10 +33,10 @@ namespace CandyShop.WebAPI.Controllers
         [HttpPost]
         public IHttpActionResult PostCompra(Compra compra)
         {
-            var result = _appService.InserirCompra(compra);
+           _appService.InserirCompra(compra);
             if (_notification.HasNotification())
                 return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
-            return Ok(result);
+            return Content(HttpStatusCode.OK,"Sua compra foi registrada com sucesso");
         }
 
         /* Verbos http GET servem para operações no banco que retornam algo (SELECT) ,

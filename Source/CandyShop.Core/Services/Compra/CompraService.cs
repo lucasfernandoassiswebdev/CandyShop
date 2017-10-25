@@ -23,7 +23,7 @@ namespace CandyShop.Core.Services.Compra
             _usuarioRepository = usuarioRepository;
         }
 
-        public int InserirCompra(Compra compra)
+        public void InserirCompra(Compra compra)
         {
             /* Inicia uma transação no banco, se qualquer coisa der errado
                durante a inserção da compra, um rollback será realizado e 
@@ -32,13 +32,14 @@ namespace CandyShop.Core.Services.Compra
             _compraRepository.BeginTransaction();
             try
             {
+
                 int valor;
                 var result = _compraRepository.InserirCompra(compra, out valor);
                 if (result == -1)
                 {
                     _compraRepository.RollBackTransaction();
                     _notification.Add("Falha ao inserir compra");
-                    return 0;
+                    return;
                 }
 
                 /* Após inserir os dados da compra, item a item dessa mesma compra
@@ -46,24 +47,17 @@ namespace CandyShop.Core.Services.Compra
                    é realizado. */
                 foreach (var item in compra.Itens)
                 {
-                    if (compra.Usuario.Ativo != "A" )
-                    {
-                        _notification.Add("O Usuario esta inativo impossivel realizar a compra");
-                        return 0;
-                    }
-
                     if (item.QtdeCompra <= 0)
                     {
                         _notification.Add("Quantidade do produto nao pode ser zero ou menor");
-                        return 0;
+                        return;
                     }
-
 
                     VerificaEstoque(item);
                     if (_notification.HasNotification())
                     {
                         _compraRepository.RollBackTransaction();
-                        return 0;
+                        return;
                     }
 
                     item.IdCompra = valor;
@@ -75,18 +69,23 @@ namespace CandyShop.Core.Services.Compra
                 {
                     _compraRepository.RollBackTransaction();
                     _notification.Add("Você está excedendo a dívida máxima, pague a lojinha!");
-                    return 0;
+                    return;
+                }
+
+                if (user.Ativo != "A")
+                {
+                    _compraRepository.RollBackTransaction();
+                    _notification.Add("Sua conta foi desativada! Contate um administrador");
+                    return;
                 }
 
                 _compraRepository.CommitTransaction();
-                return valor;
             }
             catch
             {
                 // Em caso de exception(erro) o roolback é realizado
                 _compraRepository.RollBackTransaction();
                 _notification.Add("Erro ao inserir compra");
-                return 0;
             }
         }
 
