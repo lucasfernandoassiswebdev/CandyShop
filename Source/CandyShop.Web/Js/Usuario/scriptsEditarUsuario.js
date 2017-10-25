@@ -14,8 +14,8 @@ $(document).ready(function () {
         $(this).val(mcpf($(this).val()));
     });
 
-    $("#Nome, #SaldoUsuario, #Password, #SaldoUsuario").keydown(validaBotao).blur(validaBotao).focus(validaBotao).on("paste", validaBotao);
-    $("#SaldoUsuario").keydown(function(e) {
+    $("#Nome, #SaldoUsuario, #Password, #SaldoUsuario").keydown(validaBotao).keyup(validaBotao).blur(validaBotao).focus(validaBotao).on("paste", validaBotao);
+    $("#SaldoUsuario").keydown(function (e) {
         var saldo = $(this).val().replace("R$", "").replace(",", ".").trim();
         if (saldo == 0 && e.which == 109 || e.which == 189)
             return false;
@@ -58,9 +58,8 @@ function validaBotao() {
     var valorInserido = $("#SaldoUsuario").val();
     valorInserido = valorInserido.replace("R$ ", "").replace(",", ".");
     //desabilitando o botão caso um dos dois esteja inválido
-    if (qtdeNome > 50 || qtdeNome <= 0 || qtdeSenha > 12 || qtdeSenha < 5 ||
-        tamanhoCampo > 9 || tamanhoCampo < 0 || parseFloat(valorInserido) > 999.99 ||
-        parseFloat(valorInserido) < 0 || valorInserido == "")
+    if (qtdeNome > 50 || qtdeNome <= 0 || qtdeSenha > 12 || qtdeSenha < 6 || tamanhoCampo > 9 ||
+        tamanhoCampo < 0 || parseFloat(valorInserido) > 999.99)
         $(".botaoEditar").attr("disabled", "disabled");
     else
         $(".botaoEditar").removeAttr("disabled");

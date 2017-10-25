@@ -203,3 +203,10 @@ h3 {
 #search {
 	width: 400px;
 }
+
+#totalCompra {
+	font-weight: bold;
+	margin-left: 18px;
+	font-size: 35px;
+	margin-top: -10px;
+}

@@ -7,8 +7,13 @@
 
     $(".closeMenu").click(function () { $(".button-collapse").sideNav("hide"); });
 });
-// Código que faz o loading aparecer na tela toda vez que começa uma requisição Ajax
-$(document).ajaxStart(function () { $("#DivLoad").fadeIn(300); });
 
-// Código que tira o loading da tela
-$(document).ajaxStop(function () { $("#DivLoad").fadeOut(300); });
+$(document)
+    .on("ajaxSend", function () {
+        $("#DivLoad").fadeIn(300);
+    })
+    .on("ajaxComplete", function (e, xhr) {
+        $("#DivLoad").fadeOut(300);
+        if (xhr.status == 401)
+            location.reload();
+    });

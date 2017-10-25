@@ -76,12 +76,12 @@ namespace CandyShop.Web.Controllers
             Session["nomeUsuario"] = user.Content.NomeUsuario.Split(null)[0];
             Session["saldoUsuario"] = $"{user.Content.SaldoUsuario:C}";
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
+            Session["FirstLogin"] = user.Content.FirstLogin;
             return Content(response.Content + Session["Login"]);
         }
         [HttpPost]
         public ActionResult Cadastrar(CompraViewModel compra,string token)
         {
-
             if (Session["Login"].ToString() == "off")
                 return Content("Efetue login e tente novamente. Você precisa estar logado para concluir sua compra");
 

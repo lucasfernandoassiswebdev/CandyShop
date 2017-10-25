@@ -38,6 +38,7 @@
         }).maskMoney("mask")
             .keyup(validaBotao).blur(validaBotao).focus(validaBotao).on("paste", validaBotao)
             .keydown(function (e) {
+                validaBotao();
                 if (e.which === 13)
                     AjaxJsPagamento.concluirPagamento();
             });

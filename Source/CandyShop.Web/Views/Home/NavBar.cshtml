@@ -103,10 +103,10 @@
         </div>
     </div>
     <div class="modal-footer identQuant">
-        <p id="totalCompra" class="pik-text left identQuant" style="font-weight: bold;margin-left:18px">Total da compra R$ 0,00</p>
+        <p id="totalCompra" class="pink-text left identQuant">Total da compra R$ 0,00</p>
         @if (Session["Login"].ToString().Equals("off"))
         {
-            <a href="#modalLogin" id="confirmarCompra" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold" >Confirmar compra</a>
+            <a href="#modalLogin" id="confirmarCompra" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Confirmar compra</a>
         }
         else
         {
@@ -154,6 +154,15 @@
 
 @if (!Session["Login"].ToString().Equals("off"))
 {
+    if (Session["FirstLogin"].ToString().Equals("T"))
+    {
+        <script>
+            $(document).ready(function () {
+                $('#trocaSenha').modal('open');
+                Materialize.toast("Não deixe seu CPF como senha, troque para ter mais segurança. ;)");
+            });
+        </script>
+    }
     <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>

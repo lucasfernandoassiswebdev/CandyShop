@@ -1,8 +1,12 @@
 ﻿@{
     Layout = null;
 }
-<link rel="stylesheet" type="text/css" href="~/Content/shop.css"/>
+<link rel="stylesheet" type="text/css" href="~/Content/Principal/shop.css"/>
 
 <h1 class="center pink-text">
-    @ViewBag.SaldoAtual
+    <div id="valorAtual">@ViewBag.SaldoAtual</div>
 </h1>
+
+<script>
+    $("#valorAtual").text($("#valorAtual").text().replace(",", ".").replace(".", ","))
+</script>

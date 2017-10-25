@@ -1,4 +1,5 @@
-﻿@model  CandyShop.Application.ViewModels.UsuarioViewModel
+﻿
+@model  CandyShop.Application.ViewModels.UsuarioViewModel
 
 @{
     Layout = null;
@@ -52,13 +53,17 @@
                     <input id="Password" name="Password" type="password" maxlength="12" required data-length="12" autocomplete="off" class="validate" value="@Model.SenhaUsuario" />
                     <label class="active">Password:</label>
                 </div>
-                <div class="input-field col s6">
-                    <select id="Ativo">
-                        <option value="" disabled>Escolha uma opção</option>
-                        <option value="A" @(Model.Ativo == "A" ? "selected" : string.Empty)>Ativo</option>
-                        <option value="I" @(Model.Ativo == "I" ? "selected" : string.Empty)>Inativo</option>
-                    </select>
-                    <label>Status do usuário</label>
+
+                <label style="margin-left: 15px">Status do Usuário</label>               
+                <div style="margin-top: 10px">
+                    <p class="radios" style="margin-left: 185px !important;">
+                        <input name="status" class="with-gap" type="radio" id="test1" value="A" @(Model.Ativo == "A" ? "checked" : string.Empty)/>
+                        <label for="test1">Ativo</label>
+                    </p>
+                    <p class="radios">
+                        <input name="status" class="with-gap" type="radio" id="test2" value="I" @(Model.Ativo == "I" ? "checked" : string.Empty) />
+                        <label for="test2">Inativo</label>
+                    </p>
                 </div>
             </div>
             @if (ViewBag.telaAnterior.ToString().Equals("Usuários Ativos"))
@@ -82,3 +87,9 @@
 </div>
 
 
+<style>
+    .radios {
+        display: inline;
+        margin-left: 70px !important;
+    }
+</style>

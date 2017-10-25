@@ -17,7 +17,8 @@ CREATE TABLE Usuario (
 	SenhaUsuario varchar(12),
 	SaldoUsuario decimal,
 	Ativo varchar(1),
-	Classificacao varchar(1)		--Por padrão =>	'A' -> Admin______'U' -> Usuario
+	Classificacao varchar(1),		--Por padrão =>	'A' -> Admin______'U' -> Usuario
+	FirstLogin varchar(1)			--Por padrão =>	'T'  _________	'F' 
 )
 
 CREATE TABLE Pagamento (

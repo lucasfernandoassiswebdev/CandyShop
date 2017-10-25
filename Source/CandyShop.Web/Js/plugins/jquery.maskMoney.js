@@ -17,11 +17,11 @@
 				thousands: ",",
 				decimal: ".",
 				precision: 2,
-				allowZero: false,
+				allowZero: true,
 				allowNegative: false,
 				doubleClickSelection: true,
-				allowEmpty: false,
-				bringCaretAtEndOnFocus: true
+				allowEmpty: true,
+				bringCaretAtEndOnFocus: false
 			},
 		methods = {
 		destroy: function () {

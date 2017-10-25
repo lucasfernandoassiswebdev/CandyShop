@@ -37,11 +37,12 @@ var AjaxJsUsuario = (function ($) {
             NomeUsuario: $("#Nome").val(),
             SaldoUsuario: $("#SaldoUsuario").val().replace("R$ ", "").replace(".", ""),
             SenhaUsuario: $("#Password").val(),
-            Ativo: $("#Ativo").val(),
+            Ativo: $("input[name='status']:checked").val(),
             Imagem: imgBase64,
             Classificacao: $("#Classificacao").val(),
             RemoverImagem: removerImagem
         };
+        console.log(usuario);
         atualizaToken();
         concluirAcaoEdicaoUsuario(url.concluirEdicaoUsuario, { usuario: usuario, token: obj.access_token }, tela);
     };
@@ -81,8 +82,8 @@ var AjaxJsUsuario = (function ($) {
     };
     var trocarSenha = function () {
         var senhas = { NovaSenha: $("#novaSenha").val(), ConfirmaNovaSenha: $("#confirmaNovaSenha").val() };
-        console.log(senhas.ConfirmaNovaSenha);
-        $.post(url.trocarSenha, senhas)
+        atualizaToken();
+        $.post(url.trocarSenha, {senhas: senhas, token: obj.access_token})
             .done(function (message) {
                 Materialize.toast(message, 4000);
             })
@@ -108,7 +109,6 @@ var AjaxJsUsuario = (function ($) {
         trocarSenha: trocarSenha
     };
 })(jQuery);
-
 
 function chamaPaginaUsuarios(endereco) {
     atualizaToken();
