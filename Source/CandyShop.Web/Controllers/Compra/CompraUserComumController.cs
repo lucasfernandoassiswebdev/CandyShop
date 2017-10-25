@@ -21,9 +21,9 @@ namespace CandyShop.Web.Controllers.Compra
             return View("../Compra/Index");
         }
 
-        public ActionResult Detalhes(int idCompra, string paginaAnterior)
+        public ActionResult Detalhes(int idCompra, string paginaAnterior, string token)
         {
-            var response = _appCompra.SelecionarCompra(idCompra);
+            var response = _appCompra.SelecionarCompra(idCompra, token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro ao detalhar compra, ", response.ContentAsString);
             var a = paginaAnterior.LastWord();

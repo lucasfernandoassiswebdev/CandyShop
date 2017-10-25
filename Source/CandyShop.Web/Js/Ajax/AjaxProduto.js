@@ -1,4 +1,5 @@
-﻿var AjaxJsProduto = (function ($) {
+﻿var obj;
+var AjaxJsProduto = (function ($) {
     var url = {}; //objeto que recebe o nome e endereço da pagina
 
     // Lista de objetos que guarda o nome e o endereco da pagina, sã carregados na pagina padrao
@@ -10,7 +11,7 @@
         chamaPagina(url.listaProduto);
     };
     var cadastrarProduto = function () {
-        chamaPagina(url.cadastrarProduto);
+        chamaPaginaProdutos(url.cadastrarProduto);
     };
     var concluirCadastroProduto = function (baseA, baseB, baseC) {
         var produto = {
@@ -22,7 +23,8 @@
             ImagemB: baseB,
             ImagemC: baseC
         };
-        concluirAcao(url.concluirCadastroProduto, produto, url.cadastrarProduto);
+        atualizaToken();
+        concluirAcao(url.concluirCadastroProduto, { produto: produto, token: obj.access_token }, url.cadastrarProduto);
     };
     var detalheProduto = function (id, telaAnterior) {
         var produto = { IdProduto: id, telaAnterior: telaAnterior };
@@ -47,7 +49,8 @@
             RemoverImagemB: removerB,
             RemoverImagemC: removerC
         };
-        concluirAcaoEdicaoeEspecifico(url.concluirEdicaoProduto, produto, pagina);
+        atualizaToken();
+        concluirAcaoEdicaoProduto(url.concluirEdicaoProduto, { produto: produto, token: obj.access_token }, pagina);
     };
     var desativarProduto = function (id, telaAnterior) {
         var produto = { IdProduto: id, telaAnterior: telaAnterior };
@@ -58,7 +61,7 @@
         concluirAcaoEdicao(url.desativarProdutoConfirmado, produto, url.listaProduto);
     };
     var listarInativos = function () {
-        chamaPagina(url.listarInativos);
+        chamaPaginaProdutos(url.listarInativos);
     };
     var listarProdutoPorNome = function (nome) {
         var produto = { Nome: nome };
@@ -86,15 +89,43 @@
 
 })(jQuery); //O método ajaxJS é auto executado quando é iniciado o sistema.
 
-function concluirAcaoEdicaoeEspecifico(endereco, objeto, tela) {
+function concluirAcaoEdicaoProduto(endereco, objeto, tela) {
     $.ajax({
         url: endereco,
         type: "POST",
         data: objeto,
         success: function (message) {
-            chamaPagina(tela);
+            chamaPaginaProdutos(tela);
             Materialize.toast(message, 4000);
         }
     });
+}
+
+function chamaPaginaProdutos(endereco) {
+    atualizaToken();
+    $.ajax({
+        url: endereco,
+        type: "GET",
+        data: {
+            token: obj.access_token
+        },
+        success: function (dataSucess) {
+            $("#DivGrid").slideUp(function () {
+                $("#DivGrid").hide().html(dataSucess).slideDown(function () {
+                    Materialize.toast(dataSucess.data, 3000);
+                });
+            });
+        },
+        error: function (xhr) {
+            Materialize.toast("Você não está autorizado, contate os administradores", 3000);
+            console.log(xhr.responseText);
+        }
+    });
+}
+
+function atualizaToken() {
+    obj = localStorage.getItem("tokenCandyShop") ? JSON.parse(localStorage.getItem("tokenCandyShop")) : [];
+    if (obj == [])
+        Materialize.modal("Há algo de errado com suas validações", 2000);
 }
 

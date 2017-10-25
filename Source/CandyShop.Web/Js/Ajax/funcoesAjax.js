@@ -33,6 +33,7 @@ function chamaPaginaComIdentificador(endereco, identificador) {
             $("#DivGrid").hide().html(data).slideDown();
         });
     }).fail(function (xhr) {
+        Materialize.toast("Algo deu errado",2000);
         console.log(xhr.responseText);
     });
 }

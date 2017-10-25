@@ -78,8 +78,8 @@ namespace CandyShop.Web.Controllers
             Session["Login"] = user.Content.Cpf.Replace(".", "").Replace("-", "");
             return Content(response.Content + Session["Login"]);
         }
-        [HttpPost][Authorize]
-        public ActionResult Cadastrar(CompraViewModel compra)
+        [HttpPost]
+        public ActionResult Cadastrar(CompraViewModel compra,string token)
         {
 
             if (Session["Login"].ToString() == "off")
@@ -88,9 +88,9 @@ namespace CandyShop.Web.Controllers
             if (!ModelState.IsValid) return Content("Ops... ocorreu um erro ao concluir sua compra.");
             compra.Usuario = new UsuarioViewModel { Cpf = Session["Login"].ToString() };
 
-            var response = _appCompra.InserirCompra(compra);
+            var response = _appCompra.InserirCompra(compra,token);
 
-            if ((response.Status != HttpStatusCode.OK) || (response.Content < 1))
+            if (response.Status != HttpStatusCode.OK)
                 return Content($"Os itens da compra não puderam ser registrados: {response.ContentAsString  }");
 
             var user = _appUsuario.SelecionarUsuario(Session["Login"].ToString());

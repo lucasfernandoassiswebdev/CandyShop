@@ -2,20 +2,15 @@
 
 @{
     ViewBag.Title = "CandyShop";
-    string penis = "";
 }
 
 <script>
     $(document).ready(function () {
         AjaxJsPagamento.init({
-            listarPagamento: '@Url.Action("ListarCpf", "Pagamento")',
-            inserirPagamento: '@Url.Action("Inserir", "Pagamento")',
-            concluirPagamento: '@Url.Action("InserirPagamento", "Pagamento")',
+            listarPagamento: '@Url.Action("ListarCpf", "PagamentoUserComum")',
+            inserirPagamento: '@Url.Action("Inserir", "PagamentoUserComum")',
+            concluirPagamento: '@Url.Action("InserirPagamento", "PagamentoUserComum")',
             padrao: '@Url.Action("NavBar", "Home")'
-        });
-
-        AjaxJsCompra.init({
-            historicoCompra: '@Url.Action("Listar", "Compra")'
         });
 
         AjaxJsUsuario.init({
