@@ -15,6 +15,10 @@ $(document).ready(function () {
             $("#cpf").val($("#cpf").val().substr(0, 13));
             $("#cpf").keydown();
         }
+        var cpfNew = $("#cpf").val().replace(/\.|\-/g, "");
+        if (!TestaCPF(cpfNew)) {
+            $("#ErroCpf").errorMessage("CPF Inválido!", 7000);
+        }
         validaBotao();
     });
 

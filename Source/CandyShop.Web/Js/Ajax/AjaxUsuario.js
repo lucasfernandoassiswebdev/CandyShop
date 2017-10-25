@@ -82,8 +82,8 @@ var AjaxJsUsuario = (function ($) {
     };
     var trocarSenha = function () {
         var senhas = { NovaSenha: $("#novaSenha").val(), ConfirmaNovaSenha: $("#confirmaNovaSenha").val() };
-        console.log(senhas.ConfirmaNovaSenha);
-        $.post(url.trocarSenha, senhas)
+        atualizaToken();
+        $.post(url.trocarSenha, {senhas: senhas, token: obj.access_token})
             .done(function (message) {
                 Materialize.toast(message, 4000);
             })
