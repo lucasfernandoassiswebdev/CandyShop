@@ -58,7 +58,8 @@ var AjaxJsProduto = (function ($) {
     };
     var desativarProdutoConfirmado = function (id) {
         var produto = { IdProduto: id };
-        concluirAcaoEdicao(url.desativarProdutoConfirmado, produto, url.listaProduto);
+        atualizaToken();
+        concluirAcaoEdicao(url.desativarProdutoConfirmado, { produto: produto, token: obj.access_token }, url.listaProduto);
     };
     var listarInativos = function () {
         chamaPaginaProdutos(url.listarInativos);
