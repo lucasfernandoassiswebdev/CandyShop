@@ -1,4 +1,4 @@
-﻿var obj;
+﻿var obj, sub;
 var AjaxJsShop = (function ($) {
     var url = {};
 
@@ -40,7 +40,7 @@ var AjaxJsShop = (function ($) {
                         var texto = /Logado com sucesso/;
                         if (texto.test(res)) {
                             var cpf = res.replace("Logado com sucesso", "");
-
+                            sub = 18;
                             var informacoesAutorizacao = {
                                 grant_type: "password",
                                 username: cpf,
@@ -65,12 +65,13 @@ var AjaxJsShop = (function ($) {
                                     Materialize.toast(error, 3000);
                                 }
                             });
-                        } else
+                        } else{
                             res = "Você não tem acesso aos recursos do sistema, contate os administradores";
-
+                            sub = 19;
+                        }
                         $("body").slideUp("slow", function () {
                             $("body").hide().html(data).slideDown(1000, function () {
-                                Materialize.toast(res.substr(0,18), 3000);
+                                Materialize.toast(res.substr(0,sub), 3000);
                             });
                         });
                     }).fail(function (xhr) {

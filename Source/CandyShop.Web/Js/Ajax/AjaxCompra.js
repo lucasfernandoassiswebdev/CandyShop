@@ -46,7 +46,7 @@ var AjaxJsCompra = (function ($) {
     };
 
     var historicoCompra = function () {
-        chamaPaginaCompra(url.historicoCompra, "body");
+        chamaPaginaCompra(url.historicoCompra, "#DivGrid");
     };
     var listarCompra = function () {
         chamaPaginaCompra(url.listarCompra, "#DivGrid");
