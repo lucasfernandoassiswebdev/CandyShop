@@ -83,14 +83,18 @@
                     </select>
                     <label>Categoria do produto</label>
                 </div>
-                <p class="radios" style="margin-left: 185px !important;">
-                    <input name="status" class="with-gap" type="radio" id="test1" value="A" @(Model.Ativo == "A" ? "checked" : string.Empty)/>
-                    <label for="test1">Ativo</label>
-                </p>
-                <p class="radios">
-                    <input name="status" class="with-gap" type="radio" id="test2" value="I" @(Model.Ativo == "I" ? "checked" : string.Empty) />
-                    <label for="test2">Inativo</label>
-                </p>
+
+                <label style="margin-left: 15px">Status do produto:</label>
+                <div style="margin-top: 10px">
+                    <p class="radios" style="margin-left: 185px !important; display: inline;">
+                        <input name="status" class="with-gap" type="radio" id="test1" value="A" @(Model.Ativo == "A" ? "checked" : string.Empty) />
+                        <label for="test1">Ativo</label>
+                    </p>
+                    <p class="radios" style="margin-left: 70px !important; display: inline;">
+                        <input name="status" class="with-gap" type="radio" id="test2" value="I" @(Model.Ativo == "I" ? "checked" : string.Empty) />
+                        <label for="test2">Inativo</label>
+                    </p>
+                </div>
             </div>
             @{
                 var voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
@@ -103,9 +107,9 @@
     </div>
 </div>
 
-<style>
+@*<style>
     .radios {
         display: inline;
         margin-left: 70px !important;
     }
-</style>
+</style>*@
