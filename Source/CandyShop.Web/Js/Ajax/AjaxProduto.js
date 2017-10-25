@@ -41,7 +41,7 @@ var AjaxJsProduto = (function ($) {
             PrecoProduto: $('#PrecoProduto').val().replace("R$", "").replace(".", ""),
             QtdeProduto: $('#QtdeProduto').val(),
             Categoria: $('#Categoria').val(),
-            Ativo: $("input[name='group1']:checked").val(),
+            Ativo: $("input[name='status']:checked").val(),
             ImagemA: baseA,
             ImagemB: baseB,
             ImagemC: baseC,
