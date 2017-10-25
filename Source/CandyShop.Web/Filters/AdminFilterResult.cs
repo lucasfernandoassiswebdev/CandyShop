@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 ﻿using System.Net;
 using System.Web.Mvc;
+=======
+﻿using System.Web.Mvc;
+>>>>>>> 75723c4e02f86d21f37661cecd434f95e9872ee9
 
 
 namespace CandyShop.Web.Filters
@@ -18,10 +22,14 @@ namespace CandyShop.Web.Filters
                     return;
                 }
 
+<<<<<<< HEAD
             if (filterContext.HttpContext.Request.IsAjaxRequest())
                 filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             else
                 filterContext.Result = new RedirectResult("/Home");
+=======
+            filterContext.Result = new RedirectResult("/CandyShop");
+>>>>>>> 75723c4e02f86d21f37661cecd434f95e9872ee9
         }
     }
 }

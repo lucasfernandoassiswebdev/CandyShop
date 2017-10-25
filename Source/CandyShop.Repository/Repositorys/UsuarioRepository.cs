@@ -80,7 +80,8 @@ namespace CandyShop.Repository.Repositorys
                         SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
                         NomeUsuario = reader.ReadAsString("NomeUsuario"),
                         Ativo = reader.ReadAsString("Ativo"),
-                        Classificacao = reader.ReadAsString("Classificacao")
+                        Classificacao = reader.ReadAsString("Classificacao"),
+                        FirstLogin = reader.ReadAsString("FirstLogin")
                     };
             return null;
         }
