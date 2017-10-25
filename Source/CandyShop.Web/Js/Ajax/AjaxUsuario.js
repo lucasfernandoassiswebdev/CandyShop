@@ -64,7 +64,8 @@ var AjaxJsUsuario = (function ($) {
     };
     var listarUsuarioPorNome = function () {
         var usuario = { Nome: $("#nomeUsuario").val() };
-        chamaPaginaComIdentificador(url.listarUsuarioPorNome, usuario);
+        atualizaToken();
+        chamaPaginaComIdentificador(url.listarUsuarioPorNome, { nome: usuario.Nome, token: obj.access_token });
     };
     var logOff = function () {
         $.get(url.logOff).done(function (data) {

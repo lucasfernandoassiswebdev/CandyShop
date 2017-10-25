@@ -107,7 +107,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         {
             return Ok(_usuarioRepository.ListarUsuarioInativo());
         }
-        [HttpGet, Route("api/usuario/procurar/{nome}")]
+        [HttpGet, Route("api/Usuario/procurar/{nome}")]
         public IHttpActionResult GetPorNome(string nome)
         {
             return Ok(_usuarioRepository.ListarUsuarioPorNome(nome));
