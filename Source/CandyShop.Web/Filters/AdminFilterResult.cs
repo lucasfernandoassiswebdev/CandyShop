@@ -1,4 +1,4 @@
-﻿using CandyShop.Web.Helpers;
+﻿using System.Net;
 using System.Web.Mvc;
 
 
@@ -18,7 +18,10 @@ namespace CandyShop.Web.Filters
                     return;
                 }
 
-            filterContext.Result = new RedirectResult("/Home");
+            if (filterContext.HttpContext.Request.IsAjaxRequest())
+                filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            else
+                filterContext.Result = new RedirectResult("/Home");
         }
     }
 }

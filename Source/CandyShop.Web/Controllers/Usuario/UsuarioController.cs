@@ -54,6 +54,7 @@ namespace CandyShop.Web.Controllers.Usuario
         public ActionResult Listar(string token)
         {
             var response = _appUsuario.ListarUsuarios(token);
+
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
@@ -95,7 +96,7 @@ namespace CandyShop.Web.Controllers.Usuario
 
             if (!ModelState.IsValid) return Content("Ops, ocorreu um erro ao editar usuário.");
 
-            var response = _appUsuario.InserirUsuario(usuario,token);
+            var response = _appUsuario.InserirUsuario(usuario, token);
 
             return Content(response.Status != HttpStatusCode.OK || response.Status != HttpStatusCode.NotModified
                 ? $"{response.ContentAsString}"
@@ -126,7 +127,7 @@ namespace CandyShop.Web.Controllers.Usuario
         [HttpPost]
         public ActionResult DesativarUsuario(UsuarioViewModel usuario, string token)
         {
-            var response = _appUsuario.DesativarUsuario(usuario,token);
+            var response = _appUsuario.DesativarUsuario(usuario, token);
             return Content(response.Status != HttpStatusCode.OK ? $"Erro {response.Status}" : "Usuario desativado com sucesso!");
         }
     }

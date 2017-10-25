@@ -9,7 +9,7 @@ namespace CandyShop.Web.Filters
             if (filterContext.HttpContext.Session["Login"] == null)
                 filterContext.HttpContext.Session["Login"] = "off";
 
-            var classificacao = filterContext.HttpContext.Session["classificacao"].ToString();
+            var classificacao = filterContext.HttpContext.Session["classificacao"]?.ToString();
 
             if (!filterContext.HttpContext.Session["Login"].ToString().Equals("off"))
                 if (classificacao == "U" || classificacao == "A")

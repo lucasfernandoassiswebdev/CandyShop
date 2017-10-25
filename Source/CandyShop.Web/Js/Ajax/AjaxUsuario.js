@@ -110,7 +110,6 @@ var AjaxJsUsuario = (function ($) {
     };
 })(jQuery);
 
-
 function chamaPaginaUsuarios(endereco) {
     atualizaToken();
     $.ajax({
