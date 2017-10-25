@@ -112,13 +112,14 @@ $(document).ready(function () {
                                 // Recalculando o total
                                 totalCompra = 0;
                                 listaProdutos.forEach(function (produto) {
-                                    var precoCorreto = produto.Preco.replace(",", ".");
-                                    totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
+                                    var precoCorreto = String(produto.Preco).replace(",", ".");
+                                    totalCompra += parseFloat(precoCorreto) * parseInt(produto.Quantidade);
+                                    console.log(totalCompra);
                                 });
-                                totalCompra = totalCompra.replace(".", ",");
+                                totalCompra = String(totalCompra).replace(".", ",");
                                 if (totalCompra.length > 6)
-                                    totalCompra = totalCompra.substr(6, totalCompra.length);
-                                $("#totalCompra").text("Total da compra: R$ " + parseFloat(totalCompra)).attr("title", "Total da compra");
+                                    totalCompra = String(totalCompra).substr(6, totalCompra.length);
+                                $("#totalCompra").text("Total da compra: R$ " + totalCompra).attr("title", "Total da compra");
                             })
                         ]
                     }),
@@ -173,6 +174,8 @@ $(document).ready(function () {
 
         if (listaProdutos.filter(function (v) { return v.Id == produto.Id; }).length) {
             Materialize.toast("Produto já esta no carrinho", 2000);
+            $("#modalCarrinho").modal("open");
+            $("#modalQuantidade").modal("close");
             return;
         } else
             listaProdutos.push(produto);
@@ -247,7 +250,7 @@ $(document).ready(function () {
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
 
         if (String(totalCompra).length > 7)
-            totalCompra = totalCompra.substr(7, totalCompra.length);
+            totalCompra = String(totalCompra).substr(7, totalCompra.length);
         $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".",",")).attr("title", "Total da compra");
 
         // Adiciona item, remove localStorage e seta de novo com a lista atualizada

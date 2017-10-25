@@ -138,6 +138,8 @@ $("#PrecoProduto").keydown(function (e) {
 
 //Validações no campo de quantidade
 $("#QtdeProduto").keydown(function (e) {
+    if (e.which == 188)
+        return false;
     replaceLetters($(this).val(), "#QtdeProduto");
     validaBotao();
 }).keyup(validaBotao).blur(validaBotao).on("paste", validaBotao).focus(validaBotao);
