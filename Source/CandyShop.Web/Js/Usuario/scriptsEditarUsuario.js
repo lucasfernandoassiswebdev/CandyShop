@@ -58,7 +58,7 @@ function validaBotao() {
         var qtdeSenha = $("#Password").val().length;
 
         //desabilitando o botão caso um dos dois esteja inválido
-        if (qtdeNome > 50 || qtdeNome <= 0 || qtdeSenha > 12 || qtdeSenha < 7)
+        if (qtdeNome > 50 || qtdeNome <= 0 || qtdeSenha > 12 || qtdeSenha < 6)
             $(".botaoEditar").attr("disabled", "disabled");
         else
             $(".botaoEditar").removeAttr("disabled");

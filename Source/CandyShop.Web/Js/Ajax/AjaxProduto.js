@@ -39,7 +39,7 @@
             PrecoProduto: $('#PrecoProduto').val().replace("R$", "").replace(".", ""),
             QtdeProduto: $('#QtdeProduto').val(),
             Categoria: $('#Categoria').val(),
-            Ativo: $('#Ativo').val(),
+            Ativo: $("input[name='group1']:checked").val(),
             ImagemA: baseA,
             ImagemB: baseB,
             ImagemC: baseC,

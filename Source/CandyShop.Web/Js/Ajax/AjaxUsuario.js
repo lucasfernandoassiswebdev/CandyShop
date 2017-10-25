@@ -37,11 +37,12 @@ var AjaxJsUsuario = (function ($) {
             NomeUsuario: $("#Nome").val(),
             SaldoUsuario: $("#SaldoUsuario").val().replace("R$ ", "").replace(".", ""),
             SenhaUsuario: $("#Password").val(),
-            Ativo: $("#Ativo").val(),
+            Ativo: $("input[name='status']:checked").val(),
             Imagem: imgBase64,
             Classificacao: $("#Classificacao").val(),
             RemoverImagem: removerImagem
         };
+        console.log(usuario);
         atualizaToken();
         concluirAcaoEdicaoUsuario(url.concluirEdicaoUsuario, { usuario: usuario, token: obj.access_token }, tela);
     };
