@@ -294,8 +294,10 @@ $(document).ready(function () {
 
     $("#senha, #cpf").keyup(verificaSenha).blur(verificaSenha).focus(verificaSenha);
 
-    // Foco saindo do input
-    $("#quantidade").blur(verificaQuantidade).on("paste", verificaQuantidade).keyup(verificaQuantidade);
+    $("#quantidade").blur(verificaQuantidade).on("paste", verificaQuantidade).keyup(verificaQuantidade).keydown(function (e) {
+        if (e.which == 190 || e.which == 188)
+            return false;
+    });
 
     // Onclick dentro da modal
     $("#modalQuantidade").click(verificaQuantidade);
@@ -337,9 +339,11 @@ $(document).ready(function () {
         .keydown(function (e) {
             if (e.which === 13)
                 $("#editarQuantidade").trigger("click");
+            if (e.which == 190 || e.which == 188)
+                return false;
         })
         .keyup(verificaEditQuantidade)
-        .on("paste", function () { handlePaste(event); verificaEditQuantidade(); });
+        .on("paste", verificaEditQuantidade);
 
     // Removendo caracteres inválidos dos campos de quantidade
     $("#quantidade, #quantidadeEdit").keydown(function () { mNumbers($(this).val()); })
@@ -438,6 +442,11 @@ function handlePaste(e) {
         e.stopPropagation();
         e.preventDefault();
     }
+
+    if (pastedData.indexOf(",") > -1) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
 }
 
 function mcpf(v) {
@@ -449,8 +458,8 @@ function mcpf(v) {
 }
 
 function verificaEditQuantidade() {
-    quantidade = $("#quantidadeEdit").val().replace(/\b0+/g, "");
-    
+    quantidade = $("#quantidadeEdit").val().replace(/\D+/g, "");
+    $("#quantidadeEdit").val(quantidade);
     if (parseInt(quantidade) <= 0 || quantidade == "" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
         $("#editarQuantidade").attr("disabled", "disabled");
     else
@@ -478,7 +487,8 @@ function verificaSenhasIguais(inputAtual, comparacao) {
 }
 
 function verificaQuantidade() {
-    quantidade = $("#quantidade").val().replace(/\b0+/g, "");
+    quantidade = $("#quantidade").val().replace(/\D+/g, "");
+    $("#quantidade").val(quantidade);
     if (parseInt(quantidade) <= 0 || quantidade == null || quantidade == "" || quantidade == "undefined" || quantidade.match(verifyInt) || parseInt(quantidade) > quantidadeDisponivel)
         $("#adicionaCarrinho").attr("disabled", "disabled");
     else
