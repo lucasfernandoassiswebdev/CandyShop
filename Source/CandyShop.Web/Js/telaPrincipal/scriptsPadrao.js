@@ -359,7 +359,11 @@ $(document).ready(function () {
         .on("paste", verificaEditQuantidade);
 
     // Removendo caracteres inválidos dos campos de quantidade
-    $("#quantidade, #quantidadeEdit").keydown(function () { mNumbers($(this).val()); })
+    $("#quantidade, #quantidadeEdit").keydown(function(e) {
+            if (e.which == 109 || e.which == 189 || e.which == 107 || e.which == 69)
+                return false;   
+        mNumbers($(this).val());
+        })
         .on("paste", function () { mNumbers($(this).val()); });
 
     // Limpando o carrinho
