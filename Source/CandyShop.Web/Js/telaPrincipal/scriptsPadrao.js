@@ -115,7 +115,10 @@ $(document).ready(function () {
                                     var precoCorreto = produto.Preco.replace(",", ".");
                                     totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
                                 });
-                                $("#totalCompra").text("Total da compra: R$ " + totalCompra);
+                                totalCompra = totalCompra.replace(".", ",");
+                                if (totalCompra.length > 6)
+                                    totalCompra = totalCompra.substr(6, totalCompra.length);
+                                $("#totalCompra").text("Total da compra: R$ " + parseFloat(totalCompra)).attr("title", "Total da compra");
                             })
                         ]
                     }),
@@ -142,7 +145,9 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseInt(produto.Quantidade) * parseFloat(precoCorreto);
         });
-        $("#totalCompra").text("Total da compra: R$ " + parseFloat(totalCompra)).attr('title', 'Total da compra');
+        if (totalCompra.length > 7)
+            totalCompra = totalCompra.substr(7, totalCompra.length);
+        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".",",")).attr("title", "Total da compra");
     }
 
     // Adicionando os itens no carrinho
@@ -240,7 +245,10 @@ $(document).ready(function () {
            para que a conversão para double funcione */
         var precoConcertado = preco.replace(",", ".");
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
-        $("#totalCompra").text("Total da compra: R$ " + totalCompra).attr("title", "Total da compra");
+
+        if (String(totalCompra).length > 7)
+            totalCompra = totalCompra.substr(7, totalCompra.length);
+        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".",",")).attr("title", "Total da compra");
 
         // Adiciona item, remove localStorage e seta de novo com a lista atualizada
         quantidade = 0;
@@ -313,10 +321,6 @@ $(document).ready(function () {
             return;
         }
 
-        $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
-            .text("Quantidade: " + qtde).attr("data-Quantidade", qtde);
-        $("#modalCarrinho").modal("open");
-
         // Atualizando a quantidade no localStorage
         var produtos = JSON.parse(localStorage.getItem("listaProdutos"));
         var produto = produtos[$("#modalEditarQuantidade").data("index")];
@@ -331,7 +335,13 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
         });
-        $("#totalCompra").text("Total da compra: R$ " + totalCompra);
+        if (String(totalCompra) > 7)
+            totalCompra = String(totalCompra).substr(7,String(totalCompra.length));
+        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".",","));
+
+        $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
+            .text("Quantidade: " + qtde).attr("data-Quantidade", qtde);
+        $("#modalCarrinho").modal("open");
     });
 
     // Desabilitando no modal de editar a quantidade
