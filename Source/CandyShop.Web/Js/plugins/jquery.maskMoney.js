@@ -20,8 +20,8 @@
 				allowZero: false,
 				allowNegative: false,
 				doubleClickSelection: true,
-				allowEmpty: false,
-				bringCaretAtEndOnFocus: true
+				allowEmpty: true,
+				bringCaretAtEndOnFocus: false
 			},
 		methods = {
 		destroy: function () {
