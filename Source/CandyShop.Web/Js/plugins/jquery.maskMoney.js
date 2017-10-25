@@ -17,7 +17,7 @@
 				thousands: ",",
 				decimal: ".",
 				precision: 2,
-				allowZero: false,
+				allowZero: true,
 				allowNegative: false,
 				doubleClickSelection: true,
 				allowEmpty: true,
