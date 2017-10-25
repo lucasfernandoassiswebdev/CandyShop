@@ -60,11 +60,11 @@
                             R$ @Html.DisplayFor(modelItem => usuario.SaldoUsuario)
                         </td>
                         <td style="width: 185px">
-                            <a class="btn-floating waves-effect waves-light light-blue darken-3" title="Detalhes" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons">info_outline</i></a>
-                            <a class="btn-floating waves-effect waves-light yellow darken-3" title="Editar" onclick="AjaxJsUsuario.editarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons">edit</i></a>
+                            <a title="Detalhes" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons blue-text small">info_outline</i></a>
+                            <a title="Editar" onclick="AjaxJsUsuario.editarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons black-text small">edit</i></a>
                             @if (!TempData["nomeLista"].ToString().Equals("Usuários Inativos"))
                             {
-                                <a class="btn-floating waves-effect waves-light pink lighten-1" title="Desativar" onclick="AjaxJsUsuario.desativarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons">delete_sweep</i></a>
+                                <a title="Desativar" onclick="AjaxJsUsuario.desativarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons pink-text small">delete_sweep</i></a>
                             }
                         </td>
                     </tr>

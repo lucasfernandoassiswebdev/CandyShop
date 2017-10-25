@@ -1,4 +1,5 @@
-﻿var AjaxJsShop = (function ($) {
+﻿var obj;
+var AjaxJsShop = (function ($) {
     var url = {};
 
     var init = function (config) {
@@ -7,7 +8,7 @@
     };
 
     var mostraSaldo = function () {
-        chamaPagina(url.mostraSaldo);
+        chamaPaginaToken(url.mostraSaldo,"#DivGrid");
     };
 
     var administracao = function () {
@@ -117,3 +118,31 @@
         loja: loja
     };
 })(jQuery);
+
+function chamaPaginaToken(endereco, div) {
+    atualizaToken();
+    $.ajax({
+        url: endereco,
+        type: "GET",
+        data: {
+            token: obj.access_token
+        },
+        success: function (dataSucess) {
+            $(div).slideUp(function () {
+                $(div).hide().html(dataSucess).slideDown(function () {
+                    Materialize.toast(dataSucess.data, 3000);
+                });
+            });
+        },
+        error: function (xhr) {
+            Materialize.toast("Você não está autorizado, contate os administradores", 3000);
+            console.log(xhr.responseText);
+        }
+    });
+}
+
+function atualizaToken() {
+    obj = localStorage.getItem("tokenCandyShop") ? JSON.parse(localStorage.getItem("tokenCandyShop")) : [];
+    if (obj == [])
+        Materialize.modal("Há algo de errado com suas validações", 2000);
+}

@@ -98,8 +98,13 @@
     }
 </script>
 <script type="text/javascript" src="~/Js/telaPrincipal/scriptsMain.js"></script>
-<link rel="stylesheet" type="text/css" href="~/Content/Admin/indexAdmin.css?d=@DateTime.Now.Ticks">
 
+<link rel="stylesheet" type="text/css" href="~/Content/Admin/indexAdmin.css?d=@DateTime.Now.Ticks">
+<style>
+    .divider {
+        height: 2px;
+    }
+</style>
 <!--modal de pesquisa de usuários-->
 <div id="modalPesquisaUsuario" class="modal">
     <div class="modal-content">
@@ -132,8 +137,11 @@
     <li class="white-text">
         <a href='@Url.Action("NavBar", "Home")' title="Voltar para Loja"><h4 class="center" style="cursor: pointer;">Candy <font class="white-text">Shop</font></h4></a>
     </li>
-    <li><br/></li>
     <li>
+        <div class="divider"></div>
+    </li>
+    
+    <li style="margin-top: 30px">
         <ul class="collapsible" data-collapsible="accordion">
             <li>
                 <div class="collapsible-header white-text">
@@ -188,13 +196,17 @@
             </li>
         </ul>
     </li>
-    <li><a class="dropdown-button white-text closeMenu" href="#!" onclick="AjaxJsShop.mostraSaldo()"><i class="material-icons left white-text small">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
+    <li><a class="dropdown-button white-text closeMenu" href="#!" onclick="AjaxJsShop.mostraSaldo()"><i class="material-icons left white-text">monetization_on</i>CRÉDITO ATUAL DA LOJA</a></li>
     <li><br /></li>
-
-    <li><a class="dropdown-button white-text active" title="Voltar para Loja" href='@Url.Action("NavBar", "Home")'><i class="material-icons left white-text small">call_made</i>VOLTAR PARA LOJA</a></li>
-    <li><a class="dropdown-button white-text active" title="Fazer logoff" href='#!' onclick="AjaxJsUsuario.logOff()"><i class="material-icons left white-text small">power_settings_new</i>SAIR</a></li>
+    <div style="position: absolute; bottom: 50px; width:100%">
+        <li>
+            <div class="divider white"></div>
+        </li>
+        <li><a class="dropdown-button white-text active" title="Voltar para Loja" href='@Url.Action("NavBar", "Home")'><i class="material-icons left white-text">call_made</i>VOLTAR PARA LOJA</a></li>
+        <li><a class="dropdown-button white-text active" title="Fazer logoff" href='#!' onclick="AjaxJsUsuario.logOff()"><i class="material-icons left white-text">power_settings_new</i>SAIR</a></li>
+    </div>
 </ul>
 
-<a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse pink-text" style="width: 40px; height: 40px; margin-top: 0px; margin-left: 5px; overflow: hidden;"><i class="material-icons" style="font-size: 40px">menu</i></a>
+<a href="#" id="sideTrigger" data-activates="slide-out" class="button-collapse pink-text" style="width: 40px; height: 40px; margin-top: 0; margin-left: 5px; overflow: hidden;"><i class="material-icons" style="font-size: 40px">menu</i></a>
 
 <div id="DivGrid"></div>
