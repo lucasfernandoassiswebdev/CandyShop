@@ -1,5 +1,4 @@
-﻿using CandyShop.Web.Helpers;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 
 namespace CandyShop.Web.Filters
@@ -18,7 +17,7 @@ namespace CandyShop.Web.Filters
                     return;
                 }
 
-            filterContext.Result = new RedirectResult("/Home");
+            filterContext.Result = new RedirectResult("/CandyShop");
         }
     }
 }

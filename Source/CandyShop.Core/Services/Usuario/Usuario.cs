@@ -10,6 +10,7 @@
         public string Classificacao { get; set; }
         public string Imagem { get; set; }
         public bool RemoverImagem { get; set; }
+        public string FirstLogin { get; set; }
 
         /* As linhas de codigo abaixo é onde ficam todas as verificações de usuario como 
             validar cpf, senha, tamanho dos campos  etc */
