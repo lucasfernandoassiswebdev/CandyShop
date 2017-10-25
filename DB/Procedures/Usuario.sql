@@ -28,8 +28,8 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	*/
 	
 	BEGIN
-		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario,Ativo, Classificacao)
-			VALUES (@CpfUsuario,@NomeUsuario,@CpfUsuario,@SaldoUsuario,@Ativo, @Classificacao)		
+		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario,Ativo, Classificacao, FirstLogin)
+			VALUES (@CpfUsuario,@NomeUsuario,@CpfUsuario,@SaldoUsuario,@Ativo, @Classificacao, 'T')		
 			
 				IF @@ERROR <> 0
 					RETURN 1
@@ -140,11 +140,12 @@ CREATE PROCEDURE [dbo].[CSSP_UpdSenha]
 	*/	
 	BEGIN	
 		UPDATE [dbo].[Usuario] 
-			SET SenhaUsuario = @senha
+			SET SenhaUsuario = @senha,
+				FirstLogin = 'F'
 			WHERE Cpf = @cpf
 	END
 GO
-				
+
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelUsuario]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_SelUsuario]
 GO
