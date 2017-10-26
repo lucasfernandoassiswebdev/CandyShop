@@ -10,63 +10,64 @@
 <script type="text/javascript" src="~/Js/Usuario/scriptsEditarUsuario.js?d=@DateTime.Now.Ticks"></script>
 <script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
 
-<div class="container" style="padding-top:20px">
-    <div class="row">
-        <form class="col s12">
-            <div class="row">
-                <div class="center">
-                    <label for="fotoUsuario">
-                        <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src=@Model.Imagem alt="imagem não disponível :(" />
-                    </label>
-                    <br />
-                    <br />
-                    <a class="btn" id="removerImagem"><i class="material-icons left">block</i>Remover</a>
-                    <input id="fotoUsuario" type="file" class="file-path validate" style="display: none" accept="image/*">
+<div class="container" style="padding-top: 20px; margin-top: 2%">
+    <div class="col s12 m12">
+        <div class="card-panel white" style="padding-bottom: 1%;">
+            <form class="col s12">
+                <div class="row" style="margin-top: -3%;">
+                    <div class="center">
+                        <label for="fotoUsuario">
+                            <img id="imagem" class="center tooltipped" data-position="bottom" data-delay="50" data-tooltip="Foto do usuário" src=@Model.Imagem alt="imagem não disponível :(" />
+                        </label>
+                        <br />
+                        <br />
+                        <a class="btn" id="removerImagem"><i class="material-icons left">block</i>Remover</a>
+                        <input id="fotoUsuario" type="file" class="file-path validate" style="display: none" accept="image/*">
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="Cpf" name="cpf" type="text" class="validate cpf" value="@Model.Cpf" required data-length="50" autocomplete="off" disabled>
-                    <label class="active">CPF:</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="Cpf" name="cpf" type="text" class="validate cpf" value="@Model.Cpf" required data-length="50" autocomplete="off" disabled>
+                        <label class="active">CPF:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <select name="Classificacao" id="Classificacao">
+                            <option value="" disabled>Tipo da conta</option>
+                            <option value="U" @(Model.Classificacao == "U" ? "selected" : string.Empty)>Usuario</option>
+                            <option value="A" @(Model.Classificacao == "A" ? "selected" : string.Empty)>Administrador</option>
+                        </select>
+                        <label>Tipo de Usuário:</label>
+                    </div>
                 </div>
-                <div class="input-field col s6">
-                    <select name="Classificacao" id="Classificacao">
-                        <option value="" disabled>Tipo da conta</option>
-                        <option value="U" @(Model.Classificacao == "U" ? "selected" : string.Empty)>Usuario</option>
-                        <option value="A" @(Model.Classificacao == "A" ? "selected" : string.Empty)>Administrador</option>
-                    </select>
-                    <label>Tipo de Usuário:</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="Nome" name="Nome" type="text" class="validate" maxlength="50" required data-length="50" autocomplete="off" value="@Model.NomeUsuario" />
+                        <label class="active">Nome:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="SaldoUsuario" name="SaldoUsuario" maxlength="9" type="text" class="validate" value="@Model.SaldoUsuario" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
+                        <label class="active">Saldo:</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="Nome" name="Nome" type="text" class="validate" maxlength="50" required data-length="50" autocomplete="off" value="@Model.NomeUsuario" />
-                    <label class="active">Nome:</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="SaldoUsuario" name="SaldoUsuario" maxlength="9" type="text" class="validate" value="@Model.SaldoUsuario" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" required>
-                    <label class="active">Saldo:</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="Password" name="Password" type="password" maxlength="12" required data-length="12" autocomplete="off" class="validate" value="@Model.SenhaUsuario" />
-                    <label class="active">Password:</label>
-                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="Password" name="Password" type="password" maxlength="12" required data-length="12" autocomplete="off" class="validate" value="@Model.SenhaUsuario" />
+                        <label class="active">Password:</label>
+                    </div>
 
-                <label style="margin-left: 15px">Status do Usuário</label>               
-                <div style="margin-top: 10px">
-                    <p class="radios" style="margin-left: 185px !important;">
-                        <input name="status" class="with-gap" type="radio" id="test1" value="A" @(Model.Ativo == "A" ? "checked" : string.Empty)/>
-                        <label for="test1">Ativo</label>
-                    </p>
-                    <p class="radios">
-                        <input name="status" class="with-gap" type="radio" id="test2" value="I" @(Model.Ativo == "I" ? "checked" : string.Empty) />
-                        <label for="test2">Inativo</label>
-                    </p>
+                    <label style="margin-left: 15px">Status do Usuário</label>
+                    <div style="margin-top: 10px">
+                        <p class="radios" style="margin-left: 185px !important;">
+                            <input name="status" class="with-gap" type="radio" id="test1" value="A" @(Model.Ativo == "A" ? "checked" : string.Empty) />
+                            <label for="test1">Ativo</label>
+                        </p>
+                        <p class="radios">
+                            <input name="status" class="with-gap" type="radio" id="test2" value="I" @(Model.Ativo == "I" ? "checked" : string.Empty) />
+                            <label for="test2">Inativo</label>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            @if (ViewBag.telaAnterior.ToString().Equals("Usuários Ativos"))
+                @if (ViewBag.telaAnterior.ToString().Equals("Usuários Ativos"))
             {
                 voltar = "AjaxJsUsuario.listaUsuario()";
             }
@@ -78,12 +79,14 @@
             {
                 voltar = "AjaxJsUsuario.listarUsuarioEmDivida()";
             }
-            <div class="row center">
-                <a class="waves-effect waves-light btn-large botaoVoltar" onclick="@voltar"><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large botaoEditar" onclick="encodeImageFileAsURL(AjaxJsUsuario.concluirEdicaoUsuario, '@(ViewBag.telaAnterior == "Usuários Ativos" ? Url.Action("Listar","Usuario") : Url.Action("ListarInativos","Usuario"))')"><i class="material-icons left">build</i>Editar</a>
-            </div>
-        </form>
+                <div class="row center">
+                    <a class="waves-effect waves-light btn-large botaoVoltar" onclick="@voltar"><i class="material-icons left">arrow_back</i>Voltar</a>
+                    <a class="waves-effect waves-light btn-large botaoEditar" onclick="encodeImageFileAsURL(AjaxJsUsuario.concluirEdicaoUsuario, '@(ViewBag.telaAnterior == "Usuários Ativos" ? Url.Action("Listar","Usuario") : Url.Action("ListarInativos","Usuario"))')"><i class="material-icons left">build</i>Editar</a>
+                </div>
+            </form>
+        </div>
     </div>
+    
 </div>
 
 
