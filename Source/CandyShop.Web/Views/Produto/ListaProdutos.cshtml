@@ -14,83 +14,87 @@
         $('.valorProduto').maskMoney('mask');
     });
 </script>
+<div class="card-panel white">
+    <div class="row">
 
-<div class="row">
-    <h3 class="center pink-text">@TempData["nomeLista"].ToString()</h3>
-    @if (!Model.Any())
-    {
-        <p align="center">Nenhum registro encontrado</p>
-    }
-    else
-    {
-        <div class="col s12 desapear">
-            <table class="bordered highlight">
-                <tr>
-                    <th>
-                        Nome
-                    </th>
-                    <th>
-                        Preço
-                    </th>
-                    <th>
-                        Qtde em estoque
-                    </th>
-                    <th>
-                        Categoria
-                    </th>
-                    <th></th>
-                </tr>
 
-                @foreach (var item in Model)
-                {
+        <h3 class="center pink-text">@TempData["nomeLista"].ToString()</h3>
+        @if (!Model.Any())
+        {
+            <p align="center">Nenhum registro encontrado</p>
+        }
+        else
+        {
+
+            <div class="col s12 desapear">
+                <table class="bordered highlight">
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NomeProduto)
-                        </td>
-                        <td class="valorProduto">
-                            R$ @Html.DisplayFor(modelItem => item.PrecoProduto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.QtdeProduto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Categoria)
-                        </td>
-                        <td style="width: 185px">
-                            <a title="Detalhes" onclick="AjaxJsProduto.detalheProduto(@item.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons blue-text small">info_outline</i></a>
-                            <a title="Editar" onclick="AjaxJsProduto.editarProduto(@item.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons black-text small">edit</i></a>
-                            @if (!TempData["nomeLista"].ToString().Equals("Produtos Inativos"))
-                            {
-                                <a title="Desativar" onclick="AjaxJsProduto.desativarProduto(@item.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons pink-text small">remove_shopping_cart</i></a>
-                            }
-                        </td>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            Preço
+                        </th>
+                        <th>
+                            Qtde em estoque
+                        </th>
+                        <th>
+                            Categoria
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </table>
-        </div>
 
-        <div class="gridCelular">
-            <ul class="collapsible" data-collapsible="accordion">
-                @foreach (var produto in Model)
+                    @foreach (var item in Model)
                 {
-                    <li>
-                        <div class="collapsible-header">
-                            <i class="material-icons pink-text">bubble_chart</i>@produto.NomeProduto
-                        </div>
-                        <div class="collapsible-body">
-                            <span>Preço: R$ @produto.PrecoProduto</span>
-                            <br />
-                            <span>Quantidade: @produto.QtdeProduto</span>
-                            <br />
-                            <span>Categoria: @produto.Categoria</span>
-                            <br /><br />
-                            <a class="btn-floating btn-sm waves-effect waves-light light-blue darken-3" onclick="AjaxJsProduto.detalheProduto(@produto.IdProduto)"><i class="material-icons">info_outline</i></a>
-                            <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsProduto.editarProduto(@produto.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">edit</i></a>
-                            <a class="btn-floating btn-sm waves-effect waves-light pink lighten-1" onclick="AjaxJsProduto.desativarProduto(@produto.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">remove_shopping_cart</i></a>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-    }
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NomeProduto)
+                            </td>
+                            <td class="valorProduto">
+                                R$ @Html.DisplayFor(modelItem => item.PrecoProduto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.QtdeProduto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Categoria)
+                            </td>
+                            <td style="width: 185px">
+                                <a title="Detalhes" onclick="AjaxJsProduto.detalheProduto(@item.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons blue-text small">info_outline</i></a>
+                                <a title="Editar" onclick="AjaxJsProduto.editarProduto(@item.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons black-text small">edit</i></a>
+                                @if (!TempData["nomeLista"].ToString().Equals("Produtos Inativos"))
+                                {
+                                    <a title="Desativar" onclick="AjaxJsProduto.desativarProduto(@item.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons pink-text small">remove_shopping_cart</i></a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <div class="gridCelular">
+                <ul class="collapsible" data-collapsible="accordion">
+                    @foreach (var produto in Model)
+                {
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons pink-text">bubble_chart</i>@produto.NomeProduto
+                            </div>
+                            <div class="collapsible-body">
+                                <span>Preço: R$ @produto.PrecoProduto</span>
+                                <br />
+                                <span>Quantidade: @produto.QtdeProduto</span>
+                                <br />
+                                <span>Categoria: @produto.Categoria</span>
+                                <br /><br />
+                                <a class="btn-floating btn-sm waves-effect waves-light light-blue darken-3" onclick="AjaxJsProduto.detalheProduto(@produto.IdProduto)"><i class="material-icons">info_outline</i></a>
+                                <a class="btn-floating btn-sm waves-effect waves-light yellow darken-3" onclick="AjaxJsProduto.editarProduto(@produto.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">edit</i></a>
+                                <a class="btn-floating btn-sm waves-effect waves-light pink lighten-1" onclick="AjaxJsProduto.desativarProduto(@produto.IdProduto, '@TempData["nomeLista"].ToString()')"><i class="material-icons">remove_shopping_cart</i></a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
 </div>
