@@ -74,9 +74,9 @@ namespace CandyShop.WebAPI.Controllers.Produto
                 if (produto.ImagemA != null)
                     _imagens.InserirImagem(produto.ImagemA, $"{caminho}_A");
                 if (produto.ImagemB != null)
-                    _imagens.InserirImagem(produto.ImagemB, $"{caminho}_A");
+                    _imagens.InserirImagem(produto.ImagemB, $"{caminho}_B");
                 if (produto.ImagemC != null)
-                    _imagens.InserirImagem(produto.ImagemC, $"{caminho}_A");
+                    _imagens.InserirImagem(produto.ImagemC, $"{caminho}_C");
 
                 if (produto.RemoverImagemA)
                     _imagens.RemoverImagem($"{caminho}_A");
