@@ -47,6 +47,10 @@ $(document).ready(function () {
 });
 
 function readURL(input) {
+    if (input.files[0].size > 4194304) {
+        Materialize.toast("A imagem deve ser menor que 4 MegaBytes", 5000);
+        return;
+    }
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -54,6 +58,7 @@ function readURL(input) {
             $("#imagem").attr("src", e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
+
     }
 }
 
@@ -138,4 +143,5 @@ function encodeImageFileAsURL(callback) {
         callback();
     }
 }
+
 

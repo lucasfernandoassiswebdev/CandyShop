@@ -66,6 +66,11 @@ function validaBotao() {
 }
 
 function readURL(input) {
+    //verificar se a imagem é maior que 4 megas
+    if (input.files[0].size > 4194304) {
+        Materialize.toast("A imagem deve ser menor que 4 MegaBytes", 5000);
+        return;
+    }
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -120,8 +125,6 @@ function mcpf(v) {
     v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     return v;
 }
-
-
 
 
 
