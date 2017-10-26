@@ -8,21 +8,17 @@ $(document).ready(function () {
     $("#cpf").keyup(function () {
         mcpf($("#cpf").val());
         validaBotao();
+    }).keydown(function (e) {
+        if (e.which == 109 || e.which == 107 || e.which == 69 || e.which == 189 || e.which == 188 || e.which == 190)
+            return false;
+        mcpf($("#cpf").val());
+        validaBotao();
     }).on("blur", function () {
         mcpf($("#cpf").val());
-        //retirando caracteres a mais do campo
-        if ($("#cpf").val().length > 14) {
-            $("#cpf").val($("#cpf").val().substr(0, 13));
-            $("#cpf").keydown();
-        }
-        var cpfNew = $("#cpf").val().replace(/\.|\-/g, "");
-        if (!TestaCPF(cpfNew)) {
-            $("#ErroCpf").errorMessage("CPF Inválido!", 7000);
-        }
         validaBotao();
     });
 
-    $("#Nome").keydown(validaBotao).on("blur", validaBotao);
+    $("#Nome").keydown(validaBotao).keyup(validaBotao).on("blur", validaBotao);
 
     //esconde o botão que retira a imagem
     $("#removerImagem").hide();
@@ -63,6 +59,12 @@ function readURL(input) {
 
 //função que remove caracteres inválidos do campo de CPF e aplica a máscara
 function mcpf(v) {
+    //retirando caracteres a mais do campo
+    if ($("#cpf").val().length > 14) {
+        $("#cpf").val($("#cpf").val().substr(0, 13));
+        $("#cpf").keydown();
+    }
+
     v = v.replace(/\D/g, "");
     v = v.replace(/(\d{3})(\d)/, "$1.$2");
     v = v.replace(/(\d{3})(\d)/, "$1.$2");
@@ -94,6 +96,8 @@ function TestaCPF(strCpf) {
         resto = 0;
     if (resto !== parseInt(strCpf.substring(10, 11)))
         return false;
+
+    $("#ErroCpf").errorMessage(false, "CPF Inválido!", 2000);
     return true;
 }
 
@@ -101,16 +105,20 @@ function validaBotao() {
     //validando o cpf
     var cpfNew = $("#cpf").val();
     cpfNew = cpfNew.replace(/\.|\-/g, "");
-
+    $("#ErroCpf").successMessage(TestaCPF(cpfNew), "CPF OK!");
     //validando o campo de nome
     var qtde = $("#Nome").val().length;
 
     //desabilitando o botão caso um dos dois esteja inválido
-    if (!TestaCPF(cpfNew) || qtde > 50 || qtde === 0) {
+    if (!TestaCPF(cpfNew)) {
+        $("#ErroCpf").errorMessage(true,"CPF Inválido!", 2000);
         $(".botaoCadastro").attr("disabled", "disabled");
-    } else {
-        $(".botaoCadastro").removeAttr("disabled");
     }
+
+    if (!TestaCPF(cpfNew) || qtde > 50 || qtde == 0)
+        $(".botaoCadastro").attr("disabled", "disabled");
+    else
+        $(".botaoCadastro").removeAttr("disabled");
 }
 
 function encodeImageFileAsURL(callback) {
