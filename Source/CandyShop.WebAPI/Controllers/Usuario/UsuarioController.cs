@@ -44,6 +44,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             {
                 return Content(HttpStatusCode.NotModified, "Usuario inserido, porém houve um erro ao inserir sua imagem");
             }
+
             return Content(HttpStatusCode.OK, "Usuario inserido com sucesso");
         }
 
