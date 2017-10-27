@@ -198,6 +198,40 @@ CREATE PROCEDURE [dbo].[CSSP_LisProduto]
 	END
 GO
 
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdutoAeI]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisProdutoAeI]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_LisProdutoAeI]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Produto.sql
+	Objetivo..........: Listar produtos ativos e inativos ordenado 
+	Autor.............: SMN - João Guilherme
+ 	Data..............: 26/10/2017
+	Ex................: EXEC [dbo].[CSSP_LisProdutoAeI]
+
+	*/
+
+	BEGIN
+	
+		SELECT  IdProduto,
+				NomeProduto,
+				PrecoProduto,
+				QtdeProduto,
+				Ativo,
+				Categoria
+		FROM Produto WITH(NOLOCK)
+		ORDER BY Ativo
+
+	END
+GO
+				
+
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisProdutoInativo]') AND objectproperty(id, N'IsPROCEDURE')=1)
 	DROP PROCEDURE [dbo].[CSSP_LisProdutoInativo]
 GO

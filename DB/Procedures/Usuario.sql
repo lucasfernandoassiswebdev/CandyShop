@@ -204,21 +204,53 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 	END
 GO
 
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_ListarUsuariosInativos]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[GCS_LisUsuariosInativos]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[GCS_LisUsuariosInativos]
 GO
 
-CREATE PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
+CREATE PROCEDURE [dbo].[GCS_LisUsuariosInativos]
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Listar todos usuarios inativos
+	Autor.............: SMN - João Guilherme
+ 	Data..............: 27/10/2017
+	Ex................: EXEC [dbo].[GCS_LisUsuariosInativos]
+
+	*/
+
+	BEGIN
+		SELECT	Cpf,
+				SenhaUsuario,
+				SaldoUsuario,
+				NomeUsuario,
+				Ativo,
+				Classificacao
+				FROM [dbo].[Usuario]
+				WHERE Ativo = 'I'
+	END
+GO
+				
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisUsuariosAtivoseInativos]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_LisUsuariosAtivoseInativos]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_LisUsuariosAtivoseInativos]
 
 	AS
 
 	/*
 	Documenta��o
 	Arquivo Fonte.....: Usuario.sql
-	Objetivo..........: Listar todos os usuarios inativos
-	Autor.............: SMN - Rafael Morais
- 	Data..............: 19/09/2017
-	Ex................: EXEC [dbo].[GCS_ListarUsuariosInativos]
+	Objetivo..........: Listar todos os usuarios e ordenar por ativos
+	Autor.............: SMN - João Guilherme
+ 	Data..............: 27/10/2017
+	Ex................: EXEC [dbo].[CSSP_LisUsuariosAtivoseInativos]
+
 
 	*/
 
@@ -231,9 +263,7 @@ CREATE PROCEDURE [dbo].[CSSP_ListarUsuariosInativos]
 				Ativo,
 				Classificacao
 				FROM [dbo].[Usuario]
-				WHERE Ativo = 'I'
-				ORDER BY NomeUsuario
-
+				ORDER BY Ativo
 	END
 GO
 				

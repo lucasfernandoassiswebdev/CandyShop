@@ -25,7 +25,9 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisProdutoAcimaValor,
             CSSP_LisProdutoCategoria,
             CSSP_SelDadosProduto,
-            CSSP_LisProdPorNome
+            CSSP_LisProdPorNome,
+            CSSP_LisProdutoAeI
+
         }
 
         public int InserirProduto(Produto produto, out int sequencial)
@@ -147,6 +149,12 @@ namespace CandyShop.Repository.Repositorys
                         Categoria = reader.ReadAsString("Categoria")
                     });
             return retorno;
+        }
+
+        public IEnumerable<Produto> ListarProdutoAeI()
+        {
+            ExecuteProcedure(Procedures.CSSP_LisProdutoAeI);
+            return Listar();
         }
     }
 }

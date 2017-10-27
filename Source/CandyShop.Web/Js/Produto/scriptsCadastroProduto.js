@@ -126,6 +126,10 @@ function forBase64(imagem, base, callback) {
 }
 
 function readURL(input, imagem) {
+    if (input.files[0].size > 4194304) {
+        Materialize.toast("A imagem deve ser menor que 4 MegaBytes", 4000);
+        return;
+    }
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 

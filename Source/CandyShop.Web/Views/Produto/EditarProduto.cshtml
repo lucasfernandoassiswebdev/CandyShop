@@ -10,106 +10,108 @@
 <script type="text/javascript" src="~/Js/plugins/jquery.maskMoney.js"></script>
 
 <div class="container">
-    <div class="row">
-        <form class="col s12">
-            <div class="row">
-                <div class="center">
-                    <h2 class="center pink-text" style="font-weight: bold">Editar Produto</h2>
+    <div class="card-panel white" style="padding-bottom: 0">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="center">
+                        <h2 class="center pink-text" style="font-weight: bold">Editar Produto</h2>
+                    </div>
                 </div>
-            </div>
-            <!--fotos-->
-            <div class="row">
+                <!--fotos-->
+                <div class="row">
 
-                <div class="center">
-                    <div class="Imagens" style="display: flex">
-                        <div>
-                            <label for="fotoProduto1">
-                                <img id="imagem1" style="margin: 0 auto; display: block; margin-right: 38px" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@Model.ImagemA" alt="imagem não disponível :(" />
-                            </label>
-                            <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                            <a class="btn botaoRemover" id="removerImagem1" style="margin-right: 30px; margin-top:5px"><i class="material-icons left">block</i>Remover</a>
-                        </div>
+                    <div class="center">
+                        <div class="Imagens" style="display: flex">
+                            <div>
+                                <label for="fotoProduto1">
+                                    <img id="imagem1" style="margin: 0 auto; display: block; margin-right: 38px" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@Model.ImagemA" alt="imagem não disponível :(" />
+                                </label>
+                                <input id="fotoProduto1" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                                <a class="btn botaoRemover" id="removerImagem1" style="margin-right: 30px; margin-top: 5px"><i class="material-icons left">block</i>Remover</a>
+                            </div>
 
-                        <div>
-                            <label for="fotoProduto2">
-                                <img id="imagem2" style="margin: 0 auto;display: block; margin-right: 38px" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@Model.ImagemB" alt="imagem não disponível :(" />
-                            </label>
-                            <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                            <a class="btn botaoRemover" id="removerImagem2" style="margin-right: 30px; margin-top:5px"><i class="material-icons left">block</i>Remover</a>
-                        </div>
+                            <div>
+                                <label for="fotoProduto2">
+                                    <img id="imagem2" style="margin: 0 auto; display: block; margin-right: 38px" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@Model.ImagemB" alt="imagem não disponível :(" />
+                                </label>
+                                <input id="fotoProduto2" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                                <a class="btn botaoRemover" id="removerImagem2" style="margin-right: 30px; margin-top: 5px"><i class="material-icons left">block</i>Remover</a>
+                            </div>
 
-                        <div>
-                            <label for="fotoProduto3">
-                                <img id="imagem3" style="margin: 0 auto;display: block; margin-right: 38px" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@Model.ImagemC" alt="imagem não disponível :(" />
-                            </label>
-                            <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
-                            <a class="btn botaoRemover" id="removerImagem3" style="margin-right: 30px; margin-top:5px"><i class="material-icons left">block</i>Remover</a>
+                            <div>
+                                <label for="fotoProduto3">
+                                    <img id="imagem3" style="margin: 0 auto; display: block; margin-right: 38px" class="center tooltipped imagemFoto" data-position="bottom" data-delay="50" data-tooltip="Foto do produto" src="@Model.ImagemC" alt="imagem não disponível :(" />
+                                </label>
+                                <input id="fotoProduto3" type="file" placeholder="foto do usuário" class="file-path validate" style="display: none" accept="image/*">
+                                <a class="btn botaoRemover" id="removerImagem3" style="margin-right: 30px; margin-top: 5px"><i class="material-icons left">block</i>Remover</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="Placeholder" id="IdProduto" name="IdProduto" type="text" class="validate" required="" value="@Model.IdProduto" disabled>
-                    <label class="active">ID do Produto:</label>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Placeholder" id="IdProduto" name="IdProduto" type="text" class="validate" required="" value="@Model.IdProduto" disabled>
+                        <label class="active">ID do Produto:</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="Placeholder" id="NomeProduto" name="Nome" type="text" class="validate" maxlength="40" required data-length="40" autocomplete="off" value="@Model.NomeProduto">
-                    <label class="active">Nome:</label>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Placeholder" id="NomeProduto" name="Nome" type="text" class="validate" maxlength="40" required data-length="40" autocomplete="off" value="@Model.NomeProduto">
+                        <label class="active">Nome:</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="PrecoProduto" type="text" maxlength="9" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" value="@Model.PrecoProduto" required>
-                    <label class="active" for="PrecoProduto">Preco do Produto:</label>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="PrecoProduto" type="text" maxlength="9" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" value="@Model.PrecoProduto" required>
+                        <label class="active" for="PrecoProduto">Preco do Produto:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="QtdeProduto" name="QtdeProduto" type="number" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required value="@Model.QtdeProduto">
+                        <label class="active">Quantidade em estoque:</label>
+                    </div>
                 </div>
-                <div class="input-field col s6">
-                    <input id="QtdeProduto" name="QtdeProduto" type="number" onkeydown="return FilterInput(event)" onpaste="handlePaste(event)" class="validate" required value="@Model.QtdeProduto">
-                    <label class="active">Quantidade em estoque:</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    <select id="Categoria">
-                        <option value="" disabled>Escolha uma opção</option>
-                        <option value="Doces" @(Convert.ToString(Model.Categoria) == "Doces" ? "selected" : string.Empty)>Doces</option>
-                        <option value="Balas" @(Convert.ToString(Model.Categoria) == "Balas" ? "selected" : string.Empty)>Balas</option>
-                        <option value="Bebidas" @(Convert.ToString(Model.Categoria) == "Bebidas" ? "selected" : string.Empty)>Bebidas</option>
-                        <option value="Amendoins" @(Convert.ToString(Model.Categoria) == "Amendoins" ? "selected" : string.Empty)>Amendoins</option>
-                        <option value="Chocolates" @(Convert.ToString(Model.Categoria) == "Chocolates" ? "selected" : string.Empty)>Chocolates</option>
-                        <option value="Salgadinhos" @(Convert.ToString(Model.Categoria) == "Salgadinhos" ? "selected" : string.Empty)>Salgadinhos</option>
-                    </select>
-                    <label>Categoria do produto</label>
-                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select id="Categoria">
+                            <option value="" disabled>Escolha uma opção</option>
+                            <option value="Doces" @(Convert.ToString(Model.Categoria) == "Doces" ? "selected" : string.Empty)>Doces</option>
+                            <option value="Balas" @(Convert.ToString(Model.Categoria) == "Balas" ? "selected" : string.Empty)>Balas</option>
+                            <option value="Bebidas" @(Convert.ToString(Model.Categoria) == "Bebidas" ? "selected" : string.Empty)>Bebidas</option>
+                            <option value="Amendoins" @(Convert.ToString(Model.Categoria) == "Amendoins" ? "selected" : string.Empty)>Amendoins</option>
+                            <option value="Chocolates" @(Convert.ToString(Model.Categoria) == "Chocolates" ? "selected" : string.Empty)>Chocolates</option>
+                            <option value="Salgadinhos" @(Convert.ToString(Model.Categoria) == "Salgadinhos" ? "selected" : string.Empty)>Salgadinhos</option>
+                        </select>
+                        <label>Categoria do produto</label>
+                    </div>
 
-                <label style="margin-left: 15px">Status do produto:</label>
-                <div style="margin-top: 10px">
-                    <p class="radios" style="margin-left: 185px !important; display: inline;">
-                        <input name="status" class="with-gap" type="radio" id="test1" value="A" @(Model.Ativo == "A" ? "checked" : string.Empty) />
-                        <label for="test1">Ativo</label>
-                    </p>
-                    <p class="radios" style="margin-left: 70px !important; display: inline;">
-                        <input name="status" class="with-gap" type="radio" id="test2" value="I" @(Model.Ativo == "I" ? "checked" : string.Empty) />
-                        <label for="test2">Inativo</label>
-                    </p>
+                    <label style="margin-left: 15px">Status do produto:</label>
+                    <div style="margin-top: 10px">
+                        <p class="radios" style="margin-left: 185px !important; display: inline;">
+                            <input name="status" class="with-gap" type="radio" id="test1" value="A" @(Model.Ativo == "A" ? "checked" : string.Empty) />
+                            <label for="test1">Ativo</label>
+                        </p>
+                        <p class="radios" style="margin-left: 70px !important; display: inline;">
+                            <input name="status" class="with-gap" type="radio" id="test2" value="I" @(Model.Ativo == "I" ? "checked" : string.Empty) />
+                            <label for="test2">Inativo</label>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            @{
-                var voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
-            }
-            <div class="row" , align="center">
-                <a class="waves-effect waves-light btn-large botaoVoltar" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
-                <a class="waves-effect waves-light btn-large botaoEditar" onclick="encodeImageFileAsURL(AjaxJsProduto.concluirEdicaoProduto,'@(ViewBag.Tela == "A" ? Url.Action("Listar","Produto") : Url.Action("ListarInativos", "Produto"))')"><i class="material-icons left">edit</i>Editar</a>
-            </div>
-        </form>
+                @{
+                    var voltar = ViewBag.telaAnterior.ToString().Equals("Produtos Ativos") ? "AjaxJsProduto.listaProduto()" : "AjaxJsProduto.listarInativos()";
+                }
+                <div class="row" , align="center">
+                    <a class="waves-effect waves-light btn-large botaoVoltar" onclick=@voltar><i class="material-icons left">arrow_back</i>Voltar</a>
+                    <a class="waves-effect waves-light btn-large botaoEditar" onclick="encodeImageFileAsURL(AjaxJsProduto.concluirEdicaoProduto, '@(ViewBag.Tela == "A" ? Url.Action("Listar", "Produto") : Url.Action("ListarInativos", "Produto"))')"><i class="material-icons left">edit</i>Editar</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 @*<style>
-    .radios {
-        display: inline;
-        margin-left: 70px !important;
-    }
-</style>*@
+        .radios {
+            display: inline;
+            margin-left: 70px !important;
+        }
+    </style>*@

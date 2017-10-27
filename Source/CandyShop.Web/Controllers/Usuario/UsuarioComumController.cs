@@ -1,9 +1,8 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
-using CandyShop.Web.Helpers;
+using CandyShop.Web.Filters;
 using System.Net;
 using System.Web.Mvc;
-using CandyShop.Web.Filters;
 
 namespace CandyShop.Web.Controllers.Usuario
 {
@@ -38,9 +37,13 @@ namespace CandyShop.Web.Controllers.Usuario
                 SenhaUsuario = senhas.NovaSenha
             };
             var response = _appUsuario.TrocarSenha(usuario, token);
-            return Content(response.Status != HttpStatusCode.OK
-                ? $"Erro ao trocar a senha, {response.ContentAsString}"
-                : "Senha atualizada com sucesso");
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Erro ao trocar a senha, {response.ContentAsString}");
+
+            if (Session["FirstLogin"].ToString().Equals("T"))
+                Session["FirstLogin"] = "F";
+            return Content("Senha alterada com sucesso!");
+
         }
     }
 }
