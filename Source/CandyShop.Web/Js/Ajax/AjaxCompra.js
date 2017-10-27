@@ -54,7 +54,8 @@ var AjaxJsCompra = (function ($) {
 
     var listarCompraMes = function (mes) {
         var parametro = { mes: mes };
-        chamaPaginaComIdentificador(url.listarCompraMes, parametro);
+        atualizaToken();
+        chamaPaginaComIdentificador(url.listarCompraMes, { parametro: parametro, token: obj.access_token});
     };
     var listarCompraSemana = function () {
         chamaPaginaCompra(url.listarCompraSemana, "#DivGrid");
