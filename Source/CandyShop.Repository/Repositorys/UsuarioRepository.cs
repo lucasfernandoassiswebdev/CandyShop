@@ -19,11 +19,11 @@ namespace CandyShop.Repository.Repositorys
             CSSP_SelUsuariosDivida,
             CSSP_DesUsuario,
             CSSP_LisUsuarioIgual,
-            CSSP_ListarUsuariosInativos,
+            CSSP_ListarUsuariosAtivoseInativos,
             CSSP_LisUsuarioPorNome,
             CSSP_VerificaLoginSenha,
             CSSP_VerificaSaldoLoja,
-            CSSP_UpdSenha
+            CSSP_UpdSenha,
         }
 
         public void InserirUsuario(Usuario usuario)
@@ -95,9 +95,9 @@ namespace CandyShop.Repository.Repositorys
             ExecuteProcedure(Procedures.CSSP_SelUsuariosDivida);           
             return Listar();
         }
-        public IEnumerable<Usuario> ListarUsuarioInativo()
+        public IEnumerable<Usuario> ListarUsuarioAtivoeInativo()
         {
-            ExecuteProcedure(Procedures.CSSP_ListarUsuariosInativos);            
+            ExecuteProcedure(Procedures.CSSP_ListarUsuariosAtivoseInativos);            
             return Listar();
         }
         public IEnumerable<Usuario> ListarUsuarioPorNome(string nome)
@@ -151,5 +151,6 @@ namespace CandyShop.Repository.Repositorys
                     });
             return retorno;
         }
+
     }
 }
