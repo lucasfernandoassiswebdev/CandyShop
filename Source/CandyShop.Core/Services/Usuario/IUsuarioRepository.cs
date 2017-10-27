@@ -11,7 +11,8 @@ namespace CandyShop.Core.Services.Usuario
         int VericaUsuarioIgual(Usuario usuario);
         Usuario SelecionarUsuario(string cpf);
         IEnumerable<Usuario> ListarUsuario();
-        IEnumerable<Usuario> ListarUsuarioAtivoeInativo();
+        IEnumerable<Usuario> ListarUsuariosInativos();
+        IEnumerable<Usuario> ListarUsuairoAtivoseInativos();
         IEnumerable<Usuario> ListarUsuarioDivida();
         IEnumerable<Usuario> ListarUsuarioPorNome(string nome);
         int VerificaLogin(Usuario usuario);
