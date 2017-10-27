@@ -69,7 +69,6 @@ img {
 }
 
 .nav-wrapper input[type="search"]:focus {
-	position: fixed;
 	top: 0;
 }
 
@@ -83,7 +82,7 @@ img {
 
 nav .input-field label {
 	top: -11px;
-	left: 0;
+	right: 0;
 }
 
 	nav .input-field label i {
@@ -170,19 +169,15 @@ h3 {
 }
 
 #search {
-	text-align: left;
+	text-align: right;
+	padding-right: 40px;
 }
 
 .pink-text, .dropdown-content li > a, .dropdown-content li > span {
 	color: #ec407a;
 }
 
-#modalQuantidade, #modalEditarQuantidade {
-	width: 24%;
-	top: 25% !important;
-}
-
-#trocaSenha{
+#trocaSenha {
 	width: 35%;
 	top: 25% !important;
 }
@@ -209,4 +204,13 @@ h3 {
 	margin-left: 18px;
 	font-size: 35px;
 	margin-top: -10px;
+}
+
+.fixed-action-btn {
+	padding-top: 1px;
+}
+
+#search {
+	transition: 1s;
+	position: 
 }

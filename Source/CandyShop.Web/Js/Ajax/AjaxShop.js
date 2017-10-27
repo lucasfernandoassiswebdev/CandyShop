@@ -58,8 +58,8 @@ var AjaxJsShop = (function ($) {
                                     withCredentials: true
                                 },
                                 success: function (result) {
-                                    var token = result;
-                                    localStorage.setItem("tokenCandyShop", token);
+                                    console.log("token gerado: " + result);
+                                    localStorage.setItem("tokenCandyShop", result);
                                 },
                                 error: function (req, status, error) {
                                     Materialize.toast(error, 3000);
