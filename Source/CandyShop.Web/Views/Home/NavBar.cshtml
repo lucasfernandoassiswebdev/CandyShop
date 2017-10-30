@@ -37,22 +37,6 @@
 
 <link href="~/Content/Principal/Main.css?d=@DateTime.Now.Ticks" rel="stylesheet" />
 
-<!--modal de quantidade-->
-<div id="modalQuantidade" class="modal" style="z-index: 99999999">
-    <div class="modal-content center">
-        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
-        <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
-        <p class="pink-text center identQuant"></p>
-        <div class="center">
-            <input type="number" id="quantidade" class="center identQuant" autocomplete="off" />
-            <span class="QtdeInvalida" color="red"></span>
-        </div>
-    </div>
-    <div class="modal-footer identQuant">
-        <a id="adicionaCarrinho" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
-    </div>
-</div>
-
 <!--modal de Trocar a senha-->
 <div id="trocaSenha" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
@@ -77,22 +61,6 @@
     </div>
 </div>
 
-<!--modal de editar quantidade-->
-<div id="modalEditarQuantidade" class="modal" style="z-index: 99999999">
-    <div class="modal-content center">
-        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
-        <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
-        <p id="estoqueEdit" class="pink-text center identQuant"></p>
-        <div class="center">
-            <input type="number" id="quantidadeEdit" class="center identQuant" autocomplete="off" maxlength="3" />
-            <span class="QtdeInvalida" color="red"></span>
-        </div>
-    </div>
-    <div class="modal-footer identQuant">
-        <a id="editarQuantidade" href="#modalCarrinho" disabled class="modal-trigger waves-effect waves-green btn-flat pink-text modal-close" style="font-weight: bold">Confirma</a>
-    </div>
-</div>
-
 <!--modal do carrinho-->
 <div id="modalCarrinho" class="modal">
     <div class="modal-content center">
@@ -106,11 +74,11 @@
         <p id="totalCompra" class="pink-text left identQuant">Total da compra R$ 0,00</p>
         @if (Session["Login"].ToString().Equals("off"))
         {
-            <a href="#modalLogin" id="confirmarCompra" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Confirmar compra</a>
+        <a href="#modalLogin" id="confirmarCompra" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Confirmar compra</a>
         }
         else
         {
-            <a id="confirmarCompra" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold" onclick="AjaxJsCompra.inserirCompra()">Confirmar compra</a>
+        <a id="confirmarCompra" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold" onclick="AjaxJsCompra.inserirCompra()">Confirmar compra</a>
         }
         <a href="#!" id="limpar" class="modal-close right modal-action waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Limpar</a>
     </div>
@@ -142,6 +110,8 @@
     </div>
 </div>
 
+
+<!--select com os produtos filtrados-->
 <ul id="dropdownFiltro" class="dropdown-content">
     <li><a href="#!" onclick="AjaxJsShop.voltarInicio(); ">Todos</a></li>
     <li><a href="#!" onclick="AjaxJsShop.listaCategoria('Amendoins')">Amendoins</a></li>
@@ -159,32 +129,33 @@
         <script>
             $(document).ready(function () {
                 $('#trocaSenha').modal('open');
-                Materialize.toast("Não deixe seu CPF como senha, troque para ter mais segurança. ;)",5000);
+                Materialize.toast("Não deixe seu CPF como senha, troque para ter mais segurança. ;)", 5000);
             });
         </script>
     }
     <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a href="#!" class="brand-logo right" title="Inicio" onclick="AjaxJsShop.voltarInicio();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
-            <!--barra de navegação-->
-            <ul id="dropdownMenu" class="dropdown-content">
+            <a href="#!" class="brand-logo" title="Inicio" onclick="AjaxJsShop.voltarInicio();" style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
+
+            <!--side nav com as opções-->
+            <ul id="dropdownMenu" class="side-nav">
                 <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico de Compra</a></li>
                 <li><a href="#trocaSenha" class="modal-trigger"><i class="material-icons">lock_outline</i>Trocar senha</a></li>
-
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                    <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
-                    <li class="divider"></li>
+                <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
+                <li class="divider"></li>
                 }
                 <li><a href="#!" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
 
-            <ul class="hide-on-med-and-down">
-                <li><a class="dropdown-button" href="#!" data-activates="dropdownMenu">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
+            <!--barra de navegação-->
+            <ul class="hide-on-med-and-down right">
+                <li><a class="dropdown-button" href="#!" data-activates="mobile-demo">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button" title="Saldo atual: @Session["saldoUsuario"]" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] @Session["saldoUsuario"] </a></li>
                 <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Seu Carrinho</a></li>
                 <li>
@@ -212,8 +183,8 @@
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
                 {
-                    <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
-                    <li class="divider"></li>
+                <li><a href="@Url.Action("Index", "Admin")"><i class="material-icons">book</i>Administração</a></li>
+                <li class="divider"></li>
                 }
                 <li><a href="#!" class="closeMenu" onclick="AjaxJsUsuario.logOff()"><i class="material-icons">power_settings_new</i>Sair</a></li>
             </ul>
@@ -231,30 +202,26 @@ else
 {
     <nav class="brown darken-2 nav-extended">
         <div class="nav-wrapper">
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-
-            <a href="#!" class="brand-logo right" title="Inicio" onclick="AjaxJsShop.voltarInicio(); " style="font-weight: bold"><i class="material-icons">store</i><font class="pink-text">Candy</font> Shop</a>
-
-            <ul class="hide-on-med-and-down">
-                <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
-                <li><a class="dropdown-button modal-trigger right closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
-                <li>
-                    <a class="dropdown-button" title="Pesquisar por categoria" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
-                </li>
-                <li>
+            <a data-activates="barraLateral" class="button-collapse">Menu<i class="material-icons left">menu</i></a>
+            <a href="#modalLogin" class="tooltipped hide-on-med-and-down" data-position="bottom" data-delay="50" data-tooltip="Logar" href="#modalLogin" style="margin-left:12px; margin-right: 12px;float:left"><i class="material-icons">account_circle</i></a>
+            <a href="#!" class="brand-logo " title="Inicio" onclick="AjaxJsShop.voltarInicio(); " style="font-weight: bold"><font class="pink-text">Candy</font> Shop</a>
+            <ul class="hide-on-med-and-down right" style="position: absolute;right: -33%">
+                <li style="margin-left:-83%;">
                     <div class="col s6 hide-on-med-and-down">
                         <div>
                             <div class="input-field">
-                                <input id="search" type="search" title="Procurar um produto" required autocomplete="off">
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                <input id="search" type="search" placeholder="Pesquise por produtos aqui" title="Procurar um produto" required autocomplete="off">
+                                <label class="label-icon" for="search"><i class="material-icons right">search</i></label>
                             </div>
                         </div>
                     </div>
                 </li>
+                <li style="margin-left: -20px">
+                    <a class="dropdown-button" title="Pesquisar por categoria" href="#!" data-activates="dropdownFiltro">Filtrar busca<i class="material-icons right">arrow_drop_down</i></a>
+                </li>
             </ul>
-            <ul class="side-nav" id="mobile-demo">
-                <li><a class="dropdown-button modal-trigger closeMenu" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
-                <li><a class="dropdown-button modal-trigger closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
+            <ul id="barraLateral" class="side-nav">
+                <li><a class="closeMenu">Login<i class="material-icons left">account_circle</i></a></li>
             </ul>
         </div>
         <div class="nav-content white">
@@ -267,4 +234,7 @@ else
     </nav>
 }
 
+<a href="#modalCarrinho" class="modal-trigger tooltipped fixed-action-btn btn btn-floating btn-large blue" data-position="left" data-delay="50" data-tooltip="Seu carrinho atual"><i class="material-icons">shopping_cart</i></a>
+
 <div id="DivGrid"></div>
+

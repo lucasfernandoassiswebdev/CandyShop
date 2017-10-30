@@ -485,7 +485,7 @@ function verificaEditQuantidade() {
 
 function validaNovaSenha() {
     if ($("#novaSenha").val().length > 12 || $("#novaSenha").val().length <= 0 || ilegais.test($("#novaSenha").val())) {
-        Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
+        Materialize.toast("Senha deve conter de 6 a 12 caracteres!", 3000);
         $("#novaSenha").focus();
     }
 }

@@ -221,10 +221,11 @@
     <Content Include="Js\plugins\jquery.maskMoney.js" />
     <Content Include="Js\Produto\scriptsCadastroProduto.js" />
     <Content Include="Js\Produto\scriptsEditarProduto.js" />
-    <Content Include="Js\telaPrincipal\scriptsAdmin.js" />
+    <Content Include="Js\telaPrincipal\Carrinho.js" />
+    <Content Include="Js\telaPrincipal\Admin.js" />
     <Content Include="Js\Usuario\scriptsCadastroUsuario.js" />
-    <Content Include="Js\telaPrincipal\scriptsMain.js" />
-    <Content Include="Js\telaPrincipal\scriptsPadrao.js" />
+    <Content Include="Js\telaPrincipal\Main.js" />
+    <Content Include="Js\telaPrincipal\Padrao.js" />
     <Content Include="Js\Usuario\scriptsEditarUsuario.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />

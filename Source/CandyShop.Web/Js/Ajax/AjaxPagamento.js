@@ -13,9 +13,8 @@ var AjaxJsPagamento = (function ($) {
         chamaPaginaPagamento(url.listarPagamento,"#DivGrid");
     };
     var listarPagamentoMes = function (mes) {
-        var parametro = { mes: mes };
         atualizaToken();
-        chamaPaginaComIdentificador(url.listarPagamentoMes, { parametro: parametro, token: obj.access_token});
+        chamaPaginaComIdentificador(url.listarPagamentoMes, { mes: mes, token: obj.access_token});
     };
     var listarPagamentoSemana = function () {
         chamaPaginaPagamento(url.listarPagamentoSemana,"#DivGrid");

@@ -102,9 +102,9 @@ namespace CandyShop.Web.Controllers.Usuario
 
             var response = _appUsuario.InserirUsuario(usuario, token);
 
-            return Content(response.Status != HttpStatusCode.OK || response.Status != HttpStatusCode.NotModified
-                ? $"{response.ContentAsString}"
-                : response.Content);
+            if(response.Status != HttpStatusCode.OK || response.Status == HttpStatusCode.NotModified)
+                return Content($"Erro, {response.ContentAsString}");
+            return Content("Cadastro feito com sucesso!");
         }
         [HttpPost]
         public ActionResult Editar(UsuarioViewModel usuario, string token)

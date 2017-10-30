@@ -8,7 +8,7 @@ var AjaxJsShop = (function ($) {
     };
 
     var mostraSaldo = function () {
-        chamaPaginaToken(url.mostraSaldo,"#DivGrid");
+        chamaPaginaToken(url.mostraSaldo, "#DivGrid");
     };
 
     var administracao = function () {
@@ -50,7 +50,7 @@ var AjaxJsShop = (function ($) {
 
                             $.ajax({
                                 type: "POST",
-                                url: "http://localhost:4000/Token",
+                                url: "http://192.168.7.10/CandyShop/Token",
                                 data: queryString,
                                 dataType: "text",
                                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -58,20 +58,20 @@ var AjaxJsShop = (function ($) {
                                     withCredentials: true
                                 },
                                 success: function (result) {
-                                    var token = result;
-                                    localStorage.setItem("tokenCandyShop", token);
+                                    console.log("token gerado: " + result);
+                                    localStorage.setItem("tokenCandyShop", result);
                                 },
                                 error: function (req, status, error) {
                                     Materialize.toast(error, 3000);
                                 }
                             });
-                        } else{
+                        } else {
                             res = "Você não tem acesso aos recursos do sistema, contate os administradores";
                             sub = 19;
                         }
                         $("body").slideUp("slow", function () {
                             $("body").hide().html(data).slideDown(1000, function () {
-                                Materialize.toast(res.substr(0,sub), 3000);
+                                Materialize.toast(res.substr(0, sub), 3000);
                             });
                         });
                     }).fail(function (xhr) {
