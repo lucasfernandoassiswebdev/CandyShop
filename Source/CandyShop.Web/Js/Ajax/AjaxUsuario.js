@@ -9,8 +9,8 @@ var AjaxJsUsuario = (function ($) {
     var cadastroUsuario = function () {
         chamaPaginaUsuarios(url.cadastroUsuario);
     };
-    var listaUsuario = function () {
-        chamaPaginaUsuarios(url.listaUsuario);
+    var listaUsuario = function (page) {
+        chamaPaginaUsuarios(url.listaUsuario, page);
     };
     var editarUsuario = function (cpf, telaAnterior) {
         var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
@@ -111,13 +111,14 @@ var AjaxJsUsuario = (function ($) {
     };
 })(jQuery);
 
-function chamaPaginaUsuarios(endereco) {
+function chamaPaginaUsuarios(endereco, pagina) {
     atualizaToken();
     $.ajax({
         url: endereco,
         type: "GET",
         data: {
-            token: obj.access_token
+            token: obj.access_token,
+            pagina: pagina
         },
         success: function (dataSucess) {
             $("#DivGrid").slideUp(function () {

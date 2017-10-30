@@ -1,5 +1,6 @@
-﻿@model IEnumerable<CandyShop.Application.ViewModels.UsuarioViewModel>
-
+﻿@*@model IEnumerable<CandyShop.Application.ViewModels.UsuarioViewModel>*@
+@using PagedList.Mvc
+@model PagedList.IPagedList<CandyShop.Application.ViewModels.UsuarioViewModel>
 @{
     Layout = null;
 }
@@ -23,75 +24,114 @@
         return v;
     }
 </script>
-
-<div class="row">
+<div style="margin: 2%">
     <h3 class="center pink-text">@TempData["nomeLista"].ToString()</h3>
-    @if (!Model.Any())
-    {
-        <p align="center">Nenhum registro encontrado</p>
-    }
-    else
-    {
-        <div class="col s12 desapear">
-            <table class="bordered highlight">
-                <tr>
-                    <th>
-                        Nome
-                    </th>
-                    <th>
-                        CPF
-                    </th>
-                    <th>
-                        Saldo
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var usuario in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => usuario.NomeUsuario)
-                        </td>
-                        <td class="cpf">
-                            @Html.DisplayFor(modelItem => usuario.Cpf)
-                        </td>
-                        <td>
-                            R$ @Html.DisplayFor(modelItem => usuario.SaldoUsuario)
-                        </td>
-                        <td style="width: 185px">
-                            <a title="Detalhes" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons blue-text small">info_outline</i></a>
-                            <a title="Editar" onclick="AjaxJsUsuario.editarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons black-text small">edit</i></a>
-                            @if (!TempData["nomeLista"].ToString().Equals("Usuários Inativos"))
-                            {
-                                <a title="Desativar" onclick="AjaxJsUsuario.desativarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons pink-text small">delete_sweep</i></a>
-                            }
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
-
-        <div class="gridCelular">
-            <ul class="collapsible" data-collapsible="accordion">
-                @foreach (var usuario in Model)
-                {
-                    <li>
-                        <div class="collapsible-header">
-                            <i class="material-icons pink-text">account_circle</i>@usuario.NomeUsuario
-                        </div>
-                        <div class="collapsible-body">
-                            <span>CPF : @usuario.Cpf</span>
-                            <br />
-                            <span>Saldo : R$ @usuario.SaldoUsuario</span>
-                            <br /><br />
-                            <a class="btn-floating waves-effect waves-light light-blue darken-3" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons">info_outline</i></a>
-                            <a class="btn-floating waves-effect waves-light yellow darken-3" onclick="AjaxJsUsuario.editarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons">edit</i></a>
-                            <a class="btn-floating waves-effect waves-light pink lighten-1" onclick="AjaxJsUsuario.desativarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons">delete_sweep</i></a>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-    }
 </div>
+
+<input hidden value="@TempData["nomeLista"].ToString()" />  @*Talves eu precise usar isso, deixaremos até tudo se normalizar*@
+
+<div class="col s12 m12" style="margin: -1% 10% ">
+    <div class="card-panel white" style="padding-bottom: 1%;">
+        <div class="row center" style="margin-bottom: 5px; margin-top: -15px;">
+            <a class="menus" style="float: left" onclick="AjaxJsUsuario.cadastroUsuario()">Novo Usuário</a>
+            <a class="menus" onclick="AjaxJsUsuario.listaUsuario()">Todos &nbsp;&nbsp;</a>
+            <a class="menus" onclick="AjaxJsUsuario.listarUsuarioEmDivida()">&nbsp;&nbsp; Devedores &nbsp;&nbsp;</a>
+            <a class="menus" onclick="AjaxJsUsuario.listarUsuarioInativo()">&nbsp;&nbsp; Inativos &nbsp;&nbsp;</a>
+            <a class="menus">&nbsp;&nbsp; Voltar</a>
+            <a class="modal-trigger " href="#modalPesquisaUsuario"><i class="material-icons prefix" style="float: right">search</i></a>
+        </div>
+
+        <div class="row">
+            @if (!Model.Any())
+            {
+                <p align="center">Nenhum registro encontrado</p>
+            }
+            else
+            {
+                <div class="center pagination">
+                    Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+                    <ul>
+                        @for (var i = 1; i <= Model.PageCount; i++)
+                        {
+                            <li class="@i == 1 ? 'disabled' : 'waves-effect'"><a href="#!" onclick="AjaxJsUsuario.listaUsuario('@-i')"><i class="material-icons">chevron_left</i></a></li>
+                            <li class="waves-effect"><a href="#!" onclick="AjaxJsUsuario.listaUsuario('@i')">@i</a></li>
+                            <li class="waves-effect"><a href="#!"onclick="AjaxJsUsuario.listaUsuario('@++i')" ><i class="material-icons">chevron_right</i></a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="col s12 desapear">
+                    <table class="bordered highlight">
+                        <tr>
+                            <th>
+                                Nome
+                            </th>
+                            <th>
+                                CPF
+                            </th>
+                            <th>
+                                Saldo
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var usuario in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => usuario.NomeUsuario)
+                                </td>
+                                <td class="cpf">
+                                    @Html.DisplayFor(modelItem => usuario.Cpf)
+                                </td>
+                                <td>
+                                    R$ @Html.DisplayFor(modelItem => usuario.SaldoUsuario)
+                                </td>
+                                <td style="width: 185px">
+                                    <a title="Detalhes" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons blue-text small">info_outline</i></a>
+                                    <a title="Editar" onclick="AjaxJsUsuario.editarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons black-text small">edit</i></a>
+                                    @if (!TempData["nomeLista"].ToString().Equals("Usuários Inativos"))
+                                    {
+                                        <a title="Desativar" onclick="AjaxJsUsuario.desativarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons pink-text small">delete_sweep</i></a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+
+                <div class="gridCelular">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        @foreach (var usuario in Model)
+                        {
+                            <li>
+                                <div class="collapsible-header">
+                                    <i class="material-icons pink-text">account_circle</i>@usuario.NomeUsuario
+                                </div>
+                                <div class="collapsible-body">
+                                    <span>CPF : @usuario.Cpf</span>
+                                    <br />
+                                    <span>Saldo : R$ @usuario.SaldoUsuario</span>
+                                    <br /><br />
+                                    <a class="btn-floating waves-effect waves-light light-blue darken-3" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons">info_outline</i></a>
+                                    <a class="btn-floating waves-effect waves-light yellow darken-3" onclick="AjaxJsUsuario.editarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons">edit</i></a>
+                                    <a class="btn-floating waves-effect waves-light pink lighten-1" onclick="AjaxJsUsuario.desativarUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons">delete_sweep</i></a>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .menus {
+        font-size: inherit;
+    }
+
+    ul li a {
+        font-size: 15px;
+    }
+</style>

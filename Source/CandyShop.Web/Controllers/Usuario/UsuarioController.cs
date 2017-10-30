@@ -3,6 +3,7 @@ using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
 using System.Net;
 using System.Web.Mvc;
+using PagedList;
 
 namespace CandyShop.Web.Controllers.Usuario
 {
@@ -10,6 +11,7 @@ namespace CandyShop.Web.Controllers.Usuario
     public class UsuarioController : UsuarioComumController
     {
         private readonly IUsuarioApplication _appUsuario;
+        private const int TamanhoPagina = 5;
 
         public UsuarioController(IUsuarioApplication usuario) : base(usuario)
         {
@@ -51,15 +53,17 @@ namespace CandyShop.Web.Controllers.Usuario
             return View(response.Content);
         }
 
-        public ActionResult Listar(string token)
+        public ActionResult Listar(int? pagina, string token)
         {
             var response = _appUsuario.ListarUsuarios(token);
 
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
+            var numeroPagina = pagina ?? 1;
             TempData["nomeLista"] = "Usuários Ativos";
-            return View("Index", response.Content);
+
+            return View("Index", response.Content.ToPagedList(numeroPagina, TamanhoPagina));
         }
         public ActionResult ListarUsuariosEmDivida(string token)
         {
