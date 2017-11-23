@@ -1,0 +1,2 @@
+System.Web.Mvc
+O item de modelo inserido no dicionário é do tipo'System.Collections.Generic.List`1[CandyShop.Application.ViewModels.UsuarioViewModel]', mas esse dicionário requer um item do tipo 'PagedList.IPagedList`1[CandyShop.Application.ViewModels.UsuarioViewModel]'.

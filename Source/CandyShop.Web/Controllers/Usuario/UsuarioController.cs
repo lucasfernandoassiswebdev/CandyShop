@@ -53,17 +53,15 @@ namespace CandyShop.Web.Controllers.Usuario
             return View(response.Content);
         }
 
-        public ActionResult Listar(int? pagina, string token)
+        public ActionResult Listar(string token)
         {
             var response = _appUsuario.ListarUsuarios(token);
 
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
-            var numeroPagina = pagina ?? 1;
             TempData["nomeLista"] = "Usuários Ativos";
-
-            return View("Index", response.Content.ToPagedList(numeroPagina, TamanhoPagina));
+            return View("Index", response.Content);
         }
         public ActionResult ListarUsuariosEmDivida(string token)
         {
