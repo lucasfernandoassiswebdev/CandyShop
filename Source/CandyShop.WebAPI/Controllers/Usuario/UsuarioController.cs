@@ -1,5 +1,6 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Usuario;
+using System;
 using System.Net;
 using System.Web.Http;
 
@@ -9,6 +10,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
     public class UsuarioController : UsuarioUnauthorizedController
     {
         private readonly string _enderecoImagens = $"{ImagensConfig.EnderecoImagens}\\Usuarios";
+        private readonly string _getEnderecoImagens = $"{ImagensConfig.GetEnderecoImagens}/Usuarios";
 
         private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
@@ -117,6 +119,14 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         public IHttpActionResult GetSaldo()
         {
             return Ok(_usuarioRepository.VerificaCreditoLoja());
+        }
+
+        [HttpGet, Route("api/Usuario/{cpf}/Detalhes")]
+        public IHttpActionResult GetUsuario(string cpf)
+        {
+            var usuario = _usuarioRepository.SelecionarUsuario(cpf);
+            usuario.Imagem = $"{_getEnderecoImagens}/{cpf}.jpg?={DateTime.Now.Ticks}";
+            return Ok(usuario);
         }
     }
 }

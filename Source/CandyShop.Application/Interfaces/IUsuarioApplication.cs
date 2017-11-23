@@ -11,6 +11,7 @@ namespace CandyShop.Application.Interfaces
         Response<string> EditarUsuario(UsuarioViewModel usuario, string token);
         Response<string> TrocarSenha(UsuarioViewModel usuario, string token);
         Response<UsuarioViewModel> SelecionarUsuario(string cpf);
+        Response<UsuarioViewModel> SelecionarUsuario(string cpf, string token);
         Response<string> DesativarUsuario(UsuarioViewModel usuario, string token);
         Response<IEnumerable<UsuarioViewModel>> ListarInativos(string token);
         Response<IEnumerable<UsuarioViewModel>> ProcurarUsuario(string nome, string token);

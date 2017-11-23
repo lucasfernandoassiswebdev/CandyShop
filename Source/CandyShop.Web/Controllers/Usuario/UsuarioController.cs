@@ -1,9 +1,9 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
+using PagedList;
 using System.Net;
 using System.Web.Mvc;
-using PagedList;
 
 namespace CandyShop.Web.Controllers.Usuario
 {
@@ -27,26 +27,26 @@ namespace CandyShop.Web.Controllers.Usuario
         {
             return View();
         }
-        public ActionResult Editar(string cpf, string telaAnterior)
+        public ActionResult Editar(string cpf, string telaAnterior, string token)
         {
-            var usuario = _appUsuario.SelecionarUsuario(cpf);
+            var usuario = _appUsuario.SelecionarUsuario(cpf, token);
 
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro. " + usuario.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
             return View(usuario.Content);
         }
-        public ActionResult Desativar(string cpf, string telaAnterior)
+        public ActionResult Desativar(string cpf, string telaAnterior,string token)
         {
-            var usuario = _appUsuario.SelecionarUsuario(cpf);
+            var usuario = _appUsuario.SelecionarUsuario(cpf, token);
             if (usuario.Status != HttpStatusCode.OK)
                 return Content("Erro. " + usuario.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
             return View(usuario.Content);
         }
-        public ActionResult Detalhes(string cpf, string telaAnterior)
+        public ActionResult Detalhes(string cpf, string telaAnterior, string token)
         {
-            var response = _appUsuario.SelecionarUsuario(cpf);
+            var response = _appUsuario.SelecionarUsuario(cpf, token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             ViewBag.telaAnterior = telaAnterior;
@@ -121,7 +121,7 @@ namespace CandyShop.Web.Controllers.Usuario
 
             if (!Session["Login"].ToString().Equals(cpf)) return Content("Edição concluída com sucesso!!");
 
-            var res = _appUsuario.SelecionarUsuario(cpf);
+            var res = _appUsuario.SelecionarUsuario(cpf, token);
             if (res.Status != HttpStatusCode.OK)
                 return Content("Erro ao atualizar seu saldo");
 

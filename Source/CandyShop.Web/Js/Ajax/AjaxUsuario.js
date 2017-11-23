@@ -14,11 +14,13 @@ var AjaxJsUsuario = (function ($) {
     };
     var editarUsuario = function (cpf, telaAnterior) {
         var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
-        chamaPaginaComIdentificador(url.editarUsuario, usuario);
+        atualizaToken();
+        chamaPaginaComIdentificador(url.editarUsuario, { usuario: usuario, token: obj.access_token });
     };
     var detalheUsuario = function (cpf, telaAnterior) {
         var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
-        chamaPaginaComIdentificador(url.detalheUsuario, usuario);
+        atualizaToken();
+        chamaPaginaComIdentificador(url.detalheUsuario, { usuario: usuario, token: obj.access_token });
     };
     var concluirCadastroUsuario = function (imgBase64) {
         //montantando o objeto que vai chegar no controller
@@ -49,7 +51,7 @@ var AjaxJsUsuario = (function ($) {
     var desativarUsuario = function (cpf, telaAnterior) {
         var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
         atualizaToken();
-        chamaPaginaComIdentificador(url.desativarUsuario, usuario);
+        chamaPaginaComIdentificador(url.desativarUsuario, { usuario: usuario, token: obj.access_token });
     };
     var desativarUsuarioConfirmado = function (cpf) {
         var usuario = { Cpf: cpf };

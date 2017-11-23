@@ -89,6 +89,15 @@ namespace CandyShop.Application.Applications
                 return new Response<UsuarioViewModel>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
+        public Response<UsuarioViewModel> SelecionarUsuario(string cpf, string token)
+        {
+            using (var client = new HttpClient())
+            {
+                AtualizaToken(token, client);
+                var response = client.GetAsync($"{_enderecoApi}/{cpf}/Detalhes").Result;
+                return new Response<UsuarioViewModel>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
         public Response<IEnumerable<UsuarioViewModel>> ProcurarUsuario(string nome, string token)
         {
             using (var client = new HttpClient())

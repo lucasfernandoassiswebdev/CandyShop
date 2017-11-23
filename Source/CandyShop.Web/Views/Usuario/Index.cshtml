@@ -48,17 +48,6 @@
             }
             else
             {
-                <div class="center pagination">
-                    Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
-                    <ul>
-                        @for (var i = 1; i <= Model.PageCount; i++)
-                        {
-                            <li class="@i == 1 ? 'disabled' : 'waves-effect'"><a href="#!" onclick="AjaxJsUsuario.listaUsuario('@-i')"><i class="material-icons">chevron_left</i></a></li>
-                            <li class="waves-effect"><a href="#!" onclick="AjaxJsUsuario.listaUsuario('@i')">@i</a></li>
-                            <li class="waves-effect"><a href="#!"onclick="AjaxJsUsuario.listaUsuario('@++i')" ><i class="material-icons">chevron_right</i></a></li>
-                        }
-                    </ul>
-                </div>
                 <div class="col s12 desapear">
                     <table class="bordered highlight">
                         <tr>

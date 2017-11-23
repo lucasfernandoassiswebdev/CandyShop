@@ -19,7 +19,7 @@ namespace CandyShop.Repository.Repositorys
             CSSP_SelUsuariosDivida,
             CSSP_DesUsuario,
             CSSP_LisUsuarioIgual,
-            CSSP_LisUsuariosInativos,
+            CSSP_ListarUsuariosInativos,
             CSSP_LisUsuariosAtivoseInativos,
             CSSP_LisUsuarioPorNome,
             CSSP_VerificaLoginSenha,
@@ -98,7 +98,7 @@ namespace CandyShop.Repository.Repositorys
         }
         public IEnumerable<Usuario> ListarUsuariosInativos()
         {
-            ExecuteProcedure(Procedures.CSSP_LisUsuariosInativos);            
+            ExecuteProcedure(Procedures.CSSP_ListarUsuariosInativos);            
             return Listar();
         }
 
