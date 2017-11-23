@@ -114,11 +114,12 @@ $(document).ready(function () {
                                 listaProdutos.forEach(function (produto) {
                                     var precoCorreto = String(produto.Preco).replace(",", ".");
                                     totalCompra += parseFloat(precoCorreto) * parseInt(produto.Quantidade);
-                                    console.log(totalCompra);
                                 });
                                 totalCompra = String(totalCompra).replace(".", ",");
-                                if (totalCompra.length > 6)
-                                    totalCompra = String(totalCompra).substr(6, totalCompra.length);
+                                console.log("batata" + totalCompra);
+                                if (String(totalCompra).length > 6) 
+                                    totalCompra = totalCompra.toFixed(2);
+                                
                                 $("#totalCompra").text("Total da compra: R$ " + totalCompra).attr("title", "Total da compra");
                             })
                         ]
@@ -146,9 +147,9 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseInt(produto.Quantidade) * parseFloat(precoCorreto);
         });
-        if (totalCompra.length > 7)
-            totalCompra = totalCompra.substr(7, totalCompra.length);
-        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".",",")).attr("title", "Total da compra");
+        if (String(totalCompra).length > 7)
+            totalCompra = totalCompra.toFixed(2);
+        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".", ",")).attr("title", "Total da compra");
     }
 
     // Adicionando os itens no carrinho
@@ -219,6 +220,7 @@ $(document).ready(function () {
                                 var precoCorreto = produto.Preco.replace(",", ".");
                                 totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
                             });
+                            totalCompra = totalCompra.toFixed(2);
                             $("#totalCompra").text("Total da compra: R$ " + totalCompra);
                         })
                     ]
@@ -248,10 +250,10 @@ $(document).ready(function () {
            para que a conversão para double funcione */
         var precoConcertado = preco.replace(",", ".");
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
-
         if (String(totalCompra).length > 7)
-            totalCompra = String(totalCompra).substr(7, totalCompra.length);
-        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".",",")).attr("title", "Total da compra");
+            totalCompra = totalCompra.toFixed(2);
+
+        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".", ",")).attr("title", "Total da compra");
 
         // Adiciona item, remove localStorage e seta de novo com a lista atualizada
         quantidade = 0;
@@ -339,8 +341,8 @@ $(document).ready(function () {
             totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
         });
         if (String(totalCompra) > 7)
-            totalCompra = String(totalCompra).substr(7,String(totalCompra.length));
-        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".",","));
+            totalCompra = totalCompra.toFixed(2);
+        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra.toFixed(2)).replace(".", ","));
 
         $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
             .text("Quantidade: " + qtde).attr("data-Quantidade", qtde);
@@ -359,11 +361,11 @@ $(document).ready(function () {
         .on("paste", verificaEditQuantidade);
 
     // Removendo caracteres inválidos dos campos de quantidade
-    $("#quantidade, #quantidadeEdit").keydown(function(e) {
-            if (e.which == 109 || e.which == 189 || e.which == 107 || e.which == 69)
-                return false;   
+    $("#quantidade, #quantidadeEdit").keydown(function (e) {
+        if (e.which == 109 || e.which == 189 || e.which == 107 || e.which == 69)
+            return false;
         mNumbers($(this).val());
-        })
+    })
         .on("paste", function () { mNumbers($(this).val()); });
 
     // Limpando o carrinho
@@ -485,7 +487,7 @@ function verificaEditQuantidade() {
 
 function validaNovaSenha() {
     if ($("#novaSenha").val().length > 12 || $("#novaSenha").val().length <= 0 || ilegais.test($("#novaSenha").val())) {
-        Materialize.toast("Senha deve conter de 6 a 12 caracteres!", 3000);
+        Materialize.toast("Senha deve conter de 8 a 12 caracteres!", 3000);
         $("#novaSenha").focus();
     }
 }
