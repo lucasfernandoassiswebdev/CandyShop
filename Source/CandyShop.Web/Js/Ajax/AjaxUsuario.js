@@ -13,14 +13,12 @@ var AjaxJsUsuario = (function ($) {
         chamaPaginaUsuarios(url.listaUsuario, page);
     };
     var editarUsuario = function (cpf, telaAnterior) {
-        var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
         atualizaToken();
-        chamaPaginaComIdentificador(url.editarUsuario, { usuario: usuario, token: obj.access_token });
+        chamaPaginaComIdentificador(url.editarUsuario, { cpf: cpf, telaAnterior: telaAnterior, token: obj.access_token });
     };
     var detalheUsuario = function (cpf, telaAnterior) {
-        var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
         atualizaToken();
-        chamaPaginaComIdentificador(url.detalheUsuario, { usuario: usuario, token: obj.access_token });
+        chamaPaginaComIdentificador(url.detalheUsuario, { cpf : cpf, telaAnterior: telaAnterior, token: obj.access_token });
     };
     var concluirCadastroUsuario = function (imgBase64) {
         //montantando o objeto que vai chegar no controller
@@ -49,9 +47,8 @@ var AjaxJsUsuario = (function ($) {
         concluirAcaoEdicaoUsuario(url.concluirEdicaoUsuario, { usuario: usuario, token: obj.access_token }, tela);
     };
     var desativarUsuario = function (cpf, telaAnterior) {
-        var usuario = { Cpf: cpf, telaAnterior: telaAnterior };
         atualizaToken();
-        chamaPaginaComIdentificador(url.desativarUsuario, { usuario: usuario, token: obj.access_token });
+        chamaPaginaComIdentificador(url.desativarUsuario, { cpf: cpf, telaAnterior: telaAnterior, token: obj.access_token });
     };
     var desativarUsuarioConfirmado = function (cpf) {
         var usuario = { Cpf: cpf };
@@ -86,7 +83,7 @@ var AjaxJsUsuario = (function ($) {
     var trocarSenha = function () {
         var senhas = { NovaSenha: $("#novaSenha").val(), ConfirmaNovaSenha: $("#confirmaNovaSenha").val() };
         atualizaToken();
-        $.post(url.trocarSenha, {senhas: senhas, token: obj.access_token})
+        $.post(url.trocarSenha, { senhas: senhas, token: obj.access_token })
             .done(function (message) {
                 Materialize.toast(message, 4000);
             })
@@ -124,8 +121,8 @@ function chamaPaginaUsuarios(endereco, pagina) {
         },
         success: function (dataSucess) {
             $("#DivGrid").slideUp(function () {
-                $("#DivGrid").hide().html(dataSucess).slideDown(function() {
-                    Materialize.toast(dataSucess.data,3000);
+                $("#DivGrid").hide().html(dataSucess).slideDown(function () {
+                    Materialize.toast(dataSucess.data, 3000);
                 });
             });
         },
