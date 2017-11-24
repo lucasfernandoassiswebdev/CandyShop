@@ -30,7 +30,7 @@ namespace CandyShop.Web.Controllers.Compra
             ViewBag.tituloPagina = "Minhas Compras";
             var cpf = Session["login"].ToString();
             ViewBag.drop = 1;
-            var response = _appCompra.ListaCompraPorCpf(cpf,token);
+            var response = _appCompra.ListaCompraPorCpf(cpf, token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);

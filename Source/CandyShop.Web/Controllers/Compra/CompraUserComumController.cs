@@ -32,5 +32,7 @@ namespace CandyShop.Web.Controllers.Compra
                 : $"AjaxJsCompra.listarCompra{paginaAnterior.LastWord()[0]}()";
             return View("../../Views/CompraUserComum/Detalhes", response.Content);
         }
+
+        
     }
 }
