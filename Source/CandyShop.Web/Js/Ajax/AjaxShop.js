@@ -50,6 +50,7 @@ var AjaxJsShop = (function ($) {
 
                             $.ajax({
                                 type: "POST",
+                                //url: "http://localhost:4001/Token",
                                 url: "http://192.168.7.10/candyshop/Token",
                                 data: queryString,
                                 dataType: "text",
@@ -58,7 +59,6 @@ var AjaxJsShop = (function ($) {
                                     withCredentials: true
                                 },
                                 success: function (result) {
-                                    console.log("token gerado: " + result);
                                     localStorage.setItem("tokenCandyShop", result);
                                 },
                                 error: function (req, status, error) {

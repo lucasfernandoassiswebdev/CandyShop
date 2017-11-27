@@ -24,6 +24,8 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	Editado Por.......: SMN - Rafael Morais
 	Objetivo..........: Adicionar a o campo de cpf na proceure 
 	Data..............: 07/09/2017
+
+	
 	
 	*/
 	
@@ -103,12 +105,16 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[CSSP_UpdUsuario]
 
+	Editado Por.......: SMN - Gustavo Dantas
+	Objetivo..........: md5 Senha
+	Data..............: 07/09/2017
+
 	*/
 	BEGIN
-	
+		
 		UPDATE [dbo].[Usuario]
 			SET NomeUsuario = @NomeUsuario,
-				SenhaUsuario = @SenhaUsuario,
+				SenhaUsuario = CONVERT(NVARCHAR(15), HashBytes('MD5', @SenhaUsuario), 2),
 				SaldoUsuario = @SaldoUsuario,
 				Ativo = @Ativo,
 				Classificacao = @Classificacao
@@ -127,7 +133,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdSe
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_UpdSenha]
-	@senha varchar(12),
+	@senha varchar(15),
 	@cpf varchar(11)
 	AS
 	/*
@@ -140,7 +146,7 @@ CREATE PROCEDURE [dbo].[CSSP_UpdSenha]
 	*/	
 	BEGIN	
 		UPDATE [dbo].[Usuario] 
-			SET SenhaUsuario = @senha,
+			SET SenhaUsuario = CONVERT(NVARCHAR(15), HashBytes('MD5', @senha), 2),
 				FirstLogin = 'F'
 			WHERE Cpf = @cpf
 	END
