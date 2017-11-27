@@ -194,7 +194,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisProduto]
 				Categoria
 			 FROM Produto WITH(NOLOCK)
 			 WHERE Ativo = 'A'
-			 ORDER BY NomeProduto
+			 ORDER BY QtdeProduto,NomeProduto
 	END
 GO
 

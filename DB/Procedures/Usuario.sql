@@ -89,7 +89,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdUs
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
-	@Cpf varchar(14),
+		@Cpf varchar(14),
 	@NomeUsuario varchar(50),
 	@SenhaUsuario varchar(12),
 	@SaldoUsuario decimal,
@@ -104,17 +104,16 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 	Autor.............: SMN - Jo�o Guilherme
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[CSSP_UpdUsuario]
-
-	Editado Por.......: SMN - Gustavo Dantas
-	Objetivo..........: md5 Senha
-	Data..............: 07/09/2017
-
-	*/
+	
+	Objetivo..........: Editar informa�oes do usuario encriptando senha 
+	Autor.............: SMN - Gustavo Dantas
+ 	Data..............: 27/11/2017
+		*/
 	BEGIN
-		
+	
 		UPDATE [dbo].[Usuario]
 			SET NomeUsuario = @NomeUsuario,
-				SenhaUsuario = CONVERT(NVARCHAR(15), HashBytes('MD5', @SenhaUsuario), 2),
+				SenhaUsuario =  CONVERT(NVARCHAR(12), HashBytes('MD5', @SenhaUsuario), 2),
 				SaldoUsuario = @SaldoUsuario,
 				Ativo = @Ativo,
 				Classificacao = @Classificacao
@@ -133,7 +132,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdSe
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_UpdSenha]
-	@senha varchar(15),
+		@senha varchar(15),
 	@cpf varchar(11)
 	AS
 	/*
@@ -143,12 +142,17 @@ CREATE PROCEDURE [dbo].[CSSP_UpdSenha]
 	Autor.............: SMN - Rafael Morais
  	Data..............: 04/10/2017
 	Ex................: EXEC [dbo].[CSSP_UpdSenha]
+
+	Objetivo..........: colocando senha com decodificação md5 
+	Autor.............: SMN - Gustavo Dantas
+ 	Data..............: 27/11/2017
 	*/	
 	BEGIN	
 		UPDATE [dbo].[Usuario] 
-			SET SenhaUsuario = CONVERT(NVARCHAR(15), HashBytes('MD5', @senha), 2),
+			SET SenhaUsuario = CONVERT(NVARCHAR(12), HashBytes('MD5', @senha), 2),
 				FirstLogin = 'F'
 			WHERE Cpf = @cpf
+
 	END
 GO
 
@@ -364,7 +368,7 @@ GO
 
 CREATE PROCEDURE [dbo].[CSSP_VerificaLoginSenha]
 	@Cpf varchar(11),
-	@SenhaUsuario varchar(12)
+	@SenhaUsuario varchar(15)
 
 	AS
 	/*
@@ -373,13 +377,23 @@ CREATE PROCEDURE [dbo].[CSSP_VerificaLoginSenha]
 	Objetivo..........: Verificar se o login bate
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 20/09/2017
-	Ex................: EXEC [dbo].[GCS_VerificaLoginSenha]
+	Ex................: EXEC [dbo].[CSSP_VerificaLoginSenha] '44541561824', '123456'
+
+	Objetivo..........: Verficar decodificação md5 
+	Autor.............: SMN - Gustavo Dantas
+ 	Data..............: 27/11/2017
 	*/
 
-	BEGIN									
+	BEGIN		
+					
 		SELECT TOP 1 1 
 			FROM Usuario
-			WHERE Cpf = @Cpf AND SenhaUsuario = @SenhaUsuario AND Ativo = 'A'
+			WHERE Cpf = @Cpf 
+			  AND Ativo = 'A'   
+			  AND SenhaUsuario = CASE WHEN FirstLogin = 'T' THEN @SenhaUsuario
+			  ELSE CONVERT(NVARCHAR(12), HashBytes('MD5', @SenhaUsuario), 2) 
+			  END  
+
 	END
 GO
 

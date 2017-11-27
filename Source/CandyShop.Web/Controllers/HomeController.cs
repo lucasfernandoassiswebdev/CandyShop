@@ -1,7 +1,9 @@
-﻿using CandyShop.Application.Interfaces;
+﻿using System.Collections.Generic;
+using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using System.Net;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace CandyShop.Web.Controllers
 {
@@ -10,7 +12,7 @@ namespace CandyShop.Web.Controllers
         private readonly IProdutoApplication _appProduto;
         private readonly IUsuarioApplication _appUsuario;
         private readonly ICompraApplication _appCompra;
-        
+
 
         public HomeController(IProdutoApplication produto, IUsuarioApplication usuario, ICompraApplication compra)
         {
@@ -37,7 +39,11 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
-            return View("GridProdutos", response.Content);
+            var produtos = (List<ProdutoViewModel>)response.Content;
+            var listaProdutos = new List<ProdutoViewModel>();
+            listaProdutos.AddRange(produtos.Where(x => x.QtdeProduto > 0).OrderBy(x => x.NomeProduto));
+            listaProdutos.AddRange(produtos.Where(x => x.QtdeProduto <= 0));
+            return View("GridProdutos", listaProdutos);
         }
         public ActionResult ProcurarProduto(string nome)
         {
@@ -80,7 +86,7 @@ namespace CandyShop.Web.Controllers
             return Content(response.Content + Session["Login"]);
         }
         [HttpPost]
-        public ActionResult Cadastrar(CompraViewModel compra,string token)
+        public ActionResult Cadastrar(CompraViewModel compra, string token)
         {
             if (Session["Login"].ToString() == "off")
                 return Content("Efetue login e tente novamente. Você precisa estar logado para concluir sua compra");
@@ -88,7 +94,7 @@ namespace CandyShop.Web.Controllers
             if (!ModelState.IsValid) return Content("Ops... ocorreu um erro ao concluir sua compra.");
             compra.Usuario = new UsuarioViewModel { Cpf = Session["Login"].ToString() };
 
-            var response = _appCompra.InserirCompra(compra,token);
+            var response = _appCompra.InserirCompra(compra, token);
 
             if (response.Status != HttpStatusCode.OK)
                 return Content($"Os itens da compra não puderam ser registrados: {response.ContentAsString  }");
