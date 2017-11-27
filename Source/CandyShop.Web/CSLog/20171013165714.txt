@@ -1,2 +1,0 @@
-Anonymously Hosted DynamicMethods Assembly
-Não é possível chamar um tipo não delegado

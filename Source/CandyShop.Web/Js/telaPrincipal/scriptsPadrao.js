@@ -116,11 +116,7 @@ $(document).ready(function () {
                                     totalCompra += parseFloat(precoCorreto) * parseInt(produto.Quantidade);
                                 });
                                 totalCompra = String(totalCompra).replace(".", ",");
-                                console.log("batata" + totalCompra);
-                                if (String(totalCompra).length > 6) 
-                                    totalCompra = totalCompra.toFixed(2);
-                                
-                                $("#totalCompra").text("Total da compra: R$ " + totalCompra).attr("title", "Total da compra");
+                                $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2)).attr("title", "Total da compra");
                             })
                         ]
                     }),
@@ -147,9 +143,7 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseInt(produto.Quantidade) * parseFloat(precoCorreto);
         });
-        if (String(totalCompra).length > 7)
-            totalCompra = totalCompra.toFixed(2);
-        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".", ",")).attr("title", "Total da compra");
+        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra.toFixed(2)).replace(".", ",")).attr("title", "Total da compra");
     }
 
     // Adicionando os itens no carrinho
@@ -220,8 +214,7 @@ $(document).ready(function () {
                                 var precoCorreto = produto.Preco.replace(",", ".");
                                 totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
                             });
-                            totalCompra = totalCompra.toFixed(2);
-                            $("#totalCompra").text("Total da compra: R$ " + totalCompra);
+                            $("#totalCompra").text("Total da compra: R$ " + totalCompra.replace(".", ",").toFixed(2));
                         })
                     ]
                 }),
@@ -250,10 +243,7 @@ $(document).ready(function () {
            para que a conversão para double funcione */
         var precoConcertado = preco.replace(",", ".");
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
-        if (String(totalCompra).length > 7)
-            totalCompra = totalCompra.toFixed(2);
-
-        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".", ",")).attr("title", "Total da compra");
+        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra.toFixed(2)).replace(".", ",")).attr("title", "Total da compra");
 
         // Adiciona item, remove localStorage e seta de novo com a lista atualizada
         quantidade = 0;
@@ -340,8 +330,6 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
         });
-        if (String(totalCompra) > 7)
-            totalCompra = totalCompra.toFixed(2);
         $("#totalCompra").text("Total da compra: R$ " + String(totalCompra.toFixed(2)).replace(".", ","));
 
         $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
@@ -386,7 +374,7 @@ $(document).ready(function () {
 
         // Atualizando informações na tela
         totalCompra = 0;
-        $("#totalCompra").text("Total da compra: R$ " + totalCompra);
+        $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2).replace(".",","));
     });
 
     // Exibindo a quantidade atualmente disponível quando o usuário vai editar o item

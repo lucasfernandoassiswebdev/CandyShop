@@ -1,2 +1,0 @@
-System.Web
-c:\Users\Rafael\Desktop\CandyShop\Source\CandyShop.Web\Views\Home\GridProdutos.cshtml(104): error CS0165: Uso de variável local não atribuída 'i'

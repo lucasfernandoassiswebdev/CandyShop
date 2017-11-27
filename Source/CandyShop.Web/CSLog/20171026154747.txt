@@ -1,3 +1,0 @@
-System.Core
-Valor não pode ser nulo.
-Nome do parâmetro: source
