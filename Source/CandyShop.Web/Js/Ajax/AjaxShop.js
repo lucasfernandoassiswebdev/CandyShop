@@ -46,7 +46,7 @@ var AjaxJsShop = (function ($) {
                                 username: cpf,
                                 password: "password"
                             };
-                            var queryString = jQuery.param(informacoesAutorizacao);
+                            var queryString = jQuery.param(informacoesAutorizacao); 
 
                             $.ajax({
                                 type: "POST",
