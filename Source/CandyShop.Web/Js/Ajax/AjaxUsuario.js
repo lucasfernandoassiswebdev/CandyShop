@@ -80,8 +80,10 @@ var AjaxJsUsuario = (function ($) {
             console.log(xhr.responseText);
         });
     };
+   
     var trocarSenha = function () {
         var senhas = { NovaSenha: $("#novaSenha").val(), ConfirmaNovaSenha: $("#confirmaNovaSenha").val() };
+        
         atualizaToken();
         $.post(url.trocarSenha, { senhas: senhas, token: obj.access_token })
             .done(function (message) {

@@ -44,7 +44,7 @@
         <h3 class="pink-text lighten-1 identQuant">Quantidade</h3>
         <p class="pink-text center identQuant"></p>
         <div class="center">
-            <input type="number" id="quantidade" class="center identQuant" autocomplete="off" />
+            <input type="number" id="quantidade" class="center identQuant" autocomplete="off" value="1" />
             <span class="QtdeInvalida" color="red"></span>
         </div>
     </div>
@@ -54,6 +54,7 @@
 </div>
 
 <!--modal de Trocar a senha-->
+
 <div id="trocaSenha" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
         <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
@@ -61,12 +62,12 @@
         <p class="pink-text center identQuant"></p>
         <form class="center">
             <div class="input-field col s12">
-                <input type="password" id="novaSenha" class="center identQuant" maxlength="12" autocomplete="off" />
+                <input type="password" id="novaSenha" class="center identQuant" maxlength="15" autocomplete="off" />
                 <span id="senhaInvalida" color="red"></span>
                 <label for="novaSenha">Nova Senha: </label>
             </div>
             <div class="input-field col s12">
-                <input type="password" id="confirmaNovaSenha" class="center identQuant" maxlength="12" autocomplete="off" />
+                <input type="password" id="confirmaNovaSenha" class="center identQuant" maxlength="15" autocomplete="off" />
                 <span id="senhaConfirmadaInvalida" color="red"></span>
                 <label for="confirmaNovaSenha">Confirmar: </label>
             </div>
@@ -116,7 +117,7 @@
     </div>
 </div>
 
-<!--modal de Login-->
+
 <div id="modalLogin" class="modal">
     <div class="modal-content center identQuant">
         <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
@@ -130,7 +131,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="senha" type="password" class="validate identQuant" maxlength="12" autocomplete="off">
+                    <input id="senha" type="password" class="validate identQuant" maxlength="15" autocomplete="off">
                     <label for="senha">Senha</label>
                 </div>
             </div>

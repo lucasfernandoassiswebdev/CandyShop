@@ -41,14 +41,24 @@ $(document).ready(function () {
     // Verificando se as senhas batem
     $("#confirmaNovaSenha, #novaSenha").blur(function () {
         verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
-    })
+        
+        })
         .keyup(function () {
             verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
         });
 
+
+    $("#confirmaNovaSenha").blur(function() {
+        if ($("#novaSenha").val() !== $("#confirmaNovaSenha").val() && $("#confirmaNovaSenha").val().length > 5) {
+            Materialize.toast("Senhas não batem", 3000);
+            return;
+        }
+    });
+
+
     $("#TrocarSenha").click(function () {
         if ($("#novaSenha").val().length < 6) {
-            Materialize.toast("Senha deve conter de 6 a 12 caracteres", 3000);
+            Materialize.toast("Senha deve conter de 6 a 15 caracteres", 3000);
             return;
         }
         AjaxJsUsuario.trocarSenha();
@@ -58,7 +68,7 @@ $(document).ready(function () {
     $("#confirmaNovaSenha").keydown(function (e) {
         if (e.which == 13) {
             if ($("#novaSenha").val().length < 6) {
-                Materialize.toast("Senha deve conter de 6 a 12 caracteres", 3000);
+                Materialize.toast("Senha deve conter de 6 a 15 caracteres", 3000);
                 $("#trocaSenha").modal("open");
                 $("#confirmaNovaSenha").focus();
                 return;
@@ -117,6 +127,7 @@ $(document).ready(function () {
                                 });
                                 totalCompra = String(totalCompra).replace(".", ",");
                                 $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2)).attr("title", "Total da compra");
+
                             })
                         ]
                     }),
@@ -474,8 +485,8 @@ function verificaEditQuantidade() {
 }
 
 function validaNovaSenha() {
-    if ($("#novaSenha").val().length > 12 || $("#novaSenha").val().length <= 0 || ilegais.test($("#novaSenha").val())) {
-        Materialize.toast("Senha deve conter de 6 a 12 caracteres!", 3000);
+    if ($("#novaSenha").val().length > 15 || $("#novaSenha").val().length < 0) {
+        Materialize.toast("Senha deve conter de 6 a 15 caracteres!", 3000);
         $("#novaSenha").focus();
     }
 }
@@ -491,6 +502,7 @@ function verificaSenhasIguais(inputAtual, comparacao) {
         $("#TrocarSenha").removeAttr("disabled");
     else
         $("#TrocarSenha").attr("disabled", "disabled");
+         
 }
 
 function verificaQuantidade() {
