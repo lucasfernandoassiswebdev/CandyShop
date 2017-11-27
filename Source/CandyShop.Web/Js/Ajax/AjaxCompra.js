@@ -22,6 +22,7 @@ var AjaxJsCompra = (function ($) {
                 listaProdutos.push(produto);
                 i++;
             });
+        console.log(listaProdutos);
         var compra = { Itens: listaProdutos };
         atualizaToken();
         $.post(url.inserirCompra, { compra: compra, token: obj.access_token })
@@ -51,7 +52,6 @@ var AjaxJsCompra = (function ($) {
     var listarCompra = function () {
         chamaPaginaCompra(url.listarCompra, "#DivGrid");
     };
-
     var listarCompraMes = function (mes) {
         atualizaToken();
         chamaPaginaComIdentificador(url.listarCompraMes, { mes: mes, token: obj.access_token});
