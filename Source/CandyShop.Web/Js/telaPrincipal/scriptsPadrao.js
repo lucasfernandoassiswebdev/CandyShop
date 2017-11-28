@@ -26,8 +26,6 @@ $(document).ready(function () {
         $("#TrocarSenha").attr("disabled", "disabled");
     });
 
-
-
     /* Quando o botão de adicionar um item no carrinho é pressionado, as variáveis que montarão
        o objeto do produto são preenchidas */
     $("#DivGrid").on("click", ".btn-floating", function () {
@@ -42,15 +40,15 @@ $(document).ready(function () {
 
     // Verificando se as senhas batem
     $("#confirmaNovaSenha, #novaSenha").blur(function () {
-        verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
-        
+            verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
+
         })
         .keyup(function () {
             verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
         });
 
 
-    $("#confirmaNovaSenha").blur(function() {
+    $("#confirmaNovaSenha").blur(function () {
         if ($("#novaSenha").val() !== $("#confirmaNovaSenha").val() && $("#confirmaNovaSenha").val().length > 5) {
             Materialize.toast("Senhas não batem", 3000);
             return;
@@ -127,12 +125,17 @@ $(document).ready(function () {
                                     var precoCorreto = String(produto.Preco).replace(",", ".");
                                     totalCompra += parseFloat(precoCorreto) * parseInt(produto.Quantidade);
                                 });
-                                totalCompra = String(totalCompra).replace(".", ",");
+                                $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2).replace(".", ",")).attr("title", "Total da compra");
 
-                                if (String(totalCompra).length > 6) 
-                                    totalCompra = totalCompra.toFixed(2);
-                                
-                                $("#totalCompra").text("Total da compra: R$ " + totalCompra).attr("title", "Total da compra");
+                                // Alterando indicador de quantidade de itens do carrinho
+                                var tamanhoListaProdutos = listaProdutos.length;
+                                if (tamanhoListaProdutos) {
+                                    $(".PItensCarrinho").text(tamanhoListaProdutos);
+                                } else {
+                                    $(".PItensCarrinho").text("");
+                                    $("#QtdeItensCarrinho").css("display", "none");
+                                }
+
                             })
                         ]
                     }),
@@ -159,16 +162,23 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseInt(produto.Quantidade) * parseFloat(precoCorreto);
         });
-        if (String(totalCompra).length > 7)
-            totalCompra = totalCompra.toFixed(2);
-        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".", ",")).attr("title", "Total da compra");
+        $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2).replace(".", ",")).attr("title", "Total da compra");
+
+        //Alterando indicador de quantidade de itens do carrinho
+        if (i != 1 && i) {
+            $(".PItensCarrinho").text(--i);
+            $("#QtdeItensCarrinho").css("display", "block");
+        } else {
+            $("#QtdeItensCarrinho").css("display", "none");
+        }
     }
+
 
     // Adicionando os itens no carrinho
     $("#adicionaCarrinho").click(function () {
         var value = $("#quantidade").val().trim().replace(/\b0+/g, "");
         if (!value || !/^[\d]+$/g.test(value) || parseInt(value) > parseInt(quantidadeDisponivel) || parseInt(value) == 0) {
-            Materialize.toast("Quantidade inválida ou indisponível para compra!", 2000);
+            Materialize.toast("Quantidade inválida ou indisponível para compra!", 3000);
             return;
         }
 
@@ -186,7 +196,7 @@ $(document).ready(function () {
         };
 
         if (listaProdutos.filter(function (v) { return v.Id == produto.Id; }).length) {
-            Materialize.toast("Produto já esta no carrinho", 2000);
+            Materialize.toast("Produto já esta no carrinho", 3000);
             $("#modalCarrinho").modal("open");
             $("#modalQuantidade").modal("close");
             return;
@@ -229,11 +239,20 @@ $(document).ready(function () {
                             // Recalculando o total
                             totalCompra = 0;
                             listaProdutos.forEach(function (produto) {
-                                var precoCorreto = produto.Preco.replace(",", ".");
+                                var precoCorreto = produto.Preco;
                                 totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
                             });
-                            totalCompra = totalCompra.toFixed(2);
-                            $("#totalCompra").text("Total da compra: R$ " + totalCompra);
+
+                            $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2).replace(".", ","));
+
+                            // Alterando indicador de quantidade de itens do carrinho
+                            var tamanhoListaProdutos = listaProdutos.length;
+                            if (tamanhoListaProdutos) {
+                                $(".PItensCarrinho").text(tamanhoListaProdutos);
+                            } else {
+                                $(".PItensCarrinho").text("");
+                                $("#QtdeItensCarrinho").css("display", "none");
+                            }
                         })
                     ]
                 }),
@@ -262,10 +281,7 @@ $(document).ready(function () {
            para que a conversão para double funcione */
         var precoConcertado = preco.replace(",", ".");
         totalCompra += parseInt(quantidade) * parseFloat(precoConcertado);
-        if (String(totalCompra).length > 7)
-            totalCompra = totalCompra.toFixed(2);
-
-        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra).replace(".", ",")).attr("title", "Total da compra");
+        $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2).replace(".", ",")).attr("title", "Total da compra");
 
         // Adiciona item, remove localStorage e seta de novo com a lista atualizada
         quantidade = 0;
@@ -274,6 +290,17 @@ $(document).ready(function () {
 
         $("#modalQuantidade").modal("close");
         $("#modalCarrinho").modal("open");
+
+        //Alterando indicador de quantidade de itens do carrinho
+
+        var tamanhoListaProdutos = listaProdutos.length;
+        if (tamanhoListaProdutos) {
+            $(".PItensCarrinho").text(tamanhoListaProdutos);
+            $("#QtdeItensCarrinho").css("display", "block");
+        } else {
+            $(".PItensCarrinho").text("");
+            $("#QtdeItensCarrinho").css("display", "none");
+        }
     });
 
     // Desabilita o botão de confirmar compra ao abrir o carrinho
@@ -294,9 +321,6 @@ $(document).ready(function () {
 
     $("#modalLogin").modal({ dismissible: false, ready: function () { $("#cpf").focus(); } });
 
-
-    $("#EsqueceuSenha").modal({ dismissible: false, ready: function () { $("#cpf").focus(); } });
-
     // Colocando foco no modal quantidade
     $("#modalQuantidade").modal({ dismissible: false, ready: function () { $("#quantidade").focus(); } });
 
@@ -311,16 +335,6 @@ $(document).ready(function () {
     $("a[href='#modalLogin']:eq(1)").click(function () {
         $("#senha").val("");
     });
-
-    $("#EsqueciSenha").click(function () {
-        $("#modalLogin").modal('close');
-    });
-
-      
-
-    
-    
-    $("#EsqueciSenha").modal({ dismissible: false, ready: function () { $("#email").focus(); } });
 
     //desabilitar botao de login se campo de cpf estiver vazio
     $("#senha").blur(function () {
@@ -365,9 +379,7 @@ $(document).ready(function () {
             var precoCorreto = produto.Preco.replace(",", ".");
             totalCompra += parseFloat(precoCorreto) * produto.Quantidade;
         });
-        if (String(totalCompra) > 7)
-            totalCompra = totalCompra.toFixed(2);
-        $("#totalCompra").text("Total da compra: R$ " + String(totalCompra.toFixed(2)).replace(".", ","));
+        $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2).replace(".", ","));
 
         $("#modalCarrinho .collection li:eq(" + $("#modalEditarQuantidade").data("index") + ") p")
             .text("Quantidade: " + qtde).attr("data-Quantidade", qtde);
@@ -387,10 +399,10 @@ $(document).ready(function () {
 
     // Removendo caracteres inválidos dos campos de quantidade
     $("#quantidade, #quantidadeEdit").keydown(function (e) {
-        if (e.which == 109 || e.which == 189 || e.which == 107 || e.which == 69)
-            return false;
-        mNumbers($(this).val());
-    })
+            if (e.which == 109 || e.which == 189 || e.which == 107 || e.which == 69)
+                return false;
+            mNumbers($(this).val());
+        })
         .on("paste", function () { mNumbers($(this).val()); });
 
     // Limpando o carrinho
@@ -409,9 +421,13 @@ $(document).ready(function () {
             localStorage.removeItem("listaProdutos");
         }
 
+        //Retira Indicador de itens do carrinho
+        $(".PItensCarrinho").text("");
+        $("#QtdeItensCarrinho").css("display", "none");
+
         // Atualizando informações na tela
         totalCompra = 0;
-        $("#totalCompra").text("Total da compra: R$ " + totalCompra);
+        $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2).replace(".", ","));
     });
 
     // Exibindo a quantidade atualmente disponível quando o usuário vai editar o item
@@ -528,7 +544,7 @@ function verificaSenhasIguais(inputAtual, comparacao) {
         $("#TrocarSenha").removeAttr("disabled");
     else
         $("#TrocarSenha").attr("disabled", "disabled");
-         
+
 }
 
 function verificaQuantidade() {
