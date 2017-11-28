@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -37,7 +38,7 @@ namespace CandyShop.Web.Controllers
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
-            return View("GridProdutos", response.Content);
+            return View("GridProdutos", response.Content.ToList().OrderBy(x => x.QtdeProduto == 0));
         }
         public ActionResult ProcurarProduto(string nome)
         {
