@@ -5,16 +5,21 @@ $(document).ready(function () {
     $(".tooltipped").tooltip({ delay: 50 });
     $("select").material_select();
 
-    $("#cpf").keyup(function () {
-        mcpf($("#cpf").val());
+
+
+
+//colocar mascara no cpf do login 
+
+    $("#cpf, #Senhacpf").keyup(function () {
+        mcpf($("#cpf, #Senhacpf").val());
         validaBotao();
     }).keydown(function (e) {
         if (e.which == 109 || e.which == 107 || e.which == 69 || e.which == 189 || e.which == 188 || e.which == 190)
             return false;
-        mcpf($("#cpf").val());
+        mcpf($("#cpf, #Senhacpf").val());
         validaBotao();
     }).on("blur", function () {
-        mcpf($("#cpf").val());
+        mcpf($("#cpf, #Senhacpf").val());
         validaBotao();
     });
 
@@ -62,19 +67,22 @@ function readURL(input) {
     }
 }
 
+
+
+
 //função que remove caracteres inválidos do campo de CPF e aplica a máscara
 function mcpf(v) {
     //retirando caracteres a mais do campo
-    if ($("#cpf").val().length > 14) {
-        $("#cpf").val($("#cpf").val().substr(0, 13));
-        $("#cpf").keydown();
+    if ($("#cpf, #Senhacpf").val().length > 14) {
+        $("#cpf, #Senhacpf").val($("#cpf, #Senhacpf").val().substr(0, 13));
+        $("#cpf, #Senhacpf").keydown();
     }
 
     v = v.replace(/\D/g, "");
     v = v.replace(/(\d{3})(\d)/, "$1.$2");
     v = v.replace(/(\d{3})(\d)/, "$1.$2");
     v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    $("#cpf").val(v);
+    $("#cpf, #Senhacpf").val(v);
 }
 
 function TestaCPF(strCpf) {

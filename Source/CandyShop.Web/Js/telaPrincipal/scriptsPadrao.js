@@ -292,6 +292,9 @@ $(document).ready(function () {
 
     $("#modalLogin").modal({ dismissible: false, ready: function () { $("#cpf").focus(); } });
 
+
+    $("#EsqueceuSenha").modal({ dismissible: false, ready: function () { $("#cpf").focus(); } });
+
     // Colocando foco no modal quantidade
     $("#modalQuantidade").modal({ dismissible: false, ready: function () { $("#quantidade").focus(); } });
 
@@ -306,6 +309,16 @@ $(document).ready(function () {
     $("a[href='#modalLogin']:eq(1)").click(function () {
         $("#senha").val("");
     });
+
+    $("#EsqueciSenha").click(function () {
+        $("#modalLogin").modal('close');
+    });
+
+      
+
+    
+    
+    $("#EsqueciSenha").modal({ dismissible: false, ready: function () { $("#email").focus(); } });
 
     //desabilitar botao de login se campo de cpf estiver vazio
     $("#senha").blur(function () {

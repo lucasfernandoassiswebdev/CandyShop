@@ -117,6 +117,7 @@
     </div>
 </div>
 
+<!--modal do Login-->
 
 <div id="modalLogin" class="modal">
     <div class="modal-content center identQuant">
@@ -135,6 +136,7 @@
                     <label for="senha">Senha</label>
                 </div>
             </div>
+            <a class="modal-trigger" href="#EsqueceuSenha" id="EsqueciSenha">Esqueci minha senha</a>
         </form>
     </div>
     <div class="modal-footer identQuant">
@@ -142,6 +144,29 @@
         <a href="#!" id="limpar" class="right modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Cancelar</a>
     </div>
 </div>
+
+
+<!--modal do Esqueci minha senha-->
+
+<div id="EsqueceuSenha" class="modal">
+    <div class="modal-content center identQuant">
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
+        <h2 class="pink-text identQuant" style="font-weight: bold">Esqueci minha Senha</h2>
+        <form>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="Senhacpf" type="text" class="validate identQuant" maxlength="14" autocomplete="off">
+                    <label for="Senhacpf">CPF</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer identQuant">
+        <a href="#!" id="Enviar" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Enviar</a>
+        <a href="#!" id="Cancelar" class="right modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Cancelar</a>
+    </div>
+</div>
+
 
 <ul id="dropdownFiltro" class="dropdown-content">
     <li><a href="#!" onclick="AjaxJsShop.voltarInicio(); ">Todos</a></li>

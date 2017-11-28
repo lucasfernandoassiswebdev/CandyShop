@@ -50,8 +50,8 @@ var AjaxJsShop = (function ($) {
 
                             $.ajax({
                                 type: "POST",
-                                //url: "http://localhost:4001/Token",
-                                url: "http://192.168.7.10/candyshop/Token",
+                                url: "http://localhost:4001/Token",
+                                //url: "http://192.168.7.10/candyshop/Token",
                                 data: queryString,
                                 dataType: "text",
                                 contentType: "application/x-www-form-urlencoded; charset=utf-8",

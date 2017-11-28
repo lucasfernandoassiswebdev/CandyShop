@@ -8,7 +8,7 @@ $(document).ready(function () {
     $("html,body").dblclick(function (e) {
         if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") || $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant"))
             return false;
-        $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha, #cpf, #senha").val("");
+        $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha,#Senhacpf, #cpf, #senha").val("");
         $("#novaSenha").removeAttr("disabled");
         $("#logar, #TrocarSenha").attr("disabled", "disabled");
         $("#modalCarrinho, #modalQuantidade, #modalLogin, #modalQuantidade, #modalEditarQuantidade, #trocaSenha").modal("close");

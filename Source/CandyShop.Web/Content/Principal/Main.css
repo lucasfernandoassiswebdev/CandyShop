@@ -216,3 +216,16 @@ h3 {
 	transition: 1s;
 	position: 
 }
+
+#EsqueciSenha {
+    margin-left: 13px;
+}
+
+#EsqueceuSenha {
+    z-index: 2000;
+    width: 451px;
+}
+
+#EsqueciMinhaSenha {
+    font-size: 29px !important;
+}
