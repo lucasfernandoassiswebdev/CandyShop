@@ -160,7 +160,7 @@
         <script>
             $(document).ready(function () {
                 $('#trocaSenha').modal('open');
-                Materialize.toast("Não deixe seu CPF como senha, troque para ter mais segurança. ;)",5000);
+                Materialize.toast("Não deixe seu CPF como senha, troque para ter mais segurança. ;)", 5000);
             });
         </script>
     }
@@ -187,7 +187,12 @@
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdownMenu">Opções<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a class="dropdown-button" title="Saldo atual: @Session["saldoUsuario"]" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] @Session["saldoUsuario"] </a></li>
-                <li><a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Seu Carrinho</a></li>
+                <li style="display: flex;">
+                    <a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Seu Carrinho</a>
+                    <div id="QtdeItensCarrinho">
+                        <p class="PItensCarrinho"><b></b></p>
+                    </div>
+                </li>
                 <li>
                     <a class="dropdown-button" title="Pesquisar por categoria" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
@@ -238,7 +243,12 @@ else
 
             <ul class="hide-on-med-and-down">
                 <li><a class="dropdown-button modal-trigger" href="#modalLogin"><i class="material-icons left">account_circle</i>Login</a></li>
-                <li><a class="dropdown-button modal-trigger right closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho atual</a></li>
+                <li style="display: flex;">
+                    <a class="dropdown-button modal-trigger" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Seu Carrinho</a>
+                    <div id="QtdeItensCarrinho">
+                        <p class="PItensCarrinho"><b></b></p>
+                    </div>
+                </li>
                 <li>
                     <a class="dropdown-button" title="Pesquisar por categoria" href="#!" data-activates="dropdownFiltro">Filtro<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
