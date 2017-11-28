@@ -9,46 +9,58 @@
     <h4 class="center pink-text">Detalhes da Compra</h4>
     <hr />
     <div class="col s12">
-        <table class="striped centered bordered responsive-table" style="margin-bottom:50px">
+        <table class="responsive-table">
             <tbody>
+            <tr>
+                <td style="font-weight: bold; text-align: right">Id compra:</td>
+                <td>@Model.IdCompra</td>
+            </tr>
+            @if (Session["login"].ToString() == "off")
+            {
                 <tr>
-                    <td style="font-weight: bold">Id compra:</td>
-                    <td>@Model.IdCompra</td>
+                    <td style="font-weight: bold; text-align: right">Usuario:</td>
+                    <td>@Model.Usuario.NomeUsuario</td>
                 </tr>
-                @if (Session["login"].ToString() == "off")
+            }
+            <tr>
+                <td style="font-weight: bold; text-align: right">Data da compra:</td>
+                <td>@Model.DataCompra</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; text-align: right">Valor total da compra:</td>
+                <td>R$ @Html.DisplayFor(model => model.ValorCompra)</td>
+            </tr>
+
+
+            </tbody>
+        </table>
+        <h5 class="center"><b>Itens:</b></h5>
+        <table class="striped centered bordered responsive-table" style="margin-bottom: 30px">
+            <tr >
+                <th class="header2">Produto</th>
+                <th class="header2">Quantidade</th>
+                <th class="header2">Preço total do item</th>
+            </tr>
+            @if (Model.Itens != null && Model.Itens.Any())
+            {
+                foreach (var item in Model.Itens)
                 {
                     <tr>
-                        <td style="font-weight: bold">Usuario:</td>
-                        <td>@Model.Usuario.NomeUsuario</td>
+                        <td>@item.Produto.NomeProduto</td>
+                        <td>@item.QtdeCompra</td>
+                        <td>@string.Format("{0:C}", item.Produto.PrecoProduto)</td>
                     </tr>
                 }
-                <tr>
-                    <td style="font-weight: bold">Data da compra:</td>
-                    <td>@Model.DataCompra</td>
-                </tr>
-                <tr>
-                    <td style="font-weight: bold">Valor total da compra:</td>
-                    <td>R$ @Html.DisplayFor(model => model.ValorCompra)</td>
-                </tr>
-                <tr>
-                    <td style="font-weight: bold">Itens:</td>
-                </tr>
-                @foreach (var item in Model.Itens)
-                {
-                    <tr>
-                        <td style="font-weight: bold">Produto:</td>
-                        <td>@item.Produto.NomeProduto</td>
-                        <td style="font-weight: bold">Quantidade</td>
-                        <td>@item.QtdeCompra</td>
-                        <td style="font-weight: bold">Preço item:</td>
-                        <td>@string.Format("{0:C}", item.Produto.PrecoProduto)</td>
-
-                  </tr>
-                }
-            </tbody>
+            }
         </table>
         <div class="center">
             <a class="waves-effect waves-light btn" onclick="@ViewBag.endereco"><i class="material-icons left">arrow_back</i>Voltar</a>
         </div>
     </div>
 </div>
+
+<style>
+    .header2 {
+        text-align: center;
+    }
+</style>
