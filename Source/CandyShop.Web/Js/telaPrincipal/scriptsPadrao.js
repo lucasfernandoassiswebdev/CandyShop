@@ -20,7 +20,7 @@ $(document).ready(function () {
 
     // Limpando os inputs
     $(".modal-close:not(#editarQuantidade, #adicionaCarrinho)").click(function () {
-        $("#quantidade, #quantidadeEdit, #novaSenha, #confirmaNovaSenha, #cpf, #senha").val("");
+        $("#quantidadeEdit, #novaSenha, #confirmaNovaSenha, #cpf, #senha").val("");
         $("#novaSenha").removeAttr("disabled");
         $("#logar").attr("disabled", "disabled");
         $("#TrocarSenha").attr("disabled", "disabled");
@@ -40,15 +40,15 @@ $(document).ready(function () {
 
     // Verificando se as senhas batem
     $("#confirmaNovaSenha, #novaSenha").blur(function () {
-        verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
-        
+            verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
+
         })
         .keyup(function () {
             verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
         });
 
 
-    $("#confirmaNovaSenha").blur(function() {
+    $("#confirmaNovaSenha").blur(function () {
         if ($("#novaSenha").val() !== $("#confirmaNovaSenha").val() && $("#confirmaNovaSenha").val().length > 5) {
             Materialize.toast("Senhas não batem", 3000);
             return;
@@ -290,9 +290,9 @@ $(document).ready(function () {
 
         $("#modalQuantidade").modal("close");
         $("#modalCarrinho").modal("open");
-        
+
         //Alterando indicador de quantidade de itens do carrinho
-        
+
         var tamanhoListaProdutos = listaProdutos.length;
         if (tamanhoListaProdutos) {
             $(".PItensCarrinho").text(tamanhoListaProdutos);
@@ -399,10 +399,10 @@ $(document).ready(function () {
 
     // Removendo caracteres inválidos dos campos de quantidade
     $("#quantidade, #quantidadeEdit").keydown(function (e) {
-        if (e.which == 109 || e.which == 189 || e.which == 107 || e.which == 69)
-            return false;
-        mNumbers($(this).val());
-    })
+            if (e.which == 109 || e.which == 189 || e.which == 107 || e.which == 69)
+                return false;
+            mNumbers($(this).val());
+        })
         .on("paste", function () { mNumbers($(this).val()); });
 
     // Limpando o carrinho
@@ -427,7 +427,7 @@ $(document).ready(function () {
 
         // Atualizando informações na tela
         totalCompra = 0;
-        $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2).replace(".",","));
+        $("#totalCompra").text("Total da compra: R$ " + totalCompra.toFixed(2).replace(".", ","));
     });
 
     // Exibindo a quantidade atualmente disponível quando o usuário vai editar o item
@@ -544,7 +544,7 @@ function verificaSenhasIguais(inputAtual, comparacao) {
         $("#TrocarSenha").removeAttr("disabled");
     else
         $("#TrocarSenha").attr("disabled", "disabled");
-         
+
 }
 
 function verificaQuantidade() {
