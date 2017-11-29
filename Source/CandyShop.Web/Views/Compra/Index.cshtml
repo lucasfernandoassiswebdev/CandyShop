@@ -64,6 +64,9 @@
                         Item
                     </th>
                     <th>
+                        Quantidade
+                    </th>
+                    <th>
                         Valor da Compra
                     </th>
                 </tr>
@@ -78,16 +81,15 @@
                         </td>
                         @if (Session["TipoDeLogin"].ToString() == "Admin")
                         {
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
-                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)</td>
                         }
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ApenasUmItem)
-                        </td>
-                        <td>
-                            R$ @Html.DisplayFor(modelItem => item.ValorCompra)
-                        </td>
+                        
+                        <td>@Html.DisplayFor(modelItem => item.NomeItem)</td>
+
+                        <td>@(item.NomeItem == "Mais de um item..." || item.NomeItem == "Erro ao buscar item" ? " - " : item.Itens.First().QtdeCompra.ToString())</td>
+
+                        <td>R$ @Html.DisplayFor(modelItem => item.ValorCompra)</td>
+
                         <td>
                             <a class="btn-floating btn waves-effect waves-light light-blue darken-3" title="Detalhes" onclick="AjaxJsCompra.detalheCompra(@item.IdCompra, '@ViewBag.tituloPagina')"><i class="material-icons small">info_outline</i></a>
                             @*<a class="btn-floating btn waves-effect waves-light  yellow darken-3" onclick="AjaxJsCompra.editarCompra(@item.IdCompra);"><i class="material-icons">edit</i></a>*@

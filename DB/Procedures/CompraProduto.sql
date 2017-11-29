@@ -118,7 +118,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_LisCo
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_LisCompraProduto]
-	
+	@Cpf varchar(11) = NULL
 	AS
 
 	/*
@@ -127,7 +127,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraProduto]
 	Objetivo..........: Listar produtos de uma compra específica
 	Autor.............: SMN - Rafael Morais
  	Data..............: 01/01/2017
-	Ex................: EXEC [dbo].[CSSP_LisCompraProduto]
+	Ex................: EXEC [dbo].[CSSP_LisCompraProduto] null
 
 	Editado Por.......: SMN - João Guilherme
 	Objetivo..........: Alterando o select 
@@ -143,8 +143,14 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraProduto]
 				p.NomeProduto,
 				p.PrecoProduto,
 				p.Ativo
-		 FROM CompraProduto cp WITH(NOLOCK)
-		 INNER JOIN Produto p on p.IdProduto = cp.IdProduto
+			FROM CompraProduto cp WITH(NOLOCK)
+				INNER JOIN Produto p	
+					ON p.IdProduto = cp.IdProduto
+				INNER JOIN Compra c 
+					ON cp.IdCompra = c.IdCompra
+				INNER JOIN Usuario u 
+					ON c.UsuarioCompra = u.Cpf
+			WHERE @Cpf IS NULL OR u.Cpf = @Cpf
 	END
 GO
 
