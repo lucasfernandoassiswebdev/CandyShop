@@ -43,9 +43,10 @@ namespace CandyShop.Repository.Repositorys
          lendo as linhas que foram retornadas pela procedure, são criados novos objetos
          e adicionados numa lista de objetos, quando o reader terminar de ser executado
          a lista de objetos é retornada */
-        public IEnumerable<CompraProduto> ListarCompraProduto()
+        public IEnumerable<CompraProduto> ListarCompraProduto(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraProduto);
+            AddParameter("@Cpf", cpf);
             var retorno = new List<CompraProduto>();
             using (var reader = ExecuteReader())
                 while (reader.Read())

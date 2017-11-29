@@ -44,7 +44,7 @@ namespace CandyShop.WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetCompra()
         {
-            return Ok(_compraRepository.ListarCompra());
+            return Ok(_appService.ListarCompras());
         }
 
         // Definindo rotas na API
@@ -59,25 +59,25 @@ namespace CandyShop.WebAPI.Controllers
         [HttpGet, Route("api/compra/listaCompracpf/{cpf}")]
         public IHttpActionResult GetCpf(string cpf)
         {
-            return Ok(_compraRepository.ListarCompraPorCpf(cpf));
+            return Ok(_appService.ListarCompras(cpf));
         }
 
         [HttpGet, Route("api/compra/semana")]
         public IHttpActionResult GetSemana()
         {
-            return Ok(_compraRepository.ListarCompraSemana());
+            return Ok(_appService.GetSemana());
         }
 
         [HttpGet, Route("api/compra/mes/{mes}")]
         public IHttpActionResult GetMes(int mes)
         {
-            return Ok(_compraRepository.ListarCompraMes(mes));
+            return Ok(_appService.GetMes(mes));
         }
 
         [HttpGet, Route("api/compra/dia")]
         public IHttpActionResult GetDia()
         {
-            return Ok(_compraRepository.ListarCompraDia());
+            return Ok(_appService.GetDia());
         }
 
         [HttpGet, Route("api/compra/{nomeUsuario}")]

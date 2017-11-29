@@ -51,6 +51,9 @@
             <table class="striped centered">
                 <thead>
                 <tr>
+                    <th>
+                        Data da Compra
+                    </th>
                     @if (Session["TipoDeLogin"].ToString() == "Admin")
                     {
                         <th>
@@ -58,7 +61,7 @@
                         </th>
                     }
                     <th>
-                        Data da Compra
+                        Item
                     </th>
                     <th>
                         Valor da Compra
@@ -69,6 +72,10 @@
                 @foreach (var item in Model)
                 {
                     <tr class="center">
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataCompra)
+                        </td>
                         @if (Session["TipoDeLogin"].ToString() == "Admin")
                         {
                             <td>
@@ -76,7 +83,7 @@
                             </td>
                         }
                         <td>
-                            @Html.DisplayFor(modelItem => item.DataCompra)
+                            @Html.DisplayFor(modelItem => item.ApenasUmItem)
                         </td>
                         <td>
                             R$ @Html.DisplayFor(modelItem => item.ValorCompra)
