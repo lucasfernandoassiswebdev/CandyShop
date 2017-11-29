@@ -1,237 +1,243 @@
 ﻿@media screen and (min-width: 1000px) {
-    .pesquisaMobile {
-        display: none;
-    }
+	.pesquisaMobile {
+		display: none;
+	}
 }
 
 @media only screen and (max-width: 992px) {
-    .modal {
-        width: 94% !important;
-        top: 7% !important;
-    }
+	.modal {
+		width: 94% !important;
+		top: 7% !important;
+	}
 }
 
 @media screen and (max-width: 1214px) {
-    .select-wrapper {
-        display: none;
-    }
+	.select-wrapper {
+		display: none;
+	}
 }
 
 @media only screen and (min-width: 977px) {
-    .row .col.l2 {
-        width: 33% !important;
-    }
+	.row .col.l2 {
+		width: 33% !important;
+	}
 }
 
 @media only screen and (min-width: 1100px) {
-    .row .col.l2 {
-        width: 26% !important;
-    }
+	.row .col.l2 {
+		width: 26% !important;
+	}
 }
 
 @media only screen and (min-width: 1262px) {
-    .row .col.l2 {
-        width: 23% !important;
-    }
+	.row .col.l2 {
+		width: 23% !important;
+	}
 }
 
 .brown-text {
-    color: rgb(176,0,0);
+	color: rgb(176,0,0);
 }
 
 .modal .modal-footer {
-    text-align: center;
+	text-align: center;
 }
 
 img {
-    max-height: 140px;
-    margin-bottom: 20px;
-    width: auto !important;
-    height: 100% !important;
-    margin: 0 auto;
+	max-height: 140px;
+	margin-bottom: 20px;
+	width: auto !important;
+	height: 100% !important;
+	margin: 0 auto;
 }
 
-    img:hover {
-        top: -2px;
-        transform: scale(1.3,1.3);
-    }
+	img:hover {
+		top: -2px;
+		transform: scale(1.3,1.3);
+	}
 
 .card .card-image .card-title {
-    color: black;
-    font-weight: bold;
-    top: 112px;
-    font-size: 19px;
+	color: black;
+	font-weight: bold;
+	top: 112px;
+	font-size: 19px;
 }
 
 .nav-wrapper .input-field input[type=search] {
-    height: 63px;
-    margin-bottom: -100%;
+	height: 63px;
+	margin-bottom: -100%;
 }
 
 .nav-wrapper input[type="search"]:focus {
-    top: 0;
+	top: 0;
 }
 
 .input-field label {
-    max-height: 64px;
+	max-height: 64px;
 }
 
 .nav-wrapper input[type="search"]:focus ~ .closed {
-    right: -450px;
+	right: -450px;
 }
 
 nav .input-field label {
-    top: -11px;
-    right: 0;
+	top: -11px;
+	right: 0;
 }
 
-    nav .input-field label i {
-        color: white;
-    }
+	nav .input-field label i {
+		color: white;
+	}
 
 select {
-    margin-bottom: -300%;
+	margin-bottom: -300%;
 }
 
 .select-wrapper input.select-dropdown {
-    height: 2rem;
-    margin: 13px 33px 0 10px;
-    padding-left: -50cm;
+	height: 2rem;
+	margin: 13px 33px 0 10px;
+	padding-left: -50cm;
 }
 
 input[type="text"], .modal-close, h3 {
-    color: black;
+	color: black;
 }
 
 .caret {
-    display: inline !important;
-    color: white !important;
+	display: inline !important;
+	color: white !important;
 }
 
 select {
-    color: white !important;
+	color: white !important;
 }
 
 .select-dropdown {
-    color: white !important;
+	color: white !important;
 }
 
 h3 {
-    color: black;
+	color: black;
 }
 
 .material-icons {
-    font-size: 40px;
-    line-height: 1.5;
+	font-size: 40px;
+	line-height: 1.5;
 }
 
 li img {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 .collection .collection-item {
-    line-height: 2.5rem;
+	line-height: 2.5rem;
 }
 
 .btn-floating.halfway-fab {
-    bottom: 0;
+	bottom: 0;
 }
 
 .card .card-content {
-    margin-top: 4px;
-    font-weight: bold;
+	margin-top: 4px;
+	font-weight: bold;
 }
 
 .pesquisaMobile {
-    height: 3.5rem;
-    margin: 0 0 0 0;
+	height: 3.5rem;
+	margin: 0 0 0 0;
 }
 
 input[id="search"] {
-    border-bottom: none !important;
+	border-bottom: none !important;
 }
 
 .input-field input[type=search] {
-    height: 100%;
+	height: 100%;
 }
 
 .row {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 input {
-    text-align: center;
+	text-align: center;
 }
 
 h3 {
-    font-weight: bold;
-    color: red;
+	font-weight: bold;
+	color: red;
 }
 
 #search {
-    text-align: right;
-    padding-right: 40px;
+	text-align: right;
+	padding-right: 40px;
 }
 
 .pink-text, .dropdown-content li > a, .dropdown-content li > span {
-    color: #ec407a;
+	color: #ec407a;
 }
 
 #trocaSenha {
-    width: 35%;
-    top: 25% !important;
+	width: 35%;
+	top: 25% !important;
 }
 
 #modalLogin {
-    width: 32%;
-    z-index: 1003 !important;
+	width: 32%;
+	z-index: 1003 !important;
 }
 
 .divider {
-    background-color: rgb(236, 64, 122);
+	background-color: rgb(236, 64, 122);
 }
 
 #dropdownMenu {
-    width: 335px !important;
+	width: 335px !important;
 }
 
 #search {
-    width: 400px;
+	width: 400px;
 }
 
 #totalCompra {
-    font-weight: bold;
-    margin-left: 18px;
-    font-size: 35px;
-    margin-top: -10px;
+	font-weight: bold;
+	margin-left: 18px;
+	font-size: 35px;
+	margin-top: -10px;
 }
 
 .fixed-action-btn {
-    padding-top: 1px;
+	padding-top: 1px;
 }
 
 #search {
-    transition: 1s;
+	transition: 1s;
 }
 
 #QtdeItensCarrinho {
-    -webkit-border-radius: 50%;
-    background: #ec407a;
-    color: #fff;
-    width: 20px;
-    height: 20px;
-    align-self: flex-start;
-    position: relative;
-    margin-top: 8px;
-    margin-left: -15px;
-    display: none;
+	-webkit-border-radius: 50%;
+	background: #ec407a;
+	color: #fff;
+	width: 20px;
+	height: 20px;
+	align-self: flex-start;
+	position: relative;
+	margin-top: 8px;
+	margin-left: -15px;
+	display: none;
 }
 
 .PItensCarrinho {
-    line-height: 0px;
-    z-index: 10;
-    position: absolute;
-    margin-left: 35%;
-    margin-top: 50%;
-    font-size: 10px;
+	line-height: 0px;
+	z-index: 10;
+	position: absolute;
+	margin-left: 35%;
+	margin-top: 50%;
+	font-size: 10px;
+}
+
+#DivGrid {
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
 }
