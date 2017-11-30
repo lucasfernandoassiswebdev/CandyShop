@@ -10,6 +10,8 @@ Ajax
 
 Colaboradores:
 Lucas Fernando 
-Rafael Morais
-João Guilherme
+| Rafael Morais
+| João Guilherme
+| Gustavo Dantas
+
 
