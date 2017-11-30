@@ -15,5 +15,6 @@ namespace CandyShop.Core.Services.Pagamento
         Pagamento SelecionarDadosPagamento(int idPagamento);
         IEnumerable<Pagamento> ListarPagamentoDia();
         IEnumerable<Pagamento> ListarPagamentos(int mes);
+        IEnumerable<Pagamento> ListarPagamentoNome(string nome);
     }
 }

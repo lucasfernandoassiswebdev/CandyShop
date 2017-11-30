@@ -22,6 +22,10 @@ var AjaxJsPagamento = (function ($) {
     var listarPagamentoDia = function () {
         chamaPaginaPagamento(url.listarPagamentoDia,"#DivGrid");
     };
+    var listarPagamentoNome = function (nome) {
+        atualizaToken();
+        chamaPaginaComIdentificador(url.listarPagamentoNome, { nome: nome, token: obj.access_token });
+    };
     var inserirPagamento = function () {
         chamaPagina(url.inserirPagamento);
     };
@@ -66,6 +70,7 @@ var AjaxJsPagamento = (function ($) {
         listarPagamentoDia: listarPagamentoDia,
         listarPagamentoSemana: listarPagamentoSemana,
         listarPagamentoMes: listarPagamentoMes,
+        listarPagamentoNome: listarPagamentoNome,
         editarPagamento: editarPagamento,
         concluirEdicaoPagamento: concluirEdicaoPagamento
     };

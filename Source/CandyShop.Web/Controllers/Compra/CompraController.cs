@@ -62,5 +62,14 @@ namespace CandyShop.Web.Controllers.Compra
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
+
+        public ActionResult ListarNome(string nome, string token)
+        {
+            var response = _appCompra.ListarComprasNome(nome, token);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro. " + response.ContentAsString);
+            ViewBag.tituloPagina = $"Compras: {nome}";
+            return View("Index", response.Content);
+        }
     }
 }

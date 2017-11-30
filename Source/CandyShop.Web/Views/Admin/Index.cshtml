@@ -39,6 +39,7 @@
             listarPagamentoSemana: '@Url.Action("ListarSemana", "Pagamento")',
             listarPagamentoMes: '@Url.Action("ListarMes", "Pagamento")',
             listarPagamentoDia: '@Url.Action("ListarDia", "Pagamento")',
+            listarPagamentoNome: '@Url.Action("ListarNome", "Pagamento")',
             editarPagamento: '@Url.Action("Editar", "Pagamento")',
             concluirEdicaoPagamento: '@Url.Action("EditarPagamento", "Pagamento")'
         });
@@ -48,7 +49,8 @@
             listarCompraMes: '@Url.Action("ListarMes", "Compra")',
             listarCompraDia: '@Url.Action("ListarDia", "Compra")',
             listarCompra: '@Url.Action("Listar", "Compra")',
-            detalheCompra: '@Url.Action("Detalhes", "Compra")',
+            listarCompraNome: '@Url.Action("ListarNome", "Compra")',
+            detalheCompra: '@Url.Action("Detalhes", "Compra")'
         });
 
         AjaxJsShop.init({
@@ -59,13 +61,15 @@
 
         $("#modalPesquisaUsuario").modal({ dismissible: false, ready: function () { adicionaFoco("#nomeUsuario") } });
         $("#modalPesquisaProduto").modal({ dismissible: false, ready: function () { adicionaFoco("#nomeProduto") } });
+        $("#modalUsuarioCompra").modal({ dismissible: false, ready: function () { adicionaFoco("#nomeUsuarioCompra") } });
+        $("#modalUsuarioPagamento").modal({ dismissible: false, ready: function () { adicionaFoco("#nomeUsuarioPagamento") } });
 
         $("html,body").dblclick(function (e) {
             if ($(e.target).hasClass("modal") || $(e.target).hasClass("modal-content") ||
                 $(e.target).hasClass("modal-footer") || $(e.target).hasClass("identQuant"))
                 return false;
 
-            $("#modalPesquisaProduto, #modalPesquisaUsuario").modal("close");
+            $("#modalPesquisaProduto, #modalPesquisaUsuario, #modalUsuarioCompra, #modalUsuarioPagamento").modal("close");
         });
 
         $("#nomeUsuario").keydown(function (e) {
@@ -85,6 +89,25 @@
         $("#pesquisarProduto").click(function () {
             closeModalsClearInputs("#modalPesquisaProduto", "#nomeProduto", AjaxJsProduto.listarProdutoPorNome);
         });
+
+
+        $("#nomeUsuarioCompra").keydown(function (e) {
+            if (e.which === 13)
+                closeModalsClearInputs("#modalUsuarioCompra", "#nomeUsuarioCompra", AjaxJsCompra.listarCompraNome);
+        });
+
+        $("#pesquisarUsuarioCompra").click(function () {
+            closeModalsClearInputs("#modalUsuarioCompra", "#nomeUsuarioCompra", AjaxJsCompra.listarCompraNome);
+        });
+        $("#nomeUsuarioPagamento").keydown(function (e) {
+            if (e.which === 13)
+                closeModalsClearInputs("#modalUsuarioPagamento", "#nomeUsuarioPagamento", AjaxJsPagamento.listarPagamentoNome);
+        });
+
+        $("#pesquisarUsuarioPagamentos").click(function () {
+            closeModalsClearInputs("#modalUsuarioPagamento", "#nomeUsuarioPagamento", AjaxJsPagamento.listarPagamentoNome);
+        });
+
     });
 
     function adicionaFoco(input) { console.log(input); $(input).focus(); }
@@ -122,14 +145,42 @@
 <!--modal de pesquisa de produtos-->
 <div id="modalPesquisaProduto" class="modal">
     <div class="modal-content">
-        <font class="pink-text modal-close identQuant" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
+        <font class="pink-text modal-close identQuant" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size: 24px">X</font>
         <h3 class="center pink-text identQuant">Nome do produto:</h3>
         <div>
-            <input type="text" maxlength="40" id="nomeProduto" class="identQuant" autocomplete="off" style="text-align:center" />
+            <input type="text" maxlength="40" id="nomeProduto" class="identQuant" autocomplete="off" style="text-align: center"/>
         </div>
     </div>
     <div class="modal-footer center">
         <a href="#!" id="pesquisarProduto" class="closeMenu btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
+    </div>
+</div>
+
+<!--modal de pesquisa de Usuario Compra-->
+<div id="modalUsuarioCompra" class="modal">
+    <div class="modal-content">
+        <font class="pink-text modal-close identQuant" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size: 24px">X</font>
+        <h3 class="center pink-text identQuant">Nome do Usuário:</h3>
+        <div>
+            <input type="text" maxlength="40" id="nomeUsuarioCompra" class="identQuant" autocomplete="off" style="text-align: center"/>
+        </div>
+    </div>
+    <div class="modal-footer center">
+        <a href="#!" id="pesquisarUsuarioCompra" class="closeMenu btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
+    </div>
+</div>
+
+<!--modal de pesquisa de Usuario Pagamento-->
+<div id="modalUsuarioPagamento" class="modal">
+    <div class="modal-content">
+        <font class="pink-text modal-close identQuant" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size: 24px">X</font>
+        <h3 class="center pink-text identQuant">Nome do Usuário:</h3>
+        <div>
+            <input type="text" maxlength="40" id="nomeUsuarioPagamento" class="identQuant" autocomplete="off" style="text-align: center"/>
+        </div>
+    </div>
+    <div class="modal-footer center">
+        <a href="#!" id="pesquisarUsuarioPagamentos" class="closeMenu btn waves waves-light modal-close waves-effect btn-flat pink-text">Encontrar<i class="material-icons right pink-text">search</i></a>
     </div>
 </div>
 
@@ -179,6 +230,7 @@
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamentoDia();"><i class="material-icons">access_time</i>Hoje</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamentoSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamento();"><i class="material-icons">book</i>Ultimo mês</a></li>
+                        <li><a href="#modalUsuarioPagamento" class="closeMenu modal-trigger"><i class="material-icons">search</i>Por funcionário</a></li>
                     </ul>
                 </div>
             </li>
@@ -191,6 +243,7 @@
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompraDia();"><i class="material-icons">access_time</i>Hoje</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompraSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompra();"><i class="material-icons">book</i>Ultimo mês</a></li>
+                        <li><a href="#modalUsuarioCompra" class="closeMenu modal-trigger"><i class="material-icons">search</i>Por funcionário</a></li>
                     </ul>
                 </div>
             </li>

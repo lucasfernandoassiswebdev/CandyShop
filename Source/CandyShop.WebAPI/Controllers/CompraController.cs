@@ -80,10 +80,10 @@ namespace CandyShop.WebAPI.Controllers
             return Ok(_appService.GetDia());
         }
 
-        [HttpGet, Route("api/compra/{nomeUsuario}")]
+        [HttpGet, Route("api/compra/nome/{nomeUsuario}")]
         public IHttpActionResult GetNome(string nomeUsuario)
         {
-            return Ok(_compraRepository.ListarCompraPorNome(nomeUsuario));
+            return Ok(_appService.GetNome(nomeUsuario));
         }
     }
 }

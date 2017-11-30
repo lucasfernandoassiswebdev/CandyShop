@@ -111,6 +111,12 @@ namespace CandyShop.Core.Services.Compra
             return PreencheItens(_compraRepository.ListarCompraDia().ToList());
         }
 
+        public IEnumerable<Compra> GetNome(string nome)
+        {
+            return PreencheItens(_compraRepository.ListarCompraPorNome(nome).ToList());
+        }
+
+
         // Método que verifica a quantidade disponível do item no banco 
         private void VerificaEstoque(CompraProduto.CompraProduto item)
         {

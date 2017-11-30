@@ -17,6 +17,7 @@ namespace CandyShop.Application.Interfaces
         Response<IEnumerable<PagamentoViewModel>> ListarPagamentosSemana(string cpf, string token);
 
         Response<IEnumerable<PagamentoViewModel>> ListarPagamentosDia(string token);
+        Response<IEnumerable<PagamentoViewModel>> ListarPagamentosNome(string nome, string token);
         Response<IEnumerable<PagamentoViewModel>> ListarPagamentosDia(DateTime dia,string token);
     }
 }

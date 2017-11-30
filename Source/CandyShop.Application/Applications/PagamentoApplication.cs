@@ -78,6 +78,16 @@ namespace CandyShop.Application.Applications
             }
         }
 
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosNome(string nome, string token)
+        {
+            using (var client = new HttpClient())
+            {
+                AtualizaToken(token, client);
+                var response = client.GetAsync($"{_enderecoApi}/nome/{nome}").Result;
+                return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
         public Response<PagamentoViewModel> SelecionarPagamento(int idPagamento,string token)
         {
             using (var client = new HttpClient())

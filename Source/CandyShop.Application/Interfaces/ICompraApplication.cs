@@ -9,9 +9,9 @@ namespace CandyShop.Application.Interfaces
         Response<CompraViewModel> SelecionarCompra(int idcompra, string token);
         Response<IEnumerable<CompraViewModel>> ListaCompra(string token);
         Response<IEnumerable<CompraViewModel>> ListaCompraPorCpf(string cpf, string token);
-        Response<IEnumerable<CompraViewModel>> ListaCompraPorNome(string nomeUsuario, string token);
         Response<IEnumerable<CompraViewModel>> ListarComprasSemana(string token);
         Response<IEnumerable<CompraViewModel>> ListarComprasMes(int mes, string token);
         Response<IEnumerable<CompraViewModel>> ListarComprasDia(string token);
+        Response<IEnumerable<CompraViewModel>> ListarComprasNome(string nome, string token);
     }
 }
