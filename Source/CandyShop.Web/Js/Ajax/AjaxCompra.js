@@ -8,13 +8,13 @@ var AjaxJsCompra = (function ($) {
     var init = function (config) {
         url = config;
     };
-    var inserirCompra = function() {
+    var inserirCompra = function () {
         var listaProdutos = [];
         var produto;
         var produtos = $(".collection li");
         var i = 1;
         $.each(produtos,
-            function() {
+            function () {
                 produto = {
                     Produto: { IdProduto: $("li:nth-child(" + i + ") span").attr("data-id") },
                     QtdeCompra: $("li:nth-child(" + i + ") p").attr("data-Quantidade")
@@ -26,23 +26,23 @@ var AjaxJsCompra = (function ($) {
         var compra = { Itens: listaProdutos };
         atualizaToken();
         $.post(url.inserirCompra, { compra: compra, token: obj.access_token })
-            .done(function(message) {
+            .done(function (message) {
                 $.get(url.navbar)
-                    .done(function(data) {
-                        $("body").slideUp(function() {
-                            $("body").hide().html(data).slideDown(function() {
+                    .done(function (data) {
+                        $("body").slideUp(function () {
+                            $("body").hide().html(data).slideDown(function () {
                                 Materialize.toast(message, 4000);
                             });
                         });
-                    }).fail(function(xhr) {
+                    }).fail(function (xhr) {
                         console.log(xhr.responseText);
                     });
-                if (message === "Sua compra foi registrada com sucesso") 
+                if (message === "Sua compra foi registrada com sucesso")
                     localStorage.removeItem("listaProdutos");
             })
-            .fail(function(xhr) {
+            .fail(function (xhr) {
                 console.log(xhr.responseText);
-                Materialize.toast("Algo deu errado, recarregue a página ou contate um administrador",2000);
+                Materialize.toast("Algo deu errado, recarregue a página ou contate um administrador", 2000);
             });
     };
 
@@ -54,7 +54,7 @@ var AjaxJsCompra = (function ($) {
     };
     var listarCompraMes = function (mes) {
         atualizaToken();
-        chamaPaginaComIdentificador(url.listarCompraMes, { mes: mes, token: obj.access_token});
+        chamaPaginaComIdentificador(url.listarCompraMes, { mes: mes, token: obj.access_token });
     };
     var listarCompraSemana = function () {
         chamaPaginaCompra(url.listarCompraSemana, "#DivGrid");
@@ -64,9 +64,13 @@ var AjaxJsCompra = (function ($) {
     };
     var detalheCompra = function (idCompra, paginaAnterior) {
         atualizaToken();
-        chamaPaginaComIdentificador(url.detalheCompra, { idCompra: idCompra, paginaAnterior: paginaAnterior, token: obj.access_token});
+        chamaPaginaComIdentificador(url.detalheCompra, { idCompra: idCompra, paginaAnterior: paginaAnterior, token: obj.access_token });
     };
-    
+    var listarComprasProdutos = function (data) {
+        atualizaToken();
+        chamaPaginaComIdentificador(url.listarComprasProdutos, { data: data, token: obj.access_token });
+    }
+
     return {
         init: init,
         historicoCompra: historicoCompra,
@@ -75,7 +79,8 @@ var AjaxJsCompra = (function ($) {
         listarCompraMes: listarCompraMes,
         listarCompraDia: listarCompraDia,
         inserirCompra: inserirCompra,
-        detalheCompra: detalheCompra
+        detalheCompra: detalheCompra,
+        listarComprasProdutos: listarComprasProdutos
     };
 })(jQuery);
 

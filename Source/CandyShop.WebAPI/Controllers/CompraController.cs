@@ -1,6 +1,7 @@
 ﻿using CandyShop.Core.Services;
 using CandyShop.Core.Services.Compra;
 using CandyShop.Core.Services.CompraProduto;
+using System;
 using System.Net;
 using System.Web.Http;
 
@@ -84,6 +85,12 @@ namespace CandyShop.WebAPI.Controllers
         public IHttpActionResult GetNome(string nomeUsuario)
         {
             return Ok(_compraRepository.ListarCompraPorNome(nomeUsuario));
+        }
+
+        [HttpGet, Route("api/compra/produtocomprado/{data}")]
+        public IHttpActionResult GetProdutosComprados(DateTime data)
+        {
+            return Ok(_compraRepository.GetQtdeVendidos(data));
         }
     }
 }

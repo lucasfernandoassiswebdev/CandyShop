@@ -375,5 +375,37 @@ CREATE PROCEDURE [dbo].[CSSP_SelLastCompra]
 GO
 
 
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelComprasData]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelComprasData]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_SelComprasData]
+	@Data as date
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Compra.sql
+	Objetivo..........: Exibir a quantidade de produtos comprados de X data em diante
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 01/12/2017
+	Ex................: EXEC [dbo].[CSSP_SelComprasData] '2017-11-01', 28
+
+	*/
+
+	BEGIN
+	    SELECT 
+	        P.NomeProduto, SUM(CP.QtdeProduto) AS 'Qtde' 
+	        FROM CompraProduto CP
+				INNER JOIN Compra C on C.IdCompra = CP.IdCompra
+				Inner JOIN Produto P on P.IdProduto = CP.IdProduto
+			WHERE C.DataCompra > @Data
+			GROUP BY P.NomeProduto
+	END
+GO
+				
+				
+
+
 
 																			

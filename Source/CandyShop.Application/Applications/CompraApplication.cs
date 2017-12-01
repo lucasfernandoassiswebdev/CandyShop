@@ -1,5 +1,6 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -87,7 +88,15 @@ namespace CandyShop.Application.Applications
                 return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-
+        public Response<IEnumerable<ProdutoViewModel>> ListarProdutosComprados(DateTime data, string token)
+        {
+            using (var client = new HttpClient())
+            {
+                AtualizaToken(token, client);
+                var response = client.GetAsync($"{_enderecoApi}/produtocomprado/{data}").Result;
+                return new Response<IEnumerable<ProdutoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
         private static void AtualizaToken(string token, HttpClient client)
         {
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);

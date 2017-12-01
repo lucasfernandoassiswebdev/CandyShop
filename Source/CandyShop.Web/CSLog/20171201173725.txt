@@ -1,0 +1,3 @@
+System.Web.Mvc
+O dicionário de parâmetros contém uma entrada nula para o parâmetro 'data' de tipo que não permite valor anulável 'System.DateTime' para o método 'System.Web.Mvc.ActionResult ListarComprasProdutos(System.String, System.DateTime)' em 'CandyShop.Web.Controllers.Compra.CompraController'. Um parâmetro opcional deve ser um tipo de referência, um tipo que permite valor anulável ou declarado como opcional.
+Nome do parâmetro: parameters

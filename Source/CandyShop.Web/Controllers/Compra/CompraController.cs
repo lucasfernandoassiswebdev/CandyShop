@@ -10,6 +10,7 @@ namespace CandyShop.Web.Controllers.Compra
     public class CompraController : CompraUserComumController
     {
         private readonly ICompraApplication _appCompra;
+        private readonly IProdutoApplication _appProdutos;
 
         public CompraController(ICompraApplication compra, IUsuarioApplication usuario) : base(compra)
         {
@@ -61,6 +62,17 @@ namespace CandyShop.Web.Controllers.Compra
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
+        }
+        public ActionResult ListarComprasProdutos(string token,DateTime data)
+        {
+            if (data == DateTime.MinValue)
+                data = DateTime.Now.AddDays(-30);
+
+            var response = _appCompra.ListarProdutosComprados(data, token);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro. " + response.ContentAsString);
+
+            return View("ListarComprasProdutos",response.Content);
         }
     }
 }

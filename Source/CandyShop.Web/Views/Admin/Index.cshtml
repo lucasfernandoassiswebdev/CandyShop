@@ -49,6 +49,7 @@
             listarCompraDia: '@Url.Action("ListarDia", "Compra")',
             listarCompra: '@Url.Action("Listar", "Compra")',
             detalheCompra: '@Url.Action("Detalhes", "Compra")',
+            listarComprasProdutos: '@Url.Action("ListarComprasProdutos","Compra")'
         });
 
         AjaxJsShop.init({
@@ -160,15 +161,6 @@
                 <div class="collapsible-header white-text">
                     <i class="material-icons left">face</i>USUÁRIOS
                 </div>
-                @*<div class="collapsible-body">
-                    <ul>
-                        <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listaUsuario()"><i class="material-icons">list</i>Listar usuários</a></li>
-                        <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listarUsuarioEmDivida()"><i class="material-icons">attach_money</i>Usuários em dívida</a></li>
-                        <li><a class="modal-trigger" href="#modalPesquisaUsuario"><i class="material-icons">find_in_page</i>Encontrar usuário</a></li>
-                        <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.cadastroUsuario()"><i class="material-icons">account_circle</i>Inserir Usuário</a></li>
-                        <li><a class="closeMenu" href="#!" onclick="AjaxJsUsuario.listarUsuarioInativo()"><i class="material-icons">list</i>Listar Inativos</a></li>
-                    </ul>
-                </div>*@
             </li>
             <li>
                 <div class="collapsible-header white-text">
@@ -191,6 +183,7 @@
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompraDia();"><i class="material-icons">access_time</i>Hoje</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompraSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarCompra();"><i class="material-icons">book</i>Ultimo mês</a></li>
+                        <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.listarComprasProdutos(null)"><i class="material-icons">list</i>Histórico de compras</a></li>
                     </ul>
                 </div>
             </li>

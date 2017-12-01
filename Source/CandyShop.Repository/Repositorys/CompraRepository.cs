@@ -1,6 +1,8 @@
 ﻿using CandyShop.Core.Services.Compra;
+using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository.DataBase;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -22,7 +24,8 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisCompraSemana,
             CSSP_LisCompraDia,
             CSSP_LisCpfCompra,
-            CSSP_SelDadosCompra
+            CSSP_SelDadosCompra,
+            CSSP_SelComprasData
         }
 
         public int InserirCompra(Compra compra, out int sequencial)
@@ -96,6 +99,23 @@ namespace CandyShop.Repository.Repositorys
         {
             ExecuteProcedure(Procedures.CSSP_LisCompraDia);
             return Listar();
+        }
+        public IEnumerable<Produto> GetQtdeVendidos(DateTime data)
+        {
+            ExecuteProcedure(Procedures.CSSP_SelComprasData);
+            AddParameter("@Data",data);
+
+            var retorno = new List<Produto>();
+            using (var reader = ExecuteReader())
+                while (reader.Read())
+                    retorno.Add(new Produto
+                    {
+
+                        NomeProduto = reader.ReadAsString("NomeProduto"),
+                        QtdeProduto = reader.ReadAsInt("Qtde")
+                    });
+
+            return retorno;
         }
         private IEnumerable<Compra> Listar()
         {
