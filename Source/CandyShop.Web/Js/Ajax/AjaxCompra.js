@@ -64,7 +64,7 @@ var AjaxJsCompra = (function ($) {
     };
     var listarCompraNome = function (nome) {
         atualizaToken();
-        chamaPaginaComIdentificador(url.listarCompraNome, {nome: nome, token: obj.access_token});
+        chamaPaginaComIdentificador(url.listarCompraNome, { nome: nome, token: obj.access_token });
     };
     var detalheCompra = function (idCompra, paginaAnterior) {
         atualizaToken();
@@ -72,7 +72,7 @@ var AjaxJsCompra = (function ($) {
     };
     var listarComprasProdutos = function (data) {
         atualizaToken();
-        chamaPaginaComIdentificador(url.listarComprasProdutos, { data: data, token: obj.access_token });
+        chamaPaginaComIdentificador(url.listarComprasProdutos, { token: obj.access_token, data: data });
     }
 
     return {

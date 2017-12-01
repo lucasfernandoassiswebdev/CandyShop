@@ -103,7 +103,7 @@ namespace CandyShop.Repository.Repositorys
         public IEnumerable<Produto> GetQtdeVendidos(DateTime data)
         {
             ExecuteProcedure(Procedures.CSSP_SelComprasData);
-            AddParameter("@Data",data);
+            AddParameter("@Data",data.ToShortTimeString());
 
             var retorno = new List<Produto>();
             using (var reader = ExecuteReader())

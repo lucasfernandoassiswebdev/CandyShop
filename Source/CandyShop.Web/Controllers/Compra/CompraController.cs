@@ -64,12 +64,12 @@ namespace CandyShop.Web.Controllers.Compra
             return View("Index", response.Content);
         }
 
-        public ActionResult ListarComprasProdutos(string token, DateTime data)
+        public ActionResult ListarComprasProdutos(string token, DateTime? data)
         {
-            if (data == DateTime.MinValue)
+            if (data == null)
                 data = DateTime.Now.AddDays(-30);
 
-            var response = _appCompra.ListarProdutosComprados(data, token);
+            var response = _appCompra.ListarProdutosComprados((DateTime)data, token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
 
