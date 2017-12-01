@@ -51,6 +51,9 @@
             <table class="striped centered">
                 <thead>
                 <tr>
+                    <th>
+                        Data da Compra
+                    </th>
                     @if (Session["TipoDeLogin"].ToString() == "Admin")
                     {
                         <th>
@@ -58,7 +61,10 @@
                         </th>
                     }
                     <th>
-                        Data da Compra
+                        Item
+                    </th>
+                    <th>
+                        Quantidade
                     </th>
                     <th>
                         Valor da Compra
@@ -69,18 +75,21 @@
                 @foreach (var item in Model)
                 {
                     <tr class="center">
-                        @if (Session["TipoDeLogin"].ToString() == "Admin")
-                        {
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
-                            </td>
-                        }
+
                         <td>
                             @Html.DisplayFor(modelItem => item.DataCompra)
                         </td>
-                        <td>
-                            R$ @Html.DisplayFor(modelItem => item.ValorCompra)
-                        </td>
+                        @if (Session["TipoDeLogin"].ToString() == "Admin")
+                        {
+                            <td>@Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)</td>
+                        }
+                        
+                        <td>@Html.DisplayFor(modelItem => item.NomeItem)</td>
+
+                        <td>@(item.NomeItem == "Mais de um item..." || item.NomeItem == "Erro ao buscar item" ? " - " : item.Itens.First().QtdeCompra.ToString())</td>
+
+                        <td>R$ @Html.DisplayFor(modelItem => item.ValorCompra)</td>
+
                         <td>
                             <a class="btn-floating btn waves-effect waves-light light-blue darken-3" title="Detalhes" onclick="AjaxJsCompra.detalheCompra(@item.IdCompra, '@ViewBag.tituloPagina')"><i class="material-icons small">info_outline</i></a>
                         </td>

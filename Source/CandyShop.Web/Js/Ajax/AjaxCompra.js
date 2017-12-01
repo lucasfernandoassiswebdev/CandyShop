@@ -62,6 +62,10 @@ var AjaxJsCompra = (function ($) {
     var listarCompraDia = function () {
         chamaPaginaCompra(url.listarCompraDia, "#DivGrid");
     };
+    var listarCompraNome = function (nome) {
+        atualizaToken();
+        chamaPaginaComIdentificador(url.listarCompraNome, {nome: nome, token: obj.access_token});
+    };
     var detalheCompra = function (idCompra, paginaAnterior) {
         atualizaToken();
         chamaPaginaComIdentificador(url.detalheCompra, { idCompra: idCompra, paginaAnterior: paginaAnterior, token: obj.access_token });
@@ -78,6 +82,7 @@ var AjaxJsCompra = (function ($) {
         listarCompra: listarCompra,
         listarCompraMes: listarCompraMes,
         listarCompraDia: listarCompraDia,
+        listarCompraNome: listarCompraNome,
         inserirCompra: inserirCompra,
         detalheCompra: detalheCompra,
         listarComprasProdutos: listarComprasProdutos

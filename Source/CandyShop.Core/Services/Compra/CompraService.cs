@@ -1,6 +1,8 @@
 ﻿using CandyShop.Core.Services.CompraProduto;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Usuario;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CandyShop.Core.Services.Compra
 {
@@ -89,6 +91,32 @@ namespace CandyShop.Core.Services.Compra
             }
         }
 
+        public IEnumerable<Compra> ListarCompras(string cpf = null)
+        {
+            return PreencheItens(cpf == null ? _compraRepository.ListarCompra().ToList() : _compraRepository.ListarCompraPorCpf(cpf).ToList(), cpf);
+        }
+
+        public IEnumerable<Compra> GetSemana()
+        {
+            return PreencheItens(_compraRepository.ListarCompraSemana().ToList());
+        }
+
+        public IEnumerable<Compra> GetMes(int mes)
+        {          
+            return PreencheItens(_compraRepository.ListarCompraMes(mes).ToList());
+        }
+
+        public IEnumerable<Compra> GetDia()
+        {
+            return PreencheItens(_compraRepository.ListarCompraDia().ToList());
+        }
+
+        public IEnumerable<Compra> GetNome(string nome)
+        {
+            return PreencheItens(_compraRepository.ListarCompraPorNome(nome).ToList());
+        }
+
+
         // Método que verifica a quantidade disponível do item no banco 
         private void VerificaEstoque(CompraProduto.CompraProduto item)
         {
@@ -96,6 +124,18 @@ namespace CandyShop.Core.Services.Compra
             var estoque = consulta.QtdeProduto;
             if (item.QtdeCompra > estoque)
                 _notification.Add($"Quantidade de {consulta.NomeProduto} indisponível no estoque!");
+        }
+        
+        //Metodo que busca todos os itens e relaciona com sua respectiva compra
+        private IEnumerable<Compra> PreencheItens(List<Compra> compras, string cpf = null)
+        {
+            var itens = _compraProdutoRepository.ListarCompraProduto(cpf).ToList();
+
+            foreach (var compra in compras)
+            {
+                compra.Itens = itens.Where(x => x.IdCompra == compra.IdCompra);
+            }
+            return compras;
         }
     }
 }

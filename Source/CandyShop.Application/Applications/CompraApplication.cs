@@ -79,12 +79,12 @@ namespace CandyShop.Application.Applications
                 return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-        public Response<IEnumerable<CompraViewModel>> ListaCompraPorNome(string nomeUsuario, string token)
+        public Response<IEnumerable<CompraViewModel>> ListarComprasNome(string nomeUsuario, string token)
         {
             using (var client = new HttpClient())
             {
                 AtualizaToken(token, client);
-                var response = client.GetAsync($"{_enderecoApi}/{nomeUsuario}").Result;
+                var response = client.GetAsync($"{_enderecoApi}/nome/{nomeUsuario}").Result;
                 return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }

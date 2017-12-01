@@ -74,6 +74,15 @@ namespace CandyShop.Web.Controllers.Pagamento
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
+        public ActionResult ListarNome(string nome, string token)
+        {
+            var response = _appPagamento.ListarPagamentosNome(nome, token);
+            if (response.Status != HttpStatusCode.OK)
+                return Content("Erro. " + response.ContentAsString);
+            ViewBag.tituloPagina = $"Pagamentos: {nome}";
+            return View("Index", response.Content);
+        }
+
 
         [HttpPost]
         public ActionResult EditarPagamento(PagamentoViewModel pagamento, string token)

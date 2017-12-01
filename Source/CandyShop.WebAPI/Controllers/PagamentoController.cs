@@ -71,5 +71,11 @@ namespace CandyShop.WebAPI.Controllers
         {
             return Ok(_pagamentoRepository.ListarPagamentoDia());
         }
+
+        [Route("api/pagamento/nome/{nome}")]
+        public IHttpActionResult GetNome(string nome)
+        {
+            return Ok(_pagamentoRepository.ListarPagamentoNome(nome));
+        }
     }
 }

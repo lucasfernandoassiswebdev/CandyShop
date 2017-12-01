@@ -32,13 +32,13 @@
                         <th>
                             Nome
                         </th>
-                        <th>
+                        <th class="center">
                             Preço
                         </th>
-                        <th>
+                        <th class="center">
                             Qtde em estoque
                         </th>
-                        <th>
+                        <th class="center">
                             Categoria
                         </th>
                         <th></th>
@@ -50,13 +50,13 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.NomeProduto)
                             </td>
-                            <td class="valorProduto">
+                            <td class="valorProduto center">
                                 R$ @Html.DisplayFor(modelItem => item.PrecoProduto)
                             </td>
-                            <td>
+                            <td class="center">
                                 @Html.DisplayFor(modelItem => item.QtdeProduto)
                             </td>
-                            <td>
+                            <td class="center">
                                 @Html.DisplayFor(modelItem => item.Categoria)
                             </td>
                             <td style="width: 185px">

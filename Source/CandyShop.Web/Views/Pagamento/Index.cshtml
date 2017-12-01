@@ -51,21 +51,27 @@
             <table class="striped centered">
                 <thead>
                     <tr>
-                        <th>Usuário</th>
                         <th>Data do Pagamento</th>
+                        @if (Session["TipoDeLogin"].ToString() == "Admin")
+                        {
+                            <th>Usuario</th>
+                        }
                         <th>Valor Pago</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
-                {
+                    {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
-                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.DataPagamento)
                             </td>
+                            @if (Session["TipoDeLogin"].ToString() == "Admin")
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
+                                </td>
+                            }
                             <td>
                                 @string.Format("{0:C}", item.ValorPagamento)
                             </td>
@@ -76,7 +82,7 @@
                                 </td>
                             }
                         </tr>
-                    }
+                        }
                 </tbody>
             </table>
         </div>
