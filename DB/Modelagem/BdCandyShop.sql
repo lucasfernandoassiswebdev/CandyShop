@@ -14,11 +14,11 @@ CREATE TABLE Produto (
 CREATE TABLE Usuario (
 	Cpf varchar(11) constraint PK_Cpf primary key,
 	NomeUsuario varchar(50) NOT NULL,
-	SenhaUsuario varchar(30) NOT NULL,
+	SenhaUsuario varchar(15) NOT NULL,
 	SaldoUsuario decimal NOT NULL,
 	Ativo varchar(1) NOT NULL,
-	Classificacao varchar(1) NOT NULL,		--Por padrão =>	'A' -> Admin______'U' -> Usuario
-	FirstLogin varchar(1) NOT NULL			--Por padrão =>	'T'  _________	'F' 
+	Classificacao varchar(1) NOT NULL,		--Por padrÃ£o =>	'A' -> Admin______'U' -> Usuario
+	FirstLogin varchar(1) NOT NULL			--Por padrÃ£o =>	'T'  _________	'F' 
 )
 
 CREATE TABLE Pagamento (
