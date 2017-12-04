@@ -377,7 +377,7 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelCo
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_SelComprasData]
-	@Data as date
+	@Data as datetime
 	AS
 
 	/*
@@ -386,21 +386,21 @@ CREATE PROCEDURE [dbo].[CSSP_SelComprasData]
 	Objetivo..........: Exibir a quantidade de produtos comprados de X data em diante
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 01/12/2017
-	Ex................: EXEC [dbo].[CSSP_SelComprasData] '2017-11-01', 28
+	Ex................: EXEC [dbo].[CSSP_SelComprasData] '2017-12-03'
 
 	*/
 
 	BEGIN
 	    SELECT 
-	        P.NomeProduto, SUM(CP.QtdeProduto) AS 'Qtde' 
+	        P.NomeProduto, Sum(CP.QtdeProduto) AS 'Qtde' 
 	        FROM CompraProduto CP
 				INNER JOIN Compra C on C.IdCompra = CP.IdCompra
-				Inner JOIN Produto P on P.IdProduto = CP.IdProduto
+				Inner JOIN Produto P on P.IdProduto = CP.IdProduto 
 			WHERE C.DataCompra > @Data
 			GROUP BY P.NomeProduto
 	END
 GO
-				
+			
 				
 
 

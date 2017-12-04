@@ -1,41 +1,64 @@
 ﻿@model IEnumerable<CandyShop.Application.ViewModels.ProdutoViewModel>
 @{ Layout = null; }
 
-    <link rel="stylesheet" type="text/css" href="~/Content/Admin/historico.css?d=@DateTime.Now.Ticks" />
+<link rel="stylesheet" type="text/css" href="~/Content/Admin/historico.css?d=@DateTime.Now.Ticks" />
+<style>
+    .datepicker {
+        width: 18% !important;
+    }
+</style>
 
-
-    <h4 class="center ">Lista de produtos comprados</h4>
+<h4 class="center ">Lista de produtos comprados</h4>
 <div class="row">
-    <div class="center"><input type="text" class="datepicker"/></div>
-
+    <div class="center">
+        <label for="data">Escolha a data:</label>
+        <input type="text" class="datepicker" id="data"/>
+    </div>
+    <div class="center">
+        <a class="btn pink waves waves-effect" id="pesquisar">Pesquisar</a>
+    </div>
     <div id="tabela">
         <table class="striped centered">
             <thead>
-            <tr>
-                <th>Produto</th>
-                <th>Quantidade comprada até agora</th>
-            </tr>
+                <tr>
+                    <th class="pink-text">Produto</th>
+                    <th class="pink-text">Quantidade comprada até agora</th>
+                </tr>
             </thead>
             <tbody>
-            @if (Model == null)
+                @if (Model == null)
             {
-                <p>Nenhum produto foi encontrado nesse período</p>
-            }
-            else
-            {
-                foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.NomeProduto</td>
-                        <td>@item.QtdeProduto</td>
-                    </tr>
+                    <p>Nenhum produto foi encontrado nesse período</p>
                 }
-            }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.NomeProduto</td>
+                            <td>@item.QtdeProduto</td>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
     </div>
-    }
 </div>
 
+
+
 <script>
+    $("#pesquisar").click(function() {
+        AjaxJsCompra.listarComprasProdutos($("#data").val());
+    });
+
+    $(".datepicker").pickadate({
+        selectMonths: true,
+        selectYears: 15,
+        today: "Hoje",
+        clear: "Limpar",
+        close: "Ok",
+        closeOnSelect: false,
+        format: 'yyyy-dd-mm'
+    });
 </script>

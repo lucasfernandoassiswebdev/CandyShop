@@ -1,8 +1,8 @@
-﻿using CandyShop.Core.Services.Compra;
+﻿using System;
+using CandyShop.Core.Services.Compra;
 using CandyShop.Core.Services.Produto;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository.DataBase;
-using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -103,7 +103,7 @@ namespace CandyShop.Repository.Repositorys
         public IEnumerable<Produto> GetQtdeVendidos(DateTime data)
         {
             ExecuteProcedure(Procedures.CSSP_SelComprasData);
-            AddParameter("@Data",data.ToShortTimeString());
+            AddParameter("@Data",data);
 
             var retorno = new List<Produto>();
             using (var reader = ExecuteReader())

@@ -63,7 +63,6 @@ namespace CandyShop.Web.Controllers.Compra
                 return Content("Erro. " + response.ContentAsString);
             return View("Index", response.Content);
         }
-
         public ActionResult ListarComprasProdutos(string token, DateTime? data)
         {
             if (data == null)
@@ -75,7 +74,6 @@ namespace CandyShop.Web.Controllers.Compra
 
             return View("ListarComprasProdutos", response.Content);
         }
-
         public ActionResult ListarNome(string nome, string token)
         {
             var response = _appCompra.ListarComprasNome(nome, token);
