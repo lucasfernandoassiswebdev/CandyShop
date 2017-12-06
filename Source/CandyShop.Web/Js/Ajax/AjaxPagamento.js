@@ -9,13 +9,14 @@ var AjaxJsPagamento = (function ($) {
     var detalhePagamento = function () {
         chamaPaginaPagamento(url.detalhePagamento,"#DivGrid");
     };
-    var listarPagamento = function () {
-        chamaPaginaPagamento(url.listarPagamento,"#DivGrid");
+    var listarPagamento = function (mes) {
+        chamaPaginaPagamentoUsuario(url.listarPagamento, "#DivGrid", mes);
     };
     var listarPagamentoMes = function (mes) {
         atualizaToken();
         chamaPaginaComIdentificador(url.listarPagamentoMes, { mes: mes, token: obj.access_token});
     };
+
     var listarPagamentoSemana = function () {
         chamaPaginaPagamento(url.listarPagamentoSemana,"#DivGrid");
     };
@@ -76,6 +77,28 @@ var AjaxJsPagamento = (function ($) {
     };
 })(jQuery);
 
+function chamaPaginaPagamentoUsuario(endereco, div, mes) {
+    atualizaToken();
+    $.ajax({
+        url: endereco,
+        type: "GET",
+        data: {
+            token: obj.access_token,
+            mes : mes
+        },
+        success: function (dataSucess) {
+            $(div).slideUp(function () {
+                $(div).hide().html(dataSucess).slideDown(function () {
+                    Materialize.toast(dataSucess.data, 3000);
+                });
+            });
+        },
+        error: function (xhr) {
+            Materialize.toast("Você não está autorizado, contate os administradores", 3000);
+            console.log(xhr.responseText);
+        }
+    });
+}
 function chamaPaginaPagamento(endereco, div) {
     atualizaToken();
     $.ajax({

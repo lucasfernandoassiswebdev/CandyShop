@@ -1,4 +1,5 @@
-﻿using CandyShop.Application.Interfaces;
+﻿using System;
+using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
 using CandyShop.Web.Filters;
 using System.Net;
@@ -23,12 +24,14 @@ namespace CandyShop.Web.Controllers.Pagamento
             return View("../Pagamento/Inserir");
         }
 
-        public ActionResult ListarCpf(string token)
+        public ActionResult ListarCpf(string token, int mes)
         {
             ViewBag.tituloPagina = "Meus pagamentos";
-            var cpf = Session["login"].ToString();
-            ViewBag.drop = 1;
-            var response = _appPagamento.ListarPagamentos(cpf,token);
+            ViewBag.drop = 0;
+            var teste = Session["TipoDeLogin"].ToString();
+            var response = Session["TipoDeLogin"].ToString() != "Admin"
+                ? _appPagamento.ListarPagamentosUsuarios(mes, Session["login"].ToString(), token)
+                : _appPagamento.ListarPagamentos(mes,token);
             if (response.Status != HttpStatusCode.OK)
                 return Content("Erro. " + response.ContentAsString);
             return View("../Pagamento/Index", response.Content);

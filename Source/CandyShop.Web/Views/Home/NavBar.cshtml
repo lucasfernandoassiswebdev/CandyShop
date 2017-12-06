@@ -171,7 +171,7 @@
             <!--barra de navegação-->
             <ul id="dropdownMenu" class="dropdown-content">
                 <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Pagamentos</a></li>
-                <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+                <li><a href="#!" id="ListaPagamento"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico de Compra</a></li>
                 <li><a href="#trocaSenha" class="modal-trigger"><i class="material-icons">lock_outline</i>Trocar senha</a></li>
 
@@ -212,7 +212,7 @@
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
                 <li><a class="dropdown-button modal-trigger closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
                 <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
-                <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
+                <li><a href="#!" class="closeMenu" id="listarPagamento2"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Historico de Compra</a></li>
                 <li><a href="#trocaSenha" class="modal-trigger closeMenu"><i class="material-icons">lock_outline</i>Trocar senha</a></li>
                 <li class="divider"></li>

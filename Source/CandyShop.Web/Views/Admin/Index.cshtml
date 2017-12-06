@@ -35,9 +35,9 @@
         });
 
         AjaxJsPagamento.init({
-            listarPagamento: '@Url.Action("Listar", "Pagamento")',
+            listarPagamento: '@Url.Action("ListarCpf", "PagamentoUserComum")',
             listarPagamentoSemana: '@Url.Action("ListarSemana", "Pagamento")',
-            listarPagamentoMes: '@Url.Action("ListarMes", "Pagamento")',
+            listarPagamentoMes: '@Url.Action("ListarCpf", "PagamentoUserComum")',
             listarPagamentoDia: '@Url.Action("ListarDia", "Pagamento")',
             listarPagamentoNome: '@Url.Action("ListarNome", "Pagamento")',
             editarPagamento: '@Url.Action("Editar", "Pagamento")',
@@ -221,7 +221,7 @@
                     <ul class="brown-text">
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamentoDia();"><i class="material-icons">access_time</i>Hoje</a></li>
                         <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamentoSemana();"><i class="material-icons">date_range</i>Ultima semana</a></li>
-                        <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamento();"><i class="material-icons">book</i>Ultimo mês</a></li>
+                        <li><a href="#!" class="closeMenu" id="listarPagamentoAdmin"><i class="material-icons">book</i>Ultimo mês</a></li>
                         <li><a href="#modalUsuarioPagamento" class="closeMenu modal-trigger"><i class="material-icons">search</i>Por funcionário</a></li>
                     </ul>
                 </div>

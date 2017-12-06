@@ -21,7 +21,7 @@ namespace CandyShop.Application.Applications
                 return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentos(string cpf,string token)
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentos(string cpf, string token)
         {
             using (var client = new HttpClient())
             {
@@ -30,7 +30,7 @@ namespace CandyShop.Application.Applications
                 return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentos(int mes,string token)
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentos(int mes, string token)
         {
             using (var client = new HttpClient())
             {
@@ -40,7 +40,17 @@ namespace CandyShop.Application.Applications
             }
         }
 
-        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosSemana(string cpf,string token)
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosUsuarios(int mes, string cpf, string token)
+        {
+            using (var client = new HttpClient())
+            {
+                AtualizaToken(token, client);
+                var response = client.GetAsync($"{_enderecoApi}/{cpf}/{mes}").Result;
+                return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosSemana(string cpf, string token)
         {
             using (var client = new HttpClient())
             {
@@ -68,7 +78,7 @@ namespace CandyShop.Application.Applications
                 return new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosDia(DateTime dia,string token)
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosDia(DateTime dia, string token)
         {
             using (var client = new HttpClient())
             {
@@ -88,21 +98,33 @@ namespace CandyShop.Application.Applications
             }
         }
 
-        public Response<PagamentoViewModel> SelecionarPagamento(int idPagamento,string token)
+        public Response<IEnumerable<PagamentoViewModel>> ListarPagamentosUsuarios(PagamentoViewModel pagamento, string token)
         {
             using (var client = new HttpClient())
             {
-                AtualizaToken(token,client);
+                AtualizaToken(token, client);
+                var response = client.PostAsync(_enderecoApi + "/PagamentoUsuario", pagamento, new JsonMediaTypeFormatter()).Result;
+                return response.StatusCode != HttpStatusCode.OK
+                    ? new Response<IEnumerable<PagamentoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
+                    : new Response<IEnumerable<PagamentoViewModel>>(response.StatusCode);
+            }
+        }
+
+        public Response<PagamentoViewModel> SelecionarPagamento(int idPagamento, string token)
+        {
+            using (var client = new HttpClient())
+            {
+                AtualizaToken(token, client);
                 var response = client.GetAsync($"{_enderecoApi}/id/{idPagamento}").Result;
                 return new Response<PagamentoViewModel>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
 
-        public Response<string> InserirPagamento(PagamentoViewModel pagamento,string token)
+        public Response<string> InserirPagamento(PagamentoViewModel pagamento, string token)
         {
             using (var client = new HttpClient())
             {
-                AtualizaToken(token,client);
+                AtualizaToken(token, client);
                 var response = client.PostAsync(_enderecoApi, pagamento, new JsonMediaTypeFormatter()).Result;
                 return response.StatusCode != HttpStatusCode.OK
                    ? new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode)
@@ -110,7 +132,7 @@ namespace CandyShop.Application.Applications
             }
         }
 
-        public Response<string> EditarPagamento(PagamentoViewModel pagamento,string token)
+        public Response<string> EditarPagamento(PagamentoViewModel pagamento, string token)
         {
             using (var client = new HttpClient())
             {
@@ -126,5 +148,7 @@ namespace CandyShop.Application.Applications
         {
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
         }
+
+
     }
 }

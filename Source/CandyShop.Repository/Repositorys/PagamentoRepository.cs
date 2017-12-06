@@ -1,4 +1,5 @@
-﻿using CandyShop.Core.Services.Pagamento;
+﻿using System;
+using CandyShop.Core.Services.Pagamento;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
@@ -82,6 +83,13 @@ namespace CandyShop.Repository.Repositorys
         {
             ExecuteProcedure(Procedures.CSSP_LisPagamento);
             AddParameter("@cpf", null);
+            AddParameter("@mes", mes);
+            return Listar();
+        }
+        public IEnumerable<Pagamento> ListarPagamentosUsuarios(int mes, string cpf)
+        {
+            ExecuteProcedure(Procedures.CSSP_LisPagamento);
+            AddParameter("@cpf", cpf);
             AddParameter("@mes", mes);
             return Listar();
         }

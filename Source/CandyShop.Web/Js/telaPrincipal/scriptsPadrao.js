@@ -468,6 +468,10 @@ $(document).ready(function () {
         if (e.which == 13)
             $("#confirmaNovaSenha").focus();
     });
+
+    $("#ListaPagamento, #listarPagamento2, #listarPagamentoAdmin").click(function () {
+        AjaxJsPagamento.listarPagamento(new Date().getMonth() + 1);
+    });
 });
 
 var ilegais = /[\W_]/;

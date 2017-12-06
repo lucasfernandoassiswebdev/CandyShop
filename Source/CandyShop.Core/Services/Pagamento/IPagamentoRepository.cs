@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CandyShop.Core.Services.Pagamento
 {
@@ -11,6 +12,7 @@ namespace CandyShop.Core.Services.Pagamento
         IEnumerable<Pagamento> ListarPagamentos();
         IEnumerable<Pagamento> ListarPagamentoSemana(string cpf);
         IEnumerable<Pagamento> ListarPagamentoSemana();
+        IEnumerable<Pagamento> ListarPagamentosUsuarios(int mes, string cpf);
         bool SelecionarPagamento(int idPagamento);
         Pagamento SelecionarDadosPagamento(int idPagamento);
         IEnumerable<Pagamento> ListarPagamentoDia();
