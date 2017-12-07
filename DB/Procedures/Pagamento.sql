@@ -306,4 +306,32 @@ CREATE PROCEDURE [dbo].[CSSP_SelPagamento]
 	END
 GO
 
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_ListarPagamentoNome]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_ListarPagamentoNome]
+GO
 
+CREATE PROCEDURE [dbo].[CSSP_ListarPagamentoNome]
+	@Nome varchar(50)
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Pagamento.sql
+	Objetivo..........: Encontrar os pagamentos que um usuário fez pelo seu nome
+	Autor.............: SMN - Rafael henrique
+ 	Data..............: 30/11/2017
+	Ex................: EXEC [dbo].[CSSP_ListarPagamentoNome] 'rafae'
+
+	*/
+
+	BEGIN
+		SELECT	p.IdPagamento,
+				p.Cpf,				
+				u.NomeUsuario as 'NomeUsuario',
+				p.DataPagamento,
+				p.ValorPagamento 
+			FROM [dbo].[Pagamento] p WITH(NOLOCK)
+				INNER JOIN Usuario u on u.Cpf = p.Cpf
+			WHERE u.NomeUsuario LIKE '%' + @Nome + '%' 
+	END
+GO

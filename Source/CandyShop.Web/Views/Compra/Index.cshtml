@@ -52,10 +52,19 @@
                 <thead>
                 <tr>
                     <th>
-                        Usuario
+                        Data da Compra
+                    </th>
+                    @if (Session["TipoDeLogin"].ToString() == "Admin")
+                    {
+                        <th>
+                            Usuario
+                        </th>
+                    }
+                    <th>
+                        Item
                     </th>
                     <th>
-                        Data da Compra
+                        Quantidade
                     </th>
                     <th>
                         Valor da Compra
@@ -66,18 +75,23 @@
                 @foreach (var item in Model)
                 {
                     <tr class="center">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)
-                        </td>
+
                         <td>
                             @Html.DisplayFor(modelItem => item.DataCompra)
                         </td>
+                        @if (Session["TipoDeLogin"].ToString() == "Admin")
+                        {
+                            <td>@Html.DisplayFor(modelItem => item.Usuario.NomeUsuario)</td>
+                        }
+                        
+                        <td>@Html.DisplayFor(modelItem => item.NomeItem)</td>
+
+                        <td>@(item.NomeItem == "Mais de um item..." || item.NomeItem == "Erro ao buscar item" ? " - " : item.Itens.First().QtdeCompra.ToString())</td>
+
+                        <td>R$ @Html.DisplayFor(modelItem => item.ValorCompra)</td>
+
                         <td>
-                            R$ @Html.DisplayFor(modelItem => item.ValorCompra)
-                        </td>
-                        <td>
-                            <a class="btn-floating btn waves-effect waves-light light-blue darken-3" title="Detalhes" onclick="AjaxJsCompra.detalheCompra(@item.IdCompra, '@ViewBag.tituloPagina')" ><i class="material-icons small">info_outline</i></a>
-                            @*<a class="btn-floating btn waves-effect waves-light  yellow darken-3" onclick="AjaxJsCompra.editarCompra(@item.IdCompra);"><i class="material-icons">edit</i></a>*@
+                            <a class="btn-floating btn waves-effect waves-light light-blue darken-3" title="Detalhes" onclick="AjaxJsCompra.detalheCompra(@item.IdCompra, '@ViewBag.tituloPagina')"><i class="material-icons small">info_outline</i></a>
                         </td>
                     </tr>
                 }

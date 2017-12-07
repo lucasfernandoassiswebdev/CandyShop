@@ -1,6 +1,8 @@
 ﻿using CandyShop.Application.Interfaces;
 using CandyShop.Application.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 
@@ -78,16 +80,25 @@ namespace CandyShop.Application.Applications
                 return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-        public Response<IEnumerable<CompraViewModel>> ListaCompraPorNome(string nomeUsuario, string token)
+        public Response<IEnumerable<CompraViewModel>> ListarComprasNome(string nomeUsuario, string token)
         {
             using (var client = new HttpClient())
             {
                 AtualizaToken(token, client);
-                var response = client.GetAsync($"{_enderecoApi}/{nomeUsuario}").Result;
+                var response = client.GetAsync($"{_enderecoApi}/nome/{nomeUsuario}").Result;
                 return new Response<IEnumerable<CompraViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
-
+        public Response<IEnumerable<ProdutoViewModel>> ListarProdutosComprados(DateTime data, string token)
+        {
+            using (var client = new HttpClient())
+            {
+                AtualizaToken(token, client);
+                var date = data.ToShortDateString().ToString(CultureInfo.CurrentCulture).Replace("/","-").Replace("/", "-").Replace("/", "-");
+                var response = client.GetAsync($"{_enderecoApi}/produtocomprado/{date}").Result;
+                return new Response<IEnumerable<ProdutoViewModel>>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
         private static void AtualizaToken(string token, HttpClient client)
         {
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);

@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace CandyShop.Core.Services.Pagamento
 {
     public class Pagamento

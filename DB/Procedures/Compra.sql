@@ -333,23 +333,20 @@ CREATE PROCEDURE [dbo].[CSSP_LisCompraNomeUsuario]
 	Objetivo..........: Encontrar as compras que um usuário fez pelo seu nome
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 14/09/2017
-	Ex................: EXEC [dbo].[CSSP_LisCompraNomeUsuario]
+	Ex................: EXEC [dbo].[CSSP_LisCompraNomeUsuario] 'rafae'
 
 	*/
 
 	BEGIN
 		SELECT	c.IdCompra,
-				c.UsuarioCompra as 'NomeUsuario',
-				u.NomeUsuario,
-				c.DataCompra 
-		 FROM [dbo].[Compra] c WITH(NOLOCK)
-		 INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
-		 WHERE u.NomeUsuario = '%' + @Nome + '%' 
+				c.UsuarioCompra,				
+				u.NomeUsuario as 'NomeUsuario',
+				c.DataCompra,
+				c.ValorCompra 
+			FROM [dbo].[Compra] c WITH(NOLOCK)
+				INNER JOIN Usuario u on u.Cpf = c.UsuarioCompra
+			WHERE u.NomeUsuario LIKE '%' + @Nome + '%' 
 	END
-
-
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelLastCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
-	DROP PROCEDURE [dbo].[CSSP_SelLastCompra]
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelLastCompra]') AND objectproperty(id, N'IsPROCEDURE')=1)
@@ -373,6 +370,38 @@ CREATE PROCEDURE [dbo].[CSSP_SelLastCompra]
 		SELECT  IDENT_CURRENT('Produto') as 'Item' 
 	END
 GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_SelComprasData]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_SelComprasData]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_SelComprasData]
+	@Data as datetime
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Compra.sql
+	Objetivo..........: Exibir a quantidade de produtos comprados de X data em diante
+	Autor.............: SMN - Lucas Fernando
+ 	Data..............: 01/12/2017
+	Ex................: EXEC [dbo].[CSSP_SelComprasData] '2017-12-03'
+
+	*/
+
+	BEGIN
+	    SELECT 
+	        P.NomeProduto, Sum(CP.QtdeProduto) AS 'Qtde' 
+	        FROM CompraProduto CP
+				INNER JOIN Compra C on C.IdCompra = CP.IdCompra
+				Inner JOIN Produto P on P.IdProduto = CP.IdProduto 
+			WHERE C.DataCompra > @Data
+			GROUP BY P.NomeProduto
+	END
+GO
+			
+				
 
 
 

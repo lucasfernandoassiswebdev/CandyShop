@@ -271,6 +271,7 @@
     <Content Include="Views\CompraUserComum\Detalhes.cshtml" />
     <Content Include="Views\Pagamento\Editar.cshtml" />
     <Content Include="Views\Compra\Editar.cshtml" />
+    <Content Include="Views\Compra\ListarComprasProdutos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -163,6 +163,7 @@ input {
 
 .btn {
 	background-color: #e781a3;
+    color: white !important;
 }
 
 #modalPesquisaUsuario, #modalPesquisaProduto, #

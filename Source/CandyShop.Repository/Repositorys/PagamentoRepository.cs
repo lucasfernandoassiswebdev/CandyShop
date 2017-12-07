@@ -1,4 +1,5 @@
-﻿using CandyShop.Core.Services.Pagamento;
+﻿using System;
+using CandyShop.Core.Services.Pagamento;
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
@@ -20,7 +21,8 @@ namespace CandyShop.Repository.Repositorys
             CSSP_LisPagamento,
             CSSP_LisPagamentoSemana,
             CSSP_SelPagamento,
-            CSSP_ListarPagamentoDia
+            CSSP_ListarPagamentoDia,
+            CSSP_ListarPagamentoNome
         }
 
         public void InserirPagamento(Pagamento pagamento)
@@ -84,6 +86,13 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@mes", mes);
             return Listar();
         }
+        public IEnumerable<Pagamento> ListarPagamentosUsuarios(int mes, string cpf)
+        {
+            ExecuteProcedure(Procedures.CSSP_LisPagamento);
+            AddParameter("@cpf", cpf);
+            AddParameter("@mes", mes);
+            return Listar();
+        }
         public IEnumerable<Pagamento> ListarPagamentos(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_LisPagamento);
@@ -98,12 +107,18 @@ namespace CandyShop.Repository.Repositorys
         public IEnumerable<Pagamento> ListarPagamentoSemana(string cpf)
         {
             ExecuteProcedure(Procedures.CSSP_LisPagamentoSemana);
-            AddParameter("cpf", cpf);
+            AddParameter("@cpf", cpf);
             return Listar();
         }
         public IEnumerable<Pagamento> ListarPagamentoDia()
         {
             ExecuteProcedure(Procedures.CSSP_ListarPagamentoDia);
+            return Listar();
+        }
+        public IEnumerable<Pagamento> ListarPagamentoNome(string nome)
+        {
+            ExecuteProcedure(Procedures.CSSP_ListarPagamentoNome);
+            AddParameter("@nome", nome);
             return Listar();
         }
 

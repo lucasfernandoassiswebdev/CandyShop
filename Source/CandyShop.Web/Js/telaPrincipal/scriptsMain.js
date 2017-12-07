@@ -1,6 +1,4 @@
-﻿
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $(".tooltipped").tooltip({ delay: 50 });
     $(".button-collapse").sideNav();
     $("select").material_select();

@@ -12,11 +12,11 @@ namespace CandyShop.Application.Interfaces
         Response<IEnumerable<PagamentoViewModel>> ListarPagamentos(string token);
         Response<IEnumerable<PagamentoViewModel>> ListarPagamentos(string cpf,string token);
         Response<IEnumerable<PagamentoViewModel>> ListarPagamentos(int mes, string token);
-
+        Response<IEnumerable<PagamentoViewModel>> ListarPagamentosUsuarios(int mes, string cpf, string token);
         Response<IEnumerable<PagamentoViewModel>> ListarPagamentosSemana(string token);
         Response<IEnumerable<PagamentoViewModel>> ListarPagamentosSemana(string cpf, string token);
-
         Response<IEnumerable<PagamentoViewModel>> ListarPagamentosDia(string token);
+        Response<IEnumerable<PagamentoViewModel>> ListarPagamentosNome(string nome, string token);
         Response<IEnumerable<PagamentoViewModel>> ListarPagamentosDia(DateTime dia,string token);
     }
 }

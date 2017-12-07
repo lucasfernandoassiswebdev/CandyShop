@@ -62,5 +62,7 @@ namespace CandyShop.WebAPI.Controllers.Produto
             }
             return Ok(produtos);
         }
+
+       
     }
 }
