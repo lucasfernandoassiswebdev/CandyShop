@@ -2,21 +2,24 @@
 using System;
 using System.Net;
 using System.Web.Http;
+using CandyShop.Core.Services;
 
 namespace CandyShop.WebAPI.Controllers.Usuario
 {
     public class UsuarioUnauthorizedController : ApiController
     {
+        private readonly INotification _notification;
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
         private readonly string _getEnderecoImagens = $"{ImagensConfig.GetEnderecoImagens}/Usuarios";
 
-        public UsuarioUnauthorizedController(IUsuarioService usuarioService, IUsuarioRepository repository)
+        public UsuarioUnauthorizedController(IUsuarioService usuarioService, IUsuarioRepository repository, INotification notification)
         {
             _usuarioService = usuarioService;
             _usuarioRepository = repository;
+            _notification = notification;
         }
-        
+
         [HttpPost, Route("api/UsuarioUnauthorized/login")]
         public IHttpActionResult PostLogin(Core.Services.Usuario.Usuario usuario)
         {
@@ -34,6 +37,16 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             var usuario = _usuarioRepository.SelecionarUsuario(cpf);
             usuario.Imagem = $"{_getEnderecoImagens}/{cpf}.jpg?={DateTime.Now.Ticks}";
             return Ok(usuario);
+        }
+
+        [HttpGet, Route("api/UsuarioUnauthorized/{cpf}/VerificaEmailExiste")]
+        public IHttpActionResult GetVerificaEmailExiste(string cpf)
+        {
+            _usuarioService.AlteraSenha(cpf);
+            if (_notification.HasNotification())
+                return Content(HttpStatusCode.BadRequest, _notification.GetNotification());
+
+            return Ok();
         }
     }
 }

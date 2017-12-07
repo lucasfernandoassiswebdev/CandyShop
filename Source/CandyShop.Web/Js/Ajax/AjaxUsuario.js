@@ -16,6 +16,12 @@ var AjaxJsUsuario = (function ($) {
         atualizaToken();
         chamaPaginaComIdentificador(url.editarUsuario, { cpf: cpf, telaAnterior: telaAnterior, token: obj.access_token });
     };
+
+    var CadastraEmail = function () {
+        CadastraEmailUsuario();
+    };
+        
+        
     var detalheUsuario = function (cpf, telaAnterior) {
         atualizaToken();
         chamaPaginaComIdentificador(url.detalheUsuario, { cpf : cpf, telaAnterior: telaAnterior, token: obj.access_token });
@@ -23,10 +29,12 @@ var AjaxJsUsuario = (function ($) {
     var concluirCadastroUsuario = function (imgBase64) {
         //montantando o objeto que vai chegar no controller
         var usuario = {
+            
             Cpf: $("#cpf").val(),
             NomeUsuario: $("#Nome").val(),
             Imagem: imgBase64,
-            Classificacao: $("#Classificacao").val()
+            Classificacao: $("#Classificacao").val(),
+            Email: $("#EmailCadastro").val()
         };
         atualizaToken();
         concluirAcao(url.concluirCadastroUsuario, { usuario: usuario, token: obj.access_token }, url.cadastroUsuario);
@@ -40,9 +48,9 @@ var AjaxJsUsuario = (function ($) {
             Ativo: $("input[name='status']:checked").val(),
             Imagem: imgBase64,
             Classificacao: $("#Classificacao").val(),
+            Email: $("#cadastraEmail").val(),
             RemoverImagem: removerImagem
         };
-        console.log(usuario);
         atualizaToken();
         concluirAcaoEdicaoUsuario(url.concluirEdicaoUsuario, { usuario: usuario, token: obj.access_token }, tela);
     };
@@ -108,9 +116,43 @@ var AjaxJsUsuario = (function ($) {
         listarUsuarioEmDivida: listarUsuarioEmDivida,
         listarUsuarioPorNome: listarUsuarioPorNome,
         logOff: logOff,
-        trocarSenha: trocarSenha
+        trocarSenha: trocarSenha,
+        CadastraEmail: CadastraEmail
+
     };
 })(jQuery);
+
+function CadastraEmailUsuario() {
+    atualizaToken();
+
+    var usuario = {
+        Email: $("#email").val()
+    };
+
+    $.post("UsuarioComum/CadastraEmail",
+            {
+                token: obj.access_token,
+                usuario: usuario
+            })
+        .done(function() {
+            //msg mostrada apos o sucesso de recuperar a senha 
+            Materialize.toast("Email Cadastrado com sucesso", 4000);
+            //recarega a pagina depois que a solicitação for aceita
+         
+            $.get("Home")
+                .done(function (data) {
+                    $("body").slideUp(2500, function () {
+                        $("body").hide().html(data).slideDown(1000);
+                    });
+                }).fail(function (xhr) {
+                    Materialize.toast(xhr.responseText, 4000);
+                });
+        })
+        .fail(function () {
+            Materialize.toast("Você não está autorizado, contate os administradores", 3000);
+            
+        });
+}
 
 function chamaPaginaUsuarios(endereco, pagina) {
     atualizaToken();

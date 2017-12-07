@@ -1,0 +1,2 @@
+Newtonsoft.Json
+Unexpected character encountered while parsing value: S. Path '', line 1, position 1.

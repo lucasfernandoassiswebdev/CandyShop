@@ -76,6 +76,7 @@ namespace CandyShop.WebAPI
             var politica = new CorsPolicy { AllowAnyHeader = true };
             politica.Origins.Add("http://localhost:40874");
             politica.Origins.Add("http://localhost:40880");
+
             politica.Methods.Add("GET");
             politica.Methods.Add("POST");
 

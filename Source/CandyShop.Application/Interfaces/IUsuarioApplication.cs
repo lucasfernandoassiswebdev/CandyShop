@@ -17,5 +17,7 @@ namespace CandyShop.Application.Interfaces
         Response<IEnumerable<UsuarioViewModel>> ProcurarUsuario(string nome, string token);
         Response<decimal> VerificaCreditoLoja(string token);
         Response<string> VerificaLogin(UsuarioViewModel usuario);
+        Response<string> VerificaEmailExiste(string cpf);
+        Response<string> CadastraEmail(UsuarioViewModel usuario,string token);
     }
 }

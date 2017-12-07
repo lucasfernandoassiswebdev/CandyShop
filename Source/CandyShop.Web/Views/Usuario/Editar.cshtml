@@ -67,6 +67,14 @@
                         </p>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="cadastraEmail" name="E-mail" maxlength="50" type="text" class="validate" placeholder="example@smn.com.br" value="@Model.Email" required>
+                        <label for="cadastraEmail" class="active">E-mail:</label>
+                    </div>
+                </div>
+                
+
                 @if (ViewBag.telaAnterior.ToString().Equals("Usuários Ativos"))
             {
                 voltar = "AjaxJsUsuario.listaUsuario()";

@@ -90,6 +90,7 @@ namespace CandyShop.Web.Controllers.Usuario
             return View("Index", response.Content);
         }
 
+       
         [HttpPost]
         public ActionResult Cadastrar(UsuarioViewModel usuario, string token)
         {
@@ -100,15 +101,16 @@ namespace CandyShop.Web.Controllers.Usuario
 
             var response = _appUsuario.InserirUsuario(usuario, token);
 
-            if(response.Status != HttpStatusCode.OK || response.Status == HttpStatusCode.NotModified)
-                return Content($"Erro, {response.ContentAsString}");
+            if(response.Status != HttpStatusCode.OK)
+                return Content($"{response.ContentAsString}");
+
             return Content("Cadastro feito com sucesso!");
         }
         [HttpPost]
         public ActionResult Editar(UsuarioViewModel usuario, string token)
         {
             if (usuario.Cpf == null || usuario.NomeUsuario == null || usuario.Classificacao == null ||
-                usuario.Ativo == null || usuario.SenhaUsuario == null)
+                usuario.Ativo == null || usuario.SenhaUsuario == null || usuario.Email == null)
                 return Content("Preencha todos os campos");
 
             var cpf = usuario.Cpf.Replace(".", "").Replace("-", "");

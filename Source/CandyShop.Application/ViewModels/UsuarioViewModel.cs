@@ -12,5 +12,6 @@
         public bool RemoverImagem { get; set; }
         public string Classificacao { get; set; }
         public string FirstLogin { get; set; }
+        public string Email { get; set; }
     }
 }
