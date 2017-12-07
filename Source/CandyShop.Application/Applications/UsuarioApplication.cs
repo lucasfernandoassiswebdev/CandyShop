@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System;
 
 namespace CandyShop.Application.Applications
 {
@@ -115,6 +116,16 @@ namespace CandyShop.Application.Applications
                 return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
             }
         }
+
+        public Response<string> VerificaEmailExiste(string cpf)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync($"{_enderecoApiUnauthorized}/{cpf}/VerificaEmailExiste").Result;
+                return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
         public Response<decimal> VerificaCreditoLoja(string token)
         {
             using (var client = new HttpClient())
@@ -125,10 +136,22 @@ namespace CandyShop.Application.Applications
             }
         }
 
+        public Response<string> CadastraEmail(UsuarioViewModel usuario, string token)
+        {
+            using (var client = new HttpClient())
+            {
+                AtualizaToken(token, client);
+                var response = client.PutAsync($"{_enderecoApi}/CadastraEmail", usuario, new JsonMediaTypeFormatter()).Result;
+                return new Response<string>(response.Content.ReadAsStringAsync().Result, response.StatusCode);
+            }
+        }
+
         private static void AtualizaToken(string token, HttpClient client)
         {
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
         }
+
+       
     }
 }
 

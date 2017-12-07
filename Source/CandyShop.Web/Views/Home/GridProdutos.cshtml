@@ -22,7 +22,7 @@
         // Exibindo qtde em estoque antes de adicionar o item no carrinho
         $(".adicionaItemCarrinho").click(function () {
             // Limpando os inputs
-            $("#quantidade").val(1);
+            $("#quantidade").val(1).blur().focus();
             // Mostrando a quantidade de produto dispónível em estoque
             var quantidadeDisponivel = $(this).attr('data-quantidadeDisponivel');
             $('#modalQuantidade div p').html("Quantidade disponível em estoque: " + quantidadeDisponivel);

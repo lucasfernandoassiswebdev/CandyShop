@@ -133,8 +133,12 @@ li img {
     line-height: 2.5rem;
 }
 
-.btn-floating.halfway-fab {
-    bottom: 0;
+.btn-floating.halfway-fab { 
+    bottom: 0; 
+}
+
+.halfway-fab {
+	bottom: 0;
 }
 
 .card .card-content {
@@ -211,6 +215,7 @@ h3 {
 }
 
 #search {
+<<<<<<< HEAD
     transition: 1s;
 }
 
@@ -235,3 +240,25 @@ h3 {
     margin-top: 50%;
     font-size: 10px;
 }
+=======
+	transition: 1s;
+}
+
+#EsqueciSenha {
+    margin-left: 13px;
+}
+
+#EsqueceuSenha {
+    z-index: 1005 !important;
+    width: 451px;
+}
+
+#EsqueciMinhaSenha {
+    font-size: 29px !important;
+}
+
+#cadastraEmail {
+    z-index: 1110 !important;
+    width: 451px;
+}
+>>>>>>> desenvolvimento

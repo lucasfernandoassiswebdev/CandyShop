@@ -10,7 +10,8 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	@SaldoUsuario decimal(18,2) = 0,
 	@CpfUsuario varchar(14),
 	@Ativo varchar(1) = 'A',
-	@Classificacao varchar(1)
+	@Classificacao varchar(1),
+	@Email varchar(50)
 	AS
 	
 	/*
@@ -22,16 +23,18 @@ CREATE PROCEDURE [dbo].[CSSP_InsUsuario]
 	Ex................: EXEC [dbo].[CSSP_InsUsuario]
 	
 	Editado Por.......: SMN - Rafael Morais
-	Objetivo..........: Adicionar a o campo de cpf na proceure 
+	Objetivo..........: Adicionar a o campo de cpf na procedure 
 	Data..............: 07/09/2017
 
-	
+	Editado Por.......: SMN - Gustavo Dantas
+	Objetivo..........: Adicionar a o campo de email na procedure
+	Data..............: 07/09/2017
 	
 	*/
 	
 	BEGIN
-		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario,Ativo, Classificacao, FirstLogin)
-			VALUES (@CpfUsuario,@NomeUsuario,@CpfUsuario,@SaldoUsuario,@Ativo, @Classificacao, 'T')		
+		INSERT INTO [dbo].[Usuario](Cpf,NomeUsuario,SenhaUsuario,SaldoUsuario,Ativo, Classificacao, FirstLogin, Email)
+			VALUES (@CpfUsuario,@NomeUsuario,@CpfUsuario,@SaldoUsuario,@Ativo, @Classificacao, 'T',@Email)		
 			
 				IF @@ERROR <> 0
 					RETURN 1
@@ -89,12 +92,13 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].[CSSP_UpdUs
 GO
 
 CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
-	@Cpf varchar(14),
+		@Cpf varchar(14),
 	@NomeUsuario varchar(50),
 	@SenhaUsuario varchar(12),
 	@SaldoUsuario decimal,
 	@Ativo varchar(1),
-	@Classificacao varchar(1)
+	@Classificacao varchar(1),
+	@Email varchar(50)
 	AS
 
 	/*
@@ -104,20 +108,24 @@ CREATE PROCEDURE [dbo].[CSSP_UpdUsuario]
 	Autor.............: SMN - Jo�o Guilherme
  	Data..............: 06/09/2017
 	Ex................: EXEC [dbo].[CSSP_UpdUsuario]
+	
+	Objetivo..........: Editar informa�oes do usuario encriptando senha 
+	Autor.............: SMN - Gustavo Dantas
+ 	Data..............: 27/11/2017
 
 	Editado Por.......: SMN - Gustavo Dantas
-	Objetivo..........: md5 Senha
+	Objetivo..........: Adicionar a o campo de email na procedure
 	Data..............: 07/09/2017
-
-	*/
+		*/
 	BEGIN
-		
+	
 		UPDATE [dbo].[Usuario]
 			SET NomeUsuario = @NomeUsuario,
-				SenhaUsuario = CONVERT(NVARCHAR(15), HashBytes('MD5', @SenhaUsuario), 2),
+				SenhaUsuario =  CONVERT(NVARCHAR(12), HashBytes('MD5', @SenhaUsuario), 2),
 				SaldoUsuario = @SaldoUsuario,
 				Ativo = @Ativo,
-				Classificacao = @Classificacao
+				Classificacao = @Classificacao,
+				Email = @Email
 				WHERE Cpf = @Cpf
 
 				IF @@ERROR <> 0 
@@ -143,12 +151,17 @@ CREATE PROCEDURE [dbo].[CSSP_UpdSenha]
 	Autor.............: SMN - Rafael Morais
  	Data..............: 04/10/2017
 	Ex................: EXEC [dbo].[CSSP_UpdSenha]
+
+	Objetivo..........: colocando senha com decodificação md5 
+	Autor.............: SMN - Gustavo Dantas
+ 	Data..............: 27/11/2017
 	*/	
 	BEGIN	
 		UPDATE [dbo].[Usuario] 
-			SET SenhaUsuario = CONVERT(NVARCHAR(15), HashBytes('MD5', @senha), 2),
+			SET SenhaUsuario = CONVERT(NVARCHAR(12), HashBytes('MD5', @senha), 2),
 				FirstLogin = 'F'
 			WHERE Cpf = @cpf
+
 	END
 GO
 
@@ -195,6 +208,10 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 	Editado Por.......: SMN - Jo�o Guilherme
 	Objetivo..........: Alterando o select 
 	Data..............: 12/09/2017
+
+	Editado Por.......: SMN - Gustavo Dantas
+	Objetivo..........: Adicionar a o campo de email na procedure
+	Data..............: 07/09/2017
 	*/
 
 	BEGIN
@@ -203,7 +220,8 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuario]
 				SaldoUsuario,
 				NomeUsuario,
 				Ativo,
-				Classificacao
+				Classificacao,
+				Email
 				FROM [dbo].[Usuario]
 				WHERE Ativo = 'A'
 				ORDER BY NomeUsuario
@@ -226,6 +244,9 @@ CREATE PROCEDURE [dbo].[GCS_LisUsuariosInativos]
  	Data..............: 27/10/2017
 	Ex................: EXEC [dbo].[GCS_LisUsuariosInativos]
 
+	Editado Por.......: SMN - Gustavo Dantas
+	Objetivo..........: Adicionar a o campo de email na procedure
+	Data..............: 07/09/2017
 	*/
 
 	BEGIN
@@ -234,7 +255,8 @@ CREATE PROCEDURE [dbo].[GCS_LisUsuariosInativos]
 				SaldoUsuario,
 				NomeUsuario,
 				Ativo,
-				Classificacao
+				Classificacao,
+				Email
 				FROM [dbo].[Usuario]
 				WHERE Ativo = 'I'
 	END
@@ -257,7 +279,9 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuariosAtivoseInativos]
  	Data..............: 27/10/2017
 	Ex................: EXEC [dbo].[CSSP_LisUsuariosAtivoseInativos]
 
-
+	Editado Por.......: SMN - Gustavo Dantas
+	Objetivo..........: Adicionar a o campo de email na procedure
+	Data..............: 07/09/2017
 	*/
 
 	BEGIN
@@ -268,6 +292,7 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuariosAtivoseInativos]
 				NomeUsuario,
 				Ativo,
 				Classificacao
+				Email
 				FROM [dbo].[Usuario]
 				ORDER BY Ativo
 	END
@@ -289,6 +314,9 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
  	Data..............: 05/09/2017
 	Ex................: EXEC [dbo].[CSSP_SelUsuariosDivida]
 
+	Editado Por.......: SMN - Gustavo Dantas
+	Objetivo..........: Adicionar a o campo de email na procedure
+	Data..............: 07/09/2017
 	*/
 
 	BEGIN
@@ -297,7 +325,8 @@ CREATE PROCEDURE [dbo].[CSSP_SelUsuariosDivida]
 				SaldoUsuario,
 				NomeUsuario,
 				Ativo,
-				Classificacao
+				Classificacao,
+				Email
 			FROM [dbo].[Usuario]
 			WHERE SaldoUsuario < 0 AND Ativo = 'A'
 			ORDER BY NomeUsuario
@@ -345,6 +374,10 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuarioPorNome]
 	Autor.............: SMN - Rafael Henrique
  	Data..............: 20/09/2017
 	Ex................: EXEC [dbo].[CSSP_LisUsuarioPorNome]
+
+	Editado Por.......: SMN - Gustavo Dantas
+	Objetivo..........: Adicionar a o campo de email na procedure
+	Data..............: 07/09/2017
 	*/	
 	BEGIN
 		SELECT Cpf,
@@ -352,7 +385,8 @@ CREATE PROCEDURE [dbo].[CSSP_LisUsuarioPorNome]
 				SaldoUsuario,
 				NomeUsuario,
 				Ativo,
-				Classificacao 
+				Classificacao,
+				Email
 			FROM [dbo].[Usuario] WITH(NOLOCK)
 			WHERE NomeUsuario LIKE '%' + @NomeUsuario + '%' AND Ativo = 'A'
 	END
@@ -364,7 +398,7 @@ GO
 
 CREATE PROCEDURE [dbo].[CSSP_VerificaLoginSenha]
 	@Cpf varchar(11),
-	@SenhaUsuario varchar(12)
+	@SenhaUsuario varchar(15)
 
 	AS
 	/*
@@ -373,13 +407,24 @@ CREATE PROCEDURE [dbo].[CSSP_VerificaLoginSenha]
 	Objetivo..........: Verificar se o login bate
 	Autor.............: SMN - Lucas Fernando
  	Data..............: 20/09/2017
-	Ex................: EXEC [dbo].[GCS_VerificaLoginSenha]
+	Ex................: EXEC [dbo].[CSSP_VerificaLoginSenha] '44541561824', 'AUVJYT'
+	
+	
+	Objetivo..........: Verficar decodificação md5 
+	Autor.............: SMN - Gustavo Dantas
+ 	Data..............: 27/11/2017
 	*/
 
-	BEGIN									
+	BEGIN		
+					
 		SELECT TOP 1 1 
 			FROM Usuario
-			WHERE Cpf = @Cpf AND SenhaUsuario = @SenhaUsuario AND Ativo = 'A'
+			WHERE Cpf = @Cpf 
+			  AND Ativo = 'A'   
+			  AND SenhaUsuario = CASE WHEN FirstLogin = 'T' THEN @SenhaUsuario
+			  ELSE CONVERT(NVARCHAR(12), HashBytes('MD5', @SenhaUsuario), 2) 
+			  END  
+
 	END
 GO
 
@@ -408,3 +453,32 @@ CREATE PROCEDURE [dbo].[CSSP_VerificaSaldoLoja]
 			WHERE Ativo = 'A'
 	END
 GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].CSSP_UpdEmail]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_UpdEmail]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_UpdEmail]
+	@email varchar(50),
+	@cpf varchar(11)
+
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: Usuario.sql
+	Objetivo..........: Atualizar o email dos usuários
+	Autor.............: SMN - Gustavo Dantas
+ 	Data..............: 04/12/2017
+	Ex................: EXEC [dbo].[CSSP_UpdEmail] 'email@teste.com', '10963853171'
+
+	*/
+	select * from Usuario
+	BEGIN
+		UPDATE Usuario 
+			SET Email = @email
+			WHERE Cpf = @cpf 
+	END
+GO
+				

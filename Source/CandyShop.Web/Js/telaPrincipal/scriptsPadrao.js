@@ -6,9 +6,9 @@
 var imagem, preco, nome, imagem, quantidade = 0,
     quantidadeDisponivel, Id, totalCompra = 0;
 
-$(document).ready(function () {
+$(document).ready(function() {
     //pesquisa por nome de produto é feita quando se aperta a tecla "enter" na barra de pesquisa
-    $(".input-field #search").keydown(function (e) {
+    $(".input-field #search").keydown(function(e) {
         if (e.which === 13) {
             AjaxJsShop.listarProdutoPorNome($(this).val());
             $(this).val("");
@@ -16,32 +16,50 @@ $(document).ready(function () {
     });
 
     // Fechando sideNav quando o usuário selecionar alguma opção
-    $(".closeMenu").click(function () { $(".button-collapse").sideNav("hide"); });
+    $(".closeMenu").click(function() { $(".button-collapse").sideNav("hide"); });
 
     // Limpando os inputs
-    $(".modal-close:not(#editarQuantidade, #adicionaCarrinho)").click(function () {
-        $("#quantidadeEdit, #novaSenha, #confirmaNovaSenha, #cpf, #senha").val("");
+
+    $(".modal-close:not(#editarQuantidade, #adicionaCarrinho)").click(function() {
+        $("#quantidadeEdit, #novaSenha, #confirmaNovaSenha, #cpf, #senha, #Senhacpf,#email").val("");
         $("#novaSenha").removeAttr("disabled");
         $("#logar").attr("disabled", "disabled");
         $("#TrocarSenha").attr("disabled", "disabled");
+        $("#Enviar").attr("disabled", "disabled");
+        $("#CadastrarEmail").attr("disabled", "disabled");
+
     });
 
     /* Quando o botão de adicionar um item no carrinho é pressionado, as variáveis que montarão
        o objeto do produto são preenchidas */
-    $("#DivGrid").on("click", ".btn-floating", function () {
-        preco = $(this).attr("data-Preco");
-        nome = $(this).attr("data-Nome");
-        imagem = $(this).attr("data-Imagem");
-        Id = $(this).attr("data-Id");
-        quantidadeDisponivel = $(this).attr("data-quantidadedisponivel");
-    });
+    $("#DivGrid").on("click",
+        ".btn-floating",
+        function() {
+            preco = $(this).attr("data-Preco");
+            nome = $(this).attr("data-Nome");
+            imagem = $(this).attr("data-Imagem");
+            Id = $(this).attr("data-Id");
+            quantidadeDisponivel = $(this).attr("data-quantidadedisponivel");
+        });
 
     $("#novaSenha").on("paste", validaNovaSenha).blur(validaNovaSenha);
 
+ 
+
+    //valida email
+    $("#email").keyup(function() {
+        var validaEmail = /^[_a-z0-9-]+(.[a-z0-9]+)@smn.com.br$/;
+        var inputEmail = $("#email").val();
+        if (validaEmail.test(inputEmail)) {
+            $("#CadastrarEmail").removeAttr("disabled");
+        } else {
+            $("#CadastrarEmail").attr("disabled", "disabled");
+        }
+    });
+
     // Verificando se as senhas batem
     $("#confirmaNovaSenha, #novaSenha").blur(function () {
-            verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
-
+        verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
         })
         .keyup(function () {
             verificaSenhasIguais("#novaSenha", "#confirmaNovaSenha");
@@ -319,7 +337,11 @@ $(document).ready(function () {
         }
     });
 
+    //abre a modal de login
     $("#modalLogin").modal({ dismissible: false, ready: function () { $("#cpf").focus(); } });
+
+    //abre a modal esqueceu senha
+    $("#EsqueceuSenha").modal({ dismissible: false, ready: function () { $("#Senhacpf").focus(); } });
 
     // Colocando foco no modal quantidade
     $("#modalQuantidade").modal({ dismissible: false, ready: function () { $("#quantidade").focus(); } });
@@ -330,6 +352,8 @@ $(document).ready(function () {
     $("#trocaSenha").modal({ dismissible: false, ready: function () { $("#novaSenha").focus(); } });
 
     $("#modalEditarQuantidade").modal({ dismissible: false, ready: function () { $("#quantidadeEdit").focus(); } });
+
+    $("#cadastraEmail").modal({ dismissible: false, ready: function () { $("#email").focus(); } });
 
     // Limpando input senha
     $("a[href='#modalLogin']:eq(1)").click(function () {
@@ -344,7 +368,20 @@ $(document).ready(function () {
             $("#logar").attr("disabled", "disabled");
     });
 
+    $("#EsqueciSenha").click(function () {
+        $('#modalLogin').modal('close');
+    });
+
+
+    
+
+
+    //libera botão logar do login
     $("#senha, #cpf").keyup(verificaSenha).blur(verificaSenha).focus(verificaSenha);
+
+    //libera botão enviar do verificar senha 
+    $("#Senhacpf").keyup(verificaSenhaCpf).blur(verificaSenhaCpf).focus(verificaSenhaCpf);
+
 
     $("#quantidade").blur(verificaQuantidade).on("paste", verificaQuantidade).keyup(verificaQuantidade).keydown(function (e) {
         if (e.which == 190 || e.which == 188)
@@ -459,6 +496,17 @@ $(document).ready(function () {
         }
     });
 
+
+    //validando campo de CPF senha
+    $("#Senhacpf").keydown(function (e) {
+        mcpfSenha($("#Senhacpf").val());
+    }).blur(function () {
+        mcpfSenha($("#Senhacpf").val());
+        if ($("#Senhacpf").val().length > 14) {
+            $("#Senhacpf").val($("#Senhacpf").val().substr(0, 13));
+        }
+    });
+
     $("#senha").keydown(function (e) {
         if (e.which == 13)
             AjaxJsShop.verificaLogin();
@@ -517,6 +565,19 @@ function mcpf(v) {
     $("#cpf").val(v);
 }
 
+
+//validando campo de CPF senha
+function mcpfSenha(v) {
+    v = v.replace(/\D/g, "");
+    v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    $("#Senhacpf").val(v);
+}
+
+
+
+
 function verificaEditQuantidade() {
     quantidade = $("#quantidadeEdit").val().replace(/\D+/g, "");
     $("#quantidadeEdit").val(quantidade);
@@ -532,6 +593,8 @@ function validaNovaSenha() {
         $("#novaSenha").focus();
     }
 }
+
+
 
 function limpaInputFechaModal() {
     $("#confirmaNovaSenha").val("");
@@ -555,10 +618,18 @@ function verificaQuantidade() {
     else
         $("#adicionaCarrinho").removeAttr("disabled");
 }
-
+//libera botão logar do login
 function verificaSenha() {
     if ($("#senha").val().length > 0 && $("#cpf").val().length > 13)
         $("#logar").removeAttr("disabled");
     else
         $("#logar").attr("disabled", "disabled");
+}
+
+//libera botão enviar do esqueci minha senha
+function verificaSenhaCpf() {
+    if ($("#Senhacpf").val().length > 13)
+        $("#Enviar").removeAttr("disabled");
+    else
+        $("#Enviar").attr("disabled", "disabled");
 }

@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
 
 namespace CandyShop.Core.Services.Usuario
 {
@@ -42,10 +45,100 @@ namespace CandyShop.Core.Services.Usuario
             return _usuarioRepository.VerificaLogin(usuario) == 1 ? 1 : 0;
         }
 
+        public void AlteraSenha(string cpf)
+        {
+            var email = _usuarioRepository.VerificaEmailExiste(cpf);
+            if (!string.IsNullOrEmpty(email))
+            {
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                var stringChars = new char[6];
+                var random = new Random();
+
+                for (int i = 0; i < stringChars.Length; i++)
+                    stringChars[i] = chars[random.Next(chars.Length)];
+
+                var senhaGerada = new string(stringChars);
+                var usuario = new Usuario
+                {
+                    Cpf = cpf,
+                    SenhaUsuario = senhaGerada
+                };
+
+                _usuarioRepository.TrocarSenha(usuario);
+
+                SmtpClient cliente = new SmtpClient();
+                NetworkCredential credenciais = new NetworkCredential();
+
+                // definir as configuraçoes do cliente
+                cliente.Host = "smtp.gmail.com";
+                cliente.Port = 587;
+                cliente.EnableSsl = true;
+                cliente.DeliveryMethod = SmtpDeliveryMethod.Network;
+                cliente.UseDefaultCredentials = false;
+
+                //definir as credenciais de acesso ao email
+                credenciais.UserName = "candyshopsmn";
+                credenciais.Password = "candyshopsmn2017";
+
+                //define as credenciais no cliente
+                cliente.Credentials = credenciais;
+
+                //preparar a mensagem a enviar
+                MailMessage mensagem = new MailMessage();
+
+                //quem envio
+                mensagem.From = new MailAddress("candyshopsmn@gmail.com");
+
+                //assunto
+                mensagem.Subject = "Redefinição de senha";
+
+                //PARA por por codigo html
+                mensagem.IsBodyHtml = true;
+
+                //anexo
+                // mensagem.Attachments.Add(new Attachment(lbl_anexo.Text));
+                //texto //corpo da mensagem
+                mensagem.Body = "Sua nova senha é: " + senhaGerada;
+
+                //para quem vai a mensagem
+                mensagem.To.Add(email);
+
+                try
+                {
+                    //envio de mensagem de email(finalemnte)
+                    cliente.Send(mensagem);
+
+                }
+                catch (Exception ex)
+                {
+                    _notification.Add("Falha ao enviar email: " + ex.Message);
+                }
+
+                return;
+            }
+            _notification.Add("Email não encontrado para este cpf, contate o administrador");
+        }
+
         public void VerificaSenha(string novaSenha)
         {
-            if(novaSenha == null)
+            if (novaSenha == null)
                 _notification.Add("A senha não pode estar vazia!");
         }
+
+        public void CadastraEmail(string novoEmail, string cpf)
+        {
+            if (cpf != string.Empty && novoEmail != string.Empty)
+            {
+                _usuarioRepository.CadastraEmail(novoEmail, cpf);
+                _notification.Add("OK");
+            }
+            else
+            {
+                _notification.Add("Erro");
+            }
+                
+        }
+
+       
     }
 }

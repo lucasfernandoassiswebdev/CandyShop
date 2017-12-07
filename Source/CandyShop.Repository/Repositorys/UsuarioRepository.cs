@@ -1,6 +1,7 @@
 using CandyShop.Core.Services.Usuario;
 using CandyShop.Repository.DataBase;
 using System.Collections.Generic;
+using System;
 
 namespace CandyShop.Repository.Repositorys
 {
@@ -19,12 +20,14 @@ namespace CandyShop.Repository.Repositorys
             CSSP_SelUsuariosDivida,
             CSSP_DesUsuario,
             CSSP_LisUsuarioIgual,
-            CSSP_ListarUsuariosInativos,
+            GCS_LisUsuariosInativos,
             CSSP_LisUsuariosAtivoseInativos,
             CSSP_LisUsuarioPorNome,
+            CSSP_VerificaEmailExiste,
             CSSP_VerificaLoginSenha,
             CSSP_VerificaSaldoLoja,
             CSSP_UpdSenha,
+            CSSP_UpdEmail
         }
 
         public void InserirUsuario(Usuario usuario)
@@ -37,7 +40,7 @@ namespace CandyShop.Repository.Repositorys
                 AddParameter("@CpfUsuario", cpf);
                 AddParameter("@Ativo", usuario.Ativo);
                 AddParameter("@Classificacao", usuario.Classificacao);
-
+                AddParameter("@Email", usuario.Email);
                 ExecuteNonQuery();
             }
         }
@@ -50,6 +53,7 @@ namespace CandyShop.Repository.Repositorys
             AddParameter("@SaldoUsuario", usuario.SaldoUsuario);
             AddParameter("@Ativo", usuario.Ativo);
             AddParameter("@Classificacao", usuario.Classificacao);
+            AddParameter("@Email", usuario.Email);
 
             ExecuteNonQuery();
         }
@@ -82,23 +86,25 @@ namespace CandyShop.Repository.Repositorys
                         NomeUsuario = reader.ReadAsString("NomeUsuario"),
                         Ativo = reader.ReadAsString("Ativo"),
                         Classificacao = reader.ReadAsString("Classificacao"),
-                        FirstLogin = reader.ReadAsString("FirstLogin")
+                        FirstLogin = reader.ReadAsString("FirstLogin"),
+                        Email = reader.ReadAsString("Email")
+                        
                     };
             return null;
         }
         public IEnumerable<Usuario> ListarUsuario()
         {
-            ExecuteProcedure(Procedures.CSSP_LisUsuario);            
+            ExecuteProcedure(Procedures.CSSP_LisUsuario);
             return Listar();
         }
         public IEnumerable<Usuario> ListarUsuarioDivida()
         {
-            ExecuteProcedure(Procedures.CSSP_SelUsuariosDivida);           
+            ExecuteProcedure(Procedures.CSSP_SelUsuariosDivida);
             return Listar();
         }
         public IEnumerable<Usuario> ListarUsuariosInativos()
         {
-            ExecuteProcedure(Procedures.CSSP_ListarUsuariosInativos);            
+            ExecuteProcedure(Procedures.GCS_LisUsuariosInativos);
             return Listar();
         }
 
@@ -123,6 +129,7 @@ namespace CandyShop.Repository.Repositorys
                     return 1;
             return 0;
         }
+
         public int VerificaLogin(Usuario usuario)
         {
             ExecuteProcedure(Procedures.CSSP_VerificaLoginSenha);
@@ -133,6 +140,17 @@ namespace CandyShop.Repository.Repositorys
                     return 1;
             return 0;
         }
+
+        public string VerificaEmailExiste(string cpf)
+        {
+            ExecuteProcedure(Procedures.CSSP_VerificaEmailExiste);
+            AddParameter("@cpf", cpf);
+            using (var reader = ExecuteReader())
+                if (reader.Read())
+                    return reader.ReadAsString("Email");
+            return string.Empty;
+        }
+
         public decimal VerificaCreditoLoja()
         {
             ExecuteProcedure(Procedures.CSSP_VerificaSaldoLoja);
@@ -140,6 +158,15 @@ namespace CandyShop.Repository.Repositorys
                 if (reader.Read())
                     return reader.ReadAsDecimal("saldo");
             return 0;
+        }
+
+        public void CadastraEmail(string novoEmail, string cpf)
+        {
+            ExecuteProcedure(Procedures.CSSP_UpdEmail);
+            AddParameter("@email", novoEmail);
+            AddParameter("@cpf", cpf);
+
+            ExecuteNonQuery();
         }
 
         private IEnumerable<Usuario> Listar()
@@ -154,10 +181,10 @@ namespace CandyShop.Repository.Repositorys
                         SaldoUsuario = reader.ReadAsDecimal("SaldoUsuario"),
                         NomeUsuario = reader.ReadAsString("NomeUsuario"),
                         Ativo = reader.ReadAsString("Ativo"),
-                        Classificacao = reader.ReadAsString("Classificacao")
+                        Classificacao = reader.ReadAsString("Classificacao"),
+                        Email = reader.ReadAsString("Email")
                     });
             return retorno;
         }
-
     }
 }

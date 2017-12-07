@@ -13,7 +13,6 @@
             $(this).html(mcpf($(this).html()));
         });
     });
-
     function mcpf(v) {
         v = v.replace(/\D/g, "");
         v = v.replace(/(\d{3})(\d)/, "$1.$2");
@@ -29,13 +28,12 @@
 <input hidden value="@TempData["nomeLista"].ToString()" />  @*Talves eu precise usar isso, deixaremos até tudo se normalizar*@
 
 <div class="col s12 m12" style="margin: -1% 10% ">
-    <div class="card-panel white" style="padding-bottom: 1%;">
+    <div class="card-panel white" style="padding-bottom: 1%; width:900px;">
         <div class="row center" style="margin-bottom: 5px; margin-top: -15px;">
             <a class="menus" style="float: left" onclick="AjaxJsUsuario.cadastroUsuario()">Novo Usuário</a>
             <a class="menus" onclick="AjaxJsUsuario.listaUsuario()">Todos &nbsp;&nbsp;</a>
             <a class="menus" onclick="AjaxJsUsuario.listarUsuarioEmDivida()">&nbsp;&nbsp; Devedores &nbsp;&nbsp;</a>
             <a class="menus" onclick="AjaxJsUsuario.listarUsuarioInativo()">&nbsp;&nbsp; Inativos &nbsp;&nbsp;</a>
-            <a class="menus">&nbsp;&nbsp; Voltar</a>
             <a class="modal-trigger " href="#modalPesquisaUsuario"><i class="material-icons prefix" style="float: right">search</i></a>
         </div>
 
@@ -58,6 +56,9 @@
                             <th>
                                 Saldo
                             </th>
+                            <th>
+                                Email
+                            </th>
                             <th></th>
                         </tr>
 
@@ -72,6 +73,9 @@
                                 </td>
                                 <td>
                                     R$ @Html.DisplayFor(modelItem => usuario.SaldoUsuario)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => usuario.Email)
                                 </td>
                                 <td style="width: 185px">
                                     <a title="Detalhes" onclick="AjaxJsUsuario.detalheUsuario('@usuario.Cpf', '@TempData["nomeLista"].ToString()')"><i class="material-icons blue-text small">info_outline</i></a>

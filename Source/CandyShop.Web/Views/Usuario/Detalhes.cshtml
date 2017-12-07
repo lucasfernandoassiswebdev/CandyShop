@@ -53,6 +53,10 @@
                     <td class="negrito">Tipo de usuário: </td>
                     <td>@(Model.Classificacao == "A" ? "Administrador" : "Usuário")</td>
                 </tr>
+                <tr>
+                    <td class="negrito">E-mail: </td>
+                    <td>@Model.Email</td>
+                </tr>
             </tbody>
         </table>
         @if (ViewBag.telaAnterior.ToString().Equals("Usuários Ativos"))

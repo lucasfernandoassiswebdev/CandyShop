@@ -5,6 +5,11 @@ $(document).ready(function () {
     $(".tooltipped").tooltip({ delay: 50 });
     $("select").material_select();
 
+
+
+
+    //colocar mascara no cpf do login 
+
     $("#cpf").keyup(function () {
         mcpf($("#cpf").val());
         validaBotao();
@@ -62,6 +67,9 @@ function readURL(input) {
     }
 }
 
+
+
+
 //função que remove caracteres inválidos do campo de CPF e aplica a máscara
 function mcpf(v) {
     //retirando caracteres a mais do campo
@@ -111,19 +119,22 @@ function validaBotao() {
     var cpfNew = $("#cpf").val();
     cpfNew = cpfNew.replace(/\.|\-/g, "");
     $("#ErroCpf").successMessage(TestaCPF(cpfNew), "CPF OK!");
-    //validando o campo de nome
-    var qtde = $("#Nome").val().length;
 
     //desabilitando o botão caso um dos dois esteja inválido
     if (!TestaCPF(cpfNew)) {
         $("#ErroCpf").errorMessage(true,"CPF Inválido!", 2000);
-        $(".botaoCadastro").attr("disabled", "disabled");
     }
 
-    if (!TestaCPF(cpfNew) || qtde > 50 || qtde == 0)
-        $(".botaoCadastro").attr("disabled", "disabled");
-    else
-        $(".botaoCadastro").removeAttr("disabled");
+    //valida email no cadastro de usuario
+    $("#EmailCadastro").keyup(function () {
+        var validaEmail = /^[_a-z0-9-]+(.[a-z0-9]+)@smn.com.br$/;
+        var inputEmail = $("#EmailCadastro").val();
+        if (validaEmail.test(inputEmail)) {
+            $(".botaoCadastro").removeAttr("disabled");
+        } else {
+            $(".botaoCadastro").attr("disabled", "disabled");
+        }
+    });
 }
 
 function encodeImageFileAsURL(callback) {

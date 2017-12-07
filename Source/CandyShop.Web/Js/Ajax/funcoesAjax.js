@@ -46,6 +46,7 @@ function concluirAcao(endereco, objeto, tela) {
             Materialize.toast(message, 4000);
         })
         .fail(function (xhr) {
+            Materialize.toast(xhr.responseText,4000);
             console.log(xhr.responseText);
         });
 }

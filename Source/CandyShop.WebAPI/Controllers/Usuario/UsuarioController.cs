@@ -16,7 +16,7 @@ namespace CandyShop.WebAPI.Controllers.Usuario
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
         private readonly Imagens _imagens;
-        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService, Imagens imagens) : base(usuarioService, usuarioRepository)
+        public UsuarioController(INotification notification, IUsuarioRepository usuarioRepository, IUsuarioService usuarioService, Imagens imagens) : base(usuarioService, usuarioRepository, notification)
         {
             _notification = notification;
             _usuarioRepository = usuarioRepository;
@@ -44,10 +44,22 @@ namespace CandyShop.WebAPI.Controllers.Usuario
             }
             catch
             {
-                return Content(HttpStatusCode.NotModified, "Usuario inserido, porém houve um erro ao inserir sua imagem");
+                return Content(HttpStatusCode.NotAcceptable, "Usuario inserido, porém houve um erro ao inserir sua imagem");
             }
 
             return Content(HttpStatusCode.OK, "Usuario inserido com sucesso");
+        }
+
+        [HttpPut, Route("api/Usuario/CadastraEmail")]
+        public IHttpActionResult PutCadastraEmail(Core.Services.Usuario.Usuario usuario)
+        {
+            usuario.Cpf = usuario.Cpf.Replace(".", string.Empty).Replace("-", string.Empty).Replace(".", string.Empty);
+            _usuarioService.CadastraEmail(usuario.Email, usuario.Cpf);
+            if (_notification.GetNotification() == "OK")
+            {
+                return Content(HttpStatusCode.OK, _notification.GetNotification());
+            }
+            return Content(HttpStatusCode.NotAcceptable, _notification.GetNotification());
         }
 
         [HttpPut, Route("api/Usuario")]

@@ -46,7 +46,7 @@ var AjaxJsShop = (function ($) {
                                 username: cpf,
                                 password: "password"
                             };
-                            var queryString = jQuery.param(informacoesAutorizacao);
+                            var queryString = jQuery.param(informacoesAutorizacao); 
 
                             $.ajax({
                                 type: "POST",
@@ -88,6 +88,37 @@ var AjaxJsShop = (function ($) {
             });
     };
 
+    var verificaEmailExiste = function() {
+        var usuario = $("#Senhacpf").val().replace(".", "").replace(".", "").replace("-", "");
+        $.get("http://localhost:4001/api/UsuarioUnauthorized/" + usuario + "/VerificaEmailExiste")
+            .done(function () {
+                //msg mostrada apos o sucesso de recuperar a senha 
+                Materialize.toast("Senha nova enviada para o seu email!", 4000);
+                //recarega a pagina depois que a solicitação for aceita
+                $.get(url.padrao)
+                    .done(function (data) {
+                        $("body").slideUp(2500, function () {
+                            $("body").hide().html(data).slideDown(1000);
+                        });
+                    }).fail(function (xhr) {
+                        Materialize.toast(xhr.responseText, 4000);
+                    });
+            })
+            .fail(function (xhr) {
+                //msg mostrada apos o erro de recuperar a senha 
+                Materialize.toast(xhr.responseText.replace('"', "").replace('"', ""), 10000);
+                //recarega a pagina depois que a solicitação for recusada
+                $.get(url.padrao)
+                    .done(function (data) {
+                        $("body").slideUp(2500, function () {
+                            $("body").hide().html(data).slideDown(2000);
+                        });
+                    }).fail(function (xhr) {
+                        Materialize.toast(xhr.responseText, 4000);
+                    });
+            });
+    };
+
     var voltarInicio = function () {
         $.get(url.padrao)
             .done(function (data) {
@@ -114,6 +145,7 @@ var AjaxJsShop = (function ($) {
         voltarInicio: voltarInicio,
         administracao: administracao,
         verificaLogin: verificaLogin,
+        verificaEmailExiste: verificaEmailExiste,
         listarProdutoPorNome: listarProdutoPorNome,
         listaCategoria: listaCategoria,
         loja: loja

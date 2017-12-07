@@ -45,5 +45,28 @@ namespace CandyShop.Web.Controllers.Usuario
             return Content("Senha alterada com sucesso!");
 
         }
+
+        [HttpPost]
+        public ActionResult CadastraEmail(UsuarioViewModel usuario, string token)
+        {
+            usuario.Cpf = Session["Login"].ToString();
+          
+            if (usuario.Cpf == null || usuario.Email == null)
+                return Content("O campo de Email é obrigatório");
+
+            if (!ModelState.IsValid) return Content("Ops, ocorreu um erro ao Cadastrar Email");
+
+
+            var response = _appUsuario.CadastraEmail(usuario, token);
+           
+
+            if (response.Status != HttpStatusCode.OK)
+                return Content($"Falha ao cadastra usuario.{response.ContentAsString}");
+
+            Session["Email"] = usuario.Email;
+            return Content("Cadastrado de email feito com sucesso");
+
+
+        }
     }
 }

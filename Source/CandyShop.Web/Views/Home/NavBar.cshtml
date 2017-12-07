@@ -28,6 +28,7 @@
             administracao: '@Url.Action("Index", "Admin")',
             main: '@Url.Action("Index", "Home")',
             verificaLogin: '@Url.Action("Logar","Home")',
+            verificaEmailExiste: '@Url.Action("VerificaEmailExiste","Home")',
             padrao: '@Url.Action("NavBar", "Home")',
             listaCategoria: '@Url.Action("ListarCategoria", "Home")',
             listarProdutoPorNome: '@Url.Action("ProcurarProduto", "Home")'
@@ -54,7 +55,6 @@
 </div>
 
 <!--modal de Trocar a senha-->
-
 <div id="trocaSenha" class="modal" style="z-index: 99999999">
     <div class="modal-content center">
         <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
@@ -117,7 +117,7 @@
     </div>
 </div>
 
-
+<!--modal do Login-->
 <div id="modalLogin" class="modal">
     <div class="modal-content center identQuant">
         <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
@@ -135,6 +135,7 @@
                     <label for="senha">Senha</label>
                 </div>
             </div>
+            <a class="dropdown-button modal-trigger" href="#EsqueceuSenha" id="EsqueciSenha">Esqueci minha senha</a>
         </form>
     </div>
     <div class="modal-footer identQuant">
@@ -142,6 +143,48 @@
         <a href="#!" id="limpar" class="right modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Cancelar</a>
     </div>
 </div>
+
+
+<!--modal do Esqueci minha senha-->
+<div id="EsqueceuSenha" class="modal">
+    <div class="modal-content center identQuant">
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
+        <h2 class="pink-text identQuant" style="font-weight: bold">Esqueci minha Senha</h2>
+        <form>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="Senhacpf" type="text" class="validate identQuant" maxlength="14" autocomplete="off">
+                    <label for="Senhacpf">CPF</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer identQuant">
+        <a href="#EsqueceuSenha" id="Enviar" disabled class="modal-trigger right modal-action modal-close waves-effect waves-light btn-flat pink-text" onclick="AjaxJsShop.verificaEmailExiste()" style="font-weight: bold">Enviar</a>
+        <a href="#!" id="Cancelar" class="right modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Cancelar</a>
+    </div>
+</div>
+
+<!--modal de cadastro de email-->
+<div id="cadastraEmail" class="modal">
+    <div class="modal-content center identQuant">
+        <font class="pink-text modal-close" title="Fechar" style="font-weight: bold; position: absolute; right: 20px; top: 5px; font-size:24px">X</font>
+        <h2 class="pink-text-text identQuant" style="font-weight:bold">Cadastrar e-mail:</h2>
+        <form>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="email" class="validate identQuant" type="email" maxlength="50" placeholder="example@smn.com.br" autocomplete="off" />
+                    <label for="email">Digite seu email:</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer identQuant">
+        <a href="#!" id="CadastrarEmail" disabled onclick="AjaxJsUsuario.CadastraEmail()" class="modal-close modal-action right modal-close waves-effect waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Cadastrar</a>
+        <a href="#!" id="Cancelar" class="right modal-close waves-effect waves-light btn-flat pink-text" style="font-weight: bold">Cancelar</a>
+     </div>
+</div>
+
 
 <ul id="dropdownFiltro" class="dropdown-content">
     <li><a href="#!" onclick="AjaxJsShop.voltarInicio(); ">Todos</a></li>
@@ -164,6 +207,7 @@
             });
         </script>
     }
+    <!--barra de navegação do mobile-->
     <nav class="brown darken-3 nav-extended">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -173,6 +217,10 @@
                 <li><a href="#!" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Histórico de Compra</a></li>
+                @if (Session["Email"].ToString() == "")
+                {
+                    <li><a href="#cadastraEmail" class="modal-trigger"><i class="material-icons">mail</i>Cadastrar e-mail</a></li>
+                }
                 <li><a href="#trocaSenha" class="modal-trigger"><i class="material-icons">lock_outline</i>Trocar senha</a></li>
 
                 <li class="divider"></li>
@@ -207,13 +255,17 @@
                     </div>
                 </li>
             </ul>
-
+            <!--barra de navegação desktop-->
             <ul class="side-nav" id="mobile-demo">
                 <li><a class="dropdown-button" href="#!"><i class="material-icons left">account_circle</i>@Session["nomeUsuario"] R$ @Session["saldoUsuario"]</a></li>
                 <li><a class="dropdown-button modal-trigger closeMenu" href="#modalCarrinho"><i class="material-icons left">shopping_cart</i>Carrinho</a></li>
                 <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.inserirPagamento()"><i class="material-icons">add</i>Inserir Pagamentos</a></li>
                 <li><a href="#!" class="closeMenu" onclick="AjaxJsPagamento.listarPagamento()"><i class="material-icons">attach_money</i>Listar Pagamentos</a></li>
                 <li><a href="#!" class="closeMenu" onclick="AjaxJsCompra.historicoCompra()"><i class="material-icons">find_in_page</i>Historico de Compra</a></li>
+                @if (Session["Email"].ToString() == "")
+                {
+                    <li><a href="#cadastraEmail" class="modal-trigger"><i class="material-icons">mail</i>Cadastrar e-mail</a></li>
+                }
                 <li><a href="#trocaSenha" class="modal-trigger closeMenu"><i class="material-icons">lock_outline</i>Trocar senha</a></li>
                 <li class="divider"></li>
                 @if (Session["classificacao"].ToString().Equals("A"))
