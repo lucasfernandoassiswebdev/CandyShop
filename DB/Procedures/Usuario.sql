@@ -481,4 +481,32 @@ CREATE PROCEDURE [dbo].[CSSP_UpdEmail]
 			WHERE Cpf = @cpf 
 	END
 GO
-				
+
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'[dbo].CSSP_VerificaEmailExiste]') AND objectproperty(id, N'IsPROCEDURE')=1)
+	DROP PROCEDURE [dbo].[CSSP_VerificaEmailExiste]
+GO
+
+CREATE PROCEDURE [dbo].[CSSP_VerificaEmailExiste]
+	@cpf varchar(11)
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: ArquivoFonte.sql
+	Objetivo..........: Recuperar a senha, caso o usuario esqueça
+	Autor.............: SMN - Gustavo Dantas
+ 	Data..............: 28/11/2017
+	Ex................: [dbo].[CSSP_VerificaEmailExiste] '44541561823'
+
+	*/
+
+	BEGIN
+		SELECT  Email
+			FROM Usuario
+			WHERE Cpf = @cpf and Email IS NOT NULL
+	END
+GO
+
+	
