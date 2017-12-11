@@ -8,9 +8,16 @@ namespace CandyShop.Repository.DataBase
         // Essa classe contém os métodos de extensão para leitura de dados
         public static string ReadAsString(this SqlDataReader r, string campo)
         {
-            return r.GetString(r.GetOrdinal(campo));
+            try
+            {
+                return r.GetString(r.GetOrdinal(campo));
+            }
+            catch
+            {
+                return "";
+            }
         }
-
+        
         public static int ReadAsInt(this SqlDataReader r, string campo)
         {
             return r.GetInt32(r.GetOrdinal(campo));

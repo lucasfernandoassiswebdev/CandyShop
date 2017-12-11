@@ -87,8 +87,7 @@ namespace CandyShop.Repository.Repositorys
                         Ativo = reader.ReadAsString("Ativo"),
                         Classificacao = reader.ReadAsString("Classificacao"),
                         FirstLogin = reader.ReadAsString("FirstLogin"),
-                        Email = reader.ReadAsString("Email")
-                        
+                        Email = reader.ReadAsString("Email") 
                     };
             return null;
         }

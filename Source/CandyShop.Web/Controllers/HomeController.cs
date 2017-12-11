@@ -89,11 +89,11 @@ namespace CandyShop.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult VerificaEmailExiste(string cpf)
+        public ActionResult VerificaEmailExiste(string email)
         {
-            if (cpf == null)
-                return Content("Cpf não é valido, contante um administrador");
-            var response = _appUsuario.VerificaEmailExiste(cpf);
+            if (email == null)
+                return Content("Erro");
+            var response = _appUsuario.VerificaEmailExiste(email);
             if (response.Status != HttpStatusCode.OK)
                 return Content(response.Content);
 

@@ -100,18 +100,20 @@ namespace CandyShop.Core.Services.Usuario
                 //texto //corpo da mensagem
                 mensagem.Body = "Sua nova senha é: " + senhaGerada;
 
-                //para quem vai a mensagem
-                mensagem.To.Add(email);
+               
 
                 try
                 {
+                    //para quem vai a mensagem
+                    mensagem.To.Add(email);
+
                     //envio de mensagem de email(finalemnte)
                     cliente.Send(mensagem);
 
                 }
-                catch (Exception ex)
+                catch 
                 {
-                    _notification.Add("Falha ao enviar email: " + ex.Message);
+                    _notification.Add("Falha ao enviar email, contate um administrador");
                 }
 
                 return;
